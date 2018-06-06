@@ -31,14 +31,21 @@ class Window(QMainWindow):
 		# set appropriate pages in stacks
 		self.ui.stepTabs.setCurrentIndex(3) # dashboard
 		self.ui.equipStack.setCurrentIndex(0) # vsg settings page
+		self.ui.vsgEquipTabs.setCurrentIndex(0) # vsg general settings
 		self.ui.vsgEquipStack.setCurrentIndex(2) # please select a layout
 		self.ui.vsgEquipStackAdv.setCurrentIndex(2) # please select a layout
 		self.ui.vsgNextSteps.setCurrentIndex(0) # fill out vsg
 		self.ui.vsgWorkflows.setCurrentIndex(0) # general vsg workflow button
 		self.ui.upEquipTabs.setCurrentIndex(0) # upconverter general settings
+		self.ui.vsaWorkflow.setCurrentIndex(0) # vsa general workflow button
+		self.ui.vsaEquipTabs.setCurrentIndex(0) # vsa general settings tab
+		self.ui.vsaEquipStack.setCurrentIndex(3) # vsa select setup page
+		self.ui.vsaAdvancedStack.setCurrentIndex(0) # select vsa type
 		
-		# VSG setup selected, control stack displays related to it (workflow, next steps, parameters)
+		# VSG and VSA dropdown changes
 		self.ui.vsgSetup.currentIndexChanged.connect(self.displayVsg)
+		self.ui.vsaType.currentIndexChanged.connect(self.displayVsa)
+		self.ui.demodulationEnable.currentIndexChanged.connect(self.displayVsa)
 		
 		# expand/shrink depending on which step tab is clicked
 		self.ui.stepTabs.currentChanged.connect(self.changeStepTabWindowSize)
@@ -47,15 +54,23 @@ class Window(QMainWindow):
 		#self.ui.vsgEquipScroll.setWidget(self.ui.vsgEquipScrollWidgetContents)
 		
 		# control parameter set buttons
-		self.ui.awgSetGeneral.clicked.connect(self.setColoursAWG)
-		self.ui.vsgSetGeneral.clicked.connect(self.setColoursVSG)
+		self.ui.awgSetGeneral.clicked.connect(self.setGeneralAWG)
+		self.ui.vsgSetGeneral.clicked.connect(self.setGeneralVSG)
+		self.ui.vsgSetAdv.clicked.connect(self.setAdvancedVSG)
+		self.ui.awgSetAdv.clicked.connect(self.setAdvancedAWG)
 		
 		# control workflow navigation
 		self.ui.upButton.clicked.connect(self.upOnClick)
 		self.ui.psgButton.clicked.connect(self.psgOnClick)
+		self.ui.awgButton.clicked.connect(lambda: self.changeStack(self.ui.equipStack,0))
+		self.ui.vsaButton.clicked.connect(lambda: self.changeStack(self.ui.equipStack,2))
+		self.ui.vsaButton_vsg.clicked.connect(self.vsaOnClick)
 		
 		# show on window
 		self.show()	
+		
+	def changeStack(self,stackName,idx):
+		stackName.setCurrentIndex(idx)
 		
 	def upOnClick(self):
 		self.ui.equipStack.setCurrentIndex(1) # upconverter/psg page
@@ -68,19 +83,32 @@ class Window(QMainWindow):
 		self.ui.up_psg_stack.setCurrentIndex(1) # upconverter general settings
 		self.ui.up_psg_next.setCurrentIndex(1) # upconverter next 
 		self.ui.up_psg_workflow.setCurrentIndex(1) # upconverter workflow
+		
+	def vsaOnClick(self):
+		vsgSetupIdx = self.ui.vsgWorkflows.currentIndex() 
+		if vsgSetupIdx == 1 or vsgSetupIdx == 4:
+			self.ui.equipStack.setCurrentIndex(2) # vsa page
 	
-	def setColoursAWG(self):
+	def setGeneralAWG(self):
 		self.ui.fillAWG.setStyleSheet("QLabel{background-color:purple;color:white;border-radius:10px}")
 		self.ui.awgWorkflowButton.setStyleSheet("QPushButton{background-color:purple;color:white;border-radius:5px}")
 		self.ui.fillAWG_2.setStyleSheet("QLabel{background-color:purple;color:white;border-radius:10px}")
 		self.ui.awgWorkflowButton_2.setStyleSheet("QPushButton{background-color:purple;color:white;border-radius:5px;}")
 		self.ui.fillAWG_3.setStyleSheet("QLabel{background-color:purple;color:white;border-radius:10px}")
 		self.ui.awgWorkflowButton_3.setStyleSheet("QPushButton{background-color:purple;color:white;border-radius:5px;}")
+		self.ui.statusBar.showMessage('Successfully Set: AWG - General Settings',2000)	
 		
-	def setColoursVSG(self):
+	def setGeneralVSG(self):
 		self.ui.vsgWorkflowButton.setStyleSheet("QPushButton{background-color:purple;color:white;border-radius:5px}")
 		self.ui.fillVSG.setStyleSheet("QLabel{background-color:purple;color:white;border-radius:10px}")
+		self.ui.statusBar.showMessage('Successfully Set: VSG - General Settings',2000)	
 		#005500, green
+		
+	def setAdvancedAWG(self):
+		self.ui.statusBar.showMessage('Successfully Set: AWG - Advanced Settings',2000)
+	
+	def setAdvancedVSG(self):
+		self.ui.statusBar.showMessage('Successfully Set: VSG - Advanced Settings',2000)
 	
 	def changeStepTabWindowSize(self,i):
 		if i == 0 or i == 1 or i == 2:
@@ -114,16 +142,19 @@ class Window(QMainWindow):
 				self.ui.vsgWorkflows.setCurrentIndex(1)
 				self.ui.fillAWG.setStyleSheet("QLabel{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0.21, stop:0 rgba(90, 154, 215, 255), stop:1 rgba(107, 186, 255, 255)); color:white; border:3px solid purple; border-radius:10px}")
 				self.ui.awgWorkflowButton.setStyleSheet("QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0.21, stop:0 rgba(90, 154, 215, 255), stop:1 rgba(107, 186, 255, 255)); border:3px solid purple; border-radius: 5px; color:white;}")
+				self.ui.vsgWorkflowForVSA.setCurrentIndex(0) # vsa: awg
 			if i == 2: # AWG & Up
 				self.ui.vsgNextSteps.setCurrentIndex(2)
 				self.ui.vsgWorkflows.setCurrentIndex(2)
 				self.ui.fillAWG_2.setStyleSheet("QLabel{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0.21, stop:0 rgba(90, 154, 215, 255), stop:1 rgba(107, 186, 255, 255)); color:white; border:3px solid purple; border-radius:10px}")
 				self.ui.awgWorkflowButton_2.setStyleSheet("QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0.21, stop:0 rgba(90, 154, 215, 255), stop:1 rgba(107, 186, 255, 255)); border:3px solid purple; border-radius: 5px; color:white;}")
+				self.ui.vsgWorkflowForVSA.setCurrentIndex(1) # vsa: awg and up
 			if i == 3: # AWG & PSG
 				self.ui.vsgNextSteps.setCurrentIndex(3)
 				self.ui.vsgWorkflows.setCurrentIndex(3)
 				self.ui.fillAWG_3.setStyleSheet("QLabel{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0.21, stop:0 rgba(90, 154, 215, 255), stop:1 rgba(107, 186, 255, 255)); color:white; border:3px solid purple; border-radius:10px}")
 				self.ui.awgWorkflowButton_3.setStyleSheet("QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0.21, stop:0 rgba(90, 154, 215, 255), stop:1 rgba(107, 186, 255, 255)); border:3px solid purple; border-radius: 5px; color:white;}")
+				self.ui.vsgWorkflowForVSA.setCurrentIndex(2) # vsa: awg and psg
 		elif i == 4: # VSG
 			self.ui.vsgEquipStack.setCurrentIndex(1)
 			self.ui.vsgEquipStackAdv.setCurrentIndex(1)
@@ -131,6 +162,132 @@ class Window(QMainWindow):
 			self.ui.vsgWorkflows.setCurrentIndex(4)
 			self.ui.fillVSG.setStyleSheet("QLabel{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0.21, stop:0 rgba(90, 154, 215, 255), stop:1 rgba(107, 186, 255, 255)); color:white; border:3px solid purple; border-radius:10px}")
 			self.ui.vsgWorkflowButton.setStyleSheet("QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0.21, stop:0 rgba(90, 154, 215, 255), stop:1 rgba(107, 186, 255, 255)); border:3px solid purple; border-radius: 5px; color:white;}")
+			self.ui.vsgWorkflowForVSA.setCurrentIndex(3) # vsa: vsg
+			
+	def displayVsa(self):
+		# 0 = vsaGeneral, 1 = scope, 2 = digitizer, 3 = uxa, 4 = pxa, 5 = dig_demod, 6 = scope_demod, 7 = uxa_demod, 8 = pxa_demod, 9 = down_scope_mod, 10 = down_dig_mod, 11 = down_scope, 12 = down_dig
+		vsaIdx = self.ui.vsaType.currentIndex()
+		demod = self.ui.demodulationEnable.currentIndex()
+		
+		if vsaIdx == 0:
+			self.ui.vsaWorkflow.setCurrentIndex(0)
+			self.ui.vsaEquipStack.setCurrentIndex(3)
+			self.ui.vsaAdvancedStack.setCurrentIndex(0)
+			self.ui.vsaNextStack.setCurrentIndex(0)
+		elif demod == 0:
+			self.ui.uxaMod.setEnabled(False)
+			self.ui.digMod.setEnabled(False)
+			self.ui.scopeMod.setEnabled(False)
+			if vsaIdx == 1:
+				self.ui.vsaWorkflow.setCurrentIndex(1)
+				self.ui.vsaEquipStack.setCurrentIndex(1)
+				self.ui.vsaAdvancedStack.setCurrentIndex(1)
+				self.ui.vsaNextStack.setCurrentIndex(1)
+			elif vsaIdx == 2:
+				self.ui.vsaWorkflow.setCurrentIndex(2)
+				self.ui.vsaEquipStack.setCurrentIndex(2)
+				self.ui.vsaAdvancedStack.setCurrentIndex(1)
+				self.ui.vsaNextStack.setCurrentIndex(1)
+			elif vsaIdx == 3:
+				self.ui.vsaWorkflow.setCurrentIndex(3)
+				self.ui.vsaEquipStack.setCurrentIndex(0)
+				self.ui.uxa_pxa_titleStack.setCurrentIndex(1)
+				self.ui.vsaAdvancedStack.setCurrentIndex(2)
+				self.ui.uxa_pxa_titleStackAdv.setCurrentIndex(0)
+				self.ui.vsaNextStack.setCurrentIndex(1)
+			elif vsaIdx == 4:
+				self.ui.vsaWorkflow.setCurrentIndex(4)
+				self.ui.vsaEquipStack.setCurrentIndex(0)
+				self.ui.uxa_pxa_titleStack.setCurrentIndex(0)
+				self.ui.vsaAdvancedStack.setCurrentIndex(2)
+				self.ui.uxa_pxa_titleStackAdv.setCurrentIndex(1)
+				self.ui.vsaNextStack.setCurrentIndex(1)
+			elif vsaIdx == 5:
+				self.ui.vsaWorkflow.setCurrentIndex(11)
+				self.ui.vsaEquipStack.setCurrentIndex(1)
+				self.ui.vsaAdvancedStack.setCurrentIndex(1)
+				self.ui.vsaNextStack.setCurrentIndex(2)
+			elif vsaIdx == 6:
+				self.ui.vsaWorkflow.setCurrentIndex(12)
+				self.ui.vsaEquipStack.setCurrentIndex(2)
+				self.ui.vsaAdvancedStack.setCurrentIndex(1)
+				self.ui.vsaNextStack.setCurrentIndex(2)
+		elif demod == 1:
+			self.ui.uxaMod.setEnabled(True)
+			self.ui.digMod.setEnabled(True)
+			self.ui.scopeMod.setEnabled(True)
+			if vsaIdx == 1:
+				self.ui.vsaWorkflow.setCurrentIndex(6)
+				self.ui.vsaEquipStack.setCurrentIndex(1)
+				self.ui.vsaAdvancedStack.setCurrentIndex(1)
+				self.ui.vsaNextStack.setCurrentIndex(1)
+			elif vsaIdx == 2:
+				self.ui.vsaWorkflow.setCurrentIndex(5)
+				self.ui.vsaEquipStack.setCurrentIndex(2)
+				self.ui.vsaAdvancedStack.setCurrentIndex(1)
+				self.ui.vsaNextStack.setCurrentIndex(1)
+			elif vsaIdx == 3:
+				self.ui.vsaWorkflow.setCurrentIndex(7)
+				self.ui.vsaEquipStack.setCurrentIndex(0)
+				self.ui.uxa_pxa_titleStack.setCurrentIndex(1)
+				self.ui.vsaAdvancedStack.setCurrentIndex(2)
+				self.ui.uxa_pxa_titleStackAdv.setCurrentIndex(0)
+				self.ui.vsaNextStack.setCurrentIndex(1)
+			elif vsaIdx == 4:
+				self.ui.vsaWorkflow.setCurrentIndex(8)
+				self.ui.vsaEquipStack.setCurrentIndex(0)
+				self.ui.uxa_pxa_titleStack.setCurrentIndex(0)
+				self.ui.vsaAdvancedStack.setCurrentIndex(2)
+				self.ui.uxa_pxa_titleStackAdv.setCurrentIndex(1)
+				self.ui.vsaNextStack.setCurrentIndex(1)
+			elif vsaIdx == 5:
+				self.ui.vsaWorkflow.setCurrentIndex(9)
+				self.ui.vsaEquipStack.setCurrentIndex(1)
+				self.ui.vsaAdvancedStack.setCurrentIndex(1)
+				self.ui.vsaNextStack.setCurrentIndex(2)
+			elif vsaIdx == 6:
+				self.ui.vsaWorkflow.setCurrentIndex(10)
+				self.ui.vsaEquipStack.setCurrentIndex(2)
+				self.ui.vsaAdvancedStack.setCurrentIndex(1)
+				self.ui.vsaNextStack.setCurrentIndex(2)
+		elif demod == 2:
+			self.ui.uxaMod.setEnabled(False)
+			self.ui.digMod.setEnabled(False)
+			self.ui.scopeMod.setEnabled(False)
+			if vsaIdx == 1:
+				self.ui.vsaWorkflow.setCurrentIndex(1)
+				self.ui.vsaEquipStack.setCurrentIndex(1)
+				self.ui.vsaAdvancedStack.setCurrentIndex(1)
+				self.ui.vsaNextStack.setCurrentIndex(1)
+			elif vsaIdx == 2:
+				self.ui.vsaWorkflow.setCurrentIndex(2)
+				self.ui.vsaEquipStack.setCurrentIndex(2)
+				self.ui.vsaAdvancedStack.setCurrentIndex(1)
+				self.ui.vsaNextStack.setCurrentIndex(1)
+			elif vsaIdx == 3:
+				self.ui.vsaWorkflow.setCurrentIndex(3)
+				self.ui.vsaEquipStack.setCurrentIndex(0)
+				self.ui.uxa_pxa_titleStack.setCurrentIndex(1)
+				self.ui.vsaAdvancedStack.setCurrentIndex(2)
+				self.ui.uxa_pxa_titleStackAdv.setCurrentIndex(0)
+				self.ui.vsaNextStack.setCurrentIndex(1)
+			elif vsaIdx == 4:
+				self.ui.vsaWorkflow.setCurrentIndex(4)
+				self.ui.vsaEquipStack.setCurrentIndex(0)
+				self.ui.uxa_pxa_titleStack.setCurrentIndex(0)
+				self.ui.vsaAdvancedStack.setCurrentIndex(2)
+				self.ui.uxa_pxa_titleStackAdv.setCurrentIndex(1)
+				self.ui.vsaNextStack.setCurrentIndex(1)
+			elif vsaIdx == 5:
+				self.ui.vsaWorkflow.setCurrentIndex(11)
+				self.ui.vsaEquipStack.setCurrentIndex(1)	
+				self.ui.vsaAdvancedStack.setCurrentIndex(1)
+				self.ui.vsaNextStack.setCurrentIndex(2)
+			elif vsaIdx == 6:
+				self.ui.vsaWorkflow.setCurrentIndex(12)
+				self.ui.vsaEquipStack.setCurrentIndex(2)
+				self.ui.vsaAdvancedStack.setCurrentIndex(1)
+				self.ui.vsaNextStack.setCurrentIndex(2)
 	
 	def closeEvent(self,event):
 		reply=QMessageBox.question(self,'Exit Confirmation',"Are you sure you want to close the program?",QMessageBox.Yes|QMessageBox.No,QMessageBox.No)
