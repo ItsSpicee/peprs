@@ -1,8 +1,8 @@
 import sys
-from PyQt5 import QtCore, QtGui, QtWidgets, uic
+from PyQt5 import uic, QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (QTabWidget, QFileDialog,QDialog, QInputDialog, QTextEdit, QLineEdit, QLabel, QFrame, QGridLayout, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QMenu, QAction, qApp, QDesktopWidget, QMessageBox, QToolTip, QPushButton, QApplication)
-from PyQt5.QtGui import (QIcon, QFont)
-from PyQt5.QtCore import (pyqtSlot, QSize)
+from PyQt5.QtGui import (QPen, QPainter, QColor, QIcon, QFont)
+from PyQt5.QtCore import (Qt, pyqtSlot, QSize)
 from peprs import Ui_peprs
 
 class Window(QMainWindow):
@@ -14,6 +14,12 @@ class Window(QMainWindow):
 		self.initUI()	
 		
 	def initUI(self):		
+		# variables
+		purpleLabel = "QLabel{background-color:qlineargradient(spread:pad, x1:1, y1:0.767, x2:1, y2:0, stop:0 rgba(128, 0, 128, 255), stop:1 rgba(182, 0, 182, 255)); border-radius:5px; color:white}"
+		blueLabelP = "QLabel {background:qlineargradient(spread:pad, x1:1, y1:1, x2:0.994318, y2:0.267, stop:0 rgba(84, 144, 200, 255), stop:1 rgba(107, 186, 255, 255));color:white;border-radius:10px;border:3px solid purple}"
+		blueLabelG = "QLabel {background:qlineargradient(spread:pad, x1:1, y1:1, x2:0.994318, y2:0.267, stop:0 rgba(84, 144, 200, 255), stop:1 rgba(107, 186, 255, 255));color:white;border-radius:10px;border:3px solid #005500}"
+		purpleButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:0.767, x2:1, y2:0, stop:0 rgba(128, 0, 128, 255), stop:1 rgba(182, 0, 182, 255)); border-radius:5px; color:white}"	
+		
 		# set menu bar actions
 		self.ui.actionOpen.triggered.connect(self.openDialog)
 		self.ui.actionSave.triggered.connect(self.saveDialog)
@@ -54,10 +60,11 @@ class Window(QMainWindow):
 		#self.ui.vsgEquipScroll.setWidget(self.ui.vsgEquipScrollWidgetContents)
 		
 		# control parameter set buttons
-		self.ui.awgSetGeneral.clicked.connect(self.setGeneralAWG)
-		self.ui.vsgSetGeneral.clicked.connect(self.setGeneralVSG)
+		self.ui.awgSetGeneral.clicked.connect(lambda: self.setGeneralAWG(purpleButton,purpleLabel,blueLabelP,blueLabelG))
+		self.ui.vsgSetGeneral.clicked.connect(lambda: self.setGeneralVSG(purpleButton,purpleLabel,blueLabelP))
 		self.ui.vsgSetAdv.clicked.connect(self.setAdvancedVSG)
 		self.ui.awgSetAdv.clicked.connect(self.setAdvancedAWG)
+		
 		
 		# control workflow navigation
 		self.ui.upButton.clicked.connect(self.upOnClick)
@@ -65,13 +72,25 @@ class Window(QMainWindow):
 		self.ui.awgButton.clicked.connect(lambda: self.changeStack(self.ui.equipStack,0))
 		self.ui.vsaButton.clicked.connect(lambda: self.changeStack(self.ui.equipStack,2))
 		self.ui.vsaButton_vsg.clicked.connect(self.vsaOnClick)
+		#self.ui.saButton.clicked.connect(self.)
 		
 		# show on window
 		self.show()	
+	
+	# def paintEvent(self,e):
+		# qp = QPainter()
+		# qp.begin(self)
+		# self.drawLines(qp)
+		# qp.end()
 		
+	# def drawLines(self,qp):
+		# pen = QPen(QtCore.Qt.black, 2, QtCore.Qt.SolidLine)
+		# qp.setPen(pen)
+		# qp.drawLine(60,100,70,110)
+	
 	def changeStack(self,stackName,idx):
 		stackName.setCurrentIndex(idx)
-		
+	
 	def upOnClick(self):
 		self.ui.equipStack.setCurrentIndex(1) # upconverter/psg page
 		self.ui.up_psg_stack.setCurrentIndex(0) # upconverter general settings
@@ -89,20 +108,23 @@ class Window(QMainWindow):
 		if vsgSetupIdx == 1 or vsgSetupIdx == 4:
 			self.ui.equipStack.setCurrentIndex(2) # vsa page
 	
-	def setGeneralAWG(self):
-		self.ui.fillAWG.setStyleSheet("QLabel{background-color:purple;color:white;border-radius:10px}")
-		self.ui.awgWorkflowButton.setStyleSheet("QPushButton{background-color:purple;color:white;border-radius:5px}")
-		self.ui.fillAWG_2.setStyleSheet("QLabel{background-color:purple;color:white;border-radius:10px}")
-		self.ui.awgWorkflowButton_2.setStyleSheet("QPushButton{background-color:purple;color:white;border-radius:5px;}")
-		self.ui.fillAWG_3.setStyleSheet("QLabel{background-color:purple;color:white;border-radius:10px}")
-		self.ui.awgWorkflowButton_3.setStyleSheet("QPushButton{background-color:purple;color:white;border-radius:5px;}")
+	def setGeneralAWG(self,buttonColourDone,labelColourDone,labelColourStart,labelColourStart2):
+		self.ui.fillAWG.setStyleSheet(labelColourDone)
+		self.ui.awgWorkflowButton.setStyleSheet(buttonColourDone)
+		self.ui.fillAWG_2.setStyleSheet(labelColourDone)
+		self.ui.awgWorkflowButton_2.setStyleSheet(buttonColourDone)
+		self.ui.fillAWG_3.setStyleSheet(labelColourDone)
+		self.ui.awgWorkflowButton_3.setStyleSheet(buttonColourDone)
+		self.ui.fillVSA.setStyleSheet(labelColourStart)
+		self.ui.fillUp.setStyleSheet(labelColourStart2)
+		self.ui.fillPSG.setStyleSheet(labelColourStart2)
 		self.ui.statusBar.showMessage('Successfully Set: AWG - General Settings',2000)	
 		
-	def setGeneralVSG(self):
-		self.ui.vsgWorkflowButton.setStyleSheet("QPushButton{background-color:purple;color:white;border-radius:5px}")
-		self.ui.fillVSG.setStyleSheet("QLabel{background-color:purple;color:white;border-radius:10px}")
+	def setGeneralVSG(self, buttonColourDone, labelColourDone, labelColourStart):
+		self.ui.vsgWorkflowButton.setStyleSheet(buttonColourDone)
+		self.ui.fillVSG.setStyleSheet(labelColourDone)
+		self.ui.fillVSA_2.setStyleSheet(labelColourStart)
 		self.ui.statusBar.showMessage('Successfully Set: VSG - General Settings',2000)	
-		#005500, green
 		
 	def setAdvancedAWG(self):
 		self.ui.statusBar.showMessage('Successfully Set: AWG - Advanced Settings',2000)
@@ -140,28 +162,20 @@ class Window(QMainWindow):
 			if i == 1: # AWG
 				self.ui.vsgNextSteps.setCurrentIndex(1)
 				self.ui.vsgWorkflows.setCurrentIndex(1)
-				self.ui.fillAWG.setStyleSheet("QLabel{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0.21, stop:0 rgba(90, 154, 215, 255), stop:1 rgba(107, 186, 255, 255)); color:white; border:3px solid purple; border-radius:10px}")
-				self.ui.awgWorkflowButton.setStyleSheet("QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0.21, stop:0 rgba(90, 154, 215, 255), stop:1 rgba(107, 186, 255, 255)); border:3px solid purple; border-radius: 5px; color:white;}")
 				self.ui.vsgWorkflowForVSA.setCurrentIndex(0) # vsa: awg
 			if i == 2: # AWG & Up
 				self.ui.vsgNextSteps.setCurrentIndex(2)
 				self.ui.vsgWorkflows.setCurrentIndex(2)
-				self.ui.fillAWG_2.setStyleSheet("QLabel{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0.21, stop:0 rgba(90, 154, 215, 255), stop:1 rgba(107, 186, 255, 255)); color:white; border:3px solid purple; border-radius:10px}")
-				self.ui.awgWorkflowButton_2.setStyleSheet("QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0.21, stop:0 rgba(90, 154, 215, 255), stop:1 rgba(107, 186, 255, 255)); border:3px solid purple; border-radius: 5px; color:white;}")
 				self.ui.vsgWorkflowForVSA.setCurrentIndex(1) # vsa: awg and up
 			if i == 3: # AWG & PSG
 				self.ui.vsgNextSteps.setCurrentIndex(3)
 				self.ui.vsgWorkflows.setCurrentIndex(3)
-				self.ui.fillAWG_3.setStyleSheet("QLabel{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0.21, stop:0 rgba(90, 154, 215, 255), stop:1 rgba(107, 186, 255, 255)); color:white; border:3px solid purple; border-radius:10px}")
-				self.ui.awgWorkflowButton_3.setStyleSheet("QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0.21, stop:0 rgba(90, 154, 215, 255), stop:1 rgba(107, 186, 255, 255)); border:3px solid purple; border-radius: 5px; color:white;}")
 				self.ui.vsgWorkflowForVSA.setCurrentIndex(2) # vsa: awg and psg
 		elif i == 4: # VSG
 			self.ui.vsgEquipStack.setCurrentIndex(1)
 			self.ui.vsgEquipStackAdv.setCurrentIndex(1)
 			self.ui.vsgNextSteps.setCurrentIndex(4)
 			self.ui.vsgWorkflows.setCurrentIndex(4)
-			self.ui.fillVSG.setStyleSheet("QLabel{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0.21, stop:0 rgba(90, 154, 215, 255), stop:1 rgba(107, 186, 255, 255)); color:white; border:3px solid purple; border-radius:10px}")
-			self.ui.vsgWorkflowButton.setStyleSheet("QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0.21, stop:0 rgba(90, 154, 215, 255), stop:1 rgba(107, 186, 255, 255)); border:3px solid purple; border-radius: 5px; color:white;}")
 			self.ui.vsgWorkflowForVSA.setCurrentIndex(3) # vsa: vsg
 			
 	def displayVsa(self):
