@@ -74,6 +74,7 @@ class Window(QMainWindow):
 		self.ui.psgSet.clicked.connect(lambda: self.setPSG(greenButton, setParams))
 		self.ui.uxaSet.clicked.connect(lambda: self.setUXA(purpleButton,greenButton,setParams))
 		self.ui.scopeSet.clicked.connect(lambda: self.setScope(purpleButton,greenButton,setParams))
+		self.ui.digSet.clicked.connect(lambda: self.setDig(purpleButton,greenButton,setParams))
 		
 		# control dash radio buttons
 		self.ui.runVSG.toggled.connect(lambda: self.vsgOnlySetup(disabledButton,greyPButton))
@@ -91,6 +92,14 @@ class Window(QMainWindow):
 		# show on window
 		self.show()	
 		
+	
+	# FINISH THIS
+	def copyDemod(self,changedModField):
+		value = changedModField.toPlainText()
+		.setPlainText(value)
+		
+	# IF GROUPBOX VALUE CHANGED, NO LONGER GREY BOX
+	
 	def setUXA(self,buttonDoneP,buttonDoneG,boxDone):
 		type = self.ui.vsaType.currentIndex()
 		if type == 3: #UXA
@@ -100,6 +109,8 @@ class Window(QMainWindow):
 				self.ui.uxaEquipGeneralVSA.setStyleSheet(boxDone)
 				demod = self.ui.uxaMod.isEnabled()
 				if demod:
+					self.ui.digMod.setStyleSheet(boxDone)
+					self.ui.scopeMod.setStyleSheet(boxDone)
 					self.ui.uxaMod.setStyleSheet(boxDone)
 					self.ui.modButton_vsa.setStyleSheet(buttonDoneG)
 				self.ui.uxaButton_vsa.setStyleSheet(buttonDoneP)
@@ -115,6 +126,8 @@ class Window(QMainWindow):
 				demod = self.ui.uxaMod.isEnabled()
 				if demod:
 					self.ui.uxaMod.setStyleSheet(boxDone)
+					self.ui.digMod.setStyleSheet(boxDone)
+					self.ui.scopeMod.setStyleSheet(boxDone)
 					self.ui.modButton_vsa.setStyleSheet(buttonDoneG)
 				self.ui.pxaButton_vsa.setStyleSheet(buttonDoneP)
 				self.ui.pxaButton_vsa_2.setStyleSheet(buttonDoneP)
@@ -130,12 +143,34 @@ class Window(QMainWindow):
 			demod = self.ui.scopeMod.isEnabled()
 			if demod:
 				self.ui.scopeMod.setStyleSheet(boxDone)
+				self.ui.uxaMod.setStyleSheet(boxDone)
+				self.ui.digMod.setStyleSheet(boxDone)
 				self.ui.modButton_vsa_2.setStyleSheet(buttonDoneG)
 				self.ui.modButton_vsa.setStyleSheet(buttonDoneG)
 			self.ui.scopeButton_vsa.setStyleSheet(buttonDoneP)
 			self.ui.scopeButton_vsa_2.setStyleSheet(buttonDoneP)
 			self.ui.scopeButton_vsa_3.setStyleSheet(buttonDoneP)
 			self.ui.scopeButton_vsa_4.setStyleSheet(buttonDoneP)
+			#self.ui.vsaNextStack.setCurrentIndex(3)
+		else:
+			self.fillParametersMsg()
+			
+	def setDig(self,buttonDoneP,buttonDoneG,boxDone):
+		averaging = self.ui.averagingEnable.currentIndex()
+		demod = self.ui.demodulationEnable.currentIndex()
+		if averaging != 0 and demod != 0:
+			self.ui.digEquipGeneral.setStyleSheet(boxDone)
+			demod = self.ui.digMod.isEnabled()
+			if demod:
+				self.ui.digMod.setStyleSheet(boxDone)
+				self.ui.scopeMod.setStyleSheet(boxDone)
+				self.ui.uxaMod.setStyleSheet(boxDone)
+				self.ui.modButton_vsa_2.setStyleSheet(buttonDoneG)
+				self.ui.modButton_vsa.setStyleSheet(buttonDoneG)
+			self.ui.digButton_vsa.setStyleSheet(buttonDoneP)
+			self.ui.digButton_vsa_2.setStyleSheet(buttonDoneP)
+			self.ui.digButton_vsa_3.setStyleSheet(buttonDoneP)
+			self.ui.digButton_vsa_4.setStyleSheet(buttonDoneP)
 			#self.ui.vsaNextStack.setCurrentIndex(3)
 		else:
 			self.fillParametersMsg()
