@@ -23,6 +23,7 @@ class Window(QMainWindow):
 		greyBButton = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;}"
 		greyPButton = "QPushButton{border:3px solid purple;  background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;}"
 		disabledButton = "QPushButton {color:grey}"
+		blueHover = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px;} QPushButton:hover{background-color:rgb(243, 243, 243);}"
 		
 		# set menu bar actions
 		self.ui.actionOpen.triggered.connect(self.openDialog)
@@ -52,6 +53,7 @@ class Window(QMainWindow):
 		self.ui.vsaEquipTabs.setCurrentIndex(0) # vsa general settings tab
 		self.ui.vsaEquipStack.setCurrentIndex(3) # vsa select setup page
 		self.ui.vsaAdvancedStack.setCurrentIndex(0) # select vsa type
+		self.ui.vsaNextStack.setCurrentIndex(0) # vsa next
 		
 		# VSG and VSA dropdown changes
 		self.ui.vsgSetup.currentIndexChanged.connect(self.displayVsg)
@@ -62,8 +64,7 @@ class Window(QMainWindow):
 		# expand/shrink depending on which step tab is clicked
 		self.ui.stepTabs.currentChanged.connect(self.changeStepTabWindowSize)
 		
-		# set scroll area contents
-		#self.ui.vsgEquipScroll.setWidget(self.ui.vsgEquipScrollWidgetContents)
+		
 		
 		# control parameter set buttons
 		self.ui.awgSetGeneral.clicked.connect(lambda: self.setGeneralAWG(purpleButton, setParams))
@@ -72,9 +73,11 @@ class Window(QMainWindow):
 		self.ui.awgSetAdv.clicked.connect(lambda: self.setAdvancedAWG(setParams))
 		self.ui.upSet.clicked.connect(lambda: self.setUp(greenButton, setParams))
 		self.ui.psgSet.clicked.connect(lambda: self.setPSG(greenButton, setParams))
-		self.ui.uxaSet.clicked.connect(lambda: self.setUXA(purpleButton,greenButton,setParams))
+		self.ui.uxaSet.clicked.connect(lambda: self.setUXA(purpleButton,greenButton,setParams,blueHover))
+		self.ui.pxaSet.clicked.connect(lambda: self.setPXA(purpleButton,greenButton,setParams,blueHover))
 		self.ui.scopeSet.clicked.connect(lambda: self.setScope(purpleButton,greenButton,setParams))
 		self.ui.digSet.clicked.connect(lambda: self.setDig(purpleButton,greenButton,setParams))
+		self.ui.set_run_vsa.clicked.connect(self.rxCalRoutine)
 		
 		# control dash radio buttons
 		self.ui.runVSG.toggled.connect(lambda: self.vsgOnlySetup(disabledButton,greyPButton))
@@ -88,56 +91,90 @@ class Window(QMainWindow):
 		self.ui.vsaButton_vsg.clicked.connect(self.vsaOnClick)
 		self.ui.vsgButton_vsa.clicked.connect(lambda: self.changeStack(self.ui.equipStack,0))
 		self.ui.awgButton_vsa.clicked.connect(lambda: self.changeStack(self.ui.equipStack,0))
+		self.ui.awgButton_vsa_2.clicked.connect(lambda: self.changeStack(self.ui.equipStack,0))
+		self.ui.awgButton_vsa_3.clicked.connect(lambda: self.changeStack(self.ui.equipStack,0))
+		self.ui.upButton_vsa.clicked.connect(lambda: self.changeStack(self.ui.equipStack ,1))
+		self.ui.psgButton_vsa.clicked.connect(lambda: self.changeStack(self.ui.equipStack,1))
+		self.ui.meterButton_vsa.clicked.connect(lambda: self.changeStack(self.ui.equipStack,4))
+		
+		# control parameter changes
+		self.ui.dllFile_scope.textChanged.connect(lambda: self.copyDemod(self.ui.dllFile_scope, self.ui.dllFile_uxa, self.ui.dllFile_dig))
+		self.ui.setupFile_scope.textChanged.connect(lambda: self.copyDemod(self.ui.setupFile_scope,self.ui.setupFile_uxa,self.ui.setupFile_dig))
+		self.ui.dataFile_scope.textChanged.connect(lambda: self.copyDemod(self.ui.dataFile_scope,self.ui.dataFile_uxa,self.ui.dataFile_dig))
+		
+		self.ui.dllFile_uxa.textChanged.connect(lambda: self.copyDemod(self.ui.dllFile_uxa, self.ui.dllFile_scope, self.ui.dllFile_dig))
+		self.ui.setupFile_uxa.textChanged.connect(lambda: self.copyDemod(self.ui.setupFile_uxa,self.ui.setupFile_scope,self.ui.setupFile_dig))
+		self.ui.dataFile_uxa.textChanged.connect(lambda: self.copyDemod(self.ui.dataFile_uxa,self.ui.dataFile_scope,self.ui.dataFile_dig))
+		
+		self.ui.dllFile_dig.textChanged.connect(lambda: self.copyDemod(self.ui.dllFile_dig, self.ui.dllFile_scope, self.ui.dllFile_uxa))
+		self.ui.setupFile_dig.textChanged.connect(lambda: self.copyDemod(self.ui.setupFile_dig,self.ui.setupFile_scope,self.ui.setupFile_uxa))
+		self.ui.dataFile_dig.textChanged.connect(lambda: self.copyDemod(self.ui.dataFile_dig,self.ui.dataFile_scope,self.ui.dataFile_uxa))
 		
 		# show on window
 		self.show()	
 		
+	def rxCalRoutine(self):
+		self.resize(1265,950)
+		self.center()
 	
-	# FINISH THIS
-	def copyDemod(self,changedModField):
+	# apply changes from one demod box to all demod boxes
+	def copyDemod(self,changedModField,replacedFieldOne,replacedFieldTwo):
 		value = changedModField.toPlainText()
-		.setPlainText(value)
+		replacedFieldOne.blockSignals(True)
+		replacedFieldTwo.blockSignals(True)
+		replacedFieldOne.setPlainText(value)
+		replacedFieldTwo.setPlainText(value)
+		replacedFieldOne.blockSignals(False)
+		replacedFieldTwo.blockSignals(False)
 		
 	# IF GROUPBOX VALUE CHANGED, NO LONGER GREY BOX
+	# DISABLE SET BOXES (CAN'T UNCHECK) UNLESS GROUPBOX CONTENT IS CHANGED
 	
-	def setUXA(self,buttonDoneP,buttonDoneG,boxDone):
-		type = self.ui.vsaType.currentIndex()
-		if type == 3: #UXA
-			averaging = self.ui.averagingEnable.currentIndex()
-			demod = self.ui.demodulationEnable.currentIndex()
-			if averaging != 0 and demod != 0:
-				self.ui.uxaEquipGeneralVSA.setStyleSheet(boxDone)
-				demod = self.ui.uxaMod.isEnabled()
-				if demod:
-					self.ui.digMod.setStyleSheet(boxDone)
-					self.ui.scopeMod.setStyleSheet(boxDone)
-					self.ui.uxaMod.setStyleSheet(boxDone)
-					self.ui.modButton_vsa.setStyleSheet(buttonDoneG)
-				self.ui.uxaButton_vsa.setStyleSheet(buttonDoneP)
-				self.ui.uxaButton_vsa_2.setStyleSheet(buttonDoneP)
-				self.ui.vsaNextStack.setCurrentIndex(3)
-			else:
-				self.fillParametersMsg()
-		elif type == 4: #PXA	
-			averaging = self.ui.averagingEnable.currentIndex()
-			demod = self.ui.demodulationEnable.currentIndex()
-			if averaging != 0 and demod != 0:
-				self.ui.uxaEquipGeneralVSA.setStyleSheet(boxDone)
-				demod = self.ui.uxaMod.isEnabled()
-				if demod:
-					self.ui.uxaMod.setStyleSheet(boxDone)
-					self.ui.digMod.setStyleSheet(boxDone)
-					self.ui.scopeMod.setStyleSheet(boxDone)
-					self.ui.modButton_vsa.setStyleSheet(buttonDoneG)
-				self.ui.pxaButton_vsa.setStyleSheet(buttonDoneP)
-				self.ui.pxaButton_vsa_2.setStyleSheet(buttonDoneP)
-				self.ui.vsaNextStack.setCurrentIndex(3)
-			else:
-				self.fillParametersMsg()
+	# demod added, change next step to fill out standard params
+	
+	def setUXA(self,buttonDoneP,buttonDoneG,boxDone,buttonHover):
+		averaging = self.ui.averagingEnable.currentIndex()
+		demod = self.ui.demodulationEnable.currentIndex()
+		if averaging != 0 and demod != 0:
+			self.ui.uxaEquipGeneralVSA.setStyleSheet(boxDone)
+			demod = self.ui.uxaMod.isEnabled()
+			if demod:
+				self.ui.digMod.setStyleSheet(boxDone)
+				self.ui.scopeMod.setStyleSheet(boxDone)
+				self.ui.uxaMod.setStyleSheet(boxDone)
+				self.ui.modButton_vsa.setStyleSheet(buttonDoneG)
+			self.ui.uxaButton_vsa.setStyleSheet(buttonDoneP)
+			self.ui.uxaButton_vsa_2.setStyleSheet(buttonDoneP)
+			self.ui.vsaNextStack.setCurrentIndex(3)
+			self.ui.meterButton_vsa.setStyleSheet(buttonHover)
+			self.ui.meterButton_vsa.setCursor(QCursor(Qt.PointingHandCursor))
+		else:
+			self.fillParametersMsg()
+	
+	def setPXA(self,buttonDoneP,buttonDoneG,boxDone,buttonHover):
+		averaging = self.ui.averagingEnable.currentIndex()
+		demod = self.ui.demodulationEnable.currentIndex()
+		if averaging != 0 and demod != 0:
+			self.ui.uxaEquipGeneralVSA.setStyleSheet(boxDone)
+			demod = self.ui.uxaMod.isEnabled()
+			if demod:
+				self.ui.uxaMod.setStyleSheet(boxDone)
+				self.ui.digMod.setStyleSheet(boxDone)
+				self.ui.scopeMod.setStyleSheet(boxDone)
+				self.ui.modButton_vsa.setStyleSheet(buttonDoneG)
+			self.ui.pxaButton_vsa.setStyleSheet(buttonDoneP)
+			self.ui.pxaButton_vsa_2.setStyleSheet(buttonDoneP)
+			self.ui.meterButton_vsa.setStyleSheet(buttonHover)
+			self.ui.meterButton_vsa.setCursor(QCursor(Qt.PointingHandCursor))
+			self.ui.vsaNextStack.setCurrentIndex(3)
+			
+		else:
+			self.fillParametersMsg()
 	
 	def setScope(self,buttonDoneP,buttonDoneG,boxDone):
 		averaging = self.ui.averagingEnable.currentIndex()
 		demod = self.ui.demodulationEnable.currentIndex()
+		typeIdx = self.ui.vsaType.currentIndex()
 		if averaging != 0 and demod != 0:
 			self.ui.scopeEquipGeneral.setStyleSheet(boxDone)
 			demod = self.ui.scopeMod.isEnabled()
@@ -151,13 +188,17 @@ class Window(QMainWindow):
 			self.ui.scopeButton_vsa_2.setStyleSheet(buttonDoneP)
 			self.ui.scopeButton_vsa_3.setStyleSheet(buttonDoneP)
 			self.ui.scopeButton_vsa_4.setStyleSheet(buttonDoneP)
-			#self.ui.vsaNextStack.setCurrentIndex(3)
+			if typeIdx == 1:
+				self.ui.vsaNextStack.setCurrentIndex(3)
+			elif typeIdx == 5:
+				self.ui.vsaNextStack.setCurrentIndex(2)
 		else:
 			self.fillParametersMsg()
 			
 	def setDig(self,buttonDoneP,buttonDoneG,boxDone):
 		averaging = self.ui.averagingEnable.currentIndex()
 		demod = self.ui.demodulationEnable.currentIndex()
+		typeIdx = self.ui.vsaType.currentIndex()
 		if averaging != 0 and demod != 0:
 			self.ui.digEquipGeneral.setStyleSheet(boxDone)
 			demod = self.ui.digMod.isEnabled()
@@ -171,7 +212,10 @@ class Window(QMainWindow):
 			self.ui.digButton_vsa_2.setStyleSheet(buttonDoneP)
 			self.ui.digButton_vsa_3.setStyleSheet(buttonDoneP)
 			self.ui.digButton_vsa_4.setStyleSheet(buttonDoneP)
-			#self.ui.vsaNextStack.setCurrentIndex(3)
+			if typeIdx == 1:
+				self.ui.vsaNextStack.setCurrentIndex(3)
+			elif typeIdx == 6:
+				self.ui.vsaNextStack.setCurrentIndex(2)
 		else:
 			self.fillParametersMsg()
 	
@@ -383,6 +427,11 @@ class Window(QMainWindow):
 		vsaIdx = self.ui.vsaType.currentIndex()
 		averaging = self.ui.averagingEnable.currentIndex()
 		demod = self.ui.demodulationEnable.currentIndex()
+		scopeChecked = self.ui.scopeSet.isChecked()
+		uxaChecked = self.ui.uxaSet.isChecked()
+		pxaChecked = self.ui.pxaSet.isChecked()
+		digChecked = self.ui.digSet.isChecked()
+		unsetBox = "QGroupBox{background-color:rgb(247, 247, 247);}"
 		
 		if vsaIdx == 0:
 			self.ui.vsaWorkflow.setCurrentIndex(0)
@@ -410,6 +459,7 @@ class Window(QMainWindow):
 				self.ui.uxa_pxa_titleStack.setCurrentIndex(1)
 				self.ui.vsaAdvancedStack.setCurrentIndex(2)
 				self.ui.uxa_pxa_titleStackAdv.setCurrentIndex(0)
+				self.ui.uxa_pxa_set.setCurrentIndex(0)
 			elif vsaIdx == 4:
 				self.ui.vsaWorkflow.setCurrentIndex(1)
 				self.ui.single_vsa_stack.setCurrentIndex(3)
@@ -417,6 +467,7 @@ class Window(QMainWindow):
 				self.ui.uxa_pxa_titleStack.setCurrentIndex(0)
 				self.ui.vsaAdvancedStack.setCurrentIndex(2)
 				self.ui.uxa_pxa_titleStackAdv.setCurrentIndex(1)
+				self.ui.uxa_pxa_set.setCurrentIndex(1)
 			elif vsaIdx == 5:
 				self.ui.vsaWorkflow.setCurrentIndex(4)
 				self.ui.single_down_vsa_stack.setCurrentIndex(1)
@@ -428,21 +479,30 @@ class Window(QMainWindow):
 				self.ui.vsaEquipStack.setCurrentIndex(2)
 				self.ui.vsaAdvancedStack.setCurrentIndex(1)
 		elif demod == 1:
+			# if demod is originally false then switched to true, want next steps to say fill out standard parameters
 			self.ui.uxaMod.setEnabled(True)
 			self.ui.digMod.setEnabled(True)
 			self.ui.scopeMod.setEnabled(True)
-			if averaging != 0:
-				self.ui.vsaNextStack.setCurrentIndex(1)
-			if vsaIdx == 1:
+			if averaging == 0:
+				self.ui.vsaNextStack.setCurrentIndex(0)
+			elif vsaIdx == 1:
 				self.ui.vsaWorkflow.setCurrentIndex(2)
 				self.ui.single_mod_vsa_stack.setCurrentIndex(0)
 				self.ui.vsaEquipStack.setCurrentIndex(1)
 				self.ui.vsaAdvancedStack.setCurrentIndex(1)
+				if scopeChecked:
+					self.ui.vsaNextStack.setCurrentIndex(3)
+				else:
+					self.ui.vsaNextStack.setCurrentIndex(1)
 			elif vsaIdx == 2:
 				self.ui.vsaWorkflow.setCurrentIndex(2)
 				self.ui.single_mod_vsa_stack.setCurrentIndex(1)
 				self.ui.vsaEquipStack.setCurrentIndex(2)
 				self.ui.vsaAdvancedStack.setCurrentIndex(1)
+				if digChecked:
+					self.ui.vsaNextStack.setCurrentIndex(3)
+				else:
+					self.ui.vsaNextStack.setCurrentIndex(1)
 			elif vsaIdx == 3:
 				self.ui.vsaWorkflow.setCurrentIndex(2)
 				self.ui.single_mod_vsa_stack.setCurrentIndex(2)
@@ -450,6 +510,12 @@ class Window(QMainWindow):
 				self.ui.uxa_pxa_titleStack.setCurrentIndex(1)
 				self.ui.vsaAdvancedStack.setCurrentIndex(2)
 				self.ui.uxa_pxa_titleStackAdv.setCurrentIndex(0)
+				self.ui.uxa_pxa_set.setCurrentIndex(0)
+				if uxaChecked:
+					self.ui.vsaNextStack.setCurrentIndex(3)
+				else:
+					self.ui.vsaNextStack.setCurrentIndex(1)
+					self.ui.uxaEquipGeneralVSA.setStyleSheet(unsetBox)
 			elif vsaIdx == 4:
 				self.ui.vsaWorkflow.setCurrentIndex(2)
 				self.ui.single_mod_vsa_stack.setCurrentIndex(3)
@@ -457,32 +523,54 @@ class Window(QMainWindow):
 				self.ui.uxa_pxa_titleStack.setCurrentIndex(0)
 				self.ui.vsaAdvancedStack.setCurrentIndex(2)
 				self.ui.uxa_pxa_titleStackAdv.setCurrentIndex(1)
+				self.ui.uxa_pxa_set.setCurrentIndex(1)
+				if pxaChecked:
+					self.ui.vsaNextStack.setCurrentIndex(3)
+				else:
+					self.ui.vsaNextStack.setCurrentIndex(1)
+					self.ui.uxaEquipGeneralVSA.setStyleSheet(unsetBox)
 			elif vsaIdx == 5:
 				self.ui.vsaWorkflow.setCurrentIndex(3)
 				self.ui.single_mod_down_vsa_stack.setCurrentIndex(0)
 				self.ui.vsaEquipStack.setCurrentIndex(1)
 				self.ui.vsaAdvancedStack.setCurrentIndex(1)
+				if scopeChecked:
+					self.ui.vsaNextStack.setCurrentIndex(2)
+				else:
+					self.ui.vsaNextStack.setCurrentIndex(1)
 			elif vsaIdx == 6:
 				self.ui.vsaWorkflow.setCurrentIndex(3)
 				self.ui.single_mod_down_vsa_stack.setCurrentIndex(1)
 				self.ui.vsaEquipStack.setCurrentIndex(2)
 				self.ui.vsaAdvancedStack.setCurrentIndex(1)
+				if digChecked:
+					self.ui.vsaNextStack.setCurrentIndex(2)
+				else:
+					self.ui.vsaNextStack.setCurrentIndex(1)
 		elif demod == 2:
 			self.ui.uxaMod.setEnabled(False)
 			self.ui.digMod.setEnabled(False)
 			self.ui.scopeMod.setEnabled(False)
-			if averaging != 0:
-				self.ui.vsaNextStack.setCurrentIndex(1)
-			if vsaIdx == 1:
+			if averaging == 0:
+				self.ui.vsaNextStack.setCurrentIndex(0)
+			elif vsaIdx == 1:
 				self.ui.vsaWorkflow.setCurrentIndex(1)
 				self.ui.single_vsa_stack.setCurrentIndex(0)
 				self.ui.vsaEquipStack.setCurrentIndex(1)
 				self.ui.vsaAdvancedStack.setCurrentIndex(1)
+				if scopeChecked:
+					self.ui.vsaNextStack.setCurrentIndex(3)
+				else:
+					self.ui.vsaNextStack.setCurrentIndex(1)
 			elif vsaIdx == 2:
 				self.ui.vsaWorkflow.setCurrentIndex(1)
 				self.ui.single_vsa_stack.setCurrentIndex(1)
 				self.ui.vsaEquipStack.setCurrentIndex(2)
 				self.ui.vsaAdvancedStack.setCurrentIndex(1)
+				if digChecked:
+					self.ui.vsaNextStack.setCurrentIndex(3)
+				else:
+					self.ui.vsaNextStack.setCurrentIndex(1)
 			elif vsaIdx == 3:
 				self.ui.vsaWorkflow.setCurrentIndex(1)
 				self.ui.single_vsa_stack.setCurrentIndex(2)
@@ -490,6 +578,12 @@ class Window(QMainWindow):
 				self.ui.uxa_pxa_titleStack.setCurrentIndex(1)
 				self.ui.vsaAdvancedStack.setCurrentIndex(2)
 				self.ui.uxa_pxa_titleStackAdv.setCurrentIndex(0)
+				self.ui.uxa_pxa_set.setCurrentIndex(0)
+				if uxaChecked:
+					self.ui.vsaNextStack.setCurrentIndex(3)
+				else:
+					self.ui.vsaNextStack.setCurrentIndex(1)
+					self.ui.uxaEquipGeneralVSA.setStyleSheet(unsetBox)
 			elif vsaIdx == 4:
 				self.ui.vsaWorkflow.setCurrentIndex(1)
 				self.ui.single_vsa_stack.setCurrentIndex(3)
@@ -497,16 +591,30 @@ class Window(QMainWindow):
 				self.ui.uxa_pxa_titleStack.setCurrentIndex(0)
 				self.ui.vsaAdvancedStack.setCurrentIndex(2)
 				self.ui.uxa_pxa_titleStackAdv.setCurrentIndex(1)
+				self.ui.uxa_pxa_set.setCurrentIndex(1)
+				if pxaChecked:
+					self.ui.vsaNextStack.setCurrentIndex(3)
+				else:
+					self.ui.vsaNextStack.setCurrentIndex(1)
+					self.ui.uxaEquipGeneralVSA.setStyleSheet(unsetBox)
 			elif vsaIdx == 5:
 				self.ui.vsaWorkflow.setCurrentIndex(4)
 				self.ui.single_down_vsa_stack.setCurrentIndex(1)
 				self.ui.vsaEquipStack.setCurrentIndex(1)	
 				self.ui.vsaAdvancedStack.setCurrentIndex(1)
+				if scopeChecked:
+					self.ui.vsaNextStack.setCurrentIndex(2)
+				else:
+					self.ui.vsaNextStack.setCurrentIndex(1)
 			elif vsaIdx == 6:
 				self.ui.vsaWorkflow.setCurrentIndex(4)
 				self.ui.single_down_vsa_stack.setCurrentIndex(0)
 				self.ui.vsaEquipStack.setCurrentIndex(2)
 				self.ui.vsaAdvancedStack.setCurrentIndex(1)
+				if digChecked:
+					self.ui.vsaNextStack.setCurrentIndex(2)
+				else:
+					self.ui.vsaNextStack.setCurrentIndex(1)
 	
 	def closeEvent(self,event):
 		reply=QMessageBox.question(self,'Exit Confirmation',"Are you sure you want to close the program?",QMessageBox.Yes|QMessageBox.No,QMessageBox.No)
@@ -545,3 +653,8 @@ if __name__ == '__main__':
 	app = QApplication(sys.argv)
 	window = Window()
 	sys.exit(app.exec_())
+	
+# OLD CODE
+
+# set scroll area contents
+		#self.ui.vsgEquipScroll.setWidget(self.ui.vsgEquipScrollWidgetContents)
