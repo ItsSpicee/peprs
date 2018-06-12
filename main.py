@@ -1,6 +1,6 @@
 import sys
 from PyQt5 import uic, QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import (QMessageBox, QTabWidget, QFileDialog,QDialog, QInputDialog, QTextEdit, QLineEdit, QLabel, QFrame, QGridLayout, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QMenu, QAction, qApp, QDesktopWidget, QMessageBox, QToolTip, QPushButton, QApplication)
+from PyQt5.QtWidgets import (QMessageBox, QTabWidget, QFileDialog,QDialog, QInputDialog, QTextEdit, QLineEdit, QLabel, QFrame, QGridLayout, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QMenu, QAction, qApp, QDesktopWidget, QMessageBox, QToolTip, QPushButton, QApplication, QProgressBar)
 from PyQt5.QtGui import (QCursor, QPen, QPainter, QColor, QIcon, QFont)
 from PyQt5.QtCore import (Qt, pyqtSlot, QSize)
 
@@ -75,8 +75,8 @@ class Window(QMainWindow):
 		self.ui.psgSet.clicked.connect(lambda: self.setPSG(greenButton, setParams))
 		self.ui.uxaSet.clicked.connect(lambda: self.setUXA(purpleButton,greenButton,setParams,blueHover))
 		self.ui.pxaSet.clicked.connect(lambda: self.setPXA(purpleButton,greenButton,setParams,blueHover))
-		self.ui.scopeSet.clicked.connect(lambda: self.setScope(purpleButton,greenButton,setParams))
-		self.ui.digSet.clicked.connect(lambda: self.setDig(purpleButton,greenButton,setParams))
+		self.ui.scopeSet.clicked.connect(lambda: self.setScope(purpleButton,greenButton,setParams,blueHover))
+		self.ui.digSet.clicked.connect(lambda: self.setDig(purpleButton,greenButton,setParams,blueHover))
 		self.ui.set_run_vsa.clicked.connect(self.rxCalRoutine)
 		
 		# control dash radio buttons
@@ -116,6 +116,18 @@ class Window(QMainWindow):
 	def rxCalRoutine(self):
 		self.resize(1265,950)
 		self.center()
+		self.progressBar = QProgressBar()
+		self.progressBar.setRange(1,10);
+		self.progressBar.setTextVisible(True);
+		self.progressBar.setFormat("Currently Running: RX Calibration Routine")
+		self.ui.statusBar.addWidget(self.progressBar,2)
+		completed = 0
+		while completed < 100:
+			completed = completed + 0.00001
+			self.progressBar.setValue(completed)
+		self.ui.statusBar.removeWidget(self.progressBar)
+		# to show progress bar, need both addWidget() and show()
+		self.ui.statusBar.showMessage("RX Calibration Routine Complete",3000)
 	
 	# apply changes from one demod box to all demod boxes
 	def copyDemod(self,changedModField,replacedFieldOne,replacedFieldTwo):
@@ -171,7 +183,7 @@ class Window(QMainWindow):
 		else:
 			self.fillParametersMsg()
 	
-	def setScope(self,buttonDoneP,buttonDoneG,boxDone):
+	def setScope(self,buttonDoneP,buttonDoneG,boxDone, buttonHover):
 		averaging = self.ui.averagingEnable.currentIndex()
 		demod = self.ui.demodulationEnable.currentIndex()
 		typeIdx = self.ui.vsaType.currentIndex()
@@ -188,6 +200,8 @@ class Window(QMainWindow):
 			self.ui.scopeButton_vsa_2.setStyleSheet(buttonDoneP)
 			self.ui.scopeButton_vsa_3.setStyleSheet(buttonDoneP)
 			self.ui.scopeButton_vsa_4.setStyleSheet(buttonDoneP)
+			self.ui.meterButton_vsa.setStyleSheet(buttonHover)
+			self.ui.meterButton_vsa.setCursor(QCursor(Qt.PointingHandCursor))
 			if typeIdx == 1:
 				self.ui.vsaNextStack.setCurrentIndex(3)
 			elif typeIdx == 5:
@@ -195,7 +209,7 @@ class Window(QMainWindow):
 		else:
 			self.fillParametersMsg()
 			
-	def setDig(self,buttonDoneP,buttonDoneG,boxDone):
+	def setDig(self,buttonDoneP,buttonDoneG,boxDone,buttonHover):
 		averaging = self.ui.averagingEnable.currentIndex()
 		demod = self.ui.demodulationEnable.currentIndex()
 		typeIdx = self.ui.vsaType.currentIndex()
@@ -212,6 +226,8 @@ class Window(QMainWindow):
 			self.ui.digButton_vsa_2.setStyleSheet(buttonDoneP)
 			self.ui.digButton_vsa_3.setStyleSheet(buttonDoneP)
 			self.ui.digButton_vsa_4.setStyleSheet(buttonDoneP)
+			self.ui.meterButton_vsa.setStyleSheet(buttonHover)
+			self.ui.meterButton_vsa.setCursor(QCursor(Qt.PointingHandCursor))
 			if typeIdx == 1:
 				self.ui.vsaNextStack.setCurrentIndex(3)
 			elif typeIdx == 6:
@@ -349,9 +365,13 @@ class Window(QMainWindow):
 		self.ui.statusBar.showMessage('Successfully Set: VSG - Advanced Settings',2000)
 	
 	def changeStepTabWindowSize(self,i):
-		if i == 0 or i == 1 or i == 2:
+		if i == 0 or i == 2:
 			self.setMinimumSize(1265,585)
 			self.resize(1265, 585)
+			self.center()
+		elif i == 1:
+			self.setMinimumSize(1265,515)
+			self.resize(1265,515)
 			self.center()
 		elif i == 3:
 			self.setMinimumSize(700,550)
@@ -483,14 +503,14 @@ class Window(QMainWindow):
 			self.ui.uxaMod.setEnabled(True)
 			self.ui.digMod.setEnabled(True)
 			self.ui.scopeMod.setEnabled(True)
-			if averaging == 0:
-				self.ui.vsaNextStack.setCurrentIndex(0)
-			elif vsaIdx == 1:
+			if vsaIdx == 1:
 				self.ui.vsaWorkflow.setCurrentIndex(2)
 				self.ui.single_mod_vsa_stack.setCurrentIndex(0)
 				self.ui.vsaEquipStack.setCurrentIndex(1)
 				self.ui.vsaAdvancedStack.setCurrentIndex(1)
-				if scopeChecked:
+				if averaging == 0:
+					self.ui.vsaNextStack.setCurrentIndex(0)
+				elif scopeChecked:
 					self.ui.vsaNextStack.setCurrentIndex(3)
 				else:
 					self.ui.vsaNextStack.setCurrentIndex(1)
@@ -499,7 +519,9 @@ class Window(QMainWindow):
 				self.ui.single_mod_vsa_stack.setCurrentIndex(1)
 				self.ui.vsaEquipStack.setCurrentIndex(2)
 				self.ui.vsaAdvancedStack.setCurrentIndex(1)
-				if digChecked:
+				if averaging == 0:
+					self.ui.vsaNextStack.setCurrentIndex(0)
+				elif digChecked:
 					self.ui.vsaNextStack.setCurrentIndex(3)
 				else:
 					self.ui.vsaNextStack.setCurrentIndex(1)
@@ -511,7 +533,9 @@ class Window(QMainWindow):
 				self.ui.vsaAdvancedStack.setCurrentIndex(2)
 				self.ui.uxa_pxa_titleStackAdv.setCurrentIndex(0)
 				self.ui.uxa_pxa_set.setCurrentIndex(0)
-				if uxaChecked:
+				if averaging == 0:
+					self.ui.vsaNextStack.setCurrentIndex(0)
+				elif uxaChecked:
 					self.ui.vsaNextStack.setCurrentIndex(3)
 				else:
 					self.ui.vsaNextStack.setCurrentIndex(1)
@@ -524,7 +548,9 @@ class Window(QMainWindow):
 				self.ui.vsaAdvancedStack.setCurrentIndex(2)
 				self.ui.uxa_pxa_titleStackAdv.setCurrentIndex(1)
 				self.ui.uxa_pxa_set.setCurrentIndex(1)
-				if pxaChecked:
+				if averaging == 0:
+					self.ui.vsaNextStack.setCurrentIndex(0)
+				elif pxaChecked:
 					self.ui.vsaNextStack.setCurrentIndex(3)
 				else:
 					self.ui.vsaNextStack.setCurrentIndex(1)
@@ -534,7 +560,9 @@ class Window(QMainWindow):
 				self.ui.single_mod_down_vsa_stack.setCurrentIndex(0)
 				self.ui.vsaEquipStack.setCurrentIndex(1)
 				self.ui.vsaAdvancedStack.setCurrentIndex(1)
-				if scopeChecked:
+				if averaging == 0:
+					self.ui.vsaNextStack.setCurrentIndex(0)
+				elif scopeChecked:
 					self.ui.vsaNextStack.setCurrentIndex(2)
 				else:
 					self.ui.vsaNextStack.setCurrentIndex(1)
@@ -543,7 +571,9 @@ class Window(QMainWindow):
 				self.ui.single_mod_down_vsa_stack.setCurrentIndex(1)
 				self.ui.vsaEquipStack.setCurrentIndex(2)
 				self.ui.vsaAdvancedStack.setCurrentIndex(1)
-				if digChecked:
+				if averaging == 0:
+					self.ui.vsaNextStack.setCurrentIndex(0)
+				elif digChecked:
 					self.ui.vsaNextStack.setCurrentIndex(2)
 				else:
 					self.ui.vsaNextStack.setCurrentIndex(1)
@@ -558,7 +588,9 @@ class Window(QMainWindow):
 				self.ui.single_vsa_stack.setCurrentIndex(0)
 				self.ui.vsaEquipStack.setCurrentIndex(1)
 				self.ui.vsaAdvancedStack.setCurrentIndex(1)
-				if scopeChecked:
+				if averaging == 0:
+					self.ui.vsaNextStack.setCurrentIndex(0)
+				elif scopeChecked:
 					self.ui.vsaNextStack.setCurrentIndex(3)
 				else:
 					self.ui.vsaNextStack.setCurrentIndex(1)
@@ -567,7 +599,9 @@ class Window(QMainWindow):
 				self.ui.single_vsa_stack.setCurrentIndex(1)
 				self.ui.vsaEquipStack.setCurrentIndex(2)
 				self.ui.vsaAdvancedStack.setCurrentIndex(1)
-				if digChecked:
+				if averaging == 0:
+					self.ui.vsaNextStack.setCurrentIndex(0)
+				elif digChecked:
 					self.ui.vsaNextStack.setCurrentIndex(3)
 				else:
 					self.ui.vsaNextStack.setCurrentIndex(1)
@@ -579,7 +613,9 @@ class Window(QMainWindow):
 				self.ui.vsaAdvancedStack.setCurrentIndex(2)
 				self.ui.uxa_pxa_titleStackAdv.setCurrentIndex(0)
 				self.ui.uxa_pxa_set.setCurrentIndex(0)
-				if uxaChecked:
+				if averaging == 0:
+					self.ui.vsaNextStack.setCurrentIndex(0)
+				elif uxaChecked:
 					self.ui.vsaNextStack.setCurrentIndex(3)
 				else:
 					self.ui.vsaNextStack.setCurrentIndex(1)
@@ -592,7 +628,9 @@ class Window(QMainWindow):
 				self.ui.vsaAdvancedStack.setCurrentIndex(2)
 				self.ui.uxa_pxa_titleStackAdv.setCurrentIndex(1)
 				self.ui.uxa_pxa_set.setCurrentIndex(1)
-				if pxaChecked:
+				if averaging == 0:
+					self.ui.vsaNextStack.setCurrentIndex(0)
+				elif pxaChecked:
 					self.ui.vsaNextStack.setCurrentIndex(3)
 				else:
 					self.ui.vsaNextStack.setCurrentIndex(1)
@@ -602,7 +640,9 @@ class Window(QMainWindow):
 				self.ui.single_down_vsa_stack.setCurrentIndex(1)
 				self.ui.vsaEquipStack.setCurrentIndex(1)	
 				self.ui.vsaAdvancedStack.setCurrentIndex(1)
-				if scopeChecked:
+				if averaging == 0:
+					self.ui.vsaNextStack.setCurrentIndex(0)
+				elif scopeChecked:
 					self.ui.vsaNextStack.setCurrentIndex(2)
 				else:
 					self.ui.vsaNextStack.setCurrentIndex(1)
@@ -611,7 +651,9 @@ class Window(QMainWindow):
 				self.ui.single_down_vsa_stack.setCurrentIndex(0)
 				self.ui.vsaEquipStack.setCurrentIndex(2)
 				self.ui.vsaAdvancedStack.setCurrentIndex(1)
-				if digChecked:
+				if averaging == 0:
+					self.ui.vsaNextStack.setCurrentIndex(0)
+				elif digChecked:
 					self.ui.vsaNextStack.setCurrentIndex(2)
 				else:
 					self.ui.vsaNextStack.setCurrentIndex(1)
