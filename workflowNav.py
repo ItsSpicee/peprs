@@ -18,13 +18,22 @@ def vsaOnlySetup(self,greyButton,purpleButton,blueButton):
 	self.ui.vsaDash.setStyleSheet(purpleButton)
 	self.ui.saDash.setStyleSheet(purpleButton)
 
-def awgOnClick(self,unactiveButton,activeButton):
+def awgOnClick(self,unactiveButton,activeButton,buttonPHover):
 	self.ui.equipStack.setCurrentIndex(0)
 	upChecked = self.ui.upSet.isChecked()
 	psgChecked = self.ui.psgSet.isChecked()
+	scopeChecked = self.ui.scopeSet.isChecked()
+	digChecked = self.ui.digSet.isChecked()
+	uxaChecked = self.ui.uxaSet.isChecked()
+	pxaChecked = self.ui.pxaSet.isChecked()
 	if upChecked or psgChecked:
 		self.ui.vsaButton_vsg.setStyleSheet(activeButton)
 		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
+	elif scopeChecked or digChecked or uxaChecked or pxaChecked:
+		self.ui.vsaButton_vsg.setStyleSheet(buttonPHover)
+		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
+		self.ui.vsaButton_up.setStyleSheet(buttonPHover)
+		self.ui.vsaButton_up.setCursor(QCursor(Qt.PointingHandCursor))
 	else:
 		self.ui.vsaButton_vsg.setStyleSheet(unactiveButton)
 
@@ -70,3 +79,19 @@ def vsaOnClick(self):
 	elif vsgSetupIdx == 3:
 		if psgChecked:
 			self.ui.equipStack.setCurrentIndex(2)
+
+def powerOnClick(self):
+	typeIdx = self.ui.vsaType.currentIndex()
+	if typeIdx == 1 or typeIdx == 2 or typeIdx == 3 or typeIdx == 4:
+		self.ui.equipStack.setCurrentIndex(4)
+
+def downOnClick(self):
+	digChecked = self.ui.digSet.isChecked()
+	scopeChecked = self.ui.scopeSet.isChecked()
+	typeIdx = self.ui.vsaType.currentIndex()
+	if typeIdx == 5:
+		if scopeChecked:
+			self.ui.equipStack.setCurrentIndex(3)
+	elif typeIdx == 6:
+		if digChecked:
+			self.ui.equipStack.setCurrentIndex(3)

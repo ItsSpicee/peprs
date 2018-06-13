@@ -52,7 +52,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="algoTab">
        <attribute name="title">
@@ -7074,7 +7074,7 @@ Analyzer</string>
                 <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                </property>
                <property name="currentIndex">
-                <number>1</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="upStandardSettings_10">
                 <attribute name="title">
@@ -7120,7 +7120,7 @@ Analyzer</string>
                      <x>10</x>
                      <y>10</y>
                      <width>621</width>
-                     <height>301</height>
+                     <height>295</height>
                     </rect>
                    </property>
                    <property name="verticalScrollBarPolicy">
@@ -8553,7 +8553,7 @@ QPushButton:hover{background-color:rgb(72, 144, 216);}
                      <x>20</x>
                      <y>10</y>
                      <width>621</width>
-                     <height>301</height>
+                     <height>295</height>
                     </rect>
                    </property>
                    <property name="verticalScrollBarPolicy">
@@ -9626,7 +9626,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                        <x>10</x>
                        <y>10</y>
                        <width>633</width>
-                       <height>301</height>
+                       <height>295</height>
                       </rect>
                      </property>
                      <property name="verticalScrollBarPolicy">
@@ -12066,7 +12066,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                        <x>10</x>
                        <y>10</y>
                        <width>633</width>
-                       <height>301</height>
+                       <height>295</height>
                       </rect>
                      </property>
                      <property name="verticalScrollBarPolicy">
@@ -14953,7 +14953,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                        <x>7</x>
                        <y>5</y>
                        <width>633</width>
-                       <height>301</height>
+                       <height>295</height>
                       </rect>
                      </property>
                      <property name="verticalScrollBarPolicy">
@@ -14969,7 +14969,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       <property name="geometry">
                        <rect>
                         <x>0</x>
-                        <y>-838</y>
+                        <y>0</y>
                         <width>614</width>
                         <height>1200</height>
                        </rect>
@@ -18496,7 +18496,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      <x>9</x>
                      <y>9</y>
                      <width>633</width>
-                     <height>301</height>
+                     <height>295</height>
                     </rect>
                    </property>
                    <property name="verticalScrollBarPolicy">
@@ -18732,7 +18732,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      <x>10</x>
                      <y>10</y>
                      <width>633</width>
-                     <height>301</height>
+                     <height>295</height>
                     </rect>
                    </property>
                    <property name="verticalScrollBarPolicy">
@@ -19667,9 +19667,9 @@ Analyze</string>
                  <property name="geometry">
                   <rect>
                    <x>60</x>
-                   <y>10</y>
+                   <y>50</y>
                    <width>591</width>
-                   <height>281</height>
+                   <height>241</height>
                   </rect>
                  </property>
                  <property name="font">
@@ -19759,6 +19759,35 @@ Analyze</string>
                   </rect>
                  </property>
                 </widget>
+                <widget class="QLabel" name="label_446">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>10</y>
+                   <width>21</width>
+                   <height>31</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="pixmap">
+                  <pixmap>icons/download.png</pixmap>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_449">
+                 <property name="geometry">
+                  <rect>
+                   <x>40</x>
+                   <y>18</y>
+                   <width>91</width>
+                   <height>16</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Download Figure</string>
+                 </property>
+                </widget>
                </widget>
                <widget class="QWidget" name="tab_12">
                 <attribute name="title">
@@ -19777,7 +19806,7 @@ Analyze</string>
                   <enum>QTabWidget::North</enum>
                  </property>
                  <property name="currentIndex">
-                  <number>1</number>
+                  <number>2</number>
                  </property>
                  <widget class="QWidget" name="tab_13">
                   <attribute name="title">
@@ -19836,6 +19865,35 @@ Analyze</string>
                     </rect>
                    </property>
                   </widget>
+                  <widget class="QLabel" name="label_445">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>5</y>
+                     <width>21</width>
+                     <height>31</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="pixmap">
+                    <pixmap>icons/download.png</pixmap>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="label_447">
+                   <property name="geometry">
+                    <rect>
+                     <x>40</x>
+                     <y>13</y>
+                     <width>91</width>
+                     <height>16</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string>Download Figure</string>
+                   </property>
+                  </widget>
                  </widget>
                  <widget class="QWidget" name="tab_14">
                   <attribute name="title">
@@ -19892,6 +19950,35 @@ Analyze</string>
                      <width>91</width>
                      <height>22</height>
                     </rect>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="label_444">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>5</y>
+                     <width>21</width>
+                     <height>31</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="pixmap">
+                    <pixmap>icons/download.png</pixmap>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="label_448">
+                   <property name="geometry">
+                    <rect>
+                     <x>40</x>
+                     <y>13</y>
+                     <width>91</width>
+                     <height>16</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string>Download Figure</string>
                    </property>
                   </widget>
                  </widget>
@@ -20492,151 +20579,61 @@ Analyze</string>
                   <zorder>spinBox</zorder>
                  </widget>
                 </widget>
-                <widget class="QScrollArea" name="scrollArea">
+                <widget class="QStackedWidget" name="stackedWidget_10">
                  <property name="geometry">
                   <rect>
-                   <x>10</x>
+                   <x>0</x>
                    <y>320</y>
-                   <width>691</width>
-                   <height>71</height>
+                   <width>711</width>
+                   <height>81</height>
                   </rect>
                  </property>
-                 <property name="widgetResizable">
-                  <bool>true</bool>
+                 <property name="currentIndex">
+                  <number>1</number>
                  </property>
-                 <widget class="QWidget" name="scrollAreaWidgetContents">
-                  <property name="geometry">
-                   <rect>
-                    <x>0</x>
-                    <y>0</y>
-                    <width>672</width>
-                    <height>250</height>
-                   </rect>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>250</height>
-                   </size>
-                  </property>
-                  <widget class="QStackedWidget" name="stackedWidget_10">
+                 <widget class="QWidget" name="page_35">
+                  <widget class="QScrollArea" name="scrollArea">
                    <property name="geometry">
                     <rect>
-                     <x>0</x>
-                     <y>5</y>
-                     <width>671</width>
-                     <height>218</height>
+                     <x>12</x>
+                     <y>0</y>
+                     <width>691</width>
+                     <height>71</height>
                     </rect>
                    </property>
-                   <property name="currentIndex">
-                    <number>1</number>
+                   <property name="widgetResizable">
+                    <bool>true</bool>
                    </property>
-                   <widget class="QWidget" name="page_35">
-                    <widget class="QLabel" name="label_795">
-                     <property name="geometry">
-                      <rect>
-                       <x>20</x>
-                       <y>0</y>
-                       <width>171</width>
-                       <height>16</height>
-                      </rect>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <pointsize>10</pointsize>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>Path to IQ Imbalance Results:</string>
-                     </property>
-                    </widget>
-                    <widget class="QPlainTextEdit" name="plainTextEdit_44">
-                     <property name="geometry">
-                      <rect>
-                       <x>20</x>
-                       <y>28</y>
-                       <width>421</width>
-                       <height>31</height>
-                      </rect>
-                     </property>
-                    </widget>
+                   <widget class="QWidget" name="scrollAreaWidgetContents">
+                    <property name="geometry">
+                     <rect>
+                      <x>0</x>
+                      <y>0</y>
+                      <width>672</width>
+                      <height>250</height>
+                     </rect>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>250</height>
+                     </size>
+                    </property>
                     <widget class="QPlainTextEdit" name="plainTextEdit_77">
                      <property name="geometry">
                       <rect>
                        <x>20</x>
-                       <y>178</y>
+                       <y>180</y>
                        <width>421</width>
                        <height>31</height>
                       </rect>
-                     </property>
-                    </widget>
-                    <widget class="QWidget" name="layoutWidget_10">
-                     <property name="geometry">
-                      <rect>
-                       <x>470</x>
-                       <y>98</y>
-                       <width>41</width>
-                       <height>31</height>
-                      </rect>
-                     </property>
-                     <layout class="QVBoxLayout" name="verticalLayout_113">
-                      <property name="spacing">
-                       <number>0</number>
-                      </property>
-                      <item>
-                       <widget class="QLabel" name="label_798">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="pixmap">
-                         <pixmap>icons/folder 16x16.png</pixmap>
-                        </property>
-                        <property name="alignment">
-                         <set>Qt::AlignCenter</set>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QLabel" name="label_799">
-                        <property name="font">
-                         <font>
-                          <family>Arial</family>
-                          <pointsize>7</pointsize>
-                         </font>
-                        </property>
-                        <property name="text">
-                         <string>Open</string>
-                        </property>
-                        <property name="alignment">
-                         <set>Qt::AlignCenter</set>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </widget>
-                    <widget class="QLabel" name="label_800">
-                     <property name="geometry">
-                      <rect>
-                       <x>20</x>
-                       <y>70</y>
-                       <width>171</width>
-                       <height>16</height>
-                      </rect>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <pointsize>10</pointsize>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>Path to VSG Calibration File:</string>
                      </property>
                     </widget>
                     <widget class="QLabel" name="label_803">
                      <property name="geometry">
                       <rect>
                        <x>20</x>
-                       <y>150</y>
+                       <y>152</y>
                        <width>171</width>
                        <height>16</height>
                       </rect>
@@ -20650,55 +20647,11 @@ Analyze</string>
                       <string>Path to Calibration Structure:</string>
                      </property>
                     </widget>
-                    <widget class="QWidget" name="layoutWidget_9">
-                     <property name="geometry">
-                      <rect>
-                       <x>470</x>
-                       <y>28</y>
-                       <width>41</width>
-                       <height>31</height>
-                      </rect>
-                     </property>
-                     <layout class="QVBoxLayout" name="verticalLayout_112">
-                      <property name="spacing">
-                       <number>0</number>
-                      </property>
-                      <item>
-                       <widget class="QLabel" name="label_796">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="pixmap">
-                         <pixmap>icons/folder 16x16.png</pixmap>
-                        </property>
-                        <property name="alignment">
-                         <set>Qt::AlignCenter</set>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QLabel" name="label_797">
-                        <property name="font">
-                         <font>
-                          <family>Arial</family>
-                          <pointsize>7</pointsize>
-                         </font>
-                        </property>
-                        <property name="text">
-                         <string>Open</string>
-                        </property>
-                        <property name="alignment">
-                         <set>Qt::AlignCenter</set>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </widget>
                     <widget class="QWidget" name="layoutWidget_11">
                      <property name="geometry">
                       <rect>
                        <x>470</x>
-                       <y>178</y>
+                       <y>180</y>
                        <width>41</width>
                        <height>31</height>
                       </rect>
@@ -20738,23 +20691,11 @@ Analyze</string>
                       </item>
                      </layout>
                     </widget>
-                    <widget class="QPlainTextEdit" name="plainTextEdit_76">
+                    <widget class="QLabel" name="label_800">
                      <property name="geometry">
                       <rect>
                        <x>20</x>
-                       <y>98</y>
-                       <width>421</width>
-                       <height>31</height>
-                      </rect>
-                     </property>
-                    </widget>
-                   </widget>
-                   <widget class="QWidget" name="page_36">
-                    <widget class="QLabel" name="label_804">
-                     <property name="geometry">
-                      <rect>
-                       <x>10</x>
-                       <y>0</y>
+                       <y>72</y>
                        <width>171</width>
                        <height>16</height>
                       </rect>
@@ -20768,21 +20709,21 @@ Analyze</string>
                       <string>Path to VSG Calibration File:</string>
                      </property>
                     </widget>
-                    <widget class="QWidget" name="layoutWidget_12">
+                    <widget class="QWidget" name="layoutWidget_9">
                      <property name="geometry">
                       <rect>
-                       <x>460</x>
+                       <x>470</x>
                        <y>30</y>
                        <width>41</width>
                        <height>31</height>
                       </rect>
                      </property>
-                     <layout class="QVBoxLayout" name="verticalLayout_117">
+                     <layout class="QVBoxLayout" name="verticalLayout_112">
                       <property name="spacing">
                        <number>0</number>
                       </property>
                       <item>
-                       <widget class="QLabel" name="label_805">
+                       <widget class="QLabel" name="label_796">
                         <property name="text">
                          <string/>
                         </property>
@@ -20795,7 +20736,7 @@ Analyze</string>
                        </widget>
                       </item>
                       <item>
-                       <widget class="QLabel" name="label_806">
+                       <widget class="QLabel" name="label_797">
                         <property name="font">
                          <font>
                           <family>Arial</family>
@@ -20812,17 +20753,163 @@ Analyze</string>
                       </item>
                      </layout>
                     </widget>
-                    <widget class="QPlainTextEdit" name="plainTextEdit_78">
+                    <widget class="QLabel" name="label_795">
                      <property name="geometry">
                       <rect>
-                       <x>10</x>
-                       <y>28</y>
+                       <x>20</x>
+                       <y>2</y>
+                       <width>171</width>
+                       <height>16</height>
+                      </rect>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <pointsize>10</pointsize>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>Path to IQ Imbalance Results:</string>
+                     </property>
+                    </widget>
+                    <widget class="QWidget" name="layoutWidget_10">
+                     <property name="geometry">
+                      <rect>
+                       <x>470</x>
+                       <y>100</y>
+                       <width>41</width>
+                       <height>31</height>
+                      </rect>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_113">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="label_798">
+                        <property name="text">
+                         <string/>
+                        </property>
+                        <property name="pixmap">
+                         <pixmap>icons/folder 16x16.png</pixmap>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="label_799">
+                        <property name="font">
+                         <font>
+                          <family>Arial</family>
+                          <pointsize>7</pointsize>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>Open</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                    <widget class="QPlainTextEdit" name="plainTextEdit_76">
+                     <property name="geometry">
+                      <rect>
+                       <x>20</x>
+                       <y>100</y>
+                       <width>421</width>
+                       <height>31</height>
+                      </rect>
+                     </property>
+                    </widget>
+                    <widget class="QPlainTextEdit" name="plainTextEdit_44">
+                     <property name="geometry">
+                      <rect>
+                       <x>20</x>
+                       <y>30</y>
                        <width>421</width>
                        <height>31</height>
                       </rect>
                      </property>
                     </widget>
                    </widget>
+                  </widget>
+                 </widget>
+                 <widget class="QWidget" name="page_36">
+                  <widget class="QLabel" name="label_804">
+                   <property name="geometry">
+                    <rect>
+                     <x>30</x>
+                     <y>4</y>
+                     <width>171</width>
+                     <height>16</height>
+                    </rect>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>10</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Path to VSG Calibration File:</string>
+                   </property>
+                  </widget>
+                  <widget class="QWidget" name="layoutWidget_12">
+                   <property name="geometry">
+                    <rect>
+                     <x>480</x>
+                     <y>30</y>
+                     <width>41</width>
+                     <height>31</height>
+                    </rect>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_117">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <widget class="QLabel" name="label_805">
+                      <property name="text">
+                       <string/>
+                      </property>
+                      <property name="pixmap">
+                       <pixmap>icons/folder 16x16.png</pixmap>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_806">
+                      <property name="font">
+                       <font>
+                        <family>Arial</family>
+                        <pointsize>7</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>Open</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                  <widget class="QPlainTextEdit" name="plainTextEdit_78">
+                   <property name="geometry">
+                    <rect>
+                     <x>30</x>
+                     <y>30</y>
+                     <width>421</width>
+                     <height>31</height>
+                    </rect>
+                   </property>
                   </widget>
                  </widget>
                 </widget>
@@ -21560,7 +21647,7 @@ QWidget#power2{background-color:rgb(247,247,247)}
 QWidget#power3{background-color:rgb(247,247,247)}</string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="vsg">
            <property name="styleSheet">
@@ -22292,10 +22379,10 @@ Analyzer</string>
                    </rect>
                   </property>
                   <property name="currentIndex">
-                   <number>3</number>
+                   <number>4</number>
                   </property>
                   <widget class="QWidget" name="vsgGeneral">
-                   <widget class="QPushButton" name="vsgWorkflowButton_3">
+                   <widget class="QPushButton" name="vsgButton_vsg_2">
                     <property name="geometry">
                      <rect>
                       <x>10</x>
@@ -22360,7 +22447,7 @@ Analyzer</string>
                     <property name="lineWidth">
                      <number>2</number>
                     </property>
-                    <widget class="QPushButton" name="awgWorkflowButton">
+                    <widget class="QPushButton" name="awgButton_vsg">
                      <property name="geometry">
                       <rect>
                        <x>10</x>
@@ -22426,7 +22513,7 @@ Analyzer</string>
                     <property name="lineWidth">
                      <number>2</number>
                     </property>
-                    <widget class="QPushButton" name="awgWorkflowButton_2">
+                    <widget class="QPushButton" name="awgButton_vsg_2">
                      <property name="geometry">
                       <rect>
                        <x>10</x>
@@ -22572,7 +22659,7 @@ Supply 2</string>
                     <property name="lineWidth">
                      <number>2</number>
                     </property>
-                    <widget class="QPushButton" name="awgWorkflowButton_3">
+                    <widget class="QPushButton" name="awgButton_vsg_3">
                      <property name="geometry">
                       <rect>
                        <x>10</x>
@@ -22753,7 +22840,7 @@ Supply 2</string>
                     <property name="lineWidth">
                      <number>2</number>
                     </property>
-                    <widget class="QPushButton" name="vsgWorkflowButton">
+                    <widget class="QPushButton" name="vsgButton_vsg">
                      <property name="geometry">
                       <rect>
                        <x>10</x>
@@ -25068,7 +25155,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                   <enum>QFrame::Plain</enum>
                  </property>
                  <property name="currentIndex">
-                  <number>1</number>
+                  <number>2</number>
                  </property>
                  <widget class="QWidget" name="upNext">
                   <widget class="QFrame" name="frame_8">
@@ -25307,7 +25394,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                  <property name="frameShadow">
                   <enum>QFrame::Raised</enum>
                  </property>
-                 <widget class="QPushButton" name="pushButton_61">
+                 <widget class="QPushButton" name="saButton_up">
                   <property name="geometry">
                    <rect>
                     <x>360</x>
@@ -25353,7 +25440,7 @@ Analyzer</string>
                   <property name="lineWidth">
                    <number>2</number>
                   </property>
-                  <widget class="QPushButton" name="awgButton">
+                  <widget class="QPushButton" name="awgButton_up">
                    <property name="geometry">
                     <rect>
                      <x>10</x>
@@ -25449,7 +25536,7 @@ QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
                     </widget>
                    </widget>
                    <widget class="QWidget" name="page_7">
-                    <widget class="QPushButton" name="psgButton_psg">
+                    <widget class="QPushButton" name="psgButton_up">
                      <property name="geometry">
                       <rect>
                        <x>0</x>
@@ -25480,7 +25567,7 @@ QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
                   </widget>
                   <zorder>line_91</zorder>
                   <zorder>up_psg_workflow</zorder>
-                  <zorder>awgButton</zorder>
+                  <zorder>awgButton_up</zorder>
                  </widget>
                  <widget class="QLabel" name="label_75">
                   <property name="geometry">
@@ -25616,7 +25703,7 @@ Supply 2</string>
                    <enum>Qt::Vertical</enum>
                   </property>
                  </widget>
-                 <widget class="QPushButton" name="vsaButton">
+                 <widget class="QPushButton" name="vsaButton_up">
                   <property name="geometry">
                    <rect>
                     <x>360</x>
@@ -27109,7 +27196,7 @@ Meter</string>
                    </rect>
                   </property>
                   <property name="currentIndex">
-                   <number>4</number>
+                   <number>3</number>
                   </property>
                   <widget class="QWidget" name="vsaGeneral">
                    <widget class="Line" name="line_98">
@@ -28082,12 +28169,10 @@ Analyzer</string>
                      </font>
                     </property>
                     <property name="cursor">
-                     <cursorShape>PointingHandCursor</cursorShape>
+                     <cursorShape>ArrowCursor</cursorShape>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">QPushButton{ border:3px dashed #005500;  background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px;}
-
-QPushButton:hover{background-color:rgb(243, 243, 243);}</string>
+                     <string notr="true">QPushButton{ border:3px dashed #005500;  background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px;}</string>
                     </property>
                     <property name="text">
                      <string>Downconverter</string>
@@ -28380,12 +28465,10 @@ Supply 3</string>
                      </font>
                     </property>
                     <property name="cursor">
-                     <cursorShape>PointingHandCursor</cursorShape>
+                     <cursorShape>ArrowCursor</cursorShape>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">QPushButton{ border:3px dashed #005500;  background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px;}
-
-QPushButton:hover{background-color:rgb(243, 243, 243);}</string>
+                     <string notr="true">QPushButton{ border:3px dashed #005500;  background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px;}</string>
                     </property>
                     <property name="text">
                      <string>Downconverter</string>
@@ -29184,7 +29267,7 @@ Analyzer</string>
                  <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                 </property>
                 <property name="currentIndex">
-                 <number>0</number>
+                 <number>1</number>
                 </property>
                 <widget class="QWidget" name="vsaStandard">
                  <attribute name="title">
@@ -29206,7 +29289,7 @@ Analyzer</string>
                   <item>
                    <widget class="QStackedWidget" name="vsaEquipStack">
                     <property name="currentIndex">
-                     <number>2</number>
+                     <number>0</number>
                     </property>
                     <widget class="QWidget" name="uxaSettingsVSA">
                      <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="7,1">
@@ -29232,8 +29315,8 @@ Analyzer</string>
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>590</width>
-                           <height>382</height>
+                           <width>601</width>
+                           <height>450</height>
                           </rect>
                          </property>
                          <property name="minimumSize">
@@ -29660,27 +29743,6 @@ Analyzer</string>
                              <property name="currentIndex">
                               <number>1</number>
                              </property>
-                             <widget class="QWidget" name="pxaTitle">
-                              <widget class="QLabel" name="label_213">
-                               <property name="geometry">
-                                <rect>
-                                 <x>0</x>
-                                 <y>0</y>
-                                 <width>131</width>
-                                 <height>16</height>
-                                </rect>
-                               </property>
-                               <property name="font">
-                                <font>
-                                 <pointsize>10</pointsize>
-                                 <underline>true</underline>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>PXA - General Settings</string>
-                               </property>
-                              </widget>
-                             </widget>
                              <widget class="QWidget" name="uxaTitle">
                               <widget class="QLabel" name="label_80">
                                <property name="geometry">
@@ -29699,6 +29761,27 @@ Analyzer</string>
                                </property>
                                <property name="text">
                                 <string>UXA - General Settings</string>
+                               </property>
+                              </widget>
+                             </widget>
+                             <widget class="QWidget" name="pxaTitle">
+                              <widget class="QLabel" name="label_213">
+                               <property name="geometry">
+                                <rect>
+                                 <x>0</x>
+                                 <y>0</y>
+                                 <width>131</width>
+                                 <height>16</height>
+                                </rect>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <pointsize>10</pointsize>
+                                 <underline>true</underline>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>PXA - General Settings</string>
                                </property>
                               </widget>
                              </widget>
@@ -30083,8 +30166,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>593</width>
-                           <height>382</height>
+                           <width>606</width>
+                           <height>450</height>
                           </rect>
                          </property>
                          <property name="minimumSize">
@@ -30698,7 +30781,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>593</width>
+                           <width>606</width>
                            <height>500</height>
                           </rect>
                          </property>
@@ -31709,9 +31792,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           <property name="geometry">
                            <rect>
                             <x>10</x>
-                            <y>10</y>
+                            <y>13</y>
                             <width>321</width>
-                            <height>541</height>
+                            <height>551</height>
                            </rect>
                           </property>
                           <property name="minimumSize">
@@ -32428,21 +32511,22 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                            <item row="0" column="0" colspan="2">
                             <widget class="QStackedWidget" name="uxa_pxa_titleStackAdv">
                              <property name="currentIndex">
-                              <number>0</number>
+                              <number>1</number>
                              </property>
-                             <widget class="QWidget" name="page">
+                             <widget class="QWidget" name="uxaTitleAdv">
                               <widget class="QLabel" name="label_131">
                                <property name="geometry">
                                 <rect>
                                  <x>0</x>
-                                 <y>-1</y>
+                                 <y>-10</y>
                                  <width>142</width>
-                                 <height>17</height>
+                                 <height>41</height>
                                 </rect>
                                </property>
                                <property name="font">
                                 <font>
                                  <pointsize>10</pointsize>
+                                 <underline>true</underline>
                                 </font>
                                </property>
                                <property name="text">
@@ -32450,19 +32534,20 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                </property>
                               </widget>
                              </widget>
-                             <widget class="QWidget" name="page_2">
+                             <widget class="QWidget" name="pxaTitleAdv">
                               <widget class="QLabel" name="label_215">
                                <property name="geometry">
                                 <rect>
                                  <x>0</x>
-                                 <y>-1</y>
+                                 <y>-11</y>
                                  <width>142</width>
-                                 <height>17</height>
+                                 <height>41</height>
                                 </rect>
                                </property>
                                <property name="font">
                                 <font>
                                  <pointsize>10</pointsize>
+                                 <underline>true</underline>
                                 </font>
                                </property>
                                <property name="text">
@@ -32503,6 +32588,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         </property>
                         <property name="text">
                          <string>Set</string>
+                        </property>
+                        <property name="checkable">
+                         <bool>true</bool>
                         </property>
                        </widget>
                       </item>
@@ -32648,7 +32736,7 @@ Supply 1</string>
                    <enum>Qt::Horizontal</enum>
                   </property>
                  </widget>
-                 <widget class="QStackedWidget" name="vsgWorkflowForVSA_2">
+                 <widget class="QStackedWidget" name="vsgWorkflowForDown">
                   <property name="geometry">
                    <rect>
                     <x>10</x>
@@ -32660,7 +32748,7 @@ Supply 1</string>
                   <property name="currentIndex">
                    <number>0</number>
                   </property>
-                  <widget class="QWidget" name="awgForVSA_2">
+                  <widget class="QWidget" name="awgForDown">
                    <widget class="QLabel" name="label_126">
                     <property name="geometry">
                      <rect>
@@ -32728,7 +32816,7 @@ QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
                     </widget>
                    </widget>
                   </widget>
-                  <widget class="QWidget" name="awg_up_ForVSA_2">
+                  <widget class="QWidget" name="awg_up_ForDown">
                    <widget class="QLabel" name="label_127">
                     <property name="geometry">
                      <rect>
@@ -32894,7 +32982,7 @@ Supply 2</string>
                     </property>
                    </widget>
                   </widget>
-                  <widget class="QWidget" name="awg_psg_ForVSA_2">
+                  <widget class="QWidget" name="awg_psg_ForDown">
                    <widget class="QFrame" name="frame_34">
                     <property name="geometry">
                      <rect>
@@ -33060,7 +33148,7 @@ Supply 2</string>
                     </property>
                    </widget>
                   </widget>
-                  <widget class="QWidget" name="vsgForVSA_2">
+                  <widget class="QWidget" name="vsgForDown">
                    <widget class="QLabel" name="label_183">
                     <property name="geometry">
                      <rect>
@@ -33198,7 +33286,7 @@ QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
 Meter</string>
                   </property>
                  </widget>
-                 <widget class="QStackedWidget" name="stackedWidget">
+                 <widget class="QStackedWidget" name="vsaWorkflowForDown">
                   <property name="geometry">
                    <rect>
                     <x>315</x>
@@ -33210,7 +33298,7 @@ Meter</string>
                   <property name="currentIndex">
                    <number>1</number>
                   </property>
-                  <widget class="QWidget" name="page_6">
+                  <widget class="QWidget" name="down_single_page">
                    <widget class="QPushButton" name="pushButton_98">
                     <property name="geometry">
                      <rect>
@@ -33552,7 +33640,7 @@ QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
                    <zorder>line_165</zorder>
                    <zorder>line_172</zorder>
                   </widget>
-                  <widget class="QWidget" name="page_8">
+                  <widget class="QWidget" name="down_single_mod_page">
                    <widget class="Line" name="line_150">
                     <property name="geometry">
                      <rect>
@@ -33969,12 +34057,12 @@ Analyzer</string>
                  <zorder>pushButton_50</zorder>
                  <zorder>line_82</zorder>
                  <zorder>line_84</zorder>
-                 <zorder>vsgWorkflowForVSA_2</zorder>
+                 <zorder>vsgWorkflowForDown</zorder>
                  <zorder>label_184</zorder>
                  <zorder>label_287</zorder>
                  <zorder>meterButton_down</zorder>
                  <zorder>line_80</zorder>
-                 <zorder>stackedWidget</zorder>
+                 <zorder>vsaWorkflowForDown</zorder>
                  <zorder>label_218</zorder>
                 </widget>
                 <widget class="QStackedWidget" name="downNextStack">
@@ -33990,9 +34078,9 @@ Analyzer</string>
                   <string notr="true">QFrame{background-color:#d1d5de}</string>
                  </property>
                  <property name="currentIndex">
-                  <number>1</number>
+                  <number>0</number>
                  </property>
-                 <widget class="QWidget" name="page_3">
+                 <widget class="QWidget" name="fillDown_2">
                   <widget class="QFrame" name="nextFrame_11">
                    <property name="geometry">
                     <rect>
@@ -34071,7 +34159,7 @@ Analyzer</string>
                    </widget>
                   </widget>
                  </widget>
-                 <widget class="QWidget" name="page_5">
+                 <widget class="QWidget" name="fillMeter_2">
                   <widget class="QFrame" name="nextFrame_13">
                    <property name="geometry">
                     <rect>
@@ -34194,7 +34282,7 @@ Analyzer</string>
                  <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                 </property>
                 <property name="currentIndex">
-                 <number>0</number>
+                 <number>1</number>
                 </property>
                 <widget class="QWidget" name="upStandardSettings_2">
                  <attribute name="title">
@@ -34446,7 +34534,7 @@ Analyzer</string>
                    </widget>
                   </widget>
                  </widget>
-                 <widget class="QPushButton" name="upSet_2">
+                 <widget class="QPushButton" name="downSet">
                   <property name="geometry">
                    <rect>
                     <x>620</x>
@@ -34503,8 +34591,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>590</width>
-                       <height>382</height>
+                       <width>606</width>
+                       <height>765</height>
                       </rect>
                      </property>
                      <property name="minimumSize">
@@ -34747,7 +34835,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                    </widget>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="upSet_3">
+                   <widget class="QPushButton" name="downSetAdv">
                     <property name="minimumSize">
                      <size>
                       <width>75</width>
@@ -34923,7 +35011,7 @@ Supply 1</string>
                    </rect>
                   </property>
                   <property name="currentIndex">
-                   <number>2</number>
+                   <number>1</number>
                   </property>
                   <widget class="QWidget" name="awgForVSA_5">
                    <widget class="QLabel" name="label_225">
@@ -35473,7 +35561,7 @@ Meter</string>
                    </rect>
                   </property>
                   <property name="currentIndex">
-                   <number>4</number>
+                   <number>2</number>
                   </property>
                   <widget class="QWidget" name="vsaGeneral_2"/>
                   <widget class="QWidget" name="single_vsa_2">
@@ -35609,7 +35697,7 @@ Analyzer</string>
                       </rect>
                      </property>
                      <property name="currentIndex">
-                      <number>1</number>
+                      <number>0</number>
                      </property>
                      <widget class="QWidget" name="scope_5">
                       <widget class="QPushButton" name="scopeButton_meter">
@@ -35888,7 +35976,7 @@ Analyzer</string>
                       </rect>
                      </property>
                      <property name="currentIndex">
-                      <number>2</number>
+                      <number>0</number>
                      </property>
                      <widget class="QWidget" name="scope_6">
                       <widget class="QPushButton" name="scopeButton_meter_4">

@@ -21,9 +21,12 @@ class Window(QMainWindow):
 		
 	def initUI(self):		
 		# styling variables
+		purpleFocusButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:0.511, x2:1, y2:0, stop:0 rgba(128, 0, 128, 255), stop:1 rgba(154, 0, 154, 255)); border-radius:5px; color:white;font-weight:700;font-size:11px}"
 		purpleButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:0.511, x2:1, y2:0, stop:0 rgba(128, 0, 128, 255), stop:1 rgba(154, 0, 154, 255)); border-radius:5px; color:white;}"	
+		purpleButtonHover = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:0.511, x2:1, y2:0, stop:0 rgba(128, 0, 128, 255), stop:1 rgba(154, 0, 154, 255)); border-radius:5px; color:white} QPushButton:hover{background-color:rgb(144, 0, 144)}"
+		greenFocusButton = "QPushButton{ border:3px dashed #005500;  background-color:qlineargradient(spread:pad, x1:1, y1:0.83, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 126, 0, 255)); border-radius:5px;color:white;font-weight:700;font-size:11px}"
 		greenButton = "QPushButton{ border:3px dashed #005500;  background-color:qlineargradient(spread:pad, x1:1, y1:0.83, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 126, 0, 255)); border-radius:5px;color:white;}"
-		setParams = "QGroupBox{background-color:rgb(247, 247, 247); border:3px solid #515a70}"
+		setParams = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #515a70}"
 		unsetParams = "QGroupBox{background-color:rgb(247, 247, 247)}"
 		greyBButton = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;}"
 		greyPButton = "QPushButton{border:3px solid purple;  background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;}"
@@ -51,38 +54,49 @@ class Window(QMainWindow):
 		# set appropriate pages in stacks
 		self.ui.stepTabs.setCurrentIndex(3) # dashboard
 		self.ui.equipStack.setCurrentIndex(0) # vsg settings page
+		# vsg page
 		self.ui.vsgEquipTabs.setCurrentIndex(0) # vsg general settings
 		self.ui.vsgEquipStack.setCurrentIndex(2) # please select a layout
 		self.ui.vsgEquipStackAdv.setCurrentIndex(2) # please select a layout
 		self.ui.vsgNextSteps.setCurrentIndex(0) # fill out vsg
 		self.ui.vsgWorkflows.setCurrentIndex(0) # general vsg workflow button
+		# upconverter page
 		self.ui.upEquipTabs.setCurrentIndex(0) # upconverter general settings
+		# vsa page
 		self.ui.vsaWorkflow.setCurrentIndex(0) # vsa general workflow button
 		self.ui.vsaEquipTabs.setCurrentIndex(0) # vsa general settings tab
 		self.ui.vsaEquipStack.setCurrentIndex(3) # vsa select setup page
 		self.ui.vsaAdvancedStack.setCurrentIndex(0) # select vsa type
 		self.ui.vsaNextStack.setCurrentIndex(0) # vsa next
+		# downconverter page
+		self.ui.downNextStack.setCurrentIndex(0)
+		
 		
 		# VSG and VSA dropdown changes
-		self.ui.vsgSetup.currentIndexChanged.connect(lambda: param.displayVsg(self))
-		self.ui.vsaType.currentIndexChanged.connect(lambda: param.displayVsa(self,greyBox))
-		self.ui.demodulationEnable.currentIndexChanged.connect(lambda: param.displayVsa(self,greyBox))
-		self.ui.averagingEnable.currentIndexChanged.connect(lambda: param.displayVsa(self,greyBox))
+		self.ui.vsgSetup.currentIndexChanged.connect(lambda: param.displayVsg(self,purpleButtonHover,greyPHover,greyPButton))
+		self.ui.vsaType.currentIndexChanged.connect(lambda: param.displayVsa(self,greyBox,greyBHover,greyGHover,greyBButton))
+		self.ui.demodulationEnable.currentIndexChanged.connect(lambda: param.displayVsa(self,greyBox,greyBHover,greyGHover,greyBButton))
+		self.ui.averagingEnable.currentIndexChanged.connect(lambda: param.displayVsa(self,greyBox,greyBHover,greyGHover,greyBButton))
 		
 		# expand/shrink depending on which step tab is clicked
 		self.ui.stepTabs.currentChanged.connect(lambda: menu.changeStepTabWindowSize(self))
 		
 		# control parameter set buttons
-		self.ui.awgSetGeneral.clicked.connect(lambda: set.setGeneralAWG(self,purpleButton, setParams))
-		self.ui.vsgSetGeneral.clicked.connect(lambda: set.setGeneralVSG(self,purpleButton,setParams))
+		# vsg page
+		self.ui.awgSetGeneral.clicked.connect(lambda: set.setGeneralAWG(self,purpleFocusButton,setParams))
+		self.ui.vsgSetGeneral.clicked.connect(lambda: set.setGeneralVSG(self,purpleFocusButton,setParams))
 		self.ui.vsgSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.vsgEquipAdv,setParams))
 		self.ui.awgSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.awgEquipAdv,setParams))
-		self.ui.upSet.clicked.connect(lambda: set.setUp(self,greenButton, setParams))
-		self.ui.psgSet.clicked.connect(lambda: set.setPSG(self,greenButton, setParams))
-		self.ui.uxaSet.clicked.connect(lambda: set.setVSA(self,purpleButton,greenButton,setParams,greyBHover, greyGHover))
-		self.ui.pxaSet.clicked.connect(lambda: set.setVSA(self,purpleButton,greenButton,setParams,greyBHover, greyGHover))
-		self.ui.scopeSet.clicked.connect(lambda: set.setVSA(self,purpleButton,greenButton,setParams,blueHover, greenHover))
-		self.ui.digSet.clicked.connect(lambda: set.setVSA(self,purpleButton,greenButton,setParams,greyBHover, greyGHover))
+		# upconverter page
+		self.ui.upSet.clicked.connect(lambda: set.setUp(self,greenFocusButton,greenButton,setParams))
+		self.ui.psgSet.clicked.connect(lambda: set.setPSG(self,greenFocusButton,greenButton,setParams))
+		# vsa page
+		self.ui.uxaSet.clicked.connect(lambda: set.setVSA(self,purpleFocusButton,greenFocusButton,purpleButtonHover,setParams,greyBHover, greyGHover))
+		self.ui.pxaSet.clicked.connect(lambda: set.setVSA(self,purpleFocusButton,greenFocusButton,purpleButtonHover,setParams,greyBHover, greyGHover))
+		self.ui.uxaVSASetAdv.clicked.connect(lambda: set.setVSAAdv(self,setParams))
+		self.ui.scopeSet.clicked.connect(lambda: set.setVSA(self,purpleFocusButton,greenFocusButton,purpleButtonHover,setParams,greyBHover, greyGHover))
+		self.ui.digSet.clicked.connect(lambda: set.setVSA(self,purpleFocusButton,greenFocusButton,purpleButtonHover,setParams,greyBHover, greyGHover))
+		
 		self.ui.set_run_vsa.clicked.connect(lambda: set.rxCalRoutine(self))
 		
 		# control dash radio buttons
@@ -92,8 +106,8 @@ class Window(QMainWindow):
 		# control workflow navigation
 		self.ui.upButton_vsg.clicked.connect(lambda: flow.upOnClick(self))
 		self.ui.psgButton_vsg.clicked.connect(lambda: flow.psgOnClick(self))
-		self.ui.awgButton.clicked.connect(lambda: flow.awgOnClick(self,greyPButton,greyPHover))
-		self.ui.vsaButton.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.awgButton_up.clicked.connect(lambda: flow.awgOnClick(self,greyPButton,greyPHover,purpleButtonHover))
+		self.ui.vsaButton_up.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.vsaButton_vsg.clicked.connect(lambda: flow.vsaOnClick(self))
 		self.ui.vsgButton_vsa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
 		self.ui.awgButton_vsa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
@@ -101,9 +115,40 @@ class Window(QMainWindow):
 		self.ui.awgButton_vsa_3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
 		self.ui.upButton_vsa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack ,1))
 		self.ui.psgButton_vsa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,1))
-		self.ui.meterButton_vsa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,4))
-		self.ui.downButton_vsa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,3))
-		self.ui.downButton_vsa_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,3))
+		self.ui.meterButton_vsa.clicked.connect(lambda: flow.powerOnClick(self))
+		self.ui.downButton_vsa.clicked.connect(lambda: flow.downOnClick(self))
+		self.ui.downButton_vsa_2.clicked.connect(lambda: flow.downOnClick(self))
+		# downconverter page
+		self.ui.awgButton_down.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
+		self.ui.awgButton_down_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
+		self.ui.awgButton_down_3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
+		self.ui.vsgButton_down.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
+		self.ui.upButton_down.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,1))
+		self.ui.psgButton_down.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,1))
+		self.ui.scopeButton_down.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.scopeButton_down_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.digButton_down.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.digButton_down_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.modButton_down.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		# power meter page
+		self.ui.awgButton_meter.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
+		self.ui.awgButton_meter_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
+		self.ui.awgButton_meter_3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
+		self.ui.vsgButton_meter.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
+		self.ui.upButton_meter.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,1))
+		self.ui.psgButton_meter.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,1))
+		self.ui.downButton_meter.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,3))
+		self.ui.downButton_meter_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,3))
+		self.ui.scopeButton_meter.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.scopeButton_meter_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.scopeButton_meter_3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.scopeButton_meter_4.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.digButton_meter.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.digButton_meter_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.digButton_meter_3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.digButton_meter_4.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.modButton_meter.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.modButton_meter_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		
 		# control parameter changes
 		self.ui.dllFile_scope.textChanged.connect(lambda: param.copyDemod(self, self.ui.dllFile_scope, self.ui.dllFile_uxa, self.ui.dllFile_dig))
@@ -127,7 +172,7 @@ class Window(QMainWindow):
 			event.accept()
 		else:
 			event.ignore()
-			
+
 	def toggleCheck(self,state):
 		if state:
 			self.statusBar().showMessage('Safety Check Enabled',2000)
