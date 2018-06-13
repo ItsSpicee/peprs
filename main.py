@@ -41,9 +41,9 @@ class Window(QMainWindow):
 		
 		# set window details
 		self.setWindowTitle('PEPRS - Performance Enhancement for Processing Radio Signals')
-		pepper_icon = QtGui.QIcon()
-		pepper_icon.addFile('icons/pepper 24x24.png', QtCore.QSize(24,24))
-		self.setWindowIcon(pepper_icon)
+		#pepper_icon = QtGui.QIcon()
+		#pepper_icon.addFile('icons/pepper 24x24.png', QtCore.QSize(24,24))
+		#self.setWindowIcon(pepper_icon)
 		self.ui.statusBar.showMessage('Ready',2000)	
 		self.setMinimumSize(700,550)
 		self.resize(700,550)
