@@ -3,13 +3,11 @@
 from PyQt5.QtGui import (QCursor)
 from PyQt5.QtCore import (Qt)
 
-def displayVsg(self,buttonPHover,buttonGreyPHover,buttonGreyP):
+def displayVsg(self,buttonPHover,buttonGreyPHover,buttonGreyGHover,buttonGreyP):
 	awgChecked = self.ui.awgSetGeneral.isChecked()
 	vsgChecked = self.ui.vsgSetGeneral.isChecked()
-	scopeChecked = self.ui.scopeSet.isChecked()
-	digChecked = self.ui.digSet.isChecked()
-	uxaChecked = self.ui.uxaSet.isChecked()
-	pxaChecked = self.ui.pxaSet.isChecked()
+	upChecked = self.ui.upSet.isChecked()
+	psgChecked = self.ui.psgSet.isChecked()
 	i = self.ui.vsgSetup.currentIndex()
 	if i == 0: # select
 		self.ui.vsgEquipStack.setCurrentIndex(2)
@@ -23,39 +21,39 @@ def displayVsg(self,buttonPHover,buttonGreyPHover,buttonGreyP):
 		self.ui.vsgEquipStackAdv.setCurrentIndex(0)
 		if i == 1: # AWG
 			self.ui.vsgWorkflows.setCurrentIndex(1)
-			self.ui.vsgWorkflowForVSA.setCurrentIndex(0) # vsa: awg
-			self.ui.vsgWorkflowForDown.setCurrentIndex(0)
-			if scopeChecked or digChecked or uxaChecked or pxaChecked:
-				self.ui.vsaButton_vsg.setStyleSheet(buttonPHover)
-				self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
-			else:
-				self.ui.vsaButton_vsg.setStyleSheet(buttonGreyPHover) # make vsa change colour on hover
-				self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor)) # make cursor pointer over vsa
+			setVSGWorkflows(self,0)
 			if awgChecked:
 				self.ui.vsgNextSteps.setCurrentIndex(5)
+				self.ui.vsaButton_vsg.setStyleSheet(buttonGreyPHover)
+				self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
 			else:
 				self.ui.vsgNextSteps.setCurrentIndex(1)	
+				self.ui.vsaButton_vsg.setStyleSheet(buttonGreyP)
+				self.ui.vsaButton_vsg.setCursor(QCursor(Qt.ArrowCursor))
 		if i == 2: # AWG & Up
 			self.ui.vsgWorkflows.setCurrentIndex(2)
-			self.ui.vsgWorkflowForVSA.setCurrentIndex(1) # vsa: awg and up
-			self.ui.vsgWorkflowForDown.setCurrentIndex(1)
-			self.ui.vsaButton_vsg.setCursor(QCursor(Qt.ArrowCursor))
-			if awgChecked:
+			setVSGWorkflows(self,1)
+			self.ui.up_psg_next.setCurrentIndex(0)
+			if upChecked == False:
+				self.ui.vsaButton_vsg.setStyleSheet(buttonGreyP)
+				self.ui.vsaButton_vsg.setCursor(QCursor(Qt.ArrowCursor))
+			if awgChecked and upChecked == False:
 				self.ui.vsgNextSteps.setCurrentIndex(2)
+				self.ui.upButton_vsg.setStyleSheet(buttonGreyGHover)
+				self.ui.upButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
 			else:
 				self.ui.vsgNextSteps.setCurrentIndex(1)
 		if i == 3: # AWG & PSG
 			self.ui.vsgWorkflows.setCurrentIndex(3)
-			self.ui.vsgWorkflowForVSA.setCurrentIndex(2) # vsa: awg and psg
-			self.ui.vsgWorkflowForDown.setCurrentIndex(2)
-			if scopeChecked or digChecked or uxaChecked or pxaChecked:
-				self.ui.vsaButton_vsg.setStyleSheet(buttonPHover)
-				self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
-			else:
+			setVSGWorkflows(self,2)
+			self.ui.up_psg_next.setCurrentIndex(1) 
+			if psgChecked == False:
 				self.ui.vsaButton_vsg.setStyleSheet(buttonGreyP)
 				self.ui.vsaButton_vsg.setCursor(QCursor(Qt.ArrowCursor))
-			if awgChecked:
+			if awgChecked and psgChecked == False:
 				self.ui.vsgNextSteps.setCurrentIndex(3)
+				self.ui.psgButton_vsg.setStyleSheet(buttonGreyGHover)
+				self.ui.psgButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
 			else:
 				self.ui.vsgNextSteps.setCurrentIndex(1)
 	elif i == 4: # VSG
@@ -63,16 +61,13 @@ def displayVsg(self,buttonPHover,buttonGreyPHover,buttonGreyP):
 		self.ui.vsgEquipStackAdv.setCurrentIndex(1)
 		self.ui.vsgNextSteps.setCurrentIndex(4)
 		self.ui.vsgWorkflows.setCurrentIndex(4)
-		self.ui.vsgWorkflowForVSA.setCurrentIndex(3) # vsa: vsg
-		self.ui.vsgWorkflowForDown.setCurrentIndex(3)
-		if scopeChecked or digChecked or uxaChecked or pxaChecked:
-			self.ui.vsaButton_vsg.setStyleSheet(buttonPHover)
-			self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
-		else:
-			self.ui.vsaButton_vsg.setStyleSheet(buttonGreyPHover)
-			self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
+		setVSGWorkflows(self,3)
+		self.ui.vsaButton_vsg.setStyleSheet(buttonGreyP)
+		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.ArrowCursor))
 		if vsgChecked:
 			self.ui.vsgNextSteps.setCurrentIndex(5)
+			self.ui.vsaButton_vsg.setStyleSheet(buttonGreyPHover)
+			self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
 		else:
 			self.ui.vsgNextSteps.setCurrentIndex(4)
 
@@ -90,6 +85,8 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 		self.ui.vsaEquipStack.setCurrentIndex(3)
 		self.ui.vsaAdvancedStack.setCurrentIndex(0)
 		self.ui.vsaNextStack.setCurrentIndex(0)
+		self.ui.vsaWorkflow_vsg.setCurrentIndex(0)
+		self.ui.vsaWorkflow_up.setCurrentIndex(0)
 	elif demod == 0:
 		self.ui.uxaMod.setEnabled(False)
 		self.ui.digMod.setEnabled(False)
@@ -99,11 +96,13 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.single_vsa_stack.setCurrentIndex(0)
 			self.ui.vsaEquipStack.setCurrentIndex(1)
 			self.ui.vsaAdvancedStack.setCurrentIndex(1)
+			setVSAWorkflowsNoModNoDown(self,1,0)
 		elif vsaIdx == 2:
 			self.ui.vsaWorkflow.setCurrentIndex(1)
 			self.ui.single_vsa_stack.setCurrentIndex(1)
 			self.ui.vsaEquipStack.setCurrentIndex(2)
 			self.ui.vsaAdvancedStack.setCurrentIndex(1)
+			setVSAWorkflowsNoModNoDown(self,1,1)
 		elif vsaIdx == 3:
 			self.ui.vsaWorkflow.setCurrentIndex(1)
 			self.ui.single_vsa_stack.setCurrentIndex(2)
@@ -112,6 +111,7 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaAdvancedStack.setCurrentIndex(2)
 			self.ui.uxa_pxa_titleStackAdv.setCurrentIndex(0)
 			self.ui.uxa_pxa_set.setCurrentIndex(0)
+			setVSAWorkflowsNoModNoDown(self,1,2)
 		elif vsaIdx == 4:
 			self.ui.vsaWorkflow.setCurrentIndex(1)
 			self.ui.single_vsa_stack.setCurrentIndex(3)
@@ -120,81 +120,75 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaAdvancedStack.setCurrentIndex(2)
 			self.ui.uxa_pxa_titleStackAdv.setCurrentIndex(1)
 			self.ui.uxa_pxa_set.setCurrentIndex(1)
+			setVSAWorkflowsNoModNoDown(self,1,3)
 		elif vsaIdx == 5:
-			self.ui.vsaWorkflow.setCurrentIndex(4)
-			self.ui.single_down_vsa_stack.setCurrentIndex(1)
 			self.ui.vsaEquipStack.setCurrentIndex(1)
 			self.ui.vsaAdvancedStack.setCurrentIndex(1)
+			setVSAWorkflowsNoModWithDown(self,4,0,1)
 		elif vsaIdx == 6:
-			self.ui.vsaWorkflow.setCurrentIndex(4)
-			self.ui.single_down_vsa_stack.setCurrentIndex(0)
 			self.ui.vsaEquipStack.setCurrentIndex(2)
 			self.ui.vsaAdvancedStack.setCurrentIndex(1)
+			setVSAWorkflowsNoModWithDown(self,4,0,0)
 	elif demod == 1:
 		self.ui.uxaMod.setEnabled(True)
 		self.ui.digMod.setEnabled(True)
-		self.ui.scopeMod.setEnabled(True)
-			
+		self.ui.scopeMod.setEnabled(True)	
 		if vsaIdx == 1:
-			digOrScopeSet(self,1,averaging,scopeChecked,buttonGreyBHover)
+			digOrScopeSet(self,1,averaging,demod,scopeChecked,buttonGreyBHover,unsetBox,vsaIdx)
 			self.ui.vsaWorkflow.setCurrentIndex(2)
 			self.ui.single_mod_vsa_stack.setCurrentIndex(0)
+			setVSAWorkflowsWithModNoDown(self,2,0)
 		elif vsaIdx == 2:
-			digOrScopeSet(self,2,averaging,digChecked,buttonGreyBHover)
+			digOrScopeSet(self,2,averaging,demod,digChecked,buttonGreyBHover,unsetBox,vsaIdx)
 			self.ui.vsaWorkflow.setCurrentIndex(2)
 			self.ui.single_mod_vsa_stack.setCurrentIndex(1)
+			setVSAWorkflowsWithModNoDown(self,2,1)
 		elif vsaIdx == 3:
-			uxaOrPxaSet(self,0,averaging,uxaChecked,unsetBox,buttonGreyBHover)
+			uxaOrPxaSet(self,0,averaging,demod,uxaChecked,buttonGreyBHover,unsetBox)
 			self.ui.vsaWorkflow.setCurrentIndex(2)
 			self.ui.single_mod_vsa_stack.setCurrentIndex(2)
+			setVSAWorkflowsWithModNoDown(self,2,2)
 		elif vsaIdx == 4:
-			uxaOrPxaSet(self,1,averaging,pxaChecked,unsetBox,buttonGreyBHover)
+			uxaOrPxaSet(self,1,averaging,demod,pxaChecked,buttonGreyBHover,unsetBox)
 			self.ui.vsaWorkflow.setCurrentIndex(2)
 			self.ui.single_mod_vsa_stack.setCurrentIndex(3)
+			setVSAWorkflowsWithModNoDown(self,2,3)
 		elif vsaIdx == 5:
-			digOrScopeDownSet(self,1,averaging,scopeChecked,buttonGreyB,buttonGreyGHover)
-			self.ui.vsaWorkflow.setCurrentIndex(3)
-			self.ui.single_mod_down_vsa_stack.setCurrentIndex(0)
-			self.ui.vsaWorkflowForDown.setCurrentIndex(1)
-			self.ui.single_mod_down_down_stack.setCurrentIndex(0)
+			digOrScopeDownSet(self,1,averaging,demod,scopeChecked,buttonGreyB,buttonGreyGHover,unsetBox,vsaIdx)
+			setVSAWorkflowsWithModWithDown(self,3,1,0)
 		elif vsaIdx == 6:
-			digOrScopeDownSet(self,2,averaging,digChecked,buttonGreyB,buttonGreyGHover)
-			self.ui.vsaWorkflow.setCurrentIndex(3)
-			self.ui.single_mod_down_vsa_stack.setCurrentIndex(1)
-			self.ui.vsaWorkflowForDown.setCurrentIndex(1)
-			self.ui.single_mod_down_down_stack.setCurrentIndex(1)
+			digOrScopeDownSet(self,2,averaging,demod,digChecked,buttonGreyB,buttonGreyGHover,unsetBox,vsaIdx)
+			setVSAWorkflowsWithModWithDown(self,3,1,1)
 	elif demod == 2:
 		self.ui.uxaMod.setEnabled(False)
 		self.ui.digMod.setEnabled(False)
 		self.ui.scopeMod.setEnabled(False)
 		if vsaIdx == 1:
-			digOrScopeSet(self,1,averaging,scopeChecked,buttonGreyBHover)
+			digOrScopeSet(self,1,averaging,demod,scopeChecked,buttonGreyBHover,unsetBox,vsaIdx)
 			self.ui.vsaWorkflow.setCurrentIndex(1)
 			self.ui.single_vsa_stack.setCurrentIndex(0)
+			setVSAWorkflowsNoModNoDown(self,1,0)
 		elif vsaIdx == 2:
-			digOrScopeSet(self,2,averaging,digChecked,buttonGreyBHover)
+			digOrScopeSet(self,2,averaging,demod,digChecked,buttonGreyBHover,unsetBox,vsaIdx)
 			self.ui.vsaWorkflow.setCurrentIndex(1)
 			self.ui.single_vsa_stack.setCurrentIndex(1)
+			setVSAWorkflowsNoModNoDown(self,1,1)
 		elif vsaIdx == 3:
-			uxaOrPxaSet(self,0,averaging,uxaChecked,unsetBox,buttonGreyBHover)
+			uxaOrPxaSet(self,0,averaging,demod,uxaChecked,buttonGreyBHover,unsetBox)
 			self.ui.vsaWorkflow.setCurrentIndex(1)
 			self.ui.single_vsa_stack.setCurrentIndex(2)
+			setVSAWorkflowsNoModNoDown(self,1,2)
 		elif vsaIdx == 4:
-			uxaOrPxaSet(self,1,averaging,pxaChecked,unsetBox,buttonGreyBHover)
+			uxaOrPxaSet(self,1,averaging,demod,pxaChecked,buttonGreyBHover,unsetBox)
 			self.ui.vsaWorkflow.setCurrentIndex(1)
 			self.ui.single_vsa_stack.setCurrentIndex(3)
+			setVSAWorkflowsNoModNoDown(self,1,3)
 		elif vsaIdx == 5:
-			digOrScopeDownSet(self,1,averaging,scopeChecked,buttonGreyB,buttonGreyGHover)
-			self.ui.vsaWorkflow.setCurrentIndex(4)
-			self.ui.single_down_vsa_stack.setCurrentIndex(1)
-			self.ui.vsaWorkflowForDown.setCurrentIndex(0)
-			self.ui.single_down_down_stack.setCurrentIndex(1)
+			digOrScopeDownSet(self,1,averaging,demod,scopeChecked,buttonGreyB,buttonGreyGHover,unsetBox,vsaIdx)
+			setVSAWorkflowsNoModWithDown(self,4,0,1)
 		elif vsaIdx == 6:	
-			digOrScopeDownSet(self,2,averaging,digChecked,buttonGreyB,buttonGreyGHover)
-			self.ui.vsaWorkflow.setCurrentIndex(4)
-			self.ui.single_down_vsa_stack.setCurrentIndex(0)
-			self.ui.vsaWorkflowForDown.setCurrentIndex(0)
-			self.ui.single_down_down_stack.setCurrentIndex(0)			
+			digOrScopeDownSet(self,2,averaging,demod,digChecked,buttonGreyB,buttonGreyGHover,unsetBox,vsaIdx)
+			setVSAWorkflowsNoModWithDown(self,4,0,0)	
 				
 # apply changes from one demod box to all demod boxes
 def copyDemod(self,changedModField,replacedFieldOne,replacedFieldTwo):
@@ -209,10 +203,84 @@ def copyDemod(self,changedModField,replacedFieldOne,replacedFieldTwo):
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions called within parameterFunctions	
 
-def uxaOrPxaSet(self,idx,averaging,equipChecked,unsetBox,buttonGreyBHover):	
-	valueOne = self.ui.dllFile_uxa.toPlainText()
-	valueTwo = self.ui.setupFile_uxa.toPlainText()
-	valueThree = self.ui.dataFile_uxa.toPlainText()
+def setVSGWorkflows(self,idx):
+	self.ui.vsgWorkflowForVSA.setCurrentIndex(0)
+	self.ui.vsgWorkflowForDown.setCurrentIndex(0)
+	self.ui.vsgWorkflow_meter.setCurrentIndex(0)
+	self.ui.vsgWorkflow_sa.setCurrentIndex(0)
+	self.ui.vsgWorkflow_power1.setCurrentIndex(0)
+	self.ui.vsgWorkflow_power3.setCurrentIndex(0)
+	
+def setVSAWorkflowsWithModNoDown(self,idx,subidx):
+	self.ui.vsaWorkflow_vsg.setCurrentIndex(idx)
+	self.ui.single_mod_vsg_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_up.setCurrentIndex(idx)
+	self.ui.single_mod_up_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_meter.setCurrentIndex(idx)
+	self.ui.single_mod_meter_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_sa.setCurrentIndex(idx)
+	self.ui.single_mod_sa_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_power1.setCurrentIndex(idx)
+	self.ui.single_mod_p1_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_power2.setCurrentIndex(idx)
+	self.ui.single_mod_p2_stack.setCurrentIndex(subidx)
+
+def setVSAWorkflowsNoModNoDown(self,idx,subidx):
+	self.ui.vsaWorkflow_vsg.setCurrentIndex(idx)
+	self.ui.single_vsg_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_up.setCurrentIndex(idx)
+	self.ui.single_up_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_meter.setCurrentIndex(idx)
+	self.ui.single_meter_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_sa.setCurrentIndex(idx)
+	self.ui.single_sa_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_power1.setCurrentIndex(idx)
+	self.ui.single_p1_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_power2.setCurrentIndex(idx)
+	self.ui.single_p2_stack.setCurrentIndex(subidx)
+	
+def setVSAWorkflowsNoModWithDown(self,idx,twoidx,subidx):
+	self.ui.vsaWorkflow.setCurrentIndex(idx) # 4
+	self.ui.single_down_vsa_stack.setCurrentIndex(subidx) # 1 = scope, 0 = dig
+	self.ui.vsaWorkflow_vsg.setCurrentIndex(idx)
+	self.ui.single_down_vsg_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_up.setCurrentIndex(idx)
+	self.ui.single_down_up_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_meter.setCurrentIndex(idx)
+	self.ui.single_down_meter_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_sa.setCurrentIndex(idx)
+	self.ui.single_down_sa_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_power1.setCurrentIndex(idx)
+	self.ui.single_down_p1_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_power2.setCurrentIndex(idx)
+	self.ui.single_down_p2_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflowForDown.setCurrentIndex(twoidx) #0
+	self.ui.single_down_down_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_power3.setCurrentIndex(twoidx)
+	self.ui.single_down_p3_stack.setCurrentIndex(subidx)
+	
+def setVSAWorkflowsWithModWithDown(self,idx,twoidx,subidx):
+	self.ui.vsaWorkflow.setCurrentIndex(idx) # 3
+	self.ui.single_mod_down_vsa_stack.setCurrentIndex(subidx) # 0 = scope, 1 = dig
+	self.ui.vsaWorkflow_vsg.setCurrentIndex(idx)
+	self.ui.single_mod_down_vsg_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_up.setCurrentIndex(idx)
+	self.ui.single_mod_down_up_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_meter.setCurrentIndex(idx)
+	self.ui.single_mod_down_meter_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_sa.setCurrentIndex(idx)
+	self.ui.single_mod_down_sa_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_power1.setCurrentIndex(idx)
+	self.ui.single_mod_down_p1_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_power2.setCurrentIndex(idx)
+	self.ui.single_mod_down_p2_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflowForDown.setCurrentIndex(twoidx) #1
+	self.ui.single_mod_down_down_stack.setCurrentIndex(subidx)
+	self.ui.vsaWorkflow_power3.setCurrentIndex(twoidx)
+	self.ui.single_mod_down_p3_stack.setCurrentIndex(subidx)
+	
+def uxaOrPxaSet(self,idx,averaging,demod,equipChecked,buttonGreyBHover,unsetBox):	
+	style = self.ui.uxaMod.styleSheet()
 	
 	self.ui.vsaEquipStack.setCurrentIndex(0)
 	self.ui.vsaAdvancedStack.setCurrentIndex(2)
@@ -224,8 +292,11 @@ def uxaOrPxaSet(self,idx,averaging,equipChecked,unsetBox,buttonGreyBHover):
 	if averaging == 0:
 		self.ui.vsaNextStack.setCurrentIndex(0)
 	elif equipChecked:
-		if valueOne == "" or valueTwo == "" or valueThree =="":
-			self.ui.vsaNextStack.setCurrentIndex(1)
+		if demod == 1:
+			if style == "":
+				self.ui.vsaNextStack.setCurrentIndex(1)
+			else:
+				self.ui.vsaNextStack.setCurrentIndex(3)
 		else:
 			self.ui.vsaNextStack.setCurrentIndex(3)
 	else:
@@ -236,10 +307,9 @@ def uxaOrPxaSet(self,idx,averaging,equipChecked,unsetBox,buttonGreyBHover):
 		self.ui.meterButton_vsa.setStyleSheet(buttonGreyBHover)
 		self.ui.meterButton_vsa.setCursor(QCursor(Qt.PointingHandCursor))
 	
-def digOrScopeSet(self,idx,averaging,equipChecked,buttonGreyBHover):
-	valueOne = self.ui.dllFile_uxa.toPlainText()
-	valueTwo = self.ui.setupFile_uxa.toPlainText()
-	valueThree = self.ui.dataFile_uxa.toPlainText()
+def digOrScopeSet(self,idx,averaging,demod,equipChecked,buttonGreyBHover,unsetBox,vsaIdx):
+	styleDig = self.ui.digMod.styleSheet()
+	styleScope = self.ui.scopeMod.styleSheet()
 	
 	self.ui.vsaEquipStack.setCurrentIndex(idx)
 	self.ui.vsaAdvancedStack.setCurrentIndex(1)
@@ -247,8 +317,17 @@ def digOrScopeSet(self,idx,averaging,equipChecked,buttonGreyBHover):
 	if averaging == 0:
 		self.ui.vsaNextStack.setCurrentIndex(0)
 	elif equipChecked:
-		if valueOne == "" or valueTwo == "" or valueThree =="":
-			self.ui.vsaNextStack.setCurrentIndex(1)
+		if demod == 1:
+			if vsaIdx == 1:
+				if styleScope == "":
+					self.ui.vsaNextStack.setCurrentIndex(1)
+				else:
+					self.ui.vsaNextStack.setCurrentIndex(3)
+			elif vsaIdx == 2:
+				if styleDig == "":
+					self.ui.vsaNextStack.setCurrentIndex(1)
+				else:
+					self.ui.vsaNextStack.setCurrentIndex(3)
 		else:
 			self.ui.vsaNextStack.setCurrentIndex(3)
 	else:
@@ -258,10 +337,9 @@ def digOrScopeSet(self,idx,averaging,equipChecked,buttonGreyBHover):
 		self.ui.meterButton_vsa.setStyleSheet(buttonGreyBHover)
 		self.ui.meterButton_vsa.setCursor(QCursor(Qt.PointingHandCursor))
 
-def digOrScopeDownSet(self,idx,averaging,equipChecked,buttonGreyB,buttonGreyGHover):	
-	valueOne = self.ui.dllFile_uxa.toPlainText()
-	valueTwo = self.ui.setupFile_uxa.toPlainText()
-	valueThree = self.ui.dataFile_uxa.toPlainText()
+def digOrScopeDownSet(self,idx,averaging,demod,equipChecked,buttonGreyB,buttonGreyGHover,unsetBox,vsaIdx):	
+	styleDig = self.ui.digMod.styleSheet()
+	styleScope = self.ui.scopeMod.styleSheet()
 	
 	self.ui.vsaEquipStack.setCurrentIndex(idx)
 	self.ui.vsaAdvancedStack.setCurrentIndex(1)
@@ -269,8 +347,17 @@ def digOrScopeDownSet(self,idx,averaging,equipChecked,buttonGreyB,buttonGreyGHov
 	if averaging == 0:
 		self.ui.vsaNextStack.setCurrentIndex(0)
 	elif equipChecked:
-		if valueOne == "" or valueTwo == "" or valueThree =="":
-			self.ui.vsaNextStack.setCurrentIndex(1)
+		if demod == 1:
+			if vsaIdx == 5:			
+				if styleScope == "":
+					self.ui.vsaNextStack.setCurrentIndex(1)
+				else:
+					self.ui.vsaNextStack.setCurrentIndex(2)
+			elif vsaIdx == 6:
+				if styleDig == "":
+					self.ui.vsaNextStack.setCurrentIndex(1)
+				else:
+					self.ui.vsaNextStack.setCurrentIndex(2)
 		else:
 			self.ui.vsaNextStack.setCurrentIndex(2)
 	else:
