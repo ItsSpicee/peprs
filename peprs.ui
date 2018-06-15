@@ -21647,7 +21647,7 @@ QWidget#power2{background-color:rgb(247,247,247)}
 QWidget#power3{background-color:rgb(247,247,247)}</string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>6</number>
           </property>
           <widget class="QWidget" name="vsg">
            <property name="styleSheet">
@@ -21692,7 +21692,7 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                   <string notr="true">QFrame{background-color:#d1d5de}</string>
                  </property>
                  <property name="currentIndex">
-                  <number>7</number>
+                  <number>8</number>
                  </property>
                  <widget class="QWidget" name="noSetupNext">
                   <widget class="QFrame" name="nextFrame">
@@ -26156,7 +26156,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                   <item>
                    <widget class="QStackedWidget" name="vsgEquipStackAdv">
                     <property name="currentIndex">
-                     <number>0</number>
+                     <number>2</number>
                     </property>
                     <widget class="QWidget" name="awgSettingsAdv">
                      <layout class="QHBoxLayout" name="horizontalLayout_12">
@@ -27024,7 +27024,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                   <enum>QFrame::Plain</enum>
                  </property>
                  <property name="currentIndex">
-                  <number>5</number>
+                  <number>6</number>
                  </property>
                  <widget class="QWidget" name="upNext">
                   <widget class="QFrame" name="frame_8">
@@ -28270,7 +28270,7 @@ Meter</string>
                    </rect>
                   </property>
                   <property name="currentIndex">
-                   <number>4</number>
+                   <number>2</number>
                   </property>
                   <widget class="QWidget" name="vsaGeneral_4">
                    <widget class="Line" name="line_184">
@@ -29812,8 +29812,8 @@ Analyzer</string>
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>593</width>
-                         <height>391</height>
+                         <width>590</width>
+                         <height>382</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -30374,7 +30374,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                  <property name="frameShadow">
                   <enum>QFrame::Raised</enum>
                  </property>
-                 <widget class="QPushButton" name="pushButton_48">
+                 <widget class="QPushButton" name="power1Button_vsa">
                   <property name="geometry">
                    <rect>
                     <x>210</x>
@@ -31044,7 +31044,7 @@ Meter</string>
                      <enum>Qt::Horizontal</enum>
                     </property>
                    </widget>
-                   <widget class="QPushButton" name="pushButton">
+                   <widget class="QPushButton" name="saButton_vsa_5">
                     <property name="geometry">
                      <rect>
                       <x>50</x>
@@ -31197,7 +31197,7 @@ Signal Analyzer</string>
                      <enum>Qt::Horizontal</enum>
                     </property>
                    </widget>
-                   <widget class="QPushButton" name="pushButton_57">
+                   <widget class="QPushButton" name="saButton_vsa">
                     <property name="geometry">
                      <rect>
                       <x>40</x>
@@ -31291,7 +31291,7 @@ Analyzer</string>
                       </rect>
                      </property>
                      <property name="currentIndex">
-                      <number>1</number>
+                      <number>2</number>
                      </property>
                      <widget class="QWidget" name="scope">
                       <widget class="QPushButton" name="scopeButton_vsa">
@@ -31432,7 +31432,7 @@ Analyzer</string>
                    <zorder>frame_20</zorder>
                    <zorder>line_115</zorder>
                    <zorder>line_116</zorder>
-                   <zorder>pushButton_57</zorder>
+                   <zorder>saButton_vsa</zorder>
                    <zorder>line_90</zorder>
                    <zorder>line_117</zorder>
                    <zorder>label_202</zorder>
@@ -31457,7 +31457,7 @@ Analyzer</string>
                      <enum>Qt::Horizontal</enum>
                     </property>
                    </widget>
-                   <widget class="QPushButton" name="pushButton_74">
+                   <widget class="QPushButton" name="saButton_vsa_2">
                     <property name="geometry">
                      <rect>
                       <x>40</x>
@@ -31756,7 +31756,7 @@ Analyzer</string>
                    </widget>
                    <zorder>frame_33</zorder>
                    <zorder>line_107</zorder>
-                   <zorder>pushButton_74</zorder>
+                   <zorder>saButton_vsa_2</zorder>
                    <zorder>line_126</zorder>
                    <zorder>label_206</zorder>
                    <zorder>line_108</zorder>
@@ -31765,7 +31765,7 @@ Analyzer</string>
                    <zorder>line_118</zorder>
                   </widget>
                   <widget class="QWidget" name="single_mod_down_vsa">
-                   <widget class="QPushButton" name="pushButton_87">
+                   <widget class="QPushButton" name="saButton_vsa_3">
                     <property name="geometry">
                      <rect>
                       <x>30</x>
@@ -32136,7 +32136,7 @@ Supply 3</string>
                     </property>
                    </widget>
                    <zorder>line_144</zorder>
-                   <zorder>pushButton_87</zorder>
+                   <zorder>saButton_vsa_3</zorder>
                    <zorder>frame_37</zorder>
                    <zorder>label_210</zorder>
                    <zorder>line_105</zorder>
@@ -32428,7 +32428,7 @@ Supply 3</string>
                      <enum>Qt::Horizontal</enum>
                     </property>
                    </widget>
-                   <widget class="QPushButton" name="pushButton_97">
+                   <widget class="QPushButton" name="saButton_vsa_4">
                     <property name="geometry">
                      <rect>
                       <x>31</x>
@@ -32485,7 +32485,7 @@ Analyzer</string>
                    <zorder>downButton_vsa_2</zorder>
                    <zorder>line_164</zorder>
                    <zorder>line_171</zorder>
-                   <zorder>pushButton_97</zorder>
+                   <zorder>saButton_vsa_4</zorder>
                    <zorder>line_170</zorder>
                   </widget>
                  </widget>
@@ -32510,7 +32510,7 @@ Analyzer</string>
                    <string>Select an instrument to configure its parameters</string>
                   </property>
                  </widget>
-                 <zorder>pushButton_48</zorder>
+                 <zorder>power1Button_vsa</zorder>
                  <zorder>line_81</zorder>
                  <zorder>vsgWorkflowForVSA</zorder>
                  <zorder>line_79</zorder>
@@ -32540,7 +32540,7 @@ Analyzer</string>
                   <enum>QFrame::Raised</enum>
                  </property>
                  <property name="currentIndex">
-                  <number>3</number>
+                  <number>4</number>
                  </property>
                  <widget class="QWidget" name="vsaNext">
                   <widget class="QFrame" name="nextFrame_5">
@@ -33520,8 +33520,8 @@ Analyzer</string>
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>601</width>
-                           <height>450</height>
+                           <width>590</width>
+                           <height>382</height>
                           </rect>
                          </property>
                          <property name="minimumSize">
@@ -34371,8 +34371,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>606</width>
-                           <height>450</height>
+                           <width>593</width>
+                           <height>382</height>
                           </rect>
                          </property>
                          <property name="minimumSize">
@@ -35982,7 +35982,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          <property name="geometry">
                           <rect>
                            <x>0</x>
-                           <y>-5</y>
+                           <y>0</y>
                            <width>629</width>
                            <height>575</height>
                           </rect>
@@ -36856,7 +36856,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                  <property name="frameShadow">
                   <enum>QFrame::Raised</enum>
                  </property>
-                 <widget class="QPushButton" name="pushButton_50">
+                 <widget class="QPushButton" name="power1Button_down">
                   <property name="geometry">
                    <rect>
                     <x>210</x>
@@ -37501,10 +37501,10 @@ Meter</string>
                    </rect>
                   </property>
                   <property name="currentIndex">
-                   <number>1</number>
+                   <number>0</number>
                   </property>
                   <widget class="QWidget" name="down_single_page">
-                   <widget class="QPushButton" name="pushButton_98">
+                   <widget class="QPushButton" name="saButton_down_2">
                     <property name="geometry">
                      <rect>
                       <x>30</x>
@@ -37834,7 +37834,7 @@ QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
                    </widget>
                    <zorder>line_160</zorder>
                    <zorder>frame_40</zorder>
-                   <zorder>pushButton_98</zorder>
+                   <zorder>saButton_down_2</zorder>
                    <zorder>downButton_down_2</zorder>
                    <zorder>label_204</zorder>
                    <zorder>line_176</zorder>
@@ -38043,7 +38043,7 @@ QPushButton:hover{background-color:rgb(0, 118, 0)}</string>
                      <string>Demodulator</string>
                     </property>
                    </widget>
-                   <widget class="QPushButton" name="pushButton_88">
+                   <widget class="QPushButton" name="saButton_down">
                     <property name="geometry">
                      <rect>
                       <x>30</x>
@@ -38228,7 +38228,7 @@ Analyzer</string>
                    <zorder>line_132</zorder>
                    <zorder>single_mod_down_down_stack</zorder>
                    <zorder>modButton_down</zorder>
-                   <zorder>pushButton_88</zorder>
+                   <zorder>saButton_down</zorder>
                    <zorder>label_211</zorder>
                    <zorder>line_146</zorder>
                    <zorder>line_151</zorder>
@@ -38259,7 +38259,7 @@ Analyzer</string>
                    <string>Select an instrument to configure its parameters</string>
                   </property>
                  </widget>
-                 <zorder>pushButton_50</zorder>
+                 <zorder>power1Button_down</zorder>
                  <zorder>line_82</zorder>
                  <zorder>line_84</zorder>
                  <zorder>vsgWorkflowForDown</zorder>
@@ -38283,7 +38283,7 @@ Analyzer</string>
                   <string notr="true">QFrame{background-color:#d1d5de}</string>
                  </property>
                  <property name="currentIndex">
-                  <number>1</number>
+                  <number>2</number>
                  </property>
                  <widget class="QWidget" name="fillDown_2">
                   <widget class="QFrame" name="nextFrame_11">
@@ -38905,7 +38905,7 @@ Analyzer</string>
                      <height>382</height>
                     </size>
                    </property>
-                   <widget class="QGroupBox" name="upEquip_2">
+                   <widget class="QGroupBox" name="downEquip">
                     <property name="geometry">
                      <rect>
                       <x>10</x>
@@ -39151,6 +39151,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                   </property>
                   <property name="text">
                    <string>Set</string>
+                  </property>
+                  <property name="checkable">
+                   <bool>true</bool>
                   </property>
                  </widget>
                 </widget>
@@ -39500,7 +39503,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                  <property name="frameShadow">
                   <enum>QFrame::Raised</enum>
                  </property>
-                 <widget class="QPushButton" name="pushButton_51">
+                 <widget class="QPushButton" name="power1Button_meter">
                   <property name="geometry">
                    <rect>
                     <x>210</x>
@@ -39595,7 +39598,7 @@ Supply 1</string>
                    </rect>
                   </property>
                   <property name="currentIndex">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <widget class="QWidget" name="awgForVSA_5">
                    <widget class="QLabel" name="label_225">
@@ -39783,7 +39786,7 @@ QPushButton:hover{background-color:rgb(0, 118, 0)}</string>
                      </property>
                     </widget>
                    </widget>
-                   <widget class="QPushButton" name="pushButton_67">
+                   <widget class="QPushButton" name="power2Button_meter">
                     <property name="geometry">
                      <rect>
                       <x>115</x>
@@ -39949,7 +39952,7 @@ QPushButton:hover{background-color:rgb(0, 118, 0)}</string>
                      <string>Vector Signal Generator</string>
                     </property>
                    </widget>
-                   <widget class="QPushButton" name="pushButton_68">
+                   <widget class="QPushButton" name="power2Button_meter_2">
                     <property name="geometry">
                      <rect>
                       <x>116</x>
@@ -40106,7 +40109,7 @@ QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
                    <pixmap>icons/triangle small.png</pixmap>
                   </property>
                  </widget>
-                 <widget class="QPushButton" name="meterButton_vsa_3">
+                 <widget class="QPushButton" name="meterButton_meter">
                   <property name="geometry">
                    <rect>
                     <x>263</x>
@@ -40281,7 +40284,7 @@ Analyzer</string>
                       </rect>
                      </property>
                      <property name="currentIndex">
-                      <number>0</number>
+                      <number>3</number>
                      </property>
                      <widget class="QWidget" name="scope_5">
                       <widget class="QPushButton" name="scopeButton_meter">
@@ -40625,7 +40628,7 @@ QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
                       </widget>
                      </widget>
                      <widget class="QWidget" name="uxa_4">
-                      <widget class="QPushButton" name="uxaButton_vsa_4">
+                      <widget class="QPushButton" name="uxaButton_meter_2">
                        <property name="geometry">
                         <rect>
                          <x>0</x>
@@ -40656,7 +40659,7 @@ QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
                       </widget>
                      </widget>
                      <widget class="QWidget" name="pxa_4">
-                      <widget class="QPushButton" name="pxaButton_vsa_4">
+                      <widget class="QPushButton" name="pxaButton_meter_2">
                        <property name="geometry">
                         <rect>
                          <x>0</x>
@@ -41071,7 +41074,7 @@ QPushButton:hover{background-color:rgb(0, 118, 0)}</string>
                      <string>Demodulator</string>
                     </property>
                    </widget>
-                   <widget class="QPushButton" name="pushButton_95">
+                   <widget class="QPushButton" name="power3Button_meter">
                     <property name="geometry">
                      <rect>
                       <x>30</x>
@@ -41147,7 +41150,7 @@ Supply 3</string>
                    <zorder>line_157</zorder>
                    <zorder>line_158</zorder>
                    <zorder>modButton_meter</zorder>
-                   <zorder>pushButton_95</zorder>
+                   <zorder>power3Button_meter</zorder>
                    <zorder>line_161</zorder>
                    <zorder>line_140</zorder>
                    <zorder>downButton_meter_2</zorder>
@@ -41209,7 +41212,7 @@ Supply 3</string>
                      <string>Vector Signal Analyzer</string>
                     </property>
                    </widget>
-                   <widget class="QPushButton" name="pushButton_102">
+                   <widget class="QPushButton" name="power3Button_meter_2">
                     <property name="geometry">
                      <rect>
                       <x>31</x>
@@ -41487,7 +41490,7 @@ Analyzer</string>
                    <zorder>line_177</zorder>
                    <zorder>line_162</zorder>
                    <zorder>label_351</zorder>
-                   <zorder>pushButton_102</zorder>
+                   <zorder>power3Button_meter_2</zorder>
                    <zorder>line_180</zorder>
                    <zorder>line_183</zorder>
                    <zorder>downButton_meter</zorder>
@@ -41518,13 +41521,13 @@ Analyzer</string>
                    <string>Select an instrument to configure its parameters</string>
                   </property>
                  </widget>
-                 <zorder>pushButton_51</zorder>
+                 <zorder>power1Button_meter</zorder>
                  <zorder>line_114</zorder>
                  <zorder>line_119</zorder>
                  <zorder>vsgWorkflow_meter</zorder>
                  <zorder>label_322</zorder>
                  <zorder>label_323</zorder>
-                 <zorder>meterButton_vsa_3</zorder>
+                 <zorder>meterButton_meter</zorder>
                  <zorder>vsaWorkflow_meter</zorder>
                  <zorder>line_85</zorder>
                  <zorder>label_219</zorder>
@@ -41542,7 +41545,7 @@ Analyzer</string>
                   <string notr="true">QFrame{background-color:#d1d5de}</string>
                  </property>
                  <property name="currentIndex">
-                  <number>0</number>
+                  <number>1</number>
                  </property>
                  <widget class="QWidget" name="meterNextPage_meter">
                   <widget class="QFrame" name="nextFrame_17">
@@ -42089,7 +42092,7 @@ Analyzer</string>
                      <height>382</height>
                     </size>
                    </property>
-                   <widget class="QGroupBox" name="upEquip_4">
+                   <widget class="QGroupBox" name="meterEquip">
                     <property name="geometry">
                      <rect>
                       <x>10</x>
@@ -42327,7 +42330,7 @@ Analyzer</string>
                    </widget>
                   </widget>
                  </widget>
-                 <widget class="QPushButton" name="upSet_4">
+                 <widget class="QPushButton" name="meterSet">
                   <property name="geometry">
                    <rect>
                     <x>620</x>
@@ -42360,6 +42363,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                   </property>
                   <property name="text">
                    <string>Set</string>
+                  </property>
+                  <property name="checkable">
+                   <bool>true</bool>
                   </property>
                  </widget>
                 </widget>
@@ -42528,7 +42534,7 @@ Supply 1</string>
                    <rect>
                     <x>10</x>
                     <y>34</y>
-                    <width>201</width>
+                    <width>191</width>
                     <height>171</height>
                    </rect>
                   </property>
@@ -42721,7 +42727,7 @@ QPushButton:hover{background-color:rgb(0, 118, 0)}</string>
                      </property>
                     </widget>
                    </widget>
-                   <widget class="QPushButton" name="pushButton_69">
+                   <widget class="QPushButton" name="power2Button_sa_2">
                     <property name="geometry">
                      <rect>
                       <x>115</x>
@@ -42887,7 +42893,7 @@ QPushButton:hover{background-color:rgb(0, 118, 0)}</string>
                      <string>Vector Signal Generator</string>
                     </property>
                    </widget>
-                   <widget class="QPushButton" name="pushButton_70">
+                   <widget class="QPushButton" name="power2Button_sa">
                     <property name="geometry">
                      <rect>
                       <x>116</x>
@@ -43062,11 +43068,12 @@ QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
                    </font>
                   </property>
                   <property name="cursor">
-                   <cursorShape>ArrowCursor</cursorShape>
+                   <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 0, 127, 255), stop:1 rgba(0, 0, 209, 255)); border-radius:5px; color:white;}
-</string>
+                   <string notr="true">QPushButton {background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 0, 127, 255), stop:1 rgba(0, 0, 209, 255)); border-radius:5px; color:white;}
+
+QPushButton:hover{background:rgb(0, 0, 216)}</string>
                   </property>
                   <property name="text">
                    <string>Power
@@ -44007,7 +44014,7 @@ QPushButton:hover{background-color:rgb(0, 118, 0)}</string>
                      <string>Demodulator</string>
                     </property>
                    </widget>
-                   <widget class="QPushButton" name="pushButton_96">
+                   <widget class="QPushButton" name="power3Button_sa_2">
                     <property name="geometry">
                      <rect>
                       <x>30</x>
@@ -44083,7 +44090,7 @@ Supply 3</string>
                    <zorder>line_201</zorder>
                    <zorder>line_202</zorder>
                    <zorder>modButton_sa_2</zorder>
-                   <zorder>pushButton_96</zorder>
+                   <zorder>power3Button_sa_2</zorder>
                    <zorder>line_204</zorder>
                    <zorder>line_205</zorder>
                    <zorder>downButton_sa_2</zorder>
@@ -44145,7 +44152,7 @@ Supply 3</string>
                      <string>Vector Signal Analyzer</string>
                     </property>
                    </widget>
-                   <widget class="QPushButton" name="pushButton_105">
+                   <widget class="QPushButton" name="power3Button_sa">
                     <property name="geometry">
                      <rect>
                       <x>31</x>
@@ -44423,7 +44430,7 @@ Analyzer</string>
                    <zorder>line_206</zorder>
                    <zorder>line_208</zorder>
                    <zorder>label_362</zorder>
-                   <zorder>pushButton_105</zorder>
+                   <zorder>power3Button_sa</zorder>
                    <zorder>line_209</zorder>
                    <zorder>line_210</zorder>
                    <zorder>downButton_sa</zorder>
@@ -44478,7 +44485,7 @@ Analyzer</string>
                   <string notr="true">QFrame{background-color:#d1d5de}</string>
                  </property>
                  <property name="currentIndex">
-                  <number>3</number>
+                  <number>0</number>
                  </property>
                  <widget class="QWidget" name="power1Page_sa">
                   <widget class="QFrame" name="nextFrame_19">
@@ -44912,7 +44919,7 @@ Analyzer</string>
                    <number>5</number>
                   </property>
                   <item>
-                   <widget class="QComboBox" name="vsaType_2">
+                   <widget class="QComboBox" name="saType">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                       <horstretch>0</horstretch>
@@ -45002,7 +45009,7 @@ Analyzer</string>
                  <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                 </property>
                 <property name="currentIndex">
-                 <number>0</number>
+                 <number>1</number>
                 </property>
                 <widget class="QWidget" name="vsaStandard_2">
                  <attribute name="title">
@@ -45022,9 +45029,9 @@ Analyzer</string>
                    <number>0</number>
                   </property>
                   <item>
-                   <widget class="QStackedWidget" name="stackedWidget_3">
+                   <widget class="QStackedWidget" name="saEquipStandardStack">
                     <property name="currentIndex">
-                     <number>1</number>
+                     <number>0</number>
                     </property>
                     <widget class="QWidget" name="page_16">
                      <layout class="QHBoxLayout" name="horizontalLayout_27">
@@ -45044,8 +45051,8 @@ Analyzer</string>
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>590</width>
-                           <height>382</height>
+                           <width>606</width>
+                           <height>450</height>
                           </rect>
                          </property>
                          <property name="minimumSize">
@@ -45054,7 +45061,7 @@ Analyzer</string>
                            <height>382</height>
                           </size>
                          </property>
-                         <widget class="QGroupBox" name="uxaEquipGeneralVSA_2">
+                         <widget class="QGroupBox" name="saEquip">
                           <property name="geometry">
                            <rect>
                             <x>10</x>
@@ -45438,7 +45445,7 @@ Analyzer</string>
                        </widget>
                       </item>
                       <item>
-                       <widget class="QPushButton" name="awgSetGeneral_3">
+                       <widget class="QPushButton" name="saSet">
                         <property name="minimumSize">
                          <size>
                           <width>75</width>
@@ -45464,6 +45471,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         <property name="text">
                          <string>Set</string>
                         </property>
+                        <property name="checkable">
+                         <bool>true</bool>
+                        </property>
                        </widget>
                       </item>
                      </layout>
@@ -45480,6 +45490,27 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         </property>
                         <property name="text">
                          <string>Please Select a Spectrum Capture Type</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                    <widget class="QWidget" name="page_71">
+                     <layout class="QHBoxLayout" name="horizontalLayout_42">
+                      <item>
+                       <widget class="QLabel" name="label_416">
+                        <property name="font">
+                         <font>
+                          <family>Arial</family>
+                          <pointsize>9</pointsize>
+                          <italic>true</italic>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>There are no Standard Parameters</string>
                         </property>
                         <property name="alignment">
                          <set>Qt::AlignCenter</set>
@@ -45510,7 +45541,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                    <number>0</number>
                   </property>
                   <item>
-                   <widget class="QStackedWidget" name="stackedWidget_4">
+                   <widget class="QStackedWidget" name="saEquipAdvStack">
                     <property name="currentIndex">
                      <number>1</number>
                     </property>
@@ -45569,7 +45600,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          <height>600</height>
                         </size>
                        </property>
-                       <widget class="QGroupBox" name="uxaVSAAdv_2">
+                       <widget class="QGroupBox" name="saEquipAdv">
                         <property name="geometry">
                          <rect>
                           <x>10</x>
@@ -46378,7 +46409,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                        </widget>
                       </widget>
                      </widget>
-                     <widget class="QPushButton" name="uxaVSASetAdv_2">
+                     <widget class="QPushButton" name="saSetAdv">
                       <property name="geometry">
                        <rect>
                         <x>630</x>
@@ -46412,7 +46443,31 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       <property name="text">
                        <string>Set</string>
                       </property>
+                      <property name="checkable">
+                       <bool>true</bool>
+                      </property>
                      </widget>
+                    </widget>
+                    <widget class="QWidget" name="page_70">
+                     <layout class="QHBoxLayout" name="horizontalLayout_40">
+                      <item>
+                       <widget class="QLabel" name="label_412">
+                        <property name="font">
+                         <font>
+                          <family>Arial</family>
+                          <pointsize>9</pointsize>
+                          <italic>true</italic>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>There are no Advanced Parameters</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
                     </widget>
                    </widget>
                   </item>
@@ -47096,7 +47151,7 @@ QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 0, 127, 255), stop:1 rgba(0, 0, 209, 255)); border-radius:5px; color:white;}
+                   <string notr="true">QPushButton {background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 0, 127, 255), stop:1 rgba(0, 0, 209, 255)); border-radius:5px; color:white;}
 
 QPushButton:hover{background:rgb(0, 0, 216)}</string>
                   </property>
@@ -48518,7 +48573,7 @@ Analyzer</string>
                   <string notr="true">QFrame{background-color:#d1d5de}</string>
                  </property>
                  <property name="currentIndex">
-                  <number>3</number>
+                  <number>0</number>
                  </property>
                  <widget class="QWidget" name="page_13">
                   <widget class="QFrame" name="nextFrame_21">
@@ -48878,7 +48933,7 @@ Analyzer</string>
                  <attribute name="title">
                   <string>Standard</string>
                  </attribute>
-                 <widget class="QPushButton" name="psgSet_4">
+                 <widget class="QPushButton" name="p1Set">
                   <property name="geometry">
                    <rect>
                     <x>640</x>
@@ -48946,7 +49001,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      <height>415</height>
                     </size>
                    </property>
-                   <widget class="QGroupBox" name="psgEquip_12">
+                   <widget class="QGroupBox" name="p1Equip">
                     <property name="geometry">
                      <rect>
                       <x>10</x>
@@ -49002,7 +49057,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       </widget>
                      </item>
                      <item row="1" column="2" colspan="2">
-                      <widget class="QComboBox" name="comboBox_70">
+                      <widget class="QComboBox" name="p1Enabled">
                        <property name="layoutDirection">
                         <enum>Qt::LeftToRight</enum>
                        </property>
@@ -49037,14 +49092,14 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       </widget>
                      </item>
                      <item row="2" column="3">
-                      <widget class="QCheckBox" name="checkBox_11">
+                      <widget class="QCheckBox" name="p1c2Check">
                        <property name="text">
                         <string>Channel 2</string>
                        </property>
                       </widget>
                      </item>
                      <item row="3" column="3">
-                      <widget class="QCheckBox" name="checkBox_12">
+                      <widget class="QCheckBox" name="p1c4Check">
                        <property name="text">
                         <string>Channel 4</string>
                        </property>
@@ -49130,14 +49185,14 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       </widget>
                      </item>
                      <item row="2" column="2">
-                      <widget class="QCheckBox" name="checkBox_13">
+                      <widget class="QCheckBox" name="p1c1Check">
                        <property name="text">
                         <string>Channel 1</string>
                        </property>
                       </widget>
                      </item>
                      <item row="3" column="2">
-                      <widget class="QCheckBox" name="checkBox_14">
+                      <widget class="QCheckBox" name="p1c3Check">
                        <property name="text">
                         <string>Channel 3</string>
                        </property>
@@ -49145,7 +49200,10 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      </item>
                     </layout>
                    </widget>
-                   <widget class="QGroupBox" name="psgEquip_13">
+                   <widget class="QGroupBox" name="p1c1Equip">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
                     <property name="geometry">
                      <rect>
                       <x>10</x>
@@ -49206,7 +49264,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      <item row="1" column="1">
                       <widget class="QPlainTextEdit" name="plainTextEdit_107">
                        <property name="enabled">
-                        <bool>true</bool>
+                        <bool>false</bool>
                        </property>
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -49231,7 +49289,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      <item row="2" column="0">
                       <widget class="QLabel" name="label_401">
                        <property name="enabled">
-                        <bool>true</bool>
+                        <bool>false</bool>
                        </property>
                        <property name="font">
                         <font>
@@ -49247,7 +49305,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      <item row="2" column="1">
                       <widget class="QPlainTextEdit" name="plainTextEdit_108">
                        <property name="enabled">
-                        <bool>true</bool>
+                        <bool>false</bool>
                        </property>
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -49271,7 +49329,10 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      </item>
                     </layout>
                    </widget>
-                   <widget class="QGroupBox" name="psgEquip_14">
+                   <widget class="QGroupBox" name="p1c2Equip">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
                     <property name="geometry">
                      <rect>
                       <x>10</x>
@@ -49332,7 +49393,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      <item row="1" column="1">
                       <widget class="QPlainTextEdit" name="plainTextEdit_109">
                        <property name="enabled">
-                        <bool>true</bool>
+                        <bool>false</bool>
                        </property>
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -49357,7 +49418,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      <item row="2" column="0">
                       <widget class="QLabel" name="label_404">
                        <property name="enabled">
-                        <bool>true</bool>
+                        <bool>false</bool>
                        </property>
                        <property name="font">
                         <font>
@@ -49373,7 +49434,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      <item row="2" column="1">
                       <widget class="QPlainTextEdit" name="plainTextEdit_110">
                        <property name="enabled">
-                        <bool>true</bool>
+                        <bool>false</bool>
                        </property>
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -49397,7 +49458,10 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      </item>
                     </layout>
                    </widget>
-                   <widget class="QGroupBox" name="psgEquip_15">
+                   <widget class="QGroupBox" name="p1c3Equip">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
                     <property name="geometry">
                      <rect>
                       <x>310</x>
@@ -49458,7 +49522,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      <item row="1" column="1">
                       <widget class="QPlainTextEdit" name="plainTextEdit_111">
                        <property name="enabled">
-                        <bool>true</bool>
+                        <bool>false</bool>
                        </property>
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -49483,7 +49547,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      <item row="2" column="0">
                       <widget class="QLabel" name="label_407">
                        <property name="enabled">
-                        <bool>true</bool>
+                        <bool>false</bool>
                        </property>
                        <property name="font">
                         <font>
@@ -49499,7 +49563,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      <item row="2" column="1">
                       <widget class="QPlainTextEdit" name="plainTextEdit_112">
                        <property name="enabled">
-                        <bool>true</bool>
+                        <bool>false</bool>
                        </property>
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -49523,7 +49587,10 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      </item>
                     </layout>
                    </widget>
-                   <widget class="QGroupBox" name="psgEquip_16">
+                   <widget class="QGroupBox" name="p1c4Equip">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
                     <property name="geometry">
                      <rect>
                       <x>310</x>
@@ -49584,7 +49651,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      <item row="1" column="1">
                       <widget class="QPlainTextEdit" name="plainTextEdit_113">
                        <property name="enabled">
-                        <bool>true</bool>
+                        <bool>false</bool>
                        </property>
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -49609,7 +49676,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      <item row="2" column="0">
                       <widget class="QLabel" name="label_410">
                        <property name="enabled">
-                        <bool>true</bool>
+                        <bool>false</bool>
                        </property>
                        <property name="font">
                         <font>
@@ -49625,7 +49692,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      <item row="2" column="1">
                       <widget class="QPlainTextEdit" name="plainTextEdit_114">
                        <property name="enabled">
-                        <bool>true</bool>
+                        <bool>false</bool>
                        </property>
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -54365,7 +54432,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>-16</y>
+                     <y>0</y>
                      <width>602</width>
                      <height>415</height>
                     </rect>

@@ -27,6 +27,9 @@ class Window(QMainWindow):
 		greenFocusButton = "QPushButton{ border:3px dashed #005500;  background-color:qlineargradient(spread:pad, x1:1, y1:0.83, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 126, 0, 255)); border-radius:5px;color:white;font-weight:700;font-size:11px}"
 		greenButton = "QPushButton{ border:3px dashed #005500;  background-color:qlineargradient(spread:pad, x1:1, y1:0.83, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 126, 0, 255)); border-radius:5px;color:white;}"
 		greenButtonHover = "QPushButton{ border:3px dashed #005500;  background-color:qlineargradient(spread:pad, x1:1, y1:0.83, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 126, 0, 255)); border-radius:5px;color:white} QPushButton:hover{background-color:rgb(0, 118, 0)}"
+		blueFocusButton = "QPushButton {background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 0, 127, 255), stop:1 rgba(0, 0, 209, 255)); border-radius:5px; color:white;font-weight:700;font-size:11px}"
+		blueButton = "QPushButton {background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 0, 127, 255), stop:1 rgba(0, 0, 209, 255)); border-radius:5px; color:white;}"
+		blueButtonHover ="QPushButton {background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 0, 127, 255), stop:1 rgba(0, 0, 209, 255)); border-radius:5px; color:white;} QPushButton:hover{background:rgb(0, 0, 216)}"
 		setParams = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #515a70}"
 		unsetParams = "QGroupBox{background-color:rgb(247, 247, 247)}"
 		greyBButton = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;}"
@@ -35,6 +38,7 @@ class Window(QMainWindow):
 		greyBHover = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px;} QPushButton:hover{background-color:rgb(243, 243, 243);}"
 		greyGHover = "QPushButton {border:3px dashed #005500; background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px;} QPushButton:hover{background-color:rgb(243, 243, 243);}"
 		greyPHover = "QPushButton{ border:3px solid purple;  background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;} QPushButton:hover{background-color:rgb(243, 243, 243);}"
+		blueSelectP = "QPushButton{ border:3px solid purple;  background-color:qlineargradient(spread:pad, x1:0.994318, y1:0.682, x2:1, y2:0, stop:0 rgba(72, 144, 216, 255), stop:1 rgba(83, 170, 252, 255)); border-radius:5px;color:white}"
 		
 		# set menu bar actions
 		self.ui.actionOpen.triggered.connect(lambda: menu.openDialog(self))
@@ -76,13 +80,22 @@ class Window(QMainWindow):
 		# meter page
 		self.ui.meterNextStack.setCurrentIndex(0)
 		self.ui.meterEquipTabs.setCurrentIndex(0)
+		# sa page
+		self.ui.saNextStack.setCurrentIndex(4)
+		self.ui.saEquipTabs.setCurrentIndex(0)
+		self.ui.saEquipStandardStack.setCurrentIndex(1)
+		self.ui.saEquipAdvStack.setCurrentIndex(0)
+		# power 1 page
+		self.ui.power1NextStack.setCurrentIndex(0)
+		self.ui.power1EquipTabs.setCurrentIndex(0)
 		
 		# VSG and VSA dropdown changes
 		self.ui.vsgSetup.currentIndexChanged.connect(lambda: param.displayVsg(self,purpleButtonHover,greyPHover,greyGHover,greyPButton))
 		self.ui.vsaType.currentIndexChanged.connect(lambda: param.displayVsa(self,unsetParams,greyBHover,greyGHover,greyBButton))
 		self.ui.demodulationEnable.currentIndexChanged.connect(lambda: param.displayVsa(self,unsetParams,greyBHover,greyGHover,greyBButton))
 		self.ui.averagingEnable.currentIndexChanged.connect(lambda: param.displayVsa(self,unsetParams,greyBHover,greyGHover,greyBButton))
-		
+		self.ui.saType.currentIndexChanged.connect(lambda: param.displaySa(self,blueSelectP,purpleFocusButton,purpleButtonHover,greyBHover,greyPHover,greyBButton))
+	
 		# expand/shrink depending on which step tab is clicked
 		self.ui.stepTabs.currentChanged.connect(lambda: menu.changeStepTabWindowSize(self))
 		
@@ -103,7 +116,14 @@ class Window(QMainWindow):
 		self.ui.digSet.clicked.connect(lambda: set.setVSA(self,purpleFocusButton,greenFocusButton,purpleButtonHover,greenButtonHover,setParams,greyBHover, greyGHover))
 		# downconverter page
 		self.ui.downSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.downEquipAdv,setParams))
-		self.ui.downSet.clicked.connect(lambda: set.setDown(self,greenFocusButton,greyBHover,greenButtonHover))
+		self.ui.downSet.clicked.connect(lambda: set.setDown(self,greenFocusButton,greyBHover,greenButtonHover,setParams))
+		# meter page
+		self.ui.meterSet.clicked.connect(lambda: set.setMeter(self,blueFocusButton,blueButtonHover,greyPHover,setParams))
+		# sa page
+		self.ui.saSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.saEquipAdv,setParams))
+		self.ui.saSet.clicked.connect(lambda: set.setSA(self,purpleFocusButton,purpleButtonHover,greyBHover,setParams))
+		# power 1 page
+		self.ui.p1Set.clicked.connect(lambda: set.setP1(self))
 		# rx calibration page
 		self.ui.set_run_vsa.clicked.connect(lambda: set.rxCalRoutine(self))
 		
@@ -132,6 +152,13 @@ class Window(QMainWindow):
 		self.ui.pxaButton_vsg_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.modButton_vsg.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.modButton_vsg_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.meterButton_vsg.clicked.connect(lambda: flow.meterOnClick(self))
+		self.ui.saButton_vsg.clicked.connect(lambda: flow.saOnClick(self))
+		self.ui.saButton_vsg_2.clicked.connect(lambda: flow.saOnClick(self))
+		self.ui.saButton_vsg_3.clicked.connect(lambda: flow.saOnClick(self))
+		self.ui.saButton_vsg_4.clicked.connect(lambda: flow.saOnClick(self))
+		self.ui.saButton_vsg_5.clicked.connect(lambda: flow.saOnClick(self))
+		self.ui.power1Button_vsg.clicked.connect(lambda: flow.p1OnClick(self))
 		# upconverter page
 		self.ui.awgButton_up.clicked.connect(lambda: flow.awgOnClick(self,greyPButton,greyPHover,purpleButtonHover))
 		self.ui.vsaButton_up.clicked.connect(lambda: flow.vsaOnClick(self))
@@ -151,6 +178,13 @@ class Window(QMainWindow):
 		self.ui.pxaButton_up_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.modButton_up.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.modButton_up_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.meterButton_up.clicked.connect(lambda: flow.meterOnClick(self))
+		self.ui.saButton_up.clicked.connect(lambda: flow.saOnClick(self))
+		self.ui.saButton_up_2.clicked.connect(lambda: flow.saOnClick(self))
+		self.ui.saButton_up_3.clicked.connect(lambda: flow.saOnClick(self))
+		self.ui.saButton_up_4.clicked.connect(lambda: flow.saOnClick(self))
+		self.ui.saButton_up_5.clicked.connect(lambda: flow.saOnClick(self))
+		self.ui.power1Button_up.clicked.connect(lambda: flow.p1OnClick(self))
 		# vsa page
 		self.ui.vsgButton_vsa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
 		self.ui.awgButton_vsa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
@@ -158,9 +192,15 @@ class Window(QMainWindow):
 		self.ui.awgButton_vsa_3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
 		self.ui.upButton_vsa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack ,1))
 		self.ui.psgButton_vsa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,1))
-		self.ui.meterButton_vsa.clicked.connect(lambda: flow.powerOnClick(self))
+		self.ui.meterButton_vsa.clicked.connect(lambda: flow.meterOnClick(self))
 		self.ui.downButton_vsa.clicked.connect(lambda: flow.downOnClick(self))
 		self.ui.downButton_vsa_2.clicked.connect(lambda: flow.downOnClick(self))
+		self.ui.saButton_vsa.clicked.connect(lambda: flow.saOnClick(self))
+		self.ui.saButton_vsa_2.clicked.connect(lambda: flow.saOnClick(self))
+		self.ui.saButton_vsa_3.clicked.connect(lambda: flow.saOnClick(self))
+		self.ui.saButton_vsa_4.clicked.connect(lambda: flow.saOnClick(self))
+		self.ui.saButton_vsa_5.clicked.connect(lambda: flow.saOnClick(self))
+		self.ui.power1Button_vsa.clicked.connect(lambda: flow.p1OnClick(self))
 		# downconverter page
 		self.ui.awgButton_down.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
 		self.ui.awgButton_down_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
@@ -173,7 +213,10 @@ class Window(QMainWindow):
 		self.ui.digButton_down.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.digButton_down_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.modButton_down.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
-		self.ui.meterButton_down.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,4))
+		self.ui.meterButton_down.clicked.connect(lambda: flow.meterOnClick(self))
+		self.ui.saButton_down.clicked.connect(lambda: flow.saOnClick(self))
+		self.ui.saButton_down_2.clicked.connect(lambda: flow.saOnClick(self))
+		self.ui.power1Button_down.clicked.connect(lambda: flow.p1OnClick(self))
 		# power meter page
 		self.ui.awgButton_meter.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
 		self.ui.awgButton_meter_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
@@ -193,6 +236,65 @@ class Window(QMainWindow):
 		self.ui.digButton_meter_4.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.modButton_meter.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.modButton_meter_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.uxaButton_meter.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.uxaButton_meter_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.pxaButton_meter.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.pxaButton_meter_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.saButton_meter.clicked.connect(lambda: flow.saOnClick(self))
+		self.ui.saButton_meter_2.clicked.connect(lambda: flow.saOnClick(self))
+		self.ui.saButton_meter_3.clicked.connect(lambda: flow.saOnClick(self))
+		self.ui.saButton_meter_4.clicked.connect(lambda: flow.saOnClick(self))
+		self.ui.power1Button_meter.clicked.connect(lambda: flow.p1OnClick(self))
+		# sa page
+		self.ui.awgButton_sa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
+		self.ui.awgButton_sa_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
+		self.ui.awgButton_sa_3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
+		self.ui.vsgButton_sa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
+		self.ui.upButton_sa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,1))
+		self.ui.psgButton_sa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,1))
+		self.ui.downButton_sa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,3))
+		self.ui.downButton_sa_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,3))
+		self.ui.scopeButton_sa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.scopeButton_sa_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.scopeButton_sa_3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.scopeButton_sa_4.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.digButton_sa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.digButton_sa_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.digButton_sa_3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.digButton_sa_4.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.modButton_sa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.modButton_sa_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.uxaButton_sa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.uxaButton_sa_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.pxaButton_sa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.pxaButton_sa_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.meterButton_sa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,4))
+		self.ui.power1Button_sa.clicked.connect(lambda: flow.p1OnClick(self))
+		# power 1 page
+		self.ui.awgButton_p1.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
+		self.ui.awgButton_p1_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
+		self.ui.awgButton_p1_3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
+		self.ui.vsgButton_p1.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
+		self.ui.upButton_p1.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,1))
+		self.ui.psgButton_p1.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,1))
+		self.ui.downButton_p1.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,3))
+		self.ui.downButton_p1_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,3))
+		self.ui.scopeButton_p1.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.scopeButton_p1_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.scopeButton_p1_3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.scopeButton_p1_4.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.digButton_p1.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.digButton_p1_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.digButton_p1_3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.digButton_p1_4.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.modButton_p1.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.modButton_p1_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.uxaButton_p1.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.uxaButton_p1_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.pxaButton_p1.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.pxaButton_p1_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
+		self.ui.meterButton_p1.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,4))
+		self.ui.saButton_p1.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,5))
 		
 		# control parameter changes
 		self.ui.dllFile_scope.textChanged.connect(lambda: param.copyDemod(self, self.ui.dllFile_scope, self.ui.dllFile_uxa, self.ui.dllFile_dig))

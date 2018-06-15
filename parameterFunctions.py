@@ -2,6 +2,7 @@
 
 from PyQt5.QtGui import (QCursor)
 from PyQt5.QtCore import (Qt)
+import setParameters as set
 
 def displayVsg(self,buttonPHover,buttonGreyPHover,buttonGreyGHover,buttonGreyP):
 	awgChecked = self.ui.awgSetGeneral.isChecked()
@@ -200,16 +201,68 @@ def copyDemod(self,changedModField,replacedFieldOne,replacedFieldTwo):
 	replacedFieldOne.blockSignals(False)
 	replacedFieldTwo.blockSignals(False)
 	
+def displaySa(self,buttonSelected,buttonColourFocus,buttonPHover,buttonHoverB,buttonHoverP,buttonGreyB):
+	saIdx = self.ui.saType.currentIndex()
+	saChecked = self.ui.saSet.isChecked()
+	if saIdx == 0:
+		self.ui.saNextStack.setCurrentIndex(4)
+		self.ui.saEquipStandardStack.setCurrentIndex(1)
+		self.ui.saEquipAdvStack.setCurrentIndex(0)
+		self.ui.saButton_sa.setStyleSheet(buttonSelected)
+		if saChecked == False:
+			self.ui.saNextStack.setCurrentIndex(4)
+			self.ui.meterNextStack.setCurrentIndex(1)
+			self.ui.downNextStack.setCurrentIndex(2)
+			self.ui.vsaNextStack.setCurrentIndex(4)
+			self.ui.up_psg_next.setCurrentIndex(6)
+			self.ui.vsgNextSteps.setCurrentIndex(8)
+			self.ui.saButton_sa.setStyleSheet(buttonSelected)
+			self.ui.saButton_sa_2.setStyleSheet(buttonSelected)
+			self.ui.saButton_sa_3.setStyleSheet(buttonSelected)
+			self.ui.saButton_sa_4.setStyleSheet(buttonSelected)
+			set.setPrevSAButtons(self,buttonHoverP,buttonGreyB)
+	elif saIdx == 1 or saIdx == 2:
+		self.ui.saEquipStandardStack.setCurrentIndex(0)
+		self.ui.saEquipAdvStack.setCurrentIndex(1)
+		if saChecked == False:
+			self.ui.saNextStack.setCurrentIndex(4)
+			self.ui.meterNextStack.setCurrentIndex(1)
+			self.ui.downNextStack.setCurrentIndex(2)
+			self.ui.vsaNextStack.setCurrentIndex(4)
+			self.ui.up_psg_next.setCurrentIndex(6)
+			self.ui.vsgNextSteps.setCurrentIndex(8)
+			self.ui.saButton_sa.setStyleSheet(buttonSelected)
+			self.ui.saButton_sa_2.setStyleSheet(buttonSelected)
+			self.ui.saButton_sa_3.setStyleSheet(buttonSelected)
+			self.ui.saButton_sa_4.setStyleSheet(buttonSelected)
+			set.setPrevSAButtons(self,buttonHoverP,buttonGreyB)
+	elif saIdx == 3:
+		self.ui.saNextStack.setCurrentIndex(0)
+		self.ui.meterNextStack.setCurrentIndex(2)
+		self.ui.downNextStack.setCurrentIndex(3)
+		self.ui.vsaNextStack.setCurrentIndex(5)
+		self.ui.up_psg_next.setCurrentIndex(7)
+		self.ui.vsgNextSteps.setCurrentIndex(9)
+		
+		self.ui.saEquipStandardStack.setCurrentIndex(2)
+		self.ui.saEquipAdvStack.setCurrentIndex(2)
+		self.ui.saButton_sa.setStyleSheet(buttonColourFocus)
+		self.ui.saButton_sa_2.setStyleSheet(buttonColourFocus)
+		self.ui.saButton_sa_3.setStyleSheet(buttonColourFocus)
+		self.ui.saButton_sa_4.setStyleSheet(buttonColourFocus)
+		set.setPrevSAButtons(self,buttonPHover,buttonHoverB)
+		
+		
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions called within parameterFunctions	
 
 def setVSGWorkflows(self,idx):
-	self.ui.vsgWorkflowForVSA.setCurrentIndex(0)
-	self.ui.vsgWorkflowForDown.setCurrentIndex(0)
-	self.ui.vsgWorkflow_meter.setCurrentIndex(0)
-	self.ui.vsgWorkflow_sa.setCurrentIndex(0)
-	self.ui.vsgWorkflow_power1.setCurrentIndex(0)
-	self.ui.vsgWorkflow_power3.setCurrentIndex(0)
+	self.ui.vsgWorkflowForVSA.setCurrentIndex(idx)
+	self.ui.vsgWorkflowForDown.setCurrentIndex(idx)
+	self.ui.vsgWorkflow_meter.setCurrentIndex(idx)
+	self.ui.vsgWorkflow_sa.setCurrentIndex(idx)
+	self.ui.vsgWorkflow_power1.setCurrentIndex(idx)
+	self.ui.vsgWorkflow_power3.setCurrentIndex(idx)
 	
 def setVSAWorkflowsWithModNoDown(self,idx,subidx):
 	self.ui.vsaWorkflow_vsg.setCurrentIndex(idx)

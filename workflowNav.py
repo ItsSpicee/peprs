@@ -97,10 +97,24 @@ def vsaOnClick(self):
 		else:
 			self.fillParametersMsg()
 
-def powerOnClick(self):
+def meterOnClick(self):
 	typeIdx = self.ui.vsaType.currentIndex()
-	if typeIdx == 1 or typeIdx == 2 or typeIdx == 3 or typeIdx == 4:
+	downChecked = self.ui.downSet.isChecked()
+	digChecked = self.ui.digSet.isChecked()
+	scopeChecked = self.ui.scopeSet.isChecked()
+	uxaChecked = self.ui.uxaSet.isChecked()
+	pxaChecked = self.ui.pxaSet.isChecked()
+	if typeIdx == 1 and scopeChecked:
 		self.ui.equipStack.setCurrentIndex(4)
+	elif typeIdx == 2  and digChecked:
+		self.ui.equipStack.setCurrentIndex(4)
+	elif typeIdx == 3 and uxaChecked:
+		self.ui.equipStack.setCurrentIndex(4)
+	elif typeIdx == 4 and pxaChecked:	
+		self.ui.equipStack.setCurrentIndex(4)
+	elif typeIdx == 5 or typeIdx ==6:
+		if downChecked:
+			self.ui.equipStack.setCurrentIndex(4)
 
 def downOnClick(self):
 	digChecked = self.ui.digSet.isChecked()
@@ -112,3 +126,14 @@ def downOnClick(self):
 	elif typeIdx == 6:
 		if digChecked:
 			self.ui.equipStack.setCurrentIndex(3)
+			
+def saOnClick(self):
+	meterChecked = self.ui.meterSet.isChecked()
+	if meterChecked:
+		self.ui.equipStack.setCurrentIndex(5)
+		
+def p1OnClick(self):
+	saChecked = self.ui.saSet.isChecked()
+	saType = self.ui.saType.currentIndex()
+	if saChecked or saType == 3:
+		self.ui.equipStack.setCurrentIndex(6)
