@@ -324,10 +324,42 @@ def setP3(self,boxDone,buttonFocus,buttonBHover):
 	self.ui.up_psg_next.setCurrentIndex(10)
 	self.ui.vsgNextSteps.setCurrentIndex(12)
 	setPrevP3Buttons(self,buttonBHover)
-		
+
+def setVSAMeasDig(self,boxDone):
+	self.ui.vsaMeasGenEquip.setStyleSheet(boxDone)
+	self.ui.vsaMeasGenEquip_2.setStyleSheet(boxDone)
+	self.ui.vsaMeasDigEquip.setStyleSheet(boxDone)
+	self.ui.digMark_vsaMeas.setVisible(True)
+	self.ui.digMark_vsaMeas_2.setVisible(True)
+	self.ui.vsaMeasNextStack.setCurrentIndex(1)
+	
+def setVSAMeasGen(self,boxDone):
+	vsaType = self.ui.vsaWorkflow_vsaMeas.currentIndex()
+	downType = self.ui.single_down_vsaMeas_stack.currentIndex()
+	analyzerType = self.ui.single_vsaMeas_stack.currentIndex()
+	self.ui.vsaMeasGenEquip.setStyleSheet(boxDone)
+	self.ui.vsaMeasGenEquip_2.setStyleSheet(boxDone)
+	if vsaType == 1:
+		if downType == 0: # scope
+			self.ui.scopeMark_vsaMeas.setVisible(True)
+			self.ui.scopeMark_vsaMeas_2.setVisible(True)
+		elif downType == 1: # dig
+			self.ui.digMark_vsaMeas.setVisible(True)
+			self.ui.digMark_vsaMeas_2.setVisible(True)
+	elif vsaType == 0:
+		if analyzerType == 1: # scope
+			self.ui.scopeMark_vsaMeas.setVisible(True)
+			self.ui.scopeMark_vsaMeas_2.setVisible(True)
+		elif analyzerType == 2: # dig
+			self.ui.digMark_vsaMeas.setVisible(True)
+			self.ui.digMark_vsaMeas_2.setVisible(True)
+		elif analyzerType == 3: # uxa
+			self.ui.uxaMark_vsaMeas.setVisible(True)
+		elif analyzerType == 4: # pxa
+			self.ui.pxaMark_vsaMeas.setVisible(True)
+	self.ui.vsaMeasNextStack.setCurrentIndex(1)
+	
 def rxCalRoutine(self):
-	self.resize(1265,950)
-	self.center()
 	self.progressBar = QProgressBar()
 	self.progressBar.setRange(1,10);
 	self.progressBar.setTextVisible(True);

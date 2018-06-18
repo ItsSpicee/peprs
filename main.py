@@ -2,7 +2,7 @@
 
 import sys
 from PyQt5 import uic, QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import (QMessageBox, QTabWidget, QFileDialog,QDialog, QInputDialog, QTextEdit, QLineEdit, QLabel, QFrame, QGridLayout, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QMenu, QAction, qApp, QDesktopWidget, QMessageBox, QToolTip, QPushButton, QApplication, QProgressBar)
+from PyQt5.QtWidgets import (QMessageBox, QTabWidget, QFileDialog,QDialog, QInputDialog, QTextEdit, QLineEdit, QLabel, QFrame, QGridLayout, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QMenu, QAction, qApp, QDesktopWidget, QMessageBox, QToolTip, QPushButton, QApplication, QProgressBar,QSizePolicy)
 from PyQt5.QtGui import (QCursor, QPen, QPainter, QColor, QIcon, QFont)
 from PyQt5.QtCore import (Qt, pyqtSlot, QSize)
 
@@ -46,6 +46,14 @@ class Window(QMainWindow):
 		greyPHover = "QPushButton{ border:3px solid purple;  background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;} QPushButton:hover{background-color:rgb(243, 243, 243);}"
 		blueSelectP = "QPushButton{ border:3px solid purple;  background-color:qlineargradient(spread:pad, x1:0.994318, y1:0.682, x2:1, y2:0, stop:0 rgba(72, 144, 216, 255), stop:1 rgba(83, 170, 252, 255)); border-radius:5px;color:white}"
 		
+		# keep widget space when hidden
+		retainVsa = QSizePolicy(self.ui.debuggingPanel_vsa.sizePolicy())
+		retainVsg = QSizePolicy(self.ui.debuggingPanel_vsg.sizePolicy())
+		retainVsa.setRetainSizeWhenHidden(True)
+		retainVsg.setRetainSizeWhenHidden(True)
+		self.ui.debuggingPanel_vsa.setSizePolicy(retainVsa);
+		self.ui.debuggingPanel_vsg.setSizePolicy(retainVsg);
+		
 		# set menu bar actions
 		self.ui.actionOpen.triggered.connect(lambda: menu.openDialog(self))
 		self.ui.actionSave.triggered.connect(lambda: menu.saveDialog(self))
@@ -64,6 +72,7 @@ class Window(QMainWindow):
 		# set appropriate pages in stacks
 		self.ui.stepTabs.setCurrentIndex(3) # dashboard
 		self.ui.equipStack.setCurrentIndex(0) # vsg settings page
+		self.ui.measStack.setCurrentIndex(0)
 		# vsg page
 		self.ui.vsgEquipTabs.setCurrentIndex(0) # vsg general settings
 		self.ui.vsgEquipStack.setCurrentIndex(2) # please select a layout
@@ -104,6 +113,43 @@ class Window(QMainWindow):
 		self.ui.vsaMeasParamTabs.setCurrentIndex(0)
 		self.ui.vsaMeasGenStack.setCurrentIndex(0)
 		self.ui.vsaMeasAdvStack.setCurrentIndex(0)
+		self.ui.vsaMeasNextStack.setCurrentIndex(0)
+		self.ui.debugVSAStack.setCurrentIndex(1)
+		self.ui.resultsVSATabs.setCurrentIndex(0)
+		self.ui.vsaCalResultsStack.setCurrentIndex(1)
+		self.ui.vsaMeasRunStack.setCurrentIndex(1)
+		
+		# vsg meas page
+		self.ui.debugVSGStack.setCurrentIndex(2)
+		
+		self.ui.calAdviceText.setVisible(False)
+		self.ui.downMark_vsaMeas.setVisible(False)
+		self.ui.uxaMark_vsaMeas.setVisible(False)
+		self.ui.pxaMark_vsaMeas.setVisible(False)
+		self.ui.saMark_vsaMeas.setVisible(False)
+		self.ui.saMark_vsaMeas_2.setVisible(False)
+		self.ui.scopeMark_vsaMeas.setVisible(False)
+		self.ui.scopeMark_vsaMeas_2.setVisible(False)
+		self.ui.digMark_vsaMeas.setVisible(False)
+		self.ui.digMark_vsaMeas_2.setVisible(False)
+		self.ui.downMark_vsgMeas.setVisible(False)
+		# self.ui.uxaMark_vsgMeas.setVisible(False)
+		# self.ui.pxaMark_vsgMeas.setVisible(False)
+		self.ui.saMark_vsgMeas.setVisible(False)
+		self.ui.saMark_vsgMeas_2.setVisible(False)
+		# self.ui.scopeMark_vsgMeas.setVisible(False)
+		# self.ui.scopeMark_vsgMeas_2.setVisible(False)
+		# self.ui.digMark_vsgMeas.setVisible(False)
+		# self.ui.digMark_vsgMeas_2.setVisible(False)
+		self.ui.awgMark_vsgMeas.setVisible(False)
+		self.ui.awgMark_vsgMeas_2.setVisible(False)
+		self.ui.awgMark_vsgMeas_3.setVisible(False)
+		self.ui.vsgMark_vsgMeas.setVisible(False)
+		self.ui.psgMark_vsgMeas.setVisible(False)
+		self.ui.upMark_vsgMeas.setVisible(False)
+		
+		#vsg meas page
+		self.ui.debuggingPanel_vsg.setVisible(False)
 		
 		# dropdown and field changes
 		self.ui.vsgSetup.currentIndexChanged.connect(lambda: param.displayVsg(self,purpleButtonHover,greyPHover,greyGHover,greyPButton))
@@ -123,9 +169,12 @@ class Window(QMainWindow):
 		self.ui.p3c2Check.stateChanged.connect(lambda: param.enableChannel(self))
 		self.ui.p3c3Check.stateChanged.connect(lambda: param.enableChannel(self))
 		self.ui.p3c4Check.stateChanged.connect(lambda: param.enableChannel(self))
+		self.ui.generateVSACalCheck.stateChanged.connect(lambda: param.enableVSACalFile(self))
 	
 		# expand/shrink depending on which step tab is clicked
 		self.ui.stepTabs.currentChanged.connect(lambda: menu.changeStepTabWindowSize(self))
+		# vsa meas page
+		self.ui.vsaMeasParamTabs.currentChanged.connect(lambda: menu.switchMeasTab(self))
 		
 		# control parameter set buttons
 		# vsg page
@@ -156,10 +205,11 @@ class Window(QMainWindow):
 		self.ui.p2Set.clicked.connect(lambda: set.setP2(self,setParams,blueFocusButtonDashed,blueButtonHoverDashed,greyBHoverDashed,greyBButtonDashed))
 		# power 3 page
 		self.ui.p3Set.clicked.connect(lambda: set.setP3(self,setParams,blueFocusButtonDashed,blueButtonHoverDashed))
-		
-		# rx calibration page
+		# vsa meas page
+		self.ui.vsaMeasSet.clicked.connect(lambda: set.setVSAMeasDig(self,setParams))
+		self.ui.vsaMeasSet_2.clicked.connect(lambda: set.setVSAMeasGen(self,setParams))
 		self.ui.set_run_vsa.clicked.connect(lambda: set.rxCalRoutine(self))
-		
+		self.ui.vsaMeasAdvSet.clicked.connect(lambda: set.setAdvanced(self,self.ui.vsaMeasAdvEquip,setParams))
 		# control dash radio buttons
 		self.ui.runVSG.toggled.connect(lambda: flow.vsgOnlySetup(self,disabledButton,greyPButton))
 		self.ui.runVSA.toggled.connect(lambda: flow.vsaOnlySetup(self,disabledButton,greyBButton,greyPButton))
@@ -406,6 +456,21 @@ class Window(QMainWindow):
 		self.ui.power1Button_p3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,6))
 		self.ui.power2Button_p3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,7))
 		self.ui.power2Button_p3_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,7))
+		# vsa meas page
+		self.ui.saButton_vsaMeas.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(2))
+		self.ui.saButton_vsaMeas_2.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(2))
+		self.ui.downButton_vsaMeas.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(1))
+		self.ui.scopeButton_vsaMeas.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(0))
+		self.ui.scopeButton_vsaMeas_2.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(0))
+		self.ui.digButton_vsaMeas.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(0))
+		self.ui.digButton_vsaMeas_2.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(0))
+		self.ui.uxaButton_vsaMeas.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(0))
+		self.ui.pxaButton_vsaMeas.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(0))
+		self.ui.awgButton_vsaMeas.clicked.connect(lambda: flow.awgVSAMeasOnClick(self))
+		self.ui.awgButton_vsaMeas_2.clicked.connect(lambda: flow.awgVSAMeasOnClick(self))
+		self.ui.awgButton_vsaMeas_3.clicked.connect(lambda: flow.awgVSAMeasOnClick(self))
+		self.ui.vsgButton_vsaMeas.clicked.connect(lambda: flow.awgVSAMeasOnClick(self))
+		# vsg meas page
 		
 		# control parameter changes
 		self.ui.dllFile_scope.textChanged.connect(lambda: param.copyDemod(self, self.ui.dllFile_scope, self.ui.dllFile_uxa, self.ui.dllFile_dig))

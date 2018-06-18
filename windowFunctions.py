@@ -36,3 +36,16 @@ def changeStepTabWindowSize(self):
 		self.setMinimumSize(700,550)
 		self.resize(700,550)
 		self.center()
+		
+def switchMeasTab(self):
+	currentTab = self.ui.vsaMeasParamTabs.currentIndex()
+	if currentTab == 0 or currentTab == 2:
+		self.setMinimumSize(1265,530)
+		self.resize(1265,530)
+		self.center()
+		self.ui.calAdviceText.setVisible(False)
+	elif currentTab == 1:
+		self.setMinimumSize(1265,950)
+		self.resize(1265,950)
+		self.center()
+		self.ui.calAdviceText.setVisible(True)

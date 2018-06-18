@@ -153,4 +153,15 @@ def p3OnClick(self):
 	if vsgType == 1 or vsgType == 4:
 		if p1Checked:
 			self.ui.equipStack.setCurrentIndex(8)
+
+def awgVSAMeasOnClick(self):
+	vsaSetType = self.ui.vsaMeasGenStack.currentIndex()
+	vsaSetChecked = self.ui.vsaMeasSet.isChecked()
+	vsaSetTwoChecked = self.ui.vsaMeasSet_2.isChecked()
+	# vsaRunChecked = self.ui.
 	
+	# if vsaSetType == 0:
+		# if vsaSetTwoChecked and :
+			
+	# elif vsaSetType == 1:
+		# if vsaSetChecked and :
