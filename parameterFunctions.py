@@ -97,12 +97,16 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.single_vsa_stack.setCurrentIndex(0)
 			self.ui.vsaEquipStack.setCurrentIndex(1)
 			self.ui.vsaAdvancedStack.setCurrentIndex(1)
+			self.ui.vsaMeasGenStack.setCurrentIndex(0)
+			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
 			setVSAWorkflowsNoModNoDown(self,1,0)
 		elif vsaIdx == 2:
 			self.ui.vsaWorkflow.setCurrentIndex(1)
 			self.ui.single_vsa_stack.setCurrentIndex(1)
 			self.ui.vsaEquipStack.setCurrentIndex(2)
 			self.ui.vsaAdvancedStack.setCurrentIndex(1)
+			self.ui.vsaMeasGenStack.setCurrentIndex(1)
+			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
 			setVSAWorkflowsNoModNoDown(self,1,1)
 		elif vsaIdx == 3:
 			self.ui.vsaWorkflow.setCurrentIndex(1)
@@ -112,6 +116,8 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaAdvancedStack.setCurrentIndex(2)
 			self.ui.uxa_pxa_titleStackAdv.setCurrentIndex(0)
 			self.ui.uxa_pxa_set.setCurrentIndex(0)
+			self.ui.vsaMeasGenStack.setCurrentIndex(0)
+			self.ui.vsaMeasAdvStack.setCurrentIndex(1)
 			setVSAWorkflowsNoModNoDown(self,1,2)
 		elif vsaIdx == 4:
 			self.ui.vsaWorkflow.setCurrentIndex(1)
@@ -121,14 +127,20 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaAdvancedStack.setCurrentIndex(2)
 			self.ui.uxa_pxa_titleStackAdv.setCurrentIndex(1)
 			self.ui.uxa_pxa_set.setCurrentIndex(1)
+			self.ui.vsaMeasGenStack.setCurrentIndex(0)
+			self.ui.vsaMeasAdvStack.setCurrentIndex(1)
 			setVSAWorkflowsNoModNoDown(self,1,3)
 		elif vsaIdx == 5:
 			self.ui.vsaEquipStack.setCurrentIndex(1)
 			self.ui.vsaAdvancedStack.setCurrentIndex(1)
+			self.ui.vsaMeasGenStack.setCurrentIndex(0)
+			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
 			setVSAWorkflowsNoModWithDown(self,4,0,1)
 		elif vsaIdx == 6:
 			self.ui.vsaEquipStack.setCurrentIndex(2)
 			self.ui.vsaAdvancedStack.setCurrentIndex(1)
+			self.ui.vsaMeasGenStack.setCurrentIndex(1)
+			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
 			setVSAWorkflowsNoModWithDown(self,4,0,0)
 	elif demod == 1:
 		self.ui.uxaMod.setEnabled(True)
@@ -138,27 +150,39 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			digOrScopeSet(self,1,averaging,demod,scopeChecked,buttonGreyBHover,unsetBox,vsaIdx)
 			self.ui.vsaWorkflow.setCurrentIndex(2)
 			self.ui.single_mod_vsa_stack.setCurrentIndex(0)
+			self.ui.vsaMeasGenStack.setCurrentIndex(0)
+			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
 			setVSAWorkflowsWithModNoDown(self,2,0)
 		elif vsaIdx == 2:
 			digOrScopeSet(self,2,averaging,demod,digChecked,buttonGreyBHover,unsetBox,vsaIdx)
 			self.ui.vsaWorkflow.setCurrentIndex(2)
 			self.ui.single_mod_vsa_stack.setCurrentIndex(1)
+			self.ui.vsaMeasGenStack.setCurrentIndex(1)
+			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
 			setVSAWorkflowsWithModNoDown(self,2,1)
 		elif vsaIdx == 3:
 			uxaOrPxaSet(self,0,averaging,demod,uxaChecked,buttonGreyBHover,unsetBox)
 			self.ui.vsaWorkflow.setCurrentIndex(2)
 			self.ui.single_mod_vsa_stack.setCurrentIndex(2)
+			self.ui.vsaMeasGenStack.setCurrentIndex(0)
+			self.ui.vsaMeasAdvStack.setCurrentIndex(1)
 			setVSAWorkflowsWithModNoDown(self,2,2)
 		elif vsaIdx == 4:
 			uxaOrPxaSet(self,1,averaging,demod,pxaChecked,buttonGreyBHover,unsetBox)
 			self.ui.vsaWorkflow.setCurrentIndex(2)
 			self.ui.single_mod_vsa_stack.setCurrentIndex(3)
+			self.ui.vsaMeasGenStack.setCurrentIndex(0)
+			self.ui.vsaMeasAdvStack.setCurrentIndex(1)
 			setVSAWorkflowsWithModNoDown(self,2,3)
 		elif vsaIdx == 5:
 			digOrScopeDownSet(self,1,averaging,demod,scopeChecked,buttonGreyB,buttonGreyGHover,unsetBox,vsaIdx)
+			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
+			self.ui.vsaMeasGenStack.setCurrentIndex(0)
 			setVSAWorkflowsWithModWithDown(self,3,1,0)
 		elif vsaIdx == 6:
 			digOrScopeDownSet(self,2,averaging,demod,digChecked,buttonGreyB,buttonGreyGHover,unsetBox,vsaIdx)
+			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
+			self.ui.vsaMeasGenStack.setCurrentIndex(1)
 			setVSAWorkflowsWithModWithDown(self,3,1,1)
 	elif demod == 2:
 		self.ui.uxaMod.setEnabled(False)
@@ -168,27 +192,39 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			digOrScopeSet(self,1,averaging,demod,scopeChecked,buttonGreyBHover,unsetBox,vsaIdx)
 			self.ui.vsaWorkflow.setCurrentIndex(1)
 			self.ui.single_vsa_stack.setCurrentIndex(0)
+			self.ui.vsaMeasGenStack.setCurrentIndex(0)
+			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
 			setVSAWorkflowsNoModNoDown(self,1,0)
 		elif vsaIdx == 2:
 			digOrScopeSet(self,2,averaging,demod,digChecked,buttonGreyBHover,unsetBox,vsaIdx)
 			self.ui.vsaWorkflow.setCurrentIndex(1)
 			self.ui.single_vsa_stack.setCurrentIndex(1)
+			self.ui.vsaMeasGenStack.setCurrentIndex(1)
+			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
 			setVSAWorkflowsNoModNoDown(self,1,1)
 		elif vsaIdx == 3:
 			uxaOrPxaSet(self,0,averaging,demod,uxaChecked,buttonGreyBHover,unsetBox)
 			self.ui.vsaWorkflow.setCurrentIndex(1)
 			self.ui.single_vsa_stack.setCurrentIndex(2)
+			self.ui.vsaMeasGenStack.setCurrentIndex(0)
+			self.ui.vsaMeasAdvStack.setCurrentIndex(1)
 			setVSAWorkflowsNoModNoDown(self,1,2)
 		elif vsaIdx == 4:
 			uxaOrPxaSet(self,1,averaging,demod,pxaChecked,buttonGreyBHover,unsetBox)
 			self.ui.vsaWorkflow.setCurrentIndex(1)
 			self.ui.single_vsa_stack.setCurrentIndex(3)
+			self.ui.vsaMeasGenStack.setCurrentIndex(0)
+			self.ui.vsaMeasAdvStack.setCurrentIndex(1)
 			setVSAWorkflowsNoModNoDown(self,1,3)
 		elif vsaIdx == 5:
 			digOrScopeDownSet(self,1,averaging,demod,scopeChecked,buttonGreyB,buttonGreyGHover,unsetBox,vsaIdx)
+			self.ui.vsaMeasGenStack.setCurrentIndex(0)
+			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
 			setVSAWorkflowsNoModWithDown(self,4,0,1)
 		elif vsaIdx == 6:	
 			digOrScopeDownSet(self,2,averaging,demod,digChecked,buttonGreyB,buttonGreyGHover,unsetBox,vsaIdx)
+			self.ui.vsaMeasGenStack.setCurrentIndex(1)
+			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
 			setVSAWorkflowsNoModWithDown(self,4,0,0)	
 				
 # apply changes from one demod box to all demod boxes
@@ -236,6 +272,7 @@ def displaySa(self,buttonSelected,buttonColourFocus,buttonPHover,buttonHoverB,bu
 			self.ui.saButton_sa_3.setStyleSheet(buttonSelected)
 			self.ui.saButton_sa_4.setStyleSheet(buttonSelected)
 			set.setPrevSAButtons(self,buttonHoverP,buttonGreyB)
+			self.ui.vsaMeasAdvStack.setCurrentIndex(1)
 	elif saIdx == 3:
 		self.ui.saNextStack.setCurrentIndex(0)
 		self.ui.meterNextStack.setCurrentIndex(2)
@@ -257,15 +294,63 @@ def enableChannel(self):
 	p1c2Checked = self.ui.p1c2Check.isChecked()
 	p1c3Checked = self.ui.p1c3Check.isChecked()
 	p1c4Checked = self.ui.p1c4Check.isChecked()
+	p2c1Checked = self.ui.p2c1Check.isChecked()
+	p2c2Checked = self.ui.p2c2Check.isChecked()
+	p2c3Checked = self.ui.p2c3Check.isChecked()
+	p2c4Checked = self.ui.p2c4Check.isChecked()
+	p3c1Checked = self.ui.p3c1Check.isChecked()
+	p3c2Checked = self.ui.p3c2Check.isChecked()
+	p3c3Checked = self.ui.p3c3Check.isChecked()
+	p3c4Checked = self.ui.p3c4Check.isChecked()
 	
 	if p1c1Checked:
 		self.ui.p1c1Equip.setEnabled(True)
+	else: 
+		self.ui.p1c1Equip.setEnabled(False)
 	if p1c2Checked:
 		self.ui.p1c2Equip.setEnabled(True)
+	else: 
+		self.ui.p1c2Equip.setEnabled(False)
 	if p1c3Checked:
 		self.ui.p1c3Equip.setEnabled(True)
+	else: 
+		self.ui.p1c3Equip.setEnabled(False)
 	if p1c4Checked:
 		self.ui.p1c4Equip.setEnabled(True)
+	else: 
+		self.ui.p1c4Equip.setEnabled(False)
+	if p2c1Checked:
+		self.ui.p2c1Equip.setEnabled(True)
+	else: 
+		self.ui.p2c1Equip.setEnabled(False)
+	if p2c2Checked:
+		self.ui.p2c2Equip.setEnabled(True)
+	else: 
+		self.ui.p2c2Equip.setEnabled(False)
+	if p2c3Checked:
+		self.ui.p2c3Equip.setEnabled(True)
+	else: 
+		self.ui.p2c3Equip.setEnabled(False)
+	if p2c4Checked:
+		self.ui.p2c4Equip.setEnabled(True)
+	else: 
+		self.ui.p2c4Equip.setEnabled(False)
+	if p3c1Checked:
+		self.ui.p3c1Equip.setEnabled(True)
+	else: 
+		self.ui.p3c1Equip.setEnabled(False)
+	if p3c2Checked:
+		self.ui.p3c2Equip.setEnabled(True)
+	else: 
+		self.ui.p3c2Equip.setEnabled(False)
+	if p3c3Checked:
+		self.ui.p3c3Equip.setEnabled(True)
+	else: 
+		self.ui.p3c3Equip.setEnabled(False)
+	if p3c4Checked:
+		self.ui.p3c4Equip.setEnabled(True)
+	else: 
+		self.ui.p3c4Equip.setEnabled(False)
 		
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions called within parameterFunctions	
