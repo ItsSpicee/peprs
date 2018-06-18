@@ -137,3 +137,20 @@ def p1OnClick(self):
 	saType = self.ui.saType.currentIndex()
 	if saChecked or saType == 3:
 		self.ui.equipStack.setCurrentIndex(6)
+		
+def p2OnClick(self):
+	p1Checked = self.ui.p1Set.isChecked()
+	if p1Checked:
+		self.ui.equipStack.setCurrentIndex(7)
+		
+def p3OnClick(self):
+	vsgType = self.ui.vsgSetup.currentIndex()
+	p1Checked = self.ui.p1Set.isChecked()
+	p2Checked = self.ui.p2Set.isChecked()
+	
+	if p2Checked:
+		self.ui.equipStack.setCurrentIndex(8)
+	if vsgType == 1 or vsgType == 4:
+		if p1Checked:
+			self.ui.equipStack.setCurrentIndex(8)
+	

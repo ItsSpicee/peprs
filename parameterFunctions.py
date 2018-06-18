@@ -252,6 +252,20 @@ def displaySa(self,buttonSelected,buttonColourFocus,buttonPHover,buttonHoverB,bu
 		self.ui.saButton_sa_4.setStyleSheet(buttonColourFocus)
 		set.setPrevSAButtons(self,buttonPHover,buttonHoverB)
 		
+def enableChannel(self):
+	p1c1Checked = self.ui.p1c1Check.isChecked()
+	p1c2Checked = self.ui.p1c2Check.isChecked()
+	p1c3Checked = self.ui.p1c3Check.isChecked()
+	p1c4Checked = self.ui.p1c4Check.isChecked()
+	
+	if p1c1Checked:
+		self.ui.p1c1Equip.setEnabled(True)
+	if p1c2Checked:
+		self.ui.p1c2Equip.setEnabled(True)
+	if p1c3Checked:
+		self.ui.p1c3Equip.setEnabled(True)
+	if p1c4Checked:
+		self.ui.p1c4Equip.setEnabled(True)
 		
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions called within parameterFunctions	
