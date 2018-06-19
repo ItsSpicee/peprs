@@ -118,6 +118,7 @@ class Window(QMainWindow):
 		self.ui.resultsVSATabs.setCurrentIndex(0)
 		self.ui.vsaResultsStack_vsaMeas.setCurrentIndex(1)
 		self.ui.vsaMeasRunStack.setCurrentIndex(1)
+		self.ui.downStack_vsaMeas.setCurrentIndex(0)
 		# algo page
 		self.ui.algoTabs.setCurrentIndex(0)
 		self.ui.algoNextStack.setCurrentIndex(0)
@@ -179,7 +180,12 @@ class Window(QMainWindow):
 		self.ui.p3c2Check.stateChanged.connect(lambda: param.enableChannel(self))
 		self.ui.p3c3Check.stateChanged.connect(lambda: param.enableChannel(self))
 		self.ui.p3c4Check.stateChanged.connect(lambda: param.enableChannel(self))
-		self.ui.generateVSACalCheck.stateChanged.connect(lambda: param.enableVSACalFile(self))
+		self.ui.generateVSACalCheck.stateChanged.connect(lambda: param.enableVSACalFile(self,setParams,unsetParams))
+		self.ui.calFilePromptNo.toggled.connect(lambda: self.ui.vsaMeasNextStack.setCurrentIndex(4))
+		self.ui.calFilePromptYes.toggled.connect(lambda: self.ui.vsaMeasNextStack.setCurrentIndex(3))
+		self.ui.noCalRXButton.clicked.connect(lambda: self.ui.vsaMeasNextStack.setCurrentIndex(4))
+		self.ui.yesCalRXButton.clicked.connect(lambda: self.ui.vsaMeasNextStack.setCurrentIndex(3))
+		self.ui.vsgRelatedFrameTimeField_vsaMeas.currentIndexChanged.connect(lambda: param.determineFrameTimeEnable(self))
 	
 		# expand/shrink depending on which step tab is clicked
 		self.ui.stepTabs.currentChanged.connect(lambda: menu.changeStepTab(self))
@@ -217,11 +223,11 @@ class Window(QMainWindow):
 		# power 3 page
 		self.ui.p3Set.clicked.connect(lambda: set.setP3(self,setParams,blueFocusButtonDashed,blueButtonHoverDashed))
 		# vsa meas page
-		self.ui.vsaMeasSet.clicked.connect(lambda: set.setVSAMeasDig(self,setParams))
-		self.ui.vsaMeasSet_2.clicked.connect(lambda: set.setVSAMeasGen(self,setParams))
-		self.ui.set_run_vsa.clicked.connect(lambda: set.rxCalRoutine(self))
-		self.ui.downSetVSAMeas.clicked.connect(lambda: set.noRXCalRoutine(self,setParams))
-		self.ui.vsaMeasAdvSet.clicked.connect(lambda: set.setAdvanced(self,self.ui.vsaMeasAdvEquip,setParams))
+		self.ui.vsaMeasSet.clicked.connect(lambda: set.setVSAMeasDig(self,setParams,purpleButtonHover))
+		self.ui.vsaMeasSet_2.clicked.connect(lambda: set.setVSAMeasGen(self,setParams,purpleButtonHover))
+		self.ui.set_run_vsa.clicked.connect(lambda: set.rxCalRoutine(self,setParams,purpleButtonHover))
+		self.ui.downSetVSAMeas.clicked.connect(lambda: set.noRXCalRoutine(self,setParams,purpleButtonHover))
+		self.ui.vsaMeasAdvSet.clicked.connect(lambda: set.setVSAMeasAdv(self,setParams))
 		# control dash radio buttons
 		self.ui.runVSG.toggled.connect(lambda: flow.vsgOnlySetup(self,disabledButton,greyPButton))
 		self.ui.runVSA.toggled.connect(lambda: flow.vsaOnlySetup(self,disabledButton,greyBButton,greyPButton))

@@ -155,13 +155,16 @@ def p3OnClick(self):
 			self.ui.equipStack.setCurrentIndex(8)
 
 def awgVSAMeasOnClick(self):
-	vsaSetType = self.ui.vsaMeasGenStack.currentIndex()
 	vsaSetChecked = self.ui.vsaMeasSet.isChecked()
 	vsaSetTwoChecked = self.ui.vsaMeasSet_2.isChecked()
-	# vsaRunChecked = self.ui.
+	runChecked = self.ui.set_run_vsa.isChecked()
+	downChecked = self.ui.downSetVSAMeas.isChecked()
+	downEnabled = self.ui.vsaWorkflow_vsaMeas.currentIndex()
 	
-	# if vsaSetType == 0:
-		# if vsaSetTwoChecked and :
-			
-	# elif vsaSetType == 1:
-		# if vsaSetChecked and :
+	if downEnabled == 1: # down enabled
+		if downChecked:
+			self.ui.measStack.setCurrentIndex(1)
+	else:
+		if vsaSetChecked or vsaSetTwoChecked:
+				self.ui.measStack.setCurrentIndex(1)
+		

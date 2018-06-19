@@ -325,16 +325,29 @@ def setP3(self,boxDone,buttonFocus,buttonBHover):
 	self.ui.vsgNextSteps.setCurrentIndex(12)
 	setPrevP3Buttons(self,buttonBHover)
 
-def setVSAMeasDig(self,boxDone):
+def setVSAMeasDig(self,boxDone,buttonPHover):
+	vsaType = self.ui.vsaWorkflow_vsaMeas.currentIndex()
+	vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
 	self.ui.vsaMeasGenEquip.setStyleSheet(boxDone)
 	self.ui.vsaMeasGenEquip_2.setStyleSheet(boxDone)
 	self.ui.vsaMeasDigEquip.setStyleSheet(boxDone)
 	self.ui.digMark_vsaMeas.setVisible(True)
 	self.ui.digMark_vsaMeas_2.setVisible(True)
-	self.ui.vsaMeasNextStack.setCurrentIndex(1)
+	if vsaType == 0:
+		if vsgType == 3: # vsg
+			self.ui.vsaMeasNextStack.setCurrentIndex(6)
+			setFocusAndHand(self,self.ui.vsgButton_vsaMeas,buttonPHover)
+		else:
+			self.ui.vsaMeasNextStack.setCurrentIndex(5)
+			setFocusAndHand(self,self.ui.awgButton_vsaMeas,buttonPHover)
+			setFocusAndHand(self,self.ui.awgButton_vsaMeas_2,buttonPHover)
+			setFocusAndHand(self,self.ui.awgButton_vsaMeas_3,buttonPHover)
+	elif vsaType == 1: # has down
+		self.ui.vsaMeasNextStack.setCurrentIndex(1)
 	
-def setVSAMeasGen(self,boxDone):
+def setVSAMeasGen(self,boxDone,buttonPHover):
 	vsaType = self.ui.vsaWorkflow_vsaMeas.currentIndex()
+	vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
 	downType = self.ui.single_down_vsaMeas_stack.currentIndex()
 	analyzerType = self.ui.single_vsaMeas_stack.currentIndex()
 	self.ui.vsaMeasGenEquip.setStyleSheet(boxDone)
@@ -357,9 +370,38 @@ def setVSAMeasGen(self,boxDone):
 			self.ui.uxaMark_vsaMeas.setVisible(True)
 		elif analyzerType == 4: # pxa
 			self.ui.pxaMark_vsaMeas.setVisible(True)
+		if vsgType == 3: # vsg
+			self.ui.vsaMeasNextStack.setCurrentIndex(6)
+			setFocusAndHand(self,self.ui.vsgButton_vsaMeas,buttonPHover)
+		else:
+			self.ui.vsaMeasNextStack.setCurrentIndex(5)
+			setFocusAndHand(self,self.ui.awgButton_vsaMeas,buttonPHover)
+			setFocusAndHand(self,self.ui.awgButton_vsaMeas_2,buttonPHover)
+			setFocusAndHand(self,self.ui.awgButton_vsaMeas_3,buttonPHover)
 	self.ui.vsaMeasNextStack.setCurrentIndex(1)
 	
-def rxCalRoutine(self):
+
+def setVSAMeasAdv(self,boxDone):
+	self.ui.vsaMeasAdvEquip.setStyleSheet(boxDone)
+	self.ui.uxaMark_vsaMeas.setVisible(True)
+	self.ui.pxaMark_vsaMeas.setVisible(True)
+	
+def rxCalRoutine(self,boxDone,buttonPHover):
+	vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
+	if vsgType == 3: # vsg
+		self.ui.vsaMeasNextStack.setCurrentIndex(6)
+		setFocusAndHand(self,self.ui.vsgButton_vsaMeas,buttonPHover)
+	else:
+		self.ui.vsaMeasNextStack.setCurrentIndex(5)
+		setFocusAndHand(self,self.ui.awgButton_vsaMeas,buttonPHover)
+		setFocusAndHand(self,self.ui.awgButton_vsaMeas_2,buttonPHover)
+		setFocusAndHand(self,self.ui.awgButton_vsaMeas_3,buttonPHover)
+	self.ui.combEquip_vsaMeas.setStyleSheet(boxDone)
+	self.ui.downEquip_vsaMeas.setStyleSheet(boxDone)
+	self.ui.rxEquip_vsaMeas.setStyleSheet(boxDone)
+	self.ui.vsaResultsStack_vsaMeas.setCurrentIndex(0)
+	self.ui.debugVSAStack.setCurrentIndex(0)
+	self.ui.downMark_vsaMeas.setVisible(True)
 	self.progressBar = QProgressBar()
 	self.progressBar.setRange(1,10);
 	self.progressBar.setTextVisible(True);
@@ -373,10 +415,20 @@ def rxCalRoutine(self):
 	# to show progress bar, need both addWidget() and show()
 	self.ui.statusBar.showMessage("RX Calibration Routine Complete",3000)
 	
-def noRXCalRoutine(self,boxDone):
+def noRXCalRoutine(self,boxDone,buttonPHover):
+	vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
 	self.ui.combEquip_vsaMeas.setStyleSheet(boxDone)
 	self.ui.downEquip_vsaMeas.setStyleSheet(boxDone)
-	self.ui.rxEquip_VsaMeas.setStyleSheet(boxDone)
+	self.ui.rxEquip_vsaMeas.setStyleSheet(boxDone)
+	self.ui.downMark_vsaMeas.setVisible(True)
+	if vsgType == 3: # vsg
+		self.ui.vsaMeasNextStack.setCurrentIndex(6)
+		setFocusAndHand(self,self.ui.vsgButton_vsaMeas,buttonPHover)
+	else:
+		self.ui.vsaMeasNextStack.setCurrentIndex(5)
+		setFocusAndHand(self,self.ui.awgButton_vsaMeas,buttonPHover)
+		setFocusAndHand(self,self.ui.awgButton_vsaMeas_2,buttonPHover)
+		setFocusAndHand(self,self.ui.awgButton_vsaMeas_3,buttonPHover)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions for setParameters.py	

@@ -24,14 +24,20 @@ def closeButton(self):
 		
 def changeStepTab(self):
 	i = self.ui.stepTabs.currentIndex()
+	measTab = self.ui.vsaMeasParamTabs.currentIndex()
 	if i == 2:
 		self.setMinimumSize(1265,585)
 		self.resize(1265, 585)
 		self.center()
 	elif i == 1:
-		self.setMinimumSize(1265,528)
-		self.resize(1265,528)
-		self.center()
+		if measTab == 1:
+			self.setMinimumSize(1265,950)
+			self.resize(1265,950)
+			self.center()
+		else:
+			self.setMinimumSize(1265,528)
+			self.resize(1265,528)
+			self.center()
 	elif i == 0:
 		self.setMinimumSize(1265,950)
 		self.resize(1265,950)
@@ -43,16 +49,35 @@ def changeStepTab(self):
 	
 def switchMeasTab(self):
 	currentTab = self.ui.vsaMeasParamTabs.currentIndex()
+	vsaChecked = self.ui.vsaMeasSet.isChecked()
+	vsaChecked_2 = self.ui.vsaMeasSet_2.isChecked()
+	vsaDownChecked = self.ui.downSetVSAMeas.isChecked()
+	vsaDownRunChecked = self.ui.set_run_vsa.isChecked()
+	downStack = self.ui.downStack_vsaMeas.currentIndex()
+	vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
 	if currentTab == 0 or currentTab == 2:
 		self.setMinimumSize(1265,528)
 		self.resize(1265,528)
 		self.center()
 		self.ui.calAdviceText.setVisible(False)
 	elif currentTab == 1:
-		self.setMinimumSize(1265,950)
-		self.resize(1265,950)
-		self.center()
-		self.ui.calAdviceText.setVisible(True)
+		if downStack == 1:
+			self.setMinimumSize(1265,950)
+			self.resize(1265,950)
+			self.center()
+			self.ui.calAdviceText.setVisible(True)
+			if vsaDownChecked == False or vsaDownRunChecked == False:
+				if vsaChecked or vsaChecked_2:
+					self.ui.vsaMeasNextStack.setCurrentIndex(2)
+		else:
+			self.setMinimumSize(1265,528)
+			self.resize(1265,528)
+			self.center()
+			self.ui.calAdviceText.setVisible(False)
+			if vsgType == 3: # vsg
+				self.ui.vsaMeasNextStack.setCurrentIndex(6)
+			else:
+				self.ui.vsaMeasNextStack.setCurrentIndex(5)
 
 def switchAlgoTab(self):
 	currentTab = self.ui.algoTabs.currentIndex()
