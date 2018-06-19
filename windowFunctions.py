@@ -22,26 +22,30 @@ def closeButton(self):
 	if reply == QMessageBox.Yes:
 		qApp.quit()	
 		
-def changeStepTabWindowSize(self):
+def changeStepTab(self):
 	i = self.ui.stepTabs.currentIndex()
-	if i == 0 or i == 2:
+	if i == 2:
 		self.setMinimumSize(1265,585)
 		self.resize(1265, 585)
 		self.center()
 	elif i == 1:
-		self.setMinimumSize(1265,530)
-		self.resize(1265,530)
+		self.setMinimumSize(1265,528)
+		self.resize(1265,528)
+		self.center()
+	elif i == 0:
+		self.setMinimumSize(1265,950)
+		self.resize(1265,950)
 		self.center()
 	elif i == 3:
 		self.setMinimumSize(700,550)
 		self.resize(700,550)
 		self.center()
-		
+	
 def switchMeasTab(self):
 	currentTab = self.ui.vsaMeasParamTabs.currentIndex()
 	if currentTab == 0 or currentTab == 2:
-		self.setMinimumSize(1265,530)
-		self.resize(1265,530)
+		self.setMinimumSize(1265,528)
+		self.resize(1265,528)
 		self.center()
 		self.ui.calAdviceText.setVisible(False)
 	elif currentTab == 1:
@@ -49,3 +53,10 @@ def switchMeasTab(self):
 		self.resize(1265,950)
 		self.center()
 		self.ui.calAdviceText.setVisible(True)
+
+def switchAlgoTab(self):
+	currentTab = self.ui.algoTabs.currentIndex()
+	if currentTab == 2:
+		self.ui.rfButton.setVisible(True)
+	else:
+		self.ui.rfButton.setVisible(False)

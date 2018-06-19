@@ -376,6 +376,7 @@ def enableVSACalFile(self):
 		self.ui.vsaCalFileLabel_comb.setEnabled(False)
 		self.ui.vsaCalFileField_comb.setEnabled(False)
 		self.ui.vsaCalFileFolder_comb.setEnabled(False)
+		self.ui.vsaCalFileBrowse_comb.setEnabled(False)
 		self.ui.rfSpacingLabel_comb.setEnabled(True)
 		self.ui.rfSpacingField_comb.setEnabled(True)
 		self.ui.ifSpacingLabel_comb.setEnabled(True)
@@ -395,10 +396,13 @@ def enableVSACalFile(self):
 		self.ui.vsaCalSaveLocLabel_comb.setEnabled(True)
 		self.ui.vsaCalSaveLocField_comb.setEnabled(True)
 		self.ui.vsaCalSaveLocFolder_comb.setEnabled(True)
+		self.ui.vsaCalSaveLocBrowse_comb.setEnabled(True)
+		self.ui.vsaMeasRunStack.setCurrentIndex(0)
 	else:
 		self.ui.vsaCalFileLabel_comb.setEnabled(True)
 		self.ui.vsaCalFileField_comb.setEnabled(True)
 		self.ui.vsaCalFileFolder_comb.setEnabled(True)
+		self.ui.vsaCalFileBrowse_comb.setEnabled(True)
 		self.ui.rfSpacingLabel_comb.setEnabled(False)
 		self.ui.rfSpacingField_comb.setEnabled(False)
 		self.ui.ifSpacingLabel_comb.setEnabled(False)
@@ -418,6 +422,8 @@ def enableVSACalFile(self):
 		self.ui.vsaCalSaveLocLabel_comb.setEnabled(False)
 		self.ui.vsaCalSaveLocField_comb.setEnabled(False)
 		self.ui.vsaCalSaveLocFolder_comb.setEnabled(False)
+		self.ui.vsaCalSaveLocBrowse_comb.setEnabled(False)
+		self.ui.vsaMeasRunStack.setCurrentIndex(1)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions called within parameterFunctions	
 

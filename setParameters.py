@@ -372,6 +372,11 @@ def rxCalRoutine(self):
 	self.ui.statusBar.removeWidget(self.progressBar)
 	# to show progress bar, need both addWidget() and show()
 	self.ui.statusBar.showMessage("RX Calibration Routine Complete",3000)
+	
+def noRXCalRoutine(self,boxDone):
+	self.ui.combEquip_vsaMeas.setStyleSheet(boxDone)
+	self.ui.downEquip_vsaMeas.setStyleSheet(boxDone)
+	self.ui.rxEquip_VsaMeas.setStyleSheet(boxDone)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions for setParameters.py	

@@ -116,12 +116,21 @@ class Window(QMainWindow):
 		self.ui.vsaMeasNextStack.setCurrentIndex(0)
 		self.ui.debugVSAStack.setCurrentIndex(1)
 		self.ui.resultsVSATabs.setCurrentIndex(0)
-		self.ui.vsaCalResultsStack.setCurrentIndex(1)
+		self.ui.vsaResultsStack_vsaMeas.setCurrentIndex(1)
 		self.ui.vsaMeasRunStack.setCurrentIndex(1)
+		# algo page
+		self.ui.algoTabs.setCurrentIndex(0)
+		self.ui.algoNextStack.setCurrentIndex(0)
+		self.ui.debugAlgoStack.setCurrentIndex(2)
+		self.ui.calValResultsStack.setCurrentIndex(1)
+		self.ui.resultsAlgoTabs.setCurrentIndex(2)
+		self.ui.calWorkflowAlgoStack.setCurrentIndex(0)
+		self.ui.dpdAlgoStack.setCurrentIndex(1)
+		self.ui.precharAlgoStack.setCurrentIndex(1)
 		
-		# vsg meas page
+		# setting visibility of components
+		# vsa meas page
 		self.ui.debugVSGStack.setCurrentIndex(2)
-		
 		self.ui.calAdviceText.setVisible(False)
 		self.ui.downMark_vsaMeas.setVisible(False)
 		self.ui.uxaMark_vsaMeas.setVisible(False)
@@ -147,9 +156,10 @@ class Window(QMainWindow):
 		self.ui.vsgMark_vsgMeas.setVisible(False)
 		self.ui.psgMark_vsgMeas.setVisible(False)
 		self.ui.upMark_vsgMeas.setVisible(False)
-		
 		#vsg meas page
 		self.ui.debuggingPanel_vsg.setVisible(False)
+		# algo tab
+		self.ui.rfButton.setVisible(False)
 		
 		# dropdown and field changes
 		self.ui.vsgSetup.currentIndexChanged.connect(lambda: param.displayVsg(self,purpleButtonHover,greyPHover,greyGHover,greyPButton))
@@ -172,9 +182,10 @@ class Window(QMainWindow):
 		self.ui.generateVSACalCheck.stateChanged.connect(lambda: param.enableVSACalFile(self))
 	
 		# expand/shrink depending on which step tab is clicked
-		self.ui.stepTabs.currentChanged.connect(lambda: menu.changeStepTabWindowSize(self))
+		self.ui.stepTabs.currentChanged.connect(lambda: menu.changeStepTab(self))
 		# vsa meas page
 		self.ui.vsaMeasParamTabs.currentChanged.connect(lambda: menu.switchMeasTab(self))
+		self.ui.algoTabs.currentChanged.connect(lambda: menu.switchAlgoTab(self))
 		
 		# control parameter set buttons
 		# vsg page
@@ -209,6 +220,7 @@ class Window(QMainWindow):
 		self.ui.vsaMeasSet.clicked.connect(lambda: set.setVSAMeasDig(self,setParams))
 		self.ui.vsaMeasSet_2.clicked.connect(lambda: set.setVSAMeasGen(self,setParams))
 		self.ui.set_run_vsa.clicked.connect(lambda: set.rxCalRoutine(self))
+		self.ui.downSetVSAMeas.clicked.connect(lambda: set.noRXCalRoutine(self,setParams))
 		self.ui.vsaMeasAdvSet.clicked.connect(lambda: set.setAdvanced(self,self.ui.vsaMeasAdvEquip,setParams))
 		# control dash radio buttons
 		self.ui.runVSG.toggled.connect(lambda: flow.vsgOnlySetup(self,disabledButton,greyPButton))
