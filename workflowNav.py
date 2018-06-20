@@ -17,6 +17,12 @@ def vsaOnlySetup(self,greyButton,purpleButton,blueButton):
 	self.ui.meterDash.setStyleSheet(blueButton)
 	self.ui.vsaDash.setStyleSheet(purpleButton)
 	self.ui.saDash.setStyleSheet(purpleButton)
+	
+def standardSetup(self,purpleButton,blueButton):
+	self.ui.vsgDash.setStyleSheet(purpleButton)
+	self.ui.meterDash.setStyleSheet(blueButton)
+	self.ui.vsaDash.setStyleSheet(purpleButton)
+	self.ui.saDash.setStyleSheet(purpleButton)
 
 def awgOnClick(self,unactiveButton,activeButton,buttonPHover):
 	self.ui.equipStack.setCurrentIndex(0)
@@ -161,10 +167,28 @@ def awgVSAMeasOnClick(self):
 	downChecked = self.ui.downSetVSAMeas.isChecked()
 	downEnabled = self.ui.vsaWorkflow_vsaMeas.currentIndex()
 	
+	self.setMinimumSize(1265,950)
+	self.resize(1265,950)
+	self.center()
+	
 	if downEnabled == 1: # down enabled
 		if downChecked:
 			self.ui.measStack.setCurrentIndex(1)
+			self.ui.vsgMeasNextStack.setCurrentIndex(0)
 	else:
 		if vsaSetChecked or vsaSetTwoChecked:
-				self.ui.measStack.setCurrentIndex(1)
+			self.ui.measStack.setCurrentIndex(1)
+			self.ui.vsgMeasNextStack.setCurrentIndex(2)
+				
+def saVSGMeasOnClick(self):
+	self.ui.vsaMeasParamTabs.setCurrentIndex(2)
+	self.ui.measStack.setCurrentIndex(0)
+
+def downVSGMeasOnClick(self):
+	self.ui.vsaMeasParamTabs.setCurrentIndex(1)
+	self.ui.measStack.setCurrentIndex(0)
+
+def analyzerVSGMeasOnClick(self):
+	self.ui.vsaMeasParamTabs.setCurrentIndex(0)
+	self.ui.measStack.setCurrentIndex(0)
 		

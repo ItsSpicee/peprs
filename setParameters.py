@@ -353,10 +353,10 @@ def setVSAMeasGen(self,boxDone,buttonPHover):
 	self.ui.vsaMeasGenEquip.setStyleSheet(boxDone)
 	self.ui.vsaMeasGenEquip_2.setStyleSheet(boxDone)
 	if vsaType == 1:
-		if downType == 0: # scope
+		if downType == 1: # scope
 			self.ui.scopeMark_vsaMeas.setVisible(True)
 			self.ui.scopeMark_vsaMeas_2.setVisible(True)
-		elif downType == 1: # dig
+		elif downType == 0: # dig
 			self.ui.digMark_vsaMeas.setVisible(True)
 			self.ui.digMark_vsaMeas_2.setVisible(True)
 	elif vsaType == 0:
@@ -405,6 +405,7 @@ def rxCalRoutine(self,boxDone,buttonPHover):
 	self.ui.vsaResultsStack_vsgMeas.setCurrentIndex(0)
 	self.ui.debugVSAStack.setCurrentIndex(0)
 	self.ui.downMark_vsaMeas.setVisible(True)
+	self.ui.downMark_vsgMeas.setVisible(True)
 	self.progressBar = QProgressBar()
 	self.progressBar.setRange(1,10);
 	self.progressBar.setTextVisible(True);
@@ -426,6 +427,7 @@ def noRXCalRoutine(self,boxDone,buttonPHover):
 	self.ui.vsaResultsStack_vsaMeas.setCurrentIndex(0)
 	self.ui.vsaResultsStack_vsgMeas.setCurrentIndex(0)
 	self.ui.downMark_vsaMeas.setVisible(True)
+	self.ui.downMark_vsgMeas.setVisible(True)
 	if vsgType == 3: # vsg
 		self.ui.vsaMeasNextStack.setCurrentIndex(6)
 		setFocusAndHand(self,self.ui.vsgButton_vsaMeas,buttonPHover)
@@ -435,6 +437,110 @@ def noRXCalRoutine(self,boxDone,buttonPHover):
 		setFocusAndHand(self,self.ui.awgButton_vsaMeas_2,buttonPHover)
 		setFocusAndHand(self,self.ui.awgButton_vsaMeas_3,buttonPHover)
 
+def awgCalRoutine(self,boxDone):
+	self.ui.awgEquip_vsgMeas.setStyleSheet(boxDone)
+	self.ui.rxEquip_vsgMeas.setStyleSheet(boxDone)
+	self.ui.vsgEquip_vsgMeas.setStyleSheet(boxDone)
+	self.ui.calEquip_vsgMeas.setStyleSheet(boxDone)
+	self.ui.awgCalEquip_vsgMeas.setStyleSheet(boxDone)
+	self.ui.vsgMeasNextStack.setCurrentIndex(5)
+	self.ui.debugVSGStack.setCurrentIndex(0)
+	self.ui.vsgResultsFileStack_vsgMeas.setCurrentIndex(1)
+	self.ui.vsgResultsStack_vsgMeas.setCurrentIndex(0)
+	
+	self.progressBar = QProgressBar()
+	self.progressBar.setRange(1,10);
+	self.progressBar.setTextVisible(True);
+	self.progressBar.setFormat("Currently Running: AWG Calibration Routine")
+	self.ui.statusBar.addWidget(self.progressBar,1)
+	completed = 0
+	while completed < 100:
+		completed = completed + 0.00001
+		self.progressBar.setValue(completed)
+	self.ui.statusBar.removeWidget(self.progressBar)
+	# to show progress bar, need both addWidget() and show()
+	self.ui.statusBar.showMessage("AWG Calibration Routine Complete",3000)
+
+def noAWGCalRoutine(self,boxDone):
+	self.ui.awgEquip_vsgMeas_2.setStyleSheet(boxDone)
+	self.ui.awgCalEquip_vsgMeas_2.setStyleSheet(boxDone)
+	self.ui.vsgMeasNextStack.setCurrentIndex(5)
+	
+def setAdvVSGMeas(self,boxDone):
+	awgOnly = self.ui.setAdv_vsgMeas.isChecked()
+	awgAndVSA = self.ui.setAdv_vsgMeas_2.isChecked()
+	if awgOnly:
+		self.ui.awgAdvEquip_vsgMeas_2.setStyleSheet(boxDone)
+		self.ui.awgAdvEquip_vsgMeas.setStyleSheet(boxDone)
+	if awgAndVSA:
+		self.ui.awgAdvEquip_vsgMeas_2.setStyleSheet(boxDone)
+		self.ui.awgAdvEquip_vsgMeas.setStyleSheet(boxDone)
+		self.ui.vsaAdvEquip_vsgMeas.setStyleSheet(boxDone)
+		
+def awgPreview(self):
+	self.ui.vsgResultsStack_vsgMeas.setCurrentIndex(0)
+	self.ui.resultsTabs_vsgMeas.setCurrentIndex(1)
+	
+def setUpVSGMeas(self,boxDone):
+	awgChecked = self.ui.awgSet_vsgMeas.isChecked()
+	awgRunChecked = self.ui.awgSetRun_vsgMeas.isChecked()
+	if awgChecked or awgRunChecked:
+		self.ui.upCalHomoEquip_vsgMeas.setStyleSheet(boxDone)
+		self.ui.upCalHeteroEquip_vsgMeas.setStyleSheet(boxDone)
+		self.ui.upEquip_vsgMeas.setStyleSheet(boxDone)
+		self.ui.vsgMeasNextStack.setCurrentIndex(8)
+		
+def setHetero(self,boxDone):
+	self.ui.calEquip_hetero.setStyleSheet(boxDone)
+	self.ui.rxEquip_hetero.setStyleSheet(boxDone)
+	self.ui.vsgEquip_hetero.setStyleSheet(boxDone)
+	self.ui.upCalEquipHomo_hetero.setStyleSheet(boxDone)
+	self.ui.upCalEquipHetero_hetero.setStyleSheet(boxDone)
+	self.ui.upEquip_hetero.setStyleSheet(boxDone)
+	self.ui.vsgMeasNextStack.setCurrentIndex(8)
+	self.ui.vsgResultsFileStack_vsgMeas.setCurrentIndex(1)
+	self.ui.debugVSGStack.setCurrentIndex(0)
+	self.ui.vsgResultsStack_vsgMeas.setCurrentIndex(0)
+	
+	self.progressBar = QProgressBar()
+	self.progressBar.setRange(1,10);
+	self.progressBar.setTextVisible(True);
+	self.progressBar.setFormat("Currently Running: Heterodyne Calibration Routine")
+	self.ui.statusBar.addWidget(self.progressBar,1)
+	completed = 0
+	while completed < 100:
+		completed = completed + 0.00001
+		self.progressBar.setValue(completed)
+	self.ui.statusBar.removeWidget(self.progressBar)
+	# to show progress bar, need both addWidget() and show()
+	self.ui.statusBar.showMessage("Heterodyne Calibration Routine Complete",3000)
+	
+def setHomo(self,boxDone):
+	self.ui.calEquip_homo.setStyleSheet(boxDone)
+	self.ui.rxEquip_homo.setStyleSheet(boxDone)
+	self.ui.vsgEquip_homo.setStyleSheet(boxDone)
+	self.ui.upCalEquipHomo_homo.setStyleSheet(boxDone)
+	self.ui.upCalEquipHetero_homo.setStyleSheet(boxDone)
+	self.ui.upEquip_homo.setStyleSheet(boxDone)
+	self.ui.scopeEquip_homo.setStyleSheet(boxDone)
+	self.ui.vsgMeasNextStack.setCurrentIndex(8)
+	self.ui.debugVSGStack.setCurrentIndex(1)
+	self.ui.vsgResultsFileStack_vsgMeas.setCurrentIndex(0)
+	self.ui.vsgResultsStack_vsgMeas.setCurrentIndex(0)
+	
+	self.progressBar = QProgressBar()
+	self.progressBar.setRange(1,10);
+	self.progressBar.setTextVisible(True);
+	self.progressBar.setFormat("Currently Running: Homodyne Calibration Routine")
+	self.ui.statusBar.addWidget(self.progressBar,1)
+	completed = 0
+	while completed < 100:
+		completed = completed + 0.00001
+		self.progressBar.setValue(completed)
+	self.ui.statusBar.removeWidget(self.progressBar)
+	# to show progress bar, need both addWidget() and show()
+	self.ui.statusBar.showMessage("Homodyne Calibration Routine Complete",3000)
+	
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions for setParameters.py	
 

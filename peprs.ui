@@ -684,7 +684,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                 <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                </property>
                <property name="currentIndex">
-                <number>2</number>
+                <number>3</number>
                </property>
                <widget class="QWidget" name="widget">
                 <attribute name="title">
@@ -12135,7 +12135,7 @@ QFrame{background-color:#d1d5de}</string>
 QWidget#vsaMeas{background-color:rgb(247,247,247)}</string>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="vsaMeas">
          <widget class="QWidget" name="layoutWidget">
@@ -12241,7 +12241,7 @@ QWidget#vsaMeas{background-color:rgb(247,247,247)}</string>
                     </rect>
                    </property>
                    <property name="currentIndex">
-                    <number>3</number>
+                    <number>1</number>
                    </property>
                    <widget class="QWidget" name="awgForVSA_10">
                     <widget class="QLabel" name="label_253">
@@ -12778,7 +12778,7 @@ Meter</string>
                        </rect>
                       </property>
                       <property name="currentIndex">
-                       <number>2</number>
+                       <number>0</number>
                       </property>
                       <widget class="QWidget" name="scope_31">
                        <widget class="QPushButton" name="scopeButton_vsaMeas_2">
@@ -13158,59 +13158,6 @@ Analyzer</string>
                       <property name="currentIndex">
                        <number>1</number>
                       </property>
-                      <widget class="QWidget" name="scope_35">
-                       <widget class="QPushButton" name="scopeButton_vsaMeas">
-                        <property name="geometry">
-                         <rect>
-                          <x>0</x>
-                          <y>0</y>
-                          <width>101</width>
-                          <height>41</height>
-                         </rect>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <family>Arial</family>
-                          <pointsize>9</pointsize>
-                          <weight>50</weight>
-                          <bold>false</bold>
-                         </font>
-                        </property>
-                        <property name="cursor">
-                         <cursorShape>PointingHandCursor</cursorShape>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true">QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:0.511, x2:1, y2:0, stop:0 rgba(128, 0, 128, 255), stop:1 rgba(154, 0, 154, 255)); border-radius:5px;color:white}
-
-QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
-                        </property>
-                        <property name="text">
-                         <string>Scope</string>
-                        </property>
-                       </widget>
-                       <widget class="QLabel" name="scopeMark_vsaMeas">
-                        <property name="geometry">
-                         <rect>
-                          <x>86</x>
-                          <y>27</y>
-                          <width>12</width>
-                          <height>12</height>
-                         </rect>
-                        </property>
-                        <property name="autoFillBackground">
-                         <bool>false</bool>
-                        </property>
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="pixmap">
-                         <pixmap>icons/checkmark.png</pixmap>
-                        </property>
-                        <property name="scaledContents">
-                         <bool>true</bool>
-                        </property>
-                       </widget>
-                      </widget>
                       <widget class="QWidget" name="dig_35">
                        <widget class="QPushButton" name="digButton_vsaMeas">
                         <property name="geometry">
@@ -13242,6 +13189,59 @@ QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
                         </property>
                        </widget>
                        <widget class="QLabel" name="digMark_vsaMeas">
+                        <property name="geometry">
+                         <rect>
+                          <x>86</x>
+                          <y>27</y>
+                          <width>12</width>
+                          <height>12</height>
+                         </rect>
+                        </property>
+                        <property name="autoFillBackground">
+                         <bool>false</bool>
+                        </property>
+                        <property name="text">
+                         <string/>
+                        </property>
+                        <property name="pixmap">
+                         <pixmap>icons/checkmark.png</pixmap>
+                        </property>
+                        <property name="scaledContents">
+                         <bool>true</bool>
+                        </property>
+                       </widget>
+                      </widget>
+                      <widget class="QWidget" name="scope_35">
+                       <widget class="QPushButton" name="scopeButton_vsaMeas">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>0</y>
+                          <width>101</width>
+                          <height>41</height>
+                         </rect>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <family>Arial</family>
+                          <pointsize>9</pointsize>
+                          <weight>50</weight>
+                          <bold>false</bold>
+                         </font>
+                        </property>
+                        <property name="cursor">
+                         <cursorShape>PointingHandCursor</cursorShape>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:0.511, x2:1, y2:0, stop:0 rgba(128, 0, 128, 255), stop:1 rgba(154, 0, 154, 255)); border-radius:5px;color:white}
+
+QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
+                        </property>
+                        <property name="text">
+                         <string>Scope</string>
+                        </property>
+                       </widget>
+                       <widget class="QLabel" name="scopeMark_vsaMeas">
                         <property name="geometry">
                          <rect>
                           <x>86</x>
@@ -13471,7 +13471,7 @@ Analyzer</string>
                    <string notr="true">QFrame{background-color:#d1d5de}</string>
                   </property>
                   <property name="currentIndex">
-                   <number>0</number>
+                   <number>4</number>
                   </property>
                   <widget class="QWidget" name="page_42">
                    <widget class="QFrame" name="nextFrame_31">
@@ -13924,12 +13924,12 @@ Analyzer</string>
                       <rect>
                        <x>10</x>
                        <y>10</y>
-                       <width>181</width>
+                       <width>151</width>
                        <height>23</height>
                       </rect>
                      </property>
                      <property name="text">
-                      <string>Already have a calibrated reciever?</string>
+                      <string>Have a calibrated reciever?</string>
                      </property>
                     </widget>
                    </widget>
@@ -14132,7 +14132,7 @@ Analyzer</string>
                   <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                  </property>
                  <property name="currentIndex">
-                  <number>2</number>
+                  <number>1</number>
                  </property>
                  <widget class="QWidget" name="widget">
                   <attribute name="title">
@@ -14148,7 +14148,7 @@ Analyzer</string>
                     </rect>
                    </property>
                    <property name="currentIndex">
-                    <number>0</number>
+                    <number>1</number>
                    </property>
                    <widget class="QWidget" name="page_29">
                     <widget class="QScrollArea" name="psgEquipScroll_6">
@@ -15086,9 +15086,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                   <widget class="QStackedWidget" name="downStack_vsaMeas">
                    <property name="geometry">
                     <rect>
-                     <x>9</x>
+                     <x>-1</x>
                      <y>4</y>
-                     <width>721</width>
+                     <width>731</width>
                      <height>361</height>
                     </rect>
                    </property>
@@ -16306,10 +16306,25 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                     </rect>
                    </property>
                    <property name="currentIndex">
-                    <number>1</number>
+                    <number>0</number>
                    </property>
                    <widget class="QWidget" name="page_27">
                     <layout class="QHBoxLayout" name="horizontalLayout_37">
+                     <property name="spacing">
+                      <number>0</number>
+                     </property>
+                     <property name="leftMargin">
+                      <number>9</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>9</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>9</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>9</number>
+                     </property>
                      <item>
                       <widget class="QLabel" name="label_242">
                        <property name="font">
@@ -16764,7 +16779,7 @@ QFrame{background-color:#d1d5de}</string>
                   <enum>QTabWidget::Rounded</enum>
                  </property>
                  <property name="currentIndex">
-                  <number>2</number>
+                  <number>0</number>
                  </property>
                  <property name="usesScrollButtons">
                   <bool>true</bool>
@@ -16783,7 +16798,7 @@ QFrame{background-color:#d1d5de}</string>
                     </rect>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true">QLabel{background-color:rgb(240, 240, 240)}</string>
+                    <string notr="true"/>
                    </property>
                    <property name="currentIndex">
                     <number>0</number>
@@ -16923,6 +16938,9 @@ QFrame{background-color:#d1d5de}</string>
                          <pointsize>9</pointsize>
                          <italic>true</italic>
                         </font>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">QLabel{background-color:rgb(240, 240, 240)}</string>
                        </property>
                        <property name="text">
                         <string>No VSA Calibration File Has Been Generated or Uploaded</string>
@@ -17265,7 +17283,7 @@ QFrame{background-color:#d1d5de}</string>
                   </rect>
                  </property>
                  <property name="currentIndex">
-                  <number>2</number>
+                  <number>3</number>
                  </property>
                  <widget class="QWidget" name="awgForVSA_12">
                   <widget class="QLabel" name="label_586">
@@ -17325,10 +17343,12 @@ QFrame{background-color:#d1d5de}</string>
                      </font>
                     </property>
                     <property name="cursor">
-                     <cursorShape>ArrowCursor</cursorShape>
+                     <cursorShape>PointingHandCursor</cursorShape>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:0.511, x2:1, y2:0, stop:0 rgba(128, 0, 128, 255), stop:1 rgba(154, 0, 154, 255)); border-radius:5px;color:white;}</string>
+                     <string notr="true">QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:0.511, x2:1, y2:0, stop:0 rgba(128, 0, 128, 255), stop:1 rgba(154, 0, 154, 255)); border-radius:5px;color:white;}
+
+QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
                     </property>
                     <property name="text">
                      <string>AWG</string>
@@ -17416,10 +17436,12 @@ QFrame{background-color:#d1d5de}</string>
                      </font>
                     </property>
                     <property name="cursor">
-                     <cursorShape>ArrowCursor</cursorShape>
+                     <cursorShape>PointingHandCursor</cursorShape>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">QPushButton{  background-color:qlineargradient(spread:pad, x1:1, y1:0.511, x2:1, y2:0, stop:0 rgba(128, 0, 128, 255), stop:1 rgba(154, 0, 154, 255)); border-radius:5px;color:white;}</string>
+                     <string notr="true">QPushButton{  background-color:qlineargradient(spread:pad, x1:1, y1:0.511, x2:1, y2:0, stop:0 rgba(128, 0, 128, 255), stop:1 rgba(154, 0, 154, 255)); border-radius:5px;color:white;}
+
+QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
                     </property>
                     <property name="text">
                      <string>AWG</string>
@@ -17443,10 +17465,12 @@ QFrame{background-color:#d1d5de}</string>
                      </font>
                     </property>
                     <property name="cursor">
-                     <cursorShape>ArrowCursor</cursorShape>
+                     <cursorShape>PointingHandCursor</cursorShape>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">QPushButton{ border:3px dashed #005500;  background-color:qlineargradient(spread:pad, x1:1, y1:0.83, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 126, 0, 255)); border-radius:5px; color:white}</string>
+                     <string notr="true">QPushButton{ border:3px dashed #005500;  background-color:qlineargradient(spread:pad, x1:1, y1:0.83, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 126, 0, 255)); border-radius:5px; color:white}
+
+QPushButton:hover{background-color:rgb(0, 118, 0)}</string>
                     </property>
                     <property name="text">
                      <string>Upconverter</string>
@@ -17560,10 +17584,12 @@ QFrame{background-color:#d1d5de}</string>
                      </font>
                     </property>
                     <property name="cursor">
-                     <cursorShape>ArrowCursor</cursorShape>
+                     <cursorShape>PointingHandCursor</cursorShape>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:0.511, x2:1, y2:0, stop:0 rgba(128, 0, 128, 255), stop:1 rgba(154, 0, 154, 255)); border-radius:5px;color:white}</string>
+                     <string notr="true">QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:0.511, x2:1, y2:0, stop:0 rgba(128, 0, 128, 255), stop:1 rgba(154, 0, 154, 255)); border-radius:5px;color:white}
+
+QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
                     </property>
                     <property name="text">
                      <string>AWG</string>
@@ -17587,10 +17613,12 @@ QFrame{background-color:#d1d5de}</string>
                      </font>
                     </property>
                     <property name="cursor">
-                     <cursorShape>ArrowCursor</cursorShape>
+                     <cursorShape>PointingHandCursor</cursorShape>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">QPushButton{ border:3px dashed #005500;  background-color:qlineargradient(spread:pad, x1:1, y1:0.83, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 126, 0, 255)); border-radius:5px;color:white}</string>
+                     <string notr="true">QPushButton{ border:3px dashed #005500;  background-color:qlineargradient(spread:pad, x1:1, y1:0.83, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 126, 0, 255)); border-radius:5px;color:white}
+
+QPushButton:hover{background-color:rgb(0, 118, 0)}</string>
                     </property>
                     <property name="text">
                      <string>PSG</string>
@@ -17740,10 +17768,12 @@ QFrame{background-color:#d1d5de}</string>
                      </font>
                     </property>
                     <property name="cursor">
-                     <cursorShape>ArrowCursor</cursorShape>
+                     <cursorShape>PointingHandCursor</cursorShape>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:0.511, x2:1, y2:0, stop:0 rgba(128, 0, 128, 255), stop:1 rgba(154, 0, 154, 255)); border-radius:5px;color:white}</string>
+                     <string notr="true">QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:0.511, x2:1, y2:0, stop:0 rgba(128, 0, 128, 255), stop:1 rgba(154, 0, 154, 255)); border-radius:5px;color:white}
+
+QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
                     </property>
                     <property name="text">
                      <string>VSG</string>
@@ -17946,7 +17976,7 @@ Meter</string>
                      </rect>
                     </property>
                     <property name="currentIndex">
-                     <number>3</number>
+                     <number>0</number>
                     </property>
                     <widget class="QWidget" name="scope_33">
                      <widget class="QPushButton" name="scopeButton_vsgMeas">
@@ -18639,7 +18669,7 @@ Analyzer</string>
                  <string notr="true">QFrame{background-color:#d1d5de}</string>
                 </property>
                 <property name="currentIndex">
-                 <number>0</number>
+                 <number>8</number>
                 </property>
                 <widget class="QWidget" name="page_51">
                  <widget class="QFrame" name="nextFrame_43">
@@ -18724,7 +18754,7 @@ Analyzer</string>
                       <property name="title">
                        <string/>
                       </property>
-                      <widget class="QRadioButton" name="calFilePromptYes_3">
+                      <widget class="QRadioButton" name="calFilePromptYes_vsgMeas">
                        <property name="geometry">
                         <rect>
                          <x>130</x>
@@ -18745,7 +18775,7 @@ Analyzer</string>
                         <string>Yes</string>
                        </property>
                       </widget>
-                      <widget class="QRadioButton" name="calFilePromptNo_3">
+                      <widget class="QRadioButton" name="calFilePromptNo_vsgMeas">
                        <property name="geometry">
                         <rect>
                          <x>270</x>
@@ -18845,6 +18875,19 @@ Analyzer</string>
                     </item>
                    </layout>
                   </widget>
+                  <widget class="QPushButton" name="yesCalRXButton_vsgNext">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>10</y>
+                     <width>171</width>
+                     <height>23</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string>Have a calibrated receiver?</string>
+                   </property>
+                  </widget>
                  </widget>
                 </widget>
                 <widget class="QWidget" name="page_53">
@@ -18930,7 +18973,7 @@ Analyzer</string>
                       <property name="title">
                        <string/>
                       </property>
-                      <widget class="QRadioButton" name="calFilePromptYes_4">
+                      <widget class="QRadioButton" name="vsgCalFilePromptYes">
                        <property name="geometry">
                         <rect>
                          <x>130</x>
@@ -18951,7 +18994,7 @@ Analyzer</string>
                         <string>Yes</string>
                        </property>
                       </widget>
-                      <widget class="QRadioButton" name="calFilePromptNo_4">
+                      <widget class="QRadioButton" name="vsgCalFilePromptNo">
                        <property name="geometry">
                         <rect>
                          <x>270</x>
@@ -18975,6 +19018,19 @@ Analyzer</string>
                      </widget>
                     </item>
                    </layout>
+                  </widget>
+                  <widget class="QPushButton" name="noCalRXButton_vsgNext">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>10</y>
+                     <width>171</width>
+                     <height>23</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string>Need a calibrated receiver?</string>
+                   </property>
                   </widget>
                  </widget>
                 </widget>
@@ -19002,9 +19058,9 @@ Analyzer</string>
                   <widget class="QWidget" name="verticalLayoutWidget_51">
                    <property name="geometry">
                     <rect>
-                     <x>40</x>
+                     <x>30</x>
                      <y>10</y>
-                     <width>391</width>
+                     <width>411</width>
                      <height>91</height>
                     </rect>
                    </property>
@@ -19051,6 +19107,19 @@ Analyzer</string>
                     </item>
                    </layout>
                   </widget>
+                  <widget class="QPushButton" name="yesCalTXButton">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>10</y>
+                     <width>161</width>
+                     <height>23</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string>Have a calibrated transmitter?</string>
+                   </property>
+                  </widget>
                  </widget>
                 </widget>
                 <widget class="QWidget" name="page_55">
@@ -19078,9 +19147,9 @@ Analyzer</string>
                    <property name="geometry">
                     <rect>
                      <x>10</x>
-                     <y>10</y>
+                     <y>0</y>
                      <width>451</width>
-                     <height>91</height>
+                     <height>111</height>
                     </rect>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_97" stretch="0,0">
@@ -19117,7 +19186,8 @@ Analyzer</string>
                        <string notr="true">QLabel {background:rgb(72, 144, 216);color:white;border-radius:10px;border: 3px solid purple}</string>
                       </property>
                       <property name="text">
-                       <string>Fill out ‘General Settings’ and select Cal. file to use in ‘Calibration Settings’</string>
+                       <string>Choose 'None' for the VSG Calibration Type
+Fill out ‘General Settings’ and select file to use in ‘Calibration Settings’</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -19125,6 +19195,19 @@ Analyzer</string>
                      </widget>
                     </item>
                    </layout>
+                  </widget>
+                  <widget class="QPushButton" name="noCalTXButton">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>10</y>
+                     <width>171</width>
+                     <height>23</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string>Need a calibrated transmitter?</string>
+                   </property>
                   </widget>
                  </widget>
                 </widget>
@@ -19272,7 +19355,7 @@ Analyzer</string>
                        <string notr="true">QLabel {background:rgb(72, 144, 216);color:white;border-radius:10px;border: 3px solid purple}</string>
                       </property>
                       <property name="text">
-                       <string>Fill out all available settings. Select Cal. File for unused cal. panel.</string>
+                       <string>Fill out all available settings</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -19532,6 +19615,9 @@ Analyzer</string>
                        <italic>true</italic>
                       </font>
                      </property>
+                     <property name="styleSheet">
+                      <string notr="true">QLabel{background-color:rgb(240, 240, 240)}</string>
+                     </property>
                      <property name="text">
                       <string>Select a VSG Calibration Type</string>
                      </property>
@@ -19576,7 +19662,7 @@ Analyzer</string>
                       <height>500</height>
                      </size>
                     </property>
-                    <widget class="QGroupBox" name="psgEquip_33">
+                    <widget class="QGroupBox" name="awgEquip_vsgMeas">
                      <property name="geometry">
                       <rect>
                        <x>10</x>
@@ -19948,7 +20034,7 @@ Analyzer</string>
                       </item>
                      </layout>
                     </widget>
-                    <widget class="QGroupBox" name="psgEquip_34">
+                    <widget class="QGroupBox" name="rxEquip_vsgMeas">
                      <property name="geometry">
                       <rect>
                        <x>10</x>
@@ -20001,21 +20087,6 @@ Analyzer</string>
                         </property>
                         <property name="text">
                          <string>Down-conversion Filter File:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="0" column="0" colspan="2">
-                       <widget class="QLabel" name="label_624">
-                        <property name="font">
-                         <font>
-                          <pointsize>10</pointsize>
-                          <weight>50</weight>
-                          <bold>false</bold>
-                          <underline>true</underline>
-                         </font>
-                        </property>
-                        <property name="text">
-                         <string>2) Reference Receiver - General Settings</string>
                         </property>
                        </widget>
                       </item>
@@ -20137,9 +20208,24 @@ Analyzer</string>
                         </property>
                        </widget>
                       </item>
+                      <item row="0" column="0" colspan="3">
+                       <widget class="QLabel" name="label_624">
+                        <property name="font">
+                         <font>
+                          <pointsize>10</pointsize>
+                          <weight>50</weight>
+                          <bold>false</bold>
+                          <underline>true</underline>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>2) Reference Receiver - General Settings</string>
+                        </property>
+                       </widget>
+                      </item>
                      </layout>
                     </widget>
-                    <widget class="QGroupBox" name="psgEquip_36">
+                    <widget class="QGroupBox" name="vsgEquip_vsgMeas">
                      <property name="geometry">
                       <rect>
                        <x>10</x>
@@ -20224,7 +20310,7 @@ Analyzer</string>
                       </item>
                      </layout>
                     </widget>
-                    <widget class="QGroupBox" name="psgEquip_37">
+                    <widget class="QGroupBox" name="calEquip_vsgMeas">
                      <property name="geometry">
                       <rect>
                        <x>310</x>
@@ -20377,7 +20463,7 @@ Analyzer</string>
                       </item>
                      </layout>
                     </widget>
-                    <widget class="QGroupBox" name="psgEquip_38">
+                    <widget class="QGroupBox" name="awgCalEquip_vsgMeas">
                      <property name="geometry">
                       <rect>
                        <x>310</x>
@@ -20904,7 +20990,7 @@ Analyzer</string>
                     </widget>
                    </widget>
                   </widget>
-                  <widget class="QPushButton" name="psgSet_11">
+                  <widget class="QPushButton" name="awgSetRun_vsgMeas">
                    <property name="geometry">
                     <rect>
                      <x>650</x>
@@ -20938,8 +21024,11 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                    <property name="text">
                     <string>Set &amp;&amp; Run</string>
                    </property>
+                   <property name="checkable">
+                    <bool>true</bool>
+                   </property>
                   </widget>
-                  <widget class="QPushButton" name="psgSet_12">
+                  <widget class="QPushButton" name="awgPreviewRun_vsgMeas">
                    <property name="geometry">
                     <rect>
                      <x>650</x>
@@ -21009,7 +21098,7 @@ QPushButton:hover{background-color:rgb(72, 144, 216);}
                       <height>350</height>
                      </size>
                     </property>
-                    <widget class="QGroupBox" name="psgEquip_39">
+                    <widget class="QGroupBox" name="awgEquip_vsgMeas_2">
                      <property name="geometry">
                       <rect>
                        <x>10</x>
@@ -21381,7 +21470,7 @@ QPushButton:hover{background-color:rgb(72, 144, 216);}
                       </item>
                      </layout>
                     </widget>
-                    <widget class="QGroupBox" name="psgEquip_43">
+                    <widget class="QGroupBox" name="awgCalEquip_vsgMeas_2">
                      <property name="geometry">
                       <rect>
                        <x>310</x>
@@ -21929,7 +22018,7 @@ QPushButton:hover{background-color:rgb(72, 144, 216);}
                     </widget>
                    </widget>
                   </widget>
-                  <widget class="QPushButton" name="psgSet_13">
+                  <widget class="QPushButton" name="awgPreview_vsgMeas">
                    <property name="geometry">
                     <rect>
                      <x>650</x>
@@ -21964,7 +22053,7 @@ QPushButton:hover{background-color:rgb(72, 144, 216);}
                     <string>Preview</string>
                    </property>
                   </widget>
-                  <widget class="QPushButton" name="psgSet_14">
+                  <widget class="QPushButton" name="awgSet_vsgMeas">
                    <property name="geometry">
                     <rect>
                      <x>650</x>
@@ -21998,6 +22087,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                    <property name="text">
                     <string>Set</string>
                    </property>
+                   <property name="checkable">
+                    <bool>true</bool>
+                   </property>
                   </widget>
                  </widget>
                 </widget>
@@ -22025,7 +22117,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                  <item>
                   <widget class="QStackedWidget" name="upParamsStack_vsgMeas">
                    <property name="currentIndex">
-                    <number>0</number>
+                    <number>3</number>
                    </property>
                    <widget class="QWidget" name="page_39">
                     <layout class="QHBoxLayout" name="horizontalLayout_39">
@@ -22037,6 +22129,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          <pointsize>10</pointsize>
                          <italic>true</italic>
                         </font>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">QLabel{background-color:rgb(240, 240, 240)}</string>
                        </property>
                        <property name="text">
                         <string>Select a VSG Calibration Type</string>
@@ -22082,7 +22177,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         <height>900</height>
                        </size>
                       </property>
-                      <widget class="QGroupBox" name="upEquip_10">
+                      <widget class="QGroupBox" name="upEquip_vsgMeas">
                        <property name="geometry">
                         <rect>
                          <x>5</x>
@@ -22853,7 +22948,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         </item>
                        </layout>
                       </widget>
-                      <widget class="QGroupBox" name="upEquip_11">
+                      <widget class="QGroupBox" name="upCalHeteroEquip_vsgMeas">
                        <property name="geometry">
                         <rect>
                          <x>5</x>
@@ -23396,7 +23491,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         </item>
                        </layout>
                       </widget>
-                      <widget class="QGroupBox" name="upEquip_12">
+                      <widget class="QGroupBox" name="upCalHomoEquip_vsgMeas">
                        <property name="geometry">
                         <rect>
                          <x>300</x>
@@ -24452,7 +24547,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       </widget>
                      </widget>
                     </widget>
-                    <widget class="QPushButton" name="set_run_vsa_3">
+                    <widget class="QPushButton" name="upSet_vsgMeas">
                      <property name="geometry">
                       <rect>
                        <x>650</x>
@@ -24485,6 +24580,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      </property>
                      <property name="text">
                       <string>Set</string>
+                     </property>
+                     <property name="checkable">
+                      <bool>true</bool>
                      </property>
                     </widget>
                    </widget>
@@ -24522,7 +24620,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         <height>1000</height>
                        </size>
                       </property>
-                      <widget class="QGroupBox" name="upEquip_13">
+                      <widget class="QGroupBox" name="upEquip_hetero">
                        <property name="geometry">
                         <rect>
                          <x>5</x>
@@ -25293,7 +25391,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         </item>
                        </layout>
                       </widget>
-                      <widget class="QGroupBox" name="upEquip_14">
+                      <widget class="QGroupBox" name="upCalEquipHetero_hetero">
                        <property name="geometry">
                         <rect>
                          <x>300</x>
@@ -25794,7 +25892,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         </item>
                        </layout>
                       </widget>
-                      <widget class="QGroupBox" name="upEquip_15">
+                      <widget class="QGroupBox" name="upCalEquipHomo_hetero">
                        <property name="geometry">
                         <rect>
                          <x>300</x>
@@ -26005,7 +26103,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                            </font>
                           </property>
                           <property name="text">
-                           <string>5) Upconverter - Calibration Settings (Homodyne)</string>
+                           <string>6) Upconverter - Calibration Settings (Homodyne)</string>
                           </property>
                          </widget>
                         </item>
@@ -26860,7 +26958,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         </item>
                        </layout>
                       </widget>
-                      <widget class="QGroupBox" name="psgEquip_42">
+                      <widget class="QGroupBox" name="rxEquip_hetero">
                        <property name="geometry">
                         <rect>
                          <x>5</x>
@@ -26913,21 +27011,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           </property>
                           <property name="text">
                            <string>Down-conversion Filter File:</string>
-                          </property>
-                         </widget>
-                        </item>
-                        <item row="0" column="0" colspan="2">
-                         <widget class="QLabel" name="label_960">
-                          <property name="font">
-                           <font>
-                            <pointsize>10</pointsize>
-                            <weight>50</weight>
-                            <bold>false</bold>
-                            <underline>true</underline>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>2) Reference Receiver - General Settings</string>
                           </property>
                          </widget>
                         </item>
@@ -27049,9 +27132,24 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           </property>
                          </widget>
                         </item>
+                        <item row="0" column="0" colspan="3">
+                         <widget class="QLabel" name="label_960">
+                          <property name="font">
+                           <font>
+                            <pointsize>10</pointsize>
+                            <weight>50</weight>
+                            <bold>false</bold>
+                            <underline>true</underline>
+                           </font>
+                          </property>
+                          <property name="text">
+                           <string>2) Reference Receiver - General Settings</string>
+                          </property>
+                         </widget>
+                        </item>
                        </layout>
                       </widget>
-                      <widget class="QGroupBox" name="psgEquip_44">
+                      <widget class="QGroupBox" name="vsgEquip_hetero">
                        <property name="geometry">
                         <rect>
                          <x>5</x>
@@ -27184,7 +27282,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         </item>
                        </layout>
                       </widget>
-                      <widget class="QGroupBox" name="psgEquip_45">
+                      <widget class="QGroupBox" name="calEquip_hetero">
                        <property name="geometry">
                         <rect>
                          <x>6</x>
@@ -27339,7 +27437,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       </widget>
                      </widget>
                     </widget>
-                    <widget class="QPushButton" name="set_run_vsa_4">
+                    <widget class="QPushButton" name="heteroRun">
                      <property name="geometry">
                       <rect>
                        <x>650</x>
@@ -27372,6 +27470,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      </property>
                      <property name="text">
                       <string>Set &amp;&amp; Run</string>
+                     </property>
+                     <property name="checkable">
+                      <bool>true</bool>
                      </property>
                     </widget>
                    </widget>
@@ -27409,7 +27510,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         <height>1200</height>
                        </size>
                       </property>
-                      <widget class="QGroupBox" name="upEquip_25">
+                      <widget class="QGroupBox" name="upEquip_homo">
                        <property name="geometry">
                         <rect>
                          <x>5</x>
@@ -28180,7 +28281,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         </item>
                        </layout>
                       </widget>
-                      <widget class="QGroupBox" name="upEquip_26">
+                      <widget class="QGroupBox" name="upCalEquipHetero_homo">
                        <property name="geometry">
                         <rect>
                          <x>300</x>
@@ -28735,7 +28836,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         </item>
                        </layout>
                       </widget>
-                      <widget class="QGroupBox" name="upEquip_27">
+                      <widget class="QGroupBox" name="upCalEquipHomo_homo">
                        <property name="geometry">
                         <rect>
                          <x>300</x>
@@ -29801,7 +29902,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         </item>
                        </layout>
                       </widget>
-                      <widget class="QGroupBox" name="psgEquip_55">
+                      <widget class="QGroupBox" name="rxEquip_homo">
                        <property name="geometry">
                         <rect>
                          <x>5</x>
@@ -29854,21 +29955,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           </property>
                           <property name="text">
                            <string>Down-conversion Filter File:</string>
-                          </property>
-                         </widget>
-                        </item>
-                        <item row="0" column="0" colspan="2">
-                         <widget class="QLabel" name="label_1330">
-                          <property name="font">
-                           <font>
-                            <pointsize>10</pointsize>
-                            <weight>50</weight>
-                            <bold>false</bold>
-                            <underline>true</underline>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>3) Reference Receiver - General Settings</string>
                           </property>
                          </widget>
                         </item>
@@ -29990,9 +30076,24 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           </property>
                          </widget>
                         </item>
+                        <item row="0" column="0" colspan="3">
+                         <widget class="QLabel" name="label_1330">
+                          <property name="font">
+                           <font>
+                            <pointsize>10</pointsize>
+                            <weight>50</weight>
+                            <bold>false</bold>
+                            <underline>true</underline>
+                           </font>
+                          </property>
+                          <property name="text">
+                           <string>3) Reference Receiver - General Settings</string>
+                          </property>
+                         </widget>
+                        </item>
                        </layout>
                       </widget>
-                      <widget class="QGroupBox" name="psgEquip_56">
+                      <widget class="QGroupBox" name="vsgEquip_homo">
                        <property name="geometry">
                         <rect>
                          <x>5</x>
@@ -30413,7 +30514,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         </item>
                        </layout>
                       </widget>
-                      <widget class="QGroupBox" name="psgEquip_57">
+                      <widget class="QGroupBox" name="calEquip_homo">
                        <property name="geometry">
                         <rect>
                          <x>300</x>
@@ -30749,7 +30850,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         </item>
                        </layout>
                       </widget>
-                      <widget class="QGroupBox" name="psgEquip_58">
+                      <widget class="QGroupBox" name="scopeEquip_homo">
                        <property name="geometry">
                         <rect>
                          <x>10</x>
@@ -30849,7 +30950,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       </widget>
                      </widget>
                     </widget>
-                    <widget class="QPushButton" name="set_run_vsa_7">
+                    <widget class="QPushButton" name="homoRun">
                      <property name="geometry">
                       <rect>
                        <x>650</x>
@@ -30883,7 +30984,34 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      <property name="text">
                       <string>Set &amp;&amp; Run</string>
                      </property>
+                     <property name="checkable">
+                      <bool>true</bool>
+                     </property>
                     </widget>
+                   </widget>
+                   <widget class="QWidget" name="page_117">
+                    <layout class="QHBoxLayout" name="horizontalLayout_55">
+                     <item>
+                      <widget class="QLabel" name="label_404">
+                       <property name="font">
+                        <font>
+                         <family>Arial</family>
+                         <pointsize>10</pointsize>
+                         <italic>true</italic>
+                        </font>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">QLabel{background-color:rgb(240, 240, 240)}</string>
+                       </property>
+                       <property name="text">
+                        <string>There are no Upconverter Settings</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
                    </widget>
                   </widget>
                  </item>
@@ -30916,7 +31044,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                   </rect>
                  </property>
                  <property name="currentIndex">
-                  <number>0</number>
+                  <number>1</number>
                  </property>
                  <widget class="QWidget" name="page_116">
                   <layout class="QHBoxLayout" name="horizontalLayout_54">
@@ -30928,6 +31056,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                        <pointsize>10</pointsize>
                        <italic>true</italic>
                       </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QLabel{background-color:rgb(240, 240, 240)}</string>
                      </property>
                      <property name="text">
                       <string>Select a VSG Calibration Type</string>
@@ -30973,7 +31104,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       <height>370</height>
                      </size>
                     </property>
-                    <widget class="QGroupBox" name="psgEquip_35">
+                    <widget class="QGroupBox" name="awgAdvEquip_vsgMeas">
                      <property name="geometry">
                       <rect>
                        <x>10</x>
@@ -31057,7 +31188,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                     </widget>
                    </widget>
                   </widget>
-                  <widget class="QPushButton" name="set_run_vsa_6">
+                  <widget class="QPushButton" name="setAdv_vsgMeas">
                    <property name="geometry">
                     <rect>
                      <x>650</x>
@@ -31090,6 +31221,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                    </property>
                    <property name="text">
                     <string>Set</string>
+                   </property>
+                   <property name="checkable">
+                    <bool>true</bool>
                    </property>
                   </widget>
                  </widget>
@@ -31127,7 +31261,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       <height>370</height>
                      </size>
                     </property>
-                    <widget class="QGroupBox" name="psgEquip_40">
+                    <widget class="QGroupBox" name="awgAdvEquip_vsgMeas_2">
                      <property name="geometry">
                       <rect>
                        <x>10</x>
@@ -31209,7 +31343,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       </item>
                      </layout>
                     </widget>
-                    <widget class="QGroupBox" name="psgEquip_41">
+                    <widget class="QGroupBox" name="vsaAdvEquip_vsgMeas">
                      <property name="geometry">
                       <rect>
                        <x>10</x>
@@ -31247,7 +31381,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </font>
                         </property>
                         <property name="text">
-                         <string>VSG Caibration - Advanced Settings</string>
+                         <string>VSA - Advanced Settings</string>
                         </property>
                        </widget>
                       </item>
@@ -31260,7 +31394,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </font>
                         </property>
                         <property name="text">
-                         <string>VSA Cross Cor. Length:</string>
+                         <string>Cross Cor. Length:</string>
                         </property>
                        </widget>
                       </item>
@@ -31293,7 +31427,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                     </widget>
                    </widget>
                   </widget>
-                  <widget class="QPushButton" name="set_run_vsa_5">
+                  <widget class="QPushButton" name="setAdv_vsgMeas_2">
                    <property name="geometry">
                     <rect>
                      <x>650</x>
@@ -31326,6 +31460,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                    </property>
                    <property name="text">
                     <string>Set</string>
+                   </property>
+                   <property name="checkable">
+                    <bool>true</bool>
                    </property>
                   </widget>
                  </widget>
@@ -31423,7 +31560,7 @@ QFrame{background-color:#d1d5de}</string>
                   </rect>
                  </property>
                  <property name="currentIndex">
-                  <number>2</number>
+                  <number>1</number>
                  </property>
                  <widget class="QWidget" name="page_33">
                   <widget class="QScrollArea" name="psgEquipScroll_15">
@@ -32118,7 +32255,7 @@ Analyze</string>
               </widget>
              </item>
              <item>
-              <widget class="QTabWidget" name="tabWidget_3">
+              <widget class="QTabWidget" name="resultsTabs_vsgMeas">
                <property name="font">
                 <font>
                  <pointsize>8</pointsize>
@@ -32135,7 +32272,7 @@ Analyze</string>
                 <enum>QTabWidget::Rounded</enum>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>1</number>
                </property>
                <property name="usesScrollButtons">
                 <bool>true</bool>
@@ -32154,7 +32291,7 @@ Analyze</string>
                   </rect>
                  </property>
                  <property name="currentIndex">
-                  <number>1</number>
+                  <number>0</number>
                  </property>
                  <widget class="QWidget" name="page_100">
                   <widget class="QLabel" name="label_579">
@@ -32293,6 +32430,9 @@ Analyze</string>
                        <italic>true</italic>
                       </font>
                      </property>
+                     <property name="styleSheet">
+                      <string notr="true">QLabel{background-color:rgb(240, 240, 240)}</string>
+                     </property>
                      <property name="text">
                       <string>No VSA Calibration File Has Been Generated or Uploaded</string>
                      </property>
@@ -32319,10 +32459,10 @@ Analyze</string>
                   </rect>
                  </property>
                  <property name="currentIndex">
-                  <number>1</number>
+                  <number>0</number>
                  </property>
                  <widget class="QWidget" name="page_105">
-                  <widget class="QTabWidget" name="tabWidget_4">
+                  <widget class="QTabWidget" name="vsgResultsTabs_vsgMeas">
                    <property name="geometry">
                     <rect>
                      <x>10</x>
@@ -32335,7 +32475,7 @@ Analyze</string>
                     <enum>QTabWidget::North</enum>
                    </property>
                    <property name="currentIndex">
-                    <number>1</number>
+                    <number>0</number>
                    </property>
                    <widget class="QWidget" name="tab_13">
                     <attribute name="title">
@@ -33169,7 +33309,7 @@ Analyze</string>
                     <zorder>spinBox</zorder>
                    </widget>
                   </widget>
-                  <widget class="QStackedWidget" name="stackedWidget_10">
+                  <widget class="QStackedWidget" name="vsgResultsFileStack_vsgMeas">
                    <property name="geometry">
                     <rect>
                      <x>0</x>
@@ -33513,6 +33653,9 @@ Analyze</string>
                        <pointsize>9</pointsize>
                        <italic>true</italic>
                       </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QLabel{background-color:rgb(240, 240, 240)}</string>
                      </property>
                      <property name="text">
                       <string>No VSG Calibration File Has Been Generated or Uploaded</string>
@@ -34259,7 +34402,7 @@ QWidget#power2{background-color:rgb(247,247,247)}
 QWidget#power3{background-color:rgb(247,247,247)}</string>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="vsg">
            <property name="styleSheet">
@@ -37689,7 +37832,7 @@ Analyzer</string>
                  <enum>QTabWidget::Rounded</enum>
                 </property>
                 <property name="currentIndex">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <widget class="QWidget" name="tab_7">
                  <property name="styleSheet">
@@ -37740,8 +37883,8 @@ Analyzer</string>
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>590</width>
-                           <height>382</height>
+                           <width>606</width>
+                           <height>448</height>
                           </rect>
                          </property>
                          <property name="minimumSize">
@@ -38768,7 +38911,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                   <item>
                    <widget class="QStackedWidget" name="vsgEquipStackAdv">
                     <property name="currentIndex">
-                     <number>2</number>
+                     <number>0</number>
                     </property>
                     <widget class="QWidget" name="awgSettingsAdv">
                      <layout class="QHBoxLayout" name="horizontalLayout_12">
@@ -42388,7 +42531,7 @@ Analyzer</string>
                  <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                 </property>
                 <property name="currentIndex">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <widget class="QWidget" name="upStandardSettings">
                  <attribute name="title">
@@ -48527,7 +48670,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                   <item>
                    <widget class="QStackedWidget" name="vsaAdvancedStack">
                     <property name="currentIndex">
-                     <number>1</number>
+                     <number>0</number>
                     </property>
                     <widget class="QWidget" name="selectTypeAdv">
                      <layout class="QHBoxLayout" name="horizontalLayout_18">
@@ -67304,7 +67447,7 @@ Supply 1</string>
          <rect>
           <x>20</x>
           <y>330</y>
-          <width>311</width>
+          <width>301</width>
           <height>101</height>
          </rect>
         </property>
@@ -67330,7 +67473,7 @@ Supply 1</string>
           <rect>
            <x>10</x>
            <y>10</y>
-           <width>291</width>
+           <width>281</width>
            <height>81</height>
           </rect>
          </property>
@@ -67630,10 +67773,10 @@ Analyzer</string>
        <widget class="QGroupBox" name="groupBox_4">
         <property name="geometry">
          <rect>
-          <x>376</x>
-          <y>394</y>
-          <width>281</width>
-          <height>31</height>
+          <x>350</x>
+          <y>370</y>
+          <width>321</width>
+          <height>21</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -67645,9 +67788,9 @@ Analyzer</string>
         <widget class="QRadioButton" name="runVSG">
          <property name="geometry">
           <rect>
-           <x>10</x>
-           <y>9</y>
-           <width>131</width>
+           <x>82</x>
+           <y>0</y>
+           <width>111</width>
            <height>17</height>
           </rect>
          </property>
@@ -67667,9 +67810,9 @@ Analyzer</string>
         <widget class="QRadioButton" name="runVSA">
          <property name="geometry">
           <rect>
-           <x>150</x>
-           <y>9</y>
-           <width>131</width>
+           <x>210</x>
+           <y>0</y>
+           <width>111</width>
            <height>17</height>
           </rect>
          </property>
@@ -67684,6 +67827,31 @@ Analyzer</string>
          </property>
          <property name="text">
           <string>Run Only VSA</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="runStandard">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>71</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="text">
+          <string>Run All</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
          </property>
         </widget>
        </widget>

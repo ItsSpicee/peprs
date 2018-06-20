@@ -2,6 +2,7 @@
 
 from PyQt5.QtGui import (QCursor)
 from PyQt5.QtCore import (Qt)
+from PyQt5.QtWidgets import (QMessageBox)
 import setParameters as set
 
 def displayVsg(self,buttonPHover,buttonGreyPHover,buttonGreyGHover,buttonGreyP):
@@ -479,6 +480,49 @@ def determineFrameTimeEnable(self):
 	elif idx == 2:
 		self.ui.frameTimeLabel_vsaMeas.setEnabled(True)
 		self.ui.framTimeField_vsaMeas.setEnabled(True)
+
+def displayVSGMeas(self):
+	idx = self.ui.vsgCalType.currentIndex()
+	vsgType = self.ui.vsgWorkflow_vsgMeas.currentIndex()
+	
+	if idx == 0:
+		self.ui.awgParamsStack_vsgMeas.setCurrentIndex(0)
+		self.ui.upParamsStack_vsgMeas.setCurrentIndex(0)
+		self.ui.advParamsStack_vsgMeas.setCurrentIndex(0)
+	elif idx == 1:
+		self.ui.advParamsStack_vsgMeas.setCurrentIndex(1)
+		self.ui.awgParamsStack_vsgMeas.setCurrentIndex(1)
+		self.ui.upParamsStack_vsgMeas.setCurrentIndex(1)
+	elif idx == 2:
+		if vsgType == 0 or vsgType == 3:
+			self.ui.vsgCalType.setCurrentIndex(0)
+			msg = QMessageBox(self)
+			msg.setIcon(QMessageBox.Critical)
+			msg.setWindowTitle('No Upconverter')
+			msg.setText("It is not possible to perform this kind of VSG calibration when there is no upconverter in the setup.")
+			msg.setStandardButtons(QMessageBox.Ok)
+			msg.exec_();
+		else:
+			self.ui.advParamsStack_vsgMeas.setCurrentIndex(2)
+			self.ui.awgParamsStack_vsgMeas.setCurrentIndex(2)
+			self.ui.upParamsStack_vsgMeas.setCurrentIndex(2)
+	elif idx == 3:
+		if vsgType == 0 or vsgType == 3:
+			self.ui.vsgCalType.setCurrentIndex(0)
+			msg = QMessageBox(self)
+			msg.setIcon(QMessageBox.Critical)
+			msg.setWindowTitle('No Upconverter')
+			msg.setText("It is not possible to perform this kind of VSG calibration when there is no upconverter in the setup.")
+			msg.setStandardButtons(QMessageBox.Ok)
+			msg.exec_();
+		else:
+			self.ui.advParamsStack_vsgMeas.setCurrentIndex(2)
+			self.ui.awgParamsStack_vsgMeas.setCurrentIndex(2)
+			self.ui.upParamsStack_vsgMeas.setCurrentIndex(3)
+	elif idx == 4:
+		self.ui.advParamsStack_vsgMeas.setCurrentIndex(1)
+		self.ui.awgParamsStack_vsgMeas.setCurrentIndex(2)
+		self.ui.upParamsStack_vsgMeas.setCurrentIndex(1)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions called within parameterFunctions	

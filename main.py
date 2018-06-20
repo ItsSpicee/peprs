@@ -120,7 +120,6 @@ class Window(QMainWindow):
 		self.ui.vsaMeasRunStack.setCurrentIndex(1)
 		self.ui.downStack_vsaMeas.setCurrentIndex(0)
 		# vsg meas page
-		self.ui.vsgMeasNextStack.setCurrentIndex(0)
 		self.ui.debugVSGStack.setCurrentIndex(2)
 		self.ui.vsaResultsStack_vsgMeas.setCurrentIndex(1)
 		self.ui.vsgResultsStack_vsgMeas.setCurrentIndex(1)
@@ -128,6 +127,8 @@ class Window(QMainWindow):
 		self.ui.awgParamsStack_vsgMeas.setCurrentIndex(0)
 		self.ui.upParamsStack_vsgMeas.setCurrentIndex(0)
 		self.ui.advParamsStack_vsgMeas.setCurrentIndex(0)
+		self.ui.vsgResultsTabs_vsgMeas.setCurrentIndex(0)
+		self.ui.vsgResultsFileStack_vsgMeas.setCurrentIndex(1)
 		# algo page
 		self.ui.algoTabs.setCurrentIndex(0)
 		self.ui.algoNextStack.setCurrentIndex(0)
@@ -192,11 +193,21 @@ class Window(QMainWindow):
 		self.ui.noCalRXButton.clicked.connect(lambda: self.ui.vsaMeasNextStack.setCurrentIndex(4))
 		self.ui.yesCalRXButton.clicked.connect(lambda: self.ui.vsaMeasNextStack.setCurrentIndex(3))
 		self.ui.vsgRelatedFrameTimeField_vsaMeas.currentIndexChanged.connect(lambda: param.determineFrameTimeEnable(self))
+		self.ui.calFilePromptNo_vsgMeas.toggled.connect(lambda: self.ui.vsgMeasNextStack.setCurrentIndex(1))
+		self.ui.calFilePromptYes_vsgMeas.toggled.connect(lambda: self.ui.vsgMeasNextStack.setCurrentIndex(2))
+		self.ui.vsgCalFilePromptYes.toggled.connect(lambda: self.ui.vsgMeasNextStack.setCurrentIndex(3))
+		self.ui.vsgCalFilePromptNo.toggled.connect(lambda: self.ui.vsgMeasNextStack.setCurrentIndex(4))
+		self.ui.noCalTXButton.clicked.connect(lambda: self.ui.vsgMeasNextStack.setCurrentIndex(3))
+		self.ui.yesCalTXButton.clicked.connect(lambda: self.ui.vsgMeasNextStack.setCurrentIndex(4))
+		self.ui.noCalRXButton_vsgNext.clicked.connect(lambda: self.ui.vsgMeasNextStack.setCurrentIndex(1))
+		self.ui.yesCalRXButton_vsgNext.clicked.connect(lambda: self.ui.vsgMeasNextStack.setCurrentIndex(2))
+		self.ui.vsgCalType.currentIndexChanged.connect(lambda: param.displayVSGMeas(self))
 	
 		# expand/shrink depending on which step tab is clicked
 		self.ui.stepTabs.currentChanged.connect(lambda: menu.changeStepTab(self))
 		# vsa meas page
-		self.ui.vsaMeasParamTabs.currentChanged.connect(lambda: menu.switchMeasTab(self))
+		self.ui.vsaMeasParamTabs.currentChanged.connect(lambda: menu.switchMeasTabVSA(self))
+		self.ui.vsgMeasParamTabs.currentChanged.connect(lambda: menu.switchMeasTabVSG(self))
 		self.ui.algoTabs.currentChanged.connect(lambda: menu.switchAlgoTab(self))
 		
 		# control parameter set buttons
@@ -234,7 +245,18 @@ class Window(QMainWindow):
 		self.ui.set_run_vsa.clicked.connect(lambda: set.rxCalRoutine(self,setParams,purpleButtonHover))
 		self.ui.downSetVSAMeas.clicked.connect(lambda: set.noRXCalRoutine(self,setParams,purpleButtonHover))
 		self.ui.vsaMeasAdvSet.clicked.connect(lambda: set.setVSAMeasAdv(self,setParams))
+		# vsg meas page
+		self.ui.awgSet_vsgMeas.clicked.connect(lambda: set.noAWGCalRoutine(self,setParams))
+		self.ui.awgPreview_vsgMeas.clicked.connect(lambda: set.awgPreview(self))
+		self.ui.awgPreviewRun_vsgMeas.clicked.connect(lambda: set.awgPreview(self))
+		self.ui.awgSetRun_vsgMeas.clicked.connect(lambda: set.awgCalRoutine(self,setParams))
+		self.ui.setAdv_vsgMeas.clicked.connect(lambda: set.setAdvVSGMeas(self,setParams))
+		self.ui.setAdv_vsgMeas_2.clicked.connect(lambda: set.setAdvVSGMeas(self,setParams))
+		self.ui.upSet_vsgMeas.clicked.connect(lambda: set.setUpVSGMeas(self,setParams))
+		self.ui.heteroRun.clicked.connect(lambda: set.setHetero(self,setParams))
+		self.ui.homoRun.clicked.connect(lambda: set.setHomo(self,setParams))
 		# control dash radio buttons
+		self.ui.runStandard.toggled.connect(lambda: flow.standardSetup(self,greyBButton,greyPButton))
 		self.ui.runVSG.toggled.connect(lambda: flow.vsgOnlySetup(self,disabledButton,greyPButton))
 		self.ui.runVSA.toggled.connect(lambda: flow.vsaOnlySetup(self,disabledButton,greyBButton,greyPButton))
 		
@@ -495,6 +517,21 @@ class Window(QMainWindow):
 		self.ui.awgButton_vsaMeas_3.clicked.connect(lambda: flow.awgVSAMeasOnClick(self))
 		self.ui.vsgButton_vsaMeas.clicked.connect(lambda: flow.awgVSAMeasOnClick(self))
 		# vsg meas page
+		self.ui.saButton_vsgMeas.clicked.connect(lambda: flow.saVSGMeasOnClick(self))
+		self.ui.saButton_vsgMeas_2.clicked.connect(lambda: flow.saVSGMeasOnClick(self))
+		self.ui.downButton_vsgMeas.clicked.connect(lambda: flow.downVSGMeasOnClick(self))
+		self.ui.scopeButton_vsgMeas.clicked.connect(lambda: flow.analyzerVSGMeasOnClick(self))
+		self.ui.scopeButton_vsgMeas_2.clicked.connect(lambda: flow.analyzerVSGMeasOnClick(self))
+		self.ui.digButton_vsgMeas.clicked.connect(lambda: flow.analyzerVSGMeasOnClick(self))
+		self.ui.digButton_vsgMeas_2.clicked.connect(lambda: flow.analyzerVSGMeasOnClick(self))
+		self.ui.uxaButton_vsgMeas.clicked.connect(lambda: flow.analyzerVSGMeasOnClick(self))
+		self.ui.pxaButton_vsgMeas.clicked.connect(lambda: flow.analyzerVSGMeasOnClick(self))
+		self.ui.psgButton_vsgMeas.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(1))
+		self.ui.upButton_vsgMeas.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(1))
+		self.ui.awgButton_vsgMeas.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(0))
+		self.ui.awgButton_vsgMeas_2.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(0))
+		self.ui.awgButton_vsgMeas_3.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(0))
+		self.ui.vsgButton_vsgMeas.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(0))
 		
 		# control parameter changes
 		self.ui.dllFile_scope.textChanged.connect(lambda: param.copyDemod(self, self.ui.dllFile_scope, self.ui.dllFile_uxa, self.ui.dllFile_dig))

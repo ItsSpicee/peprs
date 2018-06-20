@@ -24,20 +24,44 @@ def closeButton(self):
 		
 def changeStepTab(self):
 	i = self.ui.stepTabs.currentIndex()
-	measTab = self.ui.vsaMeasParamTabs.currentIndex()
+	measStack = self.ui.measStack.currentIndex()
+	measTabVsa = self.ui.vsaMeasParamTabs.currentIndex()
+	measTabVsg = self.ui.vsgMeasParamTabs.currentIndex()
+	downEnabled = self.ui.vsaWorkflow_vsaMeas.currentIndex()
+	upEnabled = self.ui.vsgWorkflow_vsgMeas.currentIndex()
+	vsgStack = self.ui.awgParamsStack_vsgMeas.currentIndex()
 	if i == 2:
 		self.setMinimumSize(1265,585)
 		self.resize(1265, 585)
 		self.center()
 	elif i == 1:
-		if measTab == 1:
-			self.setMinimumSize(1265,950)
-			self.resize(1265,950)
-			self.center()
-		else:
-			self.setMinimumSize(1265,528)
-			self.resize(1265,528)
-			self.center()
+		if measStack == 0: #vsa
+			if measTabVsa == 1 and downEnabled:
+				self.setMinimumSize(1265,950)
+				self.resize(1265,950)
+				self.center()
+			else:
+				self.setMinimumSize(1265,528)
+				self.resize(1265,528)
+				self.center()
+		elif measStack == 1: #vsg
+			# if vsgStack == 0 or measTabVsg == 2: # select vsg type or advanced page
+				# self.setMinimumSize(1265,528)
+				# self.resize(1265,528)
+				# self.center()
+			# else:
+				self.setMinimumSize(1265,950)
+				self.resize(1265,950)
+				self.center()
+			#if upEnabled == 1 or upEnabled == 2:
+				# if measTabVsg == 1:
+					# self.setMinimumSize(1265,950)
+					# self.resize(1265,950)
+					# self.center()
+			#else:
+				# self.setMinimumSize(1265,528)
+				# self.resize(1265,528)
+				# self.center()
 	elif i == 0:
 		self.setMinimumSize(1265,950)
 		self.resize(1265,950)
@@ -47,7 +71,7 @@ def changeStepTab(self):
 		self.resize(700,550)
 		self.center()
 	
-def switchMeasTab(self):
+def switchMeasTabVSA(self):
 	currentTab = self.ui.vsaMeasParamTabs.currentIndex()
 	vsaChecked = self.ui.vsaMeasSet.isChecked()
 	vsaChecked_2 = self.ui.vsaMeasSet_2.isChecked()
@@ -66,7 +90,7 @@ def switchMeasTab(self):
 			self.resize(1265,950)
 			self.center()
 			self.ui.calAdviceText.setVisible(True)
-			if vsaDownChecked == False or vsaDownRunChecked == False:
+			if vsaDownChecked == False and vsaDownRunChecked == False:
 				if vsaChecked or vsaChecked_2:
 					self.ui.vsaMeasNextStack.setCurrentIndex(2)
 		else:
@@ -79,6 +103,29 @@ def switchMeasTab(self):
 			else:
 				self.ui.vsaMeasNextStack.setCurrentIndex(5)
 
+def switchMeasTabVSG(self):
+	currentTab = self.ui.vsgMeasParamTabs.currentIndex()
+	awgChecked = self.ui.awgSet_vsgMeas.isChecked()
+	awgRunChecked = self.ui.awgSetRun_vsgMeas.isChecked()
+	upIdx = self.ui.upParamsStack_vsgMeas.currentIndex()
+	noneChecked = self.ui.upSet_vsgMeas.isChecked()
+	homoChecked = self.ui.homoRun.isChecked()
+	heteroChecked = self.ui.heteroRun.isChecked()
+	upEnabled = self.ui.vsgWorkflow_vsgMeas.currentIndex()
+	if currentTab == 1:
+		if upEnabled == 1 or upEnabled == 2:
+			if awgChecked or awgRunChecked:
+				if upIdx == 3 and homoChecked == False: # homo
+					self.ui.vsgMeasNextStack.setCurrentIndex(7)
+				elif upIdx == 1 and noneChecked == False: # none
+					self.ui.vsgMeasNextStack.setCurrentIndex(7)
+				elif upIdx == 2 and heteroChecked == False: # hetero
+					self.ui.vsgMeasNextStack.setCurrentIndex(7)
+		elif upEnabled == 0 or upEnabled == 3:
+			self.ui.upParamsStack_vsgMeas.setCurrentIndex(4)
+			if awgChecked or awgRunChecked:
+				self.ui.vsgMeasNextStack.setCurrentIndex(8)
+				
 def switchAlgoTab(self):
 	currentTab = self.ui.algoTabs.currentIndex()
 	if currentTab == 2:
