@@ -3723,7 +3723,7 @@ QPushButton:hover{background-color:rgb(72, 144, 216);}
                   <property name="geometry">
                    <rect>
                     <x>0</x>
-                    <y>-347</y>
+                    <y>0</y>
                     <width>712</width>
                     <height>1100</height>
                    </rect>
@@ -6636,7 +6636,7 @@ QFrame{background-color:#d1d5de}</string>
                   <property name="geometry">
                    <rect>
                     <x>0</x>
-                    <y>-181</y>
+                    <y>0</y>
                     <width>332</width>
                     <height>500</height>
                    </rect>
@@ -12725,7 +12725,7 @@ Meter</string>
                     </rect>
                    </property>
                    <property name="currentIndex">
-                    <number>0</number>
+                    <number>1</number>
                    </property>
                    <widget class="QWidget" name="page_9">
                     <widget class="Line" name="line_327">
@@ -13156,7 +13156,7 @@ Analyzer</string>
                        <string notr="true">QStackedWidget{border:none}</string>
                       </property>
                       <property name="currentIndex">
-                       <number>0</number>
+                       <number>1</number>
                       </property>
                       <widget class="QWidget" name="scope_35">
                        <widget class="QPushButton" name="scopeButton_vsaMeas">
@@ -14132,7 +14132,7 @@ Analyzer</string>
                   <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                  </property>
                  <property name="currentIndex">
-                  <number>1</number>
+                  <number>2</number>
                  </property>
                  <widget class="QWidget" name="widget">
                   <attribute name="title">
@@ -15142,7 +15142,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       <property name="geometry">
                        <rect>
                         <x>0</x>
-                        <y>-60</y>
+                        <y>0</y>
                         <width>612</width>
                         <height>420</height>
                        </rect>
@@ -16306,7 +16306,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                     </rect>
                    </property>
                    <property name="currentIndex">
-                    <number>0</number>
+                    <number>1</number>
                    </property>
                    <widget class="QWidget" name="page_27">
                     <layout class="QHBoxLayout" name="horizontalLayout_37">
@@ -16764,7 +16764,7 @@ QFrame{background-color:#d1d5de}</string>
                   <enum>QTabWidget::Rounded</enum>
                  </property>
                  <property name="currentIndex">
-                  <number>0</number>
+                  <number>2</number>
                  </property>
                  <property name="usesScrollButtons">
                   <bool>true</bool>
@@ -16870,7 +16870,7 @@ QFrame{background-color:#d1d5de}</string>
                       <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
-                    <widget class="QWidget" name="">
+                    <widget class="QWidget" name="layoutWidget">
                      <property name="geometry">
                       <rect>
                        <x>490</x>
@@ -17255,7 +17255,7 @@ QFrame{background-color:#d1d5de}</string>
                   <enum>Qt::Horizontal</enum>
                  </property>
                 </widget>
-                <widget class="QStackedWidget" name="vsgWorkflowForVSA_12">
+                <widget class="QStackedWidget" name="vsgWorkflow_vsgMeas">
                  <property name="geometry">
                   <rect>
                    <x>10</x>
@@ -17265,7 +17265,7 @@ QFrame{background-color:#d1d5de}</string>
                   </rect>
                  </property>
                  <property name="currentIndex">
-                  <number>3</number>
+                  <number>2</number>
                  </property>
                  <widget class="QWidget" name="awgForVSA_12">
                   <widget class="QLabel" name="label_586">
@@ -17307,7 +17307,7 @@ QFrame{background-color:#d1d5de}</string>
                    <property name="lineWidth">
                     <number>2</number>
                    </property>
-                   <widget class="QPushButton" name="awgButton_vsaMeas_7">
+                   <widget class="QPushButton" name="awgButton_vsgMeas_2">
                     <property name="geometry">
                      <rect>
                       <x>10</x>
@@ -17398,7 +17398,7 @@ QFrame{background-color:#d1d5de}</string>
                    <property name="lineWidth">
                     <number>2</number>
                    </property>
-                   <widget class="QPushButton" name="awgButton_vsaMeas_8">
+                   <widget class="QPushButton" name="awgButton_vsgMeas_3">
                     <property name="geometry">
                      <rect>
                       <x>10</x>
@@ -17425,7 +17425,7 @@ QFrame{background-color:#d1d5de}</string>
                      <string>AWG</string>
                     </property>
                    </widget>
-                   <widget class="QPushButton" name="upButton_vsaMeas_3">
+                   <widget class="QPushButton" name="upButton_vsgMeas">
                     <property name="geometry">
                      <rect>
                       <x>80</x>
@@ -17542,7 +17542,7 @@ QFrame{background-color:#d1d5de}</string>
                    <property name="lineWidth">
                     <number>2</number>
                    </property>
-                   <widget class="QPushButton" name="awgButton_vsaMeas_9">
+                   <widget class="QPushButton" name="awgButton_vsgMeas">
                     <property name="geometry">
                      <rect>
                       <x>10</x>
@@ -17569,7 +17569,7 @@ QFrame{background-color:#d1d5de}</string>
                      <string>AWG</string>
                     </property>
                    </widget>
-                   <widget class="QPushButton" name="psgButton_vsaMeas_3">
+                   <widget class="QPushButton" name="psgButton_vsgMeas">
                     <property name="geometry">
                      <rect>
                       <x>80</x>
@@ -17722,7 +17722,7 @@ QFrame{background-color:#d1d5de}</string>
                    <property name="lineWidth">
                     <number>2</number>
                    </property>
-                   <widget class="QPushButton" name="vsgButton_vsaMeas_3">
+                   <widget class="QPushButton" name="vsgButton_vsgMeas">
                     <property name="geometry">
                      <rect>
                       <x>10</x>
@@ -17883,11 +17883,11 @@ Meter</string>
                   <enum>Qt::Horizontal</enum>
                  </property>
                 </widget>
-                <widget class="QStackedWidget" name="stackedWidget_6">
+                <widget class="QStackedWidget" name="vsaWorkflow_vsgMeas">
                  <property name="geometry">
                   <rect>
                    <x>320</x>
-                   <y>37</y>
+                   <y>40</y>
                    <width>141</width>
                    <height>208</height>
                   </rect>
@@ -17919,7 +17919,7 @@ Meter</string>
                    <property name="geometry">
                     <rect>
                      <x>20</x>
-                     <y>38</y>
+                     <y>30</y>
                      <width>121</width>
                      <height>61</height>
                     </rect>
@@ -17936,7 +17936,7 @@ Meter</string>
                    <property name="lineWidth">
                     <number>2</number>
                    </property>
-                   <widget class="QStackedWidget" name="single_vsaMeas_stack_3">
+                   <widget class="QStackedWidget" name="single_vsgMeas_stack">
                     <property name="geometry">
                      <rect>
                       <x>10</x>
@@ -17946,10 +17946,10 @@ Meter</string>
                      </rect>
                     </property>
                     <property name="currentIndex">
-                     <number>1</number>
+                     <number>3</number>
                     </property>
                     <widget class="QWidget" name="scope_33">
-                     <widget class="QPushButton" name="scopeButton_vsaMeas_5">
+                     <widget class="QPushButton" name="scopeButton_vsgMeas">
                       <property name="geometry">
                        <rect>
                         <x>0</x>
@@ -18002,7 +18002,7 @@ QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
                      </widget>
                     </widget>
                     <widget class="QWidget" name="dig_33">
-                     <widget class="QPushButton" name="digButton_vsaMeas_5">
+                     <widget class="QPushButton" name="digButton_vsgMeas">
                       <property name="geometry">
                        <rect>
                         <x>0</x>
@@ -18055,7 +18055,7 @@ QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
                      </widget>
                     </widget>
                     <widget class="QWidget" name="uxa_17">
-                     <widget class="QPushButton" name="uxaButton_vsaMeas_3">
+                     <widget class="QPushButton" name="uxaButton_vsgMeas">
                       <property name="geometry">
                        <rect>
                         <x>0</x>
@@ -18108,7 +18108,7 @@ QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
                      </widget>
                     </widget>
                     <widget class="QWidget" name="pxa_17">
-                     <widget class="QPushButton" name="pxaButton_vsaMeas_3">
+                     <widget class="QPushButton" name="pxaButton_vsgMeas">
                       <property name="geometry">
                        <rect>
                         <x>0</x>
@@ -18181,7 +18181,7 @@ QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
                     <enum>Qt::Horizontal</enum>
                    </property>
                   </widget>
-                  <widget class="QPushButton" name="saButton_vsaMeas_5">
+                  <widget class="QPushButton" name="saButton_vsgMeas">
                    <property name="geometry">
                     <rect>
                      <x>30</x>
@@ -18215,7 +18215,7 @@ Analyzer</string>
                    <property name="geometry">
                     <rect>
                      <x>10</x>
-                     <y>20</y>
+                     <y>12</y>
                      <width>131</width>
                      <height>16</height>
                     </rect>
@@ -18311,7 +18311,7 @@ Analyzer</string>
                    <property name="lineWidth">
                     <number>2</number>
                    </property>
-                   <widget class="QStackedWidget" name="single_down_vsaMeas_stack_3">
+                   <widget class="QStackedWidget" name="single_down_vsgMeas_stack">
                     <property name="geometry">
                      <rect>
                       <x>10</x>
@@ -18324,10 +18324,10 @@ Analyzer</string>
                      <string notr="true">QStackedWidget{border:none}</string>
                     </property>
                     <property name="currentIndex">
-                     <number>0</number>
+                     <number>1</number>
                     </property>
                     <widget class="QWidget" name="dig_37">
-                     <widget class="QPushButton" name="digButton_vsaMeas_6">
+                     <widget class="QPushButton" name="digButton_vsgMeas_2">
                       <property name="geometry">
                        <rect>
                         <x>0</x>
@@ -18380,7 +18380,7 @@ QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
                      </widget>
                     </widget>
                     <widget class="QWidget" name="scope_37">
-                     <widget class="QPushButton" name="scopeButton_vsaMeas_6">
+                     <widget class="QPushButton" name="scopeButton_vsgMeas_2">
                       <property name="geometry">
                        <rect>
                         <x>0</x>
@@ -18452,7 +18452,7 @@ QPushButton:hover{background-color:rgb(144, 0, 144)}</string>
                      <enum>Qt::Horizontal</enum>
                     </property>
                    </widget>
-                   <widget class="QPushButton" name="downButton_vsaMeas_3">
+                   <widget class="QPushButton" name="downButton_vsgMeas">
                     <property name="geometry">
                      <rect>
                       <x>10</x>
@@ -18542,7 +18542,7 @@ QPushButton:hover{background-color:rgb(0, 118, 0)}</string>
                     <enum>Qt::Horizontal</enum>
                    </property>
                   </widget>
-                  <widget class="QPushButton" name="saButton_vsaMeas_6">
+                  <widget class="QPushButton" name="saButton_vsgMeas_2">
                    <property name="geometry">
                     <rect>
                      <x>30</x>
@@ -18616,17 +18616,17 @@ Analyzer</string>
                  </property>
                 </widget>
                 <zorder>line_339</zorder>
-                <zorder>vsgWorkflowForVSA_12</zorder>
+                <zorder>vsgWorkflow_vsgMeas</zorder>
                 <zorder>label_590</zorder>
                 <zorder>label_591</zorder>
-                <zorder>meterButton_vsaMeas_3</zorder>
                 <zorder>label_592</zorder>
-                <zorder>stackedWidget_6</zorder>
+                <zorder>vsaWorkflow_vsgMeas</zorder>
                 <zorder>line_357</zorder>
                 <zorder>line_338</zorder>
                 <zorder>label_742</zorder>
+                <zorder>meterButton_vsaMeas_3</zorder>
                </widget>
-               <widget class="QStackedWidget" name="vsaMeasNext_3">
+               <widget class="QStackedWidget" name="vsgMeasNextStack">
                 <property name="geometry">
                  <rect>
                   <x>0</x>
@@ -18639,368 +18639,8 @@ Analyzer</string>
                  <string notr="true">QFrame{background-color:#d1d5de}</string>
                 </property>
                 <property name="currentIndex">
-                 <number>8</number>
+                 <number>0</number>
                 </property>
-                <widget class="QWidget" name="page_50">
-                 <widget class="QFrame" name="nextFrame_42">
-                  <property name="geometry">
-                   <rect>
-                    <x>0</x>
-                    <y>0</y>
-                    <width>471</width>
-                    <height>121</height>
-                   </rect>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <pointsize>4</pointsize>
-                   </font>
-                  </property>
-                  <property name="frameShape">
-                   <enum>QFrame::Box</enum>
-                  </property>
-                  <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
-                  </property>
-                  <widget class="QWidget" name="verticalLayoutWidget_47">
-                   <property name="geometry">
-                    <rect>
-                     <x>40</x>
-                     <y>10</y>
-                     <width>391</width>
-                     <height>91</height>
-                    </rect>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_92" stretch="0,0">
-                    <property name="spacing">
-                     <number>0</number>
-                    </property>
-                    <item>
-                     <widget class="QLabel" name="label_595">
-                      <property name="font">
-                       <font>
-                        <pointsize>10</pointsize>
-                        <weight>75</weight>
-                        <bold>true</bold>
-                       </font>
-                      </property>
-                      <property name="text">
-                       <string>Next Step</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="fillDownCal_3">
-                      <property name="font">
-                       <font>
-                        <pointsize>10</pointsize>
-                        <weight>50</weight>
-                        <italic>true</italic>
-                        <bold>false</bold>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">QLabel {background:rgb(72, 144, 216);color:white;border-radius:10px;border:3px solid #005500}</string>
-                      </property>
-                      <property name="lineWidth">
-                       <number>1</number>
-                      </property>
-                      <property name="text">
-                       <string>Visit the ‘Upconverter Settings &amp; Calibration’ tab</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </widget>
-                 </widget>
-                </widget>
-                <widget class="QWidget" name="page_60">
-                 <widget class="QFrame" name="nextFrame_48">
-                  <property name="geometry">
-                   <rect>
-                    <x>0</x>
-                    <y>0</y>
-                    <width>471</width>
-                    <height>121</height>
-                   </rect>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <pointsize>4</pointsize>
-                   </font>
-                  </property>
-                  <property name="frameShape">
-                   <enum>QFrame::Box</enum>
-                  </property>
-                  <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
-                  </property>
-                  <widget class="QWidget" name="verticalLayoutWidget_53">
-                   <property name="geometry">
-                    <rect>
-                     <x>10</x>
-                     <y>0</y>
-                     <width>451</width>
-                     <height>121</height>
-                    </rect>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_108" stretch="0,0,0">
-                    <property name="spacing">
-                     <number>0</number>
-                    </property>
-                    <item>
-                     <widget class="QLabel" name="label_602">
-                      <property name="font">
-                       <font>
-                        <pointsize>10</pointsize>
-                        <weight>75</weight>
-                        <bold>true</bold>
-                       </font>
-                      </property>
-                      <property name="text">
-                       <string>Next Step</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="calFilePrompt_5">
-                      <property name="font">
-                       <font>
-                        <pointsize>10</pointsize>
-                        <weight>50</weight>
-                        <italic>true</italic>
-                        <bold>false</bold>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">QLabel {background:rgb(72, 144, 216);color:white;border-radius:10px;border:3px solid rgb(0, 0, 127)}</string>
-                      </property>
-                      <property name="lineWidth">
-                       <number>1</number>
-                      </property>
-                      <property name="text">
-                       <string>Is a Heterodyne/Homodyne calibration file needed?</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QGroupBox" name="groupBox_14">
-                      <property name="styleSheet">
-                       <string notr="true">QGroupBox{border:none}</string>
-                      </property>
-                      <property name="title">
-                       <string/>
-                      </property>
-                      <widget class="QRadioButton" name="calFilePromptYes_5">
-                       <property name="geometry">
-                        <rect>
-                         <x>130</x>
-                         <y>10</y>
-                         <width>82</width>
-                         <height>17</height>
-                        </rect>
-                       </property>
-                       <property name="font">
-                        <font>
-                         <family>Arial</family>
-                         <pointsize>11</pointsize>
-                         <weight>50</weight>
-                         <bold>false</bold>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>Yes</string>
-                       </property>
-                      </widget>
-                      <widget class="QRadioButton" name="calFilePromptNo_5">
-                       <property name="geometry">
-                        <rect>
-                         <x>270</x>
-                         <y>10</y>
-                         <width>82</width>
-                         <height>17</height>
-                        </rect>
-                       </property>
-                       <property name="font">
-                        <font>
-                         <family>Arial</family>
-                         <pointsize>11</pointsize>
-                         <weight>50</weight>
-                         <bold>false</bold>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>No</string>
-                       </property>
-                      </widget>
-                     </widget>
-                    </item>
-                   </layout>
-                  </widget>
-                 </widget>
-                </widget>
-                <widget class="QWidget" name="page_61">
-                 <widget class="QFrame" name="nextFrame_49">
-                  <property name="geometry">
-                   <rect>
-                    <x>0</x>
-                    <y>0</y>
-                    <width>471</width>
-                    <height>121</height>
-                   </rect>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <pointsize>4</pointsize>
-                   </font>
-                  </property>
-                  <property name="frameShape">
-                   <enum>QFrame::Box</enum>
-                  </property>
-                  <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
-                  </property>
-                  <widget class="QWidget" name="verticalLayoutWidget_54">
-                   <property name="geometry">
-                    <rect>
-                     <x>40</x>
-                     <y>10</y>
-                     <width>391</width>
-                     <height>91</height>
-                    </rect>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_109" stretch="0,0">
-                    <property name="spacing">
-                     <number>0</number>
-                    </property>
-                    <item>
-                     <widget class="QLabel" name="label_603">
-                      <property name="font">
-                       <font>
-                        <pointsize>10</pointsize>
-                        <weight>75</weight>
-                        <bold>true</bold>
-                       </font>
-                      </property>
-                      <property name="text">
-                       <string>Next Step</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="fillVSAGen_13">
-                      <property name="font">
-                       <font>
-                        <pointsize>10</pointsize>
-                        <italic>true</italic>
-                        <kerning>true</kerning>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">QLabel {background:rgb(72, 144, 216);color:white;border-radius:10px;border: 3px solid purple}</string>
-                      </property>
-                      <property name="text">
-                       <string>Fill out all available settings. Select Cal. File for unused cal. panel.</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </widget>
-                 </widget>
-                </widget>
-                <widget class="QWidget" name="page_62">
-                 <widget class="QFrame" name="nextFrame_50">
-                  <property name="geometry">
-                   <rect>
-                    <x>0</x>
-                    <y>0</y>
-                    <width>471</width>
-                    <height>121</height>
-                   </rect>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <pointsize>4</pointsize>
-                   </font>
-                  </property>
-                  <property name="frameShape">
-                   <enum>QFrame::Box</enum>
-                  </property>
-                  <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
-                  </property>
-                  <widget class="QWidget" name="verticalLayoutWidget_55">
-                   <property name="geometry">
-                    <rect>
-                     <x>40</x>
-                     <y>10</y>
-                     <width>391</width>
-                     <height>91</height>
-                    </rect>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_110" stretch="0,0">
-                    <property name="spacing">
-                     <number>0</number>
-                    </property>
-                    <item>
-                     <widget class="QLabel" name="label_604">
-                      <property name="font">
-                       <font>
-                        <pointsize>10</pointsize>
-                        <weight>75</weight>
-                        <bold>true</bold>
-                       </font>
-                      </property>
-                      <property name="text">
-                       <string>Next Step</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="fillVSAGen_14">
-                      <property name="font">
-                       <font>
-                        <pointsize>10</pointsize>
-                        <italic>true</italic>
-                        <kerning>true</kerning>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">QLabel {background:rgb(72, 144, 216);color:white;border-radius:10px;}</string>
-                      </property>
-                      <property name="text">
-                       <string>Visit the 'Set &amp; Run Algorithms' Tab</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </widget>
-                 </widget>
-                </widget>
                 <widget class="QWidget" name="page_51">
                  <widget class="QFrame" name="nextFrame_43">
                   <property name="geometry">
@@ -19488,6 +19128,236 @@ Analyzer</string>
                   </widget>
                  </widget>
                 </widget>
+                <widget class="QWidget" name="page_50">
+                 <widget class="QFrame" name="nextFrame_42">
+                  <property name="geometry">
+                   <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>471</width>
+                    <height>121</height>
+                   </rect>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>4</pointsize>
+                   </font>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::Box</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <widget class="QWidget" name="verticalLayoutWidget_47">
+                   <property name="geometry">
+                    <rect>
+                     <x>40</x>
+                     <y>10</y>
+                     <width>391</width>
+                     <height>91</height>
+                    </rect>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_92" stretch="0,0">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <widget class="QLabel" name="label_595">
+                      <property name="font">
+                       <font>
+                        <pointsize>10</pointsize>
+                        <weight>75</weight>
+                        <bold>true</bold>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>Next Step</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="fillDownCal_3">
+                      <property name="font">
+                       <font>
+                        <pointsize>10</pointsize>
+                        <weight>50</weight>
+                        <italic>true</italic>
+                        <bold>false</bold>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">QLabel {background:rgb(72, 144, 216);color:white;border-radius:10px;border:3px solid #005500}</string>
+                      </property>
+                      <property name="lineWidth">
+                       <number>1</number>
+                      </property>
+                      <property name="text">
+                       <string>Visit the ‘Upconverter Settings &amp; Calibration’ tab</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </widget>
+                </widget>
+                <widget class="QWidget" name="page_60"/>
+                <widget class="QWidget" name="page_61">
+                 <widget class="QFrame" name="nextFrame_49">
+                  <property name="geometry">
+                   <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>471</width>
+                    <height>121</height>
+                   </rect>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>4</pointsize>
+                   </font>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::Box</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <widget class="QWidget" name="verticalLayoutWidget_54">
+                   <property name="geometry">
+                    <rect>
+                     <x>40</x>
+                     <y>10</y>
+                     <width>391</width>
+                     <height>91</height>
+                    </rect>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_109" stretch="0,0">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <widget class="QLabel" name="label_603">
+                      <property name="font">
+                       <font>
+                        <pointsize>10</pointsize>
+                        <weight>75</weight>
+                        <bold>true</bold>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>Next Step</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="fillVSAGen_13">
+                      <property name="font">
+                       <font>
+                        <pointsize>10</pointsize>
+                        <italic>true</italic>
+                        <kerning>true</kerning>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">QLabel {background:rgb(72, 144, 216);color:white;border-radius:10px;border: 3px solid purple}</string>
+                      </property>
+                      <property name="text">
+                       <string>Fill out all available settings. Select Cal. File for unused cal. panel.</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </widget>
+                </widget>
+                <widget class="QWidget" name="page_62">
+                 <widget class="QFrame" name="nextFrame_50">
+                  <property name="geometry">
+                   <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>471</width>
+                    <height>121</height>
+                   </rect>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>4</pointsize>
+                   </font>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::Box</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <widget class="QWidget" name="verticalLayoutWidget_55">
+                   <property name="geometry">
+                    <rect>
+                     <x>40</x>
+                     <y>10</y>
+                     <width>391</width>
+                     <height>91</height>
+                    </rect>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_110" stretch="0,0">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <widget class="QLabel" name="label_604">
+                      <property name="font">
+                       <font>
+                        <pointsize>10</pointsize>
+                        <weight>75</weight>
+                        <bold>true</bold>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>Next Step</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="fillVSAGen_14">
+                      <property name="font">
+                       <font>
+                        <pointsize>10</pointsize>
+                        <italic>true</italic>
+                        <kerning>true</kerning>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">QLabel {background:rgb(72, 144, 216);color:white;border-radius:10px;}</string>
+                      </property>
+                      <property name="text">
+                       <string>Visit the 'Set &amp; Run Algorithms' Tab</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </widget>
+                </widget>
                </widget>
               </widget>
              </item>
@@ -19538,7 +19408,7 @@ Analyzer</string>
                   <number>5</number>
                  </property>
                  <item>
-                  <widget class="QComboBox" name="vsaType_3">
+                  <widget class="QComboBox" name="vsgCalType">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                      <horstretch>0</horstretch>
@@ -19633,13 +19503,13 @@ Analyzer</string>
                 <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="upStandardSettings_10">
                 <attribute name="title">
                  <string>AWG Settings &amp;&amp; Calibration</string>
                 </attribute>
-                <widget class="QStackedWidget" name="stackedWidget_12">
+                <widget class="QStackedWidget" name="awgParamsStack_vsgMeas">
                  <property name="geometry">
                   <rect>
                    <x>-10</x>
@@ -19695,7 +19565,7 @@ Analyzer</string>
                     <property name="geometry">
                      <rect>
                       <x>0</x>
-                      <y>-87</y>
+                      <y>0</y>
                       <width>602</width>
                       <height>500</height>
                      </rect>
@@ -22153,9 +22023,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                   <number>0</number>
                  </property>
                  <item>
-                  <widget class="QStackedWidget" name="stackedWidget_11">
+                  <widget class="QStackedWidget" name="upParamsStack_vsgMeas">
                    <property name="currentIndex">
-                    <number>3</number>
+                    <number>0</number>
                    </property>
                    <widget class="QWidget" name="page_39">
                     <layout class="QHBoxLayout" name="horizontalLayout_39">
@@ -31036,18 +30906,193 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                   <string/>
                  </property>
                 </widget>
-                <widget class="QStackedWidget" name="stackedWidget_13">
+                <widget class="QStackedWidget" name="advParamsStack_vsgMeas">
                  <property name="geometry">
                   <rect>
                    <x>-1</x>
                    <y>-1</y>
                    <width>731</width>
-                   <height>321</height>
+                   <height>311</height>
                   </rect>
                  </property>
                  <property name="currentIndex">
-                  <number>1</number>
+                  <number>0</number>
                  </property>
+                 <widget class="QWidget" name="page_116">
+                  <layout class="QHBoxLayout" name="horizontalLayout_54">
+                   <item>
+                    <widget class="QLabel" name="label_399">
+                     <property name="font">
+                      <font>
+                       <family>Arial</family>
+                       <pointsize>10</pointsize>
+                       <italic>true</italic>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>Select a VSG Calibration Type</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="page_59">
+                  <widget class="QScrollArea" name="psgEquipScroll_14">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>10</y>
+                     <width>633</width>
+                     <height>295</height>
+                    </rect>
+                   </property>
+                   <property name="verticalScrollBarPolicy">
+                    <enum>Qt::ScrollBarAlwaysOn</enum>
+                   </property>
+                   <property name="horizontalScrollBarPolicy">
+                    <enum>Qt::ScrollBarAlwaysOff</enum>
+                   </property>
+                   <property name="widgetResizable">
+                    <bool>true</bool>
+                   </property>
+                   <widget class="QWidget" name="psgEquipScrollWidgetContents_15">
+                    <property name="geometry">
+                     <rect>
+                      <x>0</x>
+                      <y>0</y>
+                      <width>614</width>
+                      <height>370</height>
+                     </rect>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>590</width>
+                      <height>370</height>
+                     </size>
+                    </property>
+                    <widget class="QGroupBox" name="psgEquip_35">
+                     <property name="geometry">
+                      <rect>
+                       <x>10</x>
+                       <y>20</y>
+                       <width>290</width>
+                       <height>67</height>
+                      </rect>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>290</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <kerning>false</kerning>
+                      </font>
+                     </property>
+                     <property name="layoutDirection">
+                      <enum>Qt::LeftToRight</enum>
+                     </property>
+                     <property name="title">
+                      <string/>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_55">
+                      <item row="0" column="0" colspan="2">
+                       <widget class="QLabel" name="label_663">
+                        <property name="font">
+                         <font>
+                          <pointsize>10</pointsize>
+                          <weight>50</weight>
+                          <bold>false</bold>
+                          <underline>true</underline>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>AWG - Advanced Settings</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="0">
+                       <widget class="QLabel" name="label_664">
+                        <property name="font">
+                         <font>
+                          <family>Arial</family>
+                          <pointsize>9</pointsize>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>Trigger In Amplitude:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="1">
+                       <widget class="QPlainTextEdit" name="plainTextEdit_189">
+                        <property name="enabled">
+                         <bool>true</bool>
+                        </property>
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>16777215</width>
+                          <height>25</height>
+                         </size>
+                        </property>
+                        <property name="acceptDrops">
+                         <bool>true</bool>
+                        </property>
+                        <property name="verticalScrollBarPolicy">
+                         <enum>Qt::ScrollBarAlwaysOff</enum>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </widget>
+                  </widget>
+                  <widget class="QPushButton" name="set_run_vsa_6">
+                   <property name="geometry">
+                    <rect>
+                     <x>650</x>
+                     <y>130</y>
+                     <width>75</width>
+                     <height>31</height>
+                    </rect>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>75</width>
+                     <height>31</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>9</pointsize>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="cursor">
+                    <cursorShape>PointingHandCursor</cursorShape>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 158, 0, 255));color:white;border-radius: 5px; border: 3px solid green;}
+
+QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 134, 0, 255), stop:1 rgba(0, 184, 0, 255));}
+</string>
+                   </property>
+                   <property name="text">
+                    <string>Set</string>
+                   </property>
+                  </widget>
+                 </widget>
                  <widget class="QWidget" name="page_58">
                   <widget class="QScrollArea" name="psgEquipScroll_19">
                    <property name="geometry">
@@ -31249,160 +31294,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                    </widget>
                   </widget>
                   <widget class="QPushButton" name="set_run_vsa_5">
-                   <property name="geometry">
-                    <rect>
-                     <x>650</x>
-                     <y>130</y>
-                     <width>75</width>
-                     <height>31</height>
-                    </rect>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>75</width>
-                     <height>31</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <pointsize>9</pointsize>
-                     <weight>75</weight>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="cursor">
-                    <cursorShape>PointingHandCursor</cursorShape>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 158, 0, 255));color:white;border-radius: 5px; border: 3px solid green;}
-
-QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 134, 0, 255), stop:1 rgba(0, 184, 0, 255));}
-</string>
-                   </property>
-                   <property name="text">
-                    <string>Set</string>
-                   </property>
-                  </widget>
-                 </widget>
-                 <widget class="QWidget" name="page_59">
-                  <widget class="QScrollArea" name="psgEquipScroll_14">
-                   <property name="geometry">
-                    <rect>
-                     <x>10</x>
-                     <y>10</y>
-                     <width>633</width>
-                     <height>295</height>
-                    </rect>
-                   </property>
-                   <property name="verticalScrollBarPolicy">
-                    <enum>Qt::ScrollBarAlwaysOn</enum>
-                   </property>
-                   <property name="horizontalScrollBarPolicy">
-                    <enum>Qt::ScrollBarAlwaysOff</enum>
-                   </property>
-                   <property name="widgetResizable">
-                    <bool>true</bool>
-                   </property>
-                   <widget class="QWidget" name="psgEquipScrollWidgetContents_15">
-                    <property name="geometry">
-                     <rect>
-                      <x>0</x>
-                      <y>0</y>
-                      <width>614</width>
-                      <height>370</height>
-                     </rect>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>590</width>
-                      <height>370</height>
-                     </size>
-                    </property>
-                    <widget class="QGroupBox" name="psgEquip_35">
-                     <property name="geometry">
-                      <rect>
-                       <x>10</x>
-                       <y>20</y>
-                       <width>290</width>
-                       <height>67</height>
-                      </rect>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>290</width>
-                       <height>0</height>
-                      </size>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <kerning>false</kerning>
-                      </font>
-                     </property>
-                     <property name="layoutDirection">
-                      <enum>Qt::LeftToRight</enum>
-                     </property>
-                     <property name="title">
-                      <string/>
-                     </property>
-                     <layout class="QGridLayout" name="gridLayout_55">
-                      <item row="0" column="0" colspan="2">
-                       <widget class="QLabel" name="label_663">
-                        <property name="font">
-                         <font>
-                          <pointsize>10</pointsize>
-                          <weight>50</weight>
-                          <bold>false</bold>
-                          <underline>true</underline>
-                         </font>
-                        </property>
-                        <property name="text">
-                         <string>AWG - Advanced Settings</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="1" column="0">
-                       <widget class="QLabel" name="label_664">
-                        <property name="font">
-                         <font>
-                          <family>Arial</family>
-                          <pointsize>9</pointsize>
-                         </font>
-                        </property>
-                        <property name="text">
-                         <string>Trigger In Amplitude:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="1" column="1">
-                       <widget class="QPlainTextEdit" name="plainTextEdit_189">
-                        <property name="enabled">
-                         <bool>true</bool>
-                        </property>
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>16777215</width>
-                          <height>25</height>
-                         </size>
-                        </property>
-                        <property name="acceptDrops">
-                         <bool>true</bool>
-                        </property>
-                        <property name="verticalScrollBarPolicy">
-                         <enum>Qt::ScrollBarAlwaysOff</enum>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </widget>
-                   </widget>
-                  </widget>
-                  <widget class="QPushButton" name="set_run_vsa_6">
                    <property name="geometry">
                     <rect>
                      <x>650</x>
@@ -32244,7 +32135,7 @@ Analyze</string>
                 <enum>QTabWidget::Rounded</enum>
                </property>
                <property name="currentIndex">
-                <number>1</number>
+                <number>0</number>
                </property>
                <property name="usesScrollButtons">
                 <bool>true</bool>
@@ -32418,7 +32309,7 @@ Analyze</string>
                 <attribute name="title">
                  <string>VSG Cal.</string>
                 </attribute>
-                <widget class="QStackedWidget" name="stackedWidget_5">
+                <widget class="QStackedWidget" name="vsgResultsStack_vsgMeas">
                  <property name="geometry">
                   <rect>
                    <x>0</x>
@@ -32428,7 +32319,7 @@ Analyze</string>
                   </rect>
                  </property>
                  <property name="currentIndex">
-                  <number>0</number>
+                  <number>1</number>
                  </property>
                  <widget class="QWidget" name="page_105">
                   <widget class="QTabWidget" name="tabWidget_4">
@@ -42809,8 +42700,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>593</width>
-                         <height>391</height>
+                         <width>590</width>
+                         <height>382</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -47707,7 +47598,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>606</width>
+                           <width>593</width>
                            <height>500</height>
                           </rect>
                          </property>

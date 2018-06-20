@@ -119,6 +119,15 @@ class Window(QMainWindow):
 		self.ui.vsaResultsStack_vsaMeas.setCurrentIndex(1)
 		self.ui.vsaMeasRunStack.setCurrentIndex(1)
 		self.ui.downStack_vsaMeas.setCurrentIndex(0)
+		# vsg meas page
+		self.ui.vsgMeasNextStack.setCurrentIndex(0)
+		self.ui.debugVSGStack.setCurrentIndex(2)
+		self.ui.vsaResultsStack_vsgMeas.setCurrentIndex(1)
+		self.ui.vsgResultsStack_vsgMeas.setCurrentIndex(1)
+		self.ui.vsgMeasParamTabs.setCurrentIndex(0)
+		self.ui.awgParamsStack_vsgMeas.setCurrentIndex(0)
+		self.ui.upParamsStack_vsgMeas.setCurrentIndex(0)
+		self.ui.advParamsStack_vsgMeas.setCurrentIndex(0)
 		# algo page
 		self.ui.algoTabs.setCurrentIndex(0)
 		self.ui.algoNextStack.setCurrentIndex(0)
@@ -131,7 +140,6 @@ class Window(QMainWindow):
 		
 		# setting visibility of components
 		# vsa meas page
-		self.ui.debugVSGStack.setCurrentIndex(2)
 		self.ui.calAdviceText.setVisible(False)
 		self.ui.downMark_vsaMeas.setVisible(False)
 		self.ui.uxaMark_vsaMeas.setVisible(False)
@@ -157,8 +165,6 @@ class Window(QMainWindow):
 		self.ui.vsgMark_vsgMeas.setVisible(False)
 		self.ui.psgMark_vsgMeas.setVisible(False)
 		self.ui.upMark_vsgMeas.setVisible(False)
-		#vsg meas page
-		self.ui.debuggingPanel_vsg.setVisible(False)
 		# algo tab
 		self.ui.rfButton.setVisible(False)
 		

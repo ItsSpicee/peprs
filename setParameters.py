@@ -383,8 +383,10 @@ def setVSAMeasGen(self,boxDone,buttonPHover):
 
 def setVSAMeasAdv(self,boxDone):
 	self.ui.vsaMeasAdvEquip.setStyleSheet(boxDone)
-	self.ui.uxaMark_vsaMeas.setVisible(True)
-	self.ui.pxaMark_vsaMeas.setVisible(True)
+	self.ui.saMark_vsaMeas.setVisible(True)
+	self.ui.saMark_vsaMeas_2.setVisible(True)
+	self.ui.saMark_vsgMeas.setVisible(True)
+	self.ui.saMark_vsgMeas_2.setVisible(True)
 	
 def rxCalRoutine(self,boxDone,buttonPHover):
 	vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
@@ -400,6 +402,7 @@ def rxCalRoutine(self,boxDone,buttonPHover):
 	self.ui.downEquip_vsaMeas.setStyleSheet(boxDone)
 	self.ui.rxEquip_vsaMeas.setStyleSheet(boxDone)
 	self.ui.vsaResultsStack_vsaMeas.setCurrentIndex(0)
+	self.ui.vsaResultsStack_vsgMeas.setCurrentIndex(0)
 	self.ui.debugVSAStack.setCurrentIndex(0)
 	self.ui.downMark_vsaMeas.setVisible(True)
 	self.progressBar = QProgressBar()
@@ -420,6 +423,8 @@ def noRXCalRoutine(self,boxDone,buttonPHover):
 	self.ui.combEquip_vsaMeas.setStyleSheet(boxDone)
 	self.ui.downEquip_vsaMeas.setStyleSheet(boxDone)
 	self.ui.rxEquip_vsaMeas.setStyleSheet(boxDone)
+	self.ui.vsaResultsStack_vsaMeas.setCurrentIndex(0)
+	self.ui.vsaResultsStack_vsgMeas.setCurrentIndex(0)
 	self.ui.downMark_vsaMeas.setVisible(True)
 	if vsgType == 3: # vsg
 		self.ui.vsaMeasNextStack.setCurrentIndex(6)

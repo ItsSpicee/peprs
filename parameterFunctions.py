@@ -100,6 +100,7 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaMeasGenStack.setCurrentIndex(0)
 			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(0)
+			self.ui.vsaWorkflow_vsgMeas.setCurrentIndex(0)
 			self.ui.downStack_vsaMeas.setCurrentIndex(0)
 			setVSAWorkflowsNoModNoDown(self,1,0,False)
 		elif vsaIdx == 2:
@@ -111,6 +112,7 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(0)
 			self.ui.downStack_vsaMeas.setCurrentIndex(0)
+			self.ui.vsaWorkflow_vsgMeas.setCurrentIndex(0)
 			setVSAWorkflowsNoModNoDown(self,1,1,False)
 		elif vsaIdx == 3:
 			self.ui.vsaWorkflow.setCurrentIndex(1)
@@ -124,6 +126,7 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaMeasAdvStack.setCurrentIndex(1)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(0)
 			self.ui.downStack_vsaMeas.setCurrentIndex(0)
+			self.ui.vsaWorkflow_vsgMeas.setCurrentIndex(0)
 			setVSAWorkflowsNoModNoDown(self,1,2,True)
 		elif vsaIdx == 4:
 			self.ui.vsaWorkflow.setCurrentIndex(1)
@@ -137,6 +140,7 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaMeasAdvStack.setCurrentIndex(1)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(0)
 			self.ui.downStack_vsaMeas.setCurrentIndex(0)
+			self.ui.vsaWorkflow_vsgMeas.setCurrentIndex(0)
 			setVSAWorkflowsNoModNoDown(self,1,3,True)
 		elif vsaIdx == 5:
 			self.ui.vsaEquipStack.setCurrentIndex(1)
@@ -145,6 +149,7 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(1)
 			self.ui.downStack_vsaMeas.setCurrentIndex(1)
+			self.ui.vsaWorkflow_vsgMeas.setCurrentIndex(1)
 			setVSAWorkflowsNoModWithDown(self,4,0,1,False)
 		elif vsaIdx == 6:
 			self.ui.vsaEquipStack.setCurrentIndex(2)
@@ -153,6 +158,7 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(1)
 			self.ui.downStack_vsaMeas.setCurrentIndex(1)
+			self.ui.vsaWorkflow_vsgMeas.setCurrentIndex(1)
 			setVSAWorkflowsNoModWithDown(self,4,0,0,False)
 	elif demod == 1:
 		self.ui.uxaMod.setEnabled(True)
@@ -166,6 +172,7 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(0)
 			self.ui.downStack_vsaMeas.setCurrentIndex(0)
+			self.ui.vsaWorkflow_vsgMeas.setCurrentIndex(0)
 			setVSAWorkflowsWithModNoDown(self,2,0,False)
 		elif vsaIdx == 2:
 			digOrScopeSet(self,2,averaging,demod,digChecked,buttonGreyBHover,unsetBox,vsaIdx)
@@ -175,6 +182,7 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(0)
 			self.ui.downStack_vsaMeas.setCurrentIndex(0)
+			self.ui.vsaWorkflow_vsgMeas.setCurrentIndex(0)
 			setVSAWorkflowsWithModNoDown(self,2,1,False)
 		elif vsaIdx == 3:
 			uxaOrPxaSet(self,0,averaging,demod,uxaChecked,buttonGreyBHover,unsetBox)
@@ -184,6 +192,7 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaMeasAdvStack.setCurrentIndex(1)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(0)
 			self.ui.downStack_vsaMeas.setCurrentIndex(0)
+			self.ui.vsaWorkflow_vsgMeas.setCurrentIndex(0)
 			setVSAWorkflowsWithModNoDown(self,2,2,True)
 		elif vsaIdx == 4:
 			uxaOrPxaSet(self,1,averaging,demod,pxaChecked,buttonGreyBHover,unsetBox)
@@ -193,6 +202,7 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaMeasAdvStack.setCurrentIndex(1)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(0)
 			self.ui.downStack_vsaMeas.setCurrentIndex(0)
+			self.ui.vsaWorkflow_vsgMeas.setCurrentIndex(0)
 			setVSAWorkflowsWithModNoDown(self,2,3,True)
 		elif vsaIdx == 5:
 			digOrScopeDownSet(self,1,averaging,demod,scopeChecked,buttonGreyB,buttonGreyGHover,unsetBox,vsaIdx)
@@ -200,6 +210,7 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaMeasGenStack.setCurrentIndex(0)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(1)
 			self.ui.downStack_vsaMeas.setCurrentIndex(1)
+			self.ui.vsaWorkflow_vsgMeas.setCurrentIndex(1)
 			setVSAWorkflowsWithModWithDown(self,3,1,0,False)
 		elif vsaIdx == 6:
 			digOrScopeDownSet(self,2,averaging,demod,digChecked,buttonGreyB,buttonGreyGHover,unsetBox,vsaIdx)
@@ -207,6 +218,7 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaMeasGenStack.setCurrentIndex(1)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(1)
 			self.ui.downStack_vsaMeas.setCurrentIndex(1)
+			self.ui.vsaWorkflow_vsgMeas.setCurrentIndex(1)
 			setVSAWorkflowsWithModWithDown(self,3,1,1,False)
 	elif demod == 2:
 		self.ui.uxaMod.setEnabled(False)
@@ -220,6 +232,7 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(0)
 			self.ui.downStack_vsaMeas.setCurrentIndex(0)
+			self.ui.vsaWorkflow_vsgMeas.setCurrentIndex(0)
 			setVSAWorkflowsNoModNoDown(self,1,0,False)
 		elif vsaIdx == 2:
 			digOrScopeSet(self,2,averaging,demod,digChecked,buttonGreyBHover,unsetBox,vsaIdx)
@@ -229,6 +242,7 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(0)
 			self.ui.downStack_vsaMeas.setCurrentIndex(0)
+			self.ui.vsaWorkflow_vsgMeas.setCurrentIndex(0)
 			setVSAWorkflowsNoModNoDown(self,1,1,False)
 		elif vsaIdx == 3:
 			uxaOrPxaSet(self,0,averaging,demod,uxaChecked,buttonGreyBHover,unsetBox)
@@ -238,6 +252,7 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaMeasAdvStack.setCurrentIndex(1)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(0)
 			self.ui.downStack_vsaMeas.setCurrentIndex(0)
+			self.ui.vsaWorkflow_vsgMeas.setCurrentIndex(0)
 			setVSAWorkflowsNoModNoDown(self,1,2,True)
 		elif vsaIdx == 4:
 			uxaOrPxaSet(self,1,averaging,demod,pxaChecked,buttonGreyBHover,unsetBox)
@@ -247,6 +262,7 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaMeasAdvStack.setCurrentIndex(1)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(0)
 			self.ui.downStack_vsaMeas.setCurrentIndex(0)
+			self.ui.vsaWorkflow_vsgMeas.setCurrentIndex(0)
 			setVSAWorkflowsNoModNoDown(self,1,3,True)
 		elif vsaIdx == 5:
 			digOrScopeDownSet(self,1,averaging,demod,scopeChecked,buttonGreyB,buttonGreyGHover,unsetBox,vsaIdx)
@@ -254,6 +270,7 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(1)
 			self.ui.downStack_vsaMeas.setCurrentIndex(1)
+			self.ui.vsaWorkflow_vsgMeas.setCurrentIndex(1)
 			setVSAWorkflowsNoModWithDown(self,4,0,1,False)
 		elif vsaIdx == 6:	
 			digOrScopeDownSet(self,2,averaging,demod,digChecked,buttonGreyB,buttonGreyGHover,unsetBox,vsaIdx)
@@ -261,6 +278,7 @@ def displayVsa(self,unsetBox,buttonGreyBHover,buttonGreyGHover,buttonGreyB):
 			self.ui.vsaMeasAdvStack.setCurrentIndex(0)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(1)
 			self.ui.downStack_vsaMeas.setCurrentIndex(1)
+			self.ui.vsaWorkflow_vsgMeas.setCurrentIndex(1)
 			setVSAWorkflowsNoModWithDown(self,4,0,0,False)	
 				
 # apply changes from one demod box to all demod boxes
@@ -473,6 +491,7 @@ def setVSGWorkflows(self,idx):
 	self.ui.vsgWorkflow_power1.setCurrentIndex(idx)
 	self.ui.vsgWorkflow_power3.setCurrentIndex(idx)
 	self.ui.vsgWorkflow_vsaMeas.setCurrentIndex(idx)
+	self.ui.vsgWorkflow_vsgMeas.setCurrentIndex(idx)
 	
 def setVSAWorkflowsWithModNoDown(self,idx,subidx,state):
 	self.ui.vsaWorkflow_vsg.setCurrentIndex(idx)
@@ -488,6 +507,7 @@ def setVSAWorkflowsWithModNoDown(self,idx,subidx,state):
 	self.ui.vsaWorkflow_power2.setCurrentIndex(idx)
 	self.ui.single_mod_p2_stack.setCurrentIndex(subidx)
 	self.ui.single_vsaMeas_stack.setCurrentIndex(subidx)
+	self.ui.single_vsgMeas_stack.setCurrentIndex(subidx)
 	self.ui.analysisBWLabel_vsaMeas.setEnabled(state)
 	self.ui.analysisBWField_vsaMeas.setEnabled(state)
 
@@ -505,6 +525,7 @@ def setVSAWorkflowsNoModNoDown(self,idx,subidx,state):
 	self.ui.vsaWorkflow_power2.setCurrentIndex(idx)
 	self.ui.single_p2_stack.setCurrentIndex(subidx)
 	self.ui.single_vsaMeas_stack.setCurrentIndex(subidx)
+	self.ui.single_vsgMeas_stack.setCurrentIndex(subidx)
 	self.ui.analysisBWLabel_vsaMeas.setEnabled(state)
 	self.ui.analysisBWField_vsaMeas.setEnabled(state)
 	
@@ -528,6 +549,7 @@ def setVSAWorkflowsNoModWithDown(self,idx,twoidx,subidx,state):
 	self.ui.vsaWorkflow_power3.setCurrentIndex(twoidx)
 	self.ui.single_down_p3_stack.setCurrentIndex(subidx)
 	self.ui.single_down_vsaMeas_stack.setCurrentIndex(subidx)
+	self.ui.single_down_vsgMeas_stack.setCurrentIndex(subidx)
 	self.ui.analysisBWLabel_vsaMeas.setEnabled(state)
 	self.ui.analysisBWField_vsaMeas.setEnabled(state)
 	
@@ -551,6 +573,7 @@ def setVSAWorkflowsWithModWithDown(self,idx,twoidx,subidx,state):
 	self.ui.vsaWorkflow_power3.setCurrentIndex(twoidx)
 	self.ui.single_mod_down_p3_stack.setCurrentIndex(subidx)
 	self.ui.single_down_vsaMeas_stack.setCurrentIndex(subidx)
+	self.ui.single_down_vsgMeas_stack.setCurrentIndex(subidx)
 	self.ui.analysisBWLabel_vsaMeas.setEnabled(state)
 	self.ui.analysisBWField_vsaMeas.setEnabled(state)
 	
