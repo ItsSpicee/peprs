@@ -7,6 +7,7 @@ from PyQt5.QtGui import (QCursor, QPen, QPainter, QColor, QIcon, QFont)
 from PyQt5.QtCore import (Qt, pyqtSlot, QSize)
 
 from peprs import Ui_peprs
+from dutsetup import Ui_DUTSetup
 import setParameters as set
 import workflowNav as flow
 import windowFunctions as menu
@@ -15,11 +16,32 @@ import parameterFunctions as param
 class Window(QMainWindow):
 	def __init__(self):
 		super(Window,self).__init__()
-		self.ui = Ui_peprs()
+		self.ui = Ui_DUTSetup()
+		#self.ui = Ui_peprs()
 		self.ui.setupUi(self)
-		self.initUI()	
+		#self.initUI()
+		self.initDutUI()
 		
-	def initUI(self):		
+	def initDutUI(self):
+		self.ui.dutStackedWidget.setCurrentIndex(0)
+		self.ui.dutReadyButton.clicked.connect(self.dutReady)
+		self.setWindowTitle('PEPRS - Performance Enhancement for Processing Radio Signals')
+		
+		self.show()
+		
+	def dutReady(self):
+		mimoChecked = self.ui.mimoRadio.isChecked()
+		misoChecked = self.ui.misoRadio.isChecked()
+		simoChecked = self.ui.simoRadio.isChecked()
+		if self.ui.sisoRadio.isChecked() == True :
+			self.ui = Ui_peprs()
+			self.ui.setupUi(self)
+			self.initMainUI()
+			
+		elif mimoChecked == True or misoChecked or simoChecked:
+			self.ui.dutStackedWidget.setCurrentIndex(1)
+		
+	def initMainUI(self):		
 		# styling variables
 		purpleFocusButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:0.511, x2:1, y2:0, stop:0 rgba(128, 0, 128, 255), stop:1 rgba(154, 0, 154, 255)); border-radius:5px; color:white;font-weight:700;font-size:11px}"
 		purpleButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:0.511, x2:1, y2:0, stop:0 rgba(128, 0, 128, 255), stop:1 rgba(154, 0, 154, 255)); border-radius:5px; color:white;}"	
@@ -175,10 +197,6 @@ class Window(QMainWindow):
 		self.ui.demodulationEnable.currentIndexChanged.connect(lambda: param.displayVsa(self,unsetParams,greyBHover,greyGHover,greyBButton))
 		self.ui.averagingEnable.currentIndexChanged.connect(lambda: param.displayVsa(self,unsetParams,greyBHover,greyGHover,greyBButton))
 		self.ui.saType.currentIndexChanged.connect(lambda: param.displaySa(self,blueSelectP,purpleFocusButton,purpleButtonHover,greyBHover,greyPHover,greyBButton))
-		self.ui.p1c1Check.stateChanged.connect(lambda: param.enableChannel(self))
-		self.ui.p1c2Check.stateChanged.connect(lambda: param.enableChannel(self))
-		self.ui.p1c3Check.stateChanged.connect(lambda: param.enableChannel(self))
-		self.ui.p1c4Check.stateChanged.connect(lambda: param.enableChannel(self))
 		self.ui.p2c1Check.stateChanged.connect(lambda: param.enableChannel(self))
 		self.ui.p2c2Check.stateChanged.connect(lambda: param.enableChannel(self))
 		self.ui.p2c3Check.stateChanged.connect(lambda: param.enableChannel(self))
@@ -202,6 +220,18 @@ class Window(QMainWindow):
 		self.ui.noCalRXButton_vsgNext.clicked.connect(lambda: self.ui.vsgMeasNextStack.setCurrentIndex(1))
 		self.ui.yesCalRXButton_vsgNext.clicked.connect(lambda: self.ui.vsgMeasNextStack.setCurrentIndex(2))
 		self.ui.vsgCalType.currentIndexChanged.connect(lambda: param.displayVSGMeas(self))
+		# power supply 1
+		self.ui.p1c1Check.stateChanged.connect(lambda: param.enableChannel(self))
+		self.ui.p1c2Check.stateChanged.connect(lambda: param.enableChannel(self))
+		self.ui.p1c3Check.stateChanged.connect(lambda: param.enableChannel(self))
+		self.ui.p1c4Check.stateChanged.connect(lambda: param.enableChannel(self))
+		self.ui.p1Enabled.currentIndexChanged.connect(lambda: param.enableSupplies(self,self.ui.p1Enabled,self.ui.p1Equip))
+		self.ui.p2Enabled.currentIndexChanged.connect(lambda: param.enableSupplies(self,self.ui.p2Enabled,self.ui.p2Equip))
+		self.ui.p3Enabled.currentIndexChanged.connect(lambda: param.enableSupplies(self,self.ui.p3Enabled,self.ui.p3Equip))
+		
+		# browse/open folder action
+		
+		
 	
 		# expand/shrink depending on which step tab is clicked
 		self.ui.stepTabs.currentChanged.connect(lambda: menu.changeStepTab(self))

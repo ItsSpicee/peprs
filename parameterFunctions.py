@@ -406,6 +406,13 @@ def enableChannel(self):
 		self.ui.p3c4Equip.setEnabled(True)
 	else: 
 		self.ui.p3c4Equip.setEnabled(False)
+		
+def enableSupplies(self,supplyNumber,boxNumber):
+	idx = supplyNumber.currentIndex()
+	if idx == 0 or idx == 1:
+		boxNumber.setEnabled(True)
+	elif idx == 2:
+		boxNumber.setEnabled(False)
 
 def enableVSACalFile(self,boxDone,boxUnset):
 	checked = self.ui.generateVSACalCheck.isChecked()
