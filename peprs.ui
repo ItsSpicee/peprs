@@ -10,6 +10,12 @@
     <height>950</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="font">
    <font>
     <pointsize>10</pointsize>
@@ -52,7 +58,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="algoTab">
        <property name="layoutDirection">
@@ -111,7 +117,7 @@
                  <string notr="true">QFrame{background-color:#d1d5de}</string>
                 </property>
                 <property name="currentIndex">
-                 <number>0</number>
+                 <number>1</number>
                 </property>
                 <widget class="QWidget" name="page_98">
                  <widget class="QFrame" name="nextFrame_82">
@@ -712,7 +718,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                   <property name="geometry">
                    <rect>
                     <x>0</x>
-                    <y>-181</y>
+                    <y>0</y>
                     <width>712</width>
                     <height>550</height>
                    </rect>
@@ -7197,6 +7203,12 @@ QFrame{background-color:#d1d5de}</string>
                      <width>591</width>
                      <height>241</height>
                     </rect>
+                   </property>
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>2</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
                    </property>
                    <property name="font">
                     <font>
@@ -34379,7 +34391,7 @@ QWidget#power2{background-color:rgb(247,247,247)}
 QWidget#power3{background-color:rgb(247,247,247)}</string>
           </property>
           <property name="currentIndex">
-           <number>8</number>
+           <number>6</number>
           </property>
           <widget class="QWidget" name="vsg">
            <property name="styleSheet">
@@ -61854,7 +61866,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       </widget>
                      </item>
                      <item row="4" column="2" colspan="2">
-                      <widget class="QPlainTextEdit" name="plainTextEdit_105">
+                      <widget class="QPlainTextEdit" name="p1Address">
                        <property name="enabled">
                         <bool>true</bool>
                        </property>
@@ -61895,7 +61907,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       </widget>
                      </item>
                      <item row="5" column="2" colspan="2">
-                      <widget class="QPlainTextEdit" name="plainTextEdit_106">
+                      <widget class="QPlainTextEdit" name="p1PartNumber">
                        <property name="enabled">
                         <bool>false</bool>
                        </property>
@@ -61983,7 +61995,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       </widget>
                      </item>
                      <item row="1" column="1">
-                      <widget class="QPlainTextEdit" name="p1c1VoltageLimit">
+                      <widget class="QPlainTextEdit" name="p1c1Voltage">
                        <property name="verticalScrollBarPolicy">
                         <enum>Qt::ScrollBarAlwaysOff</enum>
                        </property>
@@ -62002,7 +62014,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       </widget>
                      </item>
                      <item row="2" column="1">
-                      <widget class="QPlainTextEdit" name="p1c1CurrentLimit">
+                      <widget class="QPlainTextEdit" name="p1c1Current">
                        <property name="verticalScrollBarPolicy">
                         <enum>Qt::ScrollBarAlwaysOff</enum>
                        </property>
@@ -64564,7 +64576,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       </widget>
                      </item>
                      <item row="4" column="2" colspan="2">
-                      <widget class="QPlainTextEdit" name="plainTextEdit_86">
+                      <widget class="QPlainTextEdit" name="p2Address">
                        <property name="enabled">
                         <bool>true</bool>
                        </property>
@@ -64605,7 +64617,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       </widget>
                      </item>
                      <item row="5" column="2" colspan="2">
-                      <widget class="QPlainTextEdit" name="plainTextEdit_87">
+                      <widget class="QPlainTextEdit" name="p2PartNumber">
                        <property name="enabled">
                         <bool>false</bool>
                        </property>
@@ -64693,7 +64705,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       </widget>
                      </item>
                      <item row="1" column="1">
-                      <widget class="QPlainTextEdit" name="plainTextEdit_112">
+                      <widget class="QPlainTextEdit" name="p2c1Voltage">
                        <property name="verticalScrollBarPolicy">
                         <enum>Qt::ScrollBarAlwaysOff</enum>
                        </property>
@@ -64712,7 +64724,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       </widget>
                      </item>
                      <item row="2" column="1">
-                      <widget class="QPlainTextEdit" name="plainTextEdit_113">
+                      <widget class="QPlainTextEdit" name="p2c1Current">
                        <property name="verticalScrollBarPolicy">
                         <enum>Qt::ScrollBarAlwaysOff</enum>
                        </property>
@@ -66878,7 +66890,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       </widget>
                      </item>
                      <item row="4" column="2" colspan="2">
-                      <widget class="QPlainTextEdit" name="plainTextEdit_1">
+                      <widget class="QPlainTextEdit" name="p3Address">
                        <property name="enabled">
                         <bool>true</bool>
                        </property>
@@ -66919,7 +66931,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       </widget>
                      </item>
                      <item row="5" column="2" colspan="2">
-                      <widget class="QPlainTextEdit" name="plainTextEdit_116">
+                      <widget class="QPlainTextEdit" name="p3PartNumber">
                        <property name="enabled">
                         <bool>false</bool>
                        </property>
@@ -67007,7 +67019,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       </widget>
                      </item>
                      <item row="1" column="1">
-                      <widget class="QPlainTextEdit" name="plainTextEdit_117">
+                      <widget class="QPlainTextEdit" name="p3c1Voltage">
                        <property name="verticalScrollBarPolicy">
                         <enum>Qt::ScrollBarAlwaysOff</enum>
                        </property>
@@ -67026,7 +67038,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       </widget>
                      </item>
                      <item row="2" column="1">
-                      <widget class="QPlainTextEdit" name="plainTextEdit_118">
+                      <widget class="QPlainTextEdit" name="p3c1Current">
                        <property name="verticalScrollBarPolicy">
                         <enum>Qt::ScrollBarAlwaysOff</enum>
                        </property>

@@ -1,5 +1,7 @@
 # contains callbacks to ui components and a few miscellaneous functions that function better in main.py (e.g. rely on event, used by multiple files. rely on parameter from signal)
 
+#1265, 950
+
 import sys
 from PyQt5 import uic, QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (QMessageBox, QTabWidget, QFileDialog,QDialog, QInputDialog, QTextEdit, QLineEdit, QLabel, QFrame, QGridLayout, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QMenu, QAction, qApp, QDesktopWidget, QMessageBox, QToolTip, QPushButton, QApplication, QProgressBar,QSizePolicy)
@@ -35,8 +37,10 @@ class Window(QMainWindow):
 		simoChecked = self.ui.simoRadio.isChecked()
 		if self.ui.sisoRadio.isChecked() == True :
 			self.ui = Ui_peprs()
+			self.hide()
 			self.ui.setupUi(self)
 			self.initMainUI()
+			self.show()
 			
 		elif mimoChecked == True or misoChecked or simoChecked:
 			self.ui.dutStackedWidget.setCurrentIndex(1)

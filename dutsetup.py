@@ -151,7 +151,15 @@ class Ui_DUTSetup(object):
         self.gridLayout.addWidget(self.rfOutputEdit, 2, 1, 1, 1)
         spacerItem = QtWidgets.QSpacerItem(20, 17, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.gridLayout.addItem(spacerItem, 3, 0, 1, 1)
+        self.label_2 = QtWidgets.QLabel(self.page_2)
+        self.label_2.setGeometry(QtCore.QRect(20, 10, 51, 16))
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        font.setUnderline(True)
+        self.label_2.setFont(font)
+        self.label_2.setObjectName("label_2")
         self.frame.raise_()
+        self.label_2.raise_()
         self.dutStackedWidget.addWidget(self.page_2)
 
         self.retranslateUi(DUTSetup)
@@ -171,6 +179,7 @@ class Ui_DUTSetup(object):
         self.label_4.setText(_translate("DUTSetup", "Provide the appropriate quantities for the equipment:"))
         self.rfInputLabel.setText(_translate("DUTSetup", "Number of DUT RF Inputs:"))
         self.rfOutputLabel.setText(_translate("DUTSetup", "Number of DUT RF Outputs:"))
+        self.label_2.setText(_translate("DUTSetup", "Go Back"))
 
 
 if __name__ == "__main__":

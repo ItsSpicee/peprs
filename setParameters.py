@@ -3,7 +3,7 @@
 from PyQt5.QtWidgets import (QProgressBar)
 from PyQt5.QtGui import (QCursor)
 from PyQt5.QtCore import (Qt)
-
+# import matlab.engine
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions used in main.py
 
@@ -257,6 +257,12 @@ def setP1(self,boxDone,buttonFocus,buttonBHover,buttonHoverB,greyButtonB):
 		self.ui.up_psg_next.setCurrentIndex(8)
 		self.ui.vsgNextSteps.setCurrentIndex(10)
 		setPrevP1Buttons(self,buttonBHover,buttonHoverB,greyButtonB,Qt.PointingHandCursor,Qt.ArrowCursor)
+		
+	# get field data
+	p1c1V = self.ui.p1c1Voltage.toPlainText()
+	# eng = matlab.engine.start_matlab()
+	# eng.Set_Voltage(p1c1V,nargout=0)
+	
 
 def setP2(self,boxDone,buttonFocus,buttonBHover,greyHoverB,greyButtonB):
 	c1Checked = self.ui.p2c1Check.isChecked()
