@@ -55,19 +55,14 @@ class Window(QMainWindow):
 		greenButtonHover = "QPushButton{ border:3px dashed #005500;  background-color:qlineargradient(spread:pad, x1:1, y1:0.83, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 126, 0, 255)); border-radius:5px;color:white} QPushButton:hover{background-color:rgb(0, 118, 0)}"
 		blueFocusButton = "QPushButton {background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 0, 127, 255), stop:1 rgba(0, 0, 209, 255)); border-radius:5px; color:white;font-weight:700;font-size:11px}"
 		
-		blueFocusButtonDashed = "QPushButton {background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 0, 127, 255), stop:1 rgba(0, 0, 209, 255)); border-radius:5px; color:white;font-weight:700;font-size:11px; border:3px dashed rgb(0, 0, 127);}"
-		
 		blueButton = "QPushButton {background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 0, 127, 255), stop:1 rgba(0, 0, 209, 255)); border-radius:5px; color:white;}"
 		blueButtonHover ="QPushButton {background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 0, 127, 255), stop:1 rgba(0, 0, 209, 255)); border-radius:5px; color:white;} QPushButton:hover{background:rgb(0, 0, 216)}"
-		blueButtonHoverDashed = "QPushButton {background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 0, 127, 255), stop:1 rgba(0, 0, 209, 255)); border-radius:5px; color:white;border: 3px dashed rgb(0, 0, 127)} QPushButton:hover{background:rgb(0, 0, 216)}"
 		setParams = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #515a70}"
 		unsetParams = "QGroupBox{background-color:rgb(247, 247, 247)}"
 		greyBButton = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;}"
-		greyBButtonDashed = "QPushButton {border:3px dashed rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;}"
 		greyPButton = "QPushButton{border:3px solid purple;  background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;}"
 		disabledButton = "QPushButton {color:grey}"
 		greyBHover = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px;} QPushButton:hover{background-color:rgb(243, 243, 243);}"
-		greyBHoverDashed = "QPushButton {border:3px dashed rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px;} QPushButton:hover{background-color:rgb(243, 243, 243);}"
 		greyGHover = "QPushButton {border:3px dashed #005500; background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px;} QPushButton:hover{background-color:rgb(243, 243, 243);}"
 		greyPHover = "QPushButton{ border:3px solid purple;  background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;} QPushButton:hover{background-color:rgb(243, 243, 243);}"
 		blueSelectP = "QPushButton{ border:3px solid purple;  background-color:qlineargradient(spread:pad, x1:0.994318, y1:0.682, x2:1, y2:0, stop:0 rgba(72, 144, 216, 255), stop:1 rgba(83, 170, 252, 255)); border-radius:5px;color:white}"
@@ -268,11 +263,11 @@ class Window(QMainWindow):
 		self.ui.saSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.saEquipAdv,setParams))
 		self.ui.saSet.clicked.connect(lambda: set.setSA(self,purpleFocusButton,purpleButtonHover,greyBHover,setParams))
 		# power 1 page
-		self.ui.p1Set.clicked.connect(lambda: set.setP1(self,setParams,blueFocusButton,blueButtonHover,greyBHoverDashed,greyBButtonDashed))
+		self.ui.p1Set.clicked.connect(lambda: set.setP1(self,setParams,blueFocusButton,blueButtonHover,greyBHover,greyBButton))
 		# power 2 page
-		self.ui.p2Set.clicked.connect(lambda: set.setP2(self,setParams,blueFocusButtonDashed,blueButtonHoverDashed,greyBHoverDashed,greyBButtonDashed))
+		self.ui.p2Set.clicked.connect(lambda: set.setP2(self,setParams,blueFocusButton,blueButtonHover,greyBHover,greyBButton))
 		# power 3 page
-		self.ui.p3Set.clicked.connect(lambda: set.setP3(self,setParams,blueFocusButtonDashed,blueButtonHoverDashed))
+		self.ui.p3Set.clicked.connect(lambda: set.setP3(self,setParams,blueFocusButton,blueButtonHover))
 		# vsa meas page
 		self.ui.vsaMeasSet.clicked.connect(lambda: set.setVSAMeasDig(self,setParams,purpleButtonHover))
 		self.ui.vsaMeasSet_2.clicked.connect(lambda: set.setVSAMeasGen(self,setParams,purpleButtonHover))
@@ -289,6 +284,7 @@ class Window(QMainWindow):
 		self.ui.upSet_vsgMeas.clicked.connect(lambda: set.setUpVSGMeas(self,setParams))
 		self.ui.heteroRun.clicked.connect(lambda: set.setHetero(self,setParams))
 		self.ui.homoRun.clicked.connect(lambda: set.setHomo(self,setParams))
+		
 		# control dash radio buttons
 		self.ui.runStandard.toggled.connect(lambda: flow.standardSetup(self,greyBButton,greyPButton))
 		self.ui.runVSG.toggled.connect(lambda: flow.vsgOnlySetup(self,disabledButton,greyPButton))
