@@ -6,24 +6,6 @@ from PyQt5.QtCore import (Qt)
 def changeStack(self,stackName,idx):
 	stackName.setCurrentIndex(idx)
 
-def vsgOnlySetup(self,greyButton,purpleButton):
-	self.ui.vsgDash.setStyleSheet(purpleButton)
-	self.ui.meterDash.setStyleSheet(greyButton)
-	self.ui.vsaDash.setStyleSheet(greyButton)
-	self.ui.saDash.setStyleSheet(greyButton)
-	
-def vsaOnlySetup(self,greyButton,purpleButton,blueButton):
-	self.ui.vsgDash.setStyleSheet(greyButton)
-	self.ui.meterDash.setStyleSheet(blueButton)
-	self.ui.vsaDash.setStyleSheet(purpleButton)
-	self.ui.saDash.setStyleSheet(purpleButton)
-	
-def standardSetup(self,purpleButton,blueButton):
-	self.ui.vsgDash.setStyleSheet(purpleButton)
-	self.ui.meterDash.setStyleSheet(blueButton)
-	self.ui.vsaDash.setStyleSheet(purpleButton)
-	self.ui.saDash.setStyleSheet(purpleButton)
-
 def awgOnClick(self,unactiveButton,activeButton,buttonPHover):
 	self.ui.equipStack.setCurrentIndex(0)
 	upChecked = self.ui.upSet.isChecked()
@@ -192,3 +174,23 @@ def analyzerVSGMeasOnClick(self):
 	self.ui.vsaMeasParamTabs.setCurrentIndex(0)
 	self.ui.measStack.setCurrentIndex(0)
 		
+# OLD CODE
+
+# for old vsa and vsg only dash buttons
+# def vsgOnlySetup(self,greyButton,blueButton):
+	# self.ui.vsgDash.setStyleSheet(blueButton)
+	# self.ui.meterDash.setStyleSheet(greyButton)
+	# self.ui.vsaDash.setStyleSheet(greyButton)
+	# self.ui.saDash.setStyleSheet(greyButton)
+	
+# def vsaOnlySetup(self,greyButton, blueButton):
+	# self.ui.vsgDash.setStyleSheet(greyButton)
+	# self.ui.meterDash.setStyleSheet(blueButton)
+	# self.ui.vsaDash.setStyleSheet(blueButton)
+	# self.ui.saDash.setStyleSheet(blueButton)
+	
+# def standardSetup(self,blueButton):
+	# self.ui.vsgDash.setStyleSheet(blueButton)
+	# self.ui.meterDash.setStyleSheet(blueButton)
+	# self.ui.vsaDash.setStyleSheet(blueButton)
+	# self.ui.saDash.setStyleSheet(blueButton)

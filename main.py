@@ -47,25 +47,14 @@ class Window(QMainWindow):
 		
 	def initMainUI(self):		
 		# styling variables
-		purpleFocusButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:0.511, x2:1, y2:0, stop:0 rgba(128, 0, 128, 255), stop:1 rgba(154, 0, 154, 255)); border-radius:5px; color:white;font-weight:700;font-size:11px}"
-		purpleButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:0.511, x2:1, y2:0, stop:0 rgba(128, 0, 128, 255), stop:1 rgba(154, 0, 154, 255)); border-radius:5px; color:white;}"	
-		purpleButtonHover = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:0.511, x2:1, y2:0, stop:0 rgba(128, 0, 128, 255), stop:1 rgba(154, 0, 154, 255)); border-radius:5px; color:white} QPushButton:hover{background-color:rgb(144, 0, 144)}"
-		greenFocusButton = "QPushButton{ border:3px dashed #005500;  background-color:qlineargradient(spread:pad, x1:1, y1:0.83, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 126, 0, 255)); border-radius:5px;color:white;font-weight:700;font-size:11px}"
-		greenButton = "QPushButton{ border:3px dashed #005500;  background-color:qlineargradient(spread:pad, x1:1, y1:0.83, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 126, 0, 255)); border-radius:5px;color:white;}"
-		greenButtonHover = "QPushButton{ border:3px dashed #005500;  background-color:qlineargradient(spread:pad, x1:1, y1:0.83, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 126, 0, 255)); border-radius:5px;color:white} QPushButton:hover{background-color:rgb(0, 118, 0)}"
-		blueFocusButton = "QPushButton {background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 0, 127, 255), stop:1 rgba(0, 0, 209, 255)); border-radius:5px; color:white;font-weight:700;font-size:11px}"
-		
-		blueButton = "QPushButton {background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 0, 127, 255), stop:1 rgba(0, 0, 209, 255)); border-radius:5px; color:white;}"
-		blueButtonHover ="QPushButton {background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 0, 127, 255), stop:1 rgba(0, 0, 209, 255)); border-radius:5px; color:white;} QPushButton:hover{background:rgb(0, 0, 216)}"
+		setButton = "QPushButton{ background-color:#114b5f; border-radius:5px; color:white;border:none}"
+		setFocusButton = "QPushButton{ background-color:#114b5f; border-radius:5px; color:white;border:none;font-weight:700;font-size:11px}"
+		setButtonHover = "QPushButton{ background-color:#114b5f; border-radius:5px; color:white;border:none} QPushButton:hover{background-color:rgb(23, 105, 132)}"
 		setParams = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #515a70}"
 		unsetParams = "QGroupBox{background-color:rgb(247, 247, 247)}"
-		greyBButton = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;}"
-		greyPButton = "QPushButton{border:3px solid purple;  background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;}"
-		disabledButton = "QPushButton {color:grey}"
-		greyBHover = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px;} QPushButton:hover{background-color:rgb(243, 243, 243);}"
-		greyGHover = "QPushButton {border:3px dashed #005500; background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px;} QPushButton:hover{background-color:rgb(243, 243, 243);}"
-		greyPHover = "QPushButton{ border:3px solid purple;  background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;} QPushButton:hover{background-color:rgb(243, 243, 243);}"
-		blueSelectP = "QPushButton{ border:3px solid purple;  background-color:qlineargradient(spread:pad, x1:0.994318, y1:0.682, x2:1, y2:0, stop:0 rgba(72, 144, 216, 255), stop:1 rgba(83, 170, 252, 255)); border-radius:5px;color:white}"
+		greyButton = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;}"
+		greyHover = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px;} QPushButton:hover{background-color:rgb(243, 243, 243);}"
+		blueSelect = "QPushButton{ border:3px solid rgb(0, 0, 127);  background-color:qlineargradient(spread:pad, x1:0.994318, y1:0.682, x2:1, y2:0, stop:0 rgba(72, 144, 216, 255), stop:1 rgba(83, 170, 252, 255)); border-radius:5px;color:white}"
 		
 		# keep widget space when hidden
 		retainVsa = QSizePolicy(self.ui.debuggingPanel_vsa.sizePolicy())
@@ -191,11 +180,11 @@ class Window(QMainWindow):
 		self.ui.rfButton.setVisible(False)
 		
 		# dropdown and field changes
-		self.ui.vsgSetup.currentIndexChanged.connect(lambda: param.displayVsg(self,purpleButtonHover,greyPHover,greyGHover,greyPButton))
-		self.ui.vsaType.currentIndexChanged.connect(lambda: param.displayVsa(self,unsetParams,greyBHover,greyGHover,greyBButton))
-		self.ui.demodulationEnable.currentIndexChanged.connect(lambda: param.displayVsa(self,unsetParams,greyBHover,greyGHover,greyBButton))
-		self.ui.averagingEnable.currentIndexChanged.connect(lambda: param.displayVsa(self,unsetParams,greyBHover,greyGHover,greyBButton))
-		self.ui.saType.currentIndexChanged.connect(lambda: param.displaySa(self,blueSelectP,purpleFocusButton,purpleButtonHover,greyBHover,greyPHover,greyBButton))
+		self.ui.vsgSetup.currentIndexChanged.connect(lambda: param.displayVsg(self,greyHover,greyButton))
+		self.ui.vsaType.currentIndexChanged.connect(lambda: param.displayVsa(self,unsetParams,greyHover,greyButton))
+		self.ui.demodulationEnable.currentIndexChanged.connect(lambda: param.displayVsa(self,unsetParams,greyHover,greyButton))
+		self.ui.averagingEnable.currentIndexChanged.connect(lambda: param.displayVsa(self,unsetParams,greyHover,greyButton))
+		self.ui.saType.currentIndexChanged.connect(lambda: param.displaySa(self,blueSelect,setFocusButton,setButtonHover,greyButton))
 		self.ui.p2c1Check.stateChanged.connect(lambda: param.enableChannel(self))
 		self.ui.p2c2Check.stateChanged.connect(lambda: param.enableChannel(self))
 		self.ui.p2c3Check.stateChanged.connect(lambda: param.enableChannel(self))
@@ -241,38 +230,38 @@ class Window(QMainWindow):
 		
 		# control parameter set buttons
 		# vsg page
-		self.ui.awgSetGeneral.clicked.connect(lambda: set.setGeneralAWG(self,purpleFocusButton,setParams,greyPHover,greyGHover))
-		self.ui.vsgSetGeneral.clicked.connect(lambda: set.setGeneralVSG(self,purpleFocusButton,setParams,greyPHover))
+		self.ui.awgSetGeneral.clicked.connect(lambda: set.setGeneralAWG(self,setFocusButton,setParams,greyHover,greyHover))
+		self.ui.vsgSetGeneral.clicked.connect(lambda: set.setGeneralVSG(self,setFocusButton,setParams,greyHover))
 		self.ui.vsgSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.vsgEquipAdv,setParams))
 		self.ui.awgSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.awgEquipAdv,setParams))
 		# upconverter page
-		self.ui.upSet.clicked.connect(lambda: set.setUp(self,greenFocusButton,greenButton,setParams,greyPHover))
-		self.ui.psgSet.clicked.connect(lambda: set.setPSG(self,greenFocusButton,greenButton,setParams,greyPHover))
+		self.ui.upSet.clicked.connect(lambda: set.setUp(self,setFocusButton,setButton,setParams,greyHover))
+		self.ui.psgSet.clicked.connect(lambda: set.setPSG(self,setFocusButton,setButton,setParams,greyHover))
 		# vsa page
-		self.ui.uxaSet.clicked.connect(lambda: set.setVSA(self,purpleFocusButton,greenFocusButton,purpleButtonHover,greenButtonHover,setParams,greyBHover, greyGHover))
-		self.ui.pxaSet.clicked.connect(lambda: set.setVSA(self,purpleFocusButton,greenFocusButton,purpleButtonHover,greenButtonHover,setParams,greyBHover, greyGHover))
+		self.ui.uxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover, greyHover))
+		self.ui.pxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover, greyHover))
 		self.ui.uxaVSASetAdv.clicked.connect(lambda: set.setVSAAdv(self,setParams))
-		self.ui.scopeSet.clicked.connect(lambda: set.setVSA(self,purpleFocusButton,greenFocusButton,purpleButtonHover,greenButtonHover,setParams,greyBHover, greyGHover))
-		self.ui.digSet.clicked.connect(lambda: set.setVSA(self,purpleFocusButton,greenFocusButton,purpleButtonHover,greenButtonHover,setParams,greyBHover, greyGHover))
+		self.ui.scopeSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover, greyHover))
+		self.ui.digSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover, greyHover))
 		# downconverter page
 		self.ui.downSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.downEquipAdv,setParams))
-		self.ui.downSet.clicked.connect(lambda: set.setDown(self,greenFocusButton,greyBHover,greenButtonHover,setParams))
+		self.ui.downSet.clicked.connect(lambda: set.setDown(self,setFocusButton,greyHover,setButtonHover,setParams))
 		# meter page
-		self.ui.meterSet.clicked.connect(lambda: set.setMeter(self,blueFocusButton,blueButtonHover,greyPHover,setParams))
+		self.ui.meterSet.clicked.connect(lambda: set.setMeter(self,setFocusButton,setButtonHover,greyHover,setParams))
 		# sa page
 		self.ui.saSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.saEquipAdv,setParams))
-		self.ui.saSet.clicked.connect(lambda: set.setSA(self,purpleFocusButton,purpleButtonHover,greyBHover,setParams))
+		self.ui.saSet.clicked.connect(lambda: set.setSA(self,setFocusButton,setButtonHover,greyHover,setParams))
 		# power 1 page
-		self.ui.p1Set.clicked.connect(lambda: set.setP1(self,setParams,blueFocusButton,blueButtonHover,greyBHover,greyBButton))
+		self.ui.p1Set.clicked.connect(lambda: set.setP1(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton))
 		# power 2 page
-		self.ui.p2Set.clicked.connect(lambda: set.setP2(self,setParams,blueFocusButton,blueButtonHover,greyBHover,greyBButton))
+		self.ui.p2Set.clicked.connect(lambda: set.setP2(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton))
 		# power 3 page
-		self.ui.p3Set.clicked.connect(lambda: set.setP3(self,setParams,blueFocusButton,blueButtonHover))
+		self.ui.p3Set.clicked.connect(lambda: set.setP3(self,setParams,setFocusButton,setButtonHover))
 		# vsa meas page
-		self.ui.vsaMeasSet.clicked.connect(lambda: set.setVSAMeasDig(self,setParams,purpleButtonHover))
-		self.ui.vsaMeasSet_2.clicked.connect(lambda: set.setVSAMeasGen(self,setParams,purpleButtonHover))
-		self.ui.set_run_vsa.clicked.connect(lambda: set.rxCalRoutine(self,setParams,purpleButtonHover))
-		self.ui.downSetVSAMeas.clicked.connect(lambda: set.noRXCalRoutine(self,setParams,purpleButtonHover))
+		self.ui.vsaMeasSet.clicked.connect(lambda: set.setVSAMeasDig(self,setParams,setButtonHover))
+		self.ui.vsaMeasSet_2.clicked.connect(lambda: set.setVSAMeasGen(self,setParams,setButtonHover))
+		self.ui.set_run_vsa.clicked.connect(lambda: set.rxCalRoutine(self,setParams,setButtonHover))
+		self.ui.downSetVSAMeas.clicked.connect(lambda: set.noRXCalRoutine(self,setParams,setButtonHover))
 		self.ui.vsaMeasAdvSet.clicked.connect(lambda: set.setVSAMeasAdv(self,setParams))
 		# vsg meas page
 		self.ui.awgSet_vsgMeas.clicked.connect(lambda: set.noAWGCalRoutine(self,setParams))
@@ -285,15 +274,12 @@ class Window(QMainWindow):
 		self.ui.heteroRun.clicked.connect(lambda: set.setHetero(self,setParams))
 		self.ui.homoRun.clicked.connect(lambda: set.setHomo(self,setParams))
 		
-		# control dash radio buttons
-		self.ui.runStandard.toggled.connect(lambda: flow.standardSetup(self,greyBButton,greyPButton))
-		self.ui.runVSG.toggled.connect(lambda: flow.vsgOnlySetup(self,disabledButton,greyPButton))
-		self.ui.runVSA.toggled.connect(lambda: flow.vsaOnlySetup(self,disabledButton,greyBButton,greyPButton))
+		
 		
 		# control workflow navigation
 		# vsg page
-		self.ui.upButton_vsg.clicked.connect(lambda: flow.upOnClick(self,greyPHover,greyPButton))
-		self.ui.psgButton_vsg.clicked.connect(lambda: flow.psgOnClick(self,greyPHover,greyPButton))
+		self.ui.upButton_vsg.clicked.connect(lambda: flow.upOnClick(self,greyHover,greyButton))
+		self.ui.psgButton_vsg.clicked.connect(lambda: flow.psgOnClick(self,greyHover,greyButton))
 		self.ui.vsaButton_vsg.clicked.connect(lambda: flow.vsaOnClick(self))
 		self.ui.downButton_vsg.clicked.connect(lambda: flow.downOnClick(self))
 		self.ui.downButton_vsg_2.clicked.connect(lambda: flow.downOnClick(self))
@@ -323,7 +309,7 @@ class Window(QMainWindow):
 		self.ui.power3Button_vsg.clicked.connect(lambda: flow.p3OnClick(self))
 		self.ui.power3Button_vsg_2.clicked.connect(lambda: flow.p3OnClick(self))
 		# upconverter page
-		self.ui.awgButton_up.clicked.connect(lambda: flow.awgOnClick(self,greyPButton,greyPHover,purpleButtonHover))
+		self.ui.awgButton_up.clicked.connect(lambda: flow.awgOnClick(self,greyButton,greyHover,setButtonHover))
 		self.ui.vsaButton_up.clicked.connect(lambda: flow.vsaOnClick(self))
 		self.ui.downButton_up.clicked.connect(lambda: flow.downOnClick(self))
 		self.ui.downButton_up_2.clicked.connect(lambda: flow.downOnClick(self))
@@ -634,3 +620,9 @@ if __name__ == '__main__':
 
 # set scroll area contents
 #self.ui.vsgEquipScroll.setWidget(self.ui.vsgEquipScrollWidgetContents)
+
+# control dash radio buttons
+# disabledButton = "QPushButton {color:grey}"
+# self.ui.runStandard.toggled.connect(lambda: flow.standardSetup(self,greyButton))
+# self.ui.runVSG.toggled.connect(lambda: flow.vsgOnlySetup(self,disabledButton,greyButton))
+# self.ui.runVSA.toggled.connect(lambda: flow.vsaOnlySetup(self,disabledButton,greyButton,greyButton))

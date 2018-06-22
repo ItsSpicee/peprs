@@ -7,10 +7,10 @@ from PyQt5.QtCore import (Qt)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions used in main.py
 
-def setGeneralAWG(self,buttonColourFocus,boxDone,buttonGreyPHover,buttonGreyGHover):
-	self.ui.awgButton_vsg.setStyleSheet(buttonColourFocus)
-	self.ui.awgButton_vsg_2.setStyleSheet(buttonColourFocus)
-	self.ui.awgButton_vsg_3.setStyleSheet(buttonColourFocus)
+def setGeneralAWG(self,buttonFocus,boxDone,buttonGreyPHover,buttonGreyGHover):
+	self.ui.awgButton_vsg.setStyleSheet(buttonFocus)
+	self.ui.awgButton_vsg_2.setStyleSheet(buttonFocus)
+	self.ui.awgButton_vsg_3.setStyleSheet(buttonFocus)
 	setStandardMessage(self)
 	self.ui.awgEquipGeneral.setStyleSheet(boxDone)
 	setupIdx = self.ui.vsgWorkflows.currentIndex()
@@ -31,8 +31,8 @@ def setGeneralAWG(self,buttonColourFocus,boxDone,buttonGreyPHover,buttonGreyGHov
 		self.ui.psgButton_vsg.setStyleSheet(buttonGreyGHover)
 		self.ui.psgButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
 		
-def setGeneralVSG(self, buttonColourFocus, boxDone,buttonGreyPHover):
-	self.ui.vsgButton_vsg.setStyleSheet(buttonColourFocus)
+def setGeneralVSG(self, buttonFocus, boxDone,buttonGreyPHover):
+	self.ui.vsgButton_vsg.setStyleSheet(buttonFocus)
 	self.ui.vsgEquipGeneral.setStyleSheet(boxDone)
 	setStandardMessage(self)
 	self.ui.vsgNextSteps.setCurrentIndex(5)
@@ -43,8 +43,8 @@ def setAdvanced(self,box,boxDone):
 	box.setStyleSheet(boxDone)
 	self.ui.statusBar.showMessage('Successfully Set Advanced Settings',2000)
 
-def setUp(self,buttonColourFocus,buttonColourDone,boxDone,buttonGreyPHover):
-	self.ui.upButton_up.setStyleSheet(buttonColourFocus)
+def setUp(self,buttonFocus,buttonColourDone,boxDone,buttonGreyPHover):
+	self.ui.upButton_up.setStyleSheet(buttonFocus)
 	self.ui.upButton_vsg.setStyleSheet(buttonColourDone)
 	self.ui.upEquip.setStyleSheet(boxDone)
 	self.ui.up_psg_next.setCurrentIndex(2)
@@ -55,8 +55,8 @@ def setUp(self,buttonColourFocus,buttonColourDone,boxDone,buttonGreyPHover):
 	self.ui.vsaButton_vsg.setStyleSheet(buttonGreyPHover)
 	self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
 
-def setPSG(self,buttonColourFocus,buttonColourDone,boxDone,buttonGreyPHover):
-	self.ui.psgButton_up.setStyleSheet(buttonColourFocus)
+def setPSG(self,buttonFocus,buttonColourDone,boxDone,buttonGreyPHover):
+	self.ui.psgButton_up.setStyleSheet(buttonFocus)
 	self.ui.psgButton_vsg.setStyleSheet(buttonColourDone)
 	self.ui.psgEquip.setStyleSheet(boxDone)
 	self.ui.up_psg_next.setCurrentIndex(2)
@@ -67,7 +67,7 @@ def setPSG(self,buttonColourFocus,buttonColourDone,boxDone,buttonGreyPHover):
 	self.ui.vsaButton_vsg.setStyleSheet(buttonGreyPHover)
 	self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
 		
-def setVSA(self,buttonFocusP,buttonFocusG,buttonPHover,buttonGHover,boxDone,buttonHoverB, buttonHoverG):
+def setVSA(self,buttonFocus,setButtonHover,buttonGHover,boxDone,buttonHoverB, buttonHoverG):
 	averaging = self.ui.averagingEnable.currentIndex()
 	demod = self.ui.demodulationEnable.currentIndex()
 	typeIdx = self.ui.vsaType.currentIndex()
@@ -90,7 +90,7 @@ def setVSA(self,buttonFocusP,buttonFocusG,buttonPHover,buttonGHover,boxDone,butt
 			demod = self.ui.uxaMod.isEnabled()
 			if demod:
 				setAllDemod(self, boxDone)
-				self.ui.modButton_vsa.setStyleSheet(buttonFocusG)
+				self.ui.modButton_vsa.setStyleSheet(buttonFocus)
 			self.ui.vsaNextStack.setCurrentIndex(3)
 			self.ui.vsgNextSteps.setCurrentIndex(7)
 			self.ui.up_psg_next.setCurrentIndex(5)
@@ -99,30 +99,30 @@ def setVSA(self,buttonFocusP,buttonFocusG,buttonPHover,buttonGHover,boxDone,butt
 			demodDig = self.ui.digMod.isEnabled()
 			if demodScope or demodDig:
 				setAllDemod(self, boxDone)
-				self.ui.modButton_vsa_2.setStyleSheet(buttonFocusG)
-				self.ui.modButton_vsa.setStyleSheet(buttonFocusG)
+				self.ui.modButton_vsa_2.setStyleSheet(buttonFocus)
+				self.ui.modButton_vsa.setStyleSheet(buttonFocus)
 			
 		if typeIdx == 3: #UXA
-			self.ui.uxaButton_vsa.setStyleSheet(buttonFocusP)
-			self.ui.uxaButton_vsa_2.setStyleSheet(buttonFocusP)
-			setPrevVSAButtons(self,buttonPHover,buttonGHover,buttonHoverG)
+			self.ui.uxaButton_vsa.setStyleSheet(buttonFocus)
+			self.ui.uxaButton_vsa_2.setStyleSheet(buttonFocus)
+			setPrevVSAButtons(self,setButtonHover,setButtonHover,buttonHoverG)
 			setFocusAndHand(self,self.ui.meterButton_vsa,buttonHoverB)
 			setFocusAndHand(self,self.ui.meterButton_up,buttonHoverB)
 			setFocusAndHand(self,self.ui.meterButton_vsg,buttonHoverB)
 		elif typeIdx == 4: #PXA
-			self.ui.pxaButton_vsa.setStyleSheet(buttonFocusP)
-			self.ui.pxaButton_vsa_2.setStyleSheet(buttonFocusP)
-			setPrevVSAButtons(self,buttonPHover,buttonGHover,buttonHoverG)		
+			self.ui.pxaButton_vsa.setStyleSheet(buttonFocus)
+			self.ui.pxaButton_vsa_2.setStyleSheet(buttonFocus)
+			setPrevVSAButtons(self,setButtonHover,setButtonHover,buttonHoverG)		
 			setFocusAndHand(self,self.ui.meterButton_vsa,buttonHoverB)
 			setFocusAndHand(self,self.ui.meterButton_up,buttonHoverB)
 			setFocusAndHand(self,self.ui.meterButton_vsg,buttonHoverB)
 		elif typeIdx == 1 or typeIdx == 5: #Scope
 			self.ui.scopeEquipGeneral.setStyleSheet(boxDone)
-			self.ui.scopeButton_vsa.setStyleSheet(buttonFocusP)
-			self.ui.scopeButton_vsa_2.setStyleSheet(buttonFocusP)
-			self.ui.scopeButton_vsa_3.setStyleSheet(buttonFocusP)
-			self.ui.scopeButton_vsa_4.setStyleSheet(buttonFocusP)
-			setPrevVSAButtons(self,buttonPHover,buttonGHover,buttonHoverG)
+			self.ui.scopeButton_vsa.setStyleSheet(buttonFocus)
+			self.ui.scopeButton_vsa_2.setStyleSheet(buttonFocus)
+			self.ui.scopeButton_vsa_3.setStyleSheet(buttonFocus)
+			self.ui.scopeButton_vsa_4.setStyleSheet(buttonFocus)
+			setPrevVSAButtons(self,setButtonHover,setButtonHover,buttonHoverG)
 			if typeIdx == 1:
 				self.ui.vsaNextStack.setCurrentIndex(3)
 				self.ui.vsgNextSteps.setCurrentIndex(7)
@@ -136,11 +136,11 @@ def setVSA(self,buttonFocusP,buttonFocusG,buttonPHover,buttonGHover,boxDone,butt
 				self.ui.up_psg_next.setCurrentIndex(4)
 		elif typeIdx == 2 or typeIdx ==6: #Digitizer
 			self.ui.digEquipGeneral.setStyleSheet(boxDone)
-			self.ui.digButton_vsa.setStyleSheet(buttonFocusP)
-			self.ui.digButton_vsa_2.setStyleSheet(buttonFocusP)
-			self.ui.digButton_vsa_3.setStyleSheet(buttonFocusP)
-			self.ui.digButton_vsa_4.setStyleSheet(buttonFocusP)
-			setPrevVSAButtons(self,buttonPHover,buttonGHover,buttonHoverG)
+			self.ui.digButton_vsa.setStyleSheet(buttonFocus)
+			self.ui.digButton_vsa_2.setStyleSheet(buttonFocus)
+			self.ui.digButton_vsa_3.setStyleSheet(buttonFocus)
+			self.ui.digButton_vsa_4.setStyleSheet(buttonFocus)
+			setPrevVSAButtons(self,setButtonHover,setButtonHover,buttonHoverG)
 			if typeIdx == 2:
 				self.ui.vsaNextStack.setCurrentIndex(3)
 				self.ui.vsgNextSteps.setCurrentIndex(7)
@@ -168,11 +168,11 @@ def setVSAAdv(self,boxDone):
 		self.fillParametersMsg()
 		self.ui.uxaVSASetAdv.setChecked(False)
 
-def setDown(self,buttonColourFocus,buttonHoverB,buttonGHover,boxDone):
+def setDown(self,buttonFocus,buttonHoverB,buttonGHover,boxDone):
 	#meterChecked = self.ui.meterSet.isChecked()
 	
-	self.ui.downButton_down.setStyleSheet(buttonColourFocus)
-	self.ui.downButton_down_2.setStyleSheet(buttonColourFocus)
+	self.ui.downButton_down.setStyleSheet(buttonFocus)
+	self.ui.downButton_down_2.setStyleSheet(buttonFocus)
 	self.ui.downEquip.setStyleSheet(boxDone)
 	
 	setPrevDownButtons(self,buttonGHover,buttonHoverB)
@@ -184,8 +184,8 @@ def setDown(self,buttonColourFocus,buttonHoverB,buttonGHover,boxDone):
 	self.ui.up_psg_next.setCurrentIndex(5)
 	self.ui.vsgNextSteps.setCurrentIndex(7)
 	
-def setMeter(self,buttonColourFocus,buttonBHover,buttonHoverP,boxDone):
-	self.ui.meterButton_meter.setStyleSheet(buttonColourFocus)
+def setMeter(self,buttonFocus,buttonBHover,buttonHoverP,boxDone):
+	self.ui.meterButton_meter.setStyleSheet(buttonFocus)
 	setPrevMeterButtons(self,buttonBHover,buttonHoverP)
 	self.ui.meterEquip.setStyleSheet(boxDone)
 	
@@ -195,11 +195,11 @@ def setMeter(self,buttonColourFocus,buttonBHover,buttonHoverP,boxDone):
 	self.ui.up_psg_next.setCurrentIndex(6)
 	self.ui.vsgNextSteps.setCurrentIndex(8)
 	
-def setSA(self,buttonColourFocus,buttonPHover,buttonHoverB,boxDone):
-	self.ui.saButton_sa.setStyleSheet(buttonColourFocus)
-	self.ui.saButton_sa_2.setStyleSheet(buttonColourFocus)
-	self.ui.saButton_sa_3.setStyleSheet(buttonColourFocus)
-	self.ui.saButton_sa_4.setStyleSheet(buttonColourFocus)
+def setSA(self,buttonFocus,buttonPHover,buttonHoverB,boxDone):
+	self.ui.saButton_sa.setStyleSheet(buttonFocus)
+	self.ui.saButton_sa_2.setStyleSheet(buttonFocus)
+	self.ui.saButton_sa_3.setStyleSheet(buttonFocus)
+	self.ui.saButton_sa_4.setStyleSheet(buttonFocus)
 	setPrevSAButtons(self,buttonPHover,buttonHoverB)
 	self.ui.saEquip.setStyleSheet(boxDone)
 	
@@ -550,37 +550,37 @@ def setHomo(self,boxDone):
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions for setParameters.py	
 
-def setPrevVSAButtons(self,buttonPHover,buttonGHover,buttonHoverG):
-	setFocusAndHand(self,self.ui.vsaButton_up,buttonPHover)
-	setFocusAndHand(self,self.ui.scopeButton_up,buttonPHover)
-	setFocusAndHand(self,self.ui.scopeButton_up_2,buttonPHover)
-	setFocusAndHand(self,self.ui.scopeButton_up_3,buttonPHover)
-	setFocusAndHand(self,self.ui.scopeButton_up_4,buttonPHover)
-	setFocusAndHand(self,self.ui.digButton_up,buttonPHover)
-	setFocusAndHand(self,self.ui.digButton_up_2,buttonPHover)
-	setFocusAndHand(self,self.ui.digButton_up_3,buttonPHover)
-	setFocusAndHand(self,self.ui.digButton_up_4,buttonPHover)
-	setFocusAndHand(self,self.ui.uxaButton_up,buttonPHover)
-	setFocusAndHand(self,self.ui.uxaButton_up_2,buttonPHover)
-	setFocusAndHand(self,self.ui.pxaButton_up,buttonPHover)
-	setFocusAndHand(self,self.ui.pxaButton_up_2,buttonPHover)
-	setFocusAndHand(self,self.ui.modButton_up,buttonGHover)
-	setFocusAndHand(self,self.ui.modButton_up_2,buttonGHover)
-	setFocusAndHand(self,self.ui.vsaButton_vsg,buttonPHover)
-	setFocusAndHand(self,self.ui.scopeButton_vsg,buttonPHover)
-	setFocusAndHand(self,self.ui.scopeButton_vsg_2,buttonPHover)
-	setFocusAndHand(self,self.ui.scopeButton_vsg_3,buttonPHover)
-	setFocusAndHand(self,self.ui.scopeButton_vsg_4,buttonPHover)
-	setFocusAndHand(self,self.ui.digButton_vsg,buttonPHover)
-	setFocusAndHand(self,self.ui.digButton_vsg_2,buttonPHover)
-	setFocusAndHand(self,self.ui.digButton_vsg_3,buttonPHover)
-	setFocusAndHand(self,self.ui.digButton_vsg_4,buttonPHover)
-	setFocusAndHand(self,self.ui.uxaButton_vsg,buttonPHover)
-	setFocusAndHand(self,self.ui.uxaButton_vsg_2,buttonPHover)
-	setFocusAndHand(self,self.ui.pxaButton_vsg,buttonPHover)
-	setFocusAndHand(self,self.ui.pxaButton_vsg_2,buttonPHover)
-	setFocusAndHand(self,self.ui.modButton_vsg,buttonGHover)
-	setFocusAndHand(self,self.ui.modButton_vsg_2,buttonGHover)
+def setPrevVSAButtons(self,setButtonHover,buttonHoverG):
+	setFocusAndHand(self,self.ui.vsaButton_up,setButtonHover)
+	setFocusAndHand(self,self.ui.scopeButton_up,setButtonHover)
+	setFocusAndHand(self,self.ui.scopeButton_up_2,setButtonHover)
+	setFocusAndHand(self,self.ui.scopeButton_up_3,setButtonHover)
+	setFocusAndHand(self,self.ui.scopeButton_up_4,setButtonHover)
+	setFocusAndHand(self,self.ui.digButton_up,setButtonHover)
+	setFocusAndHand(self,self.ui.digButton_up_2,setButtonHover)
+	setFocusAndHand(self,self.ui.digButton_up_3,setButtonHover)
+	setFocusAndHand(self,self.ui.digButton_up_4,setButtonHover)
+	setFocusAndHand(self,self.ui.uxaButton_up,setButtonHover)
+	setFocusAndHand(self,self.ui.uxaButton_up_2,setButtonHover)
+	setFocusAndHand(self,self.ui.pxaButton_up,setButtonHover)
+	setFocusAndHand(self,self.ui.pxaButton_up_2,setButtonHover)
+	setFocusAndHand(self,self.ui.modButton_up,setButtonHover)
+	setFocusAndHand(self,self.ui.modButton_up_2,setButtonHover)
+	setFocusAndHand(self,self.ui.vsaButton_vsg,setButtonHover)
+	setFocusAndHand(self,self.ui.scopeButton_vsg,setButtonHover)
+	setFocusAndHand(self,self.ui.scopeButton_vsg_2,setButtonHover)
+	setFocusAndHand(self,self.ui.scopeButton_vsg_3,setButtonHover)
+	setFocusAndHand(self,self.ui.scopeButton_vsg_4,setButtonHover)
+	setFocusAndHand(self,self.ui.digButton_vsg,setButtonHover)
+	setFocusAndHand(self,self.ui.digButton_vsg_2,setButtonHover)
+	setFocusAndHand(self,self.ui.digButton_vsg_3,setButtonHover)
+	setFocusAndHand(self,self.ui.digButton_vsg_4,setButtonHover)
+	setFocusAndHand(self,self.ui.uxaButton_vsg,setButtonHover)
+	setFocusAndHand(self,self.ui.uxaButton_vsg_2,setButtonHover)
+	setFocusAndHand(self,self.ui.pxaButton_vsg,setButtonHover)
+	setFocusAndHand(self,self.ui.pxaButton_vsg_2,setButtonHover)
+	setFocusAndHand(self,self.ui.modButton_vsg,setButtonHover)
+	setFocusAndHand(self,self.ui.modButton_vsg_2,setButtonHover)
 	setFocusAndHand(self,self.ui.downButton_vsa,buttonHoverG)
 	setFocusAndHand(self,self.ui.downButton_vsa_2,buttonHoverG)
 	setFocusAndHand(self,self.ui.downButton_up,buttonHoverG)
