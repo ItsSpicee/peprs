@@ -31,8 +31,8 @@ def changeStepTab(self):
 	upEnabled = self.ui.vsgWorkflow_vsgMeas.currentIndex()
 	vsgStack = self.ui.awgParamsStack_vsgMeas.currentIndex()
 	if i == 2:
-		self.setMinimumSize(1265,585)
-		self.resize(1265, 585)
+		self.setMinimumSize(1265,625)
+		self.resize(1265, 625)
 		self.center()
 	elif i == 1:
 		if measStack == 0: #vsa
@@ -41,8 +41,8 @@ def changeStepTab(self):
 				self.resize(1265,950)
 				self.center()
 			else:
-				self.setMinimumSize(1265,528)
-				self.resize(1265,528)
+				self.setMinimumSize(1265,550)
+				self.resize(1265,550)
 				self.center()
 		elif measStack == 1: #vsg
 			# if vsgStack == 0 or measTabVsg == 2: # select vsg type or advanced page
@@ -80,8 +80,8 @@ def switchMeasTabVSA(self):
 	downStack = self.ui.downStack_vsaMeas.currentIndex()
 	vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
 	if currentTab == 0 or currentTab == 2:
-		self.setMinimumSize(1265,528)
-		self.resize(1265,528)
+		self.setMinimumSize(1265,550)
+		self.resize(1265,550)
 		self.center()
 		self.ui.calAdviceText.setVisible(False)
 	elif currentTab == 1:
@@ -94,8 +94,8 @@ def switchMeasTabVSA(self):
 				if vsaChecked or vsaChecked_2:
 					self.ui.vsaMeasNextStack.setCurrentIndex(2)
 		else:
-			self.setMinimumSize(1265,528)
-			self.resize(1265,528)
+			self.setMinimumSize(1265,550)
+			self.resize(1265,550)
 			self.center()
 			self.ui.calAdviceText.setVisible(False)
 			if vsgType == 3: # vsg

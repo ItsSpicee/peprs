@@ -28,7 +28,6 @@ class Window(QMainWindow):
 		self.ui.dutStackedWidget.setCurrentIndex(0)
 		self.ui.dutReadyButton.clicked.connect(self.dutReady)
 		self.setWindowTitle('PEPRS - Performance Enhancement for Processing Radio Signals')
-		
 		self.show()
 		
 	def dutReady(self):
@@ -36,8 +35,9 @@ class Window(QMainWindow):
 		misoChecked = self.ui.misoRadio.isChecked()
 		simoChecked = self.ui.simoRadio.isChecked()
 		if self.ui.sisoRadio.isChecked() == True :
-			self.ui = Ui_peprs()
 			self.hide()
+			self.ui.dutStackedWidget.hide()
+			self.ui = Ui_peprs()
 			self.ui.setupUi(self)
 			self.initMainUI()
 			self.show()
@@ -177,7 +177,6 @@ class Window(QMainWindow):
 		self.ui.psgMark_vsgMeas.setVisible(False)
 		self.ui.upMark_vsgMeas.setVisible(False)
 		# algo tab
-		self.ui.rfButton.setVisible(False)
 		
 		# dropdown and field changes
 		self.ui.vsgSetup.currentIndexChanged.connect(lambda: param.displayVsg(self,greyHover,greyButton))
@@ -213,9 +212,9 @@ class Window(QMainWindow):
 		self.ui.p1c2Check.stateChanged.connect(lambda: param.enableChannel(self))
 		self.ui.p1c3Check.stateChanged.connect(lambda: param.enableChannel(self))
 		self.ui.p1c4Check.stateChanged.connect(lambda: param.enableChannel(self))
-		self.ui.p1Enabled.currentIndexChanged.connect(lambda: param.enableSupplies(self,self.ui.p1Enabled,self.ui.p1Equip))
-		self.ui.p2Enabled.currentIndexChanged.connect(lambda: param.enableSupplies(self,self.ui.p2Enabled,self.ui.p2Equip))
-		self.ui.p3Enabled.currentIndexChanged.connect(lambda: param.enableSupplies(self,self.ui.p3Enabled,self.ui.p3Equip))
+		self.ui.p1Enabled.currentIndexChanged.connect(lambda: param.enableSupplyOne(self))
+		self.ui.p2Enabled.currentIndexChanged.connect(lambda: param.enableSupplyTwo(self))
+		self.ui.p3Enabled.currentIndexChanged.connect(lambda: param.enableSupplyThree(self))
 		
 		# browse/open folder action
 		
