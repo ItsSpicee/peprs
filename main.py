@@ -47,13 +47,13 @@ class Window(QMainWindow):
 		
 	def initMainUI(self):		
 		# styling variables
-		setButton = "QPushButton{ background-color:#114b5f; border-radius:5px; color:white;border:none}"
-		setFocusButton = "QPushButton{ background-color:#114b5f; border-radius:5px; color:white;border:none;font-weight:700;font-size:11px}"
-		setButtonHover = "QPushButton{ background-color:#114b5f; border-radius:5px; color:white;border:none} QPushButton:hover{background-color:rgb(23, 105, 132)}"
+		setButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none}"
+		setFocusButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none;font-weight:700;font-size:11px}"
+		setButtonHover = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none} QPushButton:hover{background-color:rgb(28, 126, 159)}"
 		setParams = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #515a70}"
 		unsetParams = "QGroupBox{background-color:rgb(247, 247, 247)}"
 		greyButton = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;}"
-		greyHover = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px;} QPushButton:hover{background-color:rgb(243, 243, 243);}"
+		greyHover = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px;color:black} QPushButton:hover{background-color:rgb(243, 243, 243);}"
 		blueSelect = "QPushButton{ border:3px solid rgb(0, 0, 127);  background-color:qlineargradient(spread:pad, x1:0.994318, y1:0.682, x2:1, y2:0, stop:0 rgba(72, 144, 216, 255), stop:1 rgba(83, 170, 252, 255)); border-radius:5px;color:white}"
 		
 		# keep widget space when hidden
@@ -184,7 +184,7 @@ class Window(QMainWindow):
 		self.ui.vsaType.currentIndexChanged.connect(lambda: param.displayVsa(self,unsetParams,greyHover,greyButton))
 		self.ui.demodulationEnable.currentIndexChanged.connect(lambda: param.displayVsa(self,unsetParams,greyHover,greyButton))
 		self.ui.averagingEnable.currentIndexChanged.connect(lambda: param.displayVsa(self,unsetParams,greyHover,greyButton))
-		self.ui.saType.currentIndexChanged.connect(lambda: param.displaySa(self,blueSelect,setFocusButton,setButtonHover,greyButton))
+		self.ui.saType.currentIndexChanged.connect(lambda: param.displaySa(self,blueSelect,setFocusButton,setButtonHover,greyHover,greyButton))
 		self.ui.p2c1Check.stateChanged.connect(lambda: param.enableChannel(self))
 		self.ui.p2c2Check.stateChanged.connect(lambda: param.enableChannel(self))
 		self.ui.p2c3Check.stateChanged.connect(lambda: param.enableChannel(self))
@@ -230,7 +230,7 @@ class Window(QMainWindow):
 		
 		# control parameter set buttons
 		# vsg page
-		self.ui.awgSetGeneral.clicked.connect(lambda: set.setGeneralAWG(self,setFocusButton,setParams,greyHover,greyHover))
+		self.ui.awgSetGeneral.clicked.connect(lambda: set.setGeneralAWG(self,setFocusButton,setParams,greyHover))
 		self.ui.vsgSetGeneral.clicked.connect(lambda: set.setGeneralVSG(self,setFocusButton,setParams,greyHover))
 		self.ui.vsgSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.vsgEquipAdv,setParams))
 		self.ui.awgSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.awgEquipAdv,setParams))
@@ -238,11 +238,11 @@ class Window(QMainWindow):
 		self.ui.upSet.clicked.connect(lambda: set.setUp(self,setFocusButton,setButton,setParams,greyHover))
 		self.ui.psgSet.clicked.connect(lambda: set.setPSG(self,setFocusButton,setButton,setParams,greyHover))
 		# vsa page
-		self.ui.uxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover, greyHover))
-		self.ui.pxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover, greyHover))
+		self.ui.uxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover))
+		self.ui.pxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover))
 		self.ui.uxaVSASetAdv.clicked.connect(lambda: set.setVSAAdv(self,setParams))
-		self.ui.scopeSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover, greyHover))
-		self.ui.digSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover, greyHover))
+		self.ui.scopeSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover))
+		self.ui.digSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover))
 		# downconverter page
 		self.ui.downSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.downEquipAdv,setParams))
 		self.ui.downSet.clicked.connect(lambda: set.setDown(self,setFocusButton,greyHover,setButtonHover,setParams))
@@ -298,6 +298,10 @@ class Window(QMainWindow):
 		self.ui.modButton_vsg.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.modButton_vsg_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.meterButton_vsg.clicked.connect(lambda: flow.meterOnClick(self))
+		self.ui.meterButton_vsg_2.clicked.connect(lambda: flow.meterOnClick(self))
+		self.ui.meterButton_vsg_3.clicked.connect(lambda: flow.meterOnClick(self))
+		self.ui.meterButton_vsg_4.clicked.connect(lambda: flow.meterOnClick(self))
+		self.ui.meterButton_vsg_5.clicked.connect(lambda: flow.meterOnClick(self))
 		self.ui.saButton_vsg.clicked.connect(lambda: flow.saOnClick(self))
 		self.ui.saButton_vsg_2.clicked.connect(lambda: flow.saOnClick(self))
 		self.ui.saButton_vsg_3.clicked.connect(lambda: flow.saOnClick(self))
@@ -328,6 +332,10 @@ class Window(QMainWindow):
 		self.ui.modButton_up.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.modButton_up_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.meterButton_up.clicked.connect(lambda: flow.meterOnClick(self))
+		self.ui.meterButton_up_2.clicked.connect(lambda: flow.meterOnClick(self))
+		self.ui.meterButton_up_3.clicked.connect(lambda: flow.meterOnClick(self))
+		self.ui.meterButton_up_4.clicked.connect(lambda: flow.meterOnClick(self))
+		self.ui.meterButton_up_5.clicked.connect(lambda: flow.meterOnClick(self))
 		self.ui.saButton_up.clicked.connect(lambda: flow.saOnClick(self))
 		self.ui.saButton_up_2.clicked.connect(lambda: flow.saOnClick(self))
 		self.ui.saButton_up_3.clicked.connect(lambda: flow.saOnClick(self))
@@ -345,6 +353,10 @@ class Window(QMainWindow):
 		self.ui.upButton_vsa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack ,1))
 		self.ui.psgButton_vsa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,1))
 		self.ui.meterButton_vsa.clicked.connect(lambda: flow.meterOnClick(self))
+		self.ui.meterButton_vsa_2.clicked.connect(lambda: flow.meterOnClick(self))
+		self.ui.meterButton_vsa_3.clicked.connect(lambda: flow.meterOnClick(self))
+		self.ui.meterButton_vsa_4.clicked.connect(lambda: flow.meterOnClick(self))
+		self.ui.meterButton_vsa_5.clicked.connect(lambda: flow.meterOnClick(self))
 		self.ui.downButton_vsa.clicked.connect(lambda: flow.downOnClick(self))
 		self.ui.downButton_vsa_2.clicked.connect(lambda: flow.downOnClick(self))
 		self.ui.saButton_vsa.clicked.connect(lambda: flow.saOnClick(self))
@@ -370,6 +382,7 @@ class Window(QMainWindow):
 		self.ui.digButton_down_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.modButton_down.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.meterButton_down.clicked.connect(lambda: flow.meterOnClick(self))
+		self.ui.meterButton_down_2.clicked.connect(lambda: flow.meterOnClick(self))
 		self.ui.saButton_down.clicked.connect(lambda: flow.saOnClick(self))
 		self.ui.saButton_down_2.clicked.connect(lambda: flow.saOnClick(self))
 		self.ui.power1Button_down.clicked.connect(lambda: flow.p1OnClick(self))
@@ -433,6 +446,9 @@ class Window(QMainWindow):
 		self.ui.pxaButton_sa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.pxaButton_sa_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.meterButton_sa.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,4))
+		self.ui.meterButton_sa_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,4))
+		self.ui.meterButton_sa_3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,4))
+		self.ui.meterButton_sa_4.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,4))
 		self.ui.power1Button_sa.clicked.connect(lambda: flow.p1OnClick(self))
 		self.ui.power2Button_sa.clicked.connect(lambda: flow.p2OnClick(self))
 		self.ui.power2Button_sa_2.clicked.connect(lambda: flow.p2OnClick(self))
@@ -462,6 +478,9 @@ class Window(QMainWindow):
 		self.ui.pxaButton_p1.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.pxaButton_p1_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.meterButton_p1.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,4))
+		self.ui.meterButton_p1_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,4))
+		self.ui.meterButton_p1_3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,4))
+		self.ui.meterButton_p1_4.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,4))
 		self.ui.saButton_p1.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,5))
 		self.ui.saButton_p1_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,5))
 		self.ui.saButton_p1_3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,5))
@@ -491,6 +510,9 @@ class Window(QMainWindow):
 		self.ui.pxaButton_p2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.pxaButton_p2_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.meterButton_p2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,4))
+		self.ui.meterButton_p2_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,4))
+		self.ui.meterButton_p2_3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,4))
+		self.ui.meterButton_p2_4.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,4))
 		self.ui.saButton_p2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,5))
 		self.ui.saButton_p2_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,5))
 		self.ui.saButton_p2_3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,5))
@@ -513,6 +535,7 @@ class Window(QMainWindow):
 		self.ui.digButton_p3_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.modButton_p3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,2))
 		self.ui.meterButton_p3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,4))
+		self.ui.meterButton_p3_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,4))
 		self.ui.saButton_p3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,5))
 		self.ui.saButton_p3_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,5))
 		self.ui.power1Button_p3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,6))

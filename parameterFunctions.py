@@ -292,7 +292,7 @@ def copyDemod(self,changedModField,replacedFieldOne,replacedFieldTwo):
 	replacedFieldOne.blockSignals(False)
 	replacedFieldTwo.blockSignals(False)
 	
-def displaySa(self,buttonSelected,buttonFocus,buttonHover,greyButton):
+def displaySa(self,buttonSelected,buttonFocus,buttonHover,greyHover,greyButton):
 	saIdx = self.ui.saType.currentIndex()
 	saChecked = self.ui.saSet.isChecked()
 	if saIdx == 0:
@@ -342,7 +342,7 @@ def displaySa(self,buttonSelected,buttonFocus,buttonHover,greyButton):
 		self.ui.saButton_sa_2.setStyleSheet(buttonFocus)
 		self.ui.saButton_sa_3.setStyleSheet(buttonFocus)
 		self.ui.saButton_sa_4.setStyleSheet(buttonFocus)
-		set.setPrevSAButtons(self,buttonHover,buttonHover)
+		set.setPrevSAButtons(self,buttonHover,greyHover)
 		
 def enableChannel(self):
 	p1c1Checked = self.ui.p1c1Check.isChecked()
