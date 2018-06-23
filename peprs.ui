@@ -253,7 +253,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>3</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="algoTab">
          <property name="layoutDirection">
@@ -34573,7 +34573,7 @@ QWidget#power2{background-color:rgb(247,247,247)}
 QWidget#power3{background-color:rgb(247,247,247)}</string>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>8</number>
             </property>
             <widget class="QWidget" name="vsg">
              <property name="styleSheet">
@@ -63205,7 +63205,57 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                         </widget>
                        </item>
-                       <item row="6" column="1">
+                       <item row="4" column="0">
+                        <widget class="QLabel" name="p1c1AddressLabel">
+                         <property name="font">
+                          <font>
+                           <family>Arial</family>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>VISA  Address:</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="2">
+                        <widget class="QLabel" name="label_541">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>V</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="2" column="2">
+                        <widget class="QLabel" name="label_590">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>A</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="4" column="1" colspan="2">
+                        <widget class="QPlainTextEdit" name="p1c1Address">
+                         <property name="verticalScrollBarPolicy">
+                          <enum>Qt::ScrollBarAlwaysOff</enum>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="6" column="1" colspan="2">
                         <widget class="QPlainTextEdit" name="p1c1PartNumber">
                          <property name="enabled">
                           <bool>false</bool>
@@ -63225,26 +63275,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          <property name="acceptDrops">
                           <bool>true</bool>
                          </property>
-                         <property name="verticalScrollBarPolicy">
-                          <enum>Qt::ScrollBarAlwaysOff</enum>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="4" column="0">
-                        <widget class="QLabel" name="p1c1AddressLabel">
-                         <property name="font">
-                          <font>
-                           <family>Arial</family>
-                           <pointsize>9</pointsize>
-                          </font>
-                         </property>
-                         <property name="text">
-                          <string>VISA  Address:</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="4" column="1">
-                        <widget class="QPlainTextEdit" name="p1c1Address">
                          <property name="verticalScrollBarPolicy">
                           <enum>Qt::ScrollBarAlwaysOff</enum>
                          </property>
@@ -63338,7 +63368,60 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                         </widget>
                        </item>
-                       <item row="4" column="1">
+                       <item row="4" column="0">
+                        <widget class="QLabel" name="p1c2PartNumberLabel">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>Arial</family>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>Part Number:</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="2">
+                        <widget class="QLabel" name="label_602">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>V</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="2" column="2">
+                        <widget class="QLabel" name="label_1004">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>A</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="1" colspan="2">
+                        <widget class="QPlainTextEdit" name="p1c2Address">
+                         <property name="verticalScrollBarPolicy">
+                          <enum>Qt::ScrollBarAlwaysOff</enum>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="4" column="1" colspan="2">
                         <widget class="QPlainTextEdit" name="p1c2PartNumber">
                          <property name="enabled">
                           <bool>false</bool>
@@ -63358,29 +63441,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          <property name="acceptDrops">
                           <bool>true</bool>
                          </property>
-                         <property name="verticalScrollBarPolicy">
-                          <enum>Qt::ScrollBarAlwaysOff</enum>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="4" column="0">
-                        <widget class="QLabel" name="p1c2PartNumberLabel">
-                         <property name="enabled">
-                          <bool>false</bool>
-                         </property>
-                         <property name="font">
-                          <font>
-                           <family>Arial</family>
-                           <pointsize>9</pointsize>
-                          </font>
-                         </property>
-                         <property name="text">
-                          <string>Part Number:</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="3" column="1">
-                        <widget class="QPlainTextEdit" name="p1c2Address">
                          <property name="verticalScrollBarPolicy">
                           <enum>Qt::ScrollBarAlwaysOff</enum>
                          </property>
@@ -63477,7 +63537,57 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                         </widget>
                        </item>
-                       <item row="5" column="1">
+                       <item row="3" column="0">
+                        <widget class="QLabel" name="p1c3AddressLabel">
+                         <property name="font">
+                          <font>
+                           <family>Arial</family>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>VISA  Address:</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="2">
+                        <widget class="QLabel" name="label_856">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>V</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="2" column="2">
+                        <widget class="QLabel" name="label_1149">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>A</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="1" colspan="2">
+                        <widget class="QPlainTextEdit" name="p1c3Address">
+                         <property name="verticalScrollBarPolicy">
+                          <enum>Qt::ScrollBarAlwaysOff</enum>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="5" column="1" colspan="2">
                         <widget class="QPlainTextEdit" name="p1c3PartNumber">
                          <property name="enabled">
                           <bool>false</bool>
@@ -63497,26 +63607,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          <property name="acceptDrops">
                           <bool>true</bool>
                          </property>
-                         <property name="verticalScrollBarPolicy">
-                          <enum>Qt::ScrollBarAlwaysOff</enum>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="3" column="0">
-                        <widget class="QLabel" name="p1c3AddressLabel">
-                         <property name="font">
-                          <font>
-                           <family>Arial</family>
-                           <pointsize>9</pointsize>
-                          </font>
-                         </property>
-                         <property name="text">
-                          <string>VISA  Address:</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="3" column="1">
-                        <widget class="QPlainTextEdit" name="p1c3Address">
                          <property name="verticalScrollBarPolicy">
                           <enum>Qt::ScrollBarAlwaysOff</enum>
                          </property>
@@ -63597,31 +63687,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                         </widget>
                        </item>
-                       <item row="5" column="1">
-                        <widget class="QPlainTextEdit" name="p1c4PartNumber">
-                         <property name="enabled">
-                          <bool>false</bool>
-                         </property>
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>25</height>
-                          </size>
-                         </property>
-                         <property name="acceptDrops">
-                          <bool>true</bool>
-                         </property>
-                         <property name="verticalScrollBarPolicy">
-                          <enum>Qt::ScrollBarAlwaysOff</enum>
-                         </property>
-                        </widget>
-                       </item>
                        <item row="5" column="0">
                         <widget class="QLabel" name="p1c4PartNumberLabel">
                          <property name="enabled">
@@ -63651,8 +63716,63 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                         </widget>
                        </item>
-                       <item row="3" column="1">
+                       <item row="1" column="2">
+                        <widget class="QLabel" name="label_855">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>V</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="2" column="2">
+                        <widget class="QLabel" name="label_1031">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>A</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="1" colspan="2">
                         <widget class="QPlainTextEdit" name="p1c4Address">
+                         <property name="verticalScrollBarPolicy">
+                          <enum>Qt::ScrollBarAlwaysOff</enum>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="5" column="1" colspan="2">
+                        <widget class="QPlainTextEdit" name="p1c4PartNumber">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                         <property name="acceptDrops">
+                          <bool>true</bool>
+                         </property>
                          <property name="verticalScrollBarPolicy">
                           <enum>Qt::ScrollBarAlwaysOff</enum>
                          </property>
@@ -65907,7 +66027,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      <property name="geometry">
                       <rect>
                        <x>0</x>
-                       <y>0</y>
+                       <y>-45</y>
                        <width>602</width>
                        <height>500</height>
                       </rect>
@@ -66066,31 +66186,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                        <string/>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_64">
-                       <item row="4" column="1">
-                        <widget class="QPlainTextEdit" name="p2c1PartNumber">
-                         <property name="enabled">
-                          <bool>false</bool>
-                         </property>
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>25</height>
-                          </size>
-                         </property>
-                         <property name="acceptDrops">
-                          <bool>true</bool>
-                         </property>
-                         <property name="verticalScrollBarPolicy">
-                          <enum>Qt::ScrollBarAlwaysOff</enum>
-                         </property>
-                        </widget>
-                       </item>
                        <item row="4" column="0">
                         <widget class="QLabel" name="p2c1PartNumberLabel">
                          <property name="enabled">
@@ -66171,8 +66266,63 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                         </widget>
                        </item>
-                       <item row="3" column="1">
+                       <item row="1" column="2">
+                        <widget class="QLabel" name="label_1150">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>V</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="2" column="2">
+                        <widget class="QLabel" name="label_1245">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>A</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="1" colspan="2">
                         <widget class="QPlainTextEdit" name="p2c1Address">
+                         <property name="verticalScrollBarPolicy">
+                          <enum>Qt::ScrollBarAlwaysOff</enum>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="4" column="1" colspan="2">
+                        <widget class="QPlainTextEdit" name="p2c1PartNumber">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                         <property name="acceptDrops">
+                          <bool>true</bool>
+                         </property>
                          <property name="verticalScrollBarPolicy">
                           <enum>Qt::ScrollBarAlwaysOff</enum>
                          </property>
@@ -66253,13 +66403,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                         </widget>
                        </item>
-                       <item row="4" column="1">
-                        <widget class="QPlainTextEdit" name="p2c2Address">
-                         <property name="verticalScrollBarPolicy">
-                          <enum>Qt::ScrollBarAlwaysOff</enum>
-                         </property>
-                        </widget>
-                       </item>
                        <item row="4" column="0">
                         <widget class="QLabel" name="p2c2AddressLabel">
                          <property name="font">
@@ -66273,7 +66416,60 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                         </widget>
                        </item>
-                       <item row="5" column="1">
+                       <item row="5" column="0">
+                        <widget class="QLabel" name="p2c2PartNumberLabel">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>Arial</family>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>Part Number:</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="2">
+                        <widget class="QLabel" name="label_1180">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>V</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="2">
+                        <widget class="QLabel" name="label_1246">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>A</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="4" column="1" colspan="2">
+                        <widget class="QPlainTextEdit" name="p2c2Address">
+                         <property name="verticalScrollBarPolicy">
+                          <enum>Qt::ScrollBarAlwaysOff</enum>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="5" column="1" colspan="2">
                         <widget class="QPlainTextEdit" name="p2c2PartNumber">
                          <property name="enabled">
                           <bool>false</bool>
@@ -66295,22 +66491,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                          <property name="verticalScrollBarPolicy">
                           <enum>Qt::ScrollBarAlwaysOff</enum>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="5" column="0">
-                        <widget class="QLabel" name="p2c2PartNumberLabel">
-                         <property name="enabled">
-                          <bool>false</bool>
-                         </property>
-                         <property name="font">
-                          <font>
-                           <family>Arial</family>
-                           <pointsize>9</pointsize>
-                          </font>
-                         </property>
-                         <property name="text">
-                          <string>Part Number:</string>
                          </property>
                         </widget>
                        </item>
@@ -66402,14 +66582,60 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                         </widget>
                        </item>
-                       <item row="3" column="1">
+                       <item row="4" column="0">
+                        <widget class="QLabel" name="p2c3PartNumberLabel">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>Arial</family>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>Part Number:</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="2">
+                        <widget class="QLabel" name="label_1244">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>V</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="2" column="2">
+                        <widget class="QLabel" name="label_1248">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>A</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="1" colspan="2">
                         <widget class="QPlainTextEdit" name="p2c3Address">
                          <property name="verticalScrollBarPolicy">
                           <enum>Qt::ScrollBarAlwaysOff</enum>
                          </property>
                         </widget>
                        </item>
-                       <item row="4" column="1">
+                       <item row="4" column="1" colspan="2">
                         <widget class="QPlainTextEdit" name="p2c3PartNumber">
                          <property name="enabled">
                           <bool>false</bool>
@@ -66431,22 +66657,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                          <property name="verticalScrollBarPolicy">
                           <enum>Qt::ScrollBarAlwaysOff</enum>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="4" column="0">
-                        <widget class="QLabel" name="p2c3PartNumberLabel">
-                         <property name="enabled">
-                          <bool>false</bool>
-                         </property>
-                         <property name="font">
-                          <font>
-                           <family>Arial</family>
-                           <pointsize>9</pointsize>
-                          </font>
-                         </property>
-                         <property name="text">
-                          <string>Part Number:</string>
                          </property>
                         </widget>
                        </item>
@@ -66538,13 +66748,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                         </widget>
                        </item>
-                       <item row="4" column="1">
-                        <widget class="QPlainTextEdit" name="p2c4Address">
-                         <property name="verticalScrollBarPolicy">
-                          <enum>Qt::ScrollBarAlwaysOff</enum>
-                         </property>
-                        </widget>
-                       </item>
                        <item row="6" column="0">
                         <widget class="QLabel" name="p2c4PartNumberLabel">
                          <property name="enabled">
@@ -66561,7 +66764,44 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                         </widget>
                        </item>
-                       <item row="6" column="1">
+                       <item row="1" column="2">
+                        <widget class="QLabel" name="label_1243">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>V</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="2">
+                        <widget class="QLabel" name="label_1247">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>A</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="4" column="1" colspan="2">
+                        <widget class="QPlainTextEdit" name="p2c4Address">
+                         <property name="verticalScrollBarPolicy">
+                          <enum>Qt::ScrollBarAlwaysOff</enum>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="6" column="1" colspan="2">
                         <widget class="QPlainTextEdit" name="p2c4PartNumber">
                          <property name="enabled">
                           <bool>false</bool>
@@ -68391,7 +68631,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      <property name="geometry">
                       <rect>
                        <x>0</x>
-                       <y>0</y>
+                       <y>-89</y>
                        <width>602</width>
                        <height>500</height>
                       </rect>
@@ -68611,13 +68851,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                         </widget>
                        </item>
-                       <item row="4" column="1">
-                        <widget class="QPlainTextEdit" name="p3c1Address">
-                         <property name="verticalScrollBarPolicy">
-                          <enum>Qt::ScrollBarAlwaysOff</enum>
-                         </property>
-                        </widget>
-                       </item>
                        <item row="5" column="0">
                         <widget class="QLabel" name="p3c1PartNumberLabel">
                          <property name="enabled">
@@ -68634,7 +68867,44 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                         </widget>
                        </item>
-                       <item row="5" column="1">
+                       <item row="2" column="2">
+                        <widget class="QLabel" name="label_1367">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>A</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="2">
+                        <widget class="QLabel" name="label_1369">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>V</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="4" column="1" colspan="2">
+                        <widget class="QPlainTextEdit" name="p3c1Address">
+                         <property name="verticalScrollBarPolicy">
+                          <enum>Qt::ScrollBarAlwaysOff</enum>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="5" column="1" colspan="2">
                         <widget class="QPlainTextEdit" name="p3c1PartNumber">
                          <property name="enabled">
                           <bool>false</bool>
@@ -68734,13 +69004,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                         </widget>
                        </item>
-                       <item row="5" column="1">
-                        <widget class="QPlainTextEdit" name="p3c2Address">
-                         <property name="verticalScrollBarPolicy">
-                          <enum>Qt::ScrollBarAlwaysOff</enum>
-                         </property>
-                        </widget>
-                       </item>
                        <item row="5" column="0">
                         <widget class="QLabel" name="p3c2AddressLabel">
                          <property name="font">
@@ -68770,7 +69033,44 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                         </widget>
                        </item>
-                       <item row="6" column="1">
+                       <item row="2" column="2">
+                        <widget class="QLabel" name="label_1365">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>A</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="2">
+                        <widget class="QLabel" name="label_1370">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>V</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="5" column="1" colspan="2">
+                        <widget class="QPlainTextEdit" name="p3c2Address">
+                         <property name="verticalScrollBarPolicy">
+                          <enum>Qt::ScrollBarAlwaysOff</enum>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="6" column="1" colspan="2">
                         <widget class="QPlainTextEdit" name="p3c2PartNumber">
                          <property name="enabled">
                           <bool>false</bool>
@@ -68870,13 +69170,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                         </widget>
                        </item>
-                       <item row="5" column="1">
-                        <widget class="QPlainTextEdit" name="p3c3Address">
-                         <property name="verticalScrollBarPolicy">
-                          <enum>Qt::ScrollBarAlwaysOff</enum>
-                         </property>
-                        </widget>
-                       </item>
                        <item row="5" column="0">
                         <widget class="QLabel" name="p3c3AddressLabel">
                          <property name="font">
@@ -68906,7 +69199,44 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                         </widget>
                        </item>
-                       <item row="6" column="1">
+                       <item row="2" column="2">
+                        <widget class="QLabel" name="label_1368">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>A</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="2">
+                        <widget class="QLabel" name="label_1371">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>V</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="5" column="1" colspan="2">
+                        <widget class="QPlainTextEdit" name="p3c3Address">
+                         <property name="verticalScrollBarPolicy">
+                          <enum>Qt::ScrollBarAlwaysOff</enum>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="6" column="1" colspan="2">
                         <widget class="QPlainTextEdit" name="p3c3PartNumber">
                          <property name="enabled">
                           <bool>false</bool>
@@ -69019,13 +69349,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                         </widget>
                        </item>
-                       <item row="5" column="1">
-                        <widget class="QPlainTextEdit" name="p3c4Address">
-                         <property name="verticalScrollBarPolicy">
-                          <enum>Qt::ScrollBarAlwaysOff</enum>
-                         </property>
-                        </widget>
-                       </item>
                        <item row="6" column="0">
                         <widget class="QLabel" name="p3c4PartNumberLabel">
                          <property name="enabled">
@@ -69042,7 +69365,44 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                         </widget>
                        </item>
-                       <item row="6" column="1">
+                       <item row="2" column="2">
+                        <widget class="QLabel" name="label_1366">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>A</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="2">
+                        <widget class="QLabel" name="label_1372">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>9</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>V</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="5" column="1" colspan="2">
+                        <widget class="QPlainTextEdit" name="p3c4Address">
+                         <property name="verticalScrollBarPolicy">
+                          <enum>Qt::ScrollBarAlwaysOff</enum>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="6" column="1" colspan="2">
                         <widget class="QPlainTextEdit" name="p3c4PartNumber">
                          <property name="enabled">
                           <bool>false</bool>
