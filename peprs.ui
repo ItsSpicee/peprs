@@ -253,7 +253,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="algoTab">
          <property name="layoutDirection">
@@ -876,7 +876,7 @@ panel for guidance</string>
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>712</width>
+                      <width>715</width>
                       <height>550</height>
                      </rect>
                     </property>
@@ -1144,28 +1144,16 @@ panel for guidance</string>
                          <number>0</number>
                         </property>
                         <item>
-                         <widget class="QLabel" name="label_1000">
+                         <widget class="QPushButton" name="filePushButton_3">
                           <property name="text">
                            <string/>
                           </property>
-                          <property name="pixmap">
-                           <pixmap>icons/folder 16x16.png</pixmap>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
                           </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLabel" name="label_1001">
-                          <property name="font">
-                           <font>
-                            <family>Arial</family>
-                            <pointsize>7</pointsize>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>Browse</string>
+                          <property name="flat">
+                           <bool>true</bool>
                           </property>
                          </widget>
                         </item>
@@ -1402,28 +1390,16 @@ panel for guidance</string>
                          <number>0</number>
                         </property>
                         <item>
-                         <widget class="QLabel" name="label_994">
+                         <widget class="QPushButton" name="filePushButton_5">
                           <property name="text">
                            <string/>
                           </property>
-                          <property name="pixmap">
-                           <pixmap>icons/folder 16x16.png</pixmap>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
                           </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLabel" name="label_995">
-                          <property name="font">
-                           <font>
-                            <family>Arial</family>
-                            <pointsize>7</pointsize>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>Browse</string>
+                          <property name="flat">
+                           <bool>true</bool>
                           </property>
                          </widget>
                         </item>
@@ -1475,28 +1451,16 @@ panel for guidance</string>
                          <number>0</number>
                         </property>
                         <item>
-                         <widget class="QLabel" name="label_988">
+                         <widget class="QPushButton" name="filePushButton_4">
                           <property name="text">
                            <string/>
                           </property>
-                          <property name="pixmap">
-                           <pixmap>icons/folder 16x16.png</pixmap>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
                           </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLabel" name="label_989">
-                          <property name="font">
-                           <font>
-                            <family>Arial</family>
-                            <pointsize>7</pointsize>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>Browse</string>
+                          <property name="flat">
+                           <bool>true</bool>
                           </property>
                          </widget>
                         </item>
@@ -1610,28 +1574,16 @@ panel for guidance</string>
                          <number>0</number>
                         </property>
                         <item>
-                         <widget class="QLabel" name="label_997">
+                         <widget class="QPushButton" name="filePushButton_6">
                           <property name="text">
                            <string/>
                           </property>
-                          <property name="pixmap">
-                           <pixmap>icons/folder 16x16.png</pixmap>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
                           </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLabel" name="label_998">
-                          <property name="font">
-                           <font>
-                            <family>Arial</family>
-                            <pointsize>7</pointsize>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>Browse</string>
+                          <property name="flat">
+                           <bool>true</bool>
                           </property>
                          </widget>
                         </item>
@@ -2340,7 +2292,7 @@ QPushButton:hover{background-color:rgb(72, 144, 216);}
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>712</width>
+                      <width>715</width>
                       <height>550</height>
                      </rect>
                     </property>
@@ -2608,28 +2560,16 @@ QPushButton:hover{background-color:rgb(72, 144, 216);}
                          <number>0</number>
                         </property>
                         <item>
-                         <widget class="QLabel" name="label_1016">
+                         <widget class="QPushButton" name="filePushButton_7">
                           <property name="text">
                            <string/>
                           </property>
-                          <property name="pixmap">
-                           <pixmap>icons/folder 16x16.png</pixmap>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
                           </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLabel" name="label_1017">
-                          <property name="font">
-                           <font>
-                            <family>Arial</family>
-                            <pointsize>7</pointsize>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>Browse</string>
+                          <property name="flat">
+                           <bool>true</bool>
                           </property>
                          </widget>
                         </item>
@@ -2866,28 +2806,16 @@ QPushButton:hover{background-color:rgb(72, 144, 216);}
                          <number>0</number>
                         </property>
                         <item>
-                         <widget class="QLabel" name="label_1018">
+                         <widget class="QPushButton" name="filePushButton_9">
                           <property name="text">
                            <string/>
                           </property>
-                          <property name="pixmap">
-                           <pixmap>icons/folder 16x16.png</pixmap>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
                           </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLabel" name="label_1019">
-                          <property name="font">
-                           <font>
-                            <family>Arial</family>
-                            <pointsize>7</pointsize>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>Browse</string>
+                          <property name="flat">
+                           <bool>true</bool>
                           </property>
                          </widget>
                         </item>
@@ -2939,28 +2867,16 @@ QPushButton:hover{background-color:rgb(72, 144, 216);}
                          <number>0</number>
                         </property>
                         <item>
-                         <widget class="QLabel" name="label_993">
+                         <widget class="QPushButton" name="filePushButton_8">
                           <property name="text">
                            <string/>
                           </property>
-                          <property name="pixmap">
-                           <pixmap>icons/folder 16x16.png</pixmap>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
                           </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLabel" name="label_1020">
-                          <property name="font">
-                           <font>
-                            <family>Arial</family>
-                            <pointsize>7</pointsize>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>Browse</string>
+                          <property name="flat">
+                           <bool>true</bool>
                           </property>
                          </widget>
                         </item>
@@ -3074,28 +2990,16 @@ QPushButton:hover{background-color:rgb(72, 144, 216);}
                          <number>0</number>
                         </property>
                         <item>
-                         <widget class="QLabel" name="label_1025">
+                         <widget class="QPushButton" name="filePushButton_10">
                           <property name="text">
                            <string/>
                           </property>
-                          <property name="pixmap">
-                           <pixmap>icons/folder 16x16.png</pixmap>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
                           </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLabel" name="label_1026">
-                          <property name="font">
-                           <font>
-                            <family>Arial</family>
-                            <pointsize>7</pointsize>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>Browse</string>
+                          <property name="flat">
+                           <bool>true</bool>
                           </property>
                          </widget>
                         </item>
@@ -3817,7 +3721,7 @@ QPushButton:hover{background-color:rgb(72, 144, 216);}
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>712</width>
+                      <width>715</width>
                       <height>1100</height>
                      </rect>
                     </property>
@@ -3860,28 +3764,16 @@ QPushButton:hover{background-color:rgb(72, 144, 216);}
                          <number>0</number>
                         </property>
                         <item>
-                         <widget class="QLabel" name="label_1160">
+                         <widget class="QPushButton" name="filePushButton_16">
                           <property name="text">
                            <string/>
                           </property>
-                          <property name="pixmap">
-                           <pixmap>icons/folder 16x16.png</pixmap>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
                           </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLabel" name="label_1161">
-                          <property name="font">
-                           <font>
-                            <family>Arial</family>
-                            <pointsize>7</pointsize>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>Browse</string>
+                          <property name="flat">
+                           <bool>true</bool>
                           </property>
                          </widget>
                         </item>
@@ -4260,28 +4152,16 @@ QPushButton:hover{background-color:rgb(72, 144, 216);}
                          <number>0</number>
                         </property>
                         <item>
-                         <widget class="QLabel" name="label_1554">
+                         <widget class="QPushButton" name="filePushButton_11">
                           <property name="text">
                            <string/>
                           </property>
-                          <property name="pixmap">
-                           <pixmap>icons/folder 16x16.png</pixmap>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
                           </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLabel" name="label_1555">
-                          <property name="font">
-                           <font>
-                            <family>Arial</family>
-                            <pointsize>7</pointsize>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>Browse</string>
+                          <property name="flat">
+                           <bool>true</bool>
                           </property>
                          </widget>
                         </item>
@@ -4293,28 +4173,16 @@ QPushButton:hover{background-color:rgb(72, 144, 216);}
                          <number>0</number>
                         </property>
                         <item>
-                         <widget class="QLabel" name="label_1556">
+                         <widget class="QPushButton" name="filePushButton_12">
                           <property name="text">
                            <string/>
                           </property>
-                          <property name="pixmap">
-                           <pixmap>icons/folder 16x16.png</pixmap>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
                           </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLabel" name="label_1557">
-                          <property name="font">
-                           <font>
-                            <family>Arial</family>
-                            <pointsize>7</pointsize>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>Browse</string>
+                          <property name="flat">
+                           <bool>true</bool>
                           </property>
                          </widget>
                         </item>
@@ -4396,28 +4264,16 @@ QPushButton:hover{background-color:rgb(72, 144, 216);}
                          <number>0</number>
                         </property>
                         <item>
-                         <widget class="QLabel" name="label_1162">
+                         <widget class="QPushButton" name="filePushButton_14">
                           <property name="text">
                            <string/>
                           </property>
-                          <property name="pixmap">
-                           <pixmap>icons/folder 16x16.png</pixmap>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
                           </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLabel" name="label_1163">
-                          <property name="font">
-                           <font>
-                            <family>Arial</family>
-                            <pointsize>7</pointsize>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>Browse</string>
+                          <property name="flat">
+                           <bool>true</bool>
                           </property>
                          </widget>
                         </item>
@@ -4469,28 +4325,16 @@ QPushButton:hover{background-color:rgb(72, 144, 216);}
                          <number>0</number>
                         </property>
                         <item>
-                         <widget class="QLabel" name="label_1165">
+                         <widget class="QPushButton" name="filePushButton_13">
                           <property name="text">
                            <string/>
                           </property>
-                          <property name="pixmap">
-                           <pixmap>icons/folder 16x16.png</pixmap>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
                           </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLabel" name="label_1166">
-                          <property name="font">
-                           <font>
-                            <family>Arial</family>
-                            <pointsize>7</pointsize>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>Browse</string>
+                          <property name="flat">
+                           <bool>true</bool>
                           </property>
                          </widget>
                         </item>
@@ -4604,28 +4448,16 @@ QPushButton:hover{background-color:rgb(72, 144, 216);}
                          <number>0</number>
                         </property>
                         <item>
-                         <widget class="QLabel" name="label_1171">
+                         <widget class="QPushButton" name="filePushButton_15">
                           <property name="text">
                            <string/>
                           </property>
-                          <property name="pixmap">
-                           <pixmap>icons/folder 16x16.png</pixmap>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
                           </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLabel" name="label_1172">
-                          <property name="font">
-                           <font>
-                            <family>Arial</family>
-                            <pointsize>7</pointsize>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>Browse</string>
+                          <property name="flat">
+                           <bool>true</bool>
                           </property>
                          </widget>
                         </item>
@@ -6546,7 +6378,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>712</width>
+                      <width>715</width>
                       <height>550</height>
                      </rect>
                     </property>
@@ -6780,7 +6612,7 @@ QFrame{background-color:#d1d5de}</string>
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>332</width>
+                      <width>335</width>
                       <height>500</height>
                      </rect>
                     </property>
@@ -6977,7 +6809,7 @@ QFrame{background-color:#d1d5de}</string>
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>332</width>
+                      <width>335</width>
                       <height>550</height>
                      </rect>
                     </property>
@@ -8335,7 +8167,7 @@ QFrame{background-color:#d1d5de}</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>802</width>
+                          <width>805</width>
                           <height>250</height>
                          </rect>
                         </property>
@@ -14340,7 +14172,7 @@ Analyzer</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>602</width>
+                          <width>605</width>
                           <height>415</height>
                          </rect>
                         </property>
@@ -14742,7 +14574,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>602</width>
+                          <width>605</width>
                           <height>415</height>
                          </rect>
                         </property>
@@ -15308,8 +15140,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         <property name="geometry">
                          <rect>
                           <x>0</x>
-                          <y>0</y>
-                          <width>612</width>
+                          <y>-65</y>
+                          <width>615</width>
                           <height>420</height>
                          </rect>
                         </property>
@@ -16133,28 +15965,16 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <number>0</number>
                             </property>
                             <item>
-                             <widget class="QLabel" name="vsaCalFileFolder_comb">
+                             <widget class="QPushButton" name="filePushButton">
                               <property name="text">
                                <string/>
                               </property>
-                              <property name="pixmap">
-                               <pixmap>icons/folder 16x16.png</pixmap>
+                              <property name="icon">
+                               <iconset>
+                                <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
                               </property>
-                              <property name="alignment">
-                               <set>Qt::AlignCenter</set>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <widget class="QLabel" name="vsaCalFileBrowse_comb">
-                              <property name="font">
-                               <font>
-                                <family>Arial</family>
-                                <pointsize>7</pointsize>
-                               </font>
-                              </property>
-                              <property name="text">
-                               <string>Browse</string>
+                              <property name="flat">
+                               <bool>true</bool>
                               </property>
                              </widget>
                             </item>
@@ -16166,34 +15986,16 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <number>0</number>
                             </property>
                             <item>
-                             <widget class="QLabel" name="vsaCalSaveLocFolder_comb">
-                              <property name="enabled">
-                               <bool>false</bool>
-                              </property>
+                             <widget class="QPushButton" name="filePushButton_2">
                               <property name="text">
                                <string/>
                               </property>
-                              <property name="pixmap">
-                               <pixmap>icons/folder 16x16.png</pixmap>
+                              <property name="icon">
+                               <iconset>
+                                <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
                               </property>
-                              <property name="alignment">
-                               <set>Qt::AlignCenter</set>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <widget class="QLabel" name="vsaCalSaveLocBrowse_comb">
-                              <property name="enabled">
-                               <bool>false</bool>
-                              </property>
-                              <property name="font">
-                               <font>
-                                <family>Arial</family>
-                                <pointsize>7</pointsize>
-                               </font>
-                              </property>
-                              <property name="text">
-                               <string>Browse</string>
+                              <property name="flat">
+                               <bool>true</bool>
                               </property>
                              </widget>
                             </item>
@@ -16225,7 +16027,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                            </widget>
                           </item>
                           <item row="1" column="3">
-                           <widget class="QPlainTextEdit" name="vsaCalFileField_comb">
+                           <widget class="QPlainTextEdit" name="fileTextEdit">
                             <property name="sizePolicy">
                              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                               <horstretch>0</horstretch>
@@ -16537,7 +16339,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>602</width>
+                          <width>605</width>
                           <height>370</height>
                          </rect>
                         </property>
@@ -19823,7 +19625,7 @@ Fill out ‘General Settings’ and select file to use in ‘Calibration Setting
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>602</width>
+                        <width>605</width>
                         <height>500</height>
                        </rect>
                       </property>
@@ -21259,7 +21061,7 @@ QPushButton:hover{background-color:rgb(72, 144, 216);}
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>602</width>
+                        <width>605</width>
                         <height>350</height>
                        </rect>
                       </property>
@@ -22338,7 +22140,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>614</width>
+                          <width>617</width>
                           <height>900</height>
                          </rect>
                         </property>
@@ -24781,7 +24583,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>614</width>
+                          <width>617</width>
                           <height>1000</height>
                          </rect>
                         </property>
@@ -27671,7 +27473,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>614</width>
+                          <width>617</width>
                           <height>1200</height>
                          </rect>
                         </property>
@@ -31265,7 +31067,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>614</width>
+                        <width>617</width>
                         <height>370</height>
                        </rect>
                       </property>
@@ -31422,7 +31224,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>614</width>
+                        <width>617</width>
                         <height>370</height>
                        </rect>
                       </property>
@@ -33510,7 +33312,7 @@ Analyze</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>672</width>
+                          <width>675</width>
                           <height>250</height>
                          </rect>
                         </property>
@@ -43129,7 +42931,7 @@ Analyzer</string>
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>593</width>
+                           <width>596</width>
                            <height>391</height>
                           </rect>
                          </property>
@@ -62913,7 +62715,7 @@ Analyzer</string>
                    <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                   </property>
                   <property name="currentIndex">
-                   <number>0</number>
+                   <number>1</number>
                   </property>
                   <widget class="QWidget" name="upStandardSettings_6">
                    <attribute name="title">
@@ -62980,7 +62782,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>602</width>
+                       <width>605</width>
                        <height>500</height>
                       </rect>
                      </property>
@@ -66040,7 +65842,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>602</width>
+                       <width>605</width>
                        <height>500</height>
                       </rect>
                      </property>
@@ -68644,7 +68446,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>602</width>
+                       <width>605</width>
                        <height>500</height>
                       </rect>
                      </property>
@@ -70023,7 +69825,7 @@ Analyzer</string>
      <x>0</x>
      <y>0</y>
      <width>1248</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
