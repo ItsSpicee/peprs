@@ -20,6 +20,7 @@ class Window(QMainWindow):
 		super(Window,self).__init__()
 		self.ui = Ui_DUTSetup()
 		#self.ui = Ui_peprs()
+		##
 		self.ui.setupUi(self)
 		#self.initUI()
 		self.initDutUI()
