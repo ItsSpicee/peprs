@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import (QProgressBar)
 from PyQt5.QtGui import (QCursor)
 from PyQt5.QtCore import (Qt)
 import matlab.engine
+eng = matlab.engine.start_matlab()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions used in main.py
 
@@ -271,6 +272,7 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton):
 	c4Checked = self.ui.p1c4Check.isChecked()
 	vsgType = self.ui.vsgSetup.currentIndex()
 	vsaType = self.ui.vsaType.currentIndex()
+	enabledSupply = self.ui.p1Enabled.currentIndex()
 	
 	self.ui.p1Equip.setStyleSheet(boxDone)
 	if c1Checked:
@@ -312,11 +314,14 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton):
 		self.ui.vsgNextSteps.setCurrentIndex(10)
 		setPrevP1Buttons(self,buttonHover,greyHover,greyButton,Qt.PointingHandCursor,Qt.ArrowCursor)
 		
-	# get field data
+	# set instrument params
 	p1c1V = self.ui.p1c1Voltage.toPlainText()
-	print(p1c1V)
-	eng = matlab.engine.start_matlab()
-	eng.Set_Voltage(p1c1V,nargout=0)
+	p1c1A = self.ui.p1c1Address.toPlainText()
+	if enabledSupply == 0 or enabledSupply == 2:
+		eng.Output_Off(p1c1A,nargout=0)
+	else:
+		p1c1PartNum = eng.Set_Voltage(p1c1V,p1c1A,nargout=1)
+		self.ui.p1c1PartNumber.setPlainText(p1c1PartNum)
 
 def setP2(self,boxDone,buttonFocus,buttonHover,greyHoverB,greyButton):
 	c1Checked = self.ui.p2c1Check.isChecked()
