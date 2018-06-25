@@ -34573,7 +34573,7 @@ QWidget#power2{background-color:rgb(247,247,247)}
 QWidget#power3{background-color:rgb(247,247,247)}</string>
             </property>
             <property name="currentIndex">
-             <number>8</number>
+             <number>6</number>
             </property>
             <widget class="QWidget" name="vsg">
              <property name="styleSheet">
@@ -38255,8 +38255,8 @@ Analyzer</string>
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>595</width>
-                             <height>424</height>
+                             <width>590</width>
+                             <height>382</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -63181,6 +63181,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                        </item>
                        <item row="1" column="1">
                         <widget class="QPlainTextEdit" name="p1c1Voltage">
+                         <property name="inputMethodHints">
+                          <set>Qt::ImhDigitsOnly</set>
+                         </property>
                          <property name="verticalScrollBarPolicy">
                           <enum>Qt::ScrollBarAlwaysOff</enum>
                          </property>
@@ -63200,6 +63203,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                        </item>
                        <item row="2" column="1">
                         <widget class="QPlainTextEdit" name="p1c1Current">
+                         <property name="inputMethodHints">
+                          <set>Qt::ImhDigitsOnly</set>
+                         </property>
                          <property name="verticalScrollBarPolicy">
                           <enum>Qt::ScrollBarAlwaysOff</enum>
                          </property>
@@ -63250,6 +63256,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                        </item>
                        <item row="4" column="1" colspan="2">
                         <widget class="QPlainTextEdit" name="p1c1Address">
+                         <property name="inputMethodHints">
+                          <set>Qt::ImhNone</set>
+                         </property>
                          <property name="verticalScrollBarPolicy">
                           <enum>Qt::ScrollBarAlwaysOff</enum>
                          </property>
@@ -63274,6 +63283,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </property>
                          <property name="acceptDrops">
                           <bool>true</bool>
+                         </property>
+                         <property name="inputMethodHints">
+                          <set>Qt::ImhNone</set>
                          </property>
                          <property name="verticalScrollBarPolicy">
                           <enum>Qt::ScrollBarAlwaysOff</enum>
@@ -66027,7 +66039,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      <property name="geometry">
                       <rect>
                        <x>0</x>
-                       <y>-45</y>
+                       <y>0</y>
                        <width>602</width>
                        <height>500</height>
                       </rect>
@@ -68631,7 +68643,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                      <property name="geometry">
                       <rect>
                        <x>0</x>
-                       <y>-89</y>
+                       <y>0</y>
                        <width>602</width>
                        <height>500</height>
                       </rect>

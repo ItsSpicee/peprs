@@ -1,9 +1,7 @@
 % visa resource name is the visa address
 % visaAddress = "GPIB0::7::INSTR", E3643A
-% low voltage range: 35 V/1.4 A 
-% high voltage range: 60 V/0.8 A
     
-function partNum = Set_Voltage(voltage,address)
+function [PartNum,] = Set_Voltage(voltage,address)
 % Connect steps
 voltage = str2num(voltage);
 oldSupply = instrfind('PrimaryAddress',address);
@@ -19,10 +17,11 @@ fprintf(supply, sprintf(':SOURce:VOLTage:LEVel:IMMediate:AMPLitude %g', voltage)
 %fprintf(supply,sprintf(':SOURce:VOLTage:LIMit %g', voltage));
 idn = query(supply, '*IDN?');
 splitIdn = strsplit(idn,',');
-partNum = splitIdn{2};
+fprintf('Connected to power supply: %s\n', splitIdn{2}); 
+% pause(5);
 
 % Cleanup
-%fprintf(supply, sprintf(':OUTPut:STATe %d', 0));
+fprintf(supply, sprintf(':OUTPut:STATe %d', 0));
 fclose(supply);
 delete(supply);
 clear supply;
