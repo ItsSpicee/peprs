@@ -11,7 +11,8 @@
     </ul>
 <li>Qt (most recent version)</li>
 <li>Python 3.6</li>
-<li> PyQt5 </li>
+<li>PyQt5</li>
+<li>Keysight Libraries & Command Expert</li>
 </ul>
 
 <p> To install MATLAB, visit: https://www.mathworks.com/downloads/ <br> If a license is needed, visit the IST Webstore: https://cas.uwaterloo.ca/cas/login?service=https%3a%2f%2fstrobe.uwaterloo.ca%2fist%2fsaw%2fwebstore%2f <br> The research license should automatically come with the instrument control toolbox.</p>
@@ -19,3 +20,4 @@
 <p> To install Qt, visit: https://www.qt.io/download. In the installation wizard, make sure the correct version of Qt is selected to be installed. The most recent version is not selected by default.</p>
 <p> To install PyQt5, visit: https://www.riverbankcomputing.com/software/pyqt/download5 </p>
 <p> To install MATLAB Python drivers, follow this link: https://www.mathworks.com/help/matlab/matlab_external/install-the-matlab-engine-for-python.html <br> Administrator privileges are most likely needed to run the "python setup.py install" command. It is therefore important to make sure your python directories are in the system environment variables (for Windows) and that your python and MATLAB bit versions are the same. If you need to reinstall Python, make sure to reinstall PyQt5 as well.</p>
+<p> To install the Keysight IO Libraries and add ons, follow this link: https://www.keysight.com/en/pd-1985909/io-libraries-suite?cc=US&lc=eng </p>
