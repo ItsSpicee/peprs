@@ -20,6 +20,7 @@ class Window(QMainWindow):
 		super(Window,self).__init__()
 		self.ui = Ui_DUTSetup()
 		#self.ui = Ui_peprs()
+		##
 		self.ui.setupUi(self)
 		#self.initUI()
 		self.initDutUI()
@@ -28,7 +29,11 @@ class Window(QMainWindow):
 		self.ui.dutStackedWidget.setCurrentIndex(0)
 		self.ui.dutReadyButton.clicked.connect(self.dutReady)
 		self.setWindowTitle('PEPRS - Performance Enhancement for Processing Radio Signals')
+		self.ui.backButton.clicked.connect(lambda: self.goBack(0))
 		self.show()
+		
+	def goBack(self, index):
+		self.ui.dutStackedWidget.setCurrentIndex(index)
 		
 	def dutReady(self):
 		mimoChecked = self.ui.mimoRadio.isChecked()
@@ -46,6 +51,26 @@ class Window(QMainWindow):
 			self.ui.dutStackedWidget.setCurrentIndex(1)
 		
 	def initMainUI(self):		
+		#setting up file import buttons
+		self.ui.filePushButton_13.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_300))
+		self.ui.filePushButton_14.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_302))
+		self.ui.filePushButton_15.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_301))
+		self.ui.filePushButton_11.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_356))
+		self.ui.filePushButton_12.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_357))
+		self.ui.filePushButton_7.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_186))
+		self.ui.filePushButton_8.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_281))
+		self.ui.filePushButton_9.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_283))
+		self.ui.filePushButton_10.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_282))
+		self.ui.filePushButton_4.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_276))
+		self.ui.filePushButton_5.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_280))
+		self.ui.filePushButton_3.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_169))
+		self.ui.filePushButton_6.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_278))
+		self.ui.filePushButton.clicked.connect(lambda: flow.fileBrowse(self, self.ui.fileTextEdit))
+		self.ui.filePushButton_2.clicked.connect(lambda: flow.fileBrowse(self, self.ui.vsaCalSaveLocField_comb))
+		
+		
+	
+	
 		# styling variables
 		setButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none}"
 		setFocusButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none;font-weight:700;font-size:11px}"

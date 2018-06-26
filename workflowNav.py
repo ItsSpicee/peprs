@@ -2,6 +2,13 @@
 
 from PyQt5.QtGui import (QCursor)
 from PyQt5.QtCore import (Qt)
+from PyQt5.QtWidgets import (QFileDialog)
+
+
+def fileBrowse(self, lineEdit):
+	print("hi")
+	lineEdit.clear()
+	lineEdit.insertPlainText(str(QFileDialog.getOpenFileName()))
 
 def changeStack(self,stackName,idx):
 	stackName.setCurrentIndex(idx)
