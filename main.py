@@ -1,5 +1,4 @@
 # contains callbacks to ui components and a few miscellaneous functions that function better in main.py (e.g. rely on event, used by multiple files. rely on parameter from signal)
-
 #1265, 950
 
 import sys
@@ -14,6 +13,8 @@ import setParameters as set
 import workflowNav as flow
 import windowFunctions as menu
 import parameterFunctions as param
+import matlab.engine
+eng = matlab.engine.start_matlab()
 
 class Window(QMainWindow):
 	def __init__(self):
@@ -67,9 +68,6 @@ class Window(QMainWindow):
 		self.ui.filePushButton_6.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_278))
 		self.ui.filePushButton.clicked.connect(lambda: flow.fileBrowse(self, self.ui.fileTextEdit))
 		self.ui.filePushButton_2.clicked.connect(lambda: flow.fileBrowse(self, self.ui.vsaCalSaveLocField_comb))
-		
-		
-	
 	
 		# styling variables
 		setButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none}"
@@ -80,6 +78,13 @@ class Window(QMainWindow):
 		greyButton = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;}"
 		greyHover = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px;color:black} QPushButton:hover{background-color:rgb(243, 243, 243);}"
 		blueSelect = "QPushButton{ border:3px solid rgb(0, 0, 127);  background-color:qlineargradient(spread:pad, x1:0.994318, y1:0.682, x2:1, y2:0, stop:0 rgba(72, 144, 216, 255), stop:1 rgba(83, 170, 252, 255)); border-radius:5px;color:white}"
+		
+		# emergency on and off buttons
+		# self.ui.rfOffButton.clicked.connect()
+		# self.ui.dcOffButton.clicked.connect()
+		# self.ui.allOffButton.clicked.connect()
+		# self.ui.dcOnButton.clicked.connect()
+		# self.ui.rfOnButton.clicked.connect()
 		
 		# keep widget space when hidden
 		retainVsa = QSizePolicy(self.ui.debuggingPanel_vsa.sizePolicy())

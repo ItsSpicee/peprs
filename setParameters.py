@@ -1,6 +1,6 @@
 # setParameters.py contains all the functions that are called whenever a "set" "set & run" or "preview" button is clicked
 
-from PyQt5.QtWidgets import (QProgressBar,QErrorMessage)
+from PyQt5.QtWidgets import (QProgressBar,QMessageBox)
 from PyQt5.QtGui import (QCursor)
 from PyQt5.QtCore import (Qt)
 import matlab.engine
@@ -266,6 +266,7 @@ def setSA(self,buttonFocus,buttonPHover,buttonHover,boxDone):
 	self.ui.vsgNextSteps.setCurrentIndex(9)
 		
 def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton):
+	flag = 0;
 	c1Checked = self.ui.p1c1Check.isChecked()
 	c2Checked = self.ui.p1c2Check.isChecked()
 	c3Checked = self.ui.p1c3Check.isChecked()
@@ -273,20 +274,107 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton):
 	vsgType = self.ui.vsgSetup.currentIndex()
 	vsaType = self.ui.vsaType.currentIndex()
 	enabledSupply = self.ui.p1Enabled.currentIndex()
+	p1c1A = self.ui.p1c1Address.toPlainText()
+	p1c2A = self.ui.p1c2Address.toPlainText()
+	p1c3A = self.ui.p1c3Address.toPlainText()
+	p1c4A = self.ui.p1c4Address.toPlainText()
 	
-	self.ui.p1Equip.setStyleSheet(boxDone)
-	if c1Checked:
-		self.ui.p1c1Equip.setStyleSheet(boxDone)
-	if c2Checked:
-		self.ui.p1c2Equip.setStyleSheet(boxDone)
-	if c3Checked:
-		self.ui.p1c3Equip.setStyleSheet(boxDone)
-	if c4Checked:
-		self.ui.p1c4Equip.setStyleSheet(boxDone)
-	self.ui.power1Button_p1.setStyleSheet(buttonFocus)
+	# set instrument params
+	if enabledSupply == 0 or enabledSupply == 2:
+		if enabledSupply == 2:
+			flag = 1;
+		if p1c1A != "":
+			eng.Output_Off(p1c1A,nargout=0)
+		if p1c2A != "":
+			eng.Output_Off(p1c2A,nargout=0)
+		if p1c3A != "":
+			eng.Output_Off(p1c3A,nargout=0)
+		if p1c4A != "":
+			eng.Output_Off(p1c4A,nargout=0)
+	else:
+		if c1Checked:
+			flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone)
+		if c2Checked:
+			flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone)
+		if c3Checked:
+			flag = setSupplyParams(self,self.ui.p1c3Address,self.ui.p1c3Voltage,self.ui.p1c3Current,self.ui.p1c3PartNumber,self.ui.p1c3Equip,boxDone)
+		if c4Checked:
+			flag = setSupplyParams(self,self.ui.p1c4Address,self.ui.p1c4Voltage,self.ui.p1c4Current,self.ui.p1c4PartNumber,self.ui.p1c4Equip,boxDone)
 	
-	if vsgType == 1 or vsgType == 4:
+	if flag == 1:
+		self.ui.power1Button_p1.setStyleSheet(buttonFocus)
+		self.ui.p1Equip.setStyleSheet(boxDone)
+		
+		if vsgType == 1 or vsgType == 4:
+			if vsaType == 1 or vsaType == 2 or vsaType == 3 or vsaType == 4:
+				self.ui.power1NextStack.setCurrentIndex(3)
+				self.ui.saNextStack.setCurrentIndex(3)
+				self.ui.meterNextStack.setCurrentIndex(5)
+				self.ui.downNextStack.setCurrentIndex(6)
+				self.ui.vsaNextStack.setCurrentIndex(8)
+				self.ui.up_psg_next.setCurrentIndex(10)
+				self.ui.vsgNextSteps.setCurrentIndex(12)
+				setPrevP1Buttons(self,buttonHover,greyButton,greyButton,Qt.ArrowCursor,Qt.ArrowCursor)
+			elif vsaType == 5 or vsaType ==6:
+				self.ui.power1NextStack.setCurrentIndex(2)
+				self.ui.saNextStack.setCurrentIndex(2)
+				self.ui.meterNextStack.setCurrentIndex(4)
+				self.ui.downNextStack.setCurrentIndex(5)
+				self.ui.vsaNextStack.setCurrentIndex(7)
+				self.ui.up_psg_next.setCurrentIndex(9)
+				self.ui.vsgNextSteps.setCurrentIndex(11)
+				setPrevP1Buttons(self,buttonHover,greyButton,greyHover,Qt.ArrowCursor,Qt.PointingHandCursor)
+		elif vsgType == 2 or vsgType == 3:
+			self.ui.power1NextStack.setCurrentIndex(1)
+			self.ui.saNextStack.setCurrentIndex(1)
+			self.ui.meterNextStack.setCurrentIndex(3)
+			self.ui.downNextStack.setCurrentIndex(4)
+			self.ui.vsaNextStack.setCurrentIndex(6)
+			self.ui.up_psg_next.setCurrentIndex(8)
+			self.ui.vsgNextSteps.setCurrentIndex(10)
+			setPrevP1Buttons(self,buttonHover,greyHover,greyButton,Qt.PointingHandCursor,Qt.ArrowCursor)
+
+def setP2(self,boxDone,buttonFocus,buttonHover,greyHoverB,greyButton):
+	flag = 0;
+	c1Checked = self.ui.p2c1Check.isChecked()
+	c2Checked = self.ui.p2c2Check.isChecked()
+	c3Checked = self.ui.p2c3Check.isChecked()
+	c4Checked = self.ui.p2c4Check.isChecked()
+	vsaType = self.ui.vsaType.currentIndex()
+	enabledSupply = self.ui.p2Enabled.currentIndex()
+	p2c1A = self.ui.p2c1Address.toPlainText()
+	p2c2A = self.ui.p2c2Address.toPlainText()
+	p2c3A = self.ui.p2c3Address.toPlainText()
+	p2c4A = self.ui.p2c3Address.toPlainText()
+	
+	# set instrument params
+	if enabledSupply == 0 or enabledSupply == 2:
+		if enabledSupply == 2:
+			flag = 1;
+		if p2c1A != "":
+			eng.Output_Off(p2c1A,nargout=0)
+		if p2c2A != "":
+			eng.Output_Off(p2c2A,nargout=0)
+		if p2c3A != "":
+			eng.Output_Off(p2c3A,nargout=0)
+		if p2c4A != "":
+			eng.Output_Off(p2c4A,nargout=0)
+	else:
+		if c1Checked:
+			flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone)
+		if c2Checked:
+			flag = setSupplyParams(self,self.ui.p2c2Address,self.ui.p2c2Voltage,self.ui.p2c2Current,self.ui.p2c2PartNumber,self.ui.p2c2Equip,boxDone)
+		if c3Checked:
+			flag = setSupplyParams(self,self.ui.p2c3Address,self.ui.p2c3Voltage,self.ui.p2c3Current,self.ui.p2c3PartNumber,self.ui.p2c3Equip,boxDone)
+		if c4Checked:
+			flag = setSupplyParams(self,self.ui.p2c4Address,self.ui.p2c4Voltage,self.ui.p2c4Current,self.ui.p2c4PartNumber,self.ui.p2c4Equip,boxDone)
+	
+	if flag == 1:
+		self.ui.power2Button_p2.setStyleSheet(buttonFocus)
+		self.ui.p2Equip.setStyleSheet(boxDone)
+	
 		if vsaType == 1 or vsaType == 2 or vsaType == 3 or vsaType == 4:
+			self.ui.power2NextStack.setCurrentIndex(0)
 			self.ui.power1NextStack.setCurrentIndex(3)
 			self.ui.saNextStack.setCurrentIndex(3)
 			self.ui.meterNextStack.setCurrentIndex(5)
@@ -294,8 +382,9 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton):
 			self.ui.vsaNextStack.setCurrentIndex(8)
 			self.ui.up_psg_next.setCurrentIndex(10)
 			self.ui.vsgNextSteps.setCurrentIndex(12)
-			setPrevP1Buttons(self,buttonHover,greyButton,greyButton,Qt.ArrowCursor,Qt.ArrowCursor)
+			setPrevP2Buttons(self,buttonHover,greyButton)
 		elif vsaType == 5 or vsaType ==6:
+			self.ui.power2NextStack.setCurrentIndex(2)
 			self.ui.power1NextStack.setCurrentIndex(2)
 			self.ui.saNextStack.setCurrentIndex(2)
 			self.ui.meterNextStack.setCurrentIndex(4)
@@ -303,73 +392,48 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton):
 			self.ui.vsaNextStack.setCurrentIndex(7)
 			self.ui.up_psg_next.setCurrentIndex(9)
 			self.ui.vsgNextSteps.setCurrentIndex(11)
-			setPrevP1Buttons(self,buttonHover,greyButton,greyHover,Qt.ArrowCursor,Qt.PointingHandCursor)
-	elif vsgType == 2 or vsgType == 3:
-		self.ui.power1NextStack.setCurrentIndex(1)
-		self.ui.saNextStack.setCurrentIndex(1)
-		self.ui.meterNextStack.setCurrentIndex(3)
-		self.ui.downNextStack.setCurrentIndex(4)
-		self.ui.vsaNextStack.setCurrentIndex(6)
-		self.ui.up_psg_next.setCurrentIndex(8)
-		self.ui.vsgNextSteps.setCurrentIndex(10)
-		setPrevP1Buttons(self,buttonHover,greyHover,greyButton,Qt.PointingHandCursor,Qt.ArrowCursor)
-		
+			setPrevP2Buttons(self,buttonHover,greyHoverB)
+	
+def setP3(self,boxDone,buttonFocus,buttonHover):
+	flag = 0;
+	c1Checked = self.ui.p3c1Check.isChecked()
+	c2Checked = self.ui.p3c2Check.isChecked()
+	c3Checked = self.ui.p3c3Check.isChecked()
+	c4Checked = self.ui.p3c4Check.isChecked()
+	enabledSupply = self.ui.p3Enabled.currentIndex()
+	p3c1A = self.ui.p3c1Address.toPlainText()
+	p3c2A = self.ui.p3c2Address.toPlainText()
+	p3c3A = self.ui.p3c3Address.toPlainText()
+	p3c4A = self.ui.p3c4Address.toPlainText()
+
 	# set instrument params
 	if enabledSupply == 0 or enabledSupply == 2:
-		eng.Output_Off(p1c1A,nargout=0)
-		eng.Output_Off(p1c2A,nargout=0)
-		eng.Output_Off(p1c3A,nargout=0)
-		eng.Output_Off(p1c4A,nargout=0)
+		if enabledSupply == 2:
+			flag = 1;
+		if p3c1A != "":
+			eng.Output_Off(p3c1A,nargout=0)
+		if p3c2A != "":
+			eng.Output_Off(p3c2A,nargout=0)
+		if p3c3A != "":
+			eng.Output_Off(p3c3A,nargout=0)
+		if p3c4A != "":
+			eng.Output_Off(p3c4A,nargout=0)
 	else:
 		if c1Checked:
-			p1c1V = self.ui.p1c1Voltage.toPlainText()
-			p1c1C = self.ui.p1c1Current.toPlainText()
-			p1c1A = self.ui.p1c1Address.toPlainText()
-			p1c1Returns = eng.Set_Supply(p1c1A,p1c1V,p1c1C,nargout=2)
-			p1c1Returns = p1c1Returns.split(";")
-			p1c1Error = p1c1Returns[1]
-			if p1c1Error == " ":
-				p1c1PartNum = p1c1Returns[0]
-				self.ui.p1c1PartNumber.setPlainText(p1c1PartNum)
-			else:
-				msg = QErrorMessage(self)
-				msg.setWindowTitle('Unable to Set Parameters')
-				msg.setText(p1c1Error)
-				msg.exec_();
+			flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone)
 		if c2Checked:
-			p1c2V = self.ui.p1c2Voltage.toPlainText()
-			p1c2C = self.ui.p1c2Current.toPlainText()
-			p1c2A = self.ui.p1c2Address.toPlainText()
+			flag = setSupplyParams(self,self.ui.p3c2Address,self.ui.p3c2Voltage,self.ui.p3c2Current,self.ui.p3c2PartNumber,self.ui.p3c2Equip,boxDone)
 		if c3Checked:
-			p1c3V = self.ui.p1c3Voltage.toPlainText()
-			p1c3C = self.ui.p1c3Current.toPlainText()
-			p1c3A = self.ui.p1c3Address.toPlainText()
+			flag = setSupplyParams(self,self.ui.p3c3Address,self.ui.p3c3Voltage,self.ui.p3c3Current,self.ui.p3c3PartNumber,self.ui.p3c3Equip,boxDone)
 		if c4Checked:
-			p1c4V = self.ui.p1c4Voltage.toPlainText()
-			p1c4C = self.ui.p1c4Current.toPlainText()
-			p1c4A = self.ui.p1c4Address.toPlainText()
-		
-
-def setP2(self,boxDone,buttonFocus,buttonHover,greyHoverB,greyButton):
-	c1Checked = self.ui.p2c1Check.isChecked()
-	c2Checked = self.ui.p2c2Check.isChecked()
-	c3Checked = self.ui.p2c3Check.isChecked()
-	c4Checked = self.ui.p2c4Check.isChecked()
-	vsaType = self.ui.vsaType.currentIndex()
-	enabledSupply = self.ui.p2Enabled.currentIndex()
+			flag = setSupplyParams(self,self.ui.p3c4Address,self.ui.p3c4Voltage,self.ui.p3c4Current,self.ui.p3c4PartNumber,self.ui.p3c4Equip,boxDone)
 	
-	self.ui.p2Equip.setStyleSheet(boxDone)
-	if c1Checked:
-		self.ui.p2c1Equip.setStyleSheet(boxDone)
-	if c2Checked:
-		self.ui.p2c2Equip.setStyleSheet(boxDone)
-	if c3Checked:
-		self.ui.p2c3Equip.setStyleSheet(boxDone)
-	if c4Checked:
-		self.ui.p2c4Equip.setStyleSheet(boxDone)
-	self.ui.power2Button_p2.setStyleSheet(buttonFocus)
+	if flag == 1:
+		self.ui.p3Equip.setStyleSheet(boxDone)
 	
-	if vsaType == 1 or vsaType == 2 or vsaType == 3 or vsaType == 4:
+		self.ui.power3Button_p3.setStyleSheet(buttonFocus)
+		self.ui.power3Button_p3_2.setStyleSheet(buttonFocus)
+		self.ui.power3NextStack.setCurrentIndex(1)
 		self.ui.power2NextStack.setCurrentIndex(0)
 		self.ui.power1NextStack.setCurrentIndex(3)
 		self.ui.saNextStack.setCurrentIndex(3)
@@ -378,86 +442,7 @@ def setP2(self,boxDone,buttonFocus,buttonHover,greyHoverB,greyButton):
 		self.ui.vsaNextStack.setCurrentIndex(8)
 		self.ui.up_psg_next.setCurrentIndex(10)
 		self.ui.vsgNextSteps.setCurrentIndex(12)
-		setPrevP2Buttons(self,buttonHover,greyButton)
-	elif vsaType == 5 or vsaType ==6:
-		self.ui.power2NextStack.setCurrentIndex(2)
-		self.ui.power1NextStack.setCurrentIndex(2)
-		self.ui.saNextStack.setCurrentIndex(2)
-		self.ui.meterNextStack.setCurrentIndex(4)
-		self.ui.downNextStack.setCurrentIndex(5)
-		self.ui.vsaNextStack.setCurrentIndex(7)
-		self.ui.up_psg_next.setCurrentIndex(9)
-		self.ui.vsgNextSteps.setCurrentIndex(11)
-		setPrevP2Buttons(self,buttonHover,greyHoverB)
-	# set instrument params
-	p2c1V = self.ui.p2c1Voltage.toPlainText()
-	p2c1C = self.ui.p2c1Current.toPlainText()
-	p2c1A = self.ui.p2c1Address.toPlainText()
-	p2c2V = self.ui.p2c2Voltage.toPlainText()
-	p2c2C = self.ui.p2c2Current.toPlainText()
-	p2c2A = self.ui.p2c2Address.toPlainText()
-	p2c3V = self.ui.p2c3Voltage.toPlainText()
-	p2c3C = self.ui.p2c3Current.toPlainText()
-	p2c3A = self.ui.p2c3Address.toPlainText()
-	p2c4V = self.ui.p2c4Voltage.toPlainText()
-	p2c4C = self.ui.p2c4Current.toPlainText()
-	p2c4A = self.ui.p2c4Address.toPlainText()
-	
-	if enabledSupply == 0 or enabledSupply == 2:
-		eng.Output_Off(p2c1A,nargout=0)
-		eng.Output_Off(p2c2A,nargout=0)
-		eng.Output_Off(p2c3A,nargout=0)
-		eng.Output_Off(p2c4A,nargout=0)
-	
-def setP3(self,boxDone,buttonFocus,buttonHover):
-	c1Checked = self.ui.p3c1Check.isChecked()
-	c2Checked = self.ui.p3c2Check.isChecked()
-	c3Checked = self.ui.p3c3Check.isChecked()
-	c4Checked = self.ui.p3c4Check.isChecked()
-	enabledSupply = self.ui.p3Enabled.currentIndex()
-	
-	if c1Checked:
-		self.ui.p3c1Equip.setStyleSheet(boxDone)
-	if c2Checked:
-		self.ui.p3c2Equip.setStyleSheet(boxDone)
-	if c3Checked:
-		self.ui.p3c3Equip.setStyleSheet(boxDone)
-	if c4Checked:
-		self.ui.p3c4Equip.setStyleSheet(boxDone)
-	self.ui.p3Equip.setStyleSheet(boxDone)
-	
-	self.ui.power3Button_p3.setStyleSheet(buttonFocus)
-	self.ui.power3Button_p3_2.setStyleSheet(buttonFocus)
-	self.ui.power3NextStack.setCurrentIndex(1)
-	self.ui.power2NextStack.setCurrentIndex(0)
-	self.ui.power1NextStack.setCurrentIndex(3)
-	self.ui.saNextStack.setCurrentIndex(3)
-	self.ui.meterNextStack.setCurrentIndex(5)
-	self.ui.downNextStack.setCurrentIndex(6)
-	self.ui.vsaNextStack.setCurrentIndex(8)
-	self.ui.up_psg_next.setCurrentIndex(10)
-	self.ui.vsgNextSteps.setCurrentIndex(12)
-	setPrevP3Buttons(self,buttonHover)
-	
-	# set instrument params
-	p3c1V = self.ui.p3c1Voltage.toPlainText()
-	p3c1C = self.ui.p3c1Current.toPlainText()
-	p3c1A = self.ui.p3c1Address.toPlainText()
-	p3c2V = self.ui.p3c2Voltage.toPlainText()
-	p3c2C = self.ui.p3c2Current.toPlainText()
-	p3c2A = self.ui.p3c2Address.toPlainText()
-	p3c3V = self.ui.p3c3Voltage.toPlainText()
-	p3c3C = self.ui.p3c3Current.toPlainText()
-	p3c3A = self.ui.p3c3Address.toPlainText()
-	p3c4V = self.ui.p3c4Voltage.toPlainText()
-	p3c4C = self.ui.p3c4Current.toPlainText()
-	p3c4A = self.ui.p3c4Address.toPlainText()
-	
-	if enabledSupply == 0 or enabledSupply == 2:
-		eng.Output_Off(p3c1A,nargout=0)
-		eng.Output_Off(p3c2A,nargout=0)
-		eng.Output_Off(p3c3A,nargout=0)
-		eng.Output_Off(p3c4A,nargout=0)
+		setPrevP3Buttons(self,buttonHover)
 
 def setVSAMeasDig(self,boxDone,buttonPHover):
 	vsaType = self.ui.vsaWorkflow_vsaMeas.currentIndex()
@@ -912,3 +897,28 @@ def setAllDemod(self, boxDone):
 	
 def setStandardMessage(self):
 	self.ui.statusBar.showMessage('Successfully Set Standard Settings',2000)
+	
+def instrParamErrorMessage(self,error):
+	msg = QMessageBox(self)
+	msg.setIcon(QMessageBox.Critical)
+	msg.setWindowTitle('Unable to Set Parameters')
+	msg.setText(error)
+	msg.setStandardButtons(QMessageBox.Ok)
+	msg.exec_();
+	
+def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone):
+	A = address.toPlainText()
+	V = voltage.toPlainText()
+	C = current.toPlainText()
+	result = eng.Set_Supply(A,V,C,nargout=1)
+	result = result.split(";")
+	error = result[1]
+	if error == " ":
+		p1c3PartNum = result[0]
+		partNum.setPlainText(p1c3PartNum)
+		equipBox.setStyleSheet(boxDone)
+		flag = 1
+		return flag
+	else:
+		instrParamErrorMessage(self,error)
+		self.ui.p1Set.setChecked(False)

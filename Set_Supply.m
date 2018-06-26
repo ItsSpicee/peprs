@@ -6,10 +6,11 @@
 % channel 2 = 0->25V,1A
 % channel 3 = 0->-25V,1A
 
-function resultsString = Set_Supply(address,voltage,current)
+function result = Set_Supply(address,voltage,current)
+errorString = " ";
+partNum = " ";
 try
     % Connect steps
-    errorString = " ";
     voltage = str2double(voltage);
     current = str2double(current);
     supply = visa('agilent',address);
@@ -35,41 +36,29 @@ try
         if 0 <= voltage && voltage <= 25
             if 0 <= current && current <= 1
                 fprintf(supply, sprintf(':INSTrument:SELect %s', 'P25V'));
-            elseif 
-        elseif voltage => -25 && voltage <= 0
-
-        else 
-            errorString = "Voltage not within bounds";
-
-            fprintf(supply, sprintf(':INSTrument:SELect %s', 'P6V'));
-            if current < 0 || current > 5
-                errorString = "Current input not within bounds";
-            elseif voltage < 0 || voltage > 6
-                
+                fprintf(supply, sprintf(':SOURce:VOLTage:LEVel:IMMediate:AMPLitude %g',voltage));
+                fprintf(supply, sprintf(':SOURce:CURRent:LEVel:IMMediate:AMPLitude %g',current));
+            elseif current <= 5 && current > 1
+                if voltage >= 0 && voltage <= 6
+                    fprintf(supply, sprintf(':INSTrument:SELect %s', 'P6V'));
+                    fprintf(supply, sprintf(':SOURce:VOLTage:LEVel:IMMediate:AMPLitude %g',voltage));
+                    fprintf(supply, sprintf(':SOURce:CURRent:LEVel:IMMediate:AMPLitude %g',current));
+                else
+                    errorString = "Voltage or current not within bounds";
+                end
             else
-               fprintf(supply, sprintf(':SOURce:VOLTage:LEVel:IMMediate:AMPLitude %g',voltage));
-               fprintf(supply, sprintf(':SOURce:CURRent:LEVel:IMMediate:AMPLitude %g',current));
+                errorString = "Voltage or current input not within bounds";
             end
-        elseif cNumber == 2
-            
-            if current < 0 || current > 1
-                errorString = "Current input not within bounds";
-            elseif voltage < 0 || voltage > 25
-                errorString = "Voltage not within bounds";
-            else
-               fprintf(supply, sprintf(':SOURce:VOLTage:LEVel:IMMediate:AMPLitude %g',voltage));
-               fprintf(supply, sprintf(':SOURce:CURRent:LEVel:IMMediate:AMPLitude %g',current));
-            end
-        elseif cNumber == 3
-            fprintf(supply, sprintf(':INSTrument:SELect %s', 'N25V'));
-            if current < 0 || current > 1
-                errorString = "Current input not within bounds";
-            elseif voltage > 0 || voltage < -25
-                errorString = "Voltage not within bounds";
-            else
+        elseif voltage >= -25 && voltage <= 0
+            if 0 <= current && current <= 1
+               fprintf(supply, sprintf(':INSTrument:SELect %s', 'N25V'));
                fprintf(supply, sprintf(':SOURce:VOLTage:LEVel:IMMediate:AMPLitude %g',voltage));
                fprintf(supply, sprintf(':SOURce:CURRent:LEVel:IMMediate:AMPLitude %g',current)); 
+            else
+                errorString = "Voltage or current input not within bounds";
             end
+        else 
+            errorString = "Voltage or current not within bounds";
         end
     else
        fprintf(supply, sprintf(':SOURce:VOLTage:LEVel:IMMediate:AMPLitude %g',voltage));
@@ -83,11 +72,12 @@ try
     clear supply;
     
 catch
-    errorString = "A problem has occured, resetting instruments";
+    errorString = "A problem has occured, resetting instruments. Use Keysight Connection Expert to check your instrument VISA Addresses.";
     instrreset
 end
 
 resultsString = sprintf("%s;%s",partNum,errorString);
+result = char(resultsString);
 
 end
 
