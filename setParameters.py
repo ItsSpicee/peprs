@@ -325,9 +325,8 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton):
 			p1c1V = self.ui.p1c1Voltage.toPlainText()
 			p1c1C = self.ui.p1c1Current.toPlainText()
 			p1c1A = self.ui.p1c1Address.toPlainText()
-			# MATLAB TYPE BUG
-			p1c1Returns = eng.Set_Supply(p1c1A,p1c1V,p1c1C,1,nargout=2)
-			#p1c1Returns = 
+			p1c1Returns = eng.Set_Supply(p1c1A,p1c1V,p1c1C,nargout=2)
+			p1c1Returns = p1c1Returns.split(";")
 			p1c1Error = p1c1Returns[1]
 			if p1c1Error == " ":
 				p1c1PartNum = p1c1Returns[0]
