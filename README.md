@@ -10,6 +10,9 @@
     <li>Python drivers</li>
     </ul>
 <li>Qt (most recent version)</li>
+    <ul>
+    <li>XCode (for Mac)</li>
+    </ul>
 <li>Python 3.6</li>
 <li>PyQt5</li>
 <li>Keysight Libraries & Command Expert</li>
@@ -29,10 +32,17 @@
 <p>import matlab.engine <br> eng = matlab.engine.start_matlab() <br> eng.Function_Name(parameter,nargout=#)</p>
 <h3>Method 2: Creating Python packages</h3>
 <p>In order to create and use a Python library from MATLAB code, follow this link: https://www.mathworks.com/help/compiler_sdk/gs/create-a-python-application-with-matlab-code.html</p>
-<p>It seems to be the case that if you use this method, method 1 will no longer work. The setup files for these packages override the ones needed for the engine.</p>
+<p>If you use this method, method 1 will no longer work. You cannot use MATLAB compiler-generated software components within a running instance of MATLAB (which is what the engine is).</p>
+<p>This method does not require the user of the application to have MATLAB installed as it relies on MATLAB Runtime.</p>
+<p>When creating a package, do not include the runtime installer in the package but use the web option instead. The installer is very large and makes the repository very buky.</p>
+<h3>MATLAB Runtime</h3>
+<p>To install MATLAB Runtime: https://www.mathworks.com/products/compiler/matlab-runtime.html</p>
+<p>For details: https://www.mathworks.com/help/compiler/deployment-process.html</p>
+<p>The first time a Python package is created, you will be prompted to install MATLAB Runtime. Anyone else using the app needs to install it as well.</p>
 <h3>MATLAB on Mac</h3>
-<p>In order to use the MATLAB interface on Mac, additional setup is required, instructions are here: https://kepler-project.org/developers/teams/build/setting-up-mac-os-x-to-use-the-matlab-interface</p>
-<p>To run a script from terminal, the mwpython has to be used as well: https://www.mathworks.com/help/compiler_sdk/python/integrate-.html</p>
+<p>Make sure MATLAB Runtime is installed </p>
+<p>Append the path given by the installation wizard to the DYLD_LIBRARY_PATH environment variable. This can be done in terminal with "export DYLD_LIBRARY_PATH=path". To check your path, run "echo $DYLD_LIBRARY_PATH"</p>
+<p>To run a script from terminal, the mwpython has to be used: https://www.mathworks.com/help/compiler_sdk/python/integrate-.html</p>
 
 <h2>Deploying Qt Application</h2>
 <p>To deploy a Qt app, follow this documentation: http://doc.qt.io/qt-5/deployment.html </p>
