@@ -21,3 +21,12 @@
 <p> To install PyQt5, visit: https://www.riverbankcomputing.com/software/pyqt/download5 </p>
 <p> To install MATLAB Python drivers, follow this link: https://www.mathworks.com/help/matlab/matlab_external/install-the-matlab-engine-for-python.html <br> Administrator privileges are most likely needed to run the "python setup.py install" command. It is therefore important to make sure your python directories are in the system environment variables (for Windows) and that your python and MATLAB bit versions are the same. If you need to reinstall Python, make sure to reinstall PyQt5 as well.</p>
 <p> To install the Keysight IO Libraries and add ons, follow this link: https://www.keysight.com/en/pd-1985909/io-libraries-suite?cc=US&lc=eng </p>
+
+<h2>MATLAB Packages</h2>
+<p>In order to create a Python library out of MATLAB code, follow this link: https://www.mathworks.com/help/compiler_sdk/gs/create-a-python-application-with-matlab-code.html</p>
+
+
+<h2>Deploying Qt Application</h2>
+<p>To deploy a Qt app, follow this documentation: http://doc.qt.io/qt-5/deployment.html </p>
+<p>To create a python exe file to use during deployment, choose one of these methods: https://wiki.python.org/moin/PyQt/Deploying_PyQt_Applications </p>
+<p>The application will be statically deployed, so it is very important that the correct qt version is installed </p>
