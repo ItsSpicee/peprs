@@ -9,7 +9,7 @@
     <li>Instrument Control Toolbox</li>
     <li>Python drivers</li>
     </ul>
-<li>Qt (most recent version)</li>
+<li>Qt 5.11.1</li>
     <ul>
     <li>XCode (for Mac)</li>
     </ul>
