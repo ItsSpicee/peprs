@@ -13,8 +13,11 @@ import setParameters as set
 import workflowNav as flow
 import windowFunctions as menu
 import parameterFunctions as param
-import matlab.engine
-eng = matlab.engine.start_matlab()
+# import matlab.engine
+# eng = matlab.engine.start_matlab()
+import PowerSupplyPkg
+
+supply = PowerSupplyPkg.initialize()
 
 class Window(QMainWindow):
 	def __init__(self):
@@ -281,11 +284,11 @@ class Window(QMainWindow):
 		self.ui.saSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.saEquipAdv,setParams))
 		self.ui.saSet.clicked.connect(lambda: set.setSA(self,setFocusButton,setButtonHover,greyHover,setParams))
 		# power 1 page
-		self.ui.p1Set.clicked.connect(lambda: set.setP1(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton,eng))
+		self.ui.p1Set.clicked.connect(lambda: set.setP1(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton,supply))
 		# power 2 page
-		self.ui.p2Set.clicked.connect(lambda: set.setP2(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton,eng))
+		self.ui.p2Set.clicked.connect(lambda: set.setP2(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton,supply))
 		# power 3 page
-		self.ui.p3Set.clicked.connect(lambda: set.setP3(self,setParams,setFocusButton,setButtonHover,eng))
+		self.ui.p3Set.clicked.connect(lambda: set.setP3(self,setParams,setFocusButton,setButtonHover,supply))
 		# vsa meas page
 		self.ui.vsaMeasSet.clicked.connect(lambda: set.setVSAMeasDig(self,setParams,setButtonHover))
 		self.ui.vsaMeasSet_2.clicked.connect(lambda: set.setVSAMeasGen(self,setParams,setButtonHover))
@@ -668,7 +671,7 @@ class Window(QMainWindow):
 			if x == "":
 				continue
 			else:
-				eng.Output_Toggle(x,state,nargout=0)
+				supply.Output_Toggle(x,state,nargout=0)
 				if state == 0:
 					self.statusBar().showMessage("DC turned OFF",2000)
 				else:
