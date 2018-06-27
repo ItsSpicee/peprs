@@ -264,7 +264,7 @@ def setSA(self,buttonFocus,buttonPHover,buttonHover,boxDone):
 	self.ui.up_psg_next.setCurrentIndex(7)
 	self.ui.vsgNextSteps.setCurrentIndex(9)
 		
-def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,eng):
+def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply):
 	flag = 0;
 	c1Checked = self.ui.p1c1Check.isChecked()
 	c2Checked = self.ui.p1c2Check.isChecked()
@@ -283,22 +283,22 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,eng):
 		if enabledSupply == 2:
 			flag = 1;
 		if p1c1A != "":
-			eng.Output_Off(p1c1A,nargout=0)
+			supply.Output_Off(p1c1A,nargout=0)
 		if p1c2A != "":
-			eng.Output_Off(p1c2A,nargout=0)
+			supply.Output_Off(p1c2A,nargout=0)
 		if p1c3A != "":
-			eng.Output_Off(p1c3A,nargout=0)
+			supply.Output_Off(p1c3A,nargout=0)
 		if p1c4A != "":
-			eng.Output_Off(p1c4A,nargout=0)
+			supply.Output_Off(p1c4A,nargout=0)
 	else:
 		if c1Checked:
-			flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,eng)
+			flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply)
 		if c2Checked:
-			flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,eng)
+			flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,supply)
 		if c3Checked:
-			flag = setSupplyParams(self,self.ui.p1c3Address,self.ui.p1c3Voltage,self.ui.p1c3Current,self.ui.p1c3PartNumber,self.ui.p1c3Equip,boxDone,eng)
+			flag = setSupplyParams(self,self.ui.p1c3Address,self.ui.p1c3Voltage,self.ui.p1c3Current,self.ui.p1c3PartNumber,self.ui.p1c3Equip,boxDone,supply)
 		if c4Checked:
-			flag = setSupplyParams(self,self.ui.p1c4Address,self.ui.p1c4Voltage,self.ui.p1c4Current,self.ui.p1c4PartNumber,self.ui.p1c4Equip,boxDone,eng)
+			flag = setSupplyParams(self,self.ui.p1c4Address,self.ui.p1c4Voltage,self.ui.p1c4Current,self.ui.p1c4PartNumber,self.ui.p1c4Equip,boxDone,supply)
 	
 	if flag == 1:
 		self.ui.power1Button_p1.setStyleSheet(buttonFocus)
@@ -333,7 +333,7 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,eng):
 			self.ui.vsgNextSteps.setCurrentIndex(10)
 			setPrevP1Buttons(self,buttonHover,greyHover,greyButton,Qt.PointingHandCursor,Qt.ArrowCursor)
 
-def setP2(self,boxDone,buttonFocus,buttonHover,greyHoverB,greyButton,eng):
+def setP2(self,boxDone,buttonFocus,buttonHover,greyHoverB,greyButton,supply):
 	flag = 0;
 	c1Checked = self.ui.p2c1Check.isChecked()
 	c2Checked = self.ui.p2c2Check.isChecked()
@@ -351,22 +351,22 @@ def setP2(self,boxDone,buttonFocus,buttonHover,greyHoverB,greyButton,eng):
 		if enabledSupply == 2:
 			flag = 1;
 		if p2c1A != "":
-			eng.Output_Off(p2c1A,nargout=0)
+			supply.Output_Off(p2c1A,nargout=0)
 		if p2c2A != "":
-			eng.Output_Off(p2c2A,nargout=0)
+			supply.Output_Off(p2c2A,nargout=0)
 		if p2c3A != "":
-			eng.Output_Off(p2c3A,nargout=0)
+			supply.Output_Off(p2c3A,nargout=0)
 		if p2c4A != "":
-			eng.Output_Off(p2c4A,nargout=0)
+			supply.Output_Off(p2c4A,nargout=0)
 	else:
 		if c1Checked:
-			flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,eng)
+			flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,supply)
 		if c2Checked:
-			flag = setSupplyParams(self,self.ui.p2c2Address,self.ui.p2c2Voltage,self.ui.p2c2Current,self.ui.p2c2PartNumber,self.ui.p2c2Equip,boxDone,eng)
+			flag = setSupplyParams(self,self.ui.p2c2Address,self.ui.p2c2Voltage,self.ui.p2c2Current,self.ui.p2c2PartNumber,self.ui.p2c2Equip,boxDone,supply)
 		if c3Checked:
-			flag = setSupplyParams(self,self.ui.p2c3Address,self.ui.p2c3Voltage,self.ui.p2c3Current,self.ui.p2c3PartNumber,self.ui.p2c3Equip,boxDone,eng)
+			flag = setSupplyParams(self,self.ui.p2c3Address,self.ui.p2c3Voltage,self.ui.p2c3Current,self.ui.p2c3PartNumber,self.ui.p2c3Equip,boxDone,supply)
 		if c4Checked:
-			flag = setSupplyParams(self,self.ui.p2c4Address,self.ui.p2c4Voltage,self.ui.p2c4Current,self.ui.p2c4PartNumber,self.ui.p2c4Equip,boxDone,eng)
+			flag = setSupplyParams(self,self.ui.p2c4Address,self.ui.p2c4Voltage,self.ui.p2c4Current,self.ui.p2c4PartNumber,self.ui.p2c4Equip,boxDone,supply)
 	
 	if flag == 1:
 		self.ui.power2Button_p2.setStyleSheet(buttonFocus)
@@ -393,7 +393,7 @@ def setP2(self,boxDone,buttonFocus,buttonHover,greyHoverB,greyButton,eng):
 			self.ui.vsgNextSteps.setCurrentIndex(11)
 			setPrevP2Buttons(self,buttonHover,greyHoverB)
 	
-def setP3(self,boxDone,buttonFocus,buttonHover,eng):
+def setP3(self,boxDone,buttonFocus,buttonHover,supply):
 	flag = 0;
 	c1Checked = self.ui.p3c1Check.isChecked()
 	c2Checked = self.ui.p3c2Check.isChecked()
@@ -410,22 +410,22 @@ def setP3(self,boxDone,buttonFocus,buttonHover,eng):
 		if enabledSupply == 2:
 			flag = 1;
 		if p3c1A != "":
-			eng.Output_Off(p3c1A,nargout=0)
+			supply.Output_Off(p3c1A,nargout=0)
 		if p3c2A != "":
-			eng.Output_Off(p3c2A,nargout=0)
+			supply.Output_Off(p3c2A,nargout=0)
 		if p3c3A != "":
-			eng.Output_Off(p3c3A,nargout=0)
+			supply.Output_Off(p3c3A,nargout=0)
 		if p3c4A != "":
-			eng.Output_Off(p3c4A,nargout=0)
+			supply.Output_Off(p3c4A,nargout=0)
 	else:
 		if c1Checked:
-			flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,eng)
+			flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,supply)
 		if c2Checked:
-			flag = setSupplyParams(self,self.ui.p3c2Address,self.ui.p3c2Voltage,self.ui.p3c2Current,self.ui.p3c2PartNumber,self.ui.p3c2Equip,boxDone,eng)
+			flag = setSupplyParams(self,self.ui.p3c2Address,self.ui.p3c2Voltage,self.ui.p3c2Current,self.ui.p3c2PartNumber,self.ui.p3c2Equip,boxDone,supply)
 		if c3Checked:
-			flag = setSupplyParams(self,self.ui.p3c3Address,self.ui.p3c3Voltage,self.ui.p3c3Current,self.ui.p3c3PartNumber,self.ui.p3c3Equip,boxDone,eng)
+			flag = setSupplyParams(self,self.ui.p3c3Address,self.ui.p3c3Voltage,self.ui.p3c3Current,self.ui.p3c3PartNumber,self.ui.p3c3Equip,boxDone,supply)
 		if c4Checked:
-			flag = setSupplyParams(self,self.ui.p3c4Address,self.ui.p3c4Voltage,self.ui.p3c4Current,self.ui.p3c4PartNumber,self.ui.p3c4Equip,boxDone,eng)
+			flag = setSupplyParams(self,self.ui.p3c4Address,self.ui.p3c4Voltage,self.ui.p3c4Current,self.ui.p3c4PartNumber,self.ui.p3c4Equip,boxDone,supply)
 	
 	if flag == 1:
 		self.ui.p3Equip.setStyleSheet(boxDone)
@@ -905,11 +905,11 @@ def instrParamErrorMessage(self,error):
 	msg.setStandardButtons(QMessageBox.Ok)
 	msg.exec_();
 	
-def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,eng):
+def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,supply):
 	A = address.toPlainText()
 	V = voltage.toPlainText()
 	C = current.toPlainText()
-	result = eng.Set_Supply(A,V,C,nargout=1)
+	result = supply.Set_Supply(A,V,C,nargout=1)
 	result = result.split(";")
 	error = result[1]
 	if error == " ":

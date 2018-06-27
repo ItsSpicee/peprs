@@ -13,8 +13,6 @@ import setParameters as set
 import workflowNav as flow
 import windowFunctions as menu
 import parameterFunctions as param
-# import matlab.engine
-# eng = matlab.engine.start_matlab()
 import PowerSupplyPkg
 
 supply = PowerSupplyPkg.initialize()
@@ -695,6 +693,9 @@ if __name__ == '__main__':
 	
 	
 # OLD CODE
+
+#import matlab.engine
+#eng = matlab.engine.start_matlab()
 
 # alternative ui file loading method
 #uic.loadUi('peprs.ui',self)
