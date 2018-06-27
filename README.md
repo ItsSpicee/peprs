@@ -22,9 +22,14 @@
 <p> To install MATLAB Python drivers, follow this link: https://www.mathworks.com/help/matlab/matlab_external/install-the-matlab-engine-for-python.html <br> Administrator privileges are most likely needed to run the "python setup.py install" command. It is therefore important to make sure your python directories are in the system environment variables (for Windows) and that your python and MATLAB bit versions are the same. If you need to reinstall Python, make sure to reinstall PyQt5 as well.</p>
 <p> To install the Keysight IO Libraries and add ons, follow this link: https://www.keysight.com/en/pd-1985909/io-libraries-suite?cc=US&lc=eng </p>
 
-<h2>MATLAB Packages</h2>
-<p>In order to create a Python library out of MATLAB code, follow this link: https://www.mathworks.com/help/compiler_sdk/gs/create-a-python-application-with-matlab-code.html</p>
-
+<h2>Using MATLAB with Python</h2>
+<h3>Method 1: Import MATLAB engine into python</h3>
+<p>Documentation on the engine: https://www.mathworks.com/help/matlab/matlab_external/start-the-matlab-engine-for-python.html</p>
+<p>To use this method, you must have the python drivers installed. It will only work on computers with a MATLAB license</p>
+<p>import matlab.engine <br> eng = matlab.engine.start_matlab() <br> eng.Function_Name(parameter,nargout=#)</p>
+<h3>Method 2: Creating Python packages</h3>
+<p>In order to create and use a Python library from MATLAB code, follow this link: https://www.mathworks.com/help/compiler_sdk/gs/create-a-python-application-with-matlab-code.html</p>
+<p>It seems to be the case that if you use this method, method 1 will no longer work. The setup files for these packages override the ones needed for the engine.</p>
 
 <h2>Deploying Qt Application</h2>
 <p>To deploy a Qt app, follow this documentation: http://doc.qt.io/qt-5/deployment.html </p>
