@@ -30,6 +30,9 @@
 <h3>Method 2: Creating Python packages</h3>
 <p>In order to create and use a Python library from MATLAB code, follow this link: https://www.mathworks.com/help/compiler_sdk/gs/create-a-python-application-with-matlab-code.html</p>
 <p>It seems to be the case that if you use this method, method 1 will no longer work. The setup files for these packages override the ones needed for the engine.</p>
+<h3MATLAB on Mac</h3>
+<p>In order to use the MATLAB interface on Mac, additional setup is required, instructions are here: https://kepler-project.org/developers/teams/build/setting-up-mac-os-x-to-use-the-matlab-interface</p>
+<p>To run a script from terminal, the mwpython has to be used as well: https://www.mathworks.com/help/compiler_sdk/python/integrate-.html</p>
 
 <h2>Deploying Qt Application</h2>
 <p>To deploy a Qt app, follow this documentation: http://doc.qt.io/qt-5/deployment.html </p>
