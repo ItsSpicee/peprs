@@ -3,8 +3,7 @@
 from PyQt5.QtWidgets import (QProgressBar,QMessageBox)
 from PyQt5.QtGui import (QCursor)
 from PyQt5.QtCore import (Qt)
-import matlab.engine
-eng = matlab.engine.start_matlab()
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions used in main.py
 
@@ -265,7 +264,7 @@ def setSA(self,buttonFocus,buttonPHover,buttonHover,boxDone):
 	self.ui.up_psg_next.setCurrentIndex(7)
 	self.ui.vsgNextSteps.setCurrentIndex(9)
 		
-def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton):
+def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,eng):
 	flag = 0;
 	c1Checked = self.ui.p1c1Check.isChecked()
 	c2Checked = self.ui.p1c2Check.isChecked()
@@ -293,13 +292,13 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton):
 			eng.Output_Off(p1c4A,nargout=0)
 	else:
 		if c1Checked:
-			flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone)
+			flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,eng)
 		if c2Checked:
-			flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone)
+			flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,eng)
 		if c3Checked:
-			flag = setSupplyParams(self,self.ui.p1c3Address,self.ui.p1c3Voltage,self.ui.p1c3Current,self.ui.p1c3PartNumber,self.ui.p1c3Equip,boxDone)
+			flag = setSupplyParams(self,self.ui.p1c3Address,self.ui.p1c3Voltage,self.ui.p1c3Current,self.ui.p1c3PartNumber,self.ui.p1c3Equip,boxDone,eng)
 		if c4Checked:
-			flag = setSupplyParams(self,self.ui.p1c4Address,self.ui.p1c4Voltage,self.ui.p1c4Current,self.ui.p1c4PartNumber,self.ui.p1c4Equip,boxDone)
+			flag = setSupplyParams(self,self.ui.p1c4Address,self.ui.p1c4Voltage,self.ui.p1c4Current,self.ui.p1c4PartNumber,self.ui.p1c4Equip,boxDone,eng)
 	
 	if flag == 1:
 		self.ui.power1Button_p1.setStyleSheet(buttonFocus)
@@ -334,7 +333,7 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton):
 			self.ui.vsgNextSteps.setCurrentIndex(10)
 			setPrevP1Buttons(self,buttonHover,greyHover,greyButton,Qt.PointingHandCursor,Qt.ArrowCursor)
 
-def setP2(self,boxDone,buttonFocus,buttonHover,greyHoverB,greyButton):
+def setP2(self,boxDone,buttonFocus,buttonHover,greyHoverB,greyButton,eng):
 	flag = 0;
 	c1Checked = self.ui.p2c1Check.isChecked()
 	c2Checked = self.ui.p2c2Check.isChecked()
@@ -361,13 +360,13 @@ def setP2(self,boxDone,buttonFocus,buttonHover,greyHoverB,greyButton):
 			eng.Output_Off(p2c4A,nargout=0)
 	else:
 		if c1Checked:
-			flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone)
+			flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,eng)
 		if c2Checked:
-			flag = setSupplyParams(self,self.ui.p2c2Address,self.ui.p2c2Voltage,self.ui.p2c2Current,self.ui.p2c2PartNumber,self.ui.p2c2Equip,boxDone)
+			flag = setSupplyParams(self,self.ui.p2c2Address,self.ui.p2c2Voltage,self.ui.p2c2Current,self.ui.p2c2PartNumber,self.ui.p2c2Equip,boxDone,eng)
 		if c3Checked:
-			flag = setSupplyParams(self,self.ui.p2c3Address,self.ui.p2c3Voltage,self.ui.p2c3Current,self.ui.p2c3PartNumber,self.ui.p2c3Equip,boxDone)
+			flag = setSupplyParams(self,self.ui.p2c3Address,self.ui.p2c3Voltage,self.ui.p2c3Current,self.ui.p2c3PartNumber,self.ui.p2c3Equip,boxDone,eng)
 		if c4Checked:
-			flag = setSupplyParams(self,self.ui.p2c4Address,self.ui.p2c4Voltage,self.ui.p2c4Current,self.ui.p2c4PartNumber,self.ui.p2c4Equip,boxDone)
+			flag = setSupplyParams(self,self.ui.p2c4Address,self.ui.p2c4Voltage,self.ui.p2c4Current,self.ui.p2c4PartNumber,self.ui.p2c4Equip,boxDone,eng)
 	
 	if flag == 1:
 		self.ui.power2Button_p2.setStyleSheet(buttonFocus)
@@ -394,7 +393,7 @@ def setP2(self,boxDone,buttonFocus,buttonHover,greyHoverB,greyButton):
 			self.ui.vsgNextSteps.setCurrentIndex(11)
 			setPrevP2Buttons(self,buttonHover,greyHoverB)
 	
-def setP3(self,boxDone,buttonFocus,buttonHover):
+def setP3(self,boxDone,buttonFocus,buttonHover,eng):
 	flag = 0;
 	c1Checked = self.ui.p3c1Check.isChecked()
 	c2Checked = self.ui.p3c2Check.isChecked()
@@ -420,13 +419,13 @@ def setP3(self,boxDone,buttonFocus,buttonHover):
 			eng.Output_Off(p3c4A,nargout=0)
 	else:
 		if c1Checked:
-			flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone)
+			flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,eng)
 		if c2Checked:
-			flag = setSupplyParams(self,self.ui.p3c2Address,self.ui.p3c2Voltage,self.ui.p3c2Current,self.ui.p3c2PartNumber,self.ui.p3c2Equip,boxDone)
+			flag = setSupplyParams(self,self.ui.p3c2Address,self.ui.p3c2Voltage,self.ui.p3c2Current,self.ui.p3c2PartNumber,self.ui.p3c2Equip,boxDone,eng)
 		if c3Checked:
-			flag = setSupplyParams(self,self.ui.p3c3Address,self.ui.p3c3Voltage,self.ui.p3c3Current,self.ui.p3c3PartNumber,self.ui.p3c3Equip,boxDone)
+			flag = setSupplyParams(self,self.ui.p3c3Address,self.ui.p3c3Voltage,self.ui.p3c3Current,self.ui.p3c3PartNumber,self.ui.p3c3Equip,boxDone,eng)
 		if c4Checked:
-			flag = setSupplyParams(self,self.ui.p3c4Address,self.ui.p3c4Voltage,self.ui.p3c4Current,self.ui.p3c4PartNumber,self.ui.p3c4Equip,boxDone)
+			flag = setSupplyParams(self,self.ui.p3c4Address,self.ui.p3c4Voltage,self.ui.p3c4Current,self.ui.p3c4PartNumber,self.ui.p3c4Equip,boxDone,eng)
 	
 	if flag == 1:
 		self.ui.p3Equip.setStyleSheet(boxDone)
@@ -906,7 +905,7 @@ def instrParamErrorMessage(self,error):
 	msg.setStandardButtons(QMessageBox.Ok)
 	msg.exec_();
 	
-def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone):
+def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,eng):
 	A = address.toPlainText()
 	V = voltage.toPlainText()
 	C = current.toPlainText()

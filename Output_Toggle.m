@@ -1,4 +1,4 @@
-function Output_On(address)
+function Output_Toggle(address,state)
 % Connect steps
 oldSupply = instrfind('PrimaryAddress',address);
 delete(oldSupply);
@@ -8,7 +8,7 @@ supply.ByteOrder = 'littleEndian';
 fopen(supply);
 
 % Commands
-fprintf(supply, sprintf(':OUTPut:STATe %d', 1));
+fprintf(supply, sprintf(':OUTPut:STATe %d', state));
 
 % Cleanup
 fclose(supply);

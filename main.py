@@ -80,10 +80,10 @@ class Window(QMainWindow):
 		blueSelect = "QPushButton{ border:3px solid rgb(0, 0, 127);  background-color:qlineargradient(spread:pad, x1:0.994318, y1:0.682, x2:1, y2:0, stop:0 rgba(72, 144, 216, 255), stop:1 rgba(83, 170, 252, 255)); border-radius:5px;color:white}"
 		
 		# emergency on and off buttons
-		# self.ui.rfOffButton.clicked.connect()
-		# self.ui.dcOffButton.clicked.connect()
+		#self.ui.rfOffButton.clicked.connect()
+		self.ui.dcOffButton.clicked.connect(lambda: self.toggleOutput(0))
 		# self.ui.allOffButton.clicked.connect()
-		# self.ui.dcOnButton.clicked.connect()
+		self.ui.dcOnButton.clicked.connect(lambda: self.toggleOutput(1))
 		# self.ui.rfOnButton.clicked.connect()
 		
 		# keep widget space when hidden
@@ -281,11 +281,11 @@ class Window(QMainWindow):
 		self.ui.saSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.saEquipAdv,setParams))
 		self.ui.saSet.clicked.connect(lambda: set.setSA(self,setFocusButton,setButtonHover,greyHover,setParams))
 		# power 1 page
-		self.ui.p1Set.clicked.connect(lambda: set.setP1(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton))
+		self.ui.p1Set.clicked.connect(lambda: set.setP1(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton,eng))
 		# power 2 page
-		self.ui.p2Set.clicked.connect(lambda: set.setP2(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton))
+		self.ui.p2Set.clicked.connect(lambda: set.setP2(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton,eng))
 		# power 3 page
-		self.ui.p3Set.clicked.connect(lambda: set.setP3(self,setParams,setFocusButton,setButtonHover))
+		self.ui.p3Set.clicked.connect(lambda: set.setP3(self,setParams,setFocusButton,setButtonHover,eng))
 		# vsa meas page
 		self.ui.vsaMeasSet.clicked.connect(lambda: set.setVSAMeasDig(self,setParams,setButtonHover))
 		self.ui.vsaMeasSet_2.clicked.connect(lambda: set.setVSAMeasGen(self,setParams,setButtonHover))
@@ -647,6 +647,32 @@ class Window(QMainWindow):
 		qr.moveCenter(cp)
 		# move top-left point of the application window to top-left point of qr rectangle
 		self.move(qr.topLeft())
+		
+	def toggleOutput(self,state):
+		p1c1A = self.ui.p1c1Address.toPlainText()
+		p1c2A = self.ui.p1c2Address.toPlainText()
+		p1c3A = self.ui.p1c3Address.toPlainText()
+		p1c4A = self.ui.p1c4Address.toPlainText()
+		p2c1A = self.ui.p2c1Address.toPlainText()
+		p2c2A = self.ui.p2c2Address.toPlainText()
+		p2c3A = self.ui.p2c3Address.toPlainText()
+		p2c4A = self.ui.p2c4Address.toPlainText()
+		p3c1A = self.ui.p3c1Address.toPlainText()
+		p3c2A = self.ui.p3c2Address.toPlainText()
+		p3c3A = self.ui.p3c3Address.toPlainText()
+		p3c4A = self.ui.p3c4Address.toPlainText()
+		addressList = {p1c1A,p1c2A,p1c3A,p1c4A,p2c1A,p2c2A,p2c3A,p2c4A,p3c1A,p3c2A,p3c3A,p3c4A}
+		if len(addressList) == 1:
+			self.statusBar().showMessage("No DC supplies have been set",2000)
+		for x in addressList:
+			if x == "":
+				continue
+			else:
+				eng.Output_Toggle(x,state,nargout=0)
+				if state == 0:
+					self.statusBar().showMessage("DC turned OFF",2000)
+				else:
+					self.statusBar().showMessage("DC turned ON",2000)
 	
 	# def paintEvent(self,e):
 		# qp = QPainter()
