@@ -49,7 +49,7 @@ class Window(QMainWindow):
 			
 		elif mimoChecked == True or misoChecked or simoChecked:
 			self.ui.dutStackedWidget.setCurrentIndex(1)
-		
+			
 	def initMainUI(self):		
 		#setting up file import buttons
 		self.ui.filePushButton_13.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_300))
@@ -67,6 +67,63 @@ class Window(QMainWindow):
 		self.ui.filePushButton_6.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_278))
 		self.ui.filePushButton.clicked.connect(lambda: flow.fileBrowse(self, self.ui.fileTextEdit))
 		self.ui.filePushButton_2.clicked.connect(lambda: flow.fileBrowse(self, self.ui.vsaCalSaveLocField_comb))
+		self.ui.filePushButton_17.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_252))
+		self.ui.filePushButton_18.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_258))
+		self.ui.filePushButton_19.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_269))	
+		self.ui.filePushButton_20.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_183))
+		self.ui.filePushButton_21.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_270))
+		self.ui.filePushButton_22.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_271))
+		self.ui.filePushButton_23.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_272))
+		self.ui.filePushButton_24.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_275))
+		self.ui.filePushButton_25.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_231))
+		self.ui.filePushButton_26.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_237))
+		self.ui.filePushButton_27.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_238))
+		self.ui.filePushButton_28.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_239))
+		self.ui.filePushButton_29.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_225))
+		self.ui.filePushButton_30.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_230))
+		self.ui.filePushButton_31.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_416))
+		self.ui.filePushButton_32.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_418))
+		self.ui.filePushButton_33.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_415))
+		self.ui.filePushButton_34.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_390))
+		self.ui.filePushButton_35.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_396))
+		self.ui.filePushButton_36.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_407))
+		self.ui.filePushButton_37.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_411))
+		self.ui.filePushButton_38.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_408))
+		self.ui.filePushButton_39.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_410))
+		self.ui.filePushButton_40.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_409))
+		self.ui.filePushButton_41.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_216))
+		self.ui.filePushButton_42.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_210))
+		self.ui.filePushButton_43.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_222))
+		self.ui.filePushButton_44.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_192))
+		self.ui.filePushButton_45.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_190))
+		self.ui.filePushButton_46.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_195))
+		self.ui.filePushButton_47.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_177))
+		self.ui.filePushButton_48.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_198))
+		self.ui.filePushButton_49.clicked.connect(lambda: flow.fileBrowse(self, self.ui.dllFile_uxa))
+		self.ui.filePushButton_50.clicked.connect(lambda: flow.fileBrowse(self, self.ui.setupFile_uxa))
+		self.ui.filePushButton_51.clicked.connect(lambda: flow.fileBrowse(self, self.ui.dataFile_uxa))
+		self.ui.filePushButton_52.clicked.connect(lambda: flow.fileBrowse(self, self.ui.setupFile_scope))
+		self.ui.filePushButton_53.clicked.connect(lambda: flow.fileBrowse(self, self.ui.dllFile_scope))
+		self.ui.filePushButton_54.clicked.connect(lambda: flow.fileBrowse(self, self.ui.dataFile_scope))
+		self.ui.filePushButton_55.clicked.connect(lambda: flow.fileBrowse(self, self.ui.dllFile_dig))
+		self.ui.filePushButton_56.clicked.connect(lambda: flow.fileBrowse(self, self.ui.setupFile_dig))
+		self.ui.filePushButton_57.clicked.connect(lambda: flow.fileBrowse(self, self.ui.dataFile_dig))
+		self.ui.filePushButton_58.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_89))
+		self.ui.filePushButton_59.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_8))
+		self.ui.filePushButton_60.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_76))
+		self.ui.filePushButton_61.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_77))
+		self.ui.filePushButton_62.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_88))
+		self.ui.filePushButton_63.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_78))
+		self.ui.filePushButton_64.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_85))
+		self.ui.filePushButton_65.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_51))
+		self.ui.filePushButton_66.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_84))
+		self.ui.filePushButton_67.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_83))
+		self.ui.filePushButton_68.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_93))
+		self.ui.filePushButton_69.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_115))
+		self.ui.filePushButton_70.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_130))
+		self.ui.filePushButton_71.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_90))
+	
+		
 		
 		
 	
@@ -254,49 +311,50 @@ class Window(QMainWindow):
 		
 		# control parameter set buttons
 		# vsg page
-		self.ui.awgSetGeneral.clicked.connect(lambda: set.setGeneralAWG(self,setFocusButton,setParams,greyHover))
-		self.ui.vsgSetGeneral.clicked.connect(lambda: set.setGeneralVSG(self,setFocusButton,setParams,greyHover))
-		self.ui.vsgSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.vsgEquipAdv,setParams))
-		self.ui.awgSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.awgEquipAdv,setParams))
+		
+		self.ui.awgSetGeneral.clicked.connect(lambda: set.setGeneralAWG(self,setFocusButton,setParams,greyHover,self.ui.awgSetGeneral))
+		self.ui.vsgSetGeneral.clicked.connect(lambda: set.setGeneralVSG(self,setFocusButton,setParams,greyHover,self.ui.vsgSetGeneral))
+		self.ui.vsgSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.vsgEquipAdv,setParams,self.ui.vsgSetAdv))
+		self.ui.awgSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.awgEquipAdv,setParams,self.ui.awgSetAdv))
 		# upconverter page
-		self.ui.upSet.clicked.connect(lambda: set.setUp(self,setFocusButton,setButton,setParams,greyHover))
-		self.ui.psgSet.clicked.connect(lambda: set.setPSG(self,setFocusButton,setButton,setParams,greyHover))
+		self.ui.upSet.clicked.connect(lambda: set.setUp(self,setFocusButton,setButton,setParams,greyHover,self.ui.upSet))
+		self.ui.psgSet.clicked.connect(lambda: set.setPSG(self,setFocusButton,setButton,setParams,greyHover,self.ui.psgSet))
 		# vsa page
-		self.ui.uxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover))
-		self.ui.pxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover))
-		self.ui.uxaVSASetAdv.clicked.connect(lambda: set.setVSAAdv(self,setParams))
-		self.ui.scopeSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover))
-		self.ui.digSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover))
+		self.ui.uxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,self.ui.uxaSet))
+		self.ui.pxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,self.ui.pxaSet))
+		self.ui.uxaVSASetAdv.clicked.connect(lambda: set.setVSAAdv(self,setParams,self.ui.uxaVSASetAdv))
+		self.ui.scopeSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,self.ui.scopeSet))
+		self.ui.digSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,self.ui.digSet))
 		# downconverter page
-		self.ui.downSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.downEquipAdv,setParams))
-		self.ui.downSet.clicked.connect(lambda: set.setDown(self,setFocusButton,greyHover,setButtonHover,setParams))
+		self.ui.downSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.downEquipAdv,setParams,self.ui.downSetAdv))
+		self.ui.downSet.clicked.connect(lambda: set.setDown(self,setFocusButton,greyHover,setButtonHover,setParams,self.ui.downSet))
 		# meter page
-		self.ui.meterSet.clicked.connect(lambda: set.setMeter(self,setFocusButton,setButtonHover,greyHover,setParams))
+		self.ui.meterSet.clicked.connect(lambda: set.setMeter(self,setFocusButton,setButtonHover,greyHover,setParams,self.ui.meterSet))
 		# sa page
-		self.ui.saSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.saEquipAdv,setParams))
-		self.ui.saSet.clicked.connect(lambda: set.setSA(self,setFocusButton,setButtonHover,greyHover,setParams))
+		self.ui.saSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.saEquipAdv,setParams,self.ui.saSetAdv))
+		self.ui.saSet.clicked.connect(lambda: set.setSA(self,setFocusButton,setButtonHover,greyHover,setParams,self.ui.saSet))
 		# power 1 page
-		self.ui.p1Set.clicked.connect(lambda: set.setP1(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton))
+		self.ui.p1Set.clicked.connect(lambda: set.setP1(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton,self.ui.p1Set))
 		# power 2 page
-		self.ui.p2Set.clicked.connect(lambda: set.setP2(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton))
+		self.ui.p2Set.clicked.connect(lambda: set.setP2(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton,self.ui.p2Set))
 		# power 3 page
-		self.ui.p3Set.clicked.connect(lambda: set.setP3(self,setParams,setFocusButton,setButtonHover))
+		self.ui.p3Set.clicked.connect(lambda: set.setP3(self,setParams,setFocusButton,setButtonHover,self.ui.p3Set))
 		# vsa meas page
-		self.ui.vsaMeasSet.clicked.connect(lambda: set.setVSAMeasDig(self,setParams,setButtonHover))
-		self.ui.vsaMeasSet_2.clicked.connect(lambda: set.setVSAMeasGen(self,setParams,setButtonHover))
-		self.ui.set_run_vsa.clicked.connect(lambda: set.rxCalRoutine(self,setParams,setButtonHover))
-		self.ui.downSetVSAMeas.clicked.connect(lambda: set.noRXCalRoutine(self,setParams,setButtonHover))
-		self.ui.vsaMeasAdvSet.clicked.connect(lambda: set.setVSAMeasAdv(self,setParams))
+		self.ui.vsaMeasSet.clicked.connect(lambda: set.setVSAMeasDig(self,setParams,setButtonHover,self.ui.vsaMeasSet))
+		self.ui.vsaMeasSet_2.clicked.connect(lambda: set.setVSAMeasGen(self,setParams,setButtonHover,self.ui.vsaMeasSet_2))
+		self.ui.set_run_vsa.clicked.connect(lambda: set.rxCalRoutine(self,setParams,setButtonHover,self.ui.set_run_vsa))
+		self.ui.downSetVSAMeas.clicked.connect(lambda: set.noRXCalRoutine(self,setParams,self.ui.downSetVSAMeas))
+		self.ui.vsaMeasAdvSet.clicked.connect(lambda: set.setVSAMeasAdv(self,setParams,self.ui.vsaMeasAdvSet))
 		# vsg meas page
-		self.ui.awgSet_vsgMeas.clicked.connect(lambda: set.noAWGCalRoutine(self,setParams))
+		self.ui.awgSet_vsgMeas.clicked.connect(lambda: set.noAWGCalRoutine(self,setParams,self.ui.awgSet_vsgMeas))
 		self.ui.awgPreview_vsgMeas.clicked.connect(lambda: set.awgPreview(self))
 		self.ui.awgPreviewRun_vsgMeas.clicked.connect(lambda: set.awgPreview(self))
-		self.ui.awgSetRun_vsgMeas.clicked.connect(lambda: set.awgCalRoutine(self,setParams))
-		self.ui.setAdv_vsgMeas.clicked.connect(lambda: set.setAdvVSGMeas(self,setParams))
-		self.ui.setAdv_vsgMeas_2.clicked.connect(lambda: set.setAdvVSGMeas(self,setParams))
-		self.ui.upSet_vsgMeas.clicked.connect(lambda: set.setUpVSGMeas(self,setParams))
-		self.ui.heteroRun.clicked.connect(lambda: set.setHetero(self,setParams))
-		self.ui.homoRun.clicked.connect(lambda: set.setHomo(self,setParams))
+		self.ui.awgSetRun_vsgMeas.clicked.connect(lambda: set.awgCalRoutine(self,setParams,self.ui.awgSetRun_vsgMeas))
+		self.ui.setAdv_vsgMeas.clicked.connect(lambda: set.setAdvVSGMeas(self,setParams,self.ui.setAdv_vsgMeas))
+		self.ui.setAdv_vsgMeas_2.clicked.connect(lambda: set.setAdvVSGMeas(self,setParams,self.ui.setAdv_vsgMeas_2))
+		self.ui.upSet_vsgMeas.clicked.connect(lambda: set.setUpVSGMeas(self,setParams,self.ui.upSet_vsgMeas))
+		self.ui.heteroRun.clicked.connect(lambda: set.setHetero(self,setParams,self.ui.heteroRun))
+		self.ui.homoRun.clicked.connect(lambda: set.setHomo(self,setParams,self.ui.homoRun))
 		
 		
 		
