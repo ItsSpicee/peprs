@@ -128,7 +128,7 @@ def switchMeasTabVSG(self):
 				
 def switchAlgoTab(self):
 	currentTab = self.ui.algoTabs.currentIndex()
-	if currentTab == 2:
-		self.ui.rfButton.setVisible(True)
-	else:
-		self.ui.rfButton.setVisible(False)
+	##if currentTab == 2:
+		##self.ui.rfButton.setVisible(True)
+	##else:
+		##self.ui.rfButton.setVisible(False)
