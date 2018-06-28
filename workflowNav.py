@@ -73,8 +73,10 @@ def vsaOnClick(self):
 	vsgSetupIdx = self.ui.vsgWorkflows.currentIndex() 
 	if vsgSetupIdx == 1:
 		if awgChecked:
+			
 			self.ui.equipStack.setCurrentIndex(2)
 		else:
+			print("hi")
 			self.fillParametersMsg()
 	elif vsgSetupIdx == 4:
 		if vsgChecked:
