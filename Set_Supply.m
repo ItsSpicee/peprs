@@ -60,6 +60,24 @@ try
         else 
             errorString = "Voltage or current not within bounds";
         end
+    elseif partNum == "E3634A"
+        if 0 <= voltage && voltage <= 25
+            if 0 <= current && current <= 7
+                fprintf(supply, sprintf(':SOURce:VOLTage:LEVel:IMMediate:AMPLitude %g',voltage));
+                fprintf(supply, sprintf(':SOURce:CURRent:LEVel:IMMediate:AMPLitude %g',current));     
+            else
+                errorString = "Current input not within bounds";
+            end
+        elseif 25 < voltage && voltage <= 50
+            if 0 <= current && current <= 4
+                fprintf(supply, sprintf(':SOURce:VOLTage:LEVel:IMMediate:AMPLitude %g',voltage));
+                fprintf(supply, sprintf(':SOURce:CURRent:LEVel:IMMediate:AMPLitude %g',current));
+            else
+                errorString = "Current input not within bounds";
+            end
+        else
+            errorString = "Voltage input not within bounds";
+        end
     else
        fprintf(supply, sprintf(':SOURce:VOLTage:LEVel:IMMediate:AMPLitude %g',voltage));
        fprintf(supply, sprintf(':SOURce:CURRent:LEVel:IMMediate:AMPLitude %g',current));

@@ -3,8 +3,6 @@
 from PyQt5.QtWidgets import (QProgressBar,QMessageBox)
 from PyQt5.QtGui import (QCursor)
 from PyQt5.QtCore import (Qt)
-# import matlab.engine
-# eng = matlab.engine.start_matlab()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions used in main.py
 

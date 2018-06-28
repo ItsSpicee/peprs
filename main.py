@@ -13,9 +13,11 @@ import setParameters as set
 import workflowNav as flow
 import windowFunctions as menu
 import parameterFunctions as param
-import PowerSupplyPkg
+#import PowerSupplyPkg
+import matlab.engine
+supply = matlab.engine.start_matlab()
 
-supply = PowerSupplyPkg.initialize()
+#supply = PowerSupplyPkg.initialize()
 
 class Window(QMainWindow):
 	def __init__(self):
