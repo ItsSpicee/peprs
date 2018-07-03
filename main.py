@@ -164,8 +164,9 @@ class Window(QMainWindow):
 		#pepper_icon.addFile('icons/pepper 24x24.png', QtCore.QSize(24,24))
 		#self.setWindowIcon(pepper_icon)
 		self.ui.statusBar.showMessage('Ready',2000)	
-		self.setMinimumSize(700,550)
-		self.resize(700,550)
+		self.setMinimumSize(1265,625)
+		self.resize(1265,625)
+		self.center()
 		
 		# set appropriate pages in stacks
 		self.ui.stepTabs.setCurrentIndex(3) # dashboard
