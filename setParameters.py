@@ -269,9 +269,14 @@ def setDown(self,buttonFocus,greyHover,buttonHover,boxDone,setButton):
 	elif  setButton.isChecked() == False:
 		self.ui.downEquip.setStyleSheet(None)
 		setButton.setText("Set")
-def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,setButton):
+def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,supply):
 	if setButton.isChecked() == True:
+		flag = 0;
 		setButton.setText("Unset")
+		
+		flag = setPowerMeterParams(self, self.ui.powerMeterAddress, self.ui.powerMeterOffset, self.ui.powerMeterFrequency,self.ui.powerMeterPartNum,self.ui.meterEquip,boxDone,supply)
+		
+		
 		self.ui.meterButton_meter.setStyleSheet(buttonFocus)
 		self.ui.meterButton_meter_2.setStyleSheet(buttonFocus)
 		self.ui.meterButton_meter_3.setStyleSheet(buttonFocus)
@@ -290,6 +295,9 @@ def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,setButton):
 def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton):
 	if setButton.isChecked() == True:
 		setButton.setText("Unset")
+	
+		
+		
 		self.ui.saButton_sa.setStyleSheet(buttonFocus)
 		self.ui.saButton_sa_2.setStyleSheet(buttonFocus)
 		self.ui.saButton_sa_3.setStyleSheet(buttonFocus)
@@ -1036,7 +1044,26 @@ def instrParamErrorMessage(self,error):
 	msg.setText(error)
 	msg.setStandardButtons(QMessageBox.Ok)
 	msg.exec_();
+def setPowerMeterParams(self,address,offset,frequency,partNum,equipBox,boxDone,supply):	
+	A = address.toPlainText()
+	O = offset.toPlainText()
+	F = frequency.toPlainText()
 	
+	result = supply.Set_Meter(A,O,F,nargout=1)
+	result = result.split(";")
+	error = result[1]
+
+	if error == " ":
+		
+		powerMeterPartNum = result[0]
+		partNum.setPlainText(powerMeterPartNum)
+		equipBox.setStyleSheet(boxDone)
+		flag = 1
+		return flag
+	else:
+		print("hi")
+		instrParamErrorMessage(self,error)
+		self.ui.meterSet.setChecked(False)
 def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,supply):
 	A = address.toPlainText()
 	V = voltage.toPlainText()
