@@ -55,9 +55,10 @@ def setAdvanced(self,box,boxDone,setButton):
 		setButton.setText("Unset")
 		box.setStyleSheet(boxDone)
 		self.ui.statusBar.showMessage('Successfully Set Advanced Settings',2000)
-	elif  setButton.isChecked() == False:
-		self.ui.box.setStyleSheet(None)
+	elif setButton.isChecked() == False:
+		box.setStyleSheet(None)
 		setButton.setText("Set")
+		
 def setUp(self,buttonFocus,buttonDone,boxDone,greyHover,setButton):
 	if setButton.isChecked() == True:
 		setButton.setText("Unset")
@@ -71,7 +72,7 @@ def setUp(self,buttonFocus,buttonDone,boxDone,greyHover,setButton):
 		self.ui.vsaButton_up.setCursor(QCursor(Qt.PointingHandCursor))
 		self.ui.vsaButton_vsg.setStyleSheet(greyHover)
 		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
-	elif  setButton.isChecked() == False:
+	elif setButton.isChecked() == False:
 		self.ui.upEquip.setStyleSheet(None)
 		setButton.setText("Set")
 	

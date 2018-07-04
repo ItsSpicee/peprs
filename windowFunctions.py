@@ -35,40 +35,16 @@ def changeStepTab(self):
 		self.resize(1265, 625)
 		self.center()
 	elif i == 1:
-		if measStack == 0: #vsa
-			if measTabVsa == 1 and downEnabled:
-				self.setMinimumSize(1265,950)
-				self.resize(1265,950)
-				self.center()
-			else:
-				self.setMinimumSize(1265,550)
-				self.resize(1265,550)
-				self.center()
-		elif measStack == 1: #vsg
-			# if vsgStack == 0 or measTabVsg == 2: # select vsg type or advanced page
-				# self.setMinimumSize(1265,528)
-				# self.resize(1265,528)
-				# self.center()
-			# else:
-				self.setMinimumSize(1265,950)
-				self.resize(1265,950)
-				self.center()
-			#if upEnabled == 1 or upEnabled == 2:
-				# if measTabVsg == 1:
-					# self.setMinimumSize(1265,950)
-					# self.resize(1265,950)
-					# self.center()
-			#else:
-				# self.setMinimumSize(1265,528)
-				# self.resize(1265,528)
-				# self.center()
+		self.setMinimumSize(1265,950)
+		self.resize(1265,950)
+		self.center()
 	elif i == 0:
 		self.setMinimumSize(1265,950)
 		self.resize(1265,950)
 		self.center()
 	elif i == 3:
-		self.setMinimumSize(800,625)
-		self.resize(800,625)
+		self.setMinimumSize(1265,625)
+		self.resize(1265,625)
 		self.center()
 	
 def switchMeasTabVSA(self):
@@ -80,23 +56,23 @@ def switchMeasTabVSA(self):
 	downStack = self.ui.downStack_vsaMeas.currentIndex()
 	vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
 	if currentTab == 0 or currentTab == 2:
-		self.setMinimumSize(1265,550)
-		self.resize(1265,550)
-		self.center()
+		# self.setMinimumSize(1265,550)
+		# self.resize(1265,550)
+		# self.center()
 		self.ui.calAdviceText.setVisible(False)
 	elif currentTab == 1:
 		if downStack == 1:
-			self.setMinimumSize(1265,950)
-			self.resize(1265,950)
-			self.center()
+			# self.setMinimumSize(1265,950)
+			# self.resize(1265,950)
+			# self.center()
 			self.ui.calAdviceText.setVisible(True)
 			if vsaDownChecked == False and vsaDownRunChecked == False:
 				if vsaChecked or vsaChecked_2:
 					self.ui.vsaMeasNextStack.setCurrentIndex(2)
 		else:
-			self.setMinimumSize(1265,550)
-			self.resize(1265,550)
-			self.center()
+			# self.setMinimumSize(1265,550)
+			# self.resize(1265,550)
+			# self.center()
 			self.ui.calAdviceText.setVisible(False)
 			if vsgType == 3: # vsg
 				self.ui.vsaMeasNextStack.setCurrentIndex(6)

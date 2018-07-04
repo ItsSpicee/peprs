@@ -1,5 +1,6 @@
 # contains callbacks to ui components and a few miscellaneous functions that function better in main.py (e.g. rely on event, used by multiple files. rely on parameter from signal)
 #1265, 950
+# tabWidget->setTabEnabled(1, false);
 
 import sys
 from PyQt5 import uic, QtCore, QtGui, QtWidgets
@@ -164,8 +165,8 @@ class Window(QMainWindow):
 		#pepper_icon.addFile('icons/pepper 24x24.png', QtCore.QSize(24,24))
 		#self.setWindowIcon(pepper_icon)
 		self.ui.statusBar.showMessage('Ready',2000)	
-		self.setMinimumSize(800,625)
-		self.resize(800,625)
+		self.setMinimumSize(1265,625)
+		self.resize(1265,625)
 		self.center()
 		
 		# set appropriate pages in stacks
