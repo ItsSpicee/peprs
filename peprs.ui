@@ -18,7 +18,7 @@
   </property>
   <property name="font">
    <font>
-    <pointsize>10</pointsize>
+    <family>Arial</family>
    </font>
   </property>
   <property name="cursor">
@@ -31,7 +31,7 @@
    <enum>Qt::LeftToRight</enum>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">QMainWindow {font-family:&quot;Arial&quot;}</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="accessibleName">
@@ -312,7 +312,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                    <string notr="true">QFrame{background-color:#d1d5de}</string>
                   </property>
                   <property name="currentIndex">
-                   <number>5</number>
+                   <number>2</number>
                   </property>
                   <widget class="QWidget" name="page_98">
                    <widget class="QFrame" name="nextFrame_82">
@@ -33686,7 +33686,7 @@ QWidget#power2{background-color:rgb(247,247,247)}
 QWidget#power3{background-color:rgb(247,247,247)}</string>
             </property>
             <property name="currentIndex">
-             <number>4</number>
+             <number>8</number>
             </property>
             <widget class="QWidget" name="vsg">
              <property name="styleSheet">
@@ -33731,7 +33731,7 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                     <string notr="true">QFrame{background-color:#d1d5de}</string>
                    </property>
                    <property name="currentIndex">
-                    <number>2</number>
+                    <number>1</number>
                    </property>
                    <widget class="QWidget" name="noSetupNext">
                     <widget class="QFrame" name="nextFrame">
@@ -33771,6 +33771,7 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="label_27">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
                            <weight>75</weight>
                            <bold>true</bold>
@@ -33788,10 +33789,11 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="fillSetup">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
-                           <weight>50</weight>
-                           <italic>true</italic>
-                           <bold>false</bold>
+                           <weight>75</weight>
+                           <italic>false</italic>
+                           <bold>true</bold>
                           </font>
                          </property>
                          <property name="styleSheet">
@@ -33853,6 +33855,7 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="label_64">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
                            <weight>75</weight>
                            <bold>true</bold>
@@ -33870,10 +33873,11 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="fillAWG">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
-                           <weight>50</weight>
-                           <italic>true</italic>
-                           <bold>false</bold>
+                           <weight>75</weight>
+                           <italic>false</italic>
+                           <bold>true</bold>
                           </font>
                          </property>
                          <property name="styleSheet">
@@ -33932,6 +33936,7 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="label_68">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
                            <weight>75</weight>
                            <bold>true</bold>
@@ -33951,7 +33956,9 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                           <font>
                            <family>Arial</family>
                            <pointsize>10</pointsize>
-                           <italic>true</italic>
+                           <weight>75</weight>
+                           <italic>false</italic>
+                           <bold>true</bold>
                            <kerning>true</kerning>
                           </font>
                          </property>
@@ -34011,6 +34018,7 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="label_70">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
                            <weight>75</weight>
                            <bold>true</bold>
@@ -34028,8 +34036,11 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="fillPSG">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
-                           <italic>true</italic>
+                           <weight>75</weight>
+                           <italic>false</italic>
+                           <bold>true</bold>
                            <kerning>true</kerning>
                           </font>
                          </property>
@@ -34089,6 +34100,7 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="label_72">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
                            <weight>75</weight>
                            <bold>true</bold>
@@ -34106,10 +34118,11 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="fillVSG">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
-                           <weight>50</weight>
-                           <italic>true</italic>
-                           <bold>false</bold>
+                           <weight>75</weight>
+                           <italic>false</italic>
+                           <bold>true</bold>
                           </font>
                          </property>
                          <property name="styleSheet">
@@ -34171,6 +34184,7 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="label_308">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
                            <weight>75</weight>
                            <bold>true</bold>
@@ -34188,9 +34202,12 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="fillVSA">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
-                           <italic>true</italic>
-                           <kerning>true</kerning>
+                           <weight>75</weight>
+                           <italic>false</italic>
+                           <bold>true</bold>
+                           <kerning>false</kerning>
                           </font>
                          </property>
                          <property name="styleSheet">
@@ -34234,7 +34251,7 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                        <rect>
                         <x>40</x>
                         <y>20</y>
-                        <width>391</width>
+                        <width>404</width>
                         <height>91</height>
                        </rect>
                       </property>
@@ -34246,6 +34263,7 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="label_488">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
                            <weight>75</weight>
                            <bold>true</bold>
@@ -34263,8 +34281,11 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="fillUp_11">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
-                           <italic>true</italic>
+                           <weight>75</weight>
+                           <italic>false</italic>
+                           <bold>true</bold>
                            <kerning>true</kerning>
                           </font>
                          </property>
@@ -34321,6 +34342,7 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="label_489">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
                            <weight>75</weight>
                            <bold>true</bold>
@@ -34338,8 +34360,11 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="fillVSA_5">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
-                           <italic>true</italic>
+                           <weight>75</weight>
+                           <italic>false</italic>
+                           <bold>true</bold>
                            <kerning>true</kerning>
                           </font>
                          </property>
@@ -34396,6 +34421,7 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="label_487">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
                            <weight>75</weight>
                            <bold>true</bold>
@@ -34413,8 +34439,11 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="fillVSA_11">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
-                           <italic>true</italic>
+                           <weight>75</weight>
+                           <italic>false</italic>
+                           <bold>true</bold>
                            <kerning>true</kerning>
                           </font>
                          </property>
@@ -34471,6 +34500,7 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="label_519">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
                            <weight>75</weight>
                            <bold>true</bold>
@@ -34488,10 +34518,11 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="fillPower1_7">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
-                           <weight>50</weight>
-                           <italic>true</italic>
-                           <bold>false</bold>
+                           <weight>75</weight>
+                           <italic>false</italic>
+                           <bold>true</bold>
                           </font>
                          </property>
                          <property name="styleSheet">
@@ -34550,6 +34581,7 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="label_539">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
                            <weight>75</weight>
                            <bold>true</bold>
@@ -34567,8 +34599,11 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="fillPower2_9">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
-                           <italic>true</italic>
+                           <weight>75</weight>
+                           <italic>false</italic>
+                           <bold>true</bold>
                            <kerning>true</kerning>
                           </font>
                          </property>
@@ -34625,6 +34660,7 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="label_540">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
                            <weight>75</weight>
                            <bold>true</bold>
@@ -34642,8 +34678,11 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="fillPower3_10">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
-                           <italic>true</italic>
+                           <weight>75</weight>
+                           <italic>false</italic>
+                           <bold>true</bold>
                            <kerning>true</kerning>
                           </font>
                          </property>
@@ -34700,6 +34739,7 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="label_544">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
                            <weight>75</weight>
                            <bold>true</bold>
@@ -34717,8 +34757,11 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                         <widget class="QLabel" name="visitMeas_10">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
-                           <italic>true</italic>
+                           <weight>75</weight>
+                           <italic>false</italic>
+                           <bold>true</bold>
                            <kerning>true</kerning>
                           </font>
                          </property>
@@ -34739,11 +34782,14 @@ QWidget#power3{background-color:rgb(247,247,247)}</string>
                    </widget>
                   </widget>
                   <widget class="QFrame" name="vsgWorkflowFrame">
+                   <property name="enabled">
+                    <bool>true</bool>
+                   </property>
                    <property name="geometry">
                     <rect>
-                     <x>15</x>
+                     <x>11</x>
                      <y>10</y>
-                     <width>461</width>
+                     <width>471</width>
                      <height>331</height>
                     </rect>
                    </property>
@@ -34792,9 +34838,9 @@ Supply 1</string>
                    <widget class="Line" name="line_97">
                     <property name="geometry">
                      <rect>
-                      <x>170</x>
+                      <x>180</x>
                       <y>150</y>
-                      <width>31</width>
+                      <width>21</width>
                       <height>20</height>
                      </rect>
                     </property>
@@ -34830,9 +34876,9 @@ Supply 1</string>
                    <widget class="QStackedWidget" name="vsgWorkflows">
                     <property name="geometry">
                      <rect>
-                      <x>10</x>
+                      <x>4</x>
                       <y>40</y>
-                      <width>191</width>
+                      <width>194</width>
                       <height>171</height>
                      </rect>
                     </property>
@@ -34840,7 +34886,7 @@ Supply 1</string>
                      <string notr="true"/>
                     </property>
                     <property name="currentIndex">
-                     <number>4</number>
+                     <number>2</number>
                     </property>
                     <widget class="QWidget" name="vsgGeneral">
                      <widget class="QPushButton" name="vsgButton_vsg_2">
@@ -34856,8 +34902,9 @@ Supply 1</string>
                        <font>
                         <family>Arial</family>
                         <pointsize>9</pointsize>
-                        <weight>50</weight>
-                        <bold>false</bold>
+                        <weight>75</weight>
+                        <bold>true</bold>
+                        <kerning>false</kerning>
                        </font>
                       </property>
                       <property name="cursor">
@@ -34875,15 +34922,18 @@ Supply 1</string>
                      <widget class="QLabel" name="label_141">
                       <property name="geometry">
                        <rect>
-                        <x>0</x>
+                        <x>10</x>
                         <y>70</y>
-                        <width>141</width>
+                        <width>161</width>
                         <height>16</height>
                        </rect>
                       </property>
                       <property name="font">
                        <font>
+                        <family>Arial</family>
                         <pointsize>10</pointsize>
+                        <weight>75</weight>
+                        <bold>true</bold>
                        </font>
                       </property>
                       <property name="text">
@@ -34921,8 +34971,8 @@ Supply 1</string>
                         <font>
                          <family>Arial</family>
                          <pointsize>9</pointsize>
-                         <weight>50</weight>
-                         <bold>false</bold>
+                         <weight>75</weight>
+                         <bold>true</bold>
                         </font>
                        </property>
                        <property name="cursor">
@@ -34941,15 +34991,18 @@ Supply 1</string>
                      <widget class="QLabel" name="label_142">
                       <property name="geometry">
                        <rect>
-                        <x>0</x>
+                        <x>4</x>
                         <y>70</y>
-                        <width>141</width>
+                        <width>161</width>
                         <height>16</height>
                        </rect>
                       </property>
                       <property name="font">
                        <font>
+                        <family>Arial</family>
                         <pointsize>10</pointsize>
+                        <weight>75</weight>
+                        <bold>true</bold>
                        </font>
                       </property>
                       <property name="text">
@@ -34959,7 +35012,7 @@ Supply 1</string>
                      <widget class="QFrame" name="frame_29">
                       <property name="geometry">
                        <rect>
-                        <x>0</x>
+                        <x>10</x>
                         <y>90</y>
                         <width>171</width>
                         <height>61</height>
@@ -34987,8 +35040,8 @@ Supply 1</string>
                         <font>
                          <family>Arial</family>
                          <pointsize>9</pointsize>
-                         <weight>50</weight>
-                         <bold>false</bold>
+                         <weight>75</weight>
+                         <bold>true</bold>
                         </font>
                        </property>
                        <property name="cursor">
@@ -35082,7 +35135,7 @@ Supply 2</string>
                      <widget class="Line" name="line_168">
                       <property name="geometry">
                        <rect>
-                        <x>140</x>
+                        <x>150</x>
                         <y>50</y>
                         <width>20</width>
                         <height>51</height>
@@ -35265,15 +35318,17 @@ Supply 2</string>
                      <widget class="QLabel" name="label_144">
                       <property name="geometry">
                        <rect>
-                        <x>0</x>
+                        <x>10</x>
                         <y>70</y>
-                        <width>141</width>
+                        <width>161</width>
                         <height>16</height>
                        </rect>
                       </property>
                       <property name="font">
                        <font>
                         <pointsize>10</pointsize>
+                        <weight>75</weight>
+                        <bold>true</bold>
                        </font>
                       </property>
                       <property name="text">
@@ -35311,8 +35366,8 @@ Supply 2</string>
                         <font>
                          <family>Arial</family>
                          <pointsize>9</pointsize>
-                         <weight>50</weight>
-                         <bold>false</bold>
+                         <weight>75</weight>
+                         <bold>true</bold>
                         </font>
                        </property>
                        <property name="cursor">
@@ -35330,7 +35385,7 @@ Supply 2</string>
                    </widget>
                    <widget class="QLabel" name="label_92">
                     <property name="enabled">
-                     <bool>false</bool>
+                     <bool>true</bool>
                     </property>
                     <property name="geometry">
                      <rect>
@@ -35344,15 +35399,18 @@ Supply 2</string>
                      <string/>
                     </property>
                     <property name="pixmap">
-                     <pixmap>icons/triangle small.png</pixmap>
+                     <pixmap>icons/triangle.png</pixmap>
+                    </property>
+                    <property name="scaledContents">
+                     <bool>true</bool>
                     </property>
                    </widget>
                    <widget class="Line" name="line_109">
                     <property name="geometry">
                      <rect>
-                      <x>270</x>
+                      <x>280</x>
                       <y>150</y>
-                      <width>31</width>
+                      <width>21</width>
                       <height>20</height>
                      </rect>
                     </property>
@@ -35400,7 +35458,7 @@ Supply 2</string>
                      <string notr="true"/>
                     </property>
                     <property name="currentIndex">
-                     <number>0</number>
+                     <number>1</number>
                     </property>
                     <widget class="QWidget" name="vsaGeneral_8">
                      <widget class="Line" name="line_236">
@@ -35819,15 +35877,18 @@ Analyzer</string>
                      <widget class="QLabel" name="label_454">
                       <property name="geometry">
                        <rect>
-                        <x>10</x>
-                        <y>32</y>
-                        <width>131</width>
-                        <height>16</height>
+                        <x>0</x>
+                        <y>30</y>
+                        <width>151</width>
+                        <height>20</height>
                        </rect>
                       </property>
                       <property name="font">
                        <font>
+                        <family>Arial</family>
                         <pointsize>10</pointsize>
+                        <weight>75</weight>
+                        <bold>true</bold>
                        </font>
                       </property>
                       <property name="text">
@@ -35913,15 +35974,18 @@ Analyzer</string>
                      <widget class="QLabel" name="label_458">
                       <property name="geometry">
                        <rect>
-                        <x>10</x>
+                        <x>0</x>
                         <y>32</y>
-                        <width>131</width>
-                        <height>16</height>
+                        <width>151</width>
+                        <height>20</height>
                        </rect>
                       </property>
                       <property name="font">
                        <font>
+                        <family>Arial</family>
                         <pointsize>10</pointsize>
+                        <weight>75</weight>
+                        <bold>true</bold>
                        </font>
                       </property>
                       <property name="text">
@@ -37078,7 +37142,7 @@ Analyzer</string>
                      <rect>
                       <x>200</x>
                       <y>150</y>
-                      <width>21</width>
+                      <width>16</width>
                       <height>20</height>
                      </rect>
                     </property>
@@ -37097,10 +37161,10 @@ Analyzer</string>
                    <zorder>vsgWorkflows</zorder>
                    <zorder>line_97</zorder>
                    <zorder>line_109</zorder>
-                   <zorder>label_92</zorder>
                    <zorder>vsaWorkflow_vsg</zorder>
                    <zorder>label_187</zorder>
                    <zorder>line_302</zorder>
+                   <zorder>label_92</zorder>
                   </widget>
                  </widget>
                 </item>
@@ -37160,6 +37224,12 @@ Analyzer</string>
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Arial</family>
+                        <pointsize>9</pointsize>
+                       </font>
                       </property>
                       <property name="layoutDirection">
                        <enum>Qt::LeftToRight</enum>
@@ -37221,6 +37291,12 @@ Analyzer</string>
                         <height>25</height>
                        </size>
                       </property>
+                      <property name="font">
+                       <font>
+                        <family>Arial</family>
+                        <pointsize>9</pointsize>
+                       </font>
+                      </property>
                       <property name="acceptDrops">
                        <bool>true</bool>
                       </property>
@@ -37276,6 +37352,7 @@ Analyzer</string>
                    </property>
                    <property name="font">
                     <font>
+                     <family>Arial</family>
                      <pointsize>10</pointsize>
                      <weight>75</weight>
                      <bold>true</bold>
@@ -37317,7 +37394,7 @@ Analyzer</string>
                    <enum>QTabWidget::Rounded</enum>
                   </property>
                   <property name="currentIndex">
-                   <number>0</number>
+                   <number>1</number>
                   </property>
                   <widget class="QWidget" name="tab_7">
                    <property name="styleSheet">
@@ -37368,14 +37445,14 @@ Analyzer</string>
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>590</width>
-                             <height>382</height>
+                             <width>595</width>
+                             <height>500</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
                             <size>
                              <width>590</width>
-                             <height>382</height>
+                             <height>500</height>
                             </size>
                            </property>
                            <widget class="QGroupBox" name="awgEquipGeneral">
@@ -37383,7 +37460,7 @@ Analyzer</string>
                              <rect>
                               <x>10</x>
                               <y>10</y>
-                              <width>291</width>
+                              <width>301</width>
                               <height>331</height>
                              </rect>
                             </property>
@@ -37395,6 +37472,7 @@ Analyzer</string>
                             </property>
                             <property name="font">
                              <font>
+                              <family>Arial</family>
                               <kerning>false</kerning>
                              </font>
                             </property>
@@ -37408,10 +37486,14 @@ Analyzer</string>
                              <string/>
                             </property>
                             <layout class="QGridLayout" name="gridLayout">
+                             <property name="verticalSpacing">
+                              <number>8</number>
+                             </property>
                              <item row="0" column="0">
                               <widget class="QLabel" name="label_24">
                                <property name="font">
                                 <font>
+                                 <family>Arial</family>
                                  <pointsize>10</pointsize>
                                  <underline>true</underline>
                                 </font>
@@ -37448,6 +37530,12 @@ Analyzer</string>
                                  <height>25</height>
                                 </size>
                                </property>
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="acceptDrops">
                                 <bool>true</bool>
                                </property>
@@ -37471,6 +37559,12 @@ Analyzer</string>
                              </item>
                              <item row="2" column="1" colspan="2">
                               <widget class="QComboBox" name="comboBox">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="layoutDirection">
                                 <enum>Qt::LeftToRight</enum>
                                </property>
@@ -37523,6 +37617,12 @@ Analyzer</string>
                                  <height>25</height>
                                 </size>
                                </property>
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="acceptDrops">
                                 <bool>true</bool>
                                </property>
@@ -37559,6 +37659,12 @@ Analyzer</string>
                              </item>
                              <item row="4" column="1" colspan="2">
                               <widget class="QComboBox" name="comboBox_2">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="layoutDirection">
                                 <enum>Qt::LeftToRight</enum>
                                </property>
@@ -37594,6 +37700,12 @@ Analyzer</string>
                              </item>
                              <item row="5" column="1" colspan="2">
                               <widget class="QComboBox" name="comboBox_3">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="layoutDirection">
                                 <enum>Qt::LeftToRight</enum>
                                </property>
@@ -37641,6 +37753,12 @@ Analyzer</string>
                                  <height>25</height>
                                 </size>
                                </property>
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="acceptDrops">
                                 <bool>true</bool>
                                </property>
@@ -37679,6 +37797,12 @@ Analyzer</string>
                                  <height>25</height>
                                 </size>
                                </property>
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="acceptDrops">
                                 <bool>true</bool>
                                </property>
@@ -37702,6 +37826,12 @@ Analyzer</string>
                              </item>
                              <item row="8" column="1" colspan="2">
                               <widget class="QComboBox" name="comboBox_4">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="layoutDirection">
                                 <enum>Qt::LeftToRight</enum>
                                </property>
@@ -37737,6 +37867,12 @@ Analyzer</string>
                              </item>
                              <item row="9" column="1" colspan="2">
                               <widget class="QComboBox" name="comboBox_5">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="layoutDirection">
                                 <enum>Qt::LeftToRight</enum>
                                </property>
@@ -37777,6 +37913,12 @@ Analyzer</string>
                              </item>
                              <item row="10" column="1" colspan="2">
                               <widget class="QComboBox" name="comboBox_6">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="layoutDirection">
                                 <enum>Qt::LeftToRight</enum>
                                </property>
@@ -37877,8 +38019,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>593</width>
-                             <height>382</height>
+                             <width>595</width>
+                             <height>424</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -37892,7 +38034,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <rect>
                               <x>12</x>
                               <y>12</y>
-                              <width>291</width>
+                              <width>301</width>
                               <height>331</height>
                              </rect>
                             </property>
@@ -37904,6 +38046,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                             </property>
                             <property name="font">
                              <font>
+                              <family>Arial</family>
                               <kerning>false</kerning>
                              </font>
                             </property>
@@ -37917,10 +38060,14 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <string/>
                             </property>
                             <layout class="QGridLayout" name="gridLayout_3">
+                             <property name="verticalSpacing">
+                              <number>7</number>
+                             </property>
                              <item row="0" column="0">
                               <widget class="QLabel" name="label_51">
                                <property name="font">
                                 <font>
+                                 <family>Arial</family>
                                  <pointsize>10</pointsize>
                                  <underline>true</underline>
                                 </font>
@@ -37957,6 +38104,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                  <height>25</height>
                                 </size>
                                </property>
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="acceptDrops">
                                 <bool>true</bool>
                                </property>
@@ -37980,6 +38133,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              </item>
                              <item row="2" column="1" colspan="2">
                               <widget class="QComboBox" name="comboBox_17">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="layoutDirection">
                                 <enum>Qt::LeftToRight</enum>
                                </property>
@@ -38032,6 +38191,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                  <height>25</height>
                                 </size>
                                </property>
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="acceptDrops">
                                 <bool>true</bool>
                                </property>
@@ -38068,6 +38233,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              </item>
                              <item row="4" column="1" colspan="2">
                               <widget class="QComboBox" name="comboBox_18">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="layoutDirection">
                                 <enum>Qt::LeftToRight</enum>
                                </property>
@@ -38103,6 +38274,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              </item>
                              <item row="5" column="1" colspan="2">
                               <widget class="QComboBox" name="comboBox_19">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="layoutDirection">
                                 <enum>Qt::LeftToRight</enum>
                                </property>
@@ -38151,6 +38328,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                  <height>25</height>
                                 </size>
                                </property>
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="acceptDrops">
                                 <bool>true</bool>
                                </property>
@@ -38189,6 +38372,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                  <height>25</height>
                                 </size>
                                </property>
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="acceptDrops">
                                 <bool>true</bool>
                                </property>
@@ -38212,6 +38401,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              </item>
                              <item row="8" column="1" colspan="2">
                               <widget class="QComboBox" name="comboBox_20">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="layoutDirection">
                                 <enum>Qt::LeftToRight</enum>
                                </property>
@@ -38247,6 +38442,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              </item>
                              <item row="9" column="1" colspan="2">
                               <widget class="QComboBox" name="comboBox_21">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="layoutDirection">
                                 <enum>Qt::LeftToRight</enum>
                                </property>
@@ -38287,6 +38488,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              </item>
                              <item row="10" column="1" colspan="2">
                               <widget class="QComboBox" name="comboBox_22">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="layoutDirection">
                                 <enum>Qt::LeftToRight</enum>
                                </property>
@@ -38358,8 +38565,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           <property name="font">
                            <font>
                             <family>Arial</family>
-                            <pointsize>9</pointsize>
-                            <italic>true</italic>
+                            <pointsize>10</pointsize>
+                            <italic>false</italic>
+                            <kerning>false</kerning>
                            </font>
                           </property>
                           <property name="styleSheet">
@@ -38423,21 +38631,26 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <x>0</x>
                              <y>0</y>
                              <width>629</width>
-                             <height>349</height>
+                             <height>500</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
                             <size>
                              <width>629</width>
-                             <height>349</height>
+                             <height>500</height>
                             </size>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <family>MS Sans Serif</family>
+                            </font>
                            </property>
                            <widget class="QGroupBox" name="awgEquipAdv">
                             <property name="geometry">
                              <rect>
                               <x>10</x>
                               <y>10</y>
-                              <width>291</width>
+                              <width>311</width>
                               <height>240</height>
                              </rect>
                             </property>
@@ -38449,6 +38662,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                             </property>
                             <property name="font">
                              <font>
+                              <family>Arial</family>
                               <kerning>false</kerning>
                              </font>
                             </property>
@@ -38466,6 +38680,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                               <widget class="QLabel" name="label_38">
                                <property name="font">
                                 <font>
+                                 <family>Arial</family>
                                  <pointsize>10</pointsize>
                                  <underline>true</underline>
                                 </font>
@@ -38502,6 +38717,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                  <height>25</height>
                                 </size>
                                </property>
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="acceptDrops">
                                 <bool>true</bool>
                                </property>
@@ -38536,6 +38757,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                  <width>16777215</width>
                                  <height>25</height>
                                 </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
                                </property>
                                <property name="acceptDrops">
                                 <bool>true</bool>
@@ -38573,6 +38800,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              </item>
                              <item row="3" column="1" colspan="2">
                               <widget class="QComboBox" name="comboBox_13">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="layoutDirection">
                                 <enum>Qt::LeftToRight</enum>
                                </property>
@@ -38619,6 +38852,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                  <width>16777215</width>
                                  <height>25</height>
                                 </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
                                </property>
                                <property name="acceptDrops">
                                 <bool>true</bool>
@@ -38668,6 +38907,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                  <height>25</height>
                                 </size>
                                </property>
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="acceptDrops">
                                 <bool>true</bool>
                                </property>
@@ -38691,6 +38936,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              </item>
                              <item row="6" column="1" colspan="2">
                               <widget class="QComboBox" name="comboBox_15">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="layoutDirection">
                                 <enum>Qt::LeftToRight</enum>
                                </property>
@@ -38731,6 +38982,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              </item>
                              <item row="7" column="1" colspan="2">
                               <widget class="QComboBox" name="comboBox_14">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="layoutDirection">
                                 <enum>Qt::LeftToRight</enum>
                                </property>
@@ -38809,13 +39066,13 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <x>0</x>
                              <y>0</y>
                              <width>629</width>
-                             <height>359</height>
+                             <height>500</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
                             <size>
                              <width>629</width>
-                             <height>359</height>
+                             <height>500</height>
                             </size>
                            </property>
                            <widget class="QGroupBox" name="vsgEquipAdv">
@@ -38823,7 +39080,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <rect>
                               <x>10</x>
                               <y>10</y>
-                              <width>291</width>
+                              <width>311</width>
                               <height>240</height>
                              </rect>
                             </property>
@@ -38852,6 +39109,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                               <widget class="QLabel" name="label_52">
                                <property name="font">
                                 <font>
+                                 <family>Arial</family>
                                  <pointsize>10</pointsize>
                                  <underline>true</underline>
                                 </font>
@@ -38888,6 +39146,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                  <height>25</height>
                                 </size>
                                </property>
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="acceptDrops">
                                 <bool>true</bool>
                                </property>
@@ -38922,6 +39186,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                  <width>16777215</width>
                                  <height>25</height>
                                 </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
                                </property>
                                <property name="acceptDrops">
                                 <bool>true</bool>
@@ -38959,6 +39229,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              </item>
                              <item row="3" column="1" colspan="2">
                               <widget class="QComboBox" name="comboBox_23">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="layoutDirection">
                                 <enum>Qt::LeftToRight</enum>
                                </property>
@@ -39005,6 +39281,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                  <width>16777215</width>
                                  <height>25</height>
                                 </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
                                </property>
                                <property name="acceptDrops">
                                 <bool>true</bool>
@@ -39054,6 +39336,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                  <height>25</height>
                                 </size>
                                </property>
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="acceptDrops">
                                 <bool>true</bool>
                                </property>
@@ -39077,6 +39365,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              </item>
                              <item row="6" column="1" colspan="2">
                               <widget class="QComboBox" name="comboBox_24">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="layoutDirection">
                                 <enum>Qt::LeftToRight</enum>
                                </property>
@@ -39117,6 +39411,12 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              </item>
                              <item row="7" column="1" colspan="2">
                               <widget class="QComboBox" name="comboBox_25">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
                                <property name="layoutDirection">
                                 <enum>Qt::LeftToRight</enum>
                                </property>
@@ -39183,8 +39483,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           <property name="font">
                            <font>
                             <family>Arial</family>
-                            <pointsize>9</pointsize>
-                            <italic>true</italic>
+                            <pointsize>10</pointsize>
+                            <italic>false</italic>
                            </font>
                           </property>
                           <property name="styleSheet">
@@ -47606,7 +47906,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>593</width>
+                             <width>595</width>
                              <height>500</height>
                             </rect>
                            </property>
@@ -54383,6 +54683,7 @@ Analyzer</string>
                         <widget class="QLabel" name="label_355">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
                            <weight>75</weight>
                            <bold>true</bold>
@@ -54400,8 +54701,11 @@ Analyzer</string>
                         <widget class="QLabel" name="fillVSA_7">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
-                           <italic>true</italic>
+                           <weight>75</weight>
+                           <italic>false</italic>
+                           <bold>true</bold>
                            <kerning>true</kerning>
                           </font>
                          </property>
@@ -54458,6 +54762,7 @@ Analyzer</string>
                         <widget class="QLabel" name="label_515">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
                            <weight>75</weight>
                            <bold>true</bold>
@@ -54475,10 +54780,11 @@ Analyzer</string>
                         <widget class="QLabel" name="fillPower1_3">
                          <property name="font">
                           <font>
+                           <family>Arial</family>
                            <pointsize>10</pointsize>
-                           <weight>50</weight>
-                           <italic>true</italic>
-                           <bold>false</bold>
+                           <weight>75</weight>
+                           <italic>false</italic>
+                           <bold>true</bold>
                           </font>
                          </property>
                          <property name="styleSheet">
@@ -67603,7 +67909,7 @@ Supply 3</string>
                    <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                   </property>
                   <property name="currentIndex">
-                   <number>1</number>
+                   <number>0</number>
                   </property>
                   <widget class="QWidget" name="upStandardSettings_7">
                    <attribute name="title">
@@ -68516,6 +68822,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
          </layout>
         </widget>
         <widget class="QWidget" name="dashboard">
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
          <property name="styleSheet">
           <string notr="true">QWidget#dashboard{background-color:rgb(247, 247, 247)}</string>
          </property>
@@ -68523,8 +68832,26 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
           <string>Dashboard</string>
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_58">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>9</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_32" stretch="1,5,1">
+           <layout class="QVBoxLayout" name="verticalLayout_33">
+            <property name="spacing">
+             <number>0</number>
+            </property>
             <item>
              <widget class="QLabel" name="label_108">
               <property name="font">
@@ -68539,25 +68866,40 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
               <property name="alignment">
                <set>Qt::AlignCenter</set>
               </property>
+              <property name="indent">
+               <number>-1</number>
+              </property>
              </widget>
             </item>
             <item>
              <widget class="QFrame" name="frame_83">
-              <property name="layoutDirection">
-               <enum>Qt::LeftToRight</enum>
-              </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
               </property>
               <property name="frameShadow">
                <enum>QFrame::Raised</enum>
               </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_59">
+              <layout class="QVBoxLayout" name="verticalLayout_32" stretch="6,1">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>15</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
                <item>
                 <widget class="QLabel" name="label_65">
                  <property name="maximumSize">
                   <size>
-                   <width>10000</width>
+                   <width>16777215</width>
                    <height>10000</height>
                   </size>
                  </property>
@@ -68565,7 +68907,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                   <string/>
                  </property>
                  <property name="pixmap">
-                  <pixmap>icons/dashboard.png</pixmap>
+                  <pixmap>icons/equipment.png</pixmap>
                  </property>
                  <property name="scaledContents">
                   <bool>false</bool>
@@ -68575,99 +68917,136 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                  </property>
                 </widget>
                </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <widget class="QFrame" name="frame_84">
-              <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-              <widget class="QFrame" name="nextFrame_2">
-               <property name="geometry">
-                <rect>
-                 <x>10</x>
-                 <y>0</y>
-                 <width>281</width>
-                 <height>101</height>
-                </rect>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>4</pointsize>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QFrame{background-color:#d1d5de}</string>
-               </property>
-               <property name="frameShape">
-                <enum>QFrame::Box</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-               <property name="lineWidth">
-                <number>1</number>
-               </property>
-               <layout class="QHBoxLayout" name="horizontalLayout_60">
-                <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,1">
+               <item>
+                <widget class="QFrame" name="frame_84">
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_59" stretch="1,4">
                   <property name="spacing">
+                   <number>8</number>
+                  </property>
+                  <property name="leftMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
                    <number>0</number>
                   </property>
                   <item>
-                   <widget class="QLabel" name="label_28">
+                   <widget class="QFrame" name="nextFrame_2">
                     <property name="font">
                      <font>
-                      <family>Arial</family>
-                      <pointsize>10</pointsize>
-                      <weight>75</weight>
-                      <bold>true</bold>
+                      <pointsize>4</pointsize>
                      </font>
-                    </property>
-                    <property name="text">
-                     <string>Next Step</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="visitEquip">
-                    <property name="font">
-                     <font>
-                      <family>Arial</family>
-                      <pointsize>10</pointsize>
-                      <weight>75</weight>
-                      <italic>false</italic>
-                      <bold>true</bold>
-                     </font>
-                    </property>
-                    <property name="cursor">
-                     <cursorShape>ArrowCursor</cursorShape>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">QLabel {background:rgb(72, 144, 216);color:white;border-radius:10px;border: 3px solid  rgb(0, 0, 127)}</string>
+                     <string notr="true">QFrame{background-color:#d1d5de}</string>
+                    </property>
+                    <property name="frameShape">
+                     <enum>QFrame::Box</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Raised</enum>
                     </property>
                     <property name="lineWidth">
                      <number>1</number>
                     </property>
-                    <property name="text">
-                     <string>Move to the 'Set Equipment' tab</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignCenter</set>
-                    </property>
+                    <layout class="QHBoxLayout" name="horizontalLayout_60">
+                     <property name="leftMargin">
+                      <number>4</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>4</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>4</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>4</number>
+                     </property>
+                     <item>
+                      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,1">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QLabel" name="label_28">
+                         <property name="font">
+                          <font>
+                           <family>Arial</family>
+                           <pointsize>10</pointsize>
+                           <weight>75</weight>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>Next Step</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="visitEquip">
+                         <property name="font">
+                          <font>
+                           <family>Arial</family>
+                           <pointsize>10</pointsize>
+                           <weight>75</weight>
+                           <italic>false</italic>
+                           <bold>true</bold>
+                           <kerning>false</kerning>
+                          </font>
+                         </property>
+                         <property name="cursor">
+                          <cursorShape>ArrowCursor</cursorShape>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QLabel {background:rgb(72, 144, 216);color:white;border-radius:10px;border: 3px solid  rgb(0, 0, 127)}</string>
+                         </property>
+                         <property name="lineWidth">
+                          <number>1</number>
+                         </property>
+                         <property name="text">
+                          <string>Move to the 'Set Equipment' tab</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                    </layout>
                    </widget>
                   </item>
+                  <item>
+                   <spacer name="horizontalSpacer_2">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Expanding</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>956</width>
+                      <height>17</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
                  </layout>
-                </item>
-               </layout>
-              </widget>
+                </widget>
+               </item>
+              </layout>
              </widget>
             </item>
            </layout>
