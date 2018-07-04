@@ -67,8 +67,8 @@ def changeStepTab(self):
 		self.resize(1265,950)
 		self.center()
 	elif i == 3:
-		self.setMinimumSize(1265,625)
-		self.resize(1265,625)
+		self.setMinimumSize(800,625)
+		self.resize(800,625)
 		self.center()
 	
 def switchMeasTabVSA(self):

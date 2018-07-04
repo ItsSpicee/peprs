@@ -56,12 +56,12 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_31" stretch="0,0">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,1,1,3">
         <property name="spacing">
          <number>10</number>
         </property>
         <item>
-         <widget class="QPushButton" name="rfOffButton">
+         <widget class="QPushButton" name="emergButtonFirst">
           <property name="minimumSize">
            <size>
             <width>75</width>
@@ -70,7 +70,8 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>9</pointsize>
+            <family>Arial</family>
+            <pointsize>10</pointsize>
             <weight>75</weight>
             <bold>true</bold>
            </font>
@@ -79,13 +80,13 @@
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="styleSheet">
-           <string notr="true">QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(179, 0, 0, 255), stop:1 rgba(214, 0, 0, 255));color:white;border-radius: 5px; border: 3px solid rgb(143, 0, 0);}
+           <string notr="true">QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 158, 0, 255));color:white;border-radius: 5px; border: 3px solid green;}
 
-QPushButton:hover{background-color:rgb(217, 0, 0);}
+QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 134, 0, 255), stop:1 rgba(0, 184, 0, 255));}
 </string>
           </property>
           <property name="text">
-           <string>Turn Off RF</string>
+           <string>Turn On DC</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -93,7 +94,7 @@ QPushButton:hover{background-color:rgb(217, 0, 0);}
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="dcOffButton">
+         <widget class="QPushButton" name="emergButtonSecond">
           <property name="minimumSize">
            <size>
             <width>75</width>
@@ -111,12 +112,13 @@ QPushButton:hover{background-color:rgb(217, 0, 0);}
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="styleSheet">
-           <string notr="true">QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(179, 0, 0, 255), stop:1 rgba(214, 0, 0, 255));color:white;border-radius: 5px; border: 3px solid rgb(143, 0, 0);}
+           <string notr="true">QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 158, 0, 255));color:white;border-radius: 5px; border: 3px solid green;}
 
-QPushButton:hover{background-color:rgb(217, 0, 0);}</string>
+QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 134, 0, 255), stop:1 rgba(0, 184, 0, 255));}
+</string>
           </property>
           <property name="text">
-           <string>Turn Off DC</string>
+           <string>Turn On RF</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -160,7 +162,7 @@ QPushButton:hover{background-color:rgb(217, 0, 0);}</string>
            <enum>Qt::Horizontal</enum>
           </property>
           <property name="sizeType">
-           <enum>QSizePolicy::Preferred</enum>
+           <enum>QSizePolicy::Expanding</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -169,70 +171,6 @@ QPushButton:hover{background-color:rgb(217, 0, 0);}</string>
            </size>
           </property>
          </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="rfOnButton">
-          <property name="minimumSize">
-           <size>
-            <width>75</width>
-            <height>31</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>9</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 158, 0, 255));color:white;border-radius: 5px; border: 3px solid green;}
-
-QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 134, 0, 255), stop:1 rgba(0, 184, 0, 255));}
-</string>
-          </property>
-          <property name="text">
-           <string>Turn On RF</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="dcOnButton">
-          <property name="minimumSize">
-           <size>
-            <width>75</width>
-            <height>31</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>9</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 158, 0, 255));color:white;border-radius: 5px; border: 3px solid green;}
-
-QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 134, 0, 255), stop:1 rgba(0, 184, 0, 255));}
-</string>
-          </property>
-          <property name="text">
-           <string>Turn On DC</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
         </item>
        </layout>
       </item>
@@ -68925,7 +68863,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                  <property name="frameShadow">
                   <enum>QFrame::Raised</enum>
                  </property>
-                 <layout class="QHBoxLayout" name="horizontalLayout_59" stretch="1,4">
+                 <layout class="QHBoxLayout" name="horizontalLayout_59" stretch="1,3">
                   <property name="spacing">
                    <number>8</number>
                   </property>
@@ -69037,7 +68975,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
-                      <width>956</width>
+                      <width>896</width>
                       <height>17</height>
                      </size>
                     </property>

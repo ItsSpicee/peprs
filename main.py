@@ -136,13 +136,13 @@ class Window(QMainWindow):
 		greyButton = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;}"
 		greyHover = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px;color:black} QPushButton:hover{background-color:rgb(243, 243, 243);}"
 		blueSelect = "QPushButton{ border:3px solid rgb(0, 0, 127);  background-color:qlineargradient(spread:pad, x1:0.994318, y1:0.682, x2:1, y2:0, stop:0 rgba(72, 144, 216, 255), stop:1 rgba(83, 170, 252, 255)); border-radius:5px;color:white}"
+		greenButton = "QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 158, 0, 255));color:white;border-radius: 5px; border: 3px solid green;} QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 134, 0, 255), stop:1 rgba(0, 184, 0, 255));}"
+		redButton = "QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(179, 0, 0, 255), stop:1 rgba(214, 0, 0, 255));color:white;border-radius: 5px; border: 3px solid rgb(143, 0, 0);} QPushButton:hover{background-color:rgb(217, 0, 0);}"
 		
 		# emergency on and off buttons
-		#self.ui.rfOffButton.clicked.connect()
-		self.ui.dcOffButton.clicked.connect(lambda: self.toggleOutput(0))
-		# self.ui.allOffButton.clicked.connect()
-		self.ui.dcOnButton.clicked.connect(lambda: self.toggleOutput(1))
-		# self.ui.rfOnButton.clicked.connect()
+		self.ui.emergButtonFirst.clicked.connect(lambda: self.toggleOutput(1,redButton,greenButton))
+		self.ui.emergButtonSecond.clicked.connect(lambda: self.toggleOutput(2,redButton,greenButton))
+		self.ui.allOffButton.clicked.connect(lambda: self.toggleOutput(3,redButton,greenButton))
 		
 		# keep widget space when hidden
 		retainVsa = QSizePolicy(self.ui.debuggingPanel_vsa.sizePolicy())
@@ -164,8 +164,8 @@ class Window(QMainWindow):
 		#pepper_icon.addFile('icons/pepper 24x24.png', QtCore.QSize(24,24))
 		#self.setWindowIcon(pepper_icon)
 		self.ui.statusBar.showMessage('Ready',2000)	
-		self.setMinimumSize(1265,625)
-		self.resize(1265,625)
+		self.setMinimumSize(800,625)
+		self.resize(800,625)
 		self.center()
 		
 		# set appropriate pages in stacks
@@ -705,7 +705,9 @@ class Window(QMainWindow):
 		# move top-left point of the application window to top-left point of qr rectangle
 		self.move(qr.topLeft())
 		
-	def toggleOutput(self,state):
+	def toggleOutput(self,button,redButton,greenButton):
+		firstChecked = self.ui.emergButtonFirst.isChecked()
+		secondChecked = self.ui.emergButtonSecond.isChecked()
 		p1c1A = self.ui.p1c1Address.toPlainText()
 		p1c2A = self.ui.p1c2Address.toPlainText()
 		p1c3A = self.ui.p1c3Address.toPlainText()
@@ -719,18 +721,67 @@ class Window(QMainWindow):
 		p3c3A = self.ui.p3c3Address.toPlainText()
 		p3c4A = self.ui.p3c4Address.toPlainText()
 		addressList = {p1c1A,p1c2A,p1c3A,p1c4A,p2c1A,p2c2A,p2c3A,p2c4A,p3c1A,p3c2A,p3c3A,p3c4A}
-		if len(addressList) == 1:
-			self.statusBar().showMessage("No DC supplies have been set",2000)
-		for x in addressList:
-			if x == "":
-				continue
+		
+		if button == 1:
+			if firstChecked == True:
+				if len(addressList) == 1:
+					self.statusBar().showMessage("No DC supplies have been set",2000)
+					self.ui.emergButtonFirst.setChecked(False)
+				for x in addressList:
+					if x == "":
+						continue
+					else:
+						supply.Output_Toggle(x,1,nargout=0)
+						self.statusBar().showMessage("DC turned ON",2000)
+						self.ui.emergButtonFirst.setStyleSheet(redButton)
+						self.ui.emergButtonFirst.setText("Turn Off DC")
 			else:
-				supply.Output_Toggle(x,state,nargout=0)
-				if state == 0:
-					self.statusBar().showMessage("DC turned OFF",2000)
+				if secondChecked == True:
+					msg = QMessageBox(self)
+					msg.setIcon(QMessageBox.Critical)
+					msg.setWindowTitle('Incorrect Order')
+					msg.setText("Please turn off RF before turning off DC")
+					msg.setStandardButtons(QMessageBox.Ok)
+					msg.exec_();
+					self.ui.emergButtonFirst.setChecked(True)
 				else:
-					self.statusBar().showMessage("DC turned ON",2000)
-	
+					for x in addressList:
+						if x == "":
+							continue
+						else:
+							supply.Output_Toggle(x,0,nargout=0)
+					self.statusBar().showMessage("DC turned OFF",2000)
+					self.ui.emergButtonFirst.setStyleSheet(greenButton)
+					self.ui.emergButtonFirst.setText("Turn On DC")
+		elif button == 2:
+			if secondChecked == True:
+				if firstChecked == False:
+					msg = QMessageBox(self)
+					msg.setIcon(QMessageBox.Critical)
+					msg.setWindowTitle('Incorrect Order')
+					msg.setText("Please turn on DC before turning on RF")
+					msg.setStandardButtons(QMessageBox.Ok)
+					msg.exec_();
+					self.ui.emergButtonSecond.setChecked(False)
+				else:
+					# turn on rf
+					self.statusBar().showMessage("RF turned ON (test)",2000)
+					self.ui.emergButtonSecond.setStyleSheet(redButton)
+					self.ui.emergButtonSecond.setText("Turn Off RF")
+			else:
+				# turn off rf
+				self.statusBar().showMessage("RF turned OFF (test)",2000)
+				self.ui.emergButtonSecond.setStyleSheet(greenButton)
+				self.ui.emergButtonSecond.setText("Turn On RF")
+		elif button == 3:
+			for x in addressList:
+				if x == "":
+					continue
+				else:
+					supply.Output_Toggle(x,0,nargout=0)
+			self.statusBar().showMessage("RF and DC turned OFF (test)",2000)
+				
+
 	# def paintEvent(self,e):
 		# qp = QPainter()
 		# qp.begin(self)
