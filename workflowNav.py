@@ -150,7 +150,16 @@ def p3OnClick(self):
 	if vsgType == 1 or vsgType == 4:
 		if p1Checked:
 			self.ui.equipStack.setCurrentIndex(8)
-
+def powerMeterAveraging(self,averagingTextBox,index,label):
+	
+	if index == 2:
+		label.setDisabled(False)
+		averagingTextBox.setDisabled(False)
+		averagingTextBox.setReadOnly(False)
+	else:
+		label.setDisabled(True)
+		averagingTextBox.setDisabled(True)
+		averagingTextBox.setReadOnly(True)
 def awgVSAMeasOnClick(self):
 	vsaSetChecked = self.ui.vsaMeasSet.isChecked()
 	vsaSetTwoChecked = self.ui.vsaMeasSet_2.isChecked()

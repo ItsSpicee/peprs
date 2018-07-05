@@ -479,6 +479,7 @@ class Window(QMainWindow):
 		self.ui.power3Button_down.clicked.connect(lambda: flow.p3OnClick(self))
 		self.ui.power3Button_down_2.clicked.connect(lambda: flow.p3OnClick(self))
 		# power meter page
+		self.ui.powerMeterFilter.currentIndexChanged.connect(lambda: flow.powerMeterAveraging(self,self.ui.noAveragesField_meter,self.ui.powerMeterFilter.currentIndex(),self.ui.noAveragesLabel_meter))
 		self.ui.awgButton_meter.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
 		self.ui.awgButton_meter_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
 		self.ui.awgButton_meter_3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))

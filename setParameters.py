@@ -275,9 +275,18 @@ def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,supply):
 		flag = 0;
 		setButton.setText("Unset")
 		
-		flag = setPowerMeterParams(self, self.ui.powerMeterAddress, self.ui.powerMeterOffset, self.ui.powerMeterFrequency,self.ui.powerMeterPartNum,self.ui.meterEquip,boxDone,supply)
+		averaging = "0"
+		if self.ui.powerMeterFilter.currentIndex() == 1:
+			averaging = "-1"
+		elif self.ui.powerMeterFilter.currentIndex() == 3:
+			averaging = "-2"
+		elif self.ui.powerMeterFilter.currentIndex() == 2:
+			averaging = self.ui.noAveragesField_meter.toPlainText()
+		
+		flag = setPowerMeterParams(self, self.ui.powerMeterAddress, self.ui.powerMeterOffset, self.ui.powerMeterFrequency,self.ui.powerMeterPartNum,self.ui.meterEquip,boxDone,supply,averaging)
 		
 		
+			
 		self.ui.meterButton_meter.setStyleSheet(buttonFocus)
 		self.ui.meterButton_meter_2.setStyleSheet(buttonFocus)
 		self.ui.meterButton_meter_3.setStyleSheet(buttonFocus)
@@ -1138,13 +1147,14 @@ def instrParamErrorMessage(self,error):
 	msg.setText(error)
 	msg.setStandardButtons(QMessageBox.Ok)
 	msg.exec_();
-	
-def setPowerMeterParams(self,address,offset,frequency,partNum,equipBox,boxDone,supply):	
+
+def setPowerMeterParams(self,address,offset,frequency,partNum,equipBox,boxDone,supply,averaging):	
 	A = address.toPlainText()
 	O = offset.toPlainText()
 	F = frequency.toPlainText()
 	
-	result = supply.Set_Meter(A,O,F,nargout=1)
+	
+	result = supply.Set_Meter(A,O,F,averaging,nargout=1)
 	result = result.split(";")
 	error = result[1]
 
@@ -1160,7 +1170,7 @@ def setPowerMeterParams(self,address,offset,frequency,partNum,equipBox,boxDone,s
 		flag = 1
 		return flag
 	else:
-		print(address)
+		
 		instrParamErrorMessage(self,error)
 		self.ui.meterSet.setChecked(False)
 		

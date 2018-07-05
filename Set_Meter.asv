@@ -22,11 +22,11 @@ try
         fprintf(meter, sprintf(':SENSe:AVERage:COUNt:AUTO %d', 1));
     elseif averaging == -2
         fprintf(meter, sprintf(':SENSe:AVERage:STATe %d', 0));
-    elseif averaging <= 1024 && averaging > 0 
+    elseif averaging < 1024 && averaging > 0 
         fprintf(meter, sprintf(':SENSe:AVERage:STATe %d', 1));
         fprintf(meter, sprintf(':SENSe:AVERage:COUNt %d', averaging));
     else
-        errorString = "Number of averages is out of bounds. Must be 1-1024";
+        errorString = Number of a is out of bounds.";
     end
         
     
