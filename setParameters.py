@@ -316,7 +316,7 @@ def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton):
 		self.ui.saEquip.setStyleSheet(None)
 		setButton.setText("Set")
 	
-def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,setButton):
+def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,buttonSelect,setButton):
 	if setButton.isChecked() == True:
 		flag = 0;
 		c1Checked = self.ui.p1c1Check.isChecked()
@@ -335,6 +335,9 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,setBu
 		if enabledSupply == 0 or enabledSupply == 2:
 			if enabledSupply == 2:
 				flag = 1;
+			if enabledSupply == 0:
+				instrParamErrorMessage(self,"Please fill out the current equipment's parameters before moving on.")
+				setButton.setChecked(False)
 			if p1c1A != "":
 				supply.Output_Toggle(p1c1A,nargout=0)
 			if p1c2A != "":
@@ -344,6 +347,9 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,setBu
 			if p1c4A != "":
 				supply.Output_Toggle(p1c4A,nargout=0)
 		else:
+			if c1Checked == False and c2Checked == False and c3Checked == False and c4Checked == False:
+				instrParamErrorMessage(self,"Please enable and set channel parameters if this supply is in use.")
+				setButton.setChecked(False)
 			if c1Checked:
 				flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply,1)
 			if c2Checked:
@@ -356,6 +362,7 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,setBu
 		if flag == 1:
 			self.ui.power1Button_p1.setStyleSheet(buttonFocus)
 			self.ui.p1Equip.setStyleSheet(boxDone)
+			setButton.setText("Unset")
 			
 			if vsgType == 1 or vsgType == 4:
 				if vsaType == 1 or vsaType == 2 or vsaType == 3 or vsaType == 4:
@@ -385,11 +392,20 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,setBu
 				self.ui.up_psg_next.setCurrentIndex(8)
 				self.ui.vsgNextSteps.setCurrentIndex(10)
 				setPrevP1Buttons(self,buttonHover,greyHover,greyButton,Qt.PointingHandCursor,Qt.ArrowCursor)
-	elif  setButton.isChecked() == False:
+	elif setButton.isChecked() == False:
 		self.ui.p1Equip.setStyleSheet(None)
+		unsetPrevP1Buttons(self,greyHover)
+		self.ui.power1Button_p1.setStyleSheet(buttonSelect)
+		self.ui.power1NextStack.setCurrentIndex(0)
+		self.ui.saNextStack.setCurrentIndex(1)
+		self.ui.meterNextStack.setCurrentIndex(2)
+		self.ui.downNextStack.setCurrentIndex(3)
+		self.ui.vsaNextStack.setCurrentIndex(5)
+		self.ui.up_psg_next.setCurrentIndex(7)
+		self.ui.vsgNextSteps.setCurrentIndex(9)
 		setButton.setText("Set")
 
-def setP2(self,boxDone,buttonFocus,buttonHover,greyHoverB,greyButton,supply,setButton):
+def setP2(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,buttonSelect,setButton):
 	if setButton.isChecked() == True:
 		flag = 0;
 		c1Checked = self.ui.p2c1Check.isChecked()
@@ -407,6 +423,9 @@ def setP2(self,boxDone,buttonFocus,buttonHover,greyHoverB,greyButton,supply,setB
 		if enabledSupply == 0 or enabledSupply == 2:
 			if enabledSupply == 2:
 				flag = 1;
+			if enabledSupply == 0:
+				instrParamErrorMessage(self,"Please fill out the current equipment's parameters before moving on.")
+				setButton.setChecked(False)
 			if p2c1A != "":
 				supply.Output_Toggle(p2c1A,nargout=0)
 			if p2c2A != "":
@@ -416,6 +435,9 @@ def setP2(self,boxDone,buttonFocus,buttonHover,greyHoverB,greyButton,supply,setB
 			if p2c4A != "":
 				supply.Output_Toggle(p2c4A,nargout=0)
 		else:
+			if c1Checked == False and c2Checked == False and c3Checked == False and c4Checked == False:
+				instrParamErrorMessage(self,"Please enable and set channel parameters if this supply is in use.")
+				setButton.setChecked(False)
 			if c1Checked:
 				flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,supply)
 			if c2Checked:
@@ -428,6 +450,7 @@ def setP2(self,boxDone,buttonFocus,buttonHover,greyHoverB,greyButton,supply,setB
 		if flag == 1:
 			self.ui.power2Button_p2.setStyleSheet(buttonFocus)
 			self.ui.p2Equip.setStyleSheet(boxDone)
+			setButton.setText("Unset")
 		
 			if vsaType == 1 or vsaType == 2 or vsaType == 3 or vsaType == 4:
 				self.ui.power2NextStack.setCurrentIndex(0)
@@ -448,12 +471,22 @@ def setP2(self,boxDone,buttonFocus,buttonHover,greyHoverB,greyButton,supply,setB
 				self.ui.vsaNextStack.setCurrentIndex(7)
 				self.ui.up_psg_next.setCurrentIndex(9)
 				self.ui.vsgNextSteps.setCurrentIndex(11)
-				setPrevP2Buttons(self,buttonHover,greyHoverB)
-	elif  setButton.isChecked() == False:
+				setPrevP2Buttons(self,buttonHover,greyHover)
+	elif setButton.isChecked() == False:
 		self.ui.p2Equip.setStyleSheet(None)
+		unsetPrevP2Buttons(self,greyHover)
+		self.ui.power2Button_p2.setStyleSheet(buttonSelect)
+		self.ui.power2NextStack.setCurrentIndex(1)
+		self.ui.power1NextStack.setCurrentIndex(1)
+		self.ui.saNextStack.setCurrentIndex(1)
+		self.ui.meterNextStack.setCurrentIndex(3)
+		self.ui.downNextStack.setCurrentIndex(4)
+		self.ui.vsaNextStack.setCurrentIndex(6)
+		self.ui.up_psg_next.setCurrentIndex(8)
+		self.ui.vsgNextSteps.setCurrentIndex(10)
 		setButton.setText("Set")
 	
-def setP3(self,boxDone,buttonFocus,buttonHover,supply,setButton):
+def setP3(self,boxDone,buttonFocus,buttonHover,supply,buttonSelect,greyHover,setButton):
 	if setButton.isChecked() == True:
 		flag = 0;
 		c1Checked = self.ui.p3c1Check.isChecked()
@@ -470,6 +503,9 @@ def setP3(self,boxDone,buttonFocus,buttonHover,supply,setButton):
 		if enabledSupply == 0 or enabledSupply == 2:
 			if enabledSupply == 2:
 				flag = 1;
+			if enabledSupply == 0:
+				instrParamErrorMessage(self,"Please fill out the current equipment's parameters before moving on.")
+				setButton.setChecked(False)
 			if p3c1A != "":
 				supply.Output_Toggle(p3c1A,nargout=0)
 			if p3c2A != "":
@@ -479,6 +515,9 @@ def setP3(self,boxDone,buttonFocus,buttonHover,supply,setButton):
 			if p3c4A != "":
 				supply.Output_Toggle(p3c4A,nargout=0)
 		else:
+			if c1Checked == False and c2Checked == False and c3Checked == False and c4Checked == False:
+				instrParamErrorMessage(self,"Please enable and set channel parameters if this supply is in use.")
+				setButton.setChecked(False)
 			if c1Checked:
 				flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,supply)
 			if c2Checked:
@@ -490,6 +529,7 @@ def setP3(self,boxDone,buttonFocus,buttonHover,supply,setButton):
 		
 		if flag == 1:
 			self.ui.p3Equip.setStyleSheet(boxDone)
+			setButton.setText("Unset")
 		
 			self.ui.power3Button_p3.setStyleSheet(buttonFocus)
 			self.ui.power3Button_p3_2.setStyleSheet(buttonFocus)
@@ -503,8 +543,20 @@ def setP3(self,boxDone,buttonFocus,buttonHover,supply,setButton):
 			self.ui.up_psg_next.setCurrentIndex(10)
 			self.ui.vsgNextSteps.setCurrentIndex(12)
 			setPrevP3Buttons(self,buttonHover)
-	elif  setButton.isChecked() == False:
+	elif setButton.isChecked() == False:
 		self.ui.p3Equip.setStyleSheet(None)
+		unsetPrevP3Buttons(self,greyHover)
+		self.ui.power3Button_p3.setStyleSheet(buttonSelect)
+		self.ui.power3Button_p3_2.setStyleSheet(buttonSelect)
+		self.ui.power3NextStack.setCurrentIndex(0)
+		self.ui.power2NextStack.setCurrentIndex(2)
+		self.ui.power1NextStack.setCurrentIndex(2)
+		self.ui.saNextStack.setCurrentIndex(2)
+		self.ui.meterNextStack.setCurrentIndex(4)
+		self.ui.downNextStack.setCurrentIndex(5)
+		self.ui.vsaNextStack.setCurrentIndex(7)
+		self.ui.up_psg_next.setCurrentIndex(9)
+		self.ui.vsgNextSteps.setCurrentIndex(11)
 		setButton.setText("Set")
 			
 def setVSAMeasDig(self,boxDone,buttonHover,setButton):
@@ -972,6 +1024,14 @@ def setPrevP1Buttons(self,buttonColourOne,buttonColourTwo,buttonColourThree,curs
 	setFocusAndCursor(self,self.ui.power3Button_up_2,buttonColourThree,cursorTwo)
 	setFocusAndCursor(self,self.ui.power3Button_vsg,buttonColourThree,cursorTwo)
 	setFocusAndCursor(self,self.ui.power3Button_vsg_2,buttonColourThree,cursorTwo)
+	
+def unsetPrevP1Buttons(self,buttonColourOne):
+	setFocusAndHand(self,self.ui.power1Button_sa,buttonColourOne)
+	setFocusAndHand(self,self.ui.power1Button_meter,buttonColourOne)
+	setFocusAndHand(self,self.ui.power1Button_down,buttonColourOne)
+	setFocusAndHand(self,self.ui.power1Button_vsa,buttonColourOne)
+	setFocusAndHand(self,self.ui.power1Button_up,buttonColourOne)
+	setFocusAndHand(self,self.ui.power1Button_vsg,buttonColourOne)
 
 def setPrevP2Buttons(self,buttonColourOne,buttonColourTwo):
 	setFocusAndHand(self,self.ui.power2Button_p1,buttonColourOne)
@@ -1004,6 +1064,21 @@ def setPrevP2Buttons(self,buttonColourOne,buttonColourTwo):
 	setFocusAndHand(self,self.ui.power3Button_vsg,buttonColourTwo)
 	setFocusAndHand(self,self.ui.power3Button_vsg_2,buttonColourTwo)
 
+def unsetPrevP2Buttons(self,buttonColourOne):
+	setFocusAndHand(self,self.ui.power2Button_p1,buttonColourOne)
+	setFocusAndHand(self,self.ui.power2Button_p1_2,buttonColourOne)
+	setFocusAndHand(self,self.ui.power2Button_sa,buttonColourOne)
+	setFocusAndHand(self,self.ui.power2Button_sa_2,buttonColourOne)
+	setFocusAndHand(self,self.ui.power2Button_meter_2,buttonColourOne)
+	setFocusAndHand(self,self.ui.power2Button_meter,buttonColourOne)
+	setFocusAndHand(self,self.ui.power2Button_down,buttonColourOne)
+	setFocusAndHand(self,self.ui.power2Button_down_2,buttonColourOne)
+	setFocusAndHand(self,self.ui.power2Button_vsa,buttonColourOne)
+	setFocusAndHand(self,self.ui.power2Button_vsa_2,buttonColourOne)
+	setFocusAndHand(self,self.ui.power2Button_up,buttonColourOne)
+	setFocusAndHand(self,self.ui.power2Button_vsg,buttonColourOne)
+	setFocusAndHand(self,self.ui.power2Button_vsg_2,buttonColourOne)
+	
 def setPrevP3Buttons(self,buttonHover):
 	setFocusAndHand(self,self.ui.power3Button_p2,buttonHover)
 	setFocusAndHand(self,self.ui.power3Button_p2_2,buttonHover)
@@ -1021,6 +1096,24 @@ def setPrevP3Buttons(self,buttonHover):
 	setFocusAndHand(self,self.ui.power3Button_up_2,buttonHover)
 	setFocusAndHand(self,self.ui.power3Button_vsg,buttonHover)
 	setFocusAndHand(self,self.ui.power3Button_vsg_2,buttonHover)	
+	
+def unsetPrevP3Buttons(self,buttonHover):
+	setFocusAndHand(self,self.ui.power3Button_p2,buttonHover)
+	setFocusAndHand(self,self.ui.power3Button_p2_2,buttonHover)
+	setFocusAndHand(self,self.ui.power3Button_p1,buttonHover)
+	setFocusAndHand(self,self.ui.power3Button_p1_2,buttonHover)
+	setFocusAndHand(self,self.ui.power3Button_sa,buttonHover)
+	setFocusAndHand(self,self.ui.power3Button_sa_2,buttonHover)
+	setFocusAndHand(self,self.ui.power3Button_meter_2,buttonHover)
+	setFocusAndHand(self,self.ui.power3Button_meter,buttonHover)
+	setFocusAndHand(self,self.ui.power3Button_down,buttonHover)
+	setFocusAndHand(self,self.ui.power3Button_down_2,buttonHover)
+	setFocusAndHand(self,self.ui.power3Button_vsa,buttonHover)
+	setFocusAndHand(self,self.ui.power3Button_vsa_2,buttonHover)
+	setFocusAndHand(self,self.ui.power3Button_up,buttonHover)
+	setFocusAndHand(self,self.ui.power3Button_up_2,buttonHover)
+	setFocusAndHand(self,self.ui.power3Button_vsg,buttonHover)
+	setFocusAndHand(self,self.ui.power3Button_vsg_2,buttonHover)
 
 def setFocusAndCursor(self,button,colour,cursor):
 	button.setStyleSheet(colour)
@@ -1045,6 +1138,7 @@ def instrParamErrorMessage(self,error):
 	msg.setText(error)
 	msg.setStandardButtons(QMessageBox.Ok)
 	msg.exec_();
+	
 def setPowerMeterParams(self,address,offset,frequency,partNum,equipBox,boxDone,supply):	
 	A = address.toPlainText()
 	O = offset.toPlainText()
@@ -1069,6 +1163,7 @@ def setPowerMeterParams(self,address,offset,frequency,partNum,equipBox,boxDone,s
 		print(address)
 		instrParamErrorMessage(self,error)
 		self.ui.meterSet.setChecked(False)
+		
 def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,supply,channel):
 	A = address.toPlainText()
 	V = voltage.toPlainText()

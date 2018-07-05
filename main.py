@@ -129,6 +129,7 @@ class Window(QMainWindow):
 		self.ui.filePushButton_71.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_90))
 	
 		# styling variables
+		unsetFocusButton = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:0.994318, y1:0.682, x2:1, y2:0, stop:0 rgba(72, 144, 216, 255), stop:1 rgba(83, 170, 252, 255)); border-radius:5px;color:white;font-weight:bold;}"
 		setButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none}"
 		setFocusButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none;font-weight:700;font-size:11px}"
 		setButtonHover = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none} QPushButton:hover{background-color:rgb(28, 126, 159)}"
@@ -341,11 +342,11 @@ class Window(QMainWindow):
 		self.ui.saSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.saEquipAdv,setParams,self.ui.saSetAdv))
 		self.ui.saSet.clicked.connect(lambda: set.setSA(self,setFocusButton,setButtonHover,greyHover,setParams,self.ui.saSet))
 		# power 1 page
-		self.ui.p1Set.clicked.connect(lambda: set.setP1(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton,supply,self.ui.p1Set))
+		self.ui.p1Set.clicked.connect(lambda: set.setP1(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton,supply,unsetFocusButton,self.ui.p1Set))
 		# power 2 page
-		self.ui.p2Set.clicked.connect(lambda: set.setP2(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton,supply,self.ui.p2Set))
+		self.ui.p2Set.clicked.connect(lambda: set.setP2(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton,supply,unsetFocusButton,self.ui.p2Set))
 		# power 3 page
-		self.ui.p3Set.clicked.connect(lambda: set.setP3(self,setParams,setFocusButton,setButtonHover,supply,self.ui.p3Set))
+		self.ui.p3Set.clicked.connect(lambda: set.setP3(self,setParams,setFocusButton,setButtonHover,supply,unsetFocusButton,greyHover,self.ui.p3Set))
 		# vsa meas page
 		self.ui.vsaMeasSet.clicked.connect(lambda: set.setVSAMeasDig(self,setParams,setButtonHover,self.ui.vsaMeasSet))
 		self.ui.vsaMeasSet_2.clicked.connect(lambda: set.setVSAMeasGen(self,setParams,setButtonHover,self.ui.vsaMeasSet_2))
