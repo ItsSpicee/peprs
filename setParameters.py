@@ -345,13 +345,13 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,setBu
 				supply.Output_Toggle(p1c4A,nargout=0)
 		else:
 			if c1Checked:
-				flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply)
+				flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply,1)
 			if c2Checked:
-				flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,supply)
+				flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,supply,2)
 			if c3Checked:
-				flag = setSupplyParams(self,self.ui.p1c3Address,self.ui.p1c3Voltage,self.ui.p1c3Current,self.ui.p1c3PartNumber,self.ui.p1c3Equip,boxDone,supply)
+				flag = setSupplyParams(self,self.ui.p1c3Address,self.ui.p1c3Voltage,self.ui.p1c3Current,self.ui.p1c3PartNumber,self.ui.p1c3Equip,boxDone,supply,3)
 			if c4Checked:
-				flag = setSupplyParams(self,self.ui.p1c4Address,self.ui.p1c4Voltage,self.ui.p1c4Current,self.ui.p1c4PartNumber,self.ui.p1c4Equip,boxDone,supply)
+				flag = setSupplyParams(self,self.ui.p1c4Address,self.ui.p1c4Voltage,self.ui.p1c4Current,self.ui.p1c4PartNumber,self.ui.p1c4Equip,boxDone,supply,4)
 		
 		if flag == 1:
 			self.ui.power1Button_p1.setStyleSheet(buttonFocus)
@@ -1054,22 +1054,26 @@ def setPowerMeterParams(self,address,offset,frequency,partNum,equipBox,boxDone,s
 	result = result.split(";")
 	error = result[1]
 
-	if error == " ":
+	if error == " " :
 		
 		powerMeterPartNum = result[0]
 		partNum.setPlainText(powerMeterPartNum)
 		equipBox.setStyleSheet(boxDone)
 		flag = 1
 		return flag
+	elif A == "":
+		equipBox.setStyleSheet(boxDone)
+		flag = 1
+		return flag
 	else:
-		print("hi")
+		print(address)
 		instrParamErrorMessage(self,error)
 		self.ui.meterSet.setChecked(False)
-def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,supply):
+def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,supply,channel):
 	A = address.toPlainText()
 	V = voltage.toPlainText()
 	C = current.toPlainText()
-	result = supply.Set_Supply(A,V,C,nargout=1)
+	result = supply.Set_Supply(A,V,C,channel,nargout=1)
 	result = result.split(";")
 	error = result[1]
 	if error == " ":
