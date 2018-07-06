@@ -9559,7 +9559,7 @@ QFrame{background-color:#d1d5de}</string>
                              <enum>QTabWidget::North</enum>
                             </property>
                             <property name="currentIndex">
-                             <number>3</number>
+                             <number>4</number>
                             </property>
                             <widget class="QWidget" name="tab_33">
                              <attribute name="title">
@@ -10172,7 +10172,7 @@ QFrame{background-color:#d1d5de}</string>
                                 <property name="title">
                                  <string/>
                                 </property>
-                                <layout class="QGridLayout" name="gridLayout_88" rowstretch="1,1,1,1,1,1,1,1,8,1" columnstretch="0,0,0,0,0,0,0,0,0,0">
+                                <layout class="QGridLayout" name="gridLayout_88" rowstretch="0,0,0,0,0,0,0,0,0,0" columnstretch="1,0,0,1,1,1,1,1,3,1">
                                  <property name="leftMargin">
                                   <number>0</number>
                                  </property>
@@ -14198,7 +14198,7 @@ Analyzer</string>
                          <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                         </property>
                         <property name="currentIndex">
-                         <number>0</number>
+                         <number>2</number>
                         </property>
                         <widget class="QWidget" name="widget">
                          <attribute name="title">
@@ -15093,7 +15093,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           <item>
                            <widget class="QStackedWidget" name="downStack_vsaMeas">
                             <property name="currentIndex">
-                             <number>0</number>
+                             <number>1</number>
                             </property>
                             <widget class="QWidget" name="page_135">
                              <layout class="QHBoxLayout" name="horizontalLayout_38">
@@ -19669,7 +19669,7 @@ Fill out ‘General Settings’ and select file to use in ‘Calibration Setting
                          <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                         </property>
                         <property name="currentIndex">
-                         <number>0</number>
+                         <number>1</number>
                         </property>
                         <widget class="QWidget" name="upStandardSettings_10">
                          <attribute name="title">
@@ -19749,7 +19749,7 @@ Fill out ‘General Settings’ and select file to use in ‘Calibration Setting
                                  <property name="geometry">
                                   <rect>
                                    <x>0</x>
-                                   <y>-226</y>
+                                   <y>-298</y>
                                    <width>590</width>
                                    <height>500</height>
                                   </rect>
@@ -21242,82 +21242,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="6" column="3">
-                                    <widget class="QLineEdit" name="awgCalSaveLocField_vsgMeas_4">
-                                     <property name="minimumSize">
-                                      <size>
-                                       <width>30</width>
-                                       <height>24</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string/>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="7" column="3">
-                                    <widget class="QLineEdit" name="awgCalSaveLocField_vsgMeas_3">
-                                     <property name="minimumSize">
-                                      <size>
-                                       <width>30</width>
-                                       <height>24</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string/>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="8" column="3">
-                                    <widget class="QLineEdit" name="awgCalSaveLocField_vsgMeas_2">
-                                     <property name="minimumSize">
-                                      <size>
-                                       <width>30</width>
-                                       <height>24</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string/>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="1" column="3">
-                                    <widget class="QLineEdit" name="awgCalSaveLocField_vsgMeas_5">
-                                     <property name="minimumSize">
-                                      <size>
-                                       <width>30</width>
-                                       <height>24</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string/>
-                                     </property>
-                                    </widget>
-                                   </item>
                                    <item row="2" column="3" colspan="2">
                                     <widget class="QComboBox" name="comboBox_95">
                                      <property name="layoutDirection">
@@ -21338,6 +21262,82 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                        <string>False</string>
                                       </property>
                                      </item>
+                                    </widget>
+                                   </item>
+                                   <item row="8" column="3">
+                                    <widget class="QLineEdit" name="lineEdit_73">
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="7" column="3">
+                                    <widget class="QLineEdit" name="lineEdit_119">
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="6" column="3">
+                                    <widget class="QLineEdit" name="lineEdit_120">
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="1" column="3">
+                                    <widget class="QLineEdit" name="lineEdit_121">
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
                                     </widget>
                                    </item>
                                   </layout>
@@ -21369,85 +21369,17 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                    <string/>
                                   </property>
                                   <layout class="QGridLayout" name="gridLayout_41">
-                                   <item row="0" column="0" colspan="3">
-                                    <widget class="QLabel" name="label_771">
-                                     <property name="font">
-                                      <font>
-                                       <pointsize>10</pointsize>
-                                       <weight>50</weight>
-                                       <bold>false</bold>
-                                       <underline>true</underline>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>AWG - Calibration Settings</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="1" column="0">
-                                    <widget class="QLabel" name="label_772">
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>AWG Calibration File:</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="1" column="2">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_216">
+                                   <item row="10" column="2">
+                                    <widget class="QLineEdit" name="awgCalSaveLocField_vsgMeas_2">
                                      <property name="enabled">
-                                      <bool>true</bool>
+                                      <bool>false</bool>
                                      </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
+                                     <property name="minimumSize">
                                       <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
+                                       <width>30</width>
+                                       <height>24</height>
                                       </size>
                                      </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="1" column="3">
-                                    <layout class="QVBoxLayout" name="verticalLayout_114">
-                                     <property name="spacing">
-                                      <number>0</number>
-                                     </property>
-                                     <item>
-                                      <widget class="QPushButton" name="filePushButton_41">
-                                       <property name="text">
-                                        <string/>
-                                       </property>
-                                       <property name="icon">
-                                        <iconset>
-                                         <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
-                                       </property>
-                                       <property name="flat">
-                                        <bool>true</bool>
-                                       </property>
-                                      </widget>
-                                     </item>
-                                    </layout>
-                                   </item>
-                                   <item row="2" column="0">
-                                    <widget class="QLabel" name="label_775">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
                                      <property name="font">
                                       <font>
                                        <family>Arial</family>
@@ -21455,203 +21387,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                       </font>
                                      </property>
                                      <property name="text">
-                                      <string>Number of Iterations:</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="2" column="2" colspan="2">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_217">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="3" column="0">
-                                    <widget class="QLabel" name="label_776">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Tone Spacing:</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="3" column="2">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_218">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="3" column="3">
-                                    <widget class="QLabel" name="label_777">
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Hz</string>
-                                     </property>
-                                     <property name="alignment">
-                                      <set>Qt::AlignCenter</set>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="4" column="0">
-                                    <widget class="QLabel" name="label_778">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Starting Tone Frequency:</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="4" column="2">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_219">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="4" column="3">
-                                    <widget class="QLabel" name="label_779">
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Hz</string>
-                                     </property>
-                                     <property name="alignment">
-                                      <set>Qt::AlignCenter</set>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="5" column="0">
-                                    <widget class="QLabel" name="label_780">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Ending Tone Frequency:</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="5" column="2">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_220">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="5" column="3">
-                                    <widget class="QLabel" name="label_781">
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Hz</string>
-                                     </property>
-                                     <property name="alignment">
-                                      <set>Qt::AlignCenter</set>
+                                      <string/>
                                      </property>
                                     </widget>
                                    </item>
@@ -21728,48 +21464,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="8" column="2">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_221">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="8" column="3">
-                                    <widget class="QLabel" name="label_785">
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Hz</string>
-                                     </property>
-                                     <property name="alignment">
-                                      <set>Qt::AlignCenter</set>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="9" column="0">
+                                   <item row="10" column="0">
                                     <widget class="QLabel" name="label_786">
                                      <property name="enabled">
                                       <bool>false</bool>
@@ -21785,51 +21480,21 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="9" column="2">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_222">
-                                     <property name="enabled">
-                                      <bool>false</bool>
+                                   <item row="5" column="3">
+                                    <widget class="QLabel" name="label_781">
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
                                      </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
+                                     <property name="text">
+                                      <string>Hz</string>
                                      </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
+                                     <property name="alignment">
+                                      <set>Qt::AlignCenter</set>
                                      </property>
                                     </widget>
-                                   </item>
-                                   <item row="9" column="3">
-                                    <layout class="QVBoxLayout" name="verticalLayout_115">
-                                     <property name="spacing">
-                                      <number>0</number>
-                                     </property>
-                                     <item>
-                                      <widget class="QPushButton" name="filePushButton_43">
-                                       <property name="text">
-                                        <string/>
-                                       </property>
-                                       <property name="icon">
-                                        <iconset>
-                                         <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
-                                       </property>
-                                       <property name="flat">
-                                        <bool>true</bool>
-                                       </property>
-                                      </widget>
-                                     </item>
-                                    </layout>
                                    </item>
                                    <item row="6" column="2" colspan="2">
                                     <widget class="QComboBox" name="comboBox_99">
@@ -21854,6 +21519,303 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                        <string>False</string>
                                       </property>
                                      </item>
+                                    </widget>
+                                   </item>
+                                   <item row="8" column="3">
+                                    <widget class="QLabel" name="label_785">
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Hz</string>
+                                     </property>
+                                     <property name="alignment">
+                                      <set>Qt::AlignCenter</set>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="5" column="0">
+                                    <widget class="QLabel" name="label_780">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Ending Tone Frequency:</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="4" column="3">
+                                    <widget class="QLabel" name="label_779">
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Hz</string>
+                                     </property>
+                                     <property name="alignment">
+                                      <set>Qt::AlignCenter</set>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="4" column="0">
+                                    <widget class="QLabel" name="label_778">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Starting Tone Frequency:</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="3" column="3">
+                                    <widget class="QLabel" name="label_777">
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Hz</string>
+                                     </property>
+                                     <property name="alignment">
+                                      <set>Qt::AlignCenter</set>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="3" column="0">
+                                    <widget class="QLabel" name="label_776">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Tone Spacing:</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="2" column="0">
+                                    <widget class="QLabel" name="label_775">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Number of Iterations:</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="0" column="0" colspan="3">
+                                    <widget class="QLabel" name="label_771">
+                                     <property name="font">
+                                      <font>
+                                       <pointsize>10</pointsize>
+                                       <weight>50</weight>
+                                       <bold>false</bold>
+                                       <underline>true</underline>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>AWG - Calibration Settings</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="1" column="0">
+                                    <widget class="QLabel" name="label_772">
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>AWG Calibration File:</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="10" column="3">
+                                    <widget class="QPushButton" name="filePushButton_43">
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                     <property name="icon">
+                                      <iconset>
+                                       <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
+                                     </property>
+                                     <property name="flat">
+                                      <bool>true</bool>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="8" column="2">
+                                    <widget class="QLineEdit" name="lineEdit_122">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="5" column="2">
+                                    <widget class="QLineEdit" name="lineEdit_123">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="4" column="2">
+                                    <widget class="QLineEdit" name="lineEdit_124">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="3" column="2">
+                                    <widget class="QLineEdit" name="lineEdit_125">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="2" column="2" colspan="2">
+                                    <widget class="QLineEdit" name="lineEdit_126">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="1" column="2">
+                                    <widget class="QLineEdit" name="awgCalFileField_vsgMeas_2">
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="1" column="3">
+                                    <widget class="QPushButton" name="filePushButton_41">
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                     <property name="icon">
+                                      <iconset>
+                                       <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
+                                     </property>
+                                     <property name="flat">
+                                      <bool>true</bool>
+                                     </property>
                                     </widget>
                                    </item>
                                   </layout>
@@ -22044,7 +22006,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                     <x>5</x>
                                     <y>10</y>
                                     <width>291</width>
-                                    <height>501</height>
+                                    <height>491</height>
                                    </rect>
                                   </property>
                                   <property name="minimumSize">
@@ -22120,96 +22082,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="7" column="1" colspan="2">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_212">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="6" column="1" colspan="2">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_213">
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="13" column="1" colspan="3">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_144">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
-                                     </property>
-                                    </widget>
-                                   </item>
                                    <item row="13" column="0">
                                     <widget class="QLabel" name="label_813">
                                      <property name="enabled">
@@ -22245,37 +22117,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="4" column="1" colspan="2">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_131">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
-                                     </property>
-                                    </widget>
-                                   </item>
                                    <item row="5" column="0">
                                     <widget class="QLabel" name="label_711">
                                      <property name="enabled">
@@ -22292,37 +22133,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                      </property>
                                      <property name="text">
                                       <string>RF Understep:</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="3" column="1" colspan="2">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_179">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
                                      </property>
                                     </widget>
                                    </item>
@@ -22352,37 +22162,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                      </property>
                                      <property name="text">
                                       <string>IF Center Frequency:</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="5" column="1" colspan="3">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_140">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
                                      </property>
                                     </widget>
                                    </item>
@@ -22462,68 +22241,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="8" column="1" colspan="2">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_141">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="12" column="1" colspan="2">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_143">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
-                                     </property>
-                                    </widget>
-                                   </item>
                                    <item row="12" column="0">
                                     <widget class="QLabel" name="label_816">
                                      <property name="enabled">
@@ -22550,124 +22267,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                      </property>
                                      <property name="text">
                                       <string>Hz</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="10" column="1" colspan="2">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_215">
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="9" column="1" colspan="3">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_142">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="11" column="1" colspan="2">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_214">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="14" column="1">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_224">
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
                                      </property>
                                     </widget>
                                    </item>
@@ -22738,34 +22337,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                      </property>
                                      <property name="text">
                                       <string>Hz</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="2" column="1" colspan="2">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_178">
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
                                      </property>
                                     </widget>
                                    </item>
@@ -22898,15 +22469,301 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                      </property>
                                     </widget>
                                    </item>
+                                   <item row="14" column="1">
+                                    <widget class="QLineEdit" name="lineEdit_132">
+                                     <property name="enabled">
+                                      <bool>true</bool>
+                                     </property>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="13" column="1" colspan="3">
+                                    <widget class="QLineEdit" name="lineEdit_133">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="9" column="1" colspan="3">
+                                    <widget class="QLineEdit" name="lineEdit_137">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="8" column="1" colspan="2">
+                                    <widget class="QLineEdit" name="lineEdit_138">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="10" column="1" colspan="2">
+                                    <widget class="QLineEdit" name="lineEdit_136">
+                                     <property name="enabled">
+                                      <bool>true</bool>
+                                     </property>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="11" column="1" colspan="2">
+                                    <widget class="QLineEdit" name="lineEdit_135">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="12" column="1" colspan="2">
+                                    <widget class="QLineEdit" name="lineEdit_134">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="7" column="1" colspan="2">
+                                    <widget class="QLineEdit" name="lineEdit_139">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="6" column="1" colspan="2">
+                                    <widget class="QLineEdit" name="lineEdit_140">
+                                     <property name="enabled">
+                                      <bool>true</bool>
+                                     </property>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="5" column="1" colspan="3">
+                                    <widget class="QLineEdit" name="lineEdit_141">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="4" column="1" colspan="2">
+                                    <widget class="QLineEdit" name="lineEdit_142">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="3" column="1" colspan="2">
+                                    <widget class="QLineEdit" name="lineEdit_143">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="2" column="1" colspan="2">
+                                    <widget class="QLineEdit" name="lineEdit_144">
+                                     <property name="enabled">
+                                      <bool>true</bool>
+                                     </property>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
                                   </layout>
                                  </widget>
                                  <widget class="QGroupBox" name="upCalHeteroEquip_vsgMeas">
                                   <property name="geometry">
                                    <rect>
                                     <x>5</x>
-                                    <y>530</y>
+                                    <y>520</y>
                                     <width>291</width>
-                                    <height>322</height>
+                                    <height>301</height>
                                    </rect>
                                   </property>
                                   <property name="minimumSize">
@@ -22927,47 +22784,15 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                    <string/>
                                   </property>
                                   <layout class="QGridLayout" name="gridLayout_22">
-                                   <item row="0" column="0" colspan="3">
-                                    <widget class="QLabel" name="label_636">
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>10</pointsize>
-                                       <weight>50</weight>
-                                       <bold>false</bold>
-                                       <underline>true</underline>
-                                      </font>
+                                   <item row="14" column="1">
+                                    <widget class="QLineEdit" name="upSaveLocField_vsgMeas">
+                                     <property name="enabled">
+                                      <bool>false</bool>
                                      </property>
-                                     <property name="text">
-                                      <string>Upconverter - Calibration Settings (Heterodyne)</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="1" column="0" rowspan="2">
-                                    <widget class="QLabel" name="label_824">
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Upconverter Cal. File:</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="2" column="1">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_225">
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
+                                     <property name="minimumSize">
                                       <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
+                                       <width>30</width>
+                                       <height>24</height>
                                       </size>
                                      </property>
                                      <property name="font">
@@ -22976,37 +22801,35 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                        <pointsize>9</pointsize>
                                       </font>
                                      </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
+                                     <property name="text">
+                                      <string/>
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="2" column="2" rowspan="2">
-                                    <layout class="QVBoxLayout" name="verticalLayout_107">
-                                     <property name="spacing">
-                                      <number>0</number>
+                                   <item row="12" column="1" colspan="2">
+                                    <widget class="QLineEdit" name="lineEdit_127">
+                                     <property name="enabled">
+                                      <bool>false</bool>
                                      </property>
-                                     <item>
-                                      <widget class="QPushButton" name="filePushButton_29">
-                                       <property name="text">
-                                        <string/>
-                                       </property>
-                                       <property name="icon">
-                                        <iconset>
-                                         <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
-                                       </property>
-                                       <property name="flat">
-                                        <bool>true</bool>
-                                       </property>
-                                      </widget>
-                                     </item>
-                                    </layout>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
                                    </item>
-                                   <item row="3" column="0" rowspan="2">
-                                    <widget class="QLabel" name="label_823">
+                                   <item row="14" column="0">
+                                    <widget class="QLabel" name="label_836">
                                      <property name="enabled">
                                       <bool>false</bool>
                                      </property>
@@ -23017,26 +22840,14 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                       </font>
                                      </property>
                                      <property name="text">
-                                      <string>Tone Spacing:</string>
+                                      <string>Upco. Cal. Save Location:</string>
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="4" column="1">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_223">
+                                   <item row="12" column="0">
+                                    <widget class="QLabel" name="label_833">
                                      <property name="enabled">
                                       <bool>false</bool>
-                                     </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
                                      </property>
                                      <property name="font">
                                       <font>
@@ -23044,16 +22855,13 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                        <pointsize>9</pointsize>
                                       </font>
                                      </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
+                                     <property name="text">
+                                      <string>Number of Iterations:</string>
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="4" column="2">
-                                    <widget class="QLabel" name="label_825">
+                                   <item row="11" column="2">
+                                    <widget class="QLabel" name="label_831">
                                      <property name="font">
                                       <font>
                                        <family>Arial</family>
@@ -23068,8 +22876,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="5" column="0">
-                                    <widget class="QLabel" name="label_828">
+                                   <item row="11" column="0">
+                                    <widget class="QLabel" name="label_832">
                                      <property name="enabled">
                                       <bool>false</bool>
                                      </property>
@@ -23080,184 +22888,11 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                       </font>
                                      </property>
                                      <property name="text">
-                                      <string>Starting Tone Freq.</string>
+                                      <string>Frequency Resolution:</string>
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="5" column="1">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_226">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="5" column="2">
-                                    <widget class="QLabel" name="label_827">
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Hz</string>
-                                     </property>
-                                     <property name="alignment">
-                                      <set>Qt::AlignCenter</set>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="6" column="0">
-                                    <widget class="QLabel" name="label_830">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Ending Tone Freq.</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="6" column="1">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_227">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="6" column="2">
-                                    <widget class="QLabel" name="label_829">
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Hz</string>
-                                     </property>
-                                     <property name="alignment">
-                                      <set>Qt::AlignCenter</set>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="7" column="0">
-                                    <widget class="QLabel" name="label_637">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Multi-tone Real Basis Flag:</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="7" column="1" colspan="2">
-                                    <widget class="QComboBox" name="comboBox_89">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="layoutDirection">
-                                      <enum>Qt::LeftToRight</enum>
-                                     </property>
-                                     <item>
-                                      <property name="text">
-                                       <string>-Select-</string>
-                                      </property>
-                                     </item>
-                                     <item>
-                                      <property name="text">
-                                       <string>True</string>
-                                      </property>
-                                     </item>
-                                     <item>
-                                      <property name="text">
-                                       <string>False</string>
-                                      </property>
-                                     </item>
-                                    </widget>
-                                   </item>
-                                   <item row="8" column="0">
-                                    <widget class="QLabel" name="label_635">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Multi-tone Phase Distr.:</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="8" column="1" colspan="2">
+                                   <item row="10" column="1" colspan="2">
                                     <widget class="QComboBox" name="comboBox_88">
                                      <property name="enabled">
                                       <bool>false</bool>
@@ -23288,55 +22923,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                      </item>
                                     </widget>
                                    </item>
-                                   <item row="9" column="0">
-                                    <widget class="QLabel" name="label_832">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Frequency Resolution:</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="9" column="1">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_228">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="9" column="2">
-                                    <widget class="QLabel" name="label_831">
+                                   <item row="7" column="2">
+                                    <widget class="QLabel" name="label_827">
                                      <property name="font">
                                       <font>
                                        <family>Arial</family>
@@ -23351,8 +22939,55 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                      </property>
                                     </widget>
                                    </item>
+                                   <item row="9" column="0">
+                                    <widget class="QLabel" name="label_637">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Multi-tone Real Basis Flag:</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="9" column="1" colspan="2">
+                                    <widget class="QComboBox" name="comboBox_89">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="layoutDirection">
+                                      <enum>Qt::LeftToRight</enum>
+                                     </property>
+                                     <item>
+                                      <property name="text">
+                                       <string>-Select-</string>
+                                      </property>
+                                     </item>
+                                     <item>
+                                      <property name="text">
+                                       <string>True</string>
+                                      </property>
+                                     </item>
+                                     <item>
+                                      <property name="text">
+                                       <string>False</string>
+                                      </property>
+                                     </item>
+                                    </widget>
+                                   </item>
                                    <item row="10" column="0">
-                                    <widget class="QLabel" name="label_833">
+                                    <widget class="QLabel" name="label_635">
                                      <property name="enabled">
                                       <bool>false</bool>
                                      </property>
@@ -23363,43 +22998,28 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                       </font>
                                      </property>
                                      <property name="text">
-                                      <string>Number of Iterations:</string>
+                                      <string>Multi-tone Phase Distr.:</string>
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="10" column="1" colspan="2">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_229">
-                                     <property name="enabled">
-                                      <bool>false</bool>
-                                     </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
-                                      <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
-                                      </size>
-                                     </property>
+                                   <item row="0" column="0" colspan="3">
+                                    <widget class="QLabel" name="label_636">
                                      <property name="font">
                                       <font>
                                        <family>Arial</family>
-                                       <pointsize>9</pointsize>
+                                       <pointsize>10</pointsize>
+                                       <weight>50</weight>
+                                       <bold>false</bold>
+                                       <underline>true</underline>
                                       </font>
                                      </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
+                                     <property name="text">
+                                      <string>Upconverter - Calibration Settings (Heterodyne)</string>
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="11" column="0">
-                                    <widget class="QLabel" name="label_836">
+                                   <item row="7" column="0">
+                                    <widget class="QLabel" name="label_828">
                                      <property name="enabled">
                                       <bool>false</bool>
                                      </property>
@@ -23410,25 +23030,51 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                       </font>
                                      </property>
                                      <property name="text">
-                                      <string>Upco. Cal. Save Location:</string>
+                                      <string>Starting Tone Freq.</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="8" column="2">
+                                    <widget class="QLabel" name="label_829">
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Hz</string>
+                                     </property>
+                                     <property name="alignment">
+                                      <set>Qt::AlignCenter</set>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="8" column="0">
+                                    <widget class="QLabel" name="label_830">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Ending Tone Freq.</string>
                                      </property>
                                     </widget>
                                    </item>
                                    <item row="11" column="1">
-                                    <widget class="QPlainTextEdit" name="plainTextEdit_230">
+                                    <widget class="QLineEdit" name="lineEdit_128">
                                      <property name="enabled">
                                       <bool>false</bool>
                                      </property>
-                                     <property name="sizePolicy">
-                                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                       <horstretch>0</horstretch>
-                                       <verstretch>0</verstretch>
-                                      </sizepolicy>
-                                     </property>
-                                     <property name="maximumSize">
+                                     <property name="minimumSize">
                                       <size>
-                                       <width>16777215</width>
-                                       <height>25</height>
+                                       <width>30</width>
+                                       <height>24</height>
                                       </size>
                                      </property>
                                      <property name="font">
@@ -23437,34 +23083,171 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                        <pointsize>9</pointsize>
                                       </font>
                                      </property>
-                                     <property name="acceptDrops">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="verticalScrollBarPolicy">
-                                      <enum>Qt::ScrollBarAlwaysOff</enum>
+                                     <property name="text">
+                                      <string/>
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="11" column="2">
-                                    <layout class="QVBoxLayout" name="verticalLayout_118">
-                                     <property name="spacing">
-                                      <number>0</number>
+                                   <item row="7" column="1">
+                                    <widget class="QLineEdit" name="lineEdit_130">
+                                     <property name="enabled">
+                                      <bool>false</bool>
                                      </property>
-                                     <item>
-                                      <widget class="QPushButton" name="filePushButton_30">
-                                       <property name="text">
-                                        <string/>
-                                       </property>
-                                       <property name="icon">
-                                        <iconset>
-                                         <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
-                                       </property>
-                                       <property name="flat">
-                                        <bool>true</bool>
-                                       </property>
-                                      </widget>
-                                     </item>
-                                    </layout>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="14" column="2">
+                                    <widget class="QPushButton" name="filePushButton_30">
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                     <property name="icon">
+                                      <iconset>
+                                       <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
+                                     </property>
+                                     <property name="flat">
+                                      <bool>true</bool>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="8" column="1">
+                                    <widget class="QLineEdit" name="lineEdit_129">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="6" column="0">
+                                    <widget class="QLabel" name="label_823">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Tone Spacing:</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="6" column="1">
+                                    <widget class="QLineEdit" name="lineEdit_131">
+                                     <property name="enabled">
+                                      <bool>false</bool>
+                                     </property>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="6" column="2">
+                                    <widget class="QLabel" name="label_825">
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Hz</string>
+                                     </property>
+                                     <property name="alignment">
+                                      <set>Qt::AlignCenter</set>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="3" column="0">
+                                    <widget class="QLabel" name="label_824">
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string>Upconverter Cal. File:</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="3" column="1">
+                                    <widget class="QLineEdit" name="upCalFileField_vsgMeas">
+                                     <property name="enabled">
+                                      <bool>true</bool>
+                                     </property>
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>30</width>
+                                       <height>24</height>
+                                      </size>
+                                     </property>
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>9</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="3" column="2">
+                                    <widget class="QPushButton" name="filePushButton_29">
+                                     <property name="text">
+                                      <string/>
+                                     </property>
+                                     <property name="icon">
+                                      <iconset>
+                                       <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
+                                     </property>
+                                     <property name="flat">
+                                      <bool>true</bool>
+                                     </property>
+                                    </widget>
                                    </item>
                                   </layout>
                                  </widget>
@@ -31956,7 +31739,7 @@ Analyze</string>
                           <item>
                            <widget class="QStackedWidget" name="vsaResultsStack_vsgMeas">
                             <property name="currentIndex">
-                             <number>1</number>
+                             <number>0</number>
                             </property>
                             <widget class="QWidget" name="page_100">
                              <layout class="QVBoxLayout" name="verticalLayout_122" stretch="1,10,1,1">
@@ -32036,6 +31819,12 @@ Analyze</string>
                                <layout class="QHBoxLayout" name="horizontalLayout_297">
                                 <item>
                                  <widget class="QLineEdit" name="vsaCalFileField_vsg">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>0</width>
+                                    <height>24</height>
+                                   </size>
+                                  </property>
                                   <property name="font">
                                    <font>
                                     <family>Arial</family>
@@ -32141,7 +31930,7 @@ Analyze</string>
                                  <enum>QTabWidget::North</enum>
                                 </property>
                                 <property name="currentIndex">
-                                 <number>1</number>
+                                 <number>2</number>
                                 </property>
                                 <widget class="QWidget" name="tab_13">
                                  <attribute name="title">
@@ -32331,7 +32120,7 @@ Analyze</string>
                                  <attribute name="title">
                                   <string>NMSE, PAPR, Power</string>
                                  </attribute>
-                                 <layout class="QVBoxLayout" name="verticalLayout_222">
+                                 <layout class="QVBoxLayout" name="verticalLayout_222" stretch="1,8">
                                   <property name="spacing">
                                    <number>0</number>
                                   </property>
@@ -32381,7 +32170,7 @@ Analyze</string>
                                     <property name="title">
                                      <string/>
                                     </property>
-                                    <layout class="QGridLayout" name="gridLayout_26" rowstretch="1,1,1,1,1,1,1,1,8,1" columnstretch="0,0,0,0,0,0,0,0,0,0">
+                                    <layout class="QGridLayout" name="gridLayout_26" rowstretch="0,0,0,0,0,0,0,0,0,0" columnstretch="1,0,0,1,1,1,1,1,3,1">
                                      <property name="leftMargin">
                                       <number>0</number>
                                      </property>
@@ -32660,6 +32449,9 @@ Analyze</string>
                                        <property name="text">
                                         <string>/</string>
                                        </property>
+                                       <property name="alignment">
+                                        <set>Qt::AlignCenter</set>
+                                       </property>
                                       </widget>
                                      </item>
                                      <item row="5" column="3" colspan="3">
@@ -32931,7 +32723,7 @@ Analyze</string>
                                      <property name="geometry">
                                       <rect>
                                        <x>0</x>
-                                       <y>-118</y>
+                                       <y>0</y>
                                        <width>652</width>
                                        <height>200</height>
                                       </rect>
@@ -32942,7 +32734,7 @@ Analyze</string>
                                        <height>200</height>
                                       </size>
                                      </property>
-                                     <layout class="QGridLayout" name="gridLayout_87" rowstretch="0,0,0,0,0,0,1">
+                                     <layout class="QGridLayout" name="gridLayout_87" rowstretch="0,0,0,0,0,0,0">
                                       <property name="leftMargin">
                                        <number>9</number>
                                       </property>
