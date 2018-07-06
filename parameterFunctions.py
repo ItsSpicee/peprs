@@ -338,11 +338,11 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 				
 # apply changes from one demod box to all demod boxes
 def copyDemod(self,changedModField,replacedFieldOne,replacedFieldTwo):
-	value = changedModField.toPlainText()
+	value = changedModField.text()
 	replacedFieldOne.blockSignals(True)
 	replacedFieldTwo.blockSignals(True)
-	replacedFieldOne.setPlainText(value)
-	replacedFieldTwo.setPlainText(value)
+	replacedFieldOne.setText(value)
+	replacedFieldTwo.setText(value)
 	replacedFieldOne.blockSignals(False)
 	replacedFieldTwo.blockSignals(False)
 	

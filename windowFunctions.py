@@ -104,3 +104,15 @@ def switchMeasTabVSG(self):
 				
 def switchAlgoTab(self):
 	currentTab = self.ui.algoTabs.currentIndex()
+
+def fileBrowse(self, lineEdit):
+	fileInfo = str(QFileDialog.getOpenFileName())
+	fileList = fileInfo.split(",")
+	file = fileList[0]
+	file = file.replace("'","")
+	file = file.replace("(","")
+	lineEdit.clear()
+	lineEdit.setText(file)
+	
+def fileOpen(self, lineEdit):
+	file = lineEdit.text()
