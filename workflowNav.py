@@ -6,9 +6,13 @@ from PyQt5.QtWidgets import (QFileDialog)
 
 
 def fileBrowse(self, lineEdit):
-	print("hi")
+	fileInfo = str(QFileDialog.getOpenFileName())
+	fileList = fileInfo.split(",")
+	file = fileList[0]
+	file = file.replace("'","")
+	file = file.replace("(","")
 	lineEdit.clear()
-	lineEdit.insertPlainText(str(QFileDialog.getOpenFileName()))
+	lineEdit.insertPlainText(file)
 
 def changeStack(self,stackName,idx):
 	stackName.setCurrentIndex(idx)
@@ -166,10 +170,6 @@ def awgVSAMeasOnClick(self):
 	runChecked = self.ui.set_run_vsa.isChecked()
 	downChecked = self.ui.downSetVSAMeas.isChecked()
 	downEnabled = self.ui.vsaWorkflow_vsaMeas.currentIndex()
-	
-	self.setMinimumSize(1265,950)
-	self.resize(1265,950)
-	self.center()
 	
 	if downEnabled == 1: # down enabled
 		if downChecked:
