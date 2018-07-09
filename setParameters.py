@@ -433,13 +433,13 @@ def setP2(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,butto
 				instrParamErrorMessage(self,"Please fill out the current equipment's parameters before moving on.")
 				setButton.setChecked(False)
 			if p2c1A != "":
-				#supply.Output_Toggle(p2c1A,nargout=0)
+				supply.Output_Toggle(p2c1A,nargout=0)
 			if p2c2A != "":
-				#supply.Output_Toggle(p2c2A,nargout=0)
+				supply.Output_Toggle(p2c2A,nargout=0)
 			if p2c3A != "":
-				#supply.Output_Toggle(p2c3A,nargout=0)
+				supply.Output_Toggle(p2c3A,nargout=0)
 			if p2c4A != "":
-				#supply.Output_Toggle(p2c4A,nargout=0)
+				supply.Output_Toggle(p2c4A,nargout=0)
 		else:
 			if c1Checked == False and c2Checked == False and c3Checked == False and c4Checked == False:
 				instrParamErrorMessage(self,"Please enable and set channel parameters if this supply is in use.")
