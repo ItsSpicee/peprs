@@ -6,13 +6,12 @@ from PyQt5.QtCore import (Qt)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions used in main.py
 
-def setGeneralAWG(self,buttonFocus,boxDone,greyHover, awgSetGeneral):
+def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,awgSetGeneral):
 	
 	if awgSetGeneral.isChecked() == True:
 		self.ui.awgButton_vsg.setStyleSheet(buttonFocus)
 		self.ui.awgButton_vsg_2.setStyleSheet(buttonFocus)
 		self.ui.awgButton_vsg_3.setStyleSheet(buttonFocus)
-		setStandardMessage(self)
 		self.ui.awgEquipGeneral.setStyleSheet(boxDone)
 		awgSetGeneral.setText("Unset")
 		setupIdx = self.ui.vsgWorkflows.currentIndex()
@@ -35,19 +34,32 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover, awgSetGeneral):
 			self.ui.psgButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
 	elif  awgSetGeneral.isChecked() == False:
 		self.ui.awgEquipGeneral.setStyleSheet(None)
+		self.ui.awgButton_vsg.setStyleSheet(buttonSelected)
+		self.ui.awgButton_vsg_2.setStyleSheet(buttonSelected)
+		self.ui.awgButton_vsg_3.setStyleSheet(buttonSelected)
+		self.ui.vsaButton_vsg.setStyleSheet(greyButton)
+		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.ArrowCursor))
+		self.ui.upButton_vsg.setStyleSheet(greyButton)
+		self.ui.upButton_vsg.setCursor(QCursor(Qt.ArrowCursor))
+		self.ui.psgButton_vsg.setStyleSheet(greyButton)
+		self.ui.psgButton_vsg.setCursor(QCursor(Qt.ArrowCursor))
+		self.ui.vsgNextSteps.setCurrentIndex(1)
 		awgSetGeneral.setText("Set")
 		
-def setGeneralVSG(self,buttonFocus,boxDone,greyHover,vsgSetGeneral):
+def setGeneralVSG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,vsgSetGeneral):
 	if vsgSetGeneral.isChecked() == True:
 		vsgSetGeneral.setText("Unset")
 		self.ui.vsgButton_vsg.setStyleSheet(buttonFocus)
 		self.ui.vsgEquipGeneral.setStyleSheet(boxDone)
-		setStandardMessage(self)
 		self.ui.vsgNextSteps.setCurrentIndex(5)
 		self.ui.vsaButton_vsg.setStyleSheet(greyHover)
 		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
 	elif  vsgSetGeneral.isChecked() == False:
 		self.ui.vsgEquipGeneral.setStyleSheet(None)
+		self.ui.vsgButton_vsg.setStyleSheet(buttonSelected)
+		self.ui.vsgNextSteps.setCurrentIndex(4)
+		self.ui.vsaButton_vsg.setStyleSheet(greyButton)
+		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.ArrowCursor))
 		vsgSetGeneral.setText("Set")
 
 def setAdvanced(self,box,boxDone,setButton):
@@ -67,7 +79,6 @@ def setUp(self,buttonFocus,buttonDone,boxDone,greyHover,setButton):
 		self.ui.upEquip.setStyleSheet(boxDone)
 		self.ui.up_psg_next.setCurrentIndex(2)
 		self.ui.vsgNextSteps.setCurrentIndex(5)
-		setStandardMessage(self)
 		self.ui.vsaButton_up.setStyleSheet(greyHover)
 		self.ui.vsaButton_up.setCursor(QCursor(Qt.PointingHandCursor))
 		self.ui.vsaButton_vsg.setStyleSheet(greyHover)
@@ -85,7 +96,6 @@ def setPSG(self,buttonFocus,buttonDone,boxDone,greyHover,setButton):
 		self.ui.psgEquip.setStyleSheet(boxDone)
 		self.ui.up_psg_next.setCurrentIndex(2)
 		self.ui.vsgNextSteps.setCurrentIndex(5)
-		setStandardMessage(self)
 		self.ui.vsaButton_up.setStyleSheet(greyHover)
 		self.ui.vsaButton_up.setCursor(QCursor(Qt.PointingHandCursor))
 		self.ui.vsaButton_vsg.setStyleSheet(greyHover)
@@ -1141,9 +1151,6 @@ def setAllDemod(self, boxDone):
 	self.ui.digMod.setStyleSheet(boxDone)
 	self.ui.scopeMod.setStyleSheet(boxDone)
 	self.ui.uxaMod.setStyleSheet(boxDone)
-	
-def setStandardMessage(self):
-	self.ui.statusBar.showMessage('Successfully Set Standard Settings',2000)
 
 def instrParamErrorMessage(self,error):
 	msg = QMessageBox(self)

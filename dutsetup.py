@@ -91,6 +91,7 @@ class Ui_DUTSetup(object):
         font.setPointSize(10)
         self.sisoRadio.setFont(font)
         self.sisoRadio.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.sisoRadio.setChecked(True)
         self.sisoRadio.setObjectName("sisoRadio")
         self.dutButtonGroup = QtWidgets.QButtonGroup(DUTSetup)
         self.dutButtonGroup.setObjectName("dutButtonGroup")
