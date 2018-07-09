@@ -171,10 +171,6 @@ def awgVSAMeasOnClick(self):
 	downChecked = self.ui.downSetVSAMeas.isChecked()
 	downEnabled = self.ui.vsaWorkflow_vsaMeas.currentIndex()
 	
-	self.setMinimumSize(1265,950)
-	self.resize(1265,950)
-	self.center()
-	
 	if downEnabled == 1: # down enabled
 		if downChecked:
 			self.ui.measStack.setCurrentIndex(1)

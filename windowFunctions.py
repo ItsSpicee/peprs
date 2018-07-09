@@ -1,7 +1,8 @@
 # windowFunctions.py contains all the functions that are needed to control the window size, display, and menu functionality
 
 from PyQt5.QtWidgets import (QMessageBox, QFileDialog, qApp)
-	
+from PyQt5.QtGui import (QGuiApplication)
+						 
 def openDialog(self):
 	fname = QFileDialog.getOpenFileName(self, 'Open file', '/home')
 	if fname[0]:
@@ -23,6 +24,10 @@ def closeButton(self):
 		qApp.quit()	
 		
 def changeStepTab(self):
+	screen = QGuiApplication.primaryScreen()
+	screenSize = screen.availableSize()
+	height = screenSize.height()
+	maxHeight = height - 50
 	i = self.ui.stepTabs.currentIndex()
 	measStack = self.ui.measStack.currentIndex()
 	measTabVsa = self.ui.vsaMeasParamTabs.currentIndex()
@@ -35,12 +40,12 @@ def changeStepTab(self):
 		self.resize(1265, 625)
 		self.center()
 	elif i == 1:
-		self.setMinimumSize(1265,950)
-		self.resize(1265,950)
+		self.setMinimumSize(1265,maxHeight)
+		self.resize(1265,maxHeight)
 		self.center()
 	elif i == 0:
-		self.setMinimumSize(1265,950)
-		self.resize(1265,950)
+		self.setMinimumSize(1265,maxHeight)
+		self.resize(1265,maxHeight)
 		self.center()
 	elif i == 3:
 		self.setMinimumSize(1265,625)
@@ -56,23 +61,14 @@ def switchMeasTabVSA(self):
 	downStack = self.ui.downStack_vsaMeas.currentIndex()
 	vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
 	if currentTab == 0 or currentTab == 2:
-		# self.setMinimumSize(1265,550)
-		# self.resize(1265,550)
-		# self.center()
 		self.ui.calAdviceText.setVisible(False)
 	elif currentTab == 1:
 		if downStack == 1:
-			# self.setMinimumSize(1265,950)
-			# self.resize(1265,950)
-			# self.center()
 			self.ui.calAdviceText.setVisible(True)
 			if vsaDownChecked == False and vsaDownRunChecked == False:
 				if vsaChecked or vsaChecked_2:
 					self.ui.vsaMeasNextStack.setCurrentIndex(2)
 		else:
-			# self.setMinimumSize(1265,550)
-			# self.resize(1265,550)
-			# self.center()
 			self.ui.calAdviceText.setVisible(False)
 			if vsgType == 3: # vsg
 				self.ui.vsaMeasNextStack.setCurrentIndex(6)

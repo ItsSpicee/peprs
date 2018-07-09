@@ -15,8 +15,10 @@ import workflowNav as flow
 import windowFunctions as menu
 import parameterFunctions as param
 #import PowerSupplyPkg
-import matlab.engine
-supply = matlab.engine.start_matlab()
+
+#UNCOMMENT
+#import matlab.engine
+#supply = matlab.engine.start_matlab()
 
 #supply = PowerSupplyPkg.initialize()
 
@@ -72,30 +74,30 @@ class Window(QMainWindow):
 		self.ui.filePushButton_6.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_278))
 		self.ui.filePushButton.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_comb))
 		self.ui.filePushButton_2.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalSaveLocField_comb))
-		self.ui.filePushButton_17.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_252))
-		self.ui.filePushButton_18.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_258))
-		self.ui.filePushButton_19.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_269))	
-		self.ui.filePushButton_20.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_183))
-		self.ui.filePushButton_21.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_270))
-		self.ui.filePushButton_22.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_271))
-		self.ui.filePushButton_23.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_272))
-		self.ui.filePushButton_24.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_275))
-		self.ui.filePushButton_25.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_231))
-		self.ui.filePushButton_26.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_237))
-		self.ui.filePushButton_27.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_238))
-		self.ui.filePushButton_28.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_239))
+		self.ui.filePushButton_17.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upCalFileField_vsgMeas_2))
+		self.ui.filePushButton_18.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upCalSaveLocField_vsgMeas))
+		self.ui.filePushButton_19.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqFileField_vsgMeas_2))
+		self.ui.filePushButton_20.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_vsgMeas))
+		self.ui.filePushButton_21.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqSaveLocField_vsgMeas_2))
+		self.ui.filePushButton_22.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calStructSaveLocField_vsgMeas_2))
+		self.ui.filePushButton_23.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsgCalSaveLocField_vsgMeas_2))
+		self.ui.filePushButton_24.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_vsgMeas_2))
+		self.ui.filePushButton_25.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqFileField_vsgMeas))
+		self.ui.filePushButton_26.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqSaveLocField_vsgMeas))
+		self.ui.filePushButton_27.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsgCalSaveLocField_vsgMeas))
+		self.ui.filePushButton_28.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calStructSaveLocField_vsgMeas))
 		self.ui.filePushButton_29.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upCalFileField_vsgMeas))
 		self.ui.filePushButton_30.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upSaveLocField_vsgMeas))
-		self.ui.filePushButton_31.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_416))
-		self.ui.filePushButton_32.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_418))
-		self.ui.filePushButton_33.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_415))
-		self.ui.filePushButton_34.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_390))
-		self.ui.filePushButton_35.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_396))
-		self.ui.filePushButton_36.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_407))
-		self.ui.filePushButton_37.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_411))
-		self.ui.filePushButton_38.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_408))
-		self.ui.filePushButton_39.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_410))
-		self.ui.filePushButton_40.clicked.connect(lambda: flow.fileBrowse(self, self.ui.plainTextEdit_409))
+		self.ui.filePushButton_31.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileIField_vsgMeas))
+		self.ui.filePushButton_32.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileQField_vsgMeas))
+		self.ui.filePushButton_33.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFielField_vsgMeas))
+		self.ui.filePushButton_34.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upCalFileField_vsgMeas_3))
+		self.ui.filePushButton_35.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upCalSaveLocField_vsgMeas_2))
+		self.ui.filePushButton_36.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqFileField_vsgMeas_3))
+		self.ui.filePushButton_37.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_vsgMeas_2))
+		self.ui.filePushButton_38.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqSaveLocField_vsgMeas_3))
+		self.ui.filePushButton_39.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsgCalSaveLocField_vsgMeas_3))
+		self.ui.filePushButton_40.clicked.connect(lambda: flow.fileBrowse(self, self.ui.calStructSaveLocField_vsgMeas_3))
 		self.ui.filePushButton_41.clicked.connect(lambda: menu.fileBrowse(self, self.ui.awgCalFileField_vsgMeas_2))
 		self.ui.filePushButton_42.clicked.connect(lambda: menu.fileBrowse(self, self.ui.ampCorrFileField_vsgMeas))
 		self.ui.filePushButton_43.clicked.connect(lambda: menu.fileBrowse(self, self.ui.awgCalSaveLocField_vsgMeas_2))
@@ -740,7 +742,8 @@ class Window(QMainWindow):
 					if x == "":
 						continue
 					else:
-						supply.Output_Toggle(x,1,nargout=0)
+						#UNCOMMENT
+						#supply.Output_Toggle(x,1,nargout=0)
 						self.statusBar().showMessage("DC turned ON",2000)
 						self.ui.emergButtonFirst.setStyleSheet(redButton)
 						self.ui.emergButtonFirst.setText("Turn Off DC")
@@ -754,11 +757,12 @@ class Window(QMainWindow):
 					msg.exec_();
 					self.ui.emergButtonFirst.setChecked(True)
 				else:
-					for x in addressList:
-						if x == "":
-							continue
-						else:
-							supply.Output_Toggle(x,0,nargout=0)
+#					for x in addressList:
+#						if x == "":
+#							continue
+						#else:
+							#UNCOMMENT
+							#supply.Output_Toggle(x,0,nargout=0)
 					self.statusBar().showMessage("DC turned OFF",2000)
 					self.ui.emergButtonFirst.setStyleSheet(greenButton)
 					self.ui.emergButtonFirst.setText("Turn On DC")
@@ -783,11 +787,12 @@ class Window(QMainWindow):
 				self.ui.emergButtonSecond.setStyleSheet(greenButton)
 				self.ui.emergButtonSecond.setText("Turn On RF")
 		elif button == 3:
-			for x in addressList:
-				if x == "":
-					continue
-				else:
-					supply.Output_Toggle(x,0,nargout=0)
+#			for x in addressList:
+#				if x == "":
+#					continue
+#				else:
+					#UNCOMMENT
+					#supply.Output_Toggle(x,0,nargout=0)
 			self.statusBar().showMessage("RF and DC turned OFF (test)",2000)
 				
 
