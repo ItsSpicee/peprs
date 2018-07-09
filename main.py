@@ -782,7 +782,10 @@ class Window(QMainWindow):
 				else:
 					supply.Output_Toggle(x,0,nargout=0)
 			self.statusBar().showMessage("RF and DC turned OFF (test)",2000)
-				
+			self.ui.emergButtonSecond.setStyleSheet(greenButton)
+			self.ui.emergButtonSecond.setText("Turn On RF")
+			self.ui.emergButtonFirst.setStyleSheet(greenButton)
+			self.ui.emergButtonFirst.setText("Turn On DC")	
 
 	# def paintEvent(self,e):
 		# qp = QPainter()

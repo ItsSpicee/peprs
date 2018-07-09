@@ -13,6 +13,7 @@ try
     % Connect steps
     voltage = str2double(voltage);
     current = str2double(current);
+    channel = str2double(channel);
     supply = visa('agilent',address);
     supply.InputBufferSize = 8388608;
     supply.ByteOrder = 'littleEndian';

@@ -345,22 +345,22 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,setBu
 			if enabledSupply == 2:
 				flag = 1;
 			if p1c1A != "":
-				supply.Output_Toggle(p1c1A,nargout=0)
+				supply.Output_Toggle(p1c1A,0,nargout=0)
 			if p1c2A != "":
-				supply.Output_Toggle(p1c2A,nargout=0)
+				supply.Output_Toggle(p1c2A,0,nargout=0)
 			if p1c3A != "":
-				supply.Output_Toggle(p1c3A,nargout=0)
+				supply.Output_Toggle(p1c3A,0,nargout=0)
 			if p1c4A != "":
-				supply.Output_Toggle(p1c4A,nargout=0)
+				supply.Output_Toggle(p1c4A,0,nargout=0)
 		else:
 			if c1Checked:
-				flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply,1)
+				flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply,str(self.ui.cNumberField_p1c1.currentText()))
 			if c2Checked:
-				flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,supply,2)
+				flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,supply,str(self.ui.cNumberField_p1c2.currentText()))
 			if c3Checked:
-				flag = setSupplyParams(self,self.ui.p1c3Address,self.ui.p1c3Voltage,self.ui.p1c3Current,self.ui.p1c3PartNumber,self.ui.p1c3Equip,boxDone,supply,3)
+				flag = setSupplyParams(self,self.ui.p1c3Address,self.ui.p1c3Voltage,self.ui.p1c3Current,self.ui.p1c3PartNumber,self.ui.p1c3Equip,boxDone,supply,str(self.ui.cNumberField_p1c3.currentText()))
 			if c4Checked:
-				flag = setSupplyParams(self,self.ui.p1c4Address,self.ui.p1c4Voltage,self.ui.p1c4Current,self.ui.p1c4PartNumber,self.ui.p1c4Equip,boxDone,supply,4)
+				flag = setSupplyParams(self,self.ui.p1c4Address,self.ui.p1c4Voltage,self.ui.p1c4Current,self.ui.p1c4PartNumber,self.ui.p1c4Equip,boxDone,supply,str(self.ui.cNumberField_p1c4.currentText()))
 		
 		if flag == 1:
 			self.ui.power1Button_p1.setStyleSheet(buttonFocus)
@@ -1083,6 +1083,7 @@ def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,supply
 	A = address.toPlainText()
 	V = voltage.toPlainText()
 	C = current.toPlainText()
+	
 	result = supply.Set_Supply(A,V,C,channel,nargout=1)
 	result = result.split(";")
 	error = result[1]
