@@ -191,6 +191,10 @@ def downVSGMeasOnClick(self):
 def analyzerVSGMeasOnClick(self):
 	self.ui.vsaMeasParamTabs.setCurrentIndex(0)
 	self.ui.measStack.setCurrentIndex(0)
+	
+def switchVSAMeas(self,idx):
+	self.ui.vsaMeasParamTabs.setCurrentIndex(idx)
+	self.ui.rightFlowStack.setCurrentIndex(0)
 		
 # OLD CODE
 

@@ -132,9 +132,9 @@ class Window(QMainWindow):
 	
 		# styling variables
 		unsetFocusButton = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:0.994318, y1:0.682, x2:1, y2:0, stop:0 rgba(72, 144, 216, 255), stop:1 rgba(83, 170, 252, 255)); border-radius:5px;color:white;font-weight:bold;}"
-		setButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none}"
+		setButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none;font-weight:bold;}"
 		setFocusButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none;font-weight:700;font-size:11px}"
-		setButtonHover = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none} QPushButton:hover{background-color:rgb(28, 126, 159)}"
+		setButtonHover = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none;font-weight:bold;} QPushButton:hover{background-color:rgb(28, 126, 159);}"
 		setParams = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #515a70}"
 		unsetParams = "QGroupBox{background-color:rgb(247, 247, 247)}"
 		greyButton = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;}"
@@ -221,13 +221,14 @@ class Window(QMainWindow):
 		# vsa meas page
 		self.ui.vsaMeasParamTabs.setCurrentIndex(0)
 		self.ui.vsaMeasGenStack.setCurrentIndex(0)
-		self.ui.vsaMeasAdvStack.setCurrentIndex(0)
+		self.ui.rightFlowStack.setCurrentIndex(0)
 		self.ui.vsaMeasNextStack.setCurrentIndex(0)
 		self.ui.debugVSAStack.setCurrentIndex(1)
 		self.ui.resultsVSATabs.setCurrentIndex(0)
 		self.ui.vsaResultsStack_vsaMeas.setCurrentIndex(1)
 		self.ui.vsaMeasRunStack.setCurrentIndex(1)
 		self.ui.downStack_vsaMeas.setCurrentIndex(0)
+		self.ui.saMeasTabs.setCurrentIndex(0)
 		# vsg meas page
 		self.ui.debugVSGStack.setCurrentIndex(2)
 		self.ui.vsaResultsStack_vsgMeas.setCurrentIndex(1)
@@ -323,23 +324,23 @@ class Window(QMainWindow):
 		self.ui.vsgSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.vsgEquipAdv,setParams,self.ui.vsgSetAdv))
 		self.ui.awgSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.awgEquipAdv,setParams,self.ui.awgSetAdv))
 		# upconverter page
-		self.ui.upSet.clicked.connect(lambda: set.setUp(self,setFocusButton,setButton,setParams,greyHover,self.ui.upSet))
-		self.ui.psgSet.clicked.connect(lambda: set.setPSG(self,setFocusButton,setButton,setParams,greyHover,self.ui.psgSet))
+		self.ui.upSet.clicked.connect(lambda: set.setUp(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.upSet))
+		self.ui.psgSet.clicked.connect(lambda: set.setPSG(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.psgSet))
 		# vsa page
-		self.ui.uxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,self.ui.uxaSet))
-		self.ui.pxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,self.ui.pxaSet))
+		self.ui.uxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.uxaSet))
+		self.ui.pxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.pxaSet))
 		self.ui.uxaVSASetAdv.clicked.connect(lambda: set.setVSAAdv(self,setParams,self.ui.uxaVSASetAdv))
-		self.ui.scopeSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,self.ui.scopeSet))
-		self.ui.digSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,self.ui.digSet))
+		self.ui.scopeSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.scopeSet))
+		self.ui.digSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.digSet))
 		# downconverter page
 		self.ui.downSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.downEquipAdv,setParams,self.ui.downSetAdv))
-		self.ui.downSet.clicked.connect(lambda: set.setDown(self,setFocusButton,greyHover,setButtonHover,setParams,self.ui.downSet))
+		self.ui.downSet.clicked.connect(lambda: set.setDown(self,setFocusButton,greyHover,setButtonHover,setParams,greyButton,unsetFocusButton,self.ui.downSet))
 		# meter page
-		self.ui.meterSet.clicked.connect(lambda: set.setMeter(self,setFocusButton,setButtonHover,greyHover,setParams,self.ui.meterSet,supply))
+		self.ui.meterSet.clicked.connect(lambda: set.setMeter(self,setFocusButton,setButtonHover,greyHover,setParams,greyButton,unsetFocusButton,self.ui.meterSet,supply))
 		
 		# sa page
 		self.ui.saSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.saEquipAdv,setParams,self.ui.saSetAdv))
-		self.ui.saSet.clicked.connect(lambda: set.setSA(self,setFocusButton,setButtonHover,greyHover,setParams,self.ui.saSet))
+		self.ui.saSet.clicked.connect(lambda: set.setSA(self,setFocusButton,setButtonHover,greyHover,setParams,greyButton,unsetFocusButton,self.ui.saSet))
 		# power 1 page
 		self.ui.p1Set.clicked.connect(lambda: set.setP1(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton,supply,unsetFocusButton,self.ui.p1Set))
 		# power 2 page
@@ -347,8 +348,8 @@ class Window(QMainWindow):
 		# power 3 page
 		self.ui.p3Set.clicked.connect(lambda: set.setP3(self,setParams,setFocusButton,setButtonHover,supply,unsetFocusButton,greyHover,self.ui.p3Set))
 		# vsa meas page
-		self.ui.vsaMeasSet.clicked.connect(lambda: set.setVSAMeasDig(self,setParams,setButtonHover,self.ui.vsaMeasSet))
-		self.ui.vsaMeasSet_2.clicked.connect(lambda: set.setVSAMeasGen(self,setParams,setButtonHover,self.ui.vsaMeasSet_2))
+		self.ui.vsaMeasSet.clicked.connect(lambda: set.setVSAMeasDig(self,setParams,setButtonHover,setButton,self.ui.vsaMeasSet))
+		self.ui.vsaMeasSet_2.clicked.connect(lambda: set.setVSAMeasGen(self,setParams,setButtonHover,setButton,self.ui.vsaMeasSet_2))
 		self.ui.set_run_vsa.clicked.connect(lambda: set.rxCalRoutine(self,setParams,setButtonHover,self.ui.set_run_vsa))
 		self.ui.downSetVSAMeas.clicked.connect(lambda: set.noRXCalRoutine(self,setParams,setButtonHover,self.ui.downSetVSAMeas))
 		self.ui.vsaMeasAdvSet.clicked.connect(lambda: set.setVSAMeasAdv(self,setParams,self.ui.vsaMeasAdvSet))
@@ -630,15 +631,15 @@ class Window(QMainWindow):
 		self.ui.power2Button_p3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,7))
 		self.ui.power2Button_p3_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,7))
 		# vsa meas page
-		self.ui.saButton_vsaMeas.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(2))
-		self.ui.saButton_vsaMeas_2.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(2))
-		self.ui.downButton_vsaMeas.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(1))
-		self.ui.scopeButton_vsaMeas.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(0))
-		self.ui.scopeButton_vsaMeas_2.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(0))
-		self.ui.digButton_vsaMeas.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(0))
-		self.ui.digButton_vsaMeas_2.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(0))
-		self.ui.uxaButton_vsaMeas.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(0))
-		self.ui.pxaButton_vsaMeas.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(0))
+		self.ui.saButton_vsaMeas.clicked.connect(lambda: self.ui.rightFlowStack.setCurrentIndex(1))
+		self.ui.saButton_vsaMeas_2.clicked.connect(lambda: self.ui.rightFlowStack.setCurrentIndex(1))
+		self.ui.downButton_vsaMeas.clicked.connect(lambda: flow.switchVSAMeas(self,1))
+		self.ui.scopeButton_vsaMeas.clicked.connect(lambda: flow.switchVSAMeas(self,0))
+		self.ui.scopeButton_vsaMeas_2.clicked.connect(lambda: flow.switchVSAMeas(self,0))
+		self.ui.digButton_vsaMeas.clicked.connect(lambda: flow.switchVSAMeas(self,0))
+		self.ui.digButton_vsaMeas_2.clicked.connect(lambda: flow.switchVSAMeas(self,0))
+		self.ui.uxaButton_vsaMeas.clicked.connect(lambda: flow.switchVSAMeas(self,0))
+		self.ui.pxaButton_vsaMeas.clicked.connect(lambda: flow.switchVSAMeas(self,0))
 		self.ui.awgButton_vsaMeas.clicked.connect(lambda: flow.awgVSAMeasOnClick(self))
 		self.ui.awgButton_vsaMeas_2.clicked.connect(lambda: flow.awgVSAMeasOnClick(self))
 		self.ui.awgButton_vsaMeas_3.clicked.connect(lambda: flow.awgVSAMeasOnClick(self))
@@ -710,18 +711,18 @@ class Window(QMainWindow):
 	def toggleOutput(self,button,redButton,greenButton):
 		firstChecked = self.ui.emergButtonFirst.isChecked()
 		secondChecked = self.ui.emergButtonSecond.isChecked()
-		p1c1A = self.ui.p1c1Address.toPlainText()
-		p1c2A = self.ui.p1c2Address.toPlainText()
-		p1c3A = self.ui.p1c3Address.toPlainText()
-		p1c4A = self.ui.p1c4Address.toPlainText()
-		p2c1A = self.ui.p2c1Address.toPlainText()
-		p2c2A = self.ui.p2c2Address.toPlainText()
-		p2c3A = self.ui.p2c3Address.toPlainText()
-		p2c4A = self.ui.p2c4Address.toPlainText()
-		p3c1A = self.ui.p3c1Address.toPlainText()
-		p3c2A = self.ui.p3c2Address.toPlainText()
-		p3c3A = self.ui.p3c3Address.toPlainText()
-		p3c4A = self.ui.p3c4Address.toPlainText()
+		p1c1A = self.ui.p1c1Address.text()
+		p1c2A = self.ui.p1c2Address.text()
+		p1c3A = self.ui.p1c3Address.text()
+		p1c4A = self.ui.p1c4Address.text()
+		p2c1A = self.ui.p2c1Address.text()
+		p2c2A = self.ui.p2c2Address.text()
+		p2c3A = self.ui.p2c3Address.text()
+		p2c4A = self.ui.p2c4Address.text()
+		p3c1A = self.ui.p3c1Address.text()
+		p3c2A = self.ui.p3c2Address.text()
+		p3c3A = self.ui.p3c3Address.text()
+		p3c4A = self.ui.p3c4Address.text()
 		addressList = {p1c1A,p1c2A,p1c3A,p1c4A,p2c1A,p2c2A,p2c3A,p2c4A,p3c1A,p3c2A,p3c3A,p3c4A}
 		
 		if button == 1:
