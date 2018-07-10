@@ -347,7 +347,7 @@ class Window(QMainWindow):
 		
 		# sa page
 		self.ui.saSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.saEquipAdv,setParams,self.ui.saSetAdv))
-		self.ui.saSet.clicked.connect(lambda: set.setSA(self,setFocusButton,setButtonHover,greyHover,setParams,self.ui.saSet))
+		self.ui.saSet.clicked.connect(lambda: set.setSA(self,setFocusButton,setButtonHover,greyHover,setParams,self.ui.saSet,supply))
 		# power 1 page
 		self.ui.p1Set.clicked.connect(lambda: set.setP1(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton,supply,unsetFocusButton,self.ui.p1Set))
 		# power 2 page

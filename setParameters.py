@@ -284,8 +284,8 @@ def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,supply):
 		elif self.ui.powerMeterFilter.currentIndex() == 2:
 			averaging = self.ui.noAveragesField_meter.toPlainText()
 		
-		#UNCOMMENT
-		#flag = setPowerMeterParams(self, self.ui.powerMeterAddress, self.ui.powerMeterOffset, self.ui.powerMeterFrequency,self.ui.powerMeterPartNum,self.ui.meterEquip,boxDone,supply,averaging)
+		
+		flag = setPowerMeterParams(self, self.ui.powerMeterAddress, self.ui.powerMeterOffset, self.ui.powerMeterFrequency,self.ui.powerMeterPartNum,self.ui.meterEquip,boxDone,supply,averaging)
 		
 		
 			
@@ -305,11 +305,11 @@ def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,supply):
 		self.ui.meterEquip.setStyleSheet(None)
 		setButton.setText("Set")
 		
-def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton):
+def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,supply):
 	if setButton.isChecked() == True:
 		setButton.setText("Unset")
 	
-		
+		flag = setSpectrumAnalyzerParams(self,self.ui.lineEdit_58,self.ui.comboBox_8.currentIndex(),self.ui.lineEdit_54,self.ui.lineEdit_55,self.ui.lineEdit_56,self.ui.lineEdit_57,self.ui.comboBox_11.currentIndex(),self.ui.lineEdit_59,supply,self.ui.saEquip,boxDone)
 		
 		self.ui.saButton_sa.setStyleSheet(buttonFocus)
 		self.ui.saButton_sa_2.setStyleSheet(buttonFocus)
@@ -1152,7 +1152,31 @@ def instrParamErrorMessage(self,error):
 	msg.setText(error)
 	msg.setStandardButtons(QMessageBox.Ok)
 	msg.exec_();
-
+def setSpectrumAnalyzerParams(self,address,attenEnabled, atten, freq, freqSpan, resolutionBand,clockRef,partNum,supply,equipBox,boxDone):
+	aDD = address.text()
+	A = atten.text()
+	F = freq.text()
+	fS = freqSpan.text()
+	rB = resolutionBand.text()
+	print(rB)
+	result = supply.Set_Spectrum(aDD,attenEnabled,A,F,fS,rB,clockRef)
+	result = result.split(";")
+	
+	error = result[1]
+	
+	if error == " ":
+		powerMeterPartNum = result[0]
+		partNum.setText(powerMeterPartNum)
+		equipBox.setStyleSheet(boxDone)
+		flag = 1
+		return flag
+	elif A == "":
+		equipBox.setStyleSheet(boxDone)
+		flag = 1
+		return flag
+	else:
+		instrParamErrorMessage(self,error)
+		self.ui.saSet.setChecked(False)
 def setPowerMeterParams(self,address,offset,frequency,partNum,equipBox,boxDone,supply,averaging):	
 	A = address.toPlainText()
 	O = offset.toPlainText()
