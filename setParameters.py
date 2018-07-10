@@ -292,12 +292,9 @@ def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,supply):
 		elif self.ui.powerMeterFilter.currentIndex() == 3:
 			averaging = "-2"
 		elif self.ui.powerMeterFilter.currentIndex() == 2:
-			averaging = self.ui.noAveragesField_meter.toPlainText()
+			averaging = self.ui.noAveragesField_meter.text()
 		
-		#UNCOMMENT
-		#flag = setPowerMeterParams(self, self.ui.powerMeterAddress, self.ui.powerMeterOffset, self.ui.powerMeterFrequency,self.ui.powerMeterPartNum,self.ui.meterEquip,boxDone,supply,averaging)
-		
-		
+		flag = setPowerMeterParams(self, self.ui.powerMeterAddress, self.ui.powerMeterOffset, self.ui.powerMeterFrequency,self.ui.powerMeterPartNum,self.ui.meterEquip,boxDone,supply,averaging)
 			
 		self.ui.meterButton_meter.setStyleSheet(buttonFocus)
 		self.ui.meterButton_meter_2.setStyleSheet(buttonFocus)
@@ -341,17 +338,14 @@ def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton):
 def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,buttonSelect,setButton):
 	if setButton.isChecked() == True:
 		flag = 0;
-		c1Checked = self.ui.p1c1Check.isChecked()
-		c2Checked = self.ui.p1c2Check.isChecked()
-		c3Checked = self.ui.p1c3Check.isChecked()
-		c4Checked = self.ui.p1c4Check.isChecked()
+		numberChannels = self.ui.noChannels_p1.currentIndex()
 		vsgType = self.ui.vsgSetup.currentIndex()
 		vsaType = self.ui.vsaType.currentIndex()
 		enabledSupply = self.ui.p1Enabled.currentIndex()
-		p1c1A = self.ui.p1c1Address.toPlainText()
-		p1c2A = self.ui.p1c2Address.toPlainText()
-		p1c3A = self.ui.p1c3Address.toPlainText()
-		p1c4A = self.ui.p1c4Address.toPlainText()
+		p1c1A = self.ui.p1c1Address.text()
+		p1c2A = self.ui.p1c2Address.text()
+		p1c3A = self.ui.p1c3Address.text()
+		p1c4A = self.ui.p1c4Address.text()
 		
 		# set instrument params
 		if enabledSupply == 0 or enabledSupply == 2:
@@ -366,15 +360,24 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,butto
 			if p1c4A != "":
 				supply.Output_Toggle(p1c4A,0,nargout=0)
 		else:
-			if c1Checked:
+			if numberChannels == 0:
+				instrParamErrorMessage(self,"Please enable and set channel parameters if this supply is in use.")
+				setButton.setChecked(False)
+			elif numberChannels == 1:
 				flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply,str(self.ui.cNumberField_p1c1.currentText()))
-			if c2Checked:
+			elif numberChannels == 2:
+				flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply,str(self.ui.cNumberField_p1c1.currentText()))
 				flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,supply,str(self.ui.cNumberField_p1c2.currentText()))
-			if c3Checked:
+			elif numberChannels == 3:
+				flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply,str(self.ui.cNumberField_p1c1.currentText()))
+				flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,supply,str(self.ui.cNumberField_p1c2.currentText()))
 				flag = setSupplyParams(self,self.ui.p1c3Address,self.ui.p1c3Voltage,self.ui.p1c3Current,self.ui.p1c3PartNumber,self.ui.p1c3Equip,boxDone,supply,str(self.ui.cNumberField_p1c3.currentText()))
-			if c4Checked:
+			elif numberChannels == 4:
+				flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply,str(self.ui.cNumberField_p1c1.currentText()))
+				flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,supply,str(self.ui.cNumberField_p1c2.currentText()))
+				flag = setSupplyParams(self,self.ui.p1c3Address,self.ui.p1c3Voltage,self.ui.p1c3Current,self.ui.p1c3PartNumber,self.ui.p1c3Equip,boxDone,supply,str(self.ui.cNumberField_p1c3.currentText()))
 				flag = setSupplyParams(self,self.ui.p1c4Address,self.ui.p1c4Voltage,self.ui.p1c4Current,self.ui.p1c4PartNumber,self.ui.p1c4Equip,boxDone,supply,str(self.ui.cNumberField_p1c4.currentText()))
-	
+
 		if flag == 1:
 			self.ui.power1Button_p1.setStyleSheet(buttonFocus)
 			self.ui.p1Equip.setStyleSheet(boxDone)
@@ -424,16 +427,13 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,butto
 def setP2(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,buttonSelect,setButton):
 	if setButton.isChecked() == True:
 		flag = 0;
-		c1Checked = self.ui.p2c1Check.isChecked()
-		c2Checked = self.ui.p2c2Check.isChecked()
-		c3Checked = self.ui.p2c3Check.isChecked()
-		c4Checked = self.ui.p2c4Check.isChecked()
+		numberChannels = self.ui.noChannels_p2.currentIndex()
 		vsaType = self.ui.vsaType.currentIndex()
 		enabledSupply = self.ui.p2Enabled.currentIndex()
-		p2c1A = self.ui.p2c1Address.toPlainText()
-		p2c2A = self.ui.p2c2Address.toPlainText()
-		p2c3A = self.ui.p2c3Address.toPlainText()
-		p2c4A = self.ui.p2c3Address.toPlainText()
+		p2c1A = self.ui.p2c1Address.text()
+		p2c2A = self.ui.p2c2Address.text()
+		p2c3A = self.ui.p2c3Address.text()
+		p2c4A = self.ui.p2c3Address.text()
 		
 		# set instrument params
 		if enabledSupply == 0 or enabledSupply == 2:
@@ -451,17 +451,23 @@ def setP2(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,butto
 			if p2c4A != "":
 				supply.Output_Toggle(p2c4A,nargout=0)
 		else:
-			if c1Checked == False and c2Checked == False and c3Checked == False and c4Checked == False:
+			if numberChannels == 0:
 				instrParamErrorMessage(self,"Please enable and set channel parameters if this supply is in use.")
 				setButton.setChecked(False)
-			if c1Checked:
-				flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,supply)
-			if c2Checked:
-				flag = setSupplyParams(self,self.ui.p2c2Address,self.ui.p2c2Voltage,self.ui.p2c2Current,self.ui.p2c2PartNumber,self.ui.p2c2Equip,boxDone,supply)
-			if c3Checked:
-				flag = setSupplyParams(self,self.ui.p2c3Address,self.ui.p2c3Voltage,self.ui.p2c3Current,self.ui.p2c3PartNumber,self.ui.p2c3Equip,boxDone,supply)
-			if c4Checked:
-				flag = setSupplyParams(self,self.ui.p2c4Address,self.ui.p2c4Voltage,self.ui.p2c4Current,self.ui.p2c4PartNumber,self.ui.p2c4Equip,boxDone,supply)
+			elif numberChannels == 1:
+				flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,supply,str(self.ui.cNumberField_p2c1.currentText()))
+			elif numberChannels == 2:
+				flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,supply,str(self.ui.cNumberField_p2c1.currentText()))
+				flag = setSupplyParams(self,self.ui.p2c2Address,self.ui.p2c2Voltage,self.ui.p2c2Current,self.ui.p2c2PartNumber,self.ui.p2c2Equip,boxDone,supply,str(self.ui.cNumberField_p2c2.currentText()))
+			elif numberChannels == 3:
+				flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,supply,str(self.ui.cNumberField_p2c1.currentText()))
+				flag = setSupplyParams(self,self.ui.p2c2Address,self.ui.p2c2Voltage,self.ui.p2c2Current,self.ui.p2c2PartNumber,self.ui.p2c2Equip,boxDone,supply,str(self.ui.cNumberField_p2c2.currentText()))
+				flag = setSupplyParams(self,self.ui.p2c3Address,self.ui.p2c3Voltage,self.ui.p2c3Current,self.ui.p2c3PartNumber,self.ui.p2c3Equip,boxDone,supply,str(self.ui.cNumberField_p2c3.currentText()))
+			elif numberChannels == 4:
+				flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,supply,str(self.ui.cNumberField_p2c1.currentText()))
+				flag = setSupplyParams(self,self.ui.p2c2Address,self.ui.p2c2Voltage,self.ui.p2c2Current,self.ui.p2c2PartNumber,self.ui.p2c2Equip,boxDone,supply,str(self.ui.cNumberField_p2c2.currentText()))
+				flag = setSupplyParams(self,self.ui.p2c3Address,self.ui.p2c3Voltage,self.ui.p2c3Current,self.ui.p2c3PartNumber,self.ui.p2c3Equip,boxDone,supply,str(self.ui.cNumberField_p2c3.currentText()))
+				flag = setSupplyParams(self,self.ui.p2c4Address,self.ui.p2c4Voltage,self.ui.p2c4Current,self.ui.p2c4PartNumber,self.ui.p2c4Equip,boxDone,supply,str(self.ui.cNumberField_p2c4.currentText()))
 		
 		if flag == 1:
 			self.ui.power2Button_p2.setStyleSheet(buttonFocus)
@@ -505,15 +511,12 @@ def setP2(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,butto
 def setP3(self,boxDone,buttonFocus,buttonHover,supply,buttonSelect,greyHover,setButton):
 	if setButton.isChecked() == True:
 		flag = 0;
-		c1Checked = self.ui.p3c1Check.isChecked()
-		c2Checked = self.ui.p3c2Check.isChecked()
-		c3Checked = self.ui.p3c3Check.isChecked()
-		c4Checked = self.ui.p3c4Check.isChecked()
+		numberChannels = self.ui.noChannels_p3.currentIndex()
 		enabledSupply = self.ui.p3Enabled.currentIndex()
-		p3c1A = self.ui.p3c1Address.toPlainText()
-		p3c2A = self.ui.p3c2Address.toPlainText()
-		p3c3A = self.ui.p3c3Address.toPlainText()
-		p3c4A = self.ui.p3c4Address.toPlainText()
+		p3c1A = self.ui.p3c1Address.text()
+		p3c2A = self.ui.p3c2Address.text()
+		p3c3A = self.ui.p3c3Address.text()
+		p3c4A = self.ui.p3c4Address.text()
 
 		# set instrument params
 		if enabledSupply == 0 or enabledSupply == 2:
@@ -531,17 +534,23 @@ def setP3(self,boxDone,buttonFocus,buttonHover,supply,buttonSelect,greyHover,set
 			if p3c4A != "":
 				supply.Output_Toggle(p3c4A,nargout=0)
 		else:
-			if c1Checked == False and c2Checked == False and c3Checked == False and c4Checked == False:
+			if numberChannels == 0:
 				instrParamErrorMessage(self,"Please enable and set channel parameters if this supply is in use.")
 				setButton.setChecked(False)
-			if c1Checked:
-				flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,supply)
-			if c2Checked:
-				flag = setSupplyParams(self,self.ui.p3c2Address,self.ui.p3c2Voltage,self.ui.p3c2Current,self.ui.p3c2PartNumber,self.ui.p3c2Equip,boxDone,supply)
-			if c3Checked:
-				flag = setSupplyParams(self,self.ui.p3c3Address,self.ui.p3c3Voltage,self.ui.p3c3Current,self.ui.p3c3PartNumber,self.ui.p3c3Equip,boxDone,supply)
-			if c4Checked:
-				flag = setSupplyParams(self,self.ui.p3c4Address,self.ui.p3c4Voltage,self.ui.p3c4Current,self.ui.p3c4PartNumber,self.ui.p3c4Equip,boxDone,supply)
+			elif numberChannels == 1:
+				flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,supply,str(self.ui.cNumberField_p3c1.currentText()))
+			elif numberChannels == 2:
+				flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,supply,str(self.ui.cNumberField_p3c1.currentText()))
+				flag = setSupplyParams(self,self.ui.p3c2Address,self.ui.p3c2Voltage,self.ui.p3c2Current,self.ui.p3c2PartNumber,self.ui.p3c2Equip,boxDone,supply,str(self.ui.cNumberField_p3c2.currentText()))
+			elif numberChannels == 3:
+				flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,supply,str(self.ui.cNumberField_p3c1.currentText()))
+				flag = setSupplyParams(self,self.ui.p3c2Address,self.ui.p3c2Voltage,self.ui.p3c2Current,self.ui.p3c2PartNumber,self.ui.p3c2Equip,boxDone,supply,str(self.ui.cNumberField_p3c2.currentText()))
+				flag = setSupplyParams(self,self.ui.p3c3Address,self.ui.p3c3Voltage,self.ui.p3c3Current,self.ui.p3c3PartNumber,self.ui.p3c3Equip,boxDone,supply,str(self.ui.cNumberField_p3c3.currentText()))
+			elif numberChannels == 4:
+				flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,supply,str(self.ui.cNumberField_p3c1.currentText()))
+				flag = setSupplyParams(self,self.ui.p3c2Address,self.ui.p3c2Voltage,self.ui.p3c2Current,self.ui.p3c2PartNumber,self.ui.p3c2Equip,boxDone,supply,str(self.ui.cNumberField_p3c2.currentText()))
+				flag = setSupplyParams(self,self.ui.p3c3Address,self.ui.p3c3Voltage,self.ui.p3c3Current,self.ui.p3c3PartNumber,self.ui.p3c3Equip,boxDone,supply,str(self.ui.cNumberField_p3c3.currentText()))
+				flag = setSupplyParams(self,self.ui.p3c4Address,self.ui.p3c4Voltage,self.ui.p3c4Current,self.ui.p3c4PartNumber,self.ui.p3c4Equip,boxDone,supply,str(self.ui.cNumberField_p3c4.currentText()))
 		
 		if flag == 1:
 			self.ui.p3Equip.setStyleSheet(boxDone)
@@ -1161,9 +1170,9 @@ def instrParamErrorMessage(self,error):
 	msg.exec_();
 
 def setPowerMeterParams(self,address,offset,frequency,partNum,equipBox,boxDone,supply,averaging):	
-	A = address.toPlainText()
-	O = offset.toPlainText()
-	F = frequency.toPlainText()
+	A = address.text()
+	O = offset.text()
+	F = frequency.text()
 	
 	
 	result = supply.Set_Meter(A,O,F,averaging,nargout=1)
@@ -1173,7 +1182,7 @@ def setPowerMeterParams(self,address,offset,frequency,partNum,equipBox,boxDone,s
 	if error == " " :
 		
 		powerMeterPartNum = result[0]
-		partNum.setPlainText(powerMeterPartNum)
+		partNum.setText(powerMeterPartNum)
 		equipBox.setStyleSheet(boxDone)
 		flag = 1
 		return flag
@@ -1187,16 +1196,16 @@ def setPowerMeterParams(self,address,offset,frequency,partNum,equipBox,boxDone,s
 		self.ui.meterSet.setChecked(False)
 		
 def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,supply,channel):
-	A = address.toPlainText()
-	V = voltage.toPlainText()
-	C = current.toPlainText()
+	A = address.text()
+	V = voltage.text()
+	C = current.text()
 	
 	result = supply.Set_Supply(A,V,C,channel,nargout=1)
 	result = result.split(";")
 	error = result[1]
 	if error == " ":
-		p1c3PartNum = result[0]
-		partNum.setPlainText(p1c3PartNum)
+		partNumber = result[0]
+		partNum.setText(partNumber)
 		equipBox.setStyleSheet(boxDone)
 		flag = 1
 		return flag
