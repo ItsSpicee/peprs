@@ -399,95 +399,123 @@ def displaySa(self,buttonSelected,buttonFocus,buttonHover,greyHover,greyButton):
 		set.setPrevSAButtons(self,buttonHover,greyHover)
 		
 def enableChannel(self):
-	p1c1Checked = self.ui.p1c1Check.isChecked()
-	p1c2Checked = self.ui.p1c2Check.isChecked()
-	p1c3Checked = self.ui.p1c3Check.isChecked()
-	p1c4Checked = self.ui.p1c4Check.isChecked()
-	p2c1Checked = self.ui.p2c1Check.isChecked()
-	p2c2Checked = self.ui.p2c2Check.isChecked()
-	p2c3Checked = self.ui.p2c3Check.isChecked()
-	p2c4Checked = self.ui.p2c4Check.isChecked()
-	p3c1Checked = self.ui.p3c1Check.isChecked()
-	p3c2Checked = self.ui.p3c2Check.isChecked()
-	p3c3Checked = self.ui.p3c3Check.isChecked()
-	p3c4Checked = self.ui.p3c4Check.isChecked()
+	numberChannelsP1 = self.ui.noChannels_p1.currentIndex()
+	numberChannelsP2 = self.ui.noChannels_p2.currentIndex()
+	numberChannelsP3 = self.ui.noChannels_p3.currentIndex()
 	
-	if p1c1Checked:
-		self.ui.p1c1Equip.setEnabled(True)
-	else: 
+	if numberChannelsP1 == 0:
 		self.ui.p1c1Equip.setEnabled(False)
-	if p1c2Checked:
-		self.ui.p1c2Equip.setEnabled(True)
-	else: 
 		self.ui.p1c2Equip.setEnabled(False)
-	if p1c3Checked:
-		self.ui.p1c3Equip.setEnabled(True)
-	else: 
 		self.ui.p1c3Equip.setEnabled(False)
-	if p1c4Checked:
-		self.ui.p1c4Equip.setEnabled(True)
-	else: 
 		self.ui.p1c4Equip.setEnabled(False)
-	if p2c1Checked:
-		self.ui.p2c1Equip.setEnabled(True)
-	else: 
+	elif numberChannelsP1 == 1:
+		self.ui.p1c1Equip.setEnabled(True)
+		self.ui.p1c2Equip.setEnabled(False)
+		self.ui.p1c3Equip.setEnabled(False)
+		self.ui.p1c4Equip.setEnabled(False)
+	elif numberChannelsP1 == 2:
+		self.ui.p1c1Equip.setEnabled(True)
+		self.ui.p1c2Equip.setEnabled(True)
+		self.ui.p1c3Equip.setEnabled(False)
+		self.ui.p1c4Equip.setEnabled(False)
+	elif numberChannelsP1 == 3:
+		self.ui.p1c1Equip.setEnabled(True)
+		self.ui.p1c2Equip.setEnabled(True)
+		self.ui.p1c3Equip.setEnabled(True)
+		self.ui.p1c4Equip.setEnabled(False)
+	elif numberChannelsP1 == 4:
+		self.ui.p1c1Equip.setEnabled(True)
+		self.ui.p1c2Equip.setEnabled(True)
+		self.ui.p1c3Equip.setEnabled(True)
+		self.ui.p1c4Equip.setEnabled(True)
+		
+	if numberChannelsP2 == 0:
 		self.ui.p2c1Equip.setEnabled(False)
-	if p2c2Checked:
-		self.ui.p2c2Equip.setEnabled(True)
-	else: 
 		self.ui.p2c2Equip.setEnabled(False)
-	if p2c3Checked:
-		self.ui.p2c3Equip.setEnabled(True)
-	else: 
 		self.ui.p2c3Equip.setEnabled(False)
-	if p2c4Checked:
-		self.ui.p2c4Equip.setEnabled(True)
-	else: 
 		self.ui.p2c4Equip.setEnabled(False)
-	if p3c1Checked:
-		self.ui.p3c1Equip.setEnabled(True)
-	else: 
+	elif numberChannelsP2 == 1:
+		self.ui.p2c1Equip.setEnabled(True)
+		self.ui.p2c2Equip.setEnabled(False)
+		self.ui.p2c3Equip.setEnabled(False)
+		self.ui.p2c4Equip.setEnabled(False)
+	elif numberChannelsP2 == 2:
+		self.ui.p2c1Equip.setEnabled(True)
+		self.ui.p2c2Equip.setEnabled(True)
+		self.ui.p2c3Equip.setEnabled(False)
+		self.ui.p2c4Equip.setEnabled(False)
+	elif numberChannelsP2 == 3:
+		self.ui.p2c1Equip.setEnabled(True)
+		self.ui.p2c2Equip.setEnabled(True)
+		self.ui.p2c3Equip.setEnabled(True)
+		self.ui.p2c4Equip.setEnabled(False)
+	elif numberChannelsP2 == 4:
+		self.ui.p2c1Equip.setEnabled(True)
+		self.ui.p2c2Equip.setEnabled(True)
+		self.ui.p2c3Equip.setEnabled(True)
+		self.ui.p2c4Equip.setEnabled(True)
+		
+	if numberChannelsP3 == 0:
 		self.ui.p3c1Equip.setEnabled(False)
-	if p3c2Checked:
-		self.ui.p3c2Equip.setEnabled(True)
-	else: 
 		self.ui.p3c2Equip.setEnabled(False)
-	if p3c3Checked:
-		self.ui.p3c3Equip.setEnabled(True)
-	else: 
 		self.ui.p3c3Equip.setEnabled(False)
-	if p3c4Checked:
-		self.ui.p3c4Equip.setEnabled(True)
-	else: 
 		self.ui.p3c4Equip.setEnabled(False)
+	elif numberChannelsP3 == 1:
+		self.ui.p3c1Equip.setEnabled(True)
+		self.ui.p3c2Equip.setEnabled(False)
+		self.ui.p3c3Equip.setEnabled(False)
+		self.ui.p3c4Equip.setEnabled(False)
+	elif numberChannelsP3 == 2:
+		self.ui.p3c1Equip.setEnabled(True)
+		self.ui.p3c2Equip.setEnabled(True)
+		self.ui.p3c3Equip.setEnabled(False)
+		self.ui.p3c4Equip.setEnabled(False)
+	elif numberChannelsP3 == 3:
+		self.ui.p3c1Equip.setEnabled(True)
+		self.ui.p3c2Equip.setEnabled(True)
+		self.ui.p3c3Equip.setEnabled(True)
+		self.ui.p3c4Equip.setEnabled(False)
+	elif numberChannelsP3 == 4:
+		self.ui.p3c1Equip.setEnabled(True)
+		self.ui.p3c2Equip.setEnabled(True)
+		self.ui.p3c3Equip.setEnabled(True)
+		self.ui.p3c4Equip.setEnabled(True)
 		
 def enableSupplyOne(self):
 	idx = self.ui.p1Enabled.currentIndex()
-	c1Checked = self.ui.p1c1Check.isChecked()
-	c2Checked = self.ui.p1c2Check.isChecked()
-	c3Checked = self.ui.p1c3Check.isChecked()
-	c4Checked = self.ui.p1c4Check.isChecked()
+	numberChannels = self.ui.noChannels_p1.currentIndex()
 	
 	if idx == 0 or idx == 1:
 		self.ui.p1Channels.setEnabled(True)
-		self.ui.p1c1Check.setEnabled(True)
-		self.ui.p1c2Check.setEnabled(True)
-		self.ui.p1c3Check.setEnabled(True)
-		self.ui.p1c4Check.setEnabled(True)
-		if c1Checked:
+		self.ui.noChannels_p1.setEnabled(True)
+		if numberChannels == 0:
+			self.ui.p1c1Equip.setEnabled(False)
+			self.ui.p1c2Equip.setEnabled(False)
+			self.ui.p1c3Equip.setEnabled(False)
+			self.ui.p1c4Equip.setEnabled(False)
+		elif numberChannels == 1:
 			self.ui.p1c1Equip.setEnabled(True)
-		if c2Checked:
+			self.ui.p1c2Equip.setEnabled(False)
+			self.ui.p1c3Equip.setEnabled(False)
+			self.ui.p1c4Equip.setEnabled(False)
+		elif numberChannels == 2:
+			self.ui.p1c1Equip.setEnabled(True)
 			self.ui.p1c2Equip.setEnabled(True)
-		if c3Checked:
+			self.ui.p1c3Equip.setEnabled(False)
+			self.ui.p1c4Equip.setEnabled(False)
+		elif numberChannels == 3:
+			self.ui.p1c1Equip.setEnabled(True)
+			self.ui.p1c2Equip.setEnabled(True)
 			self.ui.p1c3Equip.setEnabled(True)
-		if c4Checked:
+			self.ui.p1c4Equip.setEnabled(False)
+		elif numberChannels == 4:
+			self.ui.p1c1Equip.setEnabled(True)
+			self.ui.p1c2Equip.setEnabled(True)
+			self.ui.p1c3Equip.setEnabled(True)
 			self.ui.p1c4Equip.setEnabled(True)
 	elif idx == 2:
 		self.ui.p1Channels.setEnabled(False)
-		self.ui.p1c1Check.setEnabled(False)
-		self.ui.p1c2Check.setEnabled(False)
-		self.ui.p1c3Check.setEnabled(False)
-		self.ui.p1c4Check.setEnabled(False)
+		self.ui.noChannels_p1.setEnabled(False)
 		self.ui.p1c1Equip.setEnabled(False)
 		self.ui.p1c2Equip.setEnabled(False)
 		self.ui.p1c3Equip.setEnabled(False)
@@ -495,31 +523,39 @@ def enableSupplyOne(self):
 		
 def enableSupplyTwo(self):
 	idx = self.ui.p2Enabled.currentIndex()
-	c1Checked = self.ui.p2c1Check.isChecked()
-	c2Checked = self.ui.p2c2Check.isChecked()
-	c3Checked = self.ui.p2c3Check.isChecked()
-	c4Checked = self.ui.p2c4Check.isChecked()
+	numberChannels = self.ui.noChannels_p2.currentIndex()
 	
 	if idx == 0 or idx == 1:
 		self.ui.p2Channels.setEnabled(True)
-		self.ui.p2c1Check.setEnabled(True)
-		self.ui.p2c2Check.setEnabled(True)
-		self.ui.p2c3Check.setEnabled(True)
-		self.ui.p2c4Check.setEnabled(True)
-		if c1Checked:
+		self.ui.noChannels_p2.setEnabled(True)
+		if numberChannels == 0:
+			self.ui.p2c1Equip.setEnabled(False)
+			self.ui.p2c2Equip.setEnabled(False)
+			self.ui.p2c3Equip.setEnabled(False)
+			self.ui.p2c4Equip.setEnabled(False)
+		elif numberChannels == 1:
 			self.ui.p2c1Equip.setEnabled(True)
-		if c2Checked:
+			self.ui.p2c2Equip.setEnabled(False)
+			self.ui.p2c3Equip.setEnabled(False)
+			self.ui.p2c4Equip.setEnabled(False)
+		elif numberChannels == 2:
+			self.ui.p2c1Equip.setEnabled(True)
 			self.ui.p2c2Equip.setEnabled(True)
-		if c3Checked:
+			self.ui.p2c3Equip.setEnabled(False)
+			self.ui.p2c4Equip.setEnabled(False)
+		elif numberChannels == 3:
+			self.ui.p2c1Equip.setEnabled(True)
+			self.ui.p2c2Equip.setEnabled(True)
 			self.ui.p2c3Equip.setEnabled(True)
-		if c4Checked:
+			self.ui.p2c4Equip.setEnabled(False)
+		elif numberChannels == 4:
+			self.ui.p2c1Equip.setEnabled(True)
+			self.ui.p2c2Equip.setEnabled(True)
+			self.ui.p2c3Equip.setEnabled(True)
 			self.ui.p2c4Equip.setEnabled(True)
 	elif idx == 2:
 		self.ui.p2Channels.setEnabled(False)
-		self.ui.p2c1Check.setEnabled(False)
-		self.ui.p2c2Check.setEnabled(False)
-		self.ui.p2c3Check.setEnabled(False)
-		self.ui.p2c4Check.setEnabled(False)
+		self.ui.noChannels_p2.setEnabled(False)
 		self.ui.p2c1Equip.setEnabled(False)
 		self.ui.p2c2Equip.setEnabled(False)
 		self.ui.p2c3Equip.setEnabled(False)
@@ -527,31 +563,39 @@ def enableSupplyTwo(self):
 
 def enableSupplyThree(self):
 	idx = self.ui.p3Enabled.currentIndex()
-	c1Checked = self.ui.p3c1Check.isChecked()
-	c2Checked = self.ui.p3c2Check.isChecked()
-	c3Checked = self.ui.p3c3Check.isChecked()
-	c4Checked = self.ui.p3c4Check.isChecked()
+	numberChannels = self.ui.noChannels_p3.currentIndex()
 	
 	if idx == 0 or idx == 1:
 		self.ui.p3Channels.setEnabled(True)
-		self.ui.p3c1Check.setEnabled(True)
-		self.ui.p3c2Check.setEnabled(True)
-		self.ui.p3c3Check.setEnabled(True)
-		self.ui.p3c4Check.setEnabled(True)
-		if c1Checked:
+		self.ui.noChannels_p3.setEnabled(True)
+		if numberChannels == 0:
+			self.ui.p3c1Equip.setEnabled(False)
+			self.ui.p3c2Equip.setEnabled(False)
+			self.ui.p3c3Equip.setEnabled(False)
+			self.ui.p3c4Equip.setEnabled(False)
+		elif numberChannels == 1:
 			self.ui.p3c1Equip.setEnabled(True)
-		if c2Checked:
+			self.ui.p3c2Equip.setEnabled(False)
+			self.ui.p3c3Equip.setEnabled(False)
+			self.ui.p3c4Equip.setEnabled(False)
+		elif numberChannels == 2:
+			self.ui.p3c1Equip.setEnabled(True)
 			self.ui.p3c2Equip.setEnabled(True)
-		if c3Checked:
+			self.ui.p3c3Equip.setEnabled(False)
+			self.ui.p3c4Equip.setEnabled(False)
+		elif numberChannels == 3:
+			self.ui.p3c1Equip.setEnabled(True)
+			self.ui.p3c2Equip.setEnabled(True)
 			self.ui.p3c3Equip.setEnabled(True)
-		if c4Checked:
+			self.ui.p3c4Equip.setEnabled(False)
+		elif numberChannels == 4:
+			self.ui.p3c1Equip.setEnabled(True)
+			self.ui.p3c2Equip.setEnabled(True)
+			self.ui.p3c3Equip.setEnabled(True)
 			self.ui.p3c4Equip.setEnabled(True)
 	elif idx == 2:
 		self.ui.p3Channels.setEnabled(False)
-		self.ui.p3c1Check.setEnabled(False)
-		self.ui.p3c2Check.setEnabled(False)
-		self.ui.p3c3Check.setEnabled(False)
-		self.ui.p3c4Check.setEnabled(False)
+		self.ui.noChannels_p3.setEnabled(False)
 		self.ui.p3c1Equip.setEnabled(False)
 		self.ui.p3c2Equip.setEnabled(False)
 		self.ui.p3c3Equip.setEnabled(False)

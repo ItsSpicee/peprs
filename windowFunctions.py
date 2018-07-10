@@ -24,6 +24,7 @@ def closeButton(self):
 		qApp.quit()	
 		
 def changeStepTab(self):
+	maxTrue = self.isMaximized()
 	screen = QGuiApplication.primaryScreen()
 	screenSize = screen.availableSize()
 	height = screenSize.height()
@@ -35,22 +36,23 @@ def changeStepTab(self):
 	downEnabled = self.ui.vsaWorkflow_vsaMeas.currentIndex()
 	upEnabled = self.ui.vsgWorkflow_vsgMeas.currentIndex()
 	vsgStack = self.ui.awgParamsStack_vsgMeas.currentIndex()
-	if i == 2:
-		self.setMinimumSize(1265,625)
-		self.resize(1265, 625)
-		self.center()
-	elif i == 1:
-		self.setMinimumSize(1265,maxHeight)
-		self.resize(1265,maxHeight)
-		self.center()
-	elif i == 0:
-		self.setMinimumSize(1265,maxHeight)
-		self.resize(1265,maxHeight)
-		self.center()
-	elif i == 3:
-		self.setMinimumSize(1265,625)
-		self.resize(1265,625)
-		self.center()
+	if maxTrue == False:
+		if i == 2:
+			self.setMinimumSize(1265,650)
+			self.resize(1265, 650)
+			self.center()
+		elif i == 1:
+			self.setMinimumSize(1265,maxHeight)
+			self.resize(1265,maxHeight)
+			self.center()
+		elif i == 0:
+			self.setMinimumSize(1265,maxHeight)
+			self.resize(1265,maxHeight)
+			self.center()
+		elif i == 3:
+			self.setMinimumSize(1265,650)
+			self.resize(1265,650)
+			self.center()
 	
 def switchMeasTabVSA(self):
 	currentTab = self.ui.vsaMeasParamTabs.currentIndex()
