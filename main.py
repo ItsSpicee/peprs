@@ -245,7 +245,7 @@ class Window(QMainWindow):
 		self.ui.debugAlgoStack.setCurrentIndex(2)
 		self.ui.calValResultsStack.setCurrentIndex(1)
 		self.ui.resultsAlgoTabs.setCurrentIndex(2)
-		self.ui.calWorkflowAlgoStack.setCurrentIndex(0)
+		self.ui.calWorkflowTabs.setCurrentIndex(0)
 		self.ui.dpdAlgoStack.setCurrentIndex(1)
 		self.ui.precharAlgoStack.setCurrentIndex(1)
 		
