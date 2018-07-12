@@ -4,16 +4,6 @@ from PyQt5.QtGui import (QCursor)
 from PyQt5.QtCore import (Qt)
 from PyQt5.QtWidgets import (QFileDialog)
 
-
-def fileBrowse(self, lineEdit):
-	fileInfo = str(QFileDialog.getOpenFileName())
-	fileList = fileInfo.split(",")
-	file = fileList[0]
-	file = file.replace("'","")
-	file = file.replace("(","")
-	lineEdit.clear()
-	lineEdit.insertPlainText(file)
-
 def changeStack(self,stackName,idx):
 	stackName.setCurrentIndex(idx)
 
@@ -216,3 +206,13 @@ def switchVSAMeas(self,idx):
 	# self.ui.meterDash.setStyleSheet(blueButton)
 	# self.ui.vsaDash.setStyleSheet(blueButton)
 	# self.ui.saDash.setStyleSheet(blueButton)
+	
+# for old open folder buttons
+# def fileBrowse(self, lineEdit):
+	# fileInfo = str(QFileDialog.getOpenFileName())
+	# fileList = fileInfo.split(",")
+	# file = fileList[0]
+	# file = file.replace("'","")
+	# file = file.replace("(","")
+	# lineEdit.clear()
+	# lineEdit.insertPlainText(file)

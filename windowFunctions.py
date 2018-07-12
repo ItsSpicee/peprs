@@ -1,6 +1,6 @@
 # windowFunctions.py contains all the functions that are needed to control the window size, display, and menu functionality
 
-from PyQt5.QtWidgets import (QMessageBox, QFileDialog, qApp)
+from PyQt5.QtWidgets import (QMessageBox, QFileDialog, qApp,QDialog)
 from PyQt5.QtGui import (QGuiApplication)
 						 
 def openDialog(self):
@@ -22,7 +22,9 @@ def closeButton(self):
 	reply=QMessageBox.question(self,'Exit Confirmation',"Are you sure you want to close the program?",QMessageBox.Yes|QMessageBox.No,QMessageBox.No)
 	if reply == QMessageBox.Yes:
 		qApp.quit()	
-		
+
+
+
 def changeStepTab(self):
 	maxTrue = self.isMaximized()
 	screen = QGuiApplication.primaryScreen()
@@ -42,9 +44,13 @@ def changeStepTab(self):
 			self.resize(1265, 650)
 			self.center()
 		elif i == 1:
-			self.setMinimumSize(1265,maxHeight)
-			self.resize(1265,maxHeight)
-			self.center()
+			# if safetyChecked:
+				# self.setMinimumSize(1265,maxHeight)
+				# self.resize(1265,maxHeight)
+				# self.center()
+			# else:
+			self.initCheckUI()
+			
 		elif i == 0:
 			self.setMinimumSize(1265,maxHeight)
 			self.resize(1265,maxHeight)
@@ -103,8 +109,8 @@ def switchMeasTabVSG(self):
 def switchAlgoTab(self):
 	currentTab = self.ui.algoTabs.currentIndex()
 
-def fileBrowse(self, lineEdit):
-	fileInfo = str(QFileDialog.getOpenFileName())
+def fileBrowse(self, lineEdit,path):
+	fileInfo = str(QFileDialog.getOpenFileName(self,"Choose a File",path))
 	fileList = fileInfo.split(",")
 	file = fileList[0]
 	file = file.replace("'","")
@@ -114,3 +120,4 @@ def fileBrowse(self, lineEdit):
 	
 def fileOpen(self, lineEdit):
 	file = lineEdit.text()
+	
