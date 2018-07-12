@@ -798,6 +798,15 @@ class Window(QMainWindow):
 		# pen = QPen(QtCore.Qt.black, 2, QtCore.Qt.SolidLine)
 		# qp.setPen(pen)
 		# qp.drawLine(60,100,70,110)
+		
+	# void LabelWidget::paintEvent(QPaintEvent*)
+	# {
+		# QPainter painter(this)
+		# painter.setPen(Qt::black);
+		# #... Need an appropriate call to painter.translate() for this to work properly
+		# painter.rotate(90);
+		# painter.drawText(QPoint(0,0), _text);
+	# }
 
 if __name__ == '__main__':
 	app = QApplication(sys.argv)
