@@ -264,7 +264,10 @@ class Window(QMainWindow):
 		self.ui.calWorkflowTabs.setCurrentIndex(0)
 		self.ui.dpdAlgoStack.setCurrentIndex(1)
 		self.ui.precharAlgoStack.setCurrentIndex(1)
-		self.ui.vsaCalResultsStack_algo.setCurrentIndex(1)
+		self.ui.vsaCalResultsStack_algo.setCurrentIndex(0)
+		self.ui.vsgCalTabs_algo.setCurrentIndex(0)
+		self.ui.vsgCalResults_algo.setCurrentIndex(0)
+		
 		
 		# setting visibility of components
 		# vsa meas page
@@ -675,6 +678,14 @@ class Window(QMainWindow):
 		self.ui.awgButton_vsgMeas_2.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(0))
 		self.ui.awgButton_vsgMeas_3.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(0))
 		self.ui.vsgButton_vsgMeas.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(0))
+		# algo page
+		self.ui.calValPreview.clicked.connect(lambda: set.calValPreview(self))
+		self.ui.calValRun.clicked.connect(lambda: set.runCalValidation(self,setParams,self.ui.calValRun))
+		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self))
+		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun))
+		self.ui.dpdPreview.clicked.connect(lambda: set.dpdPreview(self))
+		self.ui.dpdRun.clicked.connect(lambda: set.runDPD(self,setParams,self.ui.dpdRun))
+		self.ui.algoSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.refRXAdvEquip,setParams,self.ui.algoSetAdv))
 		
 		# control parameter changes
 		self.ui.dllFile_scope.textChanged.connect(lambda: param.copyDemod(self, self.ui.dllFile_scope, self.ui.dllFile_uxa, self.ui.dllFile_dig))

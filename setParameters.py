@@ -768,6 +768,7 @@ def awgCalRoutine(self,boxDone,setButton):
 		self.ui.vsgMeasNextStack.setCurrentIndex(5)
 		self.ui.debugVSGStack.setCurrentIndex(0)
 		self.ui.vsgResultsFileStack_vsgMeas.setCurrentIndex(1)
+		self.ui.vsgCalPaths_algo.setCurrentIndex(1)
 		self.ui.vsgResultsStack_vsgMeas.setCurrentIndex(0)
 		self.ui.awgMark_vsgMeas.setVisible(True)
 		self.ui.awgMark_vsgMeas_2.setVisible(True)
@@ -876,6 +877,7 @@ def setHetero(self,boxDone,setButton):
 		self.ui.upEquip_hetero.setStyleSheet(boxDone)
 		self.ui.vsgMeasNextStack.setCurrentIndex(8)
 		self.ui.vsgResultsFileStack_vsgMeas.setCurrentIndex(1)
+		self.ui.vsgCalPaths_algo.setCurrentIndex(1)
 		self.ui.debugVSGStack.setCurrentIndex(0)
 		self.ui.vsgResultsStack_vsgMeas.setCurrentIndex(0)
 		self.ui.upMark_vsgMeas.setVisible(True)
@@ -919,6 +921,7 @@ def setHomo(self,boxDone,setButton):
 		self.ui.vsgMeasNextStack.setCurrentIndex(8)
 		self.ui.debugVSGStack.setCurrentIndex(1)
 		self.ui.vsgResultsFileStack_vsgMeas.setCurrentIndex(0)
+		self.ui.vsgCalPaths_algo.setCurrentIndex(0)
 		self.ui.vsgResultsStack_vsgMeas.setCurrentIndex(0)
 		self.ui.upMark_vsgMeas.setVisible(True)
 		self.ui.psgMark_vsgMeas.setVisible(True)
@@ -935,7 +938,7 @@ def setHomo(self,boxDone,setButton):
 		self.ui.statusBar.removeWidget(self.progressBar)
 		# to show progress bar, need both addWidget() and show()
 		self.ui.statusBar.showMessage("Homodyne Calibration Routine Complete",3000)
-	elif  setButton.isChecked() == False:
+	elif setButton.isChecked() == False:
 		setButton.setText("Set && Run")
 		self.ui.calEquip_homo.setStyleSheet(None)
 		self.ui.rxEquip_homo.setStyleSheet(None)
@@ -948,6 +951,136 @@ def setHomo(self,boxDone,setButton):
 		self.ui.psgMark_vsgMeas.setVisible(False)
 		self.ui.debugVSGStack.setCurrentIndex(2)
 		self.ui.vsgMeasNextStack.setCurrentIndex(7)
+		
+def calValPreview(self):
+	self.ui.calValTabs.setCurrentIndex(0)
+	self.ui.resultsAlgoTabs.setCurrentIndex(2)
+	self.ui.calValResultsStack.setCurrentIndex(0)
+	
+def runCalValidation(self,setBox,setButton):
+	if setButton.isChecked() == True:
+		setButton.setText("Unset")
+		self.ui.calValTabs.setCurrentIndex(0)
+		self.ui.resultsAlgoTabs.setCurrentIndex(2)
+		self.ui.algoNextStack.setCurrentIndex(1)
+		self.ui.debugAlgoStack.setCurrentIndex(0)
+		self.ui.calValResultsStack.setCurrentIndex(0)
+		self.ui.calValSignalEquip.setStyleSheet(setBox)
+		self.ui.calValCalFilesEquip.setStyleSheet(setBox)
+		self.ui.calValRefRXEquip.setStyleSheet(setBox)
+		self.ui.calValVSGEquip.setStyleSheet(setBox)
+		self.ui.calValAWGEquip.setStyleSheet(setBox)
+		
+		self.progressBar = QProgressBar()
+		self.progressBar.setRange(1,10);
+		self.progressBar.setTextVisible(True);
+		self.progressBar.setFormat("Currently Running: Calibration Validation Routine")
+		self.ui.statusBar.addWidget(self.progressBar,1)
+		completed = 0
+		while completed < 100:
+			completed = completed + 0.00001
+			self.progressBar.setValue(completed)
+		self.ui.statusBar.removeWidget(self.progressBar)
+		# to show progress bar, need both addWidget() and show()
+		self.ui.statusBar.showMessage("Calibration Validation Routine Complete",3000)	
+	elif setButton.isChecked() == False:
+		setButton.setText("Set && Run")
+		self.ui.calValSignalEquip.setStyleSheet(None)
+		self.ui.calValCalFilesEquip.setStyleSheet(None)
+		self.ui.calValRefRXEquip.setStyleSheet(None)
+		self.ui.calValVSGEquip.setStyleSheet(None)
+		self.ui.calValAWGEquip.setStyleSheet(None)
+		self.ui.algoNextStack.setCurrentIndex(0)
+		self.ui.debugAlgoStack.setCurrentIndex(2)
+
+def preCharPreview(self):
+	self.ui.precharTabs.setCurrentIndex(0)
+	self.ui.resultsAlgoTabs.setCurrentIndex(3)
+	self.ui.precharAlgoStack.setCurrentIndex(0)
+	
+def runPrecharacterization(self,setBox,setButton):
+	if setButton.isChecked() == True:
+		setButton.setText("Unset")
+		self.ui.precharTabs.setCurrentIndex(0)
+		self.ui.resultsAlgoTabs.setCurrentIndex(3)
+		self.ui.algoNextStack.setCurrentIndex(3)
+		self.ui.debugAlgoStack.setCurrentIndex(0)
+		self.ui.precharAlgoStack.setCurrentIndex(0)
+		self.ui.precharSignalEquip.setStyleSheet(setBox)
+		self.ui.precharCalFilesEquip.setStyleSheet(setBox)
+		self.ui.precharRefRXEquip.setStyleSheet(setBox)
+		self.ui.precharVSGEquip.setStyleSheet(setBox)
+		self.ui.precharAWGEquip.setStyleSheet(setBox)
+		
+		self.progressBar = QProgressBar()
+		self.progressBar.setRange(1,10);
+		self.progressBar.setTextVisible(True);
+		self.progressBar.setFormat("Currently Running: PreCharacterization Setup Routine")
+		self.ui.statusBar.addWidget(self.progressBar,1)
+		completed = 0
+		while completed < 100:
+			completed = completed + 0.00001
+			self.progressBar.setValue(completed)
+		self.ui.statusBar.removeWidget(self.progressBar)
+		# to show progress bar, need both addWidget() and show()
+		self.ui.statusBar.showMessage("PreCharacterization Setup Routine Complete",3000)	
+	elif setButton.isChecked() == False:
+		setButton.setText("Set && Run")
+		self.ui.algoNextStack.setCurrentIndex(2)
+		self.ui.debugAlgoStack.setCurrentIndex(2)
+		self.ui.precharSignalEquip.setStyleSheet(None)
+		self.ui.precharCalFilesEquip.setStyleSheet(None)
+		self.ui.precharRefRXEquip.setStyleSheet(None)
+		self.ui.precharVSGEquip.setStyleSheet(None)
+		self.ui.precharAWGEquip.setStyleSheet(None)
+		
+def dpdPreview(self):
+	self.ui.dpdTabs.setCurrentIndex(0)
+	self.ui.resultsAlgoTabs.setCurrentIndex(4)
+	self.ui.dpdAlgoStack.setCurrentIndex(0)
+	
+def runDPD(self,setBox,setButton):
+	if setButton.isChecked() == True:
+		setButton.setText("Unset")
+		self.ui.dpdTabs.setCurrentIndex(0)
+		self.ui.resultsAlgoTabs.setCurrentIndex(4)
+		self.ui.algoNextStack.setCurrentIndex(5)
+		self.ui.debugAlgoStack.setCurrentIndex(1)
+		self.ui.dpdAlgoStack.setCurrentIndex(0)
+		self.ui.dpdSignalEquip.setStyleSheet(setBox)
+		self.ui.dpdCalFilesEquip.setStyleSheet(setBox)
+		self.ui.dpdGeneralEquip.setStyleSheet(setBox)
+		self.ui.dpdModelEquip.setStyleSheet(setBox)
+		self.ui.dpdAWGEquip.setStyleSheet(setBox)
+		self.ui.dpdRefRXEquip.setStyleSheet(setBox)
+		self.ui.dpdVSGEquip.setStyleSheet(setBox)
+		self.ui.dpdTrainingEquip.setStyleSheet(setBox)
+		
+		self.progressBar = QProgressBar()
+		self.progressBar.setRange(1,10);
+		self.progressBar.setTextVisible(True);
+		self.progressBar.setFormat("Currently Running: PreCharacterization Setup Routine")
+		self.ui.statusBar.addWidget(self.progressBar,1)
+		completed = 0
+		while completed < 100:
+			completed = completed + 0.00001
+			self.progressBar.setValue(completed)
+		self.ui.statusBar.removeWidget(self.progressBar)
+		# to show progress bar, need both addWidget() and show()
+		self.ui.statusBar.showMessage("PreCharacterization Setup Routine Complete",3000)	
+	elif setButton.isChecked() == False:
+		setButton.setText("Set && Run")
+		self.ui.algoNextStack.setCurrentIndex(4)
+		self.ui.debugAlgoStack.setCurrentIndex(2)
+		self.ui.dpdSignalEquip.setStyleSheet(None)
+		self.ui.dpdCalFilesEquip.setStyleSheet(None)
+		self.ui.dpdGeneralEquip.setStyleSheet(None)
+		self.ui.dpdModelEquip.setStyleSheet(None)
+		self.ui.dpdAWGEquip.setStyleSheet(None)
+		self.ui.dpdRefRXEquip.setStyleSheet(None)
+		self.ui.dpdVSGEquip.setStyleSheet(None)
+		self.ui.dpdTrainingEquip.setStyleSheet(None)
+		
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions for setParameters.py	
 
