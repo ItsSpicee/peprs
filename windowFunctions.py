@@ -137,6 +137,6 @@ def fileBrowse(self, lineEdit,path):
 	lineEdit.clear()
 	lineEdit.setText(file)
 	
-def fileOpen(self, lineEdit):
+def fileOpen(self,lineEdit,path):
 	file = lineEdit.text()
 	

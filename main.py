@@ -6,7 +6,7 @@ import sys
 from PyQt5 import uic, QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (QDialogButtonBox,QMessageBox, QTabWidget, QFileDialog,QDialog, QInputDialog, QTextEdit, QLineEdit, QLabel, QFrame, QGridLayout, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QMenu, QAction, qApp, QDesktopWidget, QMessageBox, QToolTip, QPushButton, QApplication, QProgressBar,QSizePolicy)
 from PyQt5.QtGui import (QCursor, QPen, QPainter, QColor, QIcon, QFont,QGuiApplication)
-from PyQt5.QtCore import (Qt, pyqtSlot, QSize)
+from PyQt5.QtCore import (QEvent,Qt, pyqtSlot, QSize)
 
 from peprs import Ui_peprs
 from dutsetup import Ui_DUTSetup
@@ -44,7 +44,7 @@ class Window(QMainWindow):
 		mimoChecked = self.ui.mimoRadio.isChecked()
 		misoChecked = self.ui.misoRadio.isChecked()
 		simoChecked = self.ui.simoRadio.isChecked()
-		if self.ui.sisoRadio.isChecked() == True :
+		if self.ui.sisoRadio.isChecked() == True:
 			self.hide()
 			self.ui.dutStackedWidget.hide()
 			self.ui = Ui_peprs()
@@ -70,6 +70,7 @@ class Window(QMainWindow):
 		quality.setWindowTitle('Quality Check')
 		quality.ui.qualityCheckButtons.accepted.connect(lambda: self.qualityComplete(quality))
 		quality.ui.qualityCheckButtons.rejected.connect(lambda: self.qualityCancel(quality))
+		#quality.closeEvent()
 		
 		#setting up file import buttons
 		self.ui.filePushButton_13.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_algo_3,"W:\Test_and_Measurement_Code\Measurement Data"))
@@ -253,6 +254,7 @@ class Window(QMainWindow):
 		self.ui.advParamsStack_vsgMeas.setCurrentIndex(0)
 		self.ui.vsgResultsTabs_vsgMeas.setCurrentIndex(0)
 		self.ui.vsgResultsFileStack_vsgMeas.setCurrentIndex(1)
+		self.ui.resultsTabs_vsgMeas.setCurrentIndex(1)
 		# algo page
 		self.ui.algoTabs.setCurrentIndex(0)
 		self.ui.algoNextStack.setCurrentIndex(0)
@@ -262,6 +264,7 @@ class Window(QMainWindow):
 		self.ui.calWorkflowTabs.setCurrentIndex(0)
 		self.ui.dpdAlgoStack.setCurrentIndex(1)
 		self.ui.precharAlgoStack.setCurrentIndex(1)
+		self.ui.vsaCalResultsStack_algo.setCurrentIndex(1)
 		
 		# setting visibility of components
 		# vsa meas page
@@ -370,8 +373,8 @@ class Window(QMainWindow):
 		self.ui.awgPreview_vsgMeas.clicked.connect(lambda: set.awgPreview(self))
 		self.ui.awgPreviewRun_vsgMeas.clicked.connect(lambda: set.awgPreview(self))
 		self.ui.awgSetRun_vsgMeas.clicked.connect(lambda: set.awgCalRoutine(self,setParams,self.ui.awgSetRun_vsgMeas))
-		self.ui.setAdv_vsgMeas.clicked.connect(lambda: set.setAdvVSGMeas(self,setParams,self.ui.setAdv_vsgMeas))
-		self.ui.setAdv_vsgMeas_2.clicked.connect(lambda: set.setAdvVSGMeas(self,setParams,self.ui.setAdv_vsgMeas_2))
+		self.ui.setAdv_vsgMeas.clicked.connect(lambda: set.setAdvAWG_vsgMeas(self,setParams,self.ui.setAdv_vsgMeas))
+		self.ui.setAdv_vsgMeas_2.clicked.connect(lambda: set.setAdvAWGVSA_vsgMeas(self,setParams,self.ui.setAdv_vsgMeas_2))
 		self.ui.upSet_vsgMeas.clicked.connect(lambda: set.setUpVSGMeas(self,setParams,self.ui.upSet_vsgMeas))
 		self.ui.heteroRun.clicked.connect(lambda: set.setHetero(self,setParams,self.ui.heteroRun))
 		self.ui.homoRun.clicked.connect(lambda: set.setHomo(self,setParams,self.ui.homoRun))
@@ -749,7 +752,7 @@ class Window(QMainWindow):
 			event.accept()
 		else:
 			event.ignore()
-
+			
 	def toggleCheck(self,state):
 		if state:
 			self.statusBar().showMessage('Safety Check Enabled',2000)

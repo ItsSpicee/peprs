@@ -154,6 +154,7 @@ def powerMeterAveraging(self,averagingTextBox,index,label):
 		label.setDisabled(True)
 		averagingTextBox.setDisabled(True)
 		averagingTextBox.setReadOnly(True)
+		
 def awgVSAMeasOnClick(self):
 	vsaSetChecked = self.ui.vsaMeasSet.isChecked()
 	vsaSetTwoChecked = self.ui.vsaMeasSet_2.isChecked()
@@ -161,10 +162,9 @@ def awgVSAMeasOnClick(self):
 	downChecked = self.ui.downSetVSAMeas.isChecked()
 	downEnabled = self.ui.vsaWorkflow_vsaMeas.currentIndex()
 	
-	if downEnabled == 1: # down enabled
-		if downChecked:
-			self.ui.measStack.setCurrentIndex(1)
-			self.ui.vsgMeasNextStack.setCurrentIndex(0)
+	if downEnabled == 1 and downChecked:
+		self.ui.measStack.setCurrentIndex(1)
+		self.ui.vsgMeasNextStack.setCurrentIndex(0)
 	else:
 		if vsaSetChecked or vsaSetTwoChecked:
 			self.ui.measStack.setCurrentIndex(1)

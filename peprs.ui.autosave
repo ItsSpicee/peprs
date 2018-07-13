@@ -18793,7 +18793,7 @@ Analyzer</string>
                          <string notr="true">QFrame{background-color:#d1d5de}</string>
                         </property>
                         <property name="currentIndex">
-                         <number>0</number>
+                         <number>7</number>
                         </property>
                         <widget class="QWidget" name="page_51">
                          <layout class="QHBoxLayout" name="horizontalLayout_250">
@@ -19832,7 +19832,7 @@ Fill out ‘General Settings’ and select file to use in ‘Calibration Setting
                          <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                         </property>
                         <property name="currentIndex">
-                         <number>0</number>
+                         <number>2</number>
                         </property>
                         <widget class="QWidget" name="upStandardSettings_10">
                          <attribute name="title">
@@ -30593,7 +30593,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>590</width>
+                                   <width>602</width>
                                    <height>370</height>
                                   </rect>
                                  </property>
@@ -30891,7 +30891,7 @@ QFrame{background-color:#d1d5de}</string>
                           <item>
                            <widget class="QStackedWidget" name="debugVSGStack">
                             <property name="currentIndex">
-                             <number>0</number>
+                             <number>2</number>
                             </property>
                             <widget class="QWidget" name="page_33">
                              <layout class="QHBoxLayout" name="horizontalLayout_252">
@@ -31528,7 +31528,7 @@ QFrame{background-color:#d1d5de}</string>
                                    <x>0</x>
                                    <y>0</y>
                                    <width>426</width>
-                                   <height>600</height>
+                                   <height>721</height>
                                   </rect>
                                  </property>
                                  <property name="minimumSize">
@@ -32744,7 +32744,7 @@ Modelling Parameters</string>
                                  <enum>QTabWidget::North</enum>
                                 </property>
                                 <property name="currentIndex">
-                                 <number>2</number>
+                                 <number>1</number>
                                 </property>
                                 <widget class="QWidget" name="tab_13">
                                  <attribute name="title">
