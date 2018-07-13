@@ -2,7 +2,22 @@
 
 from PyQt5.QtWidgets import (QMessageBox, QFileDialog, qApp,QDialog)
 from PyQt5.QtGui import (QGuiApplication)
-						 
+
+def tabCounterIncrement(self,dir):
+	i = self.ui.stepTabs.currentIndex()
+	if i == 1:
+		if dir == "up":
+			tabCounterIncrement.counterTwo = 1;
+		elif dir == "down":
+			tabCounterIncrement.counterTwo = 0;
+	elif i == 0:
+		if dir == "up":
+			tabCounterIncrement.counterThree = 1;
+		elif dir == "down":
+			tabCounterIncrement.counterThree = 0;
+tabCounterIncrement.counterTwo = 0
+tabCounterIncrement.counterThree = 0
+	 
 def openDialog(self):
 	fname = QFileDialog.getOpenFileName(self, 'Open file', '/home')
 	if fname[0]:
@@ -19,13 +34,11 @@ def saveDialog(self):
 	file.close()	
 		
 def closeButton(self):
-	reply=QMessageBox.question(self,'Exit Confirmation',"Are you sure you want to close the program?",QMessageBox.Yes|QMessageBox.No,QMessageBox.No)
+	reply=QMessageBox.question(self,'Exit Confirmation',"Are you sure you want to close the program?",QMessageBox.Yes|QMessageBox.No)
 	if reply == QMessageBox.Yes:
-		qApp.quit()	
+		qApp.quit()
 
-
-
-def changeStepTab(self):
+def changeStepTab(self,safety,quality):
 	maxTrue = self.isMaximized()
 	screen = QGuiApplication.primaryScreen()
 	screenSize = screen.availableSize()
@@ -44,22 +57,28 @@ def changeStepTab(self):
 			self.resize(1265, 650)
 			self.center()
 		elif i == 1:
-			# if safetyChecked:
-				# self.setMinimumSize(1265,maxHeight)
-				# self.resize(1265,maxHeight)
-				# self.center()
-			# else:
-			self.initCheckUI()
-			
+			counterTwo = tabCounterIncrement.counterTwo
+			if counterTwo == 0:
+				safety.exec_()
+				tabCounterIncrement(self,"up")
+			else:
+				self.setMinimumSize(1265,maxHeight)
+				self.resize(1265,maxHeight)
+				self.center()
 		elif i == 0:
-			self.setMinimumSize(1265,maxHeight)
-			self.resize(1265,maxHeight)
-			self.center()
+			counterThree = tabCounterIncrement.counterThree
+			if counterThree == 0:
+				quality.exec_()
+				tabCounterIncrement(self,"up")
+			else:
+				self.setMinimumSize(1265,maxHeight)
+				self.resize(1265,maxHeight)
+				self.center()
 		elif i == 3:
 			self.setMinimumSize(1265,650)
 			self.resize(1265,650)
 			self.center()
-	
+			
 def switchMeasTabVSA(self):
 	currentTab = self.ui.vsaMeasParamTabs.currentIndex()
 	vsaChecked = self.ui.vsaMeasSet.isChecked()

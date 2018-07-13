@@ -4,13 +4,14 @@
 
 import sys
 from PyQt5 import uic, QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import (QMessageBox, QTabWidget, QFileDialog,QDialog, QInputDialog, QTextEdit, QLineEdit, QLabel, QFrame, QGridLayout, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QMenu, QAction, qApp, QDesktopWidget, QMessageBox, QToolTip, QPushButton, QApplication, QProgressBar,QSizePolicy)
+from PyQt5.QtWidgets import (QDialogButtonBox,QMessageBox, QTabWidget, QFileDialog,QDialog, QInputDialog, QTextEdit, QLineEdit, QLabel, QFrame, QGridLayout, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QMenu, QAction, qApp, QDesktopWidget, QMessageBox, QToolTip, QPushButton, QApplication, QProgressBar,QSizePolicy)
 from PyQt5.QtGui import (QCursor, QPen, QPainter, QColor, QIcon, QFont,QGuiApplication)
 from PyQt5.QtCore import (Qt, pyqtSlot, QSize)
 
 from peprs import Ui_peprs
 from dutsetup import Ui_DUTSetup
 from safetycheck import Ui_safetycheck
+from qualitycheck import Ui_qualitycheck
 import setParameters as set
 import workflowNav as flow
 import windowFunctions as menu
@@ -52,31 +53,24 @@ class Window(QMainWindow):
 			self.show()
 		elif mimoChecked == True or misoChecked or simoChecked:
 			self.ui.dutStackedWidget.setCurrentIndex(1)
-			
-	def initCheckUI(self):
-		check = QDialog()
-		check.ui = Ui_safetycheck()
-		check.ui.setupUi(check)
-		check.exec()
-		check.ui.safetyCheckButtons.clicked.connect(self.formComplete)
-	
-	def formComplete(self,button):
-		print(button)
-		# nmse = self.ui.dutNMSE.text()
-		# power = self.ui.dutPower.text()
-		# gain = self.ui.dutGain.text()
-		# papr = self.ui.paprCheck.text()
-		# if nmse != "" and power != "" and gain != "" and papr != "":
-			# check.done(0)
-		# else:
-			# msg = QMessageBox(self)
-			# msg.setIcon(QMessageBox.Critical)
-			# msg.setWindowTitle('Missing Data')
-			# msg.setText("Please fill out all fields before moving on")
-			# msg.setStandardButtons(QMessageBox.Ok)
-			# msg.exec_();
 	
 	def initMainUI(self):		
+		
+		# safety and quality check dialog setup and signals
+		safety = QDialog(self)
+		safety.ui = Ui_safetycheck()
+		safety.ui.setupUi(safety)
+		safety.setWindowTitle('DUT Information - Safety Check')
+		safety.ui.safetyCheckButtons.accepted.connect(lambda: self.safetyComplete(safety))
+		safety.ui.safetyCheckButtons.rejected.connect(lambda: self.safetyCancel(safety))
+		
+		quality = QDialog(self)
+		quality.ui = Ui_qualitycheck()
+		quality.ui.setupUi(quality)
+		quality.setWindowTitle('Quality Check')
+		quality.ui.qualityCheckButtons.accepted.connect(lambda: self.qualityComplete(quality))
+		quality.ui.qualityCheckButtons.rejected.connect(lambda: self.qualityCancel(quality))
+		
 		#setting up file import buttons
 		self.ui.filePushButton_13.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_algo_3,"W:\Test_and_Measurement_Code\Measurement Data"))
 		self.ui.filePushButton_14.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileIField_algo_3,"W:\Test_and_Measurement_Code\Measurement Data"))
@@ -326,12 +320,10 @@ class Window(QMainWindow):
 		self.ui.p1Enabled.currentIndexChanged.connect(lambda: param.enableSupplyOne(self))
 		self.ui.p2Enabled.currentIndexChanged.connect(lambda: param.enableSupplyTwo(self))
 		self.ui.p3Enabled.currentIndexChanged.connect(lambda: param.enableSupplyThree(self))
-		
-		# browse/open folder action
-
 	
 		# expand/shrink depending on which step tab is clicked
-		self.ui.stepTabs.currentChanged.connect(lambda: menu.changeStepTab(self))
+		self.ui.stepTabs.currentChanged.connect(lambda: menu.changeStepTab(self,safety,quality))
+
 		# vsa meas page
 		self.ui.vsaMeasParamTabs.currentChanged.connect(lambda: menu.switchMeasTabVSA(self))
 		self.ui.vsgMeasParamTabs.currentChanged.connect(lambda: menu.switchMeasTabVSG(self))
@@ -696,6 +688,60 @@ class Window(QMainWindow):
 		
 		# show on window
 		self.show()	
+	
+	def safetyComplete(self,safety):
+		maxTrue = self.isMaximized()
+		screen = QGuiApplication.primaryScreen()
+		screenSize = screen.availableSize()
+		height = screenSize.height()
+		maxHeight = height - 50
+		nmse = safety.ui.dutNMSE.text()
+		power = safety.ui.dutPower.text()
+		gain = safety.ui.dutGain.text()
+		papr = safety.ui.paprCheck.text()
+		if nmse != "" and power != "" and gain != "" and papr != "":
+			safety.done(0)
+			self.setMinimumSize(1265,maxHeight)
+			self.resize(1265,maxHeight)
+			self.center()
+		else:
+			msg = QMessageBox(self)
+			msg.setIcon(QMessageBox.Critical)
+			msg.setWindowTitle('Missing Data')
+			msg.setText("Please fill out all fields before moving on")
+			msg.setStandardButtons(QMessageBox.Ok)
+			msg.exec_();
+	
+	def qualityComplete(self,quality):
+		maxTrue = self.isMaximized()
+		screen = QGuiApplication.primaryScreen()
+		screenSize = screen.availableSize()
+		height = screenSize.height()
+		maxHeight = height - 50
+		rxCheck = quality.ui.qualityReceiverCheck.isChecked()
+		txCheck = quality.ui.qualityGeneratorCheck.isChecked()
+		if rxCheck and txCheck:
+			quality.done(0)
+			self.setMinimumSize(1265,maxHeight)
+			self.resize(1265,maxHeight)
+			self.center()
+		else:
+			msg = QMessageBox(self)
+			msg.setIcon(QMessageBox.Critical)
+			msg.setWindowTitle('Missing Data')
+			msg.setText("Please fill out all fields before moving on")
+			msg.setStandardButtons(QMessageBox.Ok)
+			msg.exec_();
+			
+	def safetyCancel(self,safety):
+		safety.done(0)
+		menu.tabCounterIncrement(self,"down")
+		self.ui.stepTabs.setCurrentIndex(2)
+		
+	def qualityCancel(self,quality):
+		quality.done(0)
+		menu.tabCounterIncrement(self,"down")
+		self.ui.stepTabs.setCurrentIndex(1)
 	
 	def closeEvent(self,event):
 		reply=QMessageBox.question(self,'Exit Confirmation',"Are you sure you want to close the program?",QMessageBox.Yes|QMessageBox.No,QMessageBox.No)
