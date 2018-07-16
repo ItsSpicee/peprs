@@ -21,7 +21,7 @@ try
     
     partNum = splitIdn{2};
     
-    if attenEnabled == 1
+    if attenEnabled == 2
         fprintf(spectrum, sprintf(':SENSe:POWer:RF:ATTenuation %g', atten));
     end
     

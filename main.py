@@ -38,6 +38,7 @@ class Window(QMainWindow):
 		self.ui.backButton.clicked.connect(lambda: self.goBack(0))
 		self.show()
 		
+		
 	def goBack(self, index):
 		self.ui.dutStackedWidget.setCurrentIndex(index)
 		
