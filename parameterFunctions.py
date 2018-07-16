@@ -700,6 +700,15 @@ def displayVSGMeas(self):
 		self.ui.awgParamsStack_vsgMeas.setCurrentIndex(2)
 		self.ui.upParamsStack_vsgMeas.setCurrentIndex(1)
 
+def enableExtRefClkFreq(self):
+	idx = self.ui.refClockSorce_awg.currentIndex()
+	if idx == 2:
+		self.ui.extRefFreq_awg.setEnabled(True)
+		self.ui.label_4.setEnabled(True)
+	else:
+		self.ui.extRefFreq_awg.setEnabled(False)
+		self.ui.label_4.setEnabled(False)
+		
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions called within parameterFunctions	
 

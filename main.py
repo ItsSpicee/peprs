@@ -255,6 +255,10 @@ class Window(QMainWindow):
 		self.ui.vsgResultsTabs_vsgMeas.setCurrentIndex(0)
 		self.ui.vsgResultsFileStack_vsgMeas.setCurrentIndex(1)
 		self.ui.resultsTabs_vsgMeas.setCurrentIndex(1)
+		self.ui.maxSampleRate_awg.setEnabled(False)
+		self.ui.extRefFreq_awg.setEnabled(False)
+		self.ui.label_4.setEnabled(False)
+		self.ui.axieSlot_awg.setEnabled(False)
 		# algo page
 		self.ui.algoTabs.setCurrentIndex(0)
 		self.ui.algoNextStack.setCurrentIndex(0)
@@ -337,7 +341,7 @@ class Window(QMainWindow):
 		
 		# control parameter set buttons
 		# vsg page
-		self.ui.awgSetGeneral.clicked.connect(lambda: set.setGeneralAWG(self,setFocusButton,setParams,greyHover,unsetFocusButton,greyButton,self.ui.awgSetGeneral))
+		self.ui.awgSetGeneral.clicked.connect(lambda: set.setGeneralAWG(self,setFocusButton,setParams,greyHover,unsetFocusButton,greyButton,self.ui.awgSetGeneral,supply))
 		self.ui.vsgSetGeneral.clicked.connect(lambda: set.setGeneralVSG(self,setFocusButton,setParams,greyHover,unsetFocusButton,greyButton,self.ui.vsgSetGeneral))
 		self.ui.vsgSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.vsgEquipAdv,setParams,self.ui.vsgSetAdv))
 		self.ui.awgSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.awgEquipAdv,setParams,self.ui.awgSetAdv))
@@ -699,6 +703,10 @@ class Window(QMainWindow):
 		self.ui.dllFile_dig.textChanged.connect(lambda: param.copyDemod(self, self.ui.dllFile_dig, self.ui.dllFile_scope, self.ui.dllFile_uxa))
 		self.ui.setupFile_dig.textChanged.connect(lambda: param.copyDemod(self, self.ui.setupFile_dig,self.ui.setupFile_scope,self.ui.setupFile_uxa))
 		self.ui.dataFile_dig.textChanged.connect(lambda: param.copyDemod(self, self.ui.dataFile_dig,self.ui.dataFile_scope,self.ui.dataFile_uxa))
+		
+		# awg measurement page
+		self.ui.refClockSorce_awg.currentIndexChanged.connect(lambda: param.enableExtRefClkFreq(self))
+		
 		
 		# show on window
 		self.show()	

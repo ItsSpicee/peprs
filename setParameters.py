@@ -6,8 +6,26 @@ from PyQt5.QtCore import (Qt)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions used in main.py
 
-def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,awgSetGeneral):
+def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,awgSetGeneral,supply):
 	if awgSetGeneral.isChecked() == True:
+		# call matlab instrument code
+		refClkSrc = self.ui.refClockSorce_awg.currentIndex()
+		refClkFreq = self.ui.extRefFreq_awg.text()
+		sampClkSrc = self.ui.sampleClkSource_awg.currentIndex()
+		address = self.ui.address_awg.text()
+		model = self.ui.model_awg.currentIndex()
+		trigMode = self.ui.trigMode_awg.currentIndex()
+		dacRange = self.ui.dacRange_awg.text()
+		result = supply.Set_AWG(refClkSrc,refClkFreq,sampClkSrc,model,trigMode,dacRange,nargout = 1)
+		result = result.split(";")
+		partNum = result[0]
+		error = result[1]
+		self.ui.partNum_awg.setText(partNum)
+		if model == 1:
+			self.ui.maxSampleRate_awg.setText("8e9")
+		elif model == 2:
+			self.ui.maxSampleRate_awg.setText("12e9")
+		
 		self.ui.awgButton_vsg.setStyleSheet(buttonFocus)
 		self.ui.awgButton_vsg_2.setStyleSheet(buttonFocus)
 		self.ui.awgButton_vsg_3.setStyleSheet(buttonFocus)
