@@ -4,16 +4,6 @@ from PyQt5.QtGui import (QCursor)
 from PyQt5.QtCore import (Qt)
 from PyQt5.QtWidgets import (QFileDialog)
 
-
-def fileBrowse(self, lineEdit):
-	fileInfo = str(QFileDialog.getOpenFileName())
-	fileList = fileInfo.split(",")
-	file = fileList[0]
-	file = file.replace("'","")
-	file = file.replace("(","")
-	lineEdit.clear()
-	lineEdit.insertPlainText(file)
-
 def changeStack(self,stackName,idx):
 	stackName.setCurrentIndex(idx)
 
@@ -164,6 +154,7 @@ def powerMeterAveraging(self,averagingTextBox,index,label):
 		label.setDisabled(True)
 		averagingTextBox.setDisabled(True)
 		averagingTextBox.setReadOnly(True)
+		
 def awgVSAMeasOnClick(self):
 	vsaSetChecked = self.ui.vsaMeasSet.isChecked()
 	vsaSetTwoChecked = self.ui.vsaMeasSet_2.isChecked()
@@ -171,10 +162,9 @@ def awgVSAMeasOnClick(self):
 	downChecked = self.ui.downSetVSAMeas.isChecked()
 	downEnabled = self.ui.vsaWorkflow_vsaMeas.currentIndex()
 	
-	if downEnabled == 1: # down enabled
-		if downChecked:
-			self.ui.measStack.setCurrentIndex(1)
-			self.ui.vsgMeasNextStack.setCurrentIndex(0)
+	if downEnabled == 1 and downChecked:
+		self.ui.measStack.setCurrentIndex(1)
+		self.ui.vsgMeasNextStack.setCurrentIndex(0)
 	else:
 		if vsaSetChecked or vsaSetTwoChecked:
 			self.ui.measStack.setCurrentIndex(1)
@@ -191,6 +181,10 @@ def downVSGMeasOnClick(self):
 def analyzerVSGMeasOnClick(self):
 	self.ui.vsaMeasParamTabs.setCurrentIndex(0)
 	self.ui.measStack.setCurrentIndex(0)
+	
+def switchVSAMeas(self,idx):
+	self.ui.vsaMeasParamTabs.setCurrentIndex(idx)
+	self.ui.rightFlowStack.setCurrentIndex(0)
 		
 # OLD CODE
 
@@ -212,3 +206,13 @@ def analyzerVSGMeasOnClick(self):
 	# self.ui.meterDash.setStyleSheet(blueButton)
 	# self.ui.vsaDash.setStyleSheet(blueButton)
 	# self.ui.saDash.setStyleSheet(blueButton)
+	
+# for old open folder buttons
+# def fileBrowse(self, lineEdit):
+	# fileInfo = str(QFileDialog.getOpenFileName())
+	# fileList = fileInfo.split(",")
+	# file = fileList[0]
+	# file = file.replace("'","")
+	# file = file.replace("(","")
+	# lineEdit.clear()
+	# lineEdit.insertPlainText(file)

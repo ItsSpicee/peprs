@@ -4,12 +4,14 @@
 
 import sys
 from PyQt5 import uic, QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import (QMessageBox, QTabWidget, QFileDialog,QDialog, QInputDialog, QTextEdit, QLineEdit, QLabel, QFrame, QGridLayout, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QMenu, QAction, qApp, QDesktopWidget, QMessageBox, QToolTip, QPushButton, QApplication, QProgressBar,QSizePolicy)
-from PyQt5.QtGui import (QCursor, QPen, QPainter, QColor, QIcon, QFont)
-from PyQt5.QtCore import (Qt, pyqtSlot, QSize)
+from PyQt5.QtWidgets import (QDialogButtonBox,QMessageBox, QTabWidget, QFileDialog,QDialog, QInputDialog, QTextEdit, QLineEdit, QLabel, QFrame, QGridLayout, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QMenu, QAction, qApp, QDesktopWidget, QMessageBox, QToolTip, QPushButton, QApplication, QProgressBar,QSizePolicy)
+from PyQt5.QtGui import (QCursor, QPen, QPainter, QColor, QIcon, QFont,QGuiApplication)
+from PyQt5.QtCore import (QEvent,Qt, pyqtSlot, QSize)
 
 from peprs import Ui_peprs
 from dutsetup import Ui_DUTSetup
+from safetycheck import Ui_safetycheck
+from qualitycheck import Ui_qualitycheck
 import setParameters as set
 import workflowNav as flow
 import windowFunctions as menu
@@ -25,10 +27,7 @@ class Window(QMainWindow):
 	def __init__(self):
 		super(Window,self).__init__()
 		self.ui = Ui_DUTSetup()
-		#self.ui = Ui_peprs()
-		##
 		self.ui.setupUi(self)
-		#self.initUI()
 		self.initDutUI()
 		
 	def initDutUI(self):
@@ -46,96 +45,112 @@ class Window(QMainWindow):
 		mimoChecked = self.ui.mimoRadio.isChecked()
 		misoChecked = self.ui.misoRadio.isChecked()
 		simoChecked = self.ui.simoRadio.isChecked()
-		if self.ui.sisoRadio.isChecked() == True :
+		if self.ui.sisoRadio.isChecked() == True:
 			self.hide()
 			self.ui.dutStackedWidget.hide()
 			self.ui = Ui_peprs()
 			self.ui.setupUi(self)
 			self.initMainUI()
 			self.show()
-			
 		elif mimoChecked == True or misoChecked or simoChecked:
 			self.ui.dutStackedWidget.setCurrentIndex(1)
-			
+	
 	def initMainUI(self):		
+		
+		# safety and quality check dialog setup and signals
+		safety = QDialog(self)
+		safety.ui = Ui_safetycheck()
+		safety.ui.setupUi(safety)
+		safety.setWindowTitle('DUT Information - Safety Check')
+		safety.ui.safetyCheckButtons.accepted.connect(lambda: self.safetyComplete(safety))
+		safety.ui.safetyCheckButtons.rejected.connect(lambda: self.safetyCancel(safety))
+		
+		quality = QDialog(self)
+		quality.ui = Ui_qualitycheck()
+		quality.ui.setupUi(quality)
+		quality.setWindowTitle('Quality Check')
+		quality.ui.qualityCheckButtons.accepted.connect(lambda: self.qualityComplete(quality))
+		quality.ui.qualityCheckButtons.rejected.connect(lambda: self.qualityCancel(quality))
+		#quality.closeEvent()
+		
 		#setting up file import buttons
-		self.ui.filePushButton_13.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_algo_3))
-		self.ui.filePushButton_14.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileIField_algo_3))
-		self.ui.filePushButton_15.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileQField_algo_3))
-		self.ui.filePushButton_11.clicked.connect(lambda: menu.fileBrowse(self, self.ui.customIField_algo))
-		self.ui.filePushButton_12.clicked.connect(lambda: menu.fileBrowse(self, self.ui.customQField_algo))
-		self.ui.filePushButton_7.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_algo_2))
-		self.ui.filePushButton_8.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_algo_2))
-		self.ui.filePushButton_9.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileIField_algo_2))
-		self.ui.filePushButton_10.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileQField_algo_2))
-		self.ui.filePushButton_4.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsaCalFileField_algo))
-		self.ui.filePushButton_5.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileIField_algo))
-		self.ui.filePushButton_3.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_algo))
-		self.ui.filePushButton_6.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileQField_algo))
-		self.ui.filePushButton.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_comb))
-		self.ui.filePushButton_2.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalSaveLocField_comb))
-		self.ui.filePushButton_17.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upCalFileField_vsgMeas_2))
-		self.ui.filePushButton_18.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upCalSaveLocField_vsgMeas))
-		self.ui.filePushButton_19.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqFileField_vsgMeas_2))
-		self.ui.filePushButton_20.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_vsgMeas))
-		self.ui.filePushButton_21.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqSaveLocField_vsgMeas_2))
-		self.ui.filePushButton_22.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calStructSaveLocField_vsgMeas_2))
-		self.ui.filePushButton_23.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsgCalSaveLocField_vsgMeas_2))
-		self.ui.filePushButton_24.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_vsgMeas_2))
-		self.ui.filePushButton_25.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqFileField_vsgMeas))
-		self.ui.filePushButton_26.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqSaveLocField_vsgMeas))
-		self.ui.filePushButton_27.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsgCalSaveLocField_vsgMeas))
-		self.ui.filePushButton_28.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calStructSaveLocField_vsgMeas))
-		self.ui.filePushButton_29.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upCalFileField_vsgMeas))
-		self.ui.filePushButton_30.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upSaveLocField_vsgMeas))
-		self.ui.filePushButton_31.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileIField_vsgMeas))
-		self.ui.filePushButton_32.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileQField_vsgMeas))
-		self.ui.filePushButton_33.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFielField_vsgMeas))
-		self.ui.filePushButton_34.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upCalFileField_vsgMeas_3))
-		self.ui.filePushButton_35.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upCalSaveLocField_vsgMeas_2))
-		self.ui.filePushButton_36.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqFileField_vsgMeas_3))
-		self.ui.filePushButton_37.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_vsgMeas_2))
-		self.ui.filePushButton_38.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqSaveLocField_vsgMeas_3))
-		self.ui.filePushButton_39.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsgCalSaveLocField_vsgMeas_3))
-		self.ui.filePushButton_40.clicked.connect(lambda: flow.fileBrowse(self, self.ui.calStructSaveLocField_vsgMeas_3))
-		self.ui.filePushButton_41.clicked.connect(lambda: menu.fileBrowse(self, self.ui.awgCalFileField_vsgMeas_2))
-		self.ui.filePushButton_42.clicked.connect(lambda: menu.fileBrowse(self, self.ui.ampCorrFileField_vsgMeas))
-		self.ui.filePushButton_43.clicked.connect(lambda: menu.fileBrowse(self, self.ui.awgCalSaveLocField_vsgMeas_2))
-		self.ui.filePushButton_44.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_vsgMeas))
-		self.ui.filePushButton_45.clicked.connect(lambda: menu.fileBrowse(self, self.ui.ampCorrFile_vsgMeas))
-		self.ui.filePushButton_46.clicked.connect(lambda: menu.fileBrowse(self, self.ui.awgCalFileField_vsgMeas))
-		self.ui.filePushButton_47.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFilterFileField_vsgMeas))
-		self.ui.filePushButton_48.clicked.connect(lambda: flow.fileBrowse(self, self.ui.awgCalSaveLocField_vsgMeas))
-		self.ui.filePushButton_49.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dllFile_uxa))
-		self.ui.filePushButton_50.clicked.connect(lambda: menu.fileBrowse(self, self.ui.setupFile_uxa))
-		self.ui.filePushButton_51.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dataFile_uxa))
-		self.ui.filePushButton_52.clicked.connect(lambda: menu.fileBrowse(self, self.ui.setupFile_scope))
-		self.ui.filePushButton_53.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dllFile_scope))
-		self.ui.filePushButton_54.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dataFile_scope))
-		self.ui.filePushButton_55.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dllFile_dig))
-		self.ui.filePushButton_56.clicked.connect(lambda: menu.fileBrowse(self, self.ui.setupFile_dig))
-		self.ui.filePushButton_57.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dataFile_dig))
-		self.ui.filePushButton_16.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_algo_3))
-		self.ui.filePushButton_58.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsaCalFileField_vsg))
-		self.ui.filePushButton_59.clicked.connect(lambda: menu.fileOpen(self, self.ui.iqFileField_vsg))
-		self.ui.filePushButton_60.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsgFileField_vsg))
-		self.ui.filePushButton_61.clicked.connect(lambda: menu.fileOpen(self, self.ui.calStructField_vsg))
-		self.ui.filePushButton_62.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsaCalFileField_vsa))
-		self.ui.filePushButton_63.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsgCalFileField_vsg))
-		self.ui.filePushButton_64.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsgCalPath_algo))
-		self.ui.filePushButton_65.clicked.connect(lambda: menu.fileOpen(self, self.ui.iqPathField_algo))
-		self.ui.filePushButton_66.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsgCalPathField_algo))
-		self.ui.filePushButton_67.clicked.connect(lambda: menu.fileOpen(self, self.ui.calStructPathField_algo))
-		self.ui.filePushButton_68.clicked.connect(lambda: menu.fileOpen(self, self.ui.calValPathField_algo))
-		self.ui.filePushButton_69.clicked.connect(lambda: menu.fileOpen(self, self.ui.calValPathField_algo_2))
-		self.ui.filePushButton_70.clicked.connect(lambda: menu.fileOpen(self, self.ui.dpdMeasPathField_algo))
-		self.ui.filePushButton_71.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsaCalPathField_algo))
+		self.ui.filePushButton_13.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_algo_3,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_14.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileIField_algo_3,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_15.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileQField_algo_3,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_11.clicked.connect(lambda: menu.fileBrowse(self, self.ui.customIField_algo,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_12.clicked.connect(lambda: menu.fileBrowse(self, self.ui.customQField_algo,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_7.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_algo_2,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_8.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_algo_2,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_9.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileIField_algo_2,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_10.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileQField_algo_2,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_4.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsaCalFileField_algo,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_5.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileIField_algo,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_3.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_algo,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_6.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileQField_algo,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_comb,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_2.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalSaveLocField_comb,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_17.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upCalFileField_vsgMeas_2,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_18.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upCalSaveLocField_vsgMeas,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_19.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqFileField_vsgMeas_2,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_20.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_vsgMeas,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_21.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqSaveLocField_vsgMeas_2,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_22.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calStructSaveLocField_vsgMeas_2,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_23.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsgCalSaveLocField_vsgMeas_2,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_24.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_vsgMeas_2,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_25.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqFileField_vsgMeas,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_26.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqSaveLocField_vsgMeas,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_27.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsgCalSaveLocField_vsgMeas,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_28.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calStructSaveLocField_vsgMeas,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_29.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upCalFileField_vsgMeas,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_30.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upSaveLocField_vsgMeas,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_31.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileIField_vsgMeas,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_32.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileQField_vsgMeas,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_33.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFielField_vsgMeas,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_34.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upCalFileField_vsgMeas_3,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_35.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upCalSaveLocField_vsgMeas_2,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_36.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqFileField_vsgMeas_3,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_37.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_vsgMeas_2,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_38.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqSaveLocField_vsgMeas_3,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_39.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsgCalSaveLocField_vsgMeas_3,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_40.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calStructSaveLocField_vsgMeas_3,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_41.clicked.connect(lambda: menu.fileBrowse(self, self.ui.awgCalFileField_vsgMeas_2,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_42.clicked.connect(lambda: menu.fileBrowse(self, self.ui.ampCorrFileField_vsgMeas,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_43.clicked.connect(lambda: menu.fileBrowse(self, self.ui.awgCalSaveLocField_vsgMeas_2,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_44.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_vsgMeas,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_45.clicked.connect(lambda: menu.fileBrowse(self, self.ui.ampCorrFile_vsgMeas,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_46.clicked.connect(lambda: menu.fileBrowse(self, self.ui.awgCalFileField_vsgMeas,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_47.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFilterFileField_vsgMeas,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_48.clicked.connect(lambda: menu.fileBrowse(self, self.ui.awgCalSaveLocField_vsgMeas,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_49.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dllFile_uxa,"W:\Test_and_Measurement_Code\Equipment Setup\Demodulator"))
+		self.ui.filePushButton_50.clicked.connect(lambda: menu.fileBrowse(self, self.ui.setupFile_uxa,"W:\Test_and_Measurement_Code\Equipment Setup\Demodulator"))
+		self.ui.filePushButton_51.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dataFile_uxa,"W:\Test_and_Measurement_Code\Equipment Setup\Demodulator"))
+		self.ui.filePushButton_52.clicked.connect(lambda: menu.fileBrowse(self, self.ui.setupFile_scope,"W:\Test_and_Measurement_Code\Equipment Setup\Demodulator"))
+		self.ui.filePushButton_53.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dllFile_scope,"W:\Test_and_Measurement_Code\Equipment Setup\Demodulator"))
+		self.ui.filePushButton_54.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dataFile_scope,"W:\Test_and_Measurement_Code\Equipment Setup\Demodulator"))
+		self.ui.filePushButton_55.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dllFile_dig,"W:\Test_and_Measurement_Code\Equipment Setup\Demodulator"))
+		self.ui.filePushButton_56.clicked.connect(lambda: menu.fileBrowse(self, self.ui.setupFile_dig,"W:\Test_and_Measurement_Code\Equipment Setup\Demodulator"))
+		self.ui.filePushButton_57.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dataFile_dig,"W:\Test_and_Measurement_Code\Equipment Setup\Demodulator"))
+		self.ui.filePushButton_16.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_algo_3,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_58.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsaCalFileField_vsg,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_59.clicked.connect(lambda: menu.fileOpen(self, self.ui.iqFileField_vsg,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_60.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsgFileField_vsg,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_61.clicked.connect(lambda: menu.fileOpen(self, self.ui.calStructField_vsg,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_62.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsaCalFileField_vsa,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_63.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsgCalFileField_vsg,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_64.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsgCalPath_algo,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_65.clicked.connect(lambda: menu.fileOpen(self, self.ui.iqPathField_algo,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_66.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsgCalPathField_algo,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_67.clicked.connect(lambda: menu.fileOpen(self, self.ui.calStructPathField_algo,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_68.clicked.connect(lambda: menu.fileOpen(self, self.ui.calValPathField_algo,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_69.clicked.connect(lambda: menu.fileOpen(self, self.ui.calValPathField_algo_2,"W:\Test_and_Measurement_Code\Measurement Data"))
+		self.ui.filePushButton_70.clicked.connect(lambda: menu.fileOpen(self, self.ui.dpdMeasPathField_algo,"W:\Test_and_Measurement_Code\DPD Data"))
+		self.ui.filePushButton_71.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsaCalPathField_algo,"W:\Test_and_Measurement_Code\Measurement Data"))
 	
 		# styling variables
 		unsetFocusButton = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:0.994318, y1:0.682, x2:1, y2:0, stop:0 rgba(72, 144, 216, 255), stop:1 rgba(83, 170, 252, 255)); border-radius:5px;color:white;font-weight:bold;}"
-		setButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none}"
+		setButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none;font-weight:bold;}"
 		setFocusButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none;font-weight:700;font-size:11px}"
-		setButtonHover = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none} QPushButton:hover{background-color:rgb(28, 126, 159)}"
+		setButtonHover = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none;font-weight:bold;} QPushButton:hover{background-color:rgb(28, 126, 159);}"
 		setParams = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #515a70}"
 		unsetParams = "QGroupBox{background-color:rgb(247, 247, 247)}"
 		greyButton = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;}"
@@ -222,13 +237,14 @@ class Window(QMainWindow):
 		# vsa meas page
 		self.ui.vsaMeasParamTabs.setCurrentIndex(0)
 		self.ui.vsaMeasGenStack.setCurrentIndex(0)
-		self.ui.vsaMeasAdvStack.setCurrentIndex(0)
+		self.ui.rightFlowStack.setCurrentIndex(0)
 		self.ui.vsaMeasNextStack.setCurrentIndex(0)
 		self.ui.debugVSAStack.setCurrentIndex(1)
 		self.ui.resultsVSATabs.setCurrentIndex(0)
 		self.ui.vsaResultsStack_vsaMeas.setCurrentIndex(1)
 		self.ui.vsaMeasRunStack.setCurrentIndex(1)
 		self.ui.downStack_vsaMeas.setCurrentIndex(0)
+		self.ui.saMeasTabs.setCurrentIndex(0)
 		# vsg meas page
 		self.ui.debugVSGStack.setCurrentIndex(2)
 		self.ui.vsaResultsStack_vsgMeas.setCurrentIndex(1)
@@ -239,15 +255,20 @@ class Window(QMainWindow):
 		self.ui.advParamsStack_vsgMeas.setCurrentIndex(0)
 		self.ui.vsgResultsTabs_vsgMeas.setCurrentIndex(0)
 		self.ui.vsgResultsFileStack_vsgMeas.setCurrentIndex(1)
+		self.ui.resultsTabs_vsgMeas.setCurrentIndex(1)
 		# algo page
 		self.ui.algoTabs.setCurrentIndex(0)
 		self.ui.algoNextStack.setCurrentIndex(0)
 		self.ui.debugAlgoStack.setCurrentIndex(2)
 		self.ui.calValResultsStack.setCurrentIndex(1)
 		self.ui.resultsAlgoTabs.setCurrentIndex(2)
-		self.ui.calWorkflowAlgoStack.setCurrentIndex(0)
+		self.ui.calWorkflowTabs.setCurrentIndex(0)
 		self.ui.dpdAlgoStack.setCurrentIndex(1)
 		self.ui.precharAlgoStack.setCurrentIndex(1)
+		self.ui.vsaCalResultsStack_algo.setCurrentIndex(0)
+		self.ui.vsgCalTabs_algo.setCurrentIndex(0)
+		self.ui.vsgCalResults_algo.setCurrentIndex(0)
+		
 		
 		# setting visibility of components
 		# vsa meas page
@@ -306,12 +327,10 @@ class Window(QMainWindow):
 		self.ui.p1Enabled.currentIndexChanged.connect(lambda: param.enableSupplyOne(self))
 		self.ui.p2Enabled.currentIndexChanged.connect(lambda: param.enableSupplyTwo(self))
 		self.ui.p3Enabled.currentIndexChanged.connect(lambda: param.enableSupplyThree(self))
-		
-		# browse/open folder action
-
 	
 		# expand/shrink depending on which step tab is clicked
-		self.ui.stepTabs.currentChanged.connect(lambda: menu.changeStepTab(self))
+		self.ui.stepTabs.currentChanged.connect(lambda: menu.changeStepTab(self,safety,quality))
+
 		# vsa meas page
 		self.ui.vsaMeasParamTabs.currentChanged.connect(lambda: menu.switchMeasTabVSA(self))
 		self.ui.vsgMeasParamTabs.currentChanged.connect(lambda: menu.switchMeasTabVSG(self))
@@ -324,23 +343,25 @@ class Window(QMainWindow):
 		self.ui.vsgSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.vsgEquipAdv,setParams,self.ui.vsgSetAdv))
 		self.ui.awgSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.awgEquipAdv,setParams,self.ui.awgSetAdv))
 		# upconverter page
-		self.ui.upSet.clicked.connect(lambda: set.setUp(self,setFocusButton,setButton,setParams,greyHover,self.ui.upSet))
-		self.ui.psgSet.clicked.connect(lambda: set.setPSG(self,setFocusButton,setButton,setParams,greyHover,self.ui.psgSet))
+		self.ui.upSet.clicked.connect(lambda: set.setUp(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.upSet))
+		self.ui.psgSet.clicked.connect(lambda: set.setPSG(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.psgSet))
 		# vsa page
-		self.ui.uxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,self.ui.uxaSet))
-		self.ui.pxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,self.ui.pxaSet))
+		self.ui.uxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.uxaSet))
+		self.ui.pxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.pxaSet))
 		self.ui.uxaVSASetAdv.clicked.connect(lambda: set.setVSAAdv(self,setParams,self.ui.uxaVSASetAdv))
-		self.ui.scopeSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,self.ui.scopeSet))
-		self.ui.digSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,self.ui.digSet))
+		self.ui.scopeSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.scopeSet))
+		self.ui.digSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.digSet))
 		# downconverter page
 		self.ui.downSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.downEquipAdv,setParams,self.ui.downSetAdv))
-		self.ui.downSet.clicked.connect(lambda: set.setDown(self,setFocusButton,greyHover,setButtonHover,setParams,self.ui.downSet))
+		self.ui.downSet.clicked.connect(lambda: set.setDown(self,setFocusButton,greyHover,setButtonHover,setParams,greyButton,unsetFocusButton,self.ui.downSet))
 		# meter page
-		self.ui.meterSet.clicked.connect(lambda: set.setMeter(self,setFocusButton,setButtonHover,greyHover,setParams,self.ui.meterSet,supply))
+		self.ui.meterSet.clicked.connect(lambda: set.setMeter(self,setFocusButton,setButtonHover,greyHover,setParams,greyButton,unsetFocusButton,self.ui.meterSet,supply))
 		
 		# sa page
 		self.ui.saSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.saEquipAdv,setParams,self.ui.saSetAdv))
-		self.ui.saSet.clicked.connect(lambda: set.setSA(self,setFocusButton,setButtonHover,greyHover,setParams,self.ui.saSet,supply))
+
+		self.ui.saSet.clicked.connect(lambda: set.setSA(self,setFocusButton,setButtonHover,greyHover,setParams,self.ui.saSet,greyButton,unsetFocusButton,supply))
+
 		# power 1 page
 		self.ui.p1Set.clicked.connect(lambda: set.setP1(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton,supply,unsetFocusButton,self.ui.p1Set))
 		# power 2 page
@@ -348,8 +369,8 @@ class Window(QMainWindow):
 		# power 3 page
 		self.ui.p3Set.clicked.connect(lambda: set.setP3(self,setParams,setFocusButton,setButtonHover,supply,unsetFocusButton,greyHover,self.ui.p3Set))
 		# vsa meas page
-		self.ui.vsaMeasSet.clicked.connect(lambda: set.setVSAMeasDig(self,setParams,setButtonHover,self.ui.vsaMeasSet))
-		self.ui.vsaMeasSet_2.clicked.connect(lambda: set.setVSAMeasGen(self,setParams,setButtonHover,self.ui.vsaMeasSet_2))
+		self.ui.vsaMeasSet.clicked.connect(lambda: set.setVSAMeasDig(self,setParams,setButtonHover,setButton,self.ui.vsaMeasSet))
+		self.ui.vsaMeasSet_2.clicked.connect(lambda: set.setVSAMeasGen(self,setParams,setButtonHover,setButton,self.ui.vsaMeasSet_2))
 		self.ui.set_run_vsa.clicked.connect(lambda: set.rxCalRoutine(self,setParams,setButtonHover,self.ui.set_run_vsa))
 		self.ui.downSetVSAMeas.clicked.connect(lambda: set.noRXCalRoutine(self,setParams,setButtonHover,self.ui.downSetVSAMeas))
 		self.ui.vsaMeasAdvSet.clicked.connect(lambda: set.setVSAMeasAdv(self,setParams,self.ui.vsaMeasAdvSet))
@@ -358,8 +379,8 @@ class Window(QMainWindow):
 		self.ui.awgPreview_vsgMeas.clicked.connect(lambda: set.awgPreview(self))
 		self.ui.awgPreviewRun_vsgMeas.clicked.connect(lambda: set.awgPreview(self))
 		self.ui.awgSetRun_vsgMeas.clicked.connect(lambda: set.awgCalRoutine(self,setParams,self.ui.awgSetRun_vsgMeas))
-		self.ui.setAdv_vsgMeas.clicked.connect(lambda: set.setAdvVSGMeas(self,setParams,self.ui.setAdv_vsgMeas))
-		self.ui.setAdv_vsgMeas_2.clicked.connect(lambda: set.setAdvVSGMeas(self,setParams,self.ui.setAdv_vsgMeas_2))
+		self.ui.setAdv_vsgMeas.clicked.connect(lambda: set.setAdvAWG_vsgMeas(self,setParams,self.ui.setAdv_vsgMeas))
+		self.ui.setAdv_vsgMeas_2.clicked.connect(lambda: set.setAdvAWGVSA_vsgMeas(self,setParams,self.ui.setAdv_vsgMeas_2))
 		self.ui.upSet_vsgMeas.clicked.connect(lambda: set.setUpVSGMeas(self,setParams,self.ui.upSet_vsgMeas))
 		self.ui.heteroRun.clicked.connect(lambda: set.setHetero(self,setParams,self.ui.heteroRun))
 		self.ui.homoRun.clicked.connect(lambda: set.setHomo(self,setParams,self.ui.homoRun))
@@ -631,15 +652,15 @@ class Window(QMainWindow):
 		self.ui.power2Button_p3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,7))
 		self.ui.power2Button_p3_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,7))
 		# vsa meas page
-		self.ui.saButton_vsaMeas.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(2))
-		self.ui.saButton_vsaMeas_2.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(2))
-		self.ui.downButton_vsaMeas.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(1))
-		self.ui.scopeButton_vsaMeas.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(0))
-		self.ui.scopeButton_vsaMeas_2.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(0))
-		self.ui.digButton_vsaMeas.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(0))
-		self.ui.digButton_vsaMeas_2.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(0))
-		self.ui.uxaButton_vsaMeas.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(0))
-		self.ui.pxaButton_vsaMeas.clicked.connect(lambda: self.ui.vsaMeasParamTabs.setCurrentIndex(0))
+		self.ui.saButton_vsaMeas.clicked.connect(lambda: self.ui.rightFlowStack.setCurrentIndex(1))
+		self.ui.saButton_vsaMeas_2.clicked.connect(lambda: self.ui.rightFlowStack.setCurrentIndex(1))
+		self.ui.downButton_vsaMeas.clicked.connect(lambda: flow.switchVSAMeas(self,1))
+		self.ui.scopeButton_vsaMeas.clicked.connect(lambda: flow.switchVSAMeas(self,0))
+		self.ui.scopeButton_vsaMeas_2.clicked.connect(lambda: flow.switchVSAMeas(self,0))
+		self.ui.digButton_vsaMeas.clicked.connect(lambda: flow.switchVSAMeas(self,0))
+		self.ui.digButton_vsaMeas_2.clicked.connect(lambda: flow.switchVSAMeas(self,0))
+		self.ui.uxaButton_vsaMeas.clicked.connect(lambda: flow.switchVSAMeas(self,0))
+		self.ui.pxaButton_vsaMeas.clicked.connect(lambda: flow.switchVSAMeas(self,0))
 		self.ui.awgButton_vsaMeas.clicked.connect(lambda: flow.awgVSAMeasOnClick(self))
 		self.ui.awgButton_vsaMeas_2.clicked.connect(lambda: flow.awgVSAMeasOnClick(self))
 		self.ui.awgButton_vsaMeas_3.clicked.connect(lambda: flow.awgVSAMeasOnClick(self))
@@ -660,6 +681,14 @@ class Window(QMainWindow):
 		self.ui.awgButton_vsgMeas_2.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(0))
 		self.ui.awgButton_vsgMeas_3.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(0))
 		self.ui.vsgButton_vsgMeas.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(0))
+		# algo page
+		self.ui.calValPreview.clicked.connect(lambda: set.calValPreview(self))
+		self.ui.calValRun.clicked.connect(lambda: set.runCalValidation(self,setParams,self.ui.calValRun))
+		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self))
+		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun))
+		self.ui.dpdPreview.clicked.connect(lambda: set.dpdPreview(self))
+		self.ui.dpdRun.clicked.connect(lambda: set.runDPD(self,setParams,self.ui.dpdRun))
+		self.ui.algoSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.refRXAdvEquip,setParams,self.ui.algoSetAdv))
 		
 		# control parameter changes
 		self.ui.dllFile_scope.textChanged.connect(lambda: param.copyDemod(self, self.ui.dllFile_scope, self.ui.dllFile_uxa, self.ui.dllFile_dig))
@@ -677,13 +706,67 @@ class Window(QMainWindow):
 		# show on window
 		self.show()	
 	
+	def safetyComplete(self,safety):
+		maxTrue = self.isMaximized()
+		screen = QGuiApplication.primaryScreen()
+		screenSize = screen.availableSize()
+		height = screenSize.height()
+		maxHeight = height - 50
+		nmse = safety.ui.dutNMSE.text()
+		power = safety.ui.dutPower.text()
+		gain = safety.ui.dutGain.text()
+		papr = safety.ui.paprCheck.text()
+		if nmse != "" and power != "" and gain != "" and papr != "":
+			safety.done(0)
+			self.setMinimumSize(1265,maxHeight)
+			self.resize(1265,maxHeight)
+			self.center()
+		else:
+			msg = QMessageBox(self)
+			msg.setIcon(QMessageBox.Critical)
+			msg.setWindowTitle('Missing Data')
+			msg.setText("Please fill out all fields before moving on")
+			msg.setStandardButtons(QMessageBox.Ok)
+			msg.exec_();
+	
+	def qualityComplete(self,quality):
+		maxTrue = self.isMaximized()
+		screen = QGuiApplication.primaryScreen()
+		screenSize = screen.availableSize()
+		height = screenSize.height()
+		maxHeight = height - 50
+		rxCheck = quality.ui.qualityReceiverCheck.isChecked()
+		txCheck = quality.ui.qualityGeneratorCheck.isChecked()
+		if rxCheck and txCheck:
+			quality.done(0)
+			self.setMinimumSize(1265,maxHeight)
+			self.resize(1265,maxHeight)
+			self.center()
+		else:
+			msg = QMessageBox(self)
+			msg.setIcon(QMessageBox.Critical)
+			msg.setWindowTitle('Missing Data')
+			msg.setText("Please fill out all fields before moving on")
+			msg.setStandardButtons(QMessageBox.Ok)
+			msg.exec_();
+			
+	def safetyCancel(self,safety):
+		safety.done(0)
+		menu.tabCounterIncrement(self,"down")
+		self.ui.stepTabs.setCurrentIndex(2)
+		
+	def qualityCancel(self,quality):
+		quality.done(0)
+		menu.tabCounterIncrement(self,"down")
+		self.ui.stepTabs.setCurrentIndex(1)
+	
 	def closeEvent(self,event):
 		reply=QMessageBox.question(self,'Exit Confirmation',"Are you sure you want to close the program?",QMessageBox.Yes|QMessageBox.No,QMessageBox.No)
 		if reply == QMessageBox.Yes:
 			event.accept()
 		else:
 			event.ignore()
-
+			
 	def toggleCheck(self,state):
 		if state:
 			self.statusBar().showMessage('Safety Check Enabled',2000)
@@ -711,18 +794,18 @@ class Window(QMainWindow):
 	def toggleOutput(self,button,redButton,greenButton):
 		firstChecked = self.ui.emergButtonFirst.isChecked()
 		secondChecked = self.ui.emergButtonSecond.isChecked()
-		p1c1A = self.ui.p1c1Address.toPlainText()
-		p1c2A = self.ui.p1c2Address.toPlainText()
-		p1c3A = self.ui.p1c3Address.toPlainText()
-		p1c4A = self.ui.p1c4Address.toPlainText()
-		p2c1A = self.ui.p2c1Address.toPlainText()
-		p2c2A = self.ui.p2c2Address.toPlainText()
-		p2c3A = self.ui.p2c3Address.toPlainText()
-		p2c4A = self.ui.p2c4Address.toPlainText()
-		p3c1A = self.ui.p3c1Address.toPlainText()
-		p3c2A = self.ui.p3c2Address.toPlainText()
-		p3c3A = self.ui.p3c3Address.toPlainText()
-		p3c4A = self.ui.p3c4Address.toPlainText()
+		p1c1A = self.ui.p1c1Address.text()
+		p1c2A = self.ui.p1c2Address.text()
+		p1c3A = self.ui.p1c3Address.text()
+		p1c4A = self.ui.p1c4Address.text()
+		p2c1A = self.ui.p2c1Address.text()
+		p2c2A = self.ui.p2c2Address.text()
+		p2c3A = self.ui.p2c3Address.text()
+		p2c4A = self.ui.p2c4Address.text()
+		p3c1A = self.ui.p3c1Address.text()
+		p3c2A = self.ui.p3c2Address.text()
+		p3c3A = self.ui.p3c3Address.text()
+		p3c4A = self.ui.p3c4Address.text()
 		addressList = {p1c1A,p1c2A,p1c3A,p1c4A,p2c1A,p2c2A,p2c3A,p2c4A,p3c1A,p3c2A,p3c3A,p3c4A}
 		
 		if button == 1:
@@ -798,6 +881,15 @@ class Window(QMainWindow):
 		# pen = QPen(QtCore.Qt.black, 2, QtCore.Qt.SolidLine)
 		# qp.setPen(pen)
 		# qp.drawLine(60,100,70,110)
+		
+	# void LabelWidget::paintEvent(QPaintEvent*)
+	# {
+		# QPainter painter(this)
+		# painter.setPen(Qt::black);
+		# #... Need an appropriate call to painter.translate() for this to work properly
+		# painter.rotate(90);
+		# painter.drawText(QPoint(0,0), _text);
+	# }
 
 if __name__ == '__main__':
 	app = QApplication(sys.argv)
