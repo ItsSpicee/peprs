@@ -1,15 +1,16 @@
 % channel 1 and 2 are coupled
 
-function result = Set_AWG(refClkSrc,refClkFreq,sampClkSrc,model,trigMode,dacRange)
+function result = Set_AWG(address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode,dacRange)
 %function error = Set_AWG(refClkSrc,refClkFreq,Channel,Amplitude)
     % load arbConfig file in order to connect to AWG (cannot do so through
     % command expert)
     try 
         load('arbConfig.mat');
         arbConfig = loadArbConfig(arbConfig);
+        % set visa address
+        arbConfig.visaAddr = address;
         f = iqopen(arbConfig);
-        %supply = visa('agilent',address);
-        
+
         % initialize variables
         refSrc = "";
         sampSrc = "";

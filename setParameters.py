@@ -9,6 +9,7 @@ from PyQt5.QtCore import (Qt)
 def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,awgSetGeneral,supply):
 	if awgSetGeneral.isChecked() == True:
 		# call matlab instrument code
+		address = self.ui.address_awg.text()
 		refClkSrc = self.ui.refClockSorce_awg.currentIndex()
 		refClkFreq = self.ui.extRefFreq_awg.text()
 		sampClkSrc = self.ui.sampleClkSource_awg.currentIndex()
@@ -16,7 +17,7 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 		model = self.ui.model_awg.currentIndex()
 		trigMode = self.ui.trigMode_awg.currentIndex()
 		dacRange = self.ui.dacRange_awg.text()
-		result = supply.Set_AWG(refClkSrc,refClkFreq,sampClkSrc,model,trigMode,dacRange,nargout = 1)
+		result = supply.Set_AWG(address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode,dacRange,nargout = 1)
 		result = result.split(";")
 		partNum = result[0]
 		error = result[1]
