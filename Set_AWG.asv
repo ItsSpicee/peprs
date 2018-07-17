@@ -5,13 +5,9 @@ function result = Set_AWG(address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode
     % load arbConfig file in order to connect to AWG (cannot do so through
     % command expert)
     
-    % initialize variables
-        refSrc = "";
-        sampSrc = "";
-        error = "";
-        partNum = "";
+   
     
-    try   
+    try 
         load('arbConfig.mat');
         arbConfig = loadArbConfig(arbConfig);
         % set visa address
@@ -19,7 +15,6 @@ function result = Set_AWG(address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode
             error = "Please fill out all fields before attempting to set parameters."; 
         else   
             arbConfig.visaAddr = address;
-        end
         f = iqopen(arbConfig);
 
         idn = query(f, '*IDN?');

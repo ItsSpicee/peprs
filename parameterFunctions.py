@@ -107,6 +107,7 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 		self.ui.vsaWorkflow_up.setCurrentIndex(0)
 		self.ui.averagingEnableLabel.setEnabled(True)
 		self.ui.averagingEnable.setEnabled(True)
+		self.ui.scopeEquip_homo.setEnabled(False)
 	elif demod == 0:
 		self.ui.uxaMod.setEnabled(False)
 		self.ui.digMod.setEnabled(False)
@@ -123,6 +124,7 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.averagingEnableLabel.setEnabled(True)
 			self.ui.averagingEnable.setEnabled(True)
 			setVSAWorkflowsNoModNoDown(self,1,0,False)
+			self.ui.scopeEquip_homo.setEnabled(True)
 		elif vsaIdx == 2:
 			self.ui.vsaWorkflow.setCurrentIndex(1)
 			self.ui.single_vsa_stack.setCurrentIndex(1)
@@ -135,6 +137,7 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.averagingEnableLabel.setEnabled(False)
 			self.ui.averagingEnable.setEnabled(False)
 			setVSAWorkflowsNoModNoDown(self,1,1,False)
+			self.ui.scopeEquip_homo.setEnabled(False)
 		elif vsaIdx == 3:
 			self.ui.vsaWorkflow.setCurrentIndex(1)
 			self.ui.single_vsa_stack.setCurrentIndex(2)
@@ -150,6 +153,7 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.averagingEnableLabel.setEnabled(True)
 			self.ui.averagingEnable.setEnabled(True)
 			setVSAWorkflowsNoModNoDown(self,1,2,True)
+			self.ui.scopeEquip_homo.setEnabled(False)
 		elif vsaIdx == 4:
 			self.ui.vsaWorkflow.setCurrentIndex(1)
 			self.ui.single_vsa_stack.setCurrentIndex(3)
@@ -165,6 +169,7 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.averagingEnableLabel.setEnabled(True)
 			self.ui.averagingEnable.setEnabled(True)
 			setVSAWorkflowsNoModNoDown(self,1,3,True)
+			self.ui.scopeEquip_homo.setEnabled(False)
 		elif vsaIdx == 5:
 			self.ui.vsaEquipStack.setCurrentIndex(1)
 			self.ui.vsaAdvancedStack.setCurrentIndex(1)
@@ -176,6 +181,7 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.averagingEnable.setEnabled(True)
 			setVSAWorkflowsNoModWithDown(self,4,0,1,False)
 			self.ui.single_down_vsaMeas_stack.setCurrentIndex(1)
+			self.ui.scopeEquip_homo.setEnabled(True)
 		elif vsaIdx == 6:
 			self.ui.vsaEquipStack.setCurrentIndex(2)
 			self.ui.vsaAdvancedStack.setCurrentIndex(1)
@@ -187,6 +193,7 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.averagingEnable.setEnabled(False)
 			setVSAWorkflowsNoModWithDown(self,4,0,0,False)
 			self.ui.single_down_vsaMeas_stack.setCurrentIndex(0)
+			self.ui.scopeEquip_homo.setEnabled(False)
 	elif demod == 1:
 		self.ui.uxaMod.setEnabled(True)
 		self.ui.digMod.setEnabled(True)
@@ -202,6 +209,7 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.averagingEnableLabel.setEnabled(True)
 			self.ui.averagingEnable.setEnabled(True)
 			setVSAWorkflowsWithModNoDown(self,2,0,False)
+			self.ui.scopeEquip_homo.setEnabled(True)
 		elif vsaIdx == 2:
 			digOrScopeSet(self,2,averaging,demod,digChecked,greyHover,unsetBox,vsaIdx)
 			self.ui.vsaWorkflow.setCurrentIndex(2)
@@ -213,6 +221,7 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.averagingEnableLabel.setEnabled(False)
 			self.ui.averagingEnable.setEnabled(False)
 			setVSAWorkflowsWithModNoDown(self,2,1,False)
+			self.ui.scopeEquip_homo.setEnabled(False)
 		elif vsaIdx == 3:
 			uxaOrPxaSet(self,0,averaging,demod,uxaChecked,greyHover,unsetBox)
 			self.ui.vsaWorkflow.setCurrentIndex(2)
@@ -224,6 +233,7 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.averagingEnableLabel.setEnabled(True)
 			self.ui.averagingEnable.setEnabled(True)
 			setVSAWorkflowsWithModNoDown(self,2,2,True)
+			self.ui.scopeEquip_homo.setEnabled(False)
 		elif vsaIdx == 4:
 			uxaOrPxaSet(self,1,averaging,demod,pxaChecked,greyHover,unsetBox)
 			self.ui.vsaWorkflow.setCurrentIndex(2)
@@ -235,6 +245,7 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.averagingEnableLabel.setEnabled(True)
 			self.ui.averagingEnable.setEnabled(True)
 			setVSAWorkflowsWithModNoDown(self,2,3,True)
+			self.ui.scopeEquip_homo.setEnabled(False)
 		elif vsaIdx == 5:
 			digOrScopeDownSet(self,1,averaging,demod,scopeChecked,greyButton,greyHover,unsetBox,vsaIdx)
 			self.ui.vsaMeasGenStack.setCurrentIndex(0)
@@ -245,6 +256,7 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.averagingEnable.setEnabled(True)
 			setVSAWorkflowsWithModWithDown(self,3,1,0,False)
 			self.ui.single_down_vsaMeas_stack.setCurrentIndex(1)
+			self.ui.scopeEquip_homo.setEnabled(True)
 		elif vsaIdx == 6:
 			digOrScopeDownSet(self,2,averaging,demod,digChecked,greyButton,greyHover,unsetBox,vsaIdx)
 			self.ui.vsaMeasGenStack.setCurrentIndex(1)
@@ -255,6 +267,7 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.averagingEnable.setEnabled(False)
 			setVSAWorkflowsWithModWithDown(self,3,1,1,False)
 			self.ui.single_down_vsaMeas_stack.setCurrentIndex(0)
+			self.ui.scopeEquip_homo.setEnabled(False)
 	elif demod == 2:
 		self.ui.uxaMod.setEnabled(False)
 		self.ui.digMod.setEnabled(False)
@@ -270,6 +283,7 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.averagingEnableLabel.setEnabled(True)
 			self.ui.averagingEnable.setEnabled(True)
 			setVSAWorkflowsNoModNoDown(self,1,0,False)
+			self.ui.scopeEquip_homo.setEnabled(True)
 		elif vsaIdx == 2:
 			digOrScopeSet(self,2,averaging,demod,digChecked,greyHover,unsetBox,vsaIdx)
 			self.ui.vsaWorkflow.setCurrentIndex(1)
@@ -281,6 +295,7 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.averagingEnableLabel.setEnabled(False)
 			self.ui.averagingEnable.setEnabled(False)
 			setVSAWorkflowsNoModNoDown(self,1,1,False)
+			self.ui.scopeEquip_homo.setEnabled(False)
 		elif vsaIdx == 3:
 			uxaOrPxaSet(self,0,averaging,demod,uxaChecked,greyHover,unsetBox)
 			self.ui.vsaWorkflow.setCurrentIndex(1)
@@ -292,6 +307,7 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.averagingEnableLabel.setEnabled(True)
 			self.ui.averagingEnable.setEnabled(True)
 			setVSAWorkflowsNoModNoDown(self,1,2,True)
+			self.ui.scopeEquip_homo.setEnabled(False)
 		elif vsaIdx == 4:
 			uxaOrPxaSet(self,1,averaging,demod,pxaChecked,greyHover,unsetBox)
 			self.ui.vsaWorkflow.setCurrentIndex(1)
@@ -303,6 +319,7 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.averagingEnableLabel.setEnabled(True)
 			self.ui.averagingEnable.setEnabled(True)
 			setVSAWorkflowsNoModNoDown(self,1,3,True)
+			self.ui.scopeEquip_homo.setEnabled(False)
 		elif vsaIdx == 5:
 			digOrScopeDownSet(self,1,averaging,demod,scopeChecked,greyButton,greyHover,unsetBox,vsaIdx)
 			self.ui.vsaMeasGenStack.setCurrentIndex(0)
@@ -313,6 +330,7 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.averagingEnable.setEnabled(True)
 			setVSAWorkflowsNoModWithDown(self,4,0,1,False)
 			self.ui.single_down_vsaMeas_stack.setCurrentIndex(1)
+			self.ui.scopeEquip_homo.setEnabled(True)
 		elif vsaIdx == 6:	
 			digOrScopeDownSet(self,2,averaging,demod,digChecked,greyButton,greyHover,unsetBox,vsaIdx)
 			self.ui.vsaMeasGenStack.setCurrentIndex(1)
@@ -322,7 +340,8 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.averagingEnableLabel.setEnabled(False)
 			self.ui.averagingEnable.setEnabled(False)
 			setVSAWorkflowsNoModWithDown(self,4,0,0,False)
-			self.ui.single_down_vsaMeas_stack.setCurrentIndex(0)			
+			self.ui.single_down_vsaMeas_stack.setCurrentIndex(0)	
+			self.ui.scopeEquip_homo.setEnabled(False)
 				
 # apply changes from one demod box to all demod boxes
 def copyDemod(self,changedModField,replacedFieldOne,replacedFieldTwo):
@@ -704,10 +723,10 @@ def enableExtRefClkFreq(self):
 	idx = self.ui.refClockSorce_awg.currentIndex()
 	if idx == 2:
 		self.ui.extRefFreq_awg.setEnabled(True)
-		self.ui.label_4.setEnabled(True)
+		self.ui.extRefFreqLabel_awg.setEnabled(True)
 	else:
 		self.ui.extRefFreq_awg.setEnabled(False)
-		self.ui.label_4.setEnabled(False)
+		self.ui.extRefFreqLabel_awg.setEnabled(False)
 		
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions called within parameterFunctions	
