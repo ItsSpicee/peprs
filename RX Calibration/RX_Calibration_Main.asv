@@ -18,7 +18,6 @@ instrreset
 
 % load Cal parameters from GUI
 load("C:\Users\leing\Documents\Laura\git\peprs\Measurement Data\RX Calibration Parameters\Cal.mat");
-load("C:\Users\leing\Documents\Laura\git\peprs\Measurement Data\RX Calibration Parameters\RX.mat");
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Utilize 32-bit MATLAB flag
@@ -44,11 +43,14 @@ Cal.DesiredTones.NegativeAliasFrequency = (2.5e6:Cal.RFToneSpacing:242.5e6).';
 tones_freq = (-1.51e9:Cal.RFToneSpacing:1.51e9).';
 % tones_freq = tones_freq(tones_freq ~= 0);
 
+Cal.Directory = 'RX_CalResults';
+% Cal.Filename  = 'RX_CalResults_fc6r25GHz_BW3GHz';
+Cal.Filename  = 'RX_CalResults_fc25GHz_fLORX_27r002GHz_fIF_1r802GHz_BW3GHz';
+% Cal.Filename  = 'RX_CalResults_fc12r5GHz_fLORX_15r302GHz_fIF_2r802GHz_BW3GHz';
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Set RX Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-RX.Type                    = 'Scope';    
-
+RX.Type                    = 'Scope';    % Choose between 'UXA', 'Digitizer', 'Scope' for the receiver
 RX.Fcarrier                = 2.002e9;        % Center frequency of the received tones
 RX.LOLowerInjectionFlag    = false;      % Higher or lower LO injection
 RX.Analyzer.Fsample                 = 40e9;        % Sampling rate of the receiver
@@ -221,4 +223,7 @@ subplot(2,1,2); plot(tones_freq./1e9,  180/pi*unwrap(phase(tones_cal)), '.-'); h
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Save Data
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-save([Cal.SaveLocation], 'tones_freq', 'comb_I_cal', 'comb_Q_cal')
+if (~exist(Cal.Directory,'dir'))
+    mkdir(Cal.Directory);    addpath(genpath(Cal.Directory));
+end
+save(['.\' Cal.Directory '\' Cal.Filename], 'tones_freq', 'comb_I_cal', 'comb_Q_cal')

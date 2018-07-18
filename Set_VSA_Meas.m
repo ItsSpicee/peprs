@@ -4,8 +4,9 @@
 % If it’s false, they specify the measurement time.
 
 function Set_VSA_Meas(centerFreq,sampRate)  
+    load(".\Measurement Data\RX Calibration Parameters\RX.mat")
     RX.Fcarrier = centerFreq;
     
     RX.Analyzer.Fsample = sampRate;
-    
+    save(".\Measurement Data\RX Calibration Parameters\RX.mat")
 end

@@ -125,6 +125,9 @@ class Window(QMainWindow):
 		self.ui.filePushButton_56.clicked.connect(lambda: menu.fileBrowse(self, self.ui.setupFile_dig,".\Equipment Setup\Demodulator"))
 		self.ui.filePushButton_57.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dataFile_dig,".\Equipment Setup\Demodulator"))
 		self.ui.filePushButton_16.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_algo_3,".\Measurement Data"))
+		# UNCOMMENT THIS LATER
+		#self.ui.filePushButton_19.clicked.connect(lambda: menu.fileBrowse(self, self.ui.refFileField_comb,".\Measurement Data\Comb_Generator_Files"))
+		#self.ui.filePushButton_72.clicked.connect(lambda: menu.fileBrowse(self, self.ui.lineEdit_28))
 		self.ui.filePushButton_58.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsaCalFileField_vsg,".\Measurement Data"))
 		self.ui.filePushButton_59.clicked.connect(lambda: menu.fileOpen(self, self.ui.iqFileField_vsg,".\Measurement Data"))
 		self.ui.filePushButton_60.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsgFileField_vsg,".\Measurement Data"))
@@ -341,11 +344,11 @@ class Window(QMainWindow):
 		self.ui.upSet.clicked.connect(lambda: set.setUp(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.upSet))
 		self.ui.psgSet.clicked.connect(lambda: set.setPSG(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.psgSet))
 		# vsa page
-		self.ui.uxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.uxaSet))
-		self.ui.pxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.pxaSet))
+		self.ui.uxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.uxaSet,supply))
+		self.ui.pxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.pxaSet,supply))
 		self.ui.uxaVSASetAdv.clicked.connect(lambda: set.setVSAAdv(self,setParams,self.ui.uxaVSASetAdv))
-		self.ui.scopeSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.scopeSet))
-		self.ui.digSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.digSet))
+		self.ui.scopeSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.scopeSet,supply))
+		self.ui.digSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.digSet,supply))
 		# downconverter page
 		self.ui.downSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.downEquipAdv,setParams,self.ui.downSetAdv))
 		self.ui.downSet.clicked.connect(lambda: set.setDown(self,setFocusButton,greyHover,setButtonHover,setParams,greyButton,unsetFocusButton,self.ui.downSet))

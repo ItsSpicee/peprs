@@ -135,7 +135,7 @@ def setPSG(self,buttonFocus,buttonDone,boxDone,greyHover,greyButton,buttonSelect
 		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.ArrowCursor))
 		setButton.setText("Set")
 		
-def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSelect,setButton):
+def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSelect,setButton,supply):
 	averaging = self.ui.averagingEnable.currentIndex()
 	avgEnabled = self.ui.averagingEnable.isEnabled()
 	demod = self.ui.demodulationEnable.currentIndex()
@@ -146,7 +146,7 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 		if averaging != 0 or avgEnabled == False:
 			if demod != 0:
 				setButton.setText("Unset")
-				
+				#supply.Set_RXCal_VSAParams(,nargout=0)
 				# style mod related widgets
 				if typeIdx == 3 or typeIdx == 4: # UXA & PXA
 					self.ui.uxaEquipGeneralVSA.setStyleSheet(boxDone)
@@ -707,6 +707,18 @@ def setVSAMeasAdv(self,boxDone,setButton):
 def rxCalRoutine(self,boxDone,buttonHover,setButton):
 	if setButton.isChecked() == True:
 		setButton.setText("Unset")
+		# set matlab parameters
+		rfSpacing = self.ui.rfSpacingField_comb.text()
+		ifSpacing = self.ui.ifSpacingField_comb.text()
+		trigTime = self.ui.trigFrameTimeField_comb.text()
+		refFile = self.ui.refFileField_comb.text()
+		rfCenterFreq = self.ui.rfCenterFreqField_comb.text()
+		rfCalStartFreq = self.ui.rfCalStartFreqField_comb.text()
+		rfCalStopFreq = self.ui.rfCalStopFreqField_comb.text()
+		loFreqOffset = self.ui.loFreqOffsetField_comb.text()
+		saveLoc = self.ui.vsaCalSaveLocField_comb.text()
+		Set_VSA_Calibration(rfSpacing,ifSpacing,trigTime,refFile,rfCenterFreq,rfCalStartFreq,rfCalStopFreq,loFreqOffset,saveLoc)
+		
 		vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
 		if vsgType == 3: # vsg
 			self.ui.vsaMeasNextStack.setCurrentIndex(6)

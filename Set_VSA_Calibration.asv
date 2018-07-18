@@ -1,0 +1,24 @@
+% run when vsa calibration file needs to be generated
+% sets comb generator parameters
+% To generate structs:
+% Cal = struct
+% save("C:\Users\leing\Documents\Laura\cal_RXCal.mat","Cal")
+
+function Set_VSA_Calibration(rfSpacing,ifSpacing,trigTime,refFile,rfCenterFreq,rfCalStartFreq,rfCalStopFreq,loFreqOffset,saveLoc)
+    load(".\Measurement Data\RX Calibration Parameters\Cal.mat")
+    
+    cal_RXCal.RFToneSpacing = rfSpacing;
+    cal_RXCal.IFToneSpacing = ifSpacing;
+    cal_RXCal.LOFrequencyOffset = loFreqOffset;
+    cal_RXCal.SaveLocation = saveLoc;
+    
+    cal_RXCal.Reference.CombReferenceFile = refFile;
+    cal_RXCal.Reference.RFCenterFrequency = rfCenterFreq;
+    cal_RXCal.Reference.RFCalibrationStartFrequency = rfCalStartFreq;
+    cal_RXCal.Reference.RFCalibrationStopFrequency = rfCalStopFreq;
+
+    TX.FrameTime = trigTime;
+    clearvars -except cal_RXCal
+    save(".\Measurement Data\cal_RXCal.mat")
+    
+end
