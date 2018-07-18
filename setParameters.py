@@ -7,6 +7,7 @@ from PyQt5.QtCore import (Qt)
 # functions used in main.py
 
 def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,awgSetGeneral,supply):
+	flag = 0
 	if awgSetGeneral.isChecked() == True:
 		# call matlab instrument code
 		address = self.ui.address_awg.text()
@@ -17,40 +18,33 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 		model = self.ui.model_awg.currentIndex()
 		trigMode = self.ui.trigMode_awg.currentIndex()
 		dacRange = self.ui.dacRange_awg.text()
-		result = supply.Set_AWG(address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode,dacRange,nargout = 1)
-		result = result.split(";")
-		partNum = result[0]
-		error = result[1]
-		self.ui.partNum_awg.setText(partNum)
-		if model == 1:
-			self.ui.maxSampleRate_awg.setText("8e9")
-		elif model == 2:
-			self.ui.maxSampleRate_awg.setText("12e9")
+		flag = setAWGParams(self,address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode,dacRange,supply)
 		
-		self.ui.awgButton_vsg.setStyleSheet(buttonFocus)
-		self.ui.awgButton_vsg_2.setStyleSheet(buttonFocus)
-		self.ui.awgButton_vsg_3.setStyleSheet(buttonFocus)
-		self.ui.awgEquipGeneral.setStyleSheet(boxDone)
-		awgSetGeneral.setText("Unset")
-		setupIdx = self.ui.vsgWorkflows.currentIndex()
-		if setupIdx == 1:
-			self.ui.vsgNextSteps.setCurrentIndex(5)
-			self.ui.vsaButton_vsg.setStyleSheet(greyHover)
-			self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
-		elif setupIdx == 2:
-			self.ui.vsgNextSteps.setCurrentIndex(2)
-			self.ui.vsgNextSteps.setCurrentIndex(2)
-			self.ui.upButton_vsg.setStyleSheet(greyHover)
-			self.ui.upButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
-			self.ui.psgButton_vsg.setStyleSheet(greyHover)
-			self.ui.psgButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
-		elif setupIdx == 3:
-			self.ui.vsgNextSteps.setCurrentIndex(3)
-			self.ui.upButton_vsg.setStyleSheet(greyHover)
-			self.ui.upButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
-			self.ui.psgButton_vsg.setStyleSheet(greyHover)
-			self.ui.psgButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
-	elif  awgSetGeneral.isChecked() == False:
+		if flag == 1:
+			self.ui.awgButton_vsg.setStyleSheet(buttonFocus)
+			self.ui.awgButton_vsg_2.setStyleSheet(buttonFocus)
+			self.ui.awgButton_vsg_3.setStyleSheet(buttonFocus)
+			self.ui.awgEquipGeneral.setStyleSheet(boxDone)
+			awgSetGeneral.setText("Unset")
+			setupIdx = self.ui.vsgWorkflows.currentIndex()
+			if setupIdx == 1:
+				self.ui.vsgNextSteps.setCurrentIndex(5)
+				self.ui.vsaButton_vsg.setStyleSheet(greyHover)
+				self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
+			elif setupIdx == 2:
+				self.ui.vsgNextSteps.setCurrentIndex(2)
+				self.ui.vsgNextSteps.setCurrentIndex(2)
+				self.ui.upButton_vsg.setStyleSheet(greyHover)
+				self.ui.upButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
+				self.ui.psgButton_vsg.setStyleSheet(greyHover)
+				self.ui.psgButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
+			elif setupIdx == 3:
+				self.ui.vsgNextSteps.setCurrentIndex(3)
+				self.ui.upButton_vsg.setStyleSheet(greyHover)
+				self.ui.upButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
+				self.ui.psgButton_vsg.setStyleSheet(greyHover)
+				self.ui.psgButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
+	elif awgSetGeneral.isChecked() == False:
 		self.ui.awgEquipGeneral.setStyleSheet(None)
 		self.ui.awgButton_vsg.setStyleSheet(buttonSelected)
 		self.ui.awgButton_vsg_2.setStyleSheet(buttonSelected)
@@ -753,8 +747,12 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton):
 		self.ui.vsaMeasNextStack.setCurrentIndex(4)
 		setButton.setText("Set && Run")
 		
-def noRXCalRoutine(self,boxDone,buttonHover,setButton):
+def noRXCalRoutine(self,boxDone,buttonHover,setButton,supply):
 	if setButton.isChecked() == True:
+		# set matlab parameters
+		vsaCalFile = self.ui.vsaCalFileField_comb.text()
+		supply.Set_VSA_CalFile(vsaCalFile,nargout=0)
+		
 		setButton.setText("Unset")
 		vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
 		self.ui.combEquip_vsaMeas.setStyleSheet(boxDone)
@@ -1475,3 +1473,21 @@ def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,supply
 	else:
 		instrParamErrorMessage(self,error)
 		self.ui.p1Set.setChecked(False)
+		
+def setAWGParams(self,address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode,dacRange,supply):
+	result = supply.Set_AWG(address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode,dacRange,nargout = 1)
+	result = result.split(";")
+	partNum = result[0]
+	error = result[1]
+	if error == "":
+		self.ui.partNum_awg.setText(partNum)
+		if model == 1:
+			self.ui.maxSampleRate_awg.setText("8e9")
+		elif model == 2:
+			self.ui.maxSampleRate_awg.setText("12e9")
+		flag = 1
+		return flag
+	else:
+		instrParamErrorMessage(self,error)
+		# UNCOMMENT THIS LATER
+		#self.ui.awgSetGeneral.setChecked(False)

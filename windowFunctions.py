@@ -137,6 +137,18 @@ def fileBrowse(self, lineEdit,path):
 	lineEdit.clear()
 	lineEdit.setText(file)
 	
+def fileSave(self,lineEdit,path):
+	fileInfo = str(QFileDialog.getSaveFileName(self,'Save File Location',path,"Text Files (*.txt);;Matlab Files (*.mat)"))	
+	fileList = fileInfo.split(",")
+	file = fileList[0]
+	file = file.replace("'","")
+	file = file.replace("(","")
+	if file != "":
+		lineEdit.clear()
+		lineEdit.setText(file)
+		writeFile = open(file,'w')
+		writeFile.close()
+	
 def fileOpen(self,lineEdit,path):
 	file = str(QFileDialog.getExistingDirectory(self, "Select Directory", path))
 	fileList = file.split(",")
