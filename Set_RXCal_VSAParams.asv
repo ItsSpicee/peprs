@@ -1,9 +1,0 @@
-% creates struct for parameters set in VSA equipment tab that are used in the
-% RX Calibration code
-
-function Set_RXCal_VSAParams(type)
-    load(".\Measurement Data\RX Calibration Parameters\RX.mat")
-    RX.Type = type; % Choose between 'UXA', 'Digitizer', 'Scope', 'PXA', for the receiver
-    
-    save(".\Measurement Data\RX Calibration Parameters\RX.mat")
-end

@@ -48,16 +48,24 @@ tones_freq = (-1.51e9:Cal.RFToneSpacing:1.51e9).';
 %  Set RX Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 RX.Type                    = 'Scope';    
+RX.ScopeIVIDriverPath      = 'C:\Users\a38chung\Desktop\Scope\AgilentInfiniium.mdd';
+RX.VisaAddress             = 'USB0::0x0957::0x9001::MY48240314::0::INSTR';
+
 
 RX.Fcarrier                = 2.002e9;        % Center frequency of the received tones
-RX.LOLowerInjectionFlag    = false;      % Higher or lower LO injection
 RX.Analyzer.Fsample                 = 40e9;        % Sampling rate of the receiver
-RX.FrameTime               = 6 / Cal.RFToneSpacing;     % One measurement frame;
-RX.NumberOfMeasuredPeriods = 95;         % Number of measured frames;
-RX.Analyzer.PointsPerRecord         = RX.Analyzer.Fsample * RX.FrameTime * RX.NumberOfMeasuredPeriods;
 
-RX.VisaAddress             = 'USB0::0x0957::0x9001::MY48240314::0::INSTR';
-RX.ScopeIVIDriverPath      = 'C:\Users\a38chung\Desktop\Scope\AgilentInfiniium.mdd';
+% If TX Related frame time is true, averaging is also true. 
+% True: set the No. Recorded Time Frames and measurement Time (Frame time) is calculated. 
+% If it’s false, they specify the measurement time.
+
+RX.LOLowerInjectionFlag    = false;      % Higher or lower LO injection
+% no longer a field (period)
+RX.FrameTime               = 1 / Cal.RFToneSpacing;     % One measurement frame
+% gui field (how many periods captured)
+RX.NumberOfMeasuredPeriods = 95;         % Number of measured frames;
+
+RX.Analyzer.PointsPerRecord         = RX.Analyzer.Fsample * RX.FrameTime * RX.NumberOfMeasuredPeriods;
 
 % Scope Parameters
 RX.EnableExternalReferenceClock = false;
@@ -99,11 +107,12 @@ end
 %  the AWG from adding more segments to the signal, ensure that the trigger
 %  length is an integer of the minimum AWG segment length
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-TX.Type                 = 'AWG';             % Choose between 'AWG'
-TX.AWG_Model            = 'M8190A';          % Choose bewteen 'M8190A' and 'M8195A'
-TX.Fsample              = 12e9;               % AWG sample rate
-TX.ReferenceClockSource = 'External';       % Choose between 'Backplane', 'Internal', 'External'
-TX.ReferenceClock       = 10e6;             % External reference clock frequency
+TX.Type                 = 'AWG';             
+TX.AWG_Model            = 'M8190A';          
+TX.Fsample              = 12e9;               
+TX.ReferenceClockSource = 'External';       
+TX.ReferenceClock       = 10e6;    
+
 TX.MinimumSegmentLength = lcm(240,320);               % Minimum AWG segment length
 TX.VFS                  = 0.7;               % AWG full scale voltage amp
 TX.TriggerAmplitude     = 1.5;               % Trigger signal amplitude
