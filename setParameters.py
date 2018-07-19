@@ -15,13 +15,15 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 	if awgSetGeneral.isChecked() == True:
 		# call matlab instrument code
 
-		address = self.ui.address_awg.text()
-		refClkSrc = self.ui.refClockSorce_awg.currentIndex()
-		refClkFreq = self.ui.extRefFreq_awg.text()
-		sampClkSrc = self.ui.sampleClkSource_awg.currentIndex()
-		model = self.ui.model_awg.currentIndex()
+		d={
+			"address": self.ui.address_awg.text(),
+			"refClkSrc": self.ui.refClockSorce_awg.currentIndex(),
+			"refClkFreq": self.ui.extRefFreq_awg.text(),
+			"sampClkSrc": self.ui.sampleClkSource_awg.currentIndex(),
+			"model": self.ui.model_awg.currentIndex()
+		}
 
-		flag = setAWGParams(self,address,refClkSrc,refClkFreq,sampClkSrc,model,supply)
+		flag = setAWGParams(self,d,supply)
 
 		complete = menu.checkIfDone([address,refClkSrc,refClkFreq,sampClkSrc,model,supply])
 		
@@ -69,10 +71,14 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 		awgSetGeneral.setText("Set")
 		
 def setAdvancedAWG(self,boxDone,setButton,supply):
-	address = self.ui.address_awg.text()
-	trigMode = self.ui.trigMode_awg.currentIndex()
-	dacRange = self.ui.dacRange_awg.text()
-	flag = setAdvAWGParams(self,address,trigMode,dacRange,supply)
+	
+	d={
+		"address": self.ui.address_awg.text(),
+		"trigMode": self.ui.trigMode_awg.currentIndex(),
+		"dacRange": self.ui.dacRange_awg.text()
+	}
+	
+	flag = setAdvAWGParams(self,d,supply)
 	
 	if setButton.isChecked() == True:
 		if flag == 1:
@@ -350,11 +356,18 @@ def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,greyButton,buttonSel
 		elif self.ui.powerMeterFilter.currentIndex() == 2:
 			averaging = self.ui.noAveragesField_meter.text()
 		
+		d={
+			"address": 	self.ui.powerMeterAddress.text(),
+			"offset": self.ui.powerMeterOffset.text(),
+			"frequency": self.ui.powerMeterFrequency.text(),
+			"averaging": averaging
+		}
+		
 		statusList = [self.ui.powerMeterAddress.text(), self.ui.powerMeterOffset.text(), self.ui.powerMeterFrequency.text(),self.ui.powerMeterPartNum.text(),averaging]
 		complete = menu.checkIfDone(statusList)
 
 		if complete:	
-			flag = setPowerMeterParams(self, self.ui.powerMeterAddress, self.ui.powerMeterOffset, self.ui.powerMeterFrequency,self.ui.powerMeterPartNum,self.ui.meterEquip,boxDone,supply,averaging)
+			flag = setPowerMeterParams(self,d,self.ui.powerMeterPartNum,self.ui.meterEquip,boxDone,supply,averaging)
 			
 			self.ui.meterButton_meter.setStyleSheet(buttonFocus)
 			self.ui.meterButton_meter_2.setStyleSheet(buttonFocus)
@@ -389,9 +402,22 @@ def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,bu
 		setButton.setText("Unset")
 		statusList = [self.ui.lineEdit_58.text(),self.ui.comboBox_8.currentIndex(),self.ui.lineEdit_54.text(),self.ui.lineEdit_55.text(),self.ui.lineEdit_56.text(),self.ui.lineEdit_57.text(),self.ui.comboBox_11.currentIndex(),self.ui.lineEdit_59.text()]
 		complete = menu.checkIfDone(statusList)
-
+	
+		
+		d={
+			"address": self.ui.lineEdit_58.text(),
+			"attenEnabled": self.ui.comboBox_8.currentIndex(),
+			"atten": self.ui.lineEdit_54.text(),
+			"freq": self.ui.lineEdit_55.text(),
+			"freqSpan": self.ui.lineEdit_56.text(),
+			"resBand": self.ui.lineEdit_57.text(),
+			"clockRef": self.ui.comboBox_11.currentIndex()
+		
+		}
+		
+		
 		if complete:	
-			flag = setSpectrumAnalyzerParams(self,self.ui.lineEdit_58,self.ui.comboBox_8.currentIndex(),self.ui.lineEdit_54,self.ui.lineEdit_55,self.ui.lineEdit_56,self.ui.lineEdit_57,self.ui.comboBox_11.currentIndex(),self.ui.lineEdit_59,supply,self.ui.saEquip,boxDone)
+			flag = setSpectrumAnalyzerParams(self,d,self.ui.lineEdit_59,supply,self.ui.saEquip,boxDone)
 			self.ui.saButton_sa.setStyleSheet(buttonFocus)
 			self.ui.saButton_sa_2.setStyleSheet(buttonFocus)
 			self.ui.saButton_sa_3.setStyleSheet(buttonFocus)
@@ -420,7 +446,32 @@ def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,bu
 		self.ui.up_psg_next.setCurrentIndex(6)
 		self.ui.vsgNextSteps.setCurrentIndex(8)
 		setButton.setText("Set")
-	
+def setSaAdv(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,buttonSelect,supply):
+	if setButton.isChecked() == True:
+		setButton.setText("Unset")
+		self.ui.saEquipAdv.setStyleSheet(boxDone)
+		
+		d ={
+			"address": self.ui.lineEdit_58.text(),
+			"SAScreen": self.ui.lineEdit_60.text(),
+			"preAmp": self.ui.comboBox_64.currentIndex(),
+			"trigger": self.ui.comboBox_54.currentIndex(),
+			"triggerLevel": self.ui.lineEdit_62.text(),
+			#needs to be changed to a combobox in the ui
+			"traceType": self.ui.lineEdit_63.text(),
+			"traceNum": self.ui.lineEdit_64.text(),
+			"ACPNoise": self.ui.comboBox_59.currentIndex(),
+			"ACPBand": self.ui.lineEdit_65.text(),
+			"ACPOffset": self.ui.lineEdit_66()
+		}
+		
+		flag = setSpectrumAnalyzerAdvancedParams(self,d,self.ui.saEquipAdv,supply,boxDone)
+		
+	elif setButton.isChecked() == False:
+		self.ui.saEquipAdv.setStyleSheet(None)
+		setButton.setText("Set")
+		
+		
 def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,buttonSelect,setButton):
 	if setButton.isChecked() == True:
 		flag = 0;
@@ -1574,14 +1625,19 @@ def instrParamErrorMessage(self,error):
 	msg.setText(error)
 	msg.setStandardButtons(QMessageBox.Ok)
 	msg.exec_();
-def setSpectrumAnalyzerParams(self,address,attenEnabled, atten, freq, freqSpan, resolutionBand,clockRef,partNum,supply,equipBox,boxDone):
-	aDD = address.text()
-	A = atten.text()
-	F = freq.text()
-	fS = freqSpan.text()
-	rB = resolutionBand.text()
-	print(rB)
-	result = supply.Set_Spectrum(aDD,attenEnabled,A,F,fS,rB,clockRef)
+def setSpectrumAnalyzerAdvancedParams(self,dictionary,equipBox,supply,boxDone):
+	result = supply.Set_Spectrum_Advanced(dictionary,nargout=1)
+	result = result.split(";")
+	error = result[1]
+	if error == " ":
+		equipBox.setStyleSheet(boxDone)
+		flag = 1
+		return flag
+	else:
+		instrParamErrorMessage(self,error)
+		self.ui.saSetAdv.setChecked(False)
+def setSpectrumAnalyzerParams(self,dictionary,partNum,supply,equipBox,boxDone):
+	result = supply.Set_Spectrum(dictionary,nargout=1)
 	result = result.split(";")
 	
 	error = result[1]
@@ -1592,20 +1648,16 @@ def setSpectrumAnalyzerParams(self,address,attenEnabled, atten, freq, freqSpan, 
 		equipBox.setStyleSheet(boxDone)
 		flag = 1
 		return flag
-	elif A == "":
+	elif dictionary.address == "":
 		equipBox.setStyleSheet(boxDone)
 		flag = 1
 		return flag
 	else:
 		instrParamErrorMessage(self,error)
 		self.ui.saSet.setChecked(False)
-def setPowerMeterParams(self,address,offset,frequency,partNum,equipBox,boxDone,supply,averaging):	
-	A = address.text()
-	O = offset.text()
-	F = frequency.text()
-	
-	
-	result = supply.Set_Meter(A,O,F,averaging,nargout=1)
+def setPowerMeterParams(self,dictionary,partNum,equipBox,boxDone,supply):	
+
+	result = supply.Set_Meter(dictionary,nargout=1)
 	result = result.split(";")
 	error = result[1]
 
@@ -1643,8 +1695,8 @@ def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,supply
 		instrParamErrorMessage(self,error)
 		self.ui.p1Set.setChecked(False)
 		
-def setAWGParams(self,address,refClkSrc,refClkFreq,sampClkSrc,model,supply):
-	result = supply.Set_AWG(address,refClkSrc,refClkFreq,sampClkSrc,model,nargout = 1)
+def setAWGParams(self,dictionary,supply):
+	result = supply.Set_AWG(dictionary,nargout = 1)
 	result = result.split(";")
 	partNum = result[0]
 	error = result[1]
@@ -1661,8 +1713,8 @@ def setAWGParams(self,address,refClkSrc,refClkFreq,sampClkSrc,model,supply):
 		# UNCOMMENT THIS LATER
 		#self.ui.awgSetGeneral.setChecked(False)
 		
-def setAdvAWGParams(self,address,trigMode,dacRange,supply):
-	result = supply.Set_AdvAWG(address,trigMode,dacRange,nargout=1)
+def setAdvAWGParams(self,dictionary,supply):
+	result = supply.Set_AdvAWG(dictionary,nargout=1)
 	if result == "":
 		flag = 1
 		return flag

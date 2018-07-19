@@ -1,7 +1,7 @@
 % channel 1 and 2 are coupled
 % iqconfig creates arbConfig file
 
-function result = Set_AWG(address,refClkSrc,refClkFreq,sampClkSrc,model)
+function result = Set_AWG(dict)
     % load arbConfig file in order to connect to AWG (cannot do so through
     % command expert)
     
@@ -18,10 +18,10 @@ function result = Set_AWG(address,refClkSrc,refClkFreq,sampClkSrc,model)
         load('arbConfig.mat');
         arbConfig = loadArbConfig(arbConfig);
         % set visa address
-        if address == ""
+        if dict.address == ""
             error = "Please fill out all fields before attempting to set parameters."; 
         else   
-            arbConfig.visaAddr = address;
+            arbConfig.visaAddr = dict.address;
         end
         f = iqopen(arbConfig);
 
@@ -30,30 +30,30 @@ function result = Set_AWG(address,refClkSrc,refClkFreq,sampClkSrc,model)
         partNum = splitIdn{2};
         
         % set model type (12 bit (speed) or 14 bit (precision))
-        if model == 1   
+        if dict.model == 1   
             xfprintf(f, sprintf(':TRACe:DWIDth %s', 'WPRecision'));
             arbConfig.model = "M8190A_14bit";
-        elseif model == 2
+        elseif dict.model == 2
             xfprintf(f, sprintf(':TRACe:DWIDth %s', 'WSPeed'));
             arbConfig.model = "M8190A_12bit";
-        elseif model == 0
+        elseif dict.model == 0
             error = "Please fill out all fields before attempting to set parameters."; 
         end
         
         % set reference clock
-        if refClkSrc == 1
+        if dict.refClkSrc == 1
             refSrc = "AXI";
             % CHECK
             % arbConfig.clockSource = "AxieRef";
-        elseif refClkSrc == 2
+        elseif dict.refClkSrc == 2
             refSrc = "EXT";
             % CHECK
             % arbConfig.clockSource = "ExtRef";
-        elseif refClkSrc == 3
+        elseif dict.refClkSrc == 3
             refSrc = "INT";
             % CHECK
             % arbConfig.clockSource = "IntRef";
-        elseif refClkSrc == 0
+        elseif dict.refClkSrc == 0
             error = "Please fill out all fields before attempting to set parameters."; 
         end
         
@@ -63,17 +63,17 @@ function result = Set_AWG(address,refClkSrc,refClkFreq,sampClkSrc,model)
             xfprintf(f, sprintf(':SOURce:ROSCillator:SOURce %s', refSrc));
             % set external clock frequency
             if refSrc == "EXT"
-                xfprintf(f, sprintf(':SOURce:ROSCillator:FREQuency %s', refClkFreq));
-                arbConfig.clockFreq = refClkFreq;
+                xfprintf(f, sprintf(':SOURce:ROSCillator:FREQuency %s', dict.refClkFreq));
+                arbConfig.clockFreq = dict.refClkFreq;
             end
         else
             error = "No source available of selected type.";
         end
         
         % set sample clock source
-        if sampClkSrc == 1
+        if dict.sampClkSrc == 1
             sampSrc = "EXT";
-        elseif sampClkSrc == 2
+        elseif dict.sampClkSrc == 2
             sampSrc = "INT";
         else
             error = "Please fill out all fields before attempting to set parameters."; 

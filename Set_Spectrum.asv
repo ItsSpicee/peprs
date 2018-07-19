@@ -5,9 +5,13 @@ errorString = " ";
 partNum = " ";
 
 try
+    address = str2
+    atten = str2double(dict.atten);
+    freq = str2double(dict.freq);
+    resolutionBand = str2double(dict.resolutionBand);
+    freqSpan = str2double(dict.freqSpan);
     
-    
-    spectrum = visa('agilent',dict.address);
+    spectrum = visa('agilent',address);
     spectrum.InputBufferSize = 8388608;
     spectrum.ByteOrder = 'littleEndian';
     fopen(spectrum);
@@ -18,23 +22,24 @@ try
     
     partNum = splitIdn{2};
     
-    if dict.attenEnabled == 2
-        fprintf(spectrum, sprintf(':SENSe:POWer:RF:ATTenuation %g', dict.atten));
+    if attenEnabled == 2
+        fprintf(spectrum, sprintf(':SENSe:POWer:RF:ATTenuation %g', atten));
     end
     
-    fprintf(spectrum,['FREQ:CENT ' num2str(dict.freq)]);
-    fprintf(spectrum,['FREQ:SPAN ' num2str(dict.freqSpan)]);
+    fprintf(spectrum,['FREQ:CENT ' num2str(freq)]);
+    fprintf(spectrum,['FREQ:SPAN ' num2str(freqSpan)]);
     
     % Commands
-    if dict.resolutionBand >= 1 && dict.resolutionBand <= 8e6 
-        fprintf(spectrum, sprintf(':SENSe:BANDwidth:RESolution %g', dict.resolutionBand));
+    if resolutionBand >= 1 && resolutionBand <= 8e6 
+        disp("hi")
+        fprintf(spectrum, sprintf(':SENSe:BANDwidth:RESolution %g', resolutionBand));
     else
         errorString = "Resolution bandwidth is out of range.";
     end
 
-    if dict.clockRef == 1
+    if clockRef == 1
         fprintf(spectrum, sprintf(':SENSe:ROSCillator:SOURce %s', 'INTernal'));
-    elseif dict.clockRef == 2
+    elseif clockRef == 2
         fprintf(spectrum, sprintf(':SENSe:ROSCillator:SOURce %s', 'EXTernal'));
     else
         errorString = "Please select a reference clock";

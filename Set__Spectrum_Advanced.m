@@ -5,7 +5,7 @@ partNum = " ";
 
 try
     
-    spectrum = visa('agilent',address);
+    spectrum = visa('agilent',spectrumStruc.address);
     spectrum.InputBufferSize = 8388608;
     spectrum.ByteOrder = 'littleEndian';
     fopen(spectrum);

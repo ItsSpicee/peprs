@@ -1,12 +1,12 @@
-function result = Set_Meter(address, offset, frequency,averaging)
+function result = Set_Meter(dict)
 errorString = " ";
 partNum = " ";
 
 try
-    averaging = str2double(averaging);
-    offset = str2double(offset);
-    freq = str2double(frequency);
-    meter = visa('agilent',address);
+    averaging = str2double(dict.averaging);
+    offset = str2double(dict.offset);
+    freq = str2double(dict.frequency);
+    meter = visa('agilent',dict.address);
     meter.InputBufferSize = 8388608;
     meter.ByteOrder = 'littleEndian';
     fopen(meter);
