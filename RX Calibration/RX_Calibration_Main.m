@@ -28,8 +28,8 @@ Cal.Processing32BitFlag = 1;
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Set Comb Signal Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Cal.Reference.StartingTone                = round(min(abs(Cal.Reference.RFCalibrationStopFrequency),abs(Cal.Reference.RFCalibrationStartFrequency)) / Cal.RFToneSpacing);
-Cal.Reference.EndingTone                  = round(max(abs(Cal.Reference.RFCalibrationStopFrequency),abs(Cal.Reference.RFCalibrationStartFrequency)) / Cal.RFToneSpacing);
+Cal.Reference.StartingTone = round(min(abs(Cal.Reference.RFCalibrationStopFrequency),abs(Cal.Reference.RFCalibrationStartFrequency)) / Cal.RFToneSpacing);
+Cal.Reference.EndingTone = round(max(abs(Cal.Reference.RFCalibrationStopFrequency),abs(Cal.Reference.RFCalibrationStartFrequency)) / Cal.RFToneSpacing);
 
 % Inband tones
 Cal.DesiredTones.InbandFrequency = ((Cal.Reference.RFCalibrationStartFrequency:...
@@ -51,43 +51,22 @@ tones_freq = (-1.51e9:Cal.RFToneSpacing:1.51e9).';
 % True: set the No. Recorded Time Frames and measurement time is calculated. 
 % False: specify the measurement time
 
-RX.Type                    = 'Scope';    
-RX.ScopeIVIDriverPath      = 'C:\Users\a38chung\Desktop\Scope\AgilentInfiniium.mdd';
-RX.VisaAddress             = 'USB0::0x0957::0x9001::MY48240314::0::INSTR';
-RX.Fcarrier                = 2.002e9;        
-RX.Analyzer.Fsample        = 40e9;        
-RX.NumberOfMeasuredPeriods = 95;
 RX.LOLowerInjectionFlag    = false; 
 
 RX.FrameTime               = 1 / Cal.RFToneSpacing;     % One measurement frame/period
 RX.Analyzer.PointsPerRecord = RX.Analyzer.Fsample * RX.FrameTime * RX.NumberOfMeasuredPeriods;
 
-% Scope Parameters
-RX.EnableExternalReferenceClock = false;
-RX.channelVec = [1 0 0 0];
-RX.Scope.autoscaleFlag = true;
-RX.TriggerChannel = 3;
-
 % Digitizer Parameters
-RX.EnableExternalClock     = false;
-RX.ExternalClockFrequency  = 1.906e9;    % For half rate 1.998 GSa/s, quarter rate 1.906 GSa/s
-RX.ACDCCoupling            = 1;
-RX.VFS                     = 1;          % Digitzer full scale peak to peak voltage reference (1 or 2 V)
 if (RX.Analyzer.Fsample > 1e9)
     RX.EnableInterleaving  = true;       % Enable interleaving
 end
 
 % UXA
-RX.UXA.AnalysisBandwidth    = 1e09;
-% RX.UXA.Attenuation          = 0;  % dB
-RX.UXA.Attenuation          = 2;  % dB
-RX.UXA.ClockReference       = 'Internal';
 if (RX.UXA.AnalysisBandwidth > 500e6)
     RX.UXA.TriggerPort          = 'EXT3';
 else
     RX.UXA.TriggerPort          = 'EXT1';
 end
-RX.UXA.TriggerLevel         = 700; % mV
 
 % Downconversion filter if we receive at IF
 if (~strcmp(RX.Type, 'UXA'))
@@ -108,8 +87,8 @@ TX.Fsample              = 12e9;
 TX.ReferenceClockSource = 'External';       
 TX.ReferenceClock       = 10e6;    
 
-TX.MinimumSegmentLength = lcm(240,320);               % Minimum AWG segment length
-TX.VFS                  = 0.7;               % AWG full scale voltage amp
+TX.MinimumSegmentLength = lcm(240,320);               
+TX.VFS                  = 0.7;               
 TX.TriggerAmplitude     = 1.5;               % Trigger signal amplitude
 
 % TX Trigger Frame Time Calculation

@@ -15,9 +15,5 @@ function Set_VSA_Calibration(rfSpacing,ifSpacing,refFile,rfCenterFreq,rfCalStart
     Cal.Reference.RFCenterFrequency = rfCenterFreq; % Starting RF tone for calibration
     Cal.Reference.RFCalibrationStartFrequency = rfCalStartFreq; % Starting RF tone for calibration
     Cal.Reference.RFCalibrationStopFrequency = rfCalStopFreq; % Last RF tone for calibration
-    save(".\Measurement Data\RX Calibration Parameters\Cal.mat","Cal")
-    
-    % IF = RF - LO
-    % minimum segment length calculation --> model
-    
+    save(".\Measurement Data\RX Calibration Parameters\Cal.mat","Cal") 
 end

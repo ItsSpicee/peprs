@@ -30,7 +30,7 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 			supply.Set_Channel_Mapping(iChannel,qChannel,nargout=0)
 			flag = setAWGParams(self,d,supply)
 
-		complete = menu.checkIfDone([address,refClkSrc,refClkFreq,model,supply])
+		complete = menu.checkIfDone([d])
 		
 		if flag == 1:
 
@@ -203,8 +203,18 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 			if demod != 0:
 				setButton.setText("Unset")
 
-				# style mod related widgets
+				
 				if typeIdx == 3 or typeIdx == 4: # UXA & PXA
+					# set matlab parameters
+					# dUXA={
+						# "analysisBW": self.ui.analysisBandwidth_sa.text(),
+						# "address": self.ui.address_sa.text(),
+						# "attenuation": self.ui.attenuation_sa.currentIndex(),
+						# "clockRef": self.ui.clockRef_sa.currentIndex()
+						# "trigLevel": self.ui.trigLevel_sa.text()
+					# }
+					# supply.Set_RXCal_UXAParams(dUXA)
+				# style mod related widgets
 					self.ui.uxaEquipGeneralVSA.setStyleSheet(boxDone)
 					demod = self.ui.uxaMod.isEnabled()
 					if demod:
@@ -230,6 +240,14 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 					self.ui.pxaButton_vsa_2.setStyleSheet(buttonFocus)
 					setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)	
 				elif typeIdx == 1 or typeIdx == 5: #Scope
+					# dScope={
+						# "driver": self.ui.driverPath_scope.text(),
+						# "address": self.ui.address_scope.text(),
+						# "enableClock": self.ui.extClkEnabled_scope.currentIndex(),
+						# "autoScale": self.ui.autoscale_scope.currentIndex()
+						# "trigChannel": self.ui.trigChannel_scope.text()
+					# }
+					# supply.Set_RXCal_ScopeParams(dScope)
 					self.ui.scopeEquipGeneral.setStyleSheet(boxDone)
 					self.ui.scopeButton_vsa.setStyleSheet(buttonFocus)
 					self.ui.scopeButton_vsa_2.setStyleSheet(buttonFocus)
@@ -246,6 +264,14 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 						self.ui.up_psg_next.setCurrentIndex(4)
 						setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor)
 				elif typeIdx == 2 or typeIdx ==6: #Digitizer
+					# dDigitizer ={
+						# "address":self.ui.address_dig.text(),
+						# "enableClock":self.ui.clockEnabled_dig.currentIndex(),
+						# "clockFreq":self.ui.clockFreq_dig.currentIndex(),
+						# "coupling":self.ui.coupling_dig.currentIndex(),
+						# "vfs":self.ui.vfs_dig.text(),
+					# }
+					# supply.Set_RXCal_DigitizerParams(dDigitizer)
 					self.ui.digEquipGeneral.setStyleSheet(boxDone)
 					self.ui.digButton_vsa.setStyleSheet(buttonFocus)
 					self.ui.digButton_vsa_2.setStyleSheet(buttonFocus)
@@ -720,7 +746,7 @@ def setP3(self,boxDone,buttonFocus,buttonHover,supply,buttonSelect,greyHover,set
 		self.ui.vsgNextSteps.setCurrentIndex(11)
 		setButton.setText("Set")
 			
-def setVSAMeasDig(self,boxDone,buttonHover,buttonDone,setButton):
+def setVSAMeasDig(self,boxDone,buttonHover,buttonDone,setButton,supply):
 	vsaType = self.ui.vsaWorkflow_vsaMeas.currentIndex()
 	vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
 	if setButton.isChecked() == True:
@@ -728,7 +754,15 @@ def setVSAMeasDig(self,boxDone,buttonHover,buttonDone,setButton):
 		statusList = [1]
 		complete = menu.checkIfDone(statusList)
 
-		if complete:	
+		if complete:
+			# set MATLAB parameters
+			# d={
+				# "centerFreq": self.ui.centerFreq_vsaMeas.text(),
+				# "sampRate": self.ui.sampRate_vsaMeas.text(),
+				# "noFrames": self.ui.noFrameTimes_vsaMeas.text(),
+			# }
+			# supply.Set_VSA_Meas(d)
+			
 			self.ui.vsaMeasGenEquip.setStyleSheet(boxDone)
 			self.ui.vsaMeasGenEquip_2.setStyleSheet(boxDone)
 			self.ui.vsaMeasDigEquip.setStyleSheet(boxDone)
@@ -764,13 +798,21 @@ def setVSAMeasDig(self,boxDone,buttonHover,buttonDone,setButton):
 		setColourAndCursor(self,self.ui.vsgButton_vsaMeas,buttonDone,Qt.ArrowCursor)
 		setButton.setText("Set")
 		
-def setVSAMeasGen(self,boxDone,buttonHover,buttonDone,setButton):
+def setVSAMeasGen(self,boxDone,buttonHover,buttonDone,setButton,supply):
 	if setButton.isChecked() == True:
 		setButton.setText("Unset")
 		statusList = [1]
 		complete = menu.checkIfDone(statusList)
 
-		if complete:	
+		if complete:
+			# set MATLAB parameters
+			# d={
+				# "centerFreq": self.ui.centerFreq_vsaMeas_2.text(),
+				# "sampRate": self.ui.sampRate_vsaMeas_2.text(),
+				# "noFrames": self.ui.noFrameTimes_vsaMeas_2.text(),
+			# }
+			# supply.Set_VSA_Meas(d)
+		
 			vsaType = self.ui.vsaWorkflow_vsaMeas.currentIndex()
 			vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
 			downType = self.ui.single_down_vsaMeas_stack.currentIndex()
@@ -855,7 +897,7 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton):
 		loFreqOffset = self.ui.loFreqOffsetField_comb.text()
 		saveLoc = self.ui.vsaCalSaveLocField_comb.text()
 		subRate = self.ui.comboBox_77.currentIndex()
-		Set_VSA_Calibration(rfSpacing,ifSpacing,refFile,rfCenterFreq,rfCalStartFreq,rfCalStopFreq,loFreqOffset,saveLoc,subRate)
+		# Set_VSA_Calibration(rfSpacing,ifSpacing,refFile,rfCenterFreq,rfCalStartFreq,rfCalStopFreq,loFreqOffset,saveLoc,subRate)
 		
 		vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
 		if vsgType == 3: # vsg
