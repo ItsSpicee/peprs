@@ -20,6 +20,9 @@ function result = Set_AWG(dict)
         % set visa address
         if dict.address == ""
             error = "Please fill out all fields before attempting to set parameters."; 
+            resultsString = sprintf("%s;%s",partNum,error);
+            result = char(resultsString);
+            return
         else   
             arbConfig.visaAddr = dict.address;
         end
