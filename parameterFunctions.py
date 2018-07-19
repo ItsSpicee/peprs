@@ -719,14 +719,29 @@ def displayVSGMeas(self):
 		self.ui.awgParamsStack_vsgMeas.setCurrentIndex(2)
 		self.ui.upParamsStack_vsgMeas.setCurrentIndex(1)
 
-def enableExtRefClkFreq(self):
+def enableExtClkFreq(self):
 	idx = self.ui.refClockSorce_awg.currentIndex()
-	if idx == 2:
+	if idx == 2 or idx == 4:
 		self.ui.extRefFreq_awg.setEnabled(True)
 		self.ui.extRefFreqLabel_awg.setEnabled(True)
 	else:
 		self.ui.extRefFreq_awg.setEnabled(False)
 		self.ui.extRefFreqLabel_awg.setEnabled(False)
+		
+def enableChannelOptions(self):
+	# 0 = Select, 1 = None, 2 = Channel 1, 3 = Channel 2
+	iIdx = self.ui.iChannel_awg.currentIndex()
+	qIdx = self.ui.qChannel_awg.currentIndex()
+	if iIdx == qIdx and iIdx != 0 and iIdx != 1:
+		msg = QMessageBox(self)
+		msg.setIcon(QMessageBox.Critical)
+		msg.setWindowTitle('Invalid Field Settings')
+		msg.setText("Cannot set Channel 1 and Channel 2 to be the same signal part. Select 'None' for channel to output complete RF signal.")
+		msg.setStandardButtons(QMessageBox.Ok)
+		msg.exec_();
+		
+		self.ui.iChannel_awg.setCurrentIndex(0)
+		self.ui.qChannel_awg.setCurrentIndex(0)
 		
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions called within parameterFunctions	

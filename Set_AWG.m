@@ -14,7 +14,7 @@ function result = Set_AWG(dict)
     error = "";
     partNum = "";
     
-%     try
+    try
         load('arbConfig.mat');
         arbConfig = loadArbConfig(arbConfig);
         % set visa address
@@ -46,16 +46,19 @@ function result = Set_AWG(dict)
         % set reference clock
         if dict.refClkSrc == 1
             refSrc = "AXI";
-            % CHECK
-            % arbConfig.clockSource = "AxieRef";
+            sampSrc = "INT";
+            arbConfig.clockSource = "AxieRef";
         elseif dict.refClkSrc == 2
             refSrc = "EXT";
-            % CHECK
-            % arbConfig.clockSource = "ExtRef";
+            sampSrc = "INT";
+            arbConfig.clockSource = "ExtRef";
         elseif dict.refClkSrc == 3
             refSrc = "INT";
-            % CHECK
-            % arbConfig.clockSource = "IntRef";
+            sampSrc = "INT";
+            arbConfig.clockSource = "IntRef";
+        elseif dict.refClkSrc == 4
+            sampSrc = "EXT";
+            arbConfig.clockSource = "ExtClk";
         elseif dict.refClkSrc == 0
             error = "Please fill out all fields before attempting to set parameters."; 
         end
@@ -64,8 +67,9 @@ function result = Set_AWG(dict)
         check = sscanf(query(f, sprintf(':SOURce:ROSCillator:SOURce:CHECk? %s', refSrc)), '%d');
         if check == 1
             xfprintf(f, sprintf(':SOURce:ROSCillator:SOURce %s', refSrc));
+            xfprintf(f, sprintf(':OUTPut:SCLK:SOURce %s', sampSrc));
             % set external clock frequency
-            if refSrc == "EXT"
+            if refSrc == "EXT" || sampSrc == "EXT"
                 xfprintf(f, sprintf(':SOURce:ROSCillator:FREQuency %s', dict.refClkFreq));
                 arbConfig.clockFreq = dict.refClkFreq;
             end
@@ -73,26 +77,16 @@ function result = Set_AWG(dict)
             error = "No source available of selected type.";
         end
         
-        % set sample clock source
-        if dict.sampClkSrc == 1
-            sampSrc = "EXT";
-        elseif dict.sampClkSrc == 2
-            sampSrc = "INT";
-        else
-            error = "Please fill out all fields before attempting to set parameters."; 
-        end
-        xfprintf(f, sprintf(':OUTPut:SCLK:SOURce %s', sampSrc));
-        
         % cleanup
         fclose(f);
         delete(f);
         clear f; 
         rmpath(".\RX Calibration\InstrumentFunctions\M8190A")
         
-%     catch
-%         error = "A problem has occured, resetting instruments. Use Keysight Connection Expert to check your instrument VISA Address.";
-%         instrreset
-%     end
+    catch
+        error = "A problem has occured, resetting instruments. Use Keysight Connection Expert to check your instrument VISA Address.";
+        instrreset
+    end
 
     resultsString = sprintf("%s;%s",partNum,error);
     result = char(resultsString);

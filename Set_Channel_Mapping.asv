@@ -1,0 +1,39 @@
+% 0 = Select, 1 = None, 2 = Channel 1, 3 = Channel 2
+function result = Set_Channel_Mapping(ichannel,qchannel)
+    result = "";
+    channelMap = [0 0; 0 0]
+    load(".\Measurement Data\RX Calibration Parameters\RX.mat") 
+    if iChannel == 0 || qChannel == 0
+        result = char("Please fill out all fields before attempting to set parameters."); 
+        return
+    end
+    if iChannel == 1
+        channelMap(1,:) = 1;
+    elseif iChannel == 2
+        channelMap(1,1) = 1;
+    elseif iChannel == 3
+        channelMap(2,1) = 1;
+    end
+    if qChannel == 1
+        channelMap(2,:) = 1;
+    elseif qChannel == 2
+        channelMap()
+    elseif qChannel == 3
+        
+    end
+    
+    RX.channelVec = channelMap;
+    save(".\Measurement Data\RX Calibration Parameters\RX.mat","RX")
+    
+    if ChannelSelectSettings == 2
+        channelMapping = [0 0; 1 0] ; %Set I to channel 2
+    elseif ChannelSelectSettings == 1
+        channelMapping = [1 0; 0 1] ; %Set I to channel 1 
+    elseif ChannelSelectSettings == 0
+        channelMapping = [1 1; 1 1] ; %Set RF to both channels 
+    else
+        channelMapping = [1 0; 0 1] ; %Set I to channel 1 and Q to channel 2 
+    end
+    
+    
+end

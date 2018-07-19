@@ -28,7 +28,7 @@ function error = Set_AdvAWG(dict)
         error = "The Voltage should be between 0.1 and 0.7 V'";
     else 
          xfprintf(f, sprintf(':SOURce:DAC:VOLTage:LEVel:IMMediate:AMPLitude %g', dacRange));
-         arbConfg.DACRange = dict.dacRange;
+         arbConfig.DACRange = dict.dacRange;
     end
 
     % set trigger mode: continuous, triggered or gated
