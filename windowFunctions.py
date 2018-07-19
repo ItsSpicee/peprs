@@ -145,5 +145,15 @@ def fileOpen(self,lineEdit,path):
 	file = file.replace("(","")
 	lineEdit.clear()
 	lineEdit.setText(file)
+
+def checkIfDone(array):
+
+	for f in array:
+		#print("hif)
+		if f == "" or f == 0: 
+			return False
+			
+	return True
+	
 	
 	
