@@ -36,7 +36,6 @@ Cal.DesiredTones.InbandFrequency = ((Cal.Reference.RFCalibrationStartFrequency:.
     Cal.RFToneSpacing:Cal.Reference.RFCalibrationStopFrequency) - Cal.LOFrequencyOffset).';
 Cal.DesiredTones.InbandFrequency = Cal.DesiredTones.InbandFrequency(Cal.DesiredTones.InbandFrequency ~= Cal.Reference.RFCenterFrequency);
 % Aliased tones for subrate calibration
-Cal.SubRateFlag = 0;
 Cal.DesiredTones.PositiveAliasFrequency = (251.5e6:Cal.RFToneSpacing:491.5e6).';
 Cal.DesiredTones.NegativeAliasFrequency = (2.5e6:Cal.RFToneSpacing:242.5e6).';
 
@@ -47,25 +46,21 @@ tones_freq = (-1.51e9:Cal.RFToneSpacing:1.51e9).';
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Set RX Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% If VSG Related frame time is true, averaging is also true. 
+% Right now, VSG Related frame time is always true
+% True: set the No. Recorded Time Frames and measurement time is calculated. 
+% False: specify the measurement time
+
 RX.Type                    = 'Scope';    
 RX.ScopeIVIDriverPath      = 'C:\Users\a38chung\Desktop\Scope\AgilentInfiniium.mdd';
 RX.VisaAddress             = 'USB0::0x0957::0x9001::MY48240314::0::INSTR';
+RX.Fcarrier                = 2.002e9;        
+RX.Analyzer.Fsample        = 40e9;        
+RX.NumberOfMeasuredPeriods = 95;
+RX.LOLowerInjectionFlag    = false; 
 
-
-RX.Fcarrier                = 2.002e9;        % Center frequency of the received tones
-RX.Analyzer.Fsample                 = 40e9;        % Sampling rate of the receiver
-
-% If TX Related frame time is true, averaging is also true. 
-% True: set the No. Recorded Time Frames and measurement Time (Frame time) is calculated. 
-% If it’s false, they specify the measurement time.
-
-RX.LOLowerInjectionFlag    = false;      % Higher or lower LO injection
-% no longer a field (period)
-RX.FrameTime               = 1 / Cal.RFToneSpacing;     % One measurement frame
-% gui field (how many periods captured)
-RX.NumberOfMeasuredPeriods = 95;         % Number of measured frames;
-
-RX.Analyzer.PointsPerRecord         = RX.Analyzer.Fsample * RX.FrameTime * RX.NumberOfMeasuredPeriods;
+RX.FrameTime               = 1 / Cal.RFToneSpacing;     % One measurement frame/period
+RX.Analyzer.PointsPerRecord = RX.Analyzer.Fsample * RX.FrameTime * RX.NumberOfMeasuredPeriods;
 
 % Scope Parameters
 RX.EnableExternalReferenceClock = false;

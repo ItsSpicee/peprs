@@ -325,6 +325,9 @@ class Window(QMainWindow):
 		self.ui.p1Enabled.currentIndexChanged.connect(lambda: param.enableSupplyOne(self))
 		self.ui.p2Enabled.currentIndexChanged.connect(lambda: param.enableSupplyTwo(self))
 		self.ui.p3Enabled.currentIndexChanged.connect(lambda: param.enableSupplyThree(self))
+		# vsa meas page
+		self.ui.iChannel_awg.currentIndexChanged.connect(lambda: param.enableChannelOptions(self))
+		self.ui.qChannel_awg.currentIndexChanged.connect(lambda: param.enableChannelOptions(self))
 	
 		# expand/shrink depending on which step tab is clicked
 		self.ui.stepTabs.currentChanged.connect(lambda: menu.changeStepTab(self,safety,quality))
@@ -702,7 +705,7 @@ class Window(QMainWindow):
 		self.ui.dataFile_dig.textChanged.connect(lambda: param.copyDemod(self, self.ui.dataFile_dig,self.ui.dataFile_scope,self.ui.dataFile_uxa))
 		
 		# awg measurement page
-		self.ui.refClockSorce_awg.currentIndexChanged.connect(lambda: param.enableExtRefClkFreq(self))
+		self.ui.refClockSorce_awg.currentIndexChanged.connect(lambda: param.enableExtClkFreq(self))
 		
 		
 		# show on window

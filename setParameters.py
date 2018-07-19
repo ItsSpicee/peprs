@@ -18,12 +18,16 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 		address = self.ui.address_awg.text()
 		refClkSrc = self.ui.refClockSorce_awg.currentIndex()
 		refClkFreq = self.ui.extRefFreq_awg.text()
-		sampClkSrc = self.ui.sampleClkSource_awg.currentIndex()
 		model = self.ui.model_awg.currentIndex()
+		iChannel = self.ui.iChannel_awg.currentIndex()
+		qChannel = self.ui.qChannel_awg.currentIndex()
+		if iChannel == 0 or qChannel == 0:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+		else:	
+			supply.Set_Channel_Mapping(iChannel,qChannel,nargout=0)
+			flag = setAWGParams(self,address,refClkSrc,refClkFreq,model,supply)
 
-		flag = setAWGParams(self,address,refClkSrc,refClkFreq,sampClkSrc,model,supply)
-
-		complete = menu.checkIfDone([address,refClkSrc,refClkFreq,sampClkSrc,model,supply])
+		complete = menu.checkIfDone([address,refClkSrc,refClkFreq,model,supply])
 		
 		if flag == 1:
 
@@ -195,7 +199,7 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 		if averaging != 0 or avgEnabled == False:
 			if demod != 0:
 				setButton.setText("Unset")
-				#supply.Set_RXCal_VSAParams(,nargout=0)
+
 				# style mod related widgets
 				if typeIdx == 3 or typeIdx == 4: # UXA & PXA
 					self.ui.uxaEquipGeneralVSA.setStyleSheet(boxDone)
@@ -798,14 +802,14 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton):
 		# set matlab parameters
 		rfSpacing = self.ui.rfSpacingField_comb.text()
 		ifSpacing = self.ui.ifSpacingField_comb.text()
-		trigTime = self.ui.trigFrameTimeField_comb.text()
 		refFile = self.ui.refFileField_comb.text()
 		rfCenterFreq = self.ui.rfCenterFreqField_comb.text()
 		rfCalStartFreq = self.ui.rfCalStartFreqField_comb.text()
 		rfCalStopFreq = self.ui.rfCalStopFreqField_comb.text()
 		loFreqOffset = self.ui.loFreqOffsetField_comb.text()
 		saveLoc = self.ui.vsaCalSaveLocField_comb.text()
-		Set_VSA_Calibration(rfSpacing,ifSpacing,trigTime,refFile,rfCenterFreq,rfCalStartFreq,rfCalStopFreq,loFreqOffset,saveLoc)
+		subRate = self.ui.comboBox_77.currentIndex()
+		Set_VSA_Calibration(rfSpacing,ifSpacing,refFile,rfCenterFreq,rfCalStartFreq,rfCalStopFreq,loFreqOffset,saveLoc,subRate)
 		
 		vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
 		if vsgType == 3: # vsg
@@ -1643,8 +1647,8 @@ def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,supply
 		instrParamErrorMessage(self,error)
 		self.ui.p1Set.setChecked(False)
 		
-def setAWGParams(self,address,refClkSrc,refClkFreq,sampClkSrc,model,supply):
-	result = supply.Set_AWG(address,refClkSrc,refClkFreq,sampClkSrc,model,nargout = 1)
+def setAWGParams(self,address,refClkSrc,refClkFreq,model,supply):
+	result = supply.Set_AWG(address,refClkSrc,refClkFreq,model,nargout = 1)
 	result = result.split(";")
 	partNum = result[0]
 	error = result[1]
