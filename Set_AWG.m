@@ -20,6 +20,9 @@ function result = Set_AWG(address,refClkSrc,refClkFreq,sampClkSrc,model)
         % set visa address
         if address == ""
             error = "Please fill out all fields before attempting to set parameters."; 
+            resultsString = sprintf("%s;%s",partNum,error);
+            result = char(resultsString);
+            return
         else   
             arbConfig.visaAddr = address;
         end
