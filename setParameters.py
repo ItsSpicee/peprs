@@ -28,6 +28,8 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 
 		flag = setAWGParams(self,address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode,dacRange,supply)
 		
+		complete = menu.checkIfDone([address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode,dacRange,supply])
+		
 		if flag == 1:
 
 			self.ui.awgButton_vsg.setStyleSheet(buttonFocus)
@@ -330,7 +332,7 @@ def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,greyButton,buttonSel
 	if setButton.isChecked() == True:
 		flag = 0;
 		setButton.setText("Unset")
-		averaging = "0"
+		averaging = ""
 		if self.ui.powerMeterFilter.currentIndex() == 1:
 			averaging = "-1"
 		elif self.ui.powerMeterFilter.currentIndex() == 3:
@@ -338,7 +340,7 @@ def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,greyButton,buttonSel
 		elif self.ui.powerMeterFilter.currentIndex() == 2:
 			averaging = self.ui.noAveragesField_meter.text()
 		
-		statusList = [self.ui.powerMeterAddress, self.ui.powerMeterOffset, self.ui.powerMeterFrequency,self.ui.powerMeterPartNum,self.ui.meterEquip,averaging]
+		statusList = [self.ui.powerMeterAddress.text(), self.ui.powerMeterOffset.text(), self.ui.powerMeterFrequency.text(),self.ui.powerMeterPartNum.text(),averaging]
 		complete = menu.checkIfDone(statusList)
 
 		if complete:	
@@ -375,7 +377,7 @@ def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,greyButton,buttonSel
 def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,buttonSelect,supply):
 	if setButton.isChecked() == True:
 		setButton.setText("Unset")
-		statusList = [self.ui.lineEdit_58,self.ui.comboBox_8.currentIndex(),self.ui.lineEdit_54,self.ui.lineEdit_55,self.ui.lineEdit_56,self.ui.lineEdit_57,self.ui.comboBox_11.currentIndex(),self.ui.lineEdit_59,self.ui.saEquip,]
+		statusList = [self.ui.lineEdit_58.text(),self.ui.comboBox_8.currentIndex(),self.ui.lineEdit_54.text(),self.ui.lineEdit_55.text(),self.ui.lineEdit_56.text(),self.ui.lineEdit_57.text(),self.ui.comboBox_11.currentIndex(),self.ui.lineEdit_59.text()]
 		complete = menu.checkIfDone(statusList)
 
 		if complete:	

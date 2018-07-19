@@ -161,8 +161,7 @@ def fileOpen(self,lineEdit,path):
 def checkIfDone(array):
 
 	for f in array:
-		#print("hif)
-		if f == "" or f == 0: 
+		if f == "" : 
 			return False
 			
 	return True
