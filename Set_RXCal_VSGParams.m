@@ -10,6 +10,5 @@ function Set_RXCal_VSGParams(type,model,sampleRate,refClockSrc,extRefClockFreq)
    TX.Fsample = sampleRate; % AWG sample rate
    TX.ReferenceClockSource = refClockSrc; % Choose between 'Backplane', 'Internal', 'External'
    TX.ReferenceClock = extRefClockFreq; % External reference clock frequency
-   clearvars -except TX
-   save(".\Measurement Data\RX Calibration Parameters\TX.mat") 
+   save(".\Measurement Data\RX Calibration Parameters\TX.mat","TX") 
 end

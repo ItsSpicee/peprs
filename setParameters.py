@@ -16,9 +16,7 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 		sampClkSrc = self.ui.sampleClkSource_awg.currentIndex()
 		address = self.ui.address_awg.text()
 		model = self.ui.model_awg.currentIndex()
-		trigMode = self.ui.trigMode_awg.currentIndex()
-		dacRange = self.ui.dacRange_awg.text()
-		flag = setAWGParams(self,address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode,dacRange,supply)
+		flag = setAWGParams(self,address,refClkSrc,refClkFreq,sampClkSrc,model,supply)
 		
 		if flag == 1:
 			self.ui.awgButton_vsg.setStyleSheet(buttonFocus)
@@ -57,6 +55,21 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 		self.ui.psgButton_vsg.setCursor(QCursor(Qt.ArrowCursor))
 		self.ui.vsgNextSteps.setCurrentIndex(1)
 		awgSetGeneral.setText("Set")
+		
+def setAdvancedAWG(self,boxDone,setButton,supply):
+	address = self.ui.address_awg.text()
+	trigMode = self.ui.trigMode_awg.currentIndex()
+	dacRange = self.ui.dacRange_awg.text()
+	flag = setAdvAWGParams(self,address,trigMode,dacRange,supply)
+	
+	if setButton.isChecked() == True:
+		if flag == 1:
+			setButton.setText("Unset")
+			self.ui.awgEquipAdv.setStyleSheet(boxDone)
+			self.ui.statusBar.showMessage('Successfully Set Advanced Settings',2000)
+	elif setButton.isChecked() == False:
+		self.ui.awgEquipAdv.setStyleSheet(None)
+		setButton.setText("Set")
 		
 def setGeneralVSG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,vsgSetGeneral):
 	if vsgSetGeneral.isChecked() == True:
@@ -1486,8 +1499,8 @@ def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,supply
 		instrParamErrorMessage(self,error)
 		self.ui.p1Set.setChecked(False)
 		
-def setAWGParams(self,address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode,dacRange,supply):
-	result = supply.Set_AWG(address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode,dacRange,nargout = 1)
+def setAWGParams(self,address,refClkSrc,refClkFreq,sampClkSrc,model,supply):
+	result = supply.Set_AWG(address,refClkSrc,refClkFreq,sampClkSrc,model,nargout = 1)
 	result = result.split(";")
 	partNum = result[0]
 	error = result[1]
@@ -1503,3 +1516,12 @@ def setAWGParams(self,address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode,dac
 		instrParamErrorMessage(self,error)
 		# UNCOMMENT THIS LATER
 		#self.ui.awgSetGeneral.setChecked(False)
+		
+def setAdvAWGParams(self,address,trigMode,dacRange,supply):
+	result = supply.Set_AdvAWG(address,trigMode,dacRange,nargout=1)
+	if result == "":
+		flag = 1
+		return flag
+	else:
+		instrParamErrorMessage(self,result)
+		self.ui.awgSetAdv.setChecked(False)
