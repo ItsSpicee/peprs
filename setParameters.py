@@ -30,7 +30,7 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 			supply.Set_Channel_Mapping(iChannel,qChannel,nargout=0)
 			flag = setAWGParams(self,d,supply)
 
-		complete = menu.checkIfDone([address,refClkSrc,refClkFreq,model,supply])
+		complete = menu.checkIfDone([1])
 		
 		if flag == 1:
 
