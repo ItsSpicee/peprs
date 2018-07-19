@@ -11,6 +11,7 @@ import windowFunctions as menu
 incomplete = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #f24646}"
 
 def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,awgSetGeneral,supply):
+	flag = 0
 	if awgSetGeneral.isChecked() == True:
 		# call matlab instrument code
 		
@@ -23,26 +24,12 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 		model = self.ui.model_awg.currentIndex()
 		trigMode = self.ui.trigMode_awg.currentIndex()
 		dacRange = self.ui.dacRange_awg.text()
-		
-		
-		
-		
-		
-		
-		statusList = [address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode,dacRange]
-		complete = menu.checkIfDone(statusList)
 
-		if complete:
-			result = supply.Set_AWG(address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode,dacRange,nargout = 1)
-			result = result.split(";")
-			partNum = result[0]
-			error = result[1]
-			self.ui.partNum_awg.setText(partNum)
-			if model == 1:
-				self.ui.maxSampleRate_awg.setText("8e9")
-			elif model == 2:
-				self.ui.maxSampleRate_awg.setText("12e9")
-			
+
+		flag = setAWGParams(self,address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode,dacRange,supply)
+		
+		if flag == 1:
+
 			self.ui.awgButton_vsg.setStyleSheet(buttonFocus)
 			self.ui.awgButton_vsg_2.setStyleSheet(buttonFocus)
 			self.ui.awgButton_vsg_3.setStyleSheet(buttonFocus)
@@ -70,6 +57,7 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 			self.ui.awgEquipGeneral.setStyleSheet(incomplete)
 			awgSetGeneral.setText("Unset") 
 	elif  awgSetGeneral.isChecked() == False:
+
 		self.ui.awgEquipGeneral.setStyleSheet(None)
 		self.ui.awgButton_vsg.setStyleSheet(buttonSelected)
 		self.ui.awgButton_vsg_2.setStyleSheet(buttonSelected)
@@ -184,7 +172,7 @@ def setPSG(self,buttonFocus,buttonDone,boxDone,greyHover,greyButton,buttonSelect
 		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.ArrowCursor))
 		setButton.setText("Set")
 		
-def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSelect,setButton):
+def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSelect,setButton,supply):
 	averaging = self.ui.averagingEnable.currentIndex()
 	avgEnabled = self.ui.averagingEnable.isEnabled()
 	demod = self.ui.demodulationEnable.currentIndex()
@@ -195,7 +183,7 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 		if averaging != 0 or avgEnabled == False:
 			if demod != 0:
 				setButton.setText("Unset")
-				
+				#supply.Set_RXCal_VSAParams(,nargout=0)
 				# style mod related widgets
 				if typeIdx == 3 or typeIdx == 4: # UXA & PXA
 					self.ui.uxaEquipGeneralVSA.setStyleSheet(boxDone)
@@ -794,44 +782,50 @@ def setVSAMeasAdv(self,boxDone,setButton):
 def rxCalRoutine(self,boxDone,buttonHover,setButton):
 	if setButton.isChecked() == True:
 		setButton.setText("Unset")
-		statusList = [1]
-		complete = menu.checkIfDone(statusList)
+		
+		# set matlab parameters
+		rfSpacing = self.ui.rfSpacingField_comb.text()
+		ifSpacing = self.ui.ifSpacingField_comb.text()
+		trigTime = self.ui.trigFrameTimeField_comb.text()
+		refFile = self.ui.refFileField_comb.text()
+		rfCenterFreq = self.ui.rfCenterFreqField_comb.text()
+		rfCalStartFreq = self.ui.rfCalStartFreqField_comb.text()
+		rfCalStopFreq = self.ui.rfCalStopFreqField_comb.text()
+		loFreqOffset = self.ui.loFreqOffsetField_comb.text()
+		saveLoc = self.ui.vsaCalSaveLocField_comb.text()
+		Set_VSA_Calibration(rfSpacing,ifSpacing,trigTime,refFile,rfCenterFreq,rfCalStartFreq,rfCalStopFreq,loFreqOffset,saveLoc)
+		
+		vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
+		if vsgType == 3: # vsg
+			self.ui.vsaMeasNextStack.setCurrentIndex(6)
+			setFocusAndHand(self,self.ui.vsgButton_vsaMeas,buttonHover)
+		else:
+			self.ui.vsaMeasNextStack.setCurrentIndex(5)
+			setFocusAndHand(self,self.ui.awgButton_vsaMeas,buttonHover)
+			setFocusAndHand(self,self.ui.awgButton_vsaMeas_2,buttonHover)
+			setFocusAndHand(self,self.ui.awgButton_vsaMeas_3,buttonHover)
+		self.ui.combEquip_vsaMeas.setStyleSheet(boxDone)
+		self.ui.downEquip_vsaMeas.setStyleSheet(boxDone)
+		self.ui.rxEquip_vsaMeas.setStyleSheet(boxDone)
+		self.ui.vsaResultsStack_vsaMeas.setCurrentIndex(0)
+		self.ui.vsaResultsStack_vsgMeas.setCurrentIndex(0)
+		self.ui.vsaCalResultsStack_algo.setCurrentIndex(0)
+		self.ui.debugVSAStack.setCurrentIndex(0)
+		self.ui.downMark_vsaMeas.setVisible(True)
+		self.ui.downMark_vsgMeas.setVisible(True)
+		self.progressBar = QProgressBar()
+		self.progressBar.setRange(1,10);
+		self.progressBar.setTextVisible(True);
+		self.progressBar.setFormat("Currently Running: RX Calibration Routine")
+		self.ui.statusBar.addWidget(self.progressBar,1)
+		completed = 0
+		while completed < 100:
+			completed = completed + 0.00001
+			self.progressBar.setValue(completed)
+		self.ui.statusBar.removeWidget(self.progressBar)
+		# to show progress bar, need both addWidget() and show()
+		self.ui.statusBar.showMessage("RX Calibration Routine Complete",3000)
 
-		if complete:
-			vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
-			if vsgType == 3: # vsg
-				self.ui.vsaMeasNextStack.setCurrentIndex(6)
-				setFocusAndHand(self,self.ui.vsgButton_vsaMeas,buttonHover)
-			else:
-				self.ui.vsaMeasNextStack.setCurrentIndex(5)
-				setFocusAndHand(self,self.ui.awgButton_vsaMeas,buttonHover)
-				setFocusAndHand(self,self.ui.awgButton_vsaMeas_2,buttonHover)
-				setFocusAndHand(self,self.ui.awgButton_vsaMeas_3,buttonHover)
-			self.ui.combEquip_vsaMeas.setStyleSheet(boxDone)
-			self.ui.downEquip_vsaMeas.setStyleSheet(boxDone)
-			self.ui.rxEquip_vsaMeas.setStyleSheet(boxDone)
-			self.ui.vsaResultsStack_vsaMeas.setCurrentIndex(0)
-			self.ui.vsaResultsStack_vsgMeas.setCurrentIndex(0)
-			self.ui.vsaCalResultsStack_algo.setCurrentIndex(0)
-			self.ui.debugVSAStack.setCurrentIndex(0)
-			self.ui.downMark_vsaMeas.setVisible(True)
-			self.ui.downMark_vsgMeas.setVisible(True)
-			self.progressBar = QProgressBar()
-			self.progressBar.setRange(1,10);
-			self.progressBar.setTextVisible(True);
-			self.progressBar.setFormat("Currently Running: RX Calibration Routine")
-			self.ui.statusBar.addWidget(self.progressBar,1)
-			completed = 0
-			while completed < 100:
-				completed = completed + 0.00001
-				self.progressBar.setValue(completed)
-			self.ui.statusBar.removeWidget(self.progressBar)
-			# to show progress bar, need both addWidget() and show()
-			self.ui.statusBar.showMessage("RX Calibration Routine Complete",3000)
-		elif not complete:
-			self.ui.combEquip_vsaMeas.setStyleSheet(incomplete)
-			self.ui.downEquip_vsaMeas.setStyleSheet(incomplete)
-			self.ui.rxEquip_vsaMeas.setStyleSheet(incomplete)
 	elif setButton.isChecked() == False:
 		self.ui.combEquip_vsaMeas.setStyleSheet(None)
 		self.ui.downEquip_vsaMeas.setStyleSheet(None)
@@ -842,8 +836,12 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton):
 		self.ui.vsaMeasNextStack.setCurrentIndex(4)
 		setButton.setText("Set && Run")
 		
-def noRXCalRoutine(self,boxDone,buttonHover,setButton):
+def noRXCalRoutine(self,boxDone,buttonHover,setButton,supply):
 	if setButton.isChecked() == True:
+		# set matlab parameters
+		vsaCalFile = self.ui.vsaCalFileField_comb.text()
+		supply.Set_VSA_CalFile(vsaCalFile,nargout=0)
+		
 		setButton.setText("Unset")
 		statusList = [1]
 		complete = menu.checkIfDone(statusList)
@@ -1632,3 +1630,21 @@ def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,supply
 	else:
 		instrParamErrorMessage(self,error)
 		self.ui.p1Set.setChecked(False)
+		
+def setAWGParams(self,address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode,dacRange,supply):
+	result = supply.Set_AWG(address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode,dacRange,nargout = 1)
+	result = result.split(";")
+	partNum = result[0]
+	error = result[1]
+	if error == "":
+		self.ui.partNum_awg.setText(partNum)
+		if model == 1:
+			self.ui.maxSampleRate_awg.setText("8e9")
+		elif model == 2:
+			self.ui.maxSampleRate_awg.setText("12e9")
+		flag = 1
+		return flag
+	else:
+		instrParamErrorMessage(self,error)
+		# UNCOMMENT THIS LATER
+		#self.ui.awgSetGeneral.setChecked(False)
