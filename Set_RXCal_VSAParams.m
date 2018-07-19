@@ -4,6 +4,7 @@
 % PARAMETER MAPPING:
 % Scope (3 params):
     % param1 = external reference clock enable
+    % param2 = channel vector
     % param2 = autoscale flag
     % param3 = trigger channel
 % Digitizer (4 params):
@@ -23,8 +24,9 @@ function Set_RXCal_VSAParams(type,iviDriver,address,param1,param2,param3,param4)
     if type == 1 || type == 5
         typeName = "Scope"; 
         RX.EnableExternalReferenceClock = param1;
-        RX.Scope.autoscaleFlag = param2; 
-        RX.TriggerChannel = param3;
+        RX.channelVec = param2;
+        RX.Scope.autoscaleFlag = param3; 
+        RX.TriggerChannel = param4;
     elseif type == 2 || type == 6
         typeName = "Digitizer";
         RX.EnableExternalClock = param1;
@@ -41,6 +43,5 @@ function Set_RXCal_VSAParams(type,iviDriver,address,param1,param2,param3,param4)
     RX.Type = typeName; % Choose between 'UXA', 'Digitizer', 'Scope', for the receiver
     RX.ScopeIVIDriverPatch = iviDriver;
     RX.VisaAddress = address;
-    clearvars -except RX
-    save(".\Measurement Data\RX Calibration Parameters\RX.mat")
+    save(".\Measurement Data\RX Calibration Parameters\RX.mat","RX")
 end

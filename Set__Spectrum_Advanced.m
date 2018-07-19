@@ -35,7 +35,7 @@ try
     if spectrumStruc.trigger == "2"
         fprintf(spectrum, sprintf(':TRIGger1:SEQuence:EXTernal1:LEVel %g', str2double(spectrumStruc.triggerLevel)));
     elseif spectrumStruc.trigger == "3"
-        fprintf(SCPI_90x0_SA, sprintf(':TRIGger1:SEQuence:EXTernal2:LEVel %g', str2double(spectrumStruc.triggerLevel));
+        fprintf(spectrum, sprintf(':TRIGger1:SEQuence:EXTernal2:LEVel %g', str2double(spectrumStruc.triggerLevel));
     end
     
     %trace averaging

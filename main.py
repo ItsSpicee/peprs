@@ -156,6 +156,7 @@ class Window(QMainWindow):
 		blueSelect = "QPushButton{ border:3px solid rgb(0, 0, 127);  background-color:qlineargradient(spread:pad, x1:0.994318, y1:0.682, x2:1, y2:0, stop:0 rgba(72, 144, 216, 255), stop:1 rgba(83, 170, 252, 255)); border-radius:5px;color:white}"
 		greenButton = "QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 158, 0, 255));color:white;border-radius: 5px; border: 3px solid green;} QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 134, 0, 255), stop:1 rgba(0, 184, 0, 255));}"
 		redButton = "QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(179, 0, 0, 255), stop:1 rgba(214, 0, 0, 255));color:white;border-radius: 5px; border: 3px solid rgb(143, 0, 0);} QPushButton:hover{background-color:rgb(217, 0, 0);}"
+		incomplete = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #f24646}"
 		
 		# set splitters
 		sizeList = [450,450]
@@ -340,7 +341,7 @@ class Window(QMainWindow):
 		self.ui.awgSetGeneral.clicked.connect(lambda: set.setGeneralAWG(self,setFocusButton,setParams,greyHover,unsetFocusButton,greyButton,self.ui.awgSetGeneral,supply))
 		self.ui.vsgSetGeneral.clicked.connect(lambda: set.setGeneralVSG(self,setFocusButton,setParams,greyHover,unsetFocusButton,greyButton,self.ui.vsgSetGeneral))
 		self.ui.vsgSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.vsgEquipAdv,setParams,self.ui.vsgSetAdv))
-		self.ui.awgSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.awgEquipAdv,setParams,self.ui.awgSetAdv))
+		self.ui.awgSetAdv.clicked.connect(lambda: set.setAdvancedAWG(self,setParams,self.ui.awgSetAdv,supply))
 		# upconverter page
 		self.ui.upSet.clicked.connect(lambda: set.setUp(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.upSet))
 		self.ui.psgSet.clicked.connect(lambda: set.setPSG(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.psgSet))

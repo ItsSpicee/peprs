@@ -1,10 +1,12 @@
 % channel 1 and 2 are coupled
 % iqconfig creates arbConfig file
 
-function result = Set_AWG(address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode,dacRange)
-%function error = Set_AWG(refClkSrc,refClkFreq,Channel,Amplitude)
+function result = Set_AWG(address,refClkSrc,refClkFreq,sampClkSrc,model)
     % load arbConfig file in order to connect to AWG (cannot do so through
     % command expert)
+    
+    % add relevant folders to path
+    addpath(".\RX Calibration\InstrumentFunctions\M8190A")
     
     % initialize variables
     refSrc = "";
@@ -12,7 +14,7 @@ function result = Set_AWG(address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode
     error = "";
     partNum = "";
     
-    try   
+%     try
         load('arbConfig.mat');
         arbConfig = loadArbConfig(arbConfig);
         % set visa address
@@ -77,47 +79,24 @@ function result = Set_AWG(address,refClkSrc,refClkFreq,sampClkSrc,model,trigMode
             error = "Please fill out all fields before attempting to set parameters."; 
         end
         xfprintf(f, sprintf(':OUTPut:SCLK:SOURce %s', sampSrc));
-
-        % set DAC Range
-        if dacRange < 0.1 || dacRange > 0.7
-            error = "The Voltage should be between 0.1 and 0.7 V'";
-         else 
-             xfprintf(f, sprintf(':SOURce:DAC:VOLTage:LEVel:IMMediate:AMPLitude %g', dacRange));
-             arbConfg.DACRange = dacRange;
-        end
         
-        % set trigger mode: continuous, triggered or gated
-        if trigMode == 1
-            % continuous mode is on. Trigger mode is “automatic”. The value of gate mode is not relevant.
-            xfprintf(f, sprintf(':INITiate:CONTinuous:STATe %d', 1));
-            arbConfig.triggerMode = "Continuous";
-        elseif trigMode == 2
-            % continuous mode is off. If gate mode is off, the trigger mode is “triggered”
-            xfprintf(f, sprintf(':INITiate:CONTinuous:STATe %d', 0));
-            xfprintf(f, sprintf(':INITiate:GATE:STATe %d', 0));
-            arbConfig.triggerMode = "Triggered";
-        elseif trigMode == 3
-            % continuous mode is off. If gate mode is off, the trigger mode is “triggered”, else it is “gated”
-            xfprintf(f, sprintf(':INITiate:CONTinuous:STATe %d', 0));
-            xfprintf(f, sprintf(':INITiate:GATE:STATe %d', 1));
-            arbConfig.triggerMode = "Gated";
-        else
-            error = "Please fill out all fields before attempting to set parameters."; 
-        end
-        
-        save arbConfig.mat
         % cleanup
         fclose(f);
         delete(f);
         clear f; 
-    catch
-        error = "A problem has occured, resetting instruments. Use Keysight Connection Expert to check your instrument VISA Address.";
-        instrreset
-    end
-    
+        rmpath(".\RX Calibration\InstrumentFunctions\M8190A")
+        
+%     catch
+%         error = "A problem has occured, resetting instruments. Use Keysight Connection Expert to check your instrument VISA Address.";
+%         instrreset
+%     end
+
     resultsString = sprintf("%s;%s",partNum,error);
     result = char(resultsString);
+    save("arbConfig.mat","arbConfig")
 end
 
+% OLD CODE
 % start signal generation on channel 1 (both if coupled)
 %fprintf(f, ':INITiate:IMMediate1');
+%clearvars -except arbConfig result
