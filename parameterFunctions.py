@@ -624,8 +624,6 @@ def enableVSACalFile(self,boxDone,boxUnset):
 		self.ui.rfSpacingField_comb.setEnabled(True)
 		self.ui.ifSpacingLabel_comb.setEnabled(True)
 		self.ui.ifSpacingField_comb.setEnabled(True)
-		self.ui.trigFrameTimeLabel_comb.setEnabled(True)
-		self.ui.trigFrameTimeField_comb.setEnabled(True)
 		self.ui.refFileLabel_comb.setEnabled(True)
 		self.ui.refFileField_comb.setEnabled(True)
 		self.ui.rfCenterFreqLabel_comb.setEnabled(True)
@@ -652,8 +650,6 @@ def enableVSACalFile(self,boxDone,boxUnset):
 		self.ui.rfSpacingField_comb.setEnabled(False)
 		self.ui.ifSpacingLabel_comb.setEnabled(False)
 		self.ui.ifSpacingField_comb.setEnabled(False)
-		self.ui.trigFrameTimeLabel_comb.setEnabled(False)
-		self.ui.trigFrameTimeField_comb.setEnabled(False)
 		self.ui.refFileLabel_comb.setEnabled(False)
 		self.ui.refFileField_comb.setEnabled(False)
 		self.ui.rfCenterFreqLabel_comb.setEnabled(False)
@@ -673,14 +669,14 @@ def enableVSACalFile(self,boxDone,boxUnset):
 		else:
 			self.ui.combEquip_vsaMeas.setStyleSheet(boxUnset)
 			
-def determineFrameTimeEnable(self):
-	idx = self.ui.vsgRelatedFrameTime_vsaMeas.currentIndex()
+def determineFrameTimeEnable(self,dropdown):
+	idx = dropdown.currentIndex()
 	if idx == 1 or idx == 0:
-		self.ui.frameTimeLabel_vsaMeas.setEnabled(False)
-		self.ui.framTimeField_vsaMeas.setEnabled(False)
+		self.ui.frameTime_vsaMeas.setEnabled(False)
+		self.ui.frameTime_vsaMeas_2.setEnabled(False)
 	elif idx == 2:
-		self.ui.frameTimeLabel_vsaMeas.setEnabled(True)
-		self.ui.framTimeField_vsaMeas.setEnabled(True)
+		self.ui.frameTime_vsaMeas.setEnabled(True)
+		self.ui.frameTime_vsaMeas_2.setEnabled(True)
 
 def displayVSGMeas(self):
 	idx = self.ui.vsgCalType.currentIndex()
@@ -777,8 +773,6 @@ def setVSAWorkflowsWithModNoDown(self,idx,subidx,state):
 	self.ui.single_mod_p2_stack.setCurrentIndex(subidx)
 	self.ui.single_vsaMeas_stack.setCurrentIndex(subidx)
 	self.ui.single_vsgMeas_stack.setCurrentIndex(subidx)
-	#self.ui.analysisBWLabel_vsaMeas.setEnabled(state)
-	#self.ui.analysisBWField_vsaMeas.setEnabled(state)
 
 def setVSAWorkflowsNoModNoDown(self,idx,subidx,state):
 	self.ui.vsaWorkflow_vsg.setCurrentIndex(idx)
@@ -795,8 +789,6 @@ def setVSAWorkflowsNoModNoDown(self,idx,subidx,state):
 	self.ui.single_p2_stack.setCurrentIndex(subidx)
 	self.ui.single_vsaMeas_stack.setCurrentIndex(subidx)
 	self.ui.single_vsgMeas_stack.setCurrentIndex(subidx)
-	#self.ui.analysisBWLabel_vsaMeas.setEnabled(state)
-	#self.ui.analysisBWField_vsaMeas.setEnabled(state)
 	
 def setVSAWorkflowsNoModWithDown(self,idx,twoidx,subidx,state):
 	self.ui.vsaWorkflow.setCurrentIndex(idx) # 4
@@ -818,8 +810,6 @@ def setVSAWorkflowsNoModWithDown(self,idx,twoidx,subidx,state):
 	self.ui.vsaWorkflow_power3.setCurrentIndex(twoidx)
 	self.ui.single_down_p3_stack.setCurrentIndex(subidx)
 	self.ui.single_down_vsgMeas_stack.setCurrentIndex(subidx)
-	self.ui.analysisBWLabel_vsaMeas.setEnabled(state)
-	self.ui.analysisBWField_vsaMeas.setEnabled(state)
 	
 def setVSAWorkflowsWithModWithDown(self,idx,twoidx,subidx,state):
 	self.ui.vsaWorkflow.setCurrentIndex(idx) # 3
@@ -841,8 +831,6 @@ def setVSAWorkflowsWithModWithDown(self,idx,twoidx,subidx,state):
 	self.ui.vsaWorkflow_power3.setCurrentIndex(twoidx)
 	self.ui.single_mod_down_p3_stack.setCurrentIndex(subidx)
 	self.ui.single_down_vsgMeas_stack.setCurrentIndex(subidx)
-	self.ui.analysisBWLabel_vsaMeas.setEnabled(state)
-	self.ui.analysisBWField_vsaMeas.setEnabled(state)
 	
 def uxaOrPxaSet(self,idx,averaging,demod,equipChecked,greyHover,unsetBox):	
 	style = self.ui.uxaMod.styleSheet()

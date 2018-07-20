@@ -154,8 +154,7 @@ if (isrow(ReceivedTones))
     ReceivedTones = ReceivedTones.';
 end
 
-despurFlag = 0;
-if despurFlag == 1
+if RXFlags.despurFlag == 1
     scopeSpurStart = -1.75e9;
     scopeSpurSpacing = 250e6;
     scopeSpurEnd = 1.75e9;
@@ -179,8 +178,7 @@ end
 ReferenceTones = ReferenceTones / mean(ReferenceTones);
 tones_cal      = ReferenceTones./ReceivedTones; 
 
-movingAverageFlag = 1;
-if movingAverageFlag
+if RXFlags.movingAverageFlag
     tones_cal = smooth(tones_cal,7);
 end
 

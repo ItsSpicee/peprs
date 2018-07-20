@@ -8,5 +8,5 @@ function Set_VSA_Meas(dict)
     RX.Fcarrier = dict.centerFreq; % Center frequency of the received tones
     RX.Analyzer.Fsample = dict.sampRate; % Sampling rate of the receiver
     RX.NumberOfMeasuredPeriods = dict.noFrames; % Number of measured frames, number of recorded time periods
-    save(".\Measurement Data\RX Calibration Parameters\RX.mat")
+    save(".\Measurement Data\RX Calibration Parameters\RX.mat","RX")
 end

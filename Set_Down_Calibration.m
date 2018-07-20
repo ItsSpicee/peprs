@@ -25,19 +25,20 @@ function Set_Down_Calibration(dict)
     elseif dict.mirrorFlag == 2
         RX.LOLowerInjectionFlag = false;
     end
-    if despurFlag == 1
+    if dict.despurFlag == 1
         RXFlags.despurFlag = 1;
-    elseif despurFlag == 2
+    elseif dict.despurFlag == 2
         RXFlags.despurFlag = 0;
     end
-    if smoothFlag == 1
+    if dict.smoothFlag == 1
         RXFlags.movingAverageFlag = 1;
-    elseif smoothFlag == 2
+    elseif dict.smoothFlag == 2
         RXFlags.movingAverageFlag = 0;
     end
     TX.TriggerAmplitude = dict.trigAmp; % Trigger signal amplitude
-    save(".\Measurement Data\RX Calibration Parameters\RX.mat")
-    save(".\Measurement Data\RX Calibration Parameters\TX.mat")
-    save(".\Measurement Data\RX Calibration Parameters\Downconverter.mat")
-    save(".\Measurement Data\RX Calibration Parameters\RXFlags.mat")
+    clear dict
+    save(".\Measurement Data\RX Calibration Parameters\RX.mat","RX")
+    save(".\Measurement Data\RX Calibration Parameters\TX.mat","TX")
+    save(".\Measurement Data\RX Calibration Parameters\Downconverter.mat","Downconverter")
+    save(".\Measurement Data\RX Calibration Parameters\RXFlags.mat","RXFlags")
 end
