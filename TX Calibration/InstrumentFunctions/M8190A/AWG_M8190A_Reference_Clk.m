@@ -7,16 +7,20 @@ function AWG_M8190A_Reference_Clk(IntorExt,ClkFreq)
     arbConfig = loadArbConfig(arbConfig);
     f = iqopen(arbConfig);
     
-
     switch (IntorExt)
-        case 'Internal';
-            xfprintf(f, sprintf(':ROSC:SOUR INT'));
-        case 'Backplane';
-            xfprintf(f, sprintf(':ROSC:SOUR AXI'));
-        case 'External';
-            xfprintf(f, sprintf(':ROSC:FREQ %d', ClkFreq));
-            xfprintf(f, sprintf(':ROSC:SOUR EXT'));
-        otherwise error('unknown source');
-    end
-            
+        case 'IntRef'
+            xfprintf(f, sprintf(':SOURce:ROSCillator:SOURce %s', 'INT'));
+            xfprintf(f, sprintf(':OUTPut:SCLK:SOURce %s', 'INT'));
+        case 'AxieRef'
+            xfprintf(f, sprintf(':SOURce:ROSCillator:SOURce %s', 'AXI'));
+            xfprintf(f, sprintf(':OUTPut:SCLK:SOURce %s', 'INT'));
+        case 'ExtRef'
+            xfprintf(f, sprintf(':SOURce:ROSCillator:FREQuency %s', ClkFreq));
+            xfprintf(f, sprintf(':SOURce:ROSCillator:SOURce %s', 'EXT'));
+            xfprintf(f, sprintf(':OUTPut:SCLK:SOURce %s', 'INT'));
+        case 'ExtClk'
+            xfprintf(f, sprintf(':SOURce:ROSCillator:FREQuency %s', ClkFreq));
+            xfprintf(f, sprintf(':OUTPut:SCLK:SOURce %s', 'EXT'));
+    end    
 end            
+   

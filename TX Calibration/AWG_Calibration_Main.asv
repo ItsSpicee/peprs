@@ -26,13 +26,18 @@ Cal.Processing32BitFlag = 1;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Cal.LearningParam                    = 0.2;
 Cal.Mse                              = zeros(Cal.NumIterations,1);
-   
+
+Cal.Signal.ToneSpacing               = 10e6;     
+Cal.Signal.StartingToneFreq          = 15e6;
+Cal.Signal.EndingToneFreq            = 3105e6;
 % Optional Multitone Settings
 Cal.Signal.MultitoneOptions.RealBasisFlag = 1;
 Cal.Signal.MultitoneOptions.PhaseDistr = 'Schroeder';
 % PAPR limits when generating the signals
 Cal.Signal.MultitoneOptions.PAPRmin  = 8;
 Cal.Signal.MultitoneOptions.PAPRmax  = 9;
+% Frequency resolution to use to search for the tones
+Cal.Fres = 500e3;
 
 % Calibration file complex baseband frequency
 tonesBaseband = (Cal.Signal.StartingToneFreq : Cal.Signal.ToneSpacing : Cal.Signal.EndingToneFreq);

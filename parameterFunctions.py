@@ -674,7 +674,7 @@ def enableVSACalFile(self,boxDone,boxUnset):
 			self.ui.combEquip_vsaMeas.setStyleSheet(boxUnset)
 			
 def determineFrameTimeEnable(self):
-	idx = self.ui.vsgRelatedFrameTimeField_vsaMeas.currentIndex()
+	idx = self.ui.vsgRelatedFrameTime_vsaMeas.currentIndex()
 	if idx == 1 or idx == 0:
 		self.ui.frameTimeLabel_vsaMeas.setEnabled(False)
 		self.ui.framTimeField_vsaMeas.setEnabled(False)
