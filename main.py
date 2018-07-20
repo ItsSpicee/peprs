@@ -308,7 +308,7 @@ class Window(QMainWindow):
 		self.ui.calFilePromptYes.toggled.connect(lambda: self.ui.vsaMeasNextStack.setCurrentIndex(3))
 		self.ui.noCalRXButton.clicked.connect(lambda: self.ui.vsaMeasNextStack.setCurrentIndex(4))
 		self.ui.yesCalRXButton.clicked.connect(lambda: self.ui.vsaMeasNextStack.setCurrentIndex(3))
-		self.ui.vsgRelatedFrameTimeField_vsaMeas.currentIndexChanged.connect(lambda: param.determineFrameTimeEnable(self))
+		#self.ui.vsgRelatedFrameTimeField_vsaMeas.currentIndexChanged.connect(lambda: param.determineFrameTimeEnable(self))
 		self.ui.calFilePromptNo_vsgMeas.toggled.connect(lambda: self.ui.vsgMeasNextStack.setCurrentIndex(1))
 		self.ui.calFilePromptYes_vsgMeas.toggled.connect(lambda: self.ui.vsgMeasNextStack.setCurrentIndex(2))
 		self.ui.vsgCalFilePromptYes.toggled.connect(lambda: self.ui.vsgMeasNextStack.setCurrentIndex(3))

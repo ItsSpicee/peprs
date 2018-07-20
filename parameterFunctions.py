@@ -610,7 +610,13 @@ def enableVSACalFile(self,boxDone,boxUnset):
 	checked = self.ui.generateVSACalCheck.isChecked()
 	setChecked = self.ui.downSetVSAMeas.isChecked()
 	setRunChecked = self.ui.set_run_vsa.isChecked()
+	
+	#enabling subrate flag when generate vsacal file is enabled
+	self.ui.label_291.setEnabled(checked)
+	self.ui.comboBox_77.setEnabled(checked)
+		
 	if checked:
+		
 		self.ui.vsaCalFileLabel_comb.setEnabled(False)
 		self.ui.vsaCalFileField_comb.setEnabled(False)
 		self.ui.filePushButton.setEnabled(False)
@@ -771,8 +777,8 @@ def setVSAWorkflowsWithModNoDown(self,idx,subidx,state):
 	self.ui.single_mod_p2_stack.setCurrentIndex(subidx)
 	self.ui.single_vsaMeas_stack.setCurrentIndex(subidx)
 	self.ui.single_vsgMeas_stack.setCurrentIndex(subidx)
-	self.ui.analysisBWLabel_vsaMeas.setEnabled(state)
-	self.ui.analysisBWField_vsaMeas.setEnabled(state)
+	#self.ui.analysisBWLabel_vsaMeas.setEnabled(state)
+	#self.ui.analysisBWField_vsaMeas.setEnabled(state)
 
 def setVSAWorkflowsNoModNoDown(self,idx,subidx,state):
 	self.ui.vsaWorkflow_vsg.setCurrentIndex(idx)
@@ -789,8 +795,8 @@ def setVSAWorkflowsNoModNoDown(self,idx,subidx,state):
 	self.ui.single_p2_stack.setCurrentIndex(subidx)
 	self.ui.single_vsaMeas_stack.setCurrentIndex(subidx)
 	self.ui.single_vsgMeas_stack.setCurrentIndex(subidx)
-	self.ui.analysisBWLabel_vsaMeas.setEnabled(state)
-	self.ui.analysisBWField_vsaMeas.setEnabled(state)
+	#self.ui.analysisBWLabel_vsaMeas.setEnabled(state)
+	#self.ui.analysisBWField_vsaMeas.setEnabled(state)
 	
 def setVSAWorkflowsNoModWithDown(self,idx,twoidx,subidx,state):
 	self.ui.vsaWorkflow.setCurrentIndex(idx) # 4
