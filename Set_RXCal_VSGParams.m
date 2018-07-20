@@ -3,7 +3,7 @@
 % max sample rate is 8e9: 14 bit mode and 240 min segment length
 % OLD CODE: TX.MinimumSegmentLength = lcm(240,320);  
 
-function Set_RXCal_VSGParams(type,model,sampleRate,refClockSrc,extRefClockFreq)
+function Set_RXCal_VSGParams(dict)
     load(".\Measurement Data\RX Calibration Parameters\TX.mat")   
     % Choose between 'AWG' (VSG not ready)
    if dict.type == 1 || dict.type == 2 || dict.type == 3

@@ -39,7 +39,7 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 				"refClockSrc" : self.ui.refClockSorce_awg.currentIndex(),
 				"extRefClockFreq" : self.ui.extRefFreq_awg.text()
 			}
-			supply.Set_RXCal_VSGParams(type,model,sampleRate,refClockSrc,extRefClockFreq)
+			supply.Set_RXCal_VSGParams(awgDict,nargout=0)
 			
 			self.ui.awgButton_vsg.setStyleSheet(buttonFocus)
 			self.ui.awgButton_vsg_2.setStyleSheet(buttonFocus)
@@ -1012,8 +1012,20 @@ def noRXCalRoutine(self,boxDone,buttonHover,setButton,supply):
 		self.ui.vsaMeasNextStack.setCurrentIndex(3)
 		setButton.setText("Set")
 		
-def awgCalRoutine(self,boxDone,setButton):
+def awgCalRoutine(self,boxDone,setButton,supply):
 	if setButton.isChecked() == True:
+		# Set MATLAB Parameters
+		# d= {
+			# "noIterations" : self.ui.noIterations_awgCal.text(),
+			# "toneSpacing" : self.ui.toneSpacing_awgCal.text(),
+			# "startFreq" : self.ui.startFreq_awgCal.text(),
+			# "endFreq" : self.ui.endFreq_awgCal.text(),
+			# "realFlag" : self.ui.realBasisFlag_awgCal.text(),
+			# "phaseDistr" : self.ui.phaseDistr_awgCal.text(),
+			# "freqRes" : self.ui.freqRes_awgCal.text()
+			# "saveLoc" : self.ui.awgCalSaveLocField_vsgMeas.text()
+		# }
+		# supply.Set_AWG_Calibration(d,nargout=0)
 		setButton.setText("Unset")
 		statusList = [1]
 		complete = menu.checkIfDone(statusList)
@@ -1063,8 +1075,12 @@ def awgCalRoutine(self,boxDone,setButton):
 		self.ui.vsgMeasNextStack.setCurrentIndex(3)
 		self.ui.debugVSGStack.setCurrentIndex(2)
 		
-def noAWGCalRoutine(self,boxDone,setButton):
+def noAWGCalRoutine(self,boxDone,setButton,supply):
 	if setButton.isChecked() == True:
+		# Set MATLAB parameter
+		awgFile = self.ui.awgCalFileField_vsgMeas_2.text()
+		supply.Set_AWG_CalFile(awgFile,nargout=0)
+		
 		setButton.setText("Unset")
 		statusList = [1]
 		complete = menu.checkIfDone(statusList)

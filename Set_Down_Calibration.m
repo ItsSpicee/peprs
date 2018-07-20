@@ -2,6 +2,7 @@ function Set_Down_Calibration(dict)
     load(".\Measurement Data\RX Calibration Parameters\RX.mat")
     load(".\Measurement Data\RX Calibration Parameters\TX.mat")
     load(".\Measurement Data\RX Calibration Parameters\Downconverter.mat")
+    load(".\Measurement Data\RX Calibration Parameters\RXFlags.mat")
     % IF = RF - LO
     if dict.rfCenterFreq == ""
         Downconverter.RFCenterFrequency = dict.ifCenterFreq + dict.loFreq;
@@ -38,4 +39,5 @@ function Set_Down_Calibration(dict)
     save(".\Measurement Data\RX Calibration Parameters\RX.mat")
     save(".\Measurement Data\RX Calibration Parameters\TX.mat")
     save(".\Measurement Data\RX Calibration Parameters\Downconverter.mat")
+    save(".\Measurement Data\RX Calibration Parameters\RXFlags.mat")
 end
