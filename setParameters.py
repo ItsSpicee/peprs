@@ -1029,15 +1029,15 @@ def awgCalRoutine(self,boxDone,setButton,supply):
 			"saveLoc" : self.ui.awgCalSaveLocField_vsgMeas.text()
 		}
 		supply.Set_AWG_Calibration(dAWGCal,nargout=0)
-		dAWGCalGen={
-			"centerFreq" : ,
-			"ampCorr" : ,
-			"ampCorrFile" : ,
-			"vfs" : ,
-			"trigAmp" : ,
-			"sampleClkFreq" : ,
-		}
-		supply.Set_AWGCal_General(dAWGCalGen,nargout=0)
+		# dAWGCalGen={
+			# "centerFreq" : ,
+			# "ampCorr" : ,
+			# "ampCorrFile" : ,
+			# "vfs" : ,
+			# "trigAmp" : ,
+			# "sampleClkFreq" : ,
+		# }
+		# supply.Set_AWGCal_General(dAWGCalGen,nargout=0)
 		setButton.setText("Unset")
 		statusList = [1]
 		complete = menu.checkIfDone(statusList)
