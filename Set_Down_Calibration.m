@@ -1,6 +1,6 @@
 function Set_Down_Calibration(dict)
     load(".\Measurement Data\RX Calibration Parameters\RX.mat")
-    load(".\Measurement Data\RX Calibration Parameters\TX.mat")
+    load(".\Measurement Data\Calibration Parameters\TX.mat")
     load(".\Measurement Data\RX Calibration Parameters\Downconverter.mat")
     load(".\Measurement Data\RX Calibration Parameters\RXFlags.mat")
     % IF = RF - LO
@@ -38,7 +38,7 @@ function Set_Down_Calibration(dict)
     TX.TriggerAmplitude = dict.trigAmp; % Trigger signal amplitude
     clear dict
     save(".\Measurement Data\RX Calibration Parameters\RX.mat","RX")
-    save(".\Measurement Data\RX Calibration Parameters\TX.mat","TX")
+    save(".\Measurement Data\Calibration Parameters\TX.mat","TX")
     save(".\Measurement Data\RX Calibration Parameters\Downconverter.mat","Downconverter")
     save(".\Measurement Data\RX Calibration Parameters\RXFlags.mat","RXFlags")
 end

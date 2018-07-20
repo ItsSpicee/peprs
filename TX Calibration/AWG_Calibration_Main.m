@@ -15,6 +15,8 @@ addpath(genpath(pwd))%Automatically Adds all paths in directory and subfolders
 instrreset
 
 load("C:\Users\leing\Documents\Laura\git\peprs\Measurement Data\AWG Calibration Parameters\Cal.mat")
+load("C:\Users\leing\Documents\Laura\git\peprs\Measurement Data\AWG Calibration Parameters\RX.mat")
+load("C:\Users\leing\Documents\Laura\git\peprs\Measurement Data\Calibration Parameters\TX.mat")
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Utilize 32-bit MATLAB flag
@@ -27,9 +29,6 @@ Cal.Processing32BitFlag = 1;
 Cal.LearningParam                    = 0.2;
 Cal.Mse                              = zeros(Cal.NumIterations,1);
    
-% Optional Multitone Settings
-Cal.Signal.MultitoneOptions.RealBasisFlag = 1;
-Cal.Signal.MultitoneOptions.PhaseDistr = 'Schroeder';
 % PAPR limits when generating the signals
 Cal.Signal.MultitoneOptions.PAPRmin  = 8;
 Cal.Signal.MultitoneOptions.PAPRmax  = 9;
@@ -37,24 +36,12 @@ Cal.Signal.MultitoneOptions.PAPRmax  = 9;
 % Calibration file complex baseband frequency
 tonesBaseband = (Cal.Signal.StartingToneFreq : Cal.Signal.ToneSpacing : Cal.Signal.EndingToneFreq);
 tonesBaseband = [-fliplr(tonesBaseband) tonesBaseband];
-Cal.Directory = 'AWG_CalResults';
-Cal.Filename  = 'AWG_Cal_3105MHz_I';
-
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Set TX Parameters
 %  Description: AWG frame time is picked to ensure that the signal length
 %  is multiples of minimum segment length at the AWG sampling rate
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-TX.Type                       = 'AWG';             % Choose between 'AWG'
-TX.AWG_Model                  = 'M8190A';          % Choose bewteen 'M8190A' and 'M8195A'
-TX.Fsample                    = 12e9;               % AWG sample rate
-TX.ReferenceClockSource       = 'External';       % Choose between 'Backplane', 'Internal', 'External'
-TX.ReferenceClock             = 10e6;             % External reference clock frequency
-TX.MinimumSegmentLength       = lcm(240,320);               % Minimum AWG segment length
-TX.VFS                        = 0.7;               % AWG full scale voltage amp
-TX.TriggerAmplitude           = 1;               % Trigger signal amplitude
 TX.NumberOfTransmittedPeriods = 100;
-
 % AWG channel for calibration
 TX.AWG_Channel                = 1;
 
@@ -236,11 +223,7 @@ end
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Save Inverse Model Data
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-if (~exist(Cal.Directory,'dir'))
-    mkdir(Cal.Directory);
-    addpath(genpath(Cal.Directory));
-end
-save(['.\' Cal.Directory '\' Cal.Filename], 'H_Tx_freq_inverse', 'tonesBaseband');
+save([Cal.SaveLocation], 'H_Tx_freq_inverse', 'tonesBaseband');
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Apply the inverse model to the verification signal
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

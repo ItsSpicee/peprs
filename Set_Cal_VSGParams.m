@@ -3,8 +3,8 @@
 % max sample rate is 8e9: 14 bit mode and 240 min segment length
 % OLD CODE: TX.MinimumSegmentLength = lcm(240,320);  
 
-function Set_RXCal_VSGParams(dict)
-    load(".\Measurement Data\RX Calibration Parameters\TX.mat")   
+function Set_Cal_VSGParams(dict)
+    load(".\Measurement Data\Calibration Parameters\TX.mat")   
     % Choose between 'AWG' (VSG not ready)
    if dict.type == 1 || dict.type == 2 || dict.type == 3
        TX.Type = "AWG";
@@ -30,6 +30,6 @@ function Set_RXCal_VSGParams(dict)
        TX.ReferenceClockSource = "ExtClk"; 
    end
    TX.ReferenceClock = dict.extRefClockFreq; % External reference clock frequency
-   save(".\Measurement Data\RX Calibration Parameters\TX.mat","TX") 
+   save(".\Measurement Data\Calibration Parameters\TX.mat","TX") 
    % minimum segment length calculation --> model
 end

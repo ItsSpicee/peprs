@@ -39,7 +39,7 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 				"refClockSrc" : self.ui.refClockSorce_awg.currentIndex(),
 				"extRefClockFreq" : self.ui.extRefFreq_awg.text()
 			}
-			supply.Set_RXCal_VSGParams(awgDict,nargout=0)
+			supply.Set_Cal_VSGParams(awgDict,nargout=0)
 			
 			self.ui.awgButton_vsg.setStyleSheet(buttonFocus)
 			self.ui.awgButton_vsg_2.setStyleSheet(buttonFocus)
@@ -94,7 +94,7 @@ def setAdvancedAWG(self,boxDone,setButton,supply):
 	if setButton.isChecked() == True:
 		if flag == 1:
 			# set MATLAB RXCal Param
-			supply.Set_RXCal_VSGAdvParams(d.dacRange,nargout=0)
+			supply.Set_Cal_VSGAdvParams(d.dacRange,nargout=0)
 			
 			setButton.setText("Unset")
 			self.ui.awgEquipAdv.setStyleSheet(boxDone)
@@ -770,7 +770,7 @@ def setVSAMeasDig(self,boxDone,buttonHover,buttonDone,setButton,supply):
 				"sampRate": self.ui.sampRate_vsaMeas.text(),
 				"noFrames": self.ui.noFrameTimes_vsaMeas.text()
 			}
-			supply.Set_VSA_Meas(d,nargout=0)
+			supply.Set_VSA_Meas_RXCal(d,nargout=0)
 			
 			self.ui.vsaMeasGenEquip.setStyleSheet(boxDone)
 			self.ui.vsaMeasGenEquip_2.setStyleSheet(boxDone)
@@ -820,7 +820,7 @@ def setVSAMeasGen(self,boxDone,buttonHover,buttonDone,setButton,supply):
 				"sampRate": self.ui.sampRate_vsaMeas_2.text(),
 				"noFrames": self.ui.noFrameTimes_vsaMeas_2.text()
 			}
-			supply.Set_VSA_Meas(d,nargout=0)
+			supply.Set_VSA_Meas_RXCal(d,nargout=0)
 		
 			vsaType = self.ui.vsaWorkflow_vsaMeas.currentIndex()
 			vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
@@ -1018,7 +1018,7 @@ def noRXCalRoutine(self,boxDone,buttonHover,setButton,supply):
 def awgCalRoutine(self,boxDone,setButton,supply):
 	if setButton.isChecked() == True:
 		# Set MATLAB Parameters
-		d= {
+		dAWGCal= {
 			"noIterations" : self.ui.noIterations_awgCal.text(),
 			"toneSpacing" : self.ui.toneSpacing_awgCal.text(),
 			"startFreq" : self.ui.startFreq_awgCal.text(),
@@ -1028,7 +1028,16 @@ def awgCalRoutine(self,boxDone,setButton,supply):
 			"freqRes" : self.ui.freqRes_awgCal.text(),
 			"saveLoc" : self.ui.awgCalSaveLocField_vsgMeas.text()
 		}
-		supply.Set_AWG_Calibration(d,nargout=0)
+		supply.Set_AWG_Calibration(dAWGCal,nargout=0)
+		dAWGCalGen={
+			"centerFreq" : ,
+			"ampCorr" : ,
+			"ampCorrFile" : ,
+			"vfs" : ,
+			"trigAmp" : ,
+			"sampleClkFreq" : ,
+		}
+		supply.Set_AWGCal_General(dAWGCalGen,nargout=0)
 		setButton.setText("Unset")
 		statusList = [1]
 		complete = menu.checkIfDone(statusList)

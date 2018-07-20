@@ -20,7 +20,7 @@ instrreset
 load("C:\Users\leing\Documents\Laura\git\peprs\Measurement Data\RX Calibration Parameters\Cal.mat");
 load("C:\Users\leing\Documents\Laura\git\peprs\Measurement Data\RX Calibration Parameters\RX.mat");
 load("C:\Users\leing\Documents\Laura\git\peprs\Measurement Data\RX Calibration Parameters\RXFlags.mat")
-load("C:\Users\leing\Documents\Laura\git\peprs\Measurement Data\RX Calibration Parameters\TX.mat")
+load("C:\Users\leing\Documents\Laura\git\peprs\Measurement Data\Calibration Parameters\TX.mat")
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Utilize 32-bit MATLAB flag

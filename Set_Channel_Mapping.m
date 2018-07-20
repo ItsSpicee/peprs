@@ -1,7 +1,7 @@
 % 0 = Select, 1 = None, 2 = Channel 1, 3 = Channel 2
 function Set_Channel_Mapping(iChannel,qChannel)
     channelMap = [0 0; 0 0];
-    load(".\Measurement Data\RX Calibration Parameters\RX.mat") 
+    load(".\Measurement Data\Calibration Parameters\RX.mat") 
     if iChannel == 1
         channelMap(1,:) = 1;
     elseif iChannel == 2
@@ -17,5 +17,5 @@ function Set_Channel_Mapping(iChannel,qChannel)
         channelMap(2,2) = 1;
     end  
     RX.channelVec = channelMap;
-    save(".\Measurement Data\RX Calibration Parameters\RX.mat","RX")
+    save(".\Measurement Data\Calibration Parameters\RX.mat","RX")
 end
