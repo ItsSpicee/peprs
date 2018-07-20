@@ -4,16 +4,16 @@
 % Cal = struct
 % save(".\Measurement Data\RX Calibration Parameters\Cal.mat","Cal")
 
-function Set_VSA_Calibration(rfSpacing,ifSpacing,refFile,rfCenterFreq,rfCalStartFreq,rfCalStopFreq,loFreqOffset,saveLoc,subRate)
+function Set_VSA_Calibration(dict)
     load(".\Measurement Data\RX Calibration Parameters\Cal.mat")
-    Cal.RFToneSpacing = rfSpacing; % Spacing between the adjacent tones at RF
-    Cal.IFToneSpacing = ifSpacing; % Spacing between the received adjacent tones
-    Cal.LOFrequencyOffset = loFreqOffset; % Find the IF tones to fish out
-    Cal.SaveLocation = saveLoc;
-    Cal.SubRateFlag = subRate;
-    Cal.Reference.CombReferenceFile = refFile; % Reference comb generator file
-    Cal.Reference.RFCenterFrequency = rfCenterFreq; % Starting RF tone for calibration
-    Cal.Reference.RFCalibrationStartFrequency = rfCalStartFreq; % Starting RF tone for calibration
-    Cal.Reference.RFCalibrationStopFrequency = rfCalStopFreq; % Last RF tone for calibration
+    Cal.RFToneSpacing = dict.rfSpacing; % Spacing between the adjacent tones at RF
+    Cal.IFToneSpacing = dict.ifSpacing; % Spacing between the received adjacent tones
+    Cal.LOFrequencyOffset = dict.loFreqOffset; % Find the IF tones to fish out
+    Cal.SaveLocation = dict.saveLoc;
+    Cal.SubRateFlag = dict.subRate;
+    Cal.Reference.CombReferenceFile = dict.refFile; % Reference comb generator file
+    Cal.Reference.RFCenterFrequency = dict.rfCenterFreq; % Starting RF tone for calibration
+    Cal.Reference.RFCalibrationStartFrequency = dict.rfCalStartFreq; % Starting RF tone for calibration
+    Cal.Reference.RFCalibrationStopFrequency = dict.rfCalStopFreq; % Last RF tone for calibration
     save(".\Measurement Data\RX Calibration Parameters\Cal.mat","Cal") 
 end

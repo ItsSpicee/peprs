@@ -63,9 +63,9 @@ end
 
 % UXA
 if (RX.UXA.AnalysisBandwidth > 500e6)
-    RX.UXA.TriggerPort = 'EXT3';
+    RX.UXA.TriggerPort  = 'EXT3';
 else
-    RX.UXA.TriggerPort = 'EXT1';
+    RX.UXA.TriggerPort          = 'EXT1';
 end
 
 % Downconversion filter if we receive at IF
@@ -81,6 +81,15 @@ end
 %  the AWG from adding more segments to the signal, ensure that the trigger
 %  length is an integer of the minimum AWG segment length
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+TX.Type                 = 'AWG';             
+TX.AWG_Model            = 'M8190A';          
+TX.Fsample              = 12e9;               
+TX.ReferenceClockSource = 'External';       
+TX.ReferenceClock       = 10e6;    
+
+TX.MinimumSegmentLength = lcm(240,320);               
+TX.VFS                  = 0.7;               
+TX.TriggerAmplitude     = 1.5;               
 
 % TX Trigger Frame Time Calculation
 SamplesPerPeriod               = (1 / Cal.IFToneSpacing) * TX.Fsample;
