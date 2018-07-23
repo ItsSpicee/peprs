@@ -71,10 +71,7 @@ try
     if dict.detector == "1"
         fprint(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'NORMal'));
     elseif dict.detector == "2"
-        fprint(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'AVERage'));
-    elseif dict.detector == "3"
-        fprint(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'POSittive'));
-    end
+        fprint(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'A'));
         
     
     

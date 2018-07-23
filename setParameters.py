@@ -482,8 +482,6 @@ def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,bu
 		
 def setSaAdv(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,buttonSelect,supply):
 	if setButton.isChecked() == True:
-		setButton.setText("Unset")
-		self.ui.saEquipAdv.setStyleSheet(boxDone)
 		
 		d ={
 			"address": self.ui.lineEdit_58.text(),
@@ -496,8 +494,12 @@ def setSaAdv(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton
 			"traceNum": self.ui.lineEdit_64.text(),
 			"ACPNoise": self.ui.comboBox_59.currentIndex(),
 			"ACPBand": self.ui.lineEdit_65.text(),
-			"ACPOffset": self.ui.lineEdit_66()
+			"ACPOffset": self.ui.lineEdit_66(),
+			"Detector": self.ui.comboBox_66.currentIndex()
 		}
+		
+		setButton.setText("Unset")
+		self.ui.saEquipAdv.setStyleSheet(boxDone)
 		
 		flag = setSpectrumAnalyzerAdvancedParams(self,d,self.ui.saEquipAdv,supply,boxDone)
 		
