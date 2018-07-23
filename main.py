@@ -3,6 +3,7 @@
 # tabWidget->setTabEnabled(1, false);
 
 import sys
+import os
 from PyQt5 import uic, QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (QDialogButtonBox,QMessageBox, QTabWidget, QFileDialog,QDialog, QInputDialog, QTextEdit, QLineEdit, QLabel, QFrame, QGridLayout, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QMenu, QAction, qApp, QDesktopWidget, QMessageBox, QToolTip, QPushButton, QApplication, QProgressBar,QSizePolicy)
 from PyQt5.QtGui import (QCursor, QPen, QPainter, QColor, QIcon, QFont,QGuiApplication)
@@ -18,8 +19,13 @@ import windowFunctions as menu
 import parameterFunctions as param
 #import PowerSupplyPkg
 
+# setup matlab engine
 import matlab.engine
 supply = matlab.engine.start_matlab()
+# add all folders and subfolders in peprs to matlab path
+currentPath = os.getcwd();
+allPaths = supply.genpath(currentPath)
+supply.addpath(allPaths)
 
 #supply = PowerSupplyPkg.initialize()
 
@@ -79,19 +85,19 @@ class Window(QMainWindow):
 		self.ui.filePushButton_15.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileQField_algo_3,".\Measurement Data"))
 		self.ui.filePushButton_11.clicked.connect(lambda: menu.fileBrowse(self, self.ui.customIField_algo,".\Measurement Data"))
 		self.ui.filePushButton_12.clicked.connect(lambda: menu.fileBrowse(self, self.ui.customQField_algo,".\Measurement Data"))
-		self.ui.filePushButton_7.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_algo_2,".\Measurement Data"))
+		self.ui.filePushButton_7.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_algo_2,".\Measurement Data\\Utility Data"))
 		self.ui.filePushButton_8.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_algo_2,".\Measurement Data"))
 		self.ui.filePushButton_9.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileIField_algo_2,".\Measurement Data"))
 		self.ui.filePushButton_10.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileQField_algo_2,".\Measurement Data"))
 		self.ui.filePushButton_4.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsaCalFileField_algo,".\Measurement Data"))
 		self.ui.filePushButton_5.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileIField_algo,".\Measurement Data"))
-		self.ui.filePushButton_3.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_algo,".\Measurement Data"))
+		self.ui.filePushButton_3.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_algo,".\Measurement Data\\Utility Data"))
 		self.ui.filePushButton_6.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileQField_algo,".\Measurement Data"))
 		self.ui.filePushButton.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_comb,".\Measurement Data\RX_CalResults"))
 		self.ui.filePushButton_2.clicked.connect(lambda: menu.fileSave(self, self.ui.vsaCalSaveLocField_comb,".\Measurement Data"))
 		self.ui.filePushButton_17.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upCalFileField_vsgMeas_2,".\Measurement Data"))
 		self.ui.filePushButton_18.clicked.connect(lambda: menu.fileSave(self, self.ui.upCalSaveLocField_vsgMeas,".\Measurement Data"))
-		self.ui.filePushButton_20.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_vsgMeas,".\Measurement Data"))
+		self.ui.filePushButton_20.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_vsgMeas,".\Measurement Data\\Utility Data"))
 		self.ui.filePushButton_24.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_vsgMeas_2,".\Measurement Data"))
 		self.ui.filePushButton_25.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqFileField_vsgMeas,".\Measurement Data"))
 		self.ui.filePushButton_26.clicked.connect(lambda: menu.fileSave(self, self.ui.iqSaveLocField_vsgMeas,".\Measurement Data"))
@@ -103,7 +109,7 @@ class Window(QMainWindow):
 		self.ui.filePushButton_32.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileQField_vsgMeas,".\Measurement Data"))
 		self.ui.filePushButton_33.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFielField_vsgMeas,".\Measurement Data"))
 		self.ui.filePushButton_36.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqFileField_vsgMeas_3,".\Measurement Data"))
-		self.ui.filePushButton_37.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_vsgMeas_2,".\Measurement Data"))
+		self.ui.filePushButton_37.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_vsgMeas_2,".\Measurement Data\\Utility Data"))
 		self.ui.filePushButton_38.clicked.connect(lambda: menu.fileSave(self, self.ui.iqSaveLocField_vsgMeas_3,".\Measurement Data"))
 		self.ui.filePushButton_39.clicked.connect(lambda: menu.fileSave(self, self.ui.vsgCalSaveLocField_vsgMeas_3,".\Measurement Data"))
 		self.ui.filePushButton_40.clicked.connect(lambda: menu.fileSave(self, self.ui.calStructSaveLocField_vsgMeas_3,".\Measurement Data"))
@@ -113,7 +119,7 @@ class Window(QMainWindow):
 		self.ui.filePushButton_44.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_vsgMeas,".\Measurement Data"))
 		self.ui.filePushButton_45.clicked.connect(lambda: menu.fileBrowse(self, self.ui.ampCorrFile_vsgMeas,".\Measurement Data"))
 		self.ui.filePushButton_46.clicked.connect(lambda: menu.fileBrowse(self, self.ui.awgCalFileField_vsgMeas,".\Measurement Data"))
-		self.ui.filePushButton_47.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFilterFileField_vsgMeas,".\Measurement Data"))
+		self.ui.filePushButton_47.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFilterFileField_vsgMeas,".\Measurement Data\\Utility Data"))
 		self.ui.filePushButton_48.clicked.connect(lambda: menu.fileSave(self, self.ui.awgCalSaveLocField_vsgMeas,".\Measurement Data"))
 		self.ui.filePushButton_49.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dllFile_uxa,".\Equipment Setup\Demodulator"))
 		self.ui.filePushButton_50.clicked.connect(lambda: menu.fileBrowse(self, self.ui.setupFile_uxa,".\Equipment Setup\Demodulator"))
@@ -124,9 +130,9 @@ class Window(QMainWindow):
 		self.ui.filePushButton_55.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dllFile_dig,".\Equipment Setup\Demodulator"))
 		self.ui.filePushButton_56.clicked.connect(lambda: menu.fileBrowse(self, self.ui.setupFile_dig,".\Equipment Setup\Demodulator"))
 		self.ui.filePushButton_57.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dataFile_dig,".\Equipment Setup\Demodulator"))
-		self.ui.filePushButton_16.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_algo_3,".\Measurement Data"))
+		self.ui.filePushButton_16.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_algo_3,".\Measurement Data\\Utility Data"))
 		self.ui.filePushButton_19.clicked.connect(lambda: menu.fileBrowse(self, self.ui.refFileField_comb,".\Measurement Data\Comb_Generator_Files"))
-		self.ui.filePushButton_21.clicked.connect(lambda: menu.fileBrowse(self,self.ui.driverPath_scope,""))
+		self.ui.filePushButton_21.clicked.connect(lambda: menu.fileBrowse(self,self.ui.driverPath_scope,".\Equipment Setup\Scope"))
 		self.ui.filePushButton_58.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsaCalFileField_vsg,".\Measurement Data"))
 		self.ui.filePushButton_59.clicked.connect(lambda: menu.fileOpen(self, self.ui.iqFileField_vsg,".\Measurement Data"))
 		self.ui.filePushButton_60.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsgFileField_vsg,".\Measurement Data"))
