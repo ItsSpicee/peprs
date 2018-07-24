@@ -17,10 +17,9 @@ addpath(genpath(pwd))%Automatically Adds all paths in directory and subfolders
 instrreset
 
 % load Cal parameters from GUI
-load("C:\Users\leing\Documents\Laura\git\peprs\Measurement Data\RX Calibration Parameters\Cal.mat");
-load("C:\Users\leing\Documents\Laura\git\peprs\Measurement Data\RX Calibration Parameters\RX.mat");
-load("C:\Users\leing\Documents\Laura\git\peprs\Measurement Data\RX Calibration Parameters\RXFlags.mat")
-load("C:\Users\leing\Documents\Laura\git\peprs\Measurement Data\RX Calibration Parameters\TX.mat")
+load(".\Measurement Data\RX Calibration Parameters\Cal.mat");
+load(".\Measurement Data\RX Calibration Parameters\RX.mat");
+load(".\Measurement Data\RX Calibration Parameters\TX.mat")
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Utilize 32-bit MATLAB flag
@@ -68,12 +67,6 @@ else
     RX.UXA.TriggerPort = 'EXT1';
 end
 
-% Downconversion filter if we receive at IF
-if (~strcmp(RX.Type, 'UXA'))
-    load FIR_LPF_fs40e9_fpass_1r52e9_Order685
-    RX.Filter = Num;
-    clear Num
-end
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Set Trigger Signal Parameters
 %  Description: AWG_frame_time will be used to make sure that the trigger 
@@ -104,10 +97,7 @@ if (Cal.Processing32BitFlag)
     %  AWG_frame_time will be used to make sure that the trigger signal period 
     %  is at an integer multiple of the comb perid 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-    if (strcmp(RX.Type,'Scope'))
-        instrreset
-        %[RX.Scope] = ScopeDriverInit( RX );
-    elseif (strcmp(RX.Type,'Digitzer'))
+    if (strcmp(RX.Type,'Digitzer'))
         [RX.Digitizer] = ADCDriverInit( RX );
     end
 
@@ -117,8 +107,6 @@ if (Cal.Processing32BitFlag)
     %  is at an integer multiple of the comb perid 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     if (strcmp(RX.Type,'Scope'))
-        %[ obj ] = SignalCapture_Scope(RX.Scope, RX.Analyzer.Fsample, 2 * RX.PointsPerRecord, RX.EnableExternalReferenceClock);
-        %Rec = obj.Ch1_Waveform;
 		[ obj ] = SignalCapture_Scope_64bit(RX, RX.Scope.autoscaleFlag);
         Rec = obj.Ch_Waveform{1};
     else
@@ -126,7 +114,7 @@ if (Cal.Processing32BitFlag)
 %         [Rec] = DigitalDownconvert( Rec, RX.Analyzer.Fsample, RX.Fcarrier, RX.Filter, RX.LOLowerInjectionFlag);
     end
     if (strcmp(RX.Type,'UXA'))
-                % Get received I and Q signals 
+        % Get received I and Q signals 
         [Received_I, Received_Q] = IQCapture_UXA(RX.Fcarrier + Cal.LOFrequencyOffset, ...
             RX.UXA.AnalysisBandwidth, 200 * RX.FrameTime, RX.VisaAddress, RX.UXA.Attenuation, RX.UXA.ClockReference, RX.UXA.TriggerPort, RX.UXA.TriggerLevel);
         Rec = complex(Received_I, Received_Q);
@@ -141,7 +129,7 @@ end
 %  Fish out the desired tones
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 load('Raw_Data');
-Rec = Rec(1:2e6);
+Rec = Rec(1:(RX.Analyzer.Fsample/Cal.FreqRes));
 
 % Ensure the the received
 if (isrow(Rec))
@@ -154,15 +142,10 @@ if (isrow(ReceivedTones))
     ReceivedTones = ReceivedTones.';
 end
 
-if RXFlags.despurFlag == 1
-    scopeSpurStart = -1.75e9;
-    scopeSpurSpacing = 250e6;
-    scopeSpurEnd = 1.75e9;
-    ReceivedTones  = RemoveScopeSpurs(ReceivedTones, tones_freq, scopeSpurStart, scopeSpurEnd, scopeSpurSpacing);
-%     scopeSpurStart = -1.62e9;
-%     scopeSpurSpacing = 250e6;
-%     scopeSpurEnd = 1.62e9;
-%     ReceivedTones  = RemoveScopeSpurs(ReceivedTones, tones_freq, scopeSpurStart, scopeSpurEnd, scopeSpurSpacing);
+if Cal.DespurFlag == 1
+    ReceivedTones  = RemoveScopeSpurs(ReceivedTones, tones_freq, ...
+        Cal.ScopeSpurs.ScopeSpurStart, Cal.ScopeSpurs.ScopeSpurEnd, ...
+        Cal.ScopeSpurs.ScopeSpurSpacing);
 end
 
 % tones_phase           = unwrap(phase(ReceivedTones));
@@ -178,8 +161,8 @@ end
 ReferenceTones = ReferenceTones / mean(ReferenceTones);
 tones_cal      = ReferenceTones./ReceivedTones; 
 
-if RXFlags.movingAverageFlag
-    tones_cal = smooth(tones_cal,7);
+if Cal.MovingAverageFlag
+    tones_cal = smooth(tones_cal,Cal.MovingAverageOrder);
 end
 
 comb_I_cal     = real(tones_cal);
@@ -193,4 +176,4 @@ subplot(2,1,2); plot(tones_freq./1e9,  180/pi*unwrap(phase(tones_cal)), '.-'); h
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Save Data
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-save([Cal.SaveLocation], 'tones_freq', 'comb_I_cal', 'comb_Q_cal')
+save(Cal.SaveLocation, 'tones_freq', 'comb_I_cal', 'comb_Q_cal')

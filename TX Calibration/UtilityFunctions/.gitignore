@@ -1,4 +1,0 @@
-# ignore anything that is not .m files
-*.*
-!*.m
-!.gitignore

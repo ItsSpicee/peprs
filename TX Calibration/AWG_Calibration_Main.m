@@ -15,6 +15,8 @@ addpath(genpath(pwd))%Automatically Adds all paths in directory and subfolders
 instrreset
 
 load("C:\Users\leing\Documents\Laura\git\peprs\Measurement Data\AWG Calibration Parameters\Cal.mat")
+load("C:\Users\leing\Documents\Laura\git\peprs\Measurement Data\AWG Calibration Parameters\RX.mat")
+load("C:\Users\leing\Documents\Laura\git\peprs\Measurement Data\AWG Calibration Parameters\TX.mat")
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Utilize 32-bit MATLAB flag
@@ -24,12 +26,9 @@ Cal.Processing32BitFlag = 1;
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Set Calibration Signal Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Cal.LearningParam                    = 0.2;
+Cal.LearningParam                    = 0.2; % currently irrelevant
 Cal.Mse                              = zeros(Cal.NumIterations,1);
    
-% Optional Multitone Settings
-Cal.Signal.MultitoneOptions.RealBasisFlag = 1;
-Cal.Signal.MultitoneOptions.PhaseDistr = 'Schroeder';
 % PAPR limits when generating the signals
 Cal.Signal.MultitoneOptions.PAPRmin  = 8;
 Cal.Signal.MultitoneOptions.PAPRmax  = 9;
@@ -37,26 +36,11 @@ Cal.Signal.MultitoneOptions.PAPRmax  = 9;
 % Calibration file complex baseband frequency
 tonesBaseband = (Cal.Signal.StartingToneFreq : Cal.Signal.ToneSpacing : Cal.Signal.EndingToneFreq);
 tonesBaseband = [-fliplr(tonesBaseband) tonesBaseband];
-Cal.Directory = 'AWG_CalResults';
-Cal.Filename  = 'AWG_Cal_3105MHz_I';
-
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Set TX Parameters
 %  Description: AWG frame time is picked to ensure that the signal length
 %  is multiples of minimum segment length at the AWG sampling rate
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-TX.Type                       = 'AWG';             % Choose between 'AWG'
-TX.AWG_Model                  = 'M8190A';          % Choose bewteen 'M8190A' and 'M8195A'
-TX.Fsample                    = 12e9;               % AWG sample rate
-TX.ReferenceClockSource       = 'External';       % Choose between 'Backplane', 'Internal', 'External'
-TX.ReferenceClock             = 10e6;             % External reference clock frequency
-TX.MinimumSegmentLength       = lcm(240,320);               % Minimum AWG segment length
-TX.VFS                        = 0.7;               % AWG full scale voltage amp
-TX.TriggerAmplitude           = 1;               % Trigger signal amplitude
-TX.NumberOfTransmittedPeriods = 100;
-
-% AWG channel for calibration
-TX.AWG_Channel                = 1;
 
 % TX Trigger Frame Time Calculation
 SamplesPerPeriod               = (1 / Cal.Signal.ToneSpacing) * TX.Fsample;
@@ -68,48 +52,27 @@ TX.FrameTime                   = TX.NumberOfTransmittedPeriods * MinimumNumberOf
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Set RX Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-RX.Type                    = 'Scope';    % Choose between 'Digitizer', 'Scope' for the receiver
-RX.Fcarrier                = 0e9;       % Center frequency of the received tones
-RX.LOLowerInjectionFlag    = false;      % Higher or lower LO injection
-RX.Fsample                 = 20e9;        % Sampling rate of the receiver
+
 RX.FrameTime               = TX.FrameTime;     % One measurement frame;
-RX.NumberOfMeasuredPeriods = 2;          % Number of measured frames;
 RX.PointsPerRecord         = RX.Fsample * RX.FrameTime * RX.NumberOfMeasuredPeriods;
 
-RX.VisaAddress             = 'USB0::0x0957::0x9001::MY48240314::0::INSTR';
-RX.ScopeIVIDriverPath      = 'C:\Users\a38chung\Desktop\Scope\AgilentInfiniium.mdd';
-
-% Scope Parameters
-RX.EnableExternalReferenceClock = false;
-RX.channelVec                   = [1 0 0 0];
-
 % Digitizer Parameters
-RX.EnableExternalClock     = false;
-RX.ExternalClockFrequency  = 1.906e9;    % For half rate 1.998 GSa/s, quarter rate 1.906 GSa/s
-RX.ACDCCoupling            = 1;
-RX.VFS                     = 1;          % Digitzer full scale peak to peak voltage reference (1 or 2 V)
 if (RX.Fsample > 1e9)
     RX.EnableInterleaving  = true;       % Enable interleaving
 end
 
 % UXA
-RX.UXA.AnalysisBandwidth    = 1e09;
-RX.UXA.Attenuation          = 20;  % dB
-RX.UXA.ClockReference       = 'External';
 if (RX.UXA.AnalysisBandwidth > 500e6)
     RX.UXA.TriggerPort          = 'EXT3';
 else
     RX.UXA.TriggerPort          = 'EXT1';
 end
-RX.UXA.TriggerLevel         = 700; % mV
 
 % Downconversion filter
-load FIR_LPF_fs20e9_fpass5r8e9_Order408
+load RX.FilterFile
 RX.Filter = Num;
 
 % Load the RX calibration file
-Cal.RX.Calflag = false;
-Cal.RX.CalFile = '.\RX_CalResults\RX_CalResults_0GHz_UXA_Response.mat';
 if (Cal.RX.Calflag)
     load (Cal.RX.CalFile);
     RX.Cal.ToneFreq = tones_freq;
@@ -236,11 +199,7 @@ end
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Save Inverse Model Data
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-if (~exist(Cal.Directory,'dir'))
-    mkdir(Cal.Directory);
-    addpath(genpath(Cal.Directory));
-end
-save(['.\' Cal.Directory '\' Cal.Filename], 'H_Tx_freq_inverse', 'tonesBaseband');
+save(Cal.SaveLocation, 'H_Tx_freq_inverse', 'tonesBaseband');
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Apply the inverse model to the verification signal
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

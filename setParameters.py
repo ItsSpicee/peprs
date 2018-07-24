@@ -25,7 +25,8 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 		if iChannel == 0 or qChannel == 0:
 			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		else:
-			supply.Set_Channel_Mapping(iChannel,qChannel,nargout=0)
+			supply.Set_Channel_Mapping(iChannel,qChannel,"RX",nargout=0)
+			supply.Set_Channel_Mapping(iChannel,qChannel,"AWG",nargout=0)
 			flag = setAWGParams(self,d,supply)
 
 		complete = menu.checkIfDone([1])
@@ -39,7 +40,8 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 				"refClockSrc" : self.ui.refClockSorce_awg.currentIndex(),
 				"extRefClockFreq" : self.ui.extRefFreq_awg.text()
 			}
-			supply.Set_RXCal_VSGParams(awgDict,nargout=0)
+			supply.Set_Cal_VSGParams(awgDict,"RX",nargout=0)
+			supply.Set_Cal_VSGParams(awgDict,"AWG",nargout=0)
 			
 			self.ui.awgButton_vsg.setStyleSheet(buttonFocus)
 			self.ui.awgButton_vsg_2.setStyleSheet(buttonFocus)
@@ -94,7 +96,7 @@ def setAdvancedAWG(self,boxDone,setButton,supply):
 	if setButton.isChecked() == True:
 		if flag == 1:
 			# set MATLAB RXCal Param
-			supply.Set_RXCal_VSGAdvParams(d.dacRange,nargout=0)
+			supply.Set_Cal_VSGAdvParams(d.dacRange,nargout=0)
 			
 			setButton.setText("Unset")
 			self.ui.awgEquipAdv.setStyleSheet(boxDone)
@@ -222,7 +224,8 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 						"clockRef": self.ui.clockRef_sa.currentIndex(),
 						"trigLevel": self.ui.trigLevel_sa.text()
 					}
-					supply.Set_RXCal_UXAParams(dUXA,nargout=0)
+					supply.Set_Cal_UXAParams(dUXA,"RX",nargout=0)
+					supply.Set_Cal_UXAParams(dUXA,"AWG",nargout=0)
 				# style mod related widgets
 					self.ui.uxaEquipGeneralVSA.setStyleSheet(boxDone)
 					demod = self.ui.uxaMod.isEnabled()
@@ -256,7 +259,8 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 						"autoScale": self.ui.autoscale_scope.currentIndex(),
 						"trigChannel": self.ui.trigChannel_scope.text()
 					}
-					supply.Set_RXCal_ScopeParams(dScope,nargout=0)
+					supply.Set_Cal_ScopeParams(dScope,"RX",nargout=0)
+					supply.Set_Cal_ScopeParams(dScope,"AWG",nargout=0)
 					self.ui.scopeEquipGeneral.setStyleSheet(boxDone)
 					self.ui.scopeButton_vsa.setStyleSheet(buttonFocus)
 					self.ui.scopeButton_vsa_2.setStyleSheet(buttonFocus)
@@ -280,7 +284,8 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 						"coupling":self.ui.coupling_dig.currentIndex(),
 						"vfs":self.ui.vfs_dig.text(),
 					}
-					supply.Set_RXCal_DigitizerParams(dDigitizer,nargout=0)
+					supply.Set_Cal_DigitizerParams(dDigitizer,"RX",nargout=0)
+					supply.Set_Cal_DigitizerParams(dDigitizer,"AWG",nargout=0)
 					self.ui.digEquipGeneral.setStyleSheet(boxDone)
 					self.ui.digButton_vsa.setStyleSheet(buttonFocus)
 					self.ui.digButton_vsa_2.setStyleSheet(buttonFocus)
@@ -772,7 +777,8 @@ def setVSAMeasDig(self,boxDone,buttonHover,buttonDone,setButton,supply):
 				"sampRate": self.ui.sampRate_vsaMeas.text(),
 				"noFrames": self.ui.noFrameTimes_vsaMeas.text()
 			}
-			supply.Set_VSA_Meas(d,nargout=0)
+			supply.Set_VSA_Meas_RXCal(d,nargout=0)
+			supply.Set_VSA_Meas_AWGCal(d,nargout=0)
 			
 			self.ui.vsaMeasGenEquip.setStyleSheet(boxDone)
 			self.ui.vsaMeasGenEquip_2.setStyleSheet(boxDone)
@@ -822,7 +828,7 @@ def setVSAMeasGen(self,boxDone,buttonHover,buttonDone,setButton,supply):
 				"sampRate": self.ui.sampRate_vsaMeas_2.text(),
 				"noFrames": self.ui.noFrameTimes_vsaMeas_2.text()
 			}
-			supply.Set_VSA_Meas(d,nargout=0)
+			supply.Set_VSA_Meas_RXCal(d,nargout=0)
 		
 			vsaType = self.ui.vsaWorkflow_vsaMeas.currentIndex()
 			vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
@@ -908,7 +914,14 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton,supply):
 			"rfCalStopFreq" : self.ui.rfCalStopFreqField_comb.text(),
 			"loFreqOffset" : self.ui.loFreqOffsetField_comb.text(),
 			"saveLoc" : self.ui.vsaCalSaveLocField_comb.text(),
-			"subRate" : self.ui.comboBox_77.currentIndex()
+			"subRate" : self.ui.subrateField_comb.currentIndex(),
+			"freqRes" : self.ui.freqResField_comb.text(),
+			"despurFlag" : self.ui.despurFlagField_comb.currentIndex(),
+			"spurStart" : self.ui.spurStartField_comb.text(),
+			"spurSpacing" : self.ui.spurSpacingField_comb.text(),
+			"spurEnd" : self.ui.spurEndField_comb.text(),
+			"smoothFlag" : self.ui.smoothFlagField_comb.currentIndex(),
+			"smoothOrder" : self.ui.smoothOrderField_comb.text()
 		}
 		supply.Set_VSA_Calibration(combDict,nargout=0)
 		downDict = {
@@ -916,8 +929,6 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton,supply):
 			"ifCenterFreq" : self.ui.ifCenterFreq_down.text(),
 			"loFreq" : self.ui.loFreq_down.text(),
 			"mirrorFlag" : self.ui.mirrorFlag_down.currentIndex(),
-			"despurFlag": self.ui.despurFlag_down.currentIndex(),
-			"smoothFlag": self.ui.smoothFlag_down.currentIndex(),
 			"trigAmp": self.ui.trigAmp_down.text()
 		}
 		supply.Set_Down_Calibration(downDict,nargout=0)
@@ -975,8 +986,6 @@ def noRXCalRoutine(self,boxDone,buttonHover,setButton,supply):
 			"ifCenterFreq" : self.ui.ifCenterFreq_down.text(),
 			"loFreq" : self.ui.loFreq_down.text(),
 			"mirrorFlag" : self.ui.mirrorFlag_down.currentIndex(),
-			"despurFlag": self.ui.despurFlag_down.currentIndex(),
-			"smoothFlag": self.ui.smoothFlag_down.currentIndex(),
 			"trigAmp": self.ui.trigAmp_down.text()
 		}
 		supply.Set_Down_Calibration(downDict,nargout=0)
@@ -1020,7 +1029,7 @@ def noRXCalRoutine(self,boxDone,buttonHover,setButton,supply):
 def awgCalRoutine(self,boxDone,setButton,supply):
 	if setButton.isChecked() == True:
 		# Set MATLAB Parameters
-		d= {
+		dAWGCal= {
 			"noIterations" : self.ui.noIterations_awgCal.text(),
 			"toneSpacing" : self.ui.toneSpacing_awgCal.text(),
 			"startFreq" : self.ui.startFreq_awgCal.text(),
@@ -1030,7 +1039,27 @@ def awgCalRoutine(self,boxDone,setButton,supply):
 			"freqRes" : self.ui.freqRes_awgCal.text(),
 			"saveLoc" : self.ui.awgCalSaveLocField_vsgMeas.text()
 		}
-		supply.Set_AWG_Calibration(d,nargout=0)
+		supply.Set_AWG_Calibration(dAWGCal,nargout=0)
+		dAWGCalGen={
+			"centerFreq" : self.ui.centerFreq_awgCal.text(),
+			"ampCorr" : self.ui.ampCorrection_awgCal.currentIndex(),
+			"ampCorrFile" : self.ui.ampCorrFile_vsgMeas.text(),
+			"vfs" : self.ui.vfs_awgCal.text(),
+			"trigAmp" : self.ui.trigAmp_awgCal.text(),
+			"clkFreq" : self.ui.sampleClockFreq_awgCal.text()
+		}
+		supply.Set_AWGCal_General(dAWGCalGen,nargout=0)
+		dAWGCalParams={
+			"mirror" : self.ui.mirrorFlag_awgCal.currentIndex(),
+			"noRXPeriods" : self.ui.noRXPeriods_awgCal.text(),
+			"downFile" : self.ui.downFilterFileField_vsgMeas.text(),
+			"noTXPeriods" : self.ui.noTXPeriods_awgCal.text(),
+			"awgChannel" : self.ui.awgChannel_awgCal.text(),
+			"vsaCalEnabled" : self.ui.useVSACal_awgCal.currentIndex(),
+			"vsaCalFile" : self.ui.vsaCalFileField_vsgMeas.text()
+		}
+		supply.Set_AWGCal_Settings(dAWGCalParams,nargout=0)
+		
 		setButton.setText("Unset")
 		statusList = [1]
 		complete = menu.checkIfDone(statusList)
@@ -1085,6 +1114,15 @@ def noAWGCalRoutine(self,boxDone,setButton,supply):
 		# Set MATLAB parameter
 		awgFile = self.ui.awgCalFileField_vsgMeas_2.text()
 		supply.Set_AWG_CalFile(awgFile,nargout=0)
+		dAWGCalGen={
+			"centerFreq" : self.ui.centerFreq_awgCal_2.text(),
+			"ampCorr" : self.ui.ampCorrection_awgCal_2.currentIndex(),
+			"ampCorrFile" : self.ui.ampCorrFileField_vsgMeas.text(),
+			"vfs" : self.ui.vfs_awgCal_2.text(),
+			"trigAmp" : self.ui.trigAmp_awgCal_2.text(),
+			"clkFreq" : self.ui.sampleClockFreq_awgCal_2.text(),
+		}
+		supply.Set_AWGCal_General(dAWGCalGen,nargout=0)
 		
 		setButton.setText("Unset")
 		statusList = [1]
@@ -1749,7 +1787,6 @@ def setSpectrumAnalyzerParams(self,dictionary,partNum,supply,equipBox,boxDone):
 		instrParamErrorMessage(self,error)
 		self.ui.saSet.setChecked(False)
 def setPowerMeterParams(self,dictionary,partNum,equipBox,boxDone,supply):	
-
 	result = supply.Set_Meter(dictionary,nargout=1)
 	result = result.split(";")
 	error = result[1]

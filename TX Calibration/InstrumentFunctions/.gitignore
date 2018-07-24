@@ -1,5 +1,0 @@
-# ignore anything that is not .m files or matlab driver files
-*.*
-!*.mdd
-!*.m
-!.gitignore
