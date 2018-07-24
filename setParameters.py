@@ -226,6 +226,17 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 					}
 					supply.Set_Cal_UXAParams(dUXA,"RX",nargout=0)
 					supply.Set_Cal_UXAParams(dUXA,"AWG",nargout=0)
+					dAllUXA={
+						"noAverages": self.ui.noAveragesField_sa.text(),
+						"atten": self.ui.attenuation_sa.text(),
+						"freq": self.ui.freq_sa.text(),
+						"freqSpan": self.ui.freqSpan_sa.text(),
+						"analysisBW": self.ui.analysisBandwidth_sa.text(),
+						"clockRef": self.ui.clockRef_sa.currentIndex(),
+						"trigLevel": self.ui.trigLevel_sa.text(),
+						"address": self.ui.address_sa.text()	
+					}
+					#supply.Set_VSA_UXA(dAllUXA,nargout=0)
 				# style mod related widgets
 					self.ui.uxaEquipGeneralVSA.setStyleSheet(boxDone)
 					demod = self.ui.uxaMod.isEnabled()
@@ -441,12 +452,11 @@ def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,greyButton,buttonSel
 def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,buttonSelect,supply):
 	if setButton.isChecked() == True:
 		setButton.setText("Unset")
-		statusList = [self.ui.lineEdit_58.text(),self.ui.comboBox_8.currentIndex(),self.ui.lineEdit_54.text(),self.ui.lineEdit_55.text(),self.ui.lineEdit_56.text(),self.ui.lineEdit_57.text(),self.ui.comboBox_11.currentIndex(),self.ui.lineEdit_59.text()]
+		statusList = [self.ui.lineEdit_58.text(),self.ui.lineEdit_54.text(),self.ui.lineEdit_55.text(),self.ui.lineEdit_56.text(),self.ui.lineEdit_57.text(),self.ui.comboBox_11.currentIndex(),self.ui.lineEdit_59.text()]
 		complete = menu.checkIfDone(statusList)
 			
 		d={
 			"address": self.ui.lineEdit_58.text(),
-			"attenEnabled": self.ui.comboBox_8.currentIndex(),
 			"atten": self.ui.lineEdit_54.text(),
 			"freq": self.ui.lineEdit_55.text(),
 			"freqSpan": self.ui.lineEdit_56.text(),

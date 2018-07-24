@@ -1,13 +1,20 @@
+% UXA is in the IQ Analyzer form when being used as a VSA
+% resolution bandwidth only appears when filter type is moved from Flat Top (known as filter BW)
 % attenuation must be an even number, if an odd number is given, the UXA rounds up
 
-function result = Set_Spectrum(dict)
+% TO DO: set appropriate screen based on which button is being set, remove trigger level from VSA UXA
 
-errorString = " ";
-partNum = " ";
+"noAverages": self.ui.noAveragesField_sa.text(),
+"trigLevel": self.ui.trigLevel_sa.text(),
+
+function Set_VSA_UXA(dict)
+
 dict.atten = str2double(dict.atten);
-dict.resolutionBand = str2double(dict.resolutionBand);
 dict.freq = str2double(dict.freq);
 dict.freqSpan = str2double(dict.freqSpan);
+dict.analysisBW = str2double(dict.analysisBW);    
+errorString = " ";
+partNum = " ";
 
 try
     
@@ -31,13 +38,6 @@ try
     
     fprintf(spectrum, sprintf(':SENSe:FREQuency:CENTer %g', dict.freq));
     fprintf(spectrum, sprintf(':SENSe:FREQuency:SPAN %g', dict.freqSpan));
-    
-    % Commands
-    if dict.resolutionBand >= 1 && dict.resolutionBand <= 8e6 
-        fprintf(spectrum, sprintf(':SENSe:BANDwidth:RESolution %g', dict.resolutionBand));
-    else
-        errorString = "Resolution bandwidth is out of range.";
-    end
 
     if dict.clockRef == 1
         fprintf(spectrum, sprintf(':SENSe:ROSCillator:SOURce %s', 'INTernal'));
@@ -46,6 +46,9 @@ try
     else
         errorString = "Please select a reference clock";
     end
+	
+	% Set the digital IF bandwidth
+	fprintf(spectrum, sprintf(':SENSe:WAVeform:DIF:BANDwidth %g', dict.analysisBW);
 
 	% Cleanup
 	fclose(spectrum);
@@ -61,5 +64,3 @@ resultsString = sprintf("%s;%s",partNum,errorString);
 
 result = char(resultsString);
 end
-        
-    
