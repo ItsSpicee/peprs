@@ -1,7 +1,10 @@
 # windowFunctions.py contains all the functions that are needed to control the window size, display, and menu functionality
 
-from PyQt5.QtWidgets import (QMessageBox, QFileDialog, qApp,QDialog)
+from PyQt5.QtWidgets import (QMessageBox, QFileDialog, qApp,QDialog, QLineEdit, QComboBox)
+
 from PyQt5.QtGui import (QGuiApplication)
+
+redBorder = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #f24646}"
 
 def tabCounterIncrement(self,dir):
 	i = self.ui.stepTabs.currentIndex()
@@ -159,12 +162,10 @@ def fileOpen(self,lineEdit,path):
 	lineEdit.setText(file)
 
 def checkIfDone(array):
-
-	for f in array:
-		if f == "" : 
-			return False
-			
-	return True
-	
-	
-	
+	for key in array:
+		if isinstance(key, QLineEdit) and key.text() == "" and key.isEnabled() == True:
+				key.setStyleSheet("border: 1px solid red;")
+		elif isinstance(key,QComboBox) and key.currentIndex() == 0 and key.isEnabled() == True:
+				key.setStyleSheet("border: 1px solid red;")
+		else:
+			key.setStyleSheet(None)
