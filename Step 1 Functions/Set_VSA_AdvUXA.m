@@ -1,4 +1,4 @@
-function result = Set__Spectrum_Advanced(dict)
+function Set_VSA_AdvUXA(dict)
 	errorString = " ";
 	partNum = " ";
 
@@ -9,9 +9,9 @@ function result = Set__Spectrum_Advanced(dict)
 		spectrum.ByteOrder = 'littleEndian';
 		fopen(spectrum);
 		
-		%setting the screen names
-		UXAConfig.SAScreenName = dict.SAScreen;
-        UXAConfig.ACPScreenName = dict.ACPScreen;
+		%setting the screen name
+		fprintf(spectrum,'INSTrument:SCReen:CREate');
+		fprintf(spectrum,['INST:SCR:REN "' dict.SAScreen '"']);
 		
 		%internal preamp
 		if dict.preAmp == "1"
@@ -57,7 +57,7 @@ function result = Set__Spectrum_Advanced(dict)
 		elseif dict.detector == "3"
 			fprint(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'POSittive'));
 		end
-			
+		
 		save('UXAConfig.mat');	
 		
 		% Cleanup
@@ -73,7 +73,3 @@ function result = Set__Spectrum_Advanced(dict)
 	resultsString = sprintf("%s;%s",partNum,errorString);
 	result = char(resultsString);
 end
-
-% OLD CODE
-% fprintf(spectrum,'INSTrument:SCReen:CREate');
-% fprintf(spectrum,['INST:SCR:REN "' dict.SAScreen '"']);

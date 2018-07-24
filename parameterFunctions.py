@@ -758,6 +758,23 @@ def enableChannelOptions(self):
 		self.ui.iChannel_awg.setCurrentIndex(0)
 		self.ui.qChannel_awg.setCurrentIndex(0)
 		
+def disableTrigLevelVSA(self):
+	trigSource = self.ui.trigSource_sa.currentIndex()
+	if trigSource == 1 or trigSource == 2 or trigSource == 3:
+		self.ui.trigLevelLabel_sa.setEnabled = True
+		self.ui.trigLevel_sa.setEnabled = True
+	elif trigSource == 0 or trigSource == 4:
+		self.ui.trigLevelLabel_sa.setEnabled = False
+		self.ui.trigLevel_sa.setEnabled = False
+		
+def disableTrigLevelSA(self):
+	trigSource = self.ui.trigSource_spa.currentIndex()
+	if trigSource == 1 or trigSource == 2:
+		self.ui.trigLevelLabel_spa.setEnabled = True
+		self.ui.trigLevel_spa.setEnabled = True
+	elif trigSource == 0 or trigSource == 3:
+		self.ui.trigLevelLabel_spa.setEnabled = False
+		self.ui.trigLevel_spa.setEnabled = False
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions called within parameterFunctions	
 
