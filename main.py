@@ -698,6 +698,7 @@ class Window(QMainWindow):
 		self.ui.algoSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.refRXAdvEquip,setParams,self.ui.algoSetAdv))
 		
 		# control parameter changes
+		# vsa equipment page
 		self.ui.dllFile_scope.textChanged.connect(lambda: param.copyDemod(self, self.ui.dllFile_scope, self.ui.dllFile_uxa, self.ui.dllFile_dig))
 		self.ui.setupFile_scope.textChanged.connect(lambda: param.copyDemod(self, self.ui.setupFile_scope,self.ui.setupFile_uxa,self.ui.setupFile_dig))
 		self.ui.dataFile_scope.textChanged.connect(lambda: param.copyDemod(self, self.ui.dataFile_scope,self.ui.dataFile_uxa,self.ui.dataFile_dig))
@@ -709,7 +710,10 @@ class Window(QMainWindow):
 		self.ui.dllFile_dig.textChanged.connect(lambda: param.copyDemod(self, self.ui.dllFile_dig, self.ui.dllFile_scope, self.ui.dllFile_uxa))
 		self.ui.setupFile_dig.textChanged.connect(lambda: param.copyDemod(self, self.ui.setupFile_dig,self.ui.setupFile_scope,self.ui.setupFile_uxa))
 		self.ui.dataFile_dig.textChanged.connect(lambda: param.copyDemod(self, self.ui.dataFile_dig,self.ui.dataFile_scope,self.ui.dataFile_uxa))
-		
+		# vsa equipment page - uxa
+		self.ui.trigSource_sa.currentIndexChanged.connect(lambda: param.disableTrigLevelVSA(self))
+		# sa page
+		self.ui.trigSource_spa.currentIndexChanged.connect(lambda: param.disableTrigLevelSA(self))
 		# awg measurement page
 		self.ui.refClockSorce_awg.currentIndexChanged.connect(lambda: param.enableExtClkFreq(self))
 		

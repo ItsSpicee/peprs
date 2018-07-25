@@ -1,4 +1,4 @@
-function result = Set__Spectrum_Advanced(dict)
+function Set_VSA_AdvUXA(dict)
 	errorString = " ";
 	partNum = " ";
 
@@ -9,20 +9,19 @@ function result = Set__Spectrum_Advanced(dict)
 		spectrum.ByteOrder = 'littleEndian';
 		fopen(spectrum);
 		
-		%setting the screen names
-		UXAConfig.SAScreenName = dict.SAScreen;
-        UXAConfig.ACPScreenName = dict.ACPScreen;
+		%setting the screen name
+		fprintf(spectrum,'INSTrument:SCReen:CREate');
+		fprintf(spectrum,['INST:SCR:REN "' dict.SAScreen '"']);
 		
 		%internal preamp
 		if dict.preAmp == "1"
 			fprintf(spectrum, sprintf(':SENSe:POWer:RF:GAIN:STATe %d', 1));
-			UXAConfig.PreampEnable = 1;
 		elseif dict.preAmp == "2"
 			fprintf(spectrum, sprintf(':SENSe:POWer:RF:GAIN:STATe %d', 0));
-			UXAConfig.PreampEnable = 0;
 		end
 		
 		%trace averaging
+		
 		if dict.traceType == "1"
 			fprintf(spectrum, sprintf(':SENSe:AVERage:TYPE %s', 'LOG'));
 			fprintf(spectrum, sprintf(':SENSe:AVERage:COUNt %d', str2double(dict.traceNum)));
@@ -58,7 +57,7 @@ function result = Set__Spectrum_Advanced(dict)
 		elseif dict.detector == "3"
 			fprint(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'POSittive'));
 		end
-			
+		
 		save(".\InstrumentFunctions\SignalCapture_UXA\UXAConfig.mat","UXAConfig")
 		% Cleanup
 		fclose(spectrum);
@@ -73,7 +72,3 @@ function result = Set__Spectrum_Advanced(dict)
 	resultsString = sprintf("%s;%s",partNum,errorString);
 	result = char(resultsString);
 end
-
-% OLD CODE
-% fprintf(spectrum,'INSTrument:SCReen:CREate');
-% fprintf(spectrum,['INST:SCR:REN "' dict.SAScreen '"']);
