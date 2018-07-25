@@ -521,10 +521,11 @@ def setSAAdv(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton
 			"SAScreen": self.ui.saScrenName_spa.text(),
 			"ACPScreen": self.ui.acpScreenName_spa.text(),
 			"preAmp": self.ui.preampEnable_spa.currentIndex(),
-			#needs to be changed to a combobox in the ui
+			#remove trace type, add traceAvgCount, change traceAvg to true or false
 			"traceType": self.ui.lineEdit_63.text(),
 			"traceNum" : self.ui.traceNum_spa.text(),
 			"traceAvg": self.ui.traceAvg_spa.text(),
+			"traceAvgCount": self.ui.....text(),
 			"ACPNoise": self.ui.acpNoiseEnable_spa.currentIndex(),
 			"ACPBand": self.ui.acpBW_spa.text(),
 			"ACPOffset": self.ui.acpOffset_spa.text(),
