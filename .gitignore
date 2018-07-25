@@ -1,2 +1,8 @@
-# ignore pycache files
-__pycache__/
+# ignore anything that is not .m files or matlab driver files
+*.*
+!*.mdd
+!*.m
+!*.mat
+!*.py
+!*.ui
+!.gitignore

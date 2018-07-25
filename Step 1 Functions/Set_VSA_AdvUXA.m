@@ -3,7 +3,7 @@ function Set_VSA_AdvUXA(dict)
 	partNum = " ";
 
 	try
-		load('UXAConfig.mat');
+		load(".\InstrumentFunctions\SignalCapture_UXA\UXAConfig.mat")
 		spectrum = visa('agilent',dict.address);
 		spectrum.InputBufferSize = 8388608;
 		spectrum.ByteOrder = 'littleEndian';
@@ -58,8 +58,7 @@ function Set_VSA_AdvUXA(dict)
 			fprint(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'POSittive'));
 		end
 		
-		save('UXAConfig.mat');	
-		
+		save(".\InstrumentFunctions\SignalCapture_UXA\UXAConfig.mat","UXAConfig")
 		% Cleanup
 		fclose(spectrum);
 		delete(spectrum);

@@ -3,7 +3,7 @@ function result = Set__Spectrum_Advanced(dict)
 	partNum = " ";
 
 	try
-		load('UXAConfig.mat');
+		load(".\InstrumentFunctions\SignalCapture_UXA\UXAConfig.mat")
 		spectrum = visa('agilent',dict.address);
 		spectrum.InputBufferSize = 8388608;
 		spectrum.ByteOrder = 'littleEndian';
@@ -16,12 +16,13 @@ function result = Set__Spectrum_Advanced(dict)
 		%internal preamp
 		if dict.preAmp == "1"
 			fprintf(spectrum, sprintf(':SENSe:POWer:RF:GAIN:STATe %d', 1));
+			UXAConfig.PreampEnable = 1;
 		elseif dict.preAmp == "2"
 			fprintf(spectrum, sprintf(':SENSe:POWer:RF:GAIN:STATe %d', 0));
+			UXAConfig.PreampEnable = 0;
 		end
 		
 		%trace averaging
-		
 		if dict.traceType == "1"
 			fprintf(spectrum, sprintf(':SENSe:AVERage:TYPE %s', 'LOG'));
 			fprintf(spectrum, sprintf(':SENSe:AVERage:COUNt %d', str2double(dict.traceNum)));
@@ -58,8 +59,7 @@ function result = Set__Spectrum_Advanced(dict)
 			fprint(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'POSittive'));
 		end
 			
-		save('UXAConfig.mat');	
-		
+		save(".\InstrumentFunctions\SignalCapture_UXA\UXAConfig.mat","UXAConfig")
 		% Cleanup
 		fclose(spectrum);
 		delete(spectrum);

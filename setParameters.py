@@ -520,14 +520,15 @@ def setSAAdv(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton
 			"address": self.ui.address_spa.text(),
 			"SAScreen": self.ui.saScrenName_spa.text(),
 			"ACPScreen": self.ui.acpScreenName_spa.text(),
-			"preAmp": self.ui.comboBox_64.currentIndex(),
+			"preAmp": self.ui.preampEnable_spa.currentIndex(),
 			#needs to be changed to a combobox in the ui
 			"traceType": self.ui.lineEdit_63.text(),
-			"traceNum": self.ui.lineEdit_64.text(),
-			"ACPNoise": self.ui.comboBox_59.currentIndex(),
-			"ACPBand": self.ui.lineEdit_65.text(),
-			"ACPOffset": self.ui.lineEdit_66(),
-			"Detector": self.ui.comboBox_66.currentIndex()
+			"traceNum" : self.ui.traceNum_spa.text(),
+			"traceAvg": self.ui.traceAvg_spa.text(),
+			"ACPNoise": self.ui.acpNoiseEnable_spa.currentIndex(),
+			"ACPBand": self.ui.acpBW_spa.text(),
+			"ACPOffset": self.ui.acpOffset_spa.text(),
+			"Detector": self.ui.detector_spa.currentIndex()
 		}
 		
 		setButton.setText("Unset")

@@ -27,7 +27,7 @@ function result = Set_VSA_UXA(dict,model)
 		idn = query(spectrum, '*IDN?');
 		splitIdn = strsplit(idn,',');
 		partNum = splitIdn{2};
-		
+	
 		UXAConfig.Model = model;
 		
 		% turn averaging on or off
@@ -35,13 +35,17 @@ function result = Set_VSA_UXA(dict,model)
 			fprintf(spectrum, sprintf(':SENSe:WAVeform:AVERage:STATe %d', 1));
 			% determine number of averages
 			fprintf(spectrum, sprintf(':SENSe:WAVeform:AVERage:COUNt %d', dict.noAverages));
+			UXAConfig.NumberSweepAverages = dict.noAverages;
 		elseif dict.averaging == 2
 			fprintf(spectrum, sprintf(':SENSe:WAVeform:AVERage:STATe %d', 0));
+			UXAConfig.NumberSweepAverages = 0;
 		end
 		
 		% set attenuation mode (auto or manual), if manual, set attenuation value
 		if isnan(dict.atten)
 			fprintf(spectrum, sprintf(':SENSe:POWer:RF:ATTenuation:AUTO %d', 1));
+			relAmpl = str2double(query(spectrum, ':SENSe:POWer:RF:ATTenuation?'));
+			UXAConfig.Attenuation = relAmpl;
 		else
 			fprintf(spectrum, sprintf(':SENSe:POWer:RF:ATTenuation:AUTO %d', 0));
 			fprintf(spectrum, sprintf(':SENSe:POWer:RF:ATTenuation %g', dict.atten));
@@ -55,14 +59,17 @@ function result = Set_VSA_UXA(dict,model)
 		% set frequency reference
 		if dict.clockRef == 1
 			fprintf(spectrum, sprintf(':SENSe:ROSCillator:SOURce %s', 'INTernal'));
+			UXAConfig.freqRef = "INT";
 		elseif dict.clockRef == 2
 			fprintf(spectrum, sprintf(':SENSe:ROSCillator:SOURce %s', 'EXTernal'));
+			UXAConfig.freqRef = "EXT";
 		else
 			errorString = "Please select a reference clock";
 		end
 		
 		% Set the digital IF bandwidth
 		fprintf(spectrum, sprintf(':SENSe:WAVeform:DIF:BANDwidth %g', dict.analysisBW);
+		UXAConfig.AnalysisBW = dict.analysisBW;
 
 		% set trigger parameters
 		if dict.trigSource == 1
@@ -84,9 +91,9 @@ function result = Set_VSA_UXA(dict,model)
 		elseif dict.trigSource == 0
 			errorString = "Please fill out all fields before attempting to set parameters."; 
 		end
+		UXAConfig.SA.TriggerLevel = dict.trigLevel;
 		
 		save(".\InstrumentFunctions\SignalCapture_UXA\UXAConfig.mat","UXAConfig")
-		
 		% Cleanup
 		fclose(spectrum);
 		delete(spectrum);
