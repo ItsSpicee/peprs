@@ -13,7 +13,7 @@
     <ul>
     <li>XCode (for Mac)</li>
     </ul>
-<li>Python 3.6</li>
+<li>Python 3.6.5</li>
 <li>PyQt5</li>
 <li>Keysight Libraries & Command Expert</li>
 </ul>

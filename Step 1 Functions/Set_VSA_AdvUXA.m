@@ -1,5 +1,4 @@
-function result = Set__Spectrum_Advanced(dict)
-	dict.traceAvgNum = str2double(dict.traceAvgNum);
+function Set_VSA_AdvUXA(dict)
 	errorString = " ";
 	partNum = " ";
 
@@ -10,42 +9,32 @@ function result = Set__Spectrum_Advanced(dict)
 		spectrum.ByteOrder = 'littleEndian';
 		fopen(spectrum);
 		
-		%setting the screen names
-		UXAConfig.SAScreenName = dict.SAScreen;
-        UXAConfig.ACPScreenName = dict.ACPScreen;
+		%setting the screen name
+		fprintf(spectrum,'INSTrument:SCReen:CREate');
+		fprintf(spectrum,['INST:SCR:REN "' dict.SAScreen '"']);
 		
 		%internal preamp
-		if dict.preAmp == 1
+		if dict.preAmp == "1"
 			fprintf(spectrum, sprintf(':SENSe:POWer:RF:GAIN:STATe %d', 1));
-			UXAConfig.PreampEnable = 1;
-		elseif dict.preAmp == 2
+		elseif dict.preAmp == "2"
 			fprintf(spectrum, sprintf(':SENSe:POWer:RF:GAIN:STATe %d', 0));
-			UXAConfig.PreampEnable = 0;
 		end
 		
-		%trace number, averaging, number of averages
-		% trace number - determines which trace is set
-		% traces can be of type WRITe, AVERage, MAXHold, MINHold. Only use WRITe and AVERage
-		% averaging - true or false
-			% true then type is set to AVERage and must provide number of averages
-			% false then type is set to WRIT and no average number needed, default is 20 averages
-		UXAConfig.SA.TraceNumber = str2double(dict.traceNum);
-		UXAConfig.SA.TraceAverage = trace.avg;
-		if trace.avg == 1
-			fprintf(spectrum,sprintf(':TRACe%s:TYPE %s', dict.traceNum,'AVERage'));
-			fprintf(spectrum, sprintf(':SENSe:AVERage:TYPE %s', 'RMS'));
-			fprintf(spectrum, sprintf(':SENSe:DETector:%s %s', dict.traceNum, 'AVERage'));
-			fprintf(spectrum, sprintf(':SENSe:AVERage:COUNt %d', dict.traceAvgNum);
-			UXAConfig.SA.TraceAverageCount = dict.traceAvgNum;
-		elseif trace.avg == 2
-			fprintf(spectrum,sprintf(':TRACe%s:TYPE %s', dict.traceNum,'WRITe'));
+		%trace averaging
+		
+		if dict.traceType == "1"
 			fprintf(spectrum, sprintf(':SENSe:AVERage:TYPE %s', 'LOG'));
-			fprintf(spectrum, sprintf(':SENSe:DETector:%s %s', dict.traceNum, 'NORMal'));
-			fprintf(spectrum, sprintf(':SENSe:AVERage:COUNt %d', 20);
-			UXAConfig.SA.TraceAverageCount = 20;
+			fprintf(spectrum, sprintf(':SENSe:AVERage:COUNt %d', str2double(dict.traceNum)));
+		elseif dict.traceType == "2"
+			fprintf(spectrum, sprintf(':SENSe:AVERage:TYPE %s', 'RMS'));
+			fprintf(spectrum, sprintf(':SENSe:AVERage:COUNt %d', str2double(dict.traceNum)));
+		elseif dict.traceType == "3"
+			fprintf(spectrum, sprintf(':SENSe:AVERage:TYPE %s', 'SCALar'));
+			fprintf(spectrum, sprintf(':SENSe:AVERage:COUNt %d', str2double(dict.traceNum)));
 		end
 		
 		%Noise Extension
+		
 		if dict.ACPNoise == "1"
 			fprintf(spectrum, sprintf(':SENSe:ACPower:CORRection:NOISe:AUTO %d', 1));
 		elseif dict.ACPNoise == "2"
@@ -53,9 +42,11 @@ function result = Set__Spectrum_Advanced(dict)
 		end
 		
 		%ACP Integration Bandwidth
+		
 		fprintf(spectrum, sprintf(':SENSe:CHPower:BANDwidth:INTegration %g', dict.ACPBand));
 		
 		%ACP Frequency Offset
+		
 		fprintf(spectrum, sprintf(':SENSe:ACPower:OFFSet:LIST:FREQuency %g', dict.ACPOffset));
 		
 		%Detector Type
@@ -66,7 +57,7 @@ function result = Set__Spectrum_Advanced(dict)
 		elseif dict.detector == "3"
 			fprint(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'POSittive'));
 		end
-			
+		
 		save(".\InstrumentFunctions\SignalCapture_UXA\UXAConfig.mat","UXAConfig")
 		% Cleanup
 		fclose(spectrum);
@@ -81,7 +72,3 @@ function result = Set__Spectrum_Advanced(dict)
 	resultsString = sprintf("%s;%s",partNum,errorString);
 	result = char(resultsString);
 end
-
-% OLD CODE
-% fprintf(spectrum,'INSTrument:SCReen:CREate');
-% fprintf(spectrum,['INST:SCR:REN "' dict.SAScreen '"']);
