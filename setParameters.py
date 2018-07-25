@@ -244,7 +244,7 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 					result = result.split(";")
 					partNum = result[0]
 					error = result[1]
-					if error = "":
+					if error == "":
 						self.ui.partNum_sa.setText(partNum);
 						flag = 1;
 					else:
@@ -525,7 +525,7 @@ def setSAAdv(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton
 			"traceType": self.ui.lineEdit_63.text(),
 			"traceNum" : self.ui.traceNum_spa.text(),
 			"traceAvg": self.ui.traceAvg_spa.text(),
-			"traceAvgCount": self.ui.....text(),
+			#"traceAvgCount": self.ui.....text(),
 			"ACPNoise": self.ui.acpNoiseEnable_spa.currentIndex(),
 			"ACPBand": self.ui.acpBW_spa.text(),
 			"ACPOffset": self.ui.acpOffset_spa.text(),
