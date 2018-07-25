@@ -46,9 +46,16 @@ function result = Set__Spectrum_Advanced(dict)
 		end
 		
 		%Noise Extension
-		if dict.ACPNoise == "1"
+		if dict.noiseExtension == 1
+			fprintf(spectrum, sprintf(':SENSe:CORRection:NOISe:FLOor %d', 1));
+		elseif dict.noiseExtension == 2
+			fprintf(spectrum, sprintf(':SENSe:CORRection:NOISe:FLOor %d', 0));
+		end
+		
+		%Noise Correction
+		if dict.ACPCorrection == 1
 			fprintf(spectrum, sprintf(':SENSe:ACPower:CORRection:NOISe:AUTO %d', 1));
-		elseif dict.ACPNoise == "2"
+		elseif dict.ACPCorrection == 2
 			fprintf(spectrum, sprintf(':SENSe:ACPower:CORRection:NOISe:AUTO %d', 0));
 		end
 		
@@ -59,13 +66,15 @@ function result = Set__Spectrum_Advanced(dict)
 		fprintf(spectrum, sprintf(':SENSe:ACPower:OFFSet:LIST:FREQuency %g', dict.ACPOffset));
 		
 		%Detector Type
-		if dict.detector == "1"
+		if dict.detector == 1
 			fprint(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'NORMal'));
-		elseif dict.detector == "2"
+		elseif dict.detector == 2
 			fprint(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'AVERage'));
-		elseif dict.detector == "3"
+		elseif dict.detector == 3
 			fprint(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'POSittive'));
 		end
+			
+		% window type, RBW filter type
 			
 		save(".\InstrumentFunctions\SignalCapture_UXA\UXAConfig.mat","UXAConfig")
 		% Cleanup

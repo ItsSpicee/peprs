@@ -511,12 +511,12 @@ def setSAAdv(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton
 			"SAScreen": self.ui.saScrenName_spa.text(),
 			"ACPScreen": self.ui.acpScreenName_spa.text(),
 			"preAmp": self.ui.preampEnable_spa.currentIndex(),
-			#remove trace type, add traceAvgCount, change traceAvg to true or false
 			"traceType": self.ui.lineEdit_63.text(),
 			"traceNum" : self.ui.traceNum_spa.text(),
-			"traceAvg": self.ui.traceAvg_spa.text(),
-			#"traceAvgCount": self.ui.....text(),
-			"ACPNoise": self.ui.acpNoiseEnable_spa.currentIndex(),
+			"traceAvg": self.ui.traceAvg_spa.currentIndex(),
+			"traceAvgCount": self.ui.traceAvgCount_spa.text(),
+			"noiseExtension": self.ui.noiseExtension_spa.text(),
+			"ACPCorrection": self.ui.acpNoiseEnable_spa.currentIndex(),
 			"ACPBand": self.ui.acpBW_spa.text(),
 			"ACPOffset": self.ui.acpOffset_spa.text(),
 			"Detector": self.ui.detector_spa.currentIndex()
