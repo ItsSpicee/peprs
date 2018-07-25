@@ -11,6 +11,7 @@ import windowFunctions as win
 incomplete = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #f24646}"
 
 def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,awgSetGeneral,supply):
+	#I had to use an array over a dictionary because I couldn't properly get the object type of the those stored in a dict
 	checkDic = [
 		self.ui.address_awg,
 		self.ui.refClockSorce_awg,
@@ -30,7 +31,7 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 			"refClkFreq": self.ui.extRefFreq_awg.text(),
 			"model": self.ui.model_awg.currentIndex()
 		}
-		
+		#one single call to a windofunctions.py function
 		win.checkIfDone(checkDic)
 		
 		iChannel = self.ui.iChannel_awg.currentIndex()
