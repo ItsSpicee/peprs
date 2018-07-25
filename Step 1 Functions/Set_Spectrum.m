@@ -1,16 +1,16 @@
 % attenuation must be an even number, if an odd number is given, the UXA rounds up
 
-function result = Set_Spectrum(dict)
+function result = Set_Spectrum(dict,model)
 
 	errorString = " ";
 	partNum = " ";
 	dict.atten = str2double(dict.atten);
-	dict.resolutionBand = str2double(dict.resolutionBand);
+	dict.resBand = str2double(dict.resBand);
 	dict.freq = str2double(dict.freq);
 	dict.freqSpan = str2double(dict.freqSpan);
-	dict.triggerLevel = str2double(dict.triggerLevel)
+	dict.trigLevel = str2double(dict.trigLevel)
 
-	try	
+	% try	
 		load(".\InstrumentFunctions\SignalCapture_UXA\UXAConfig.mat")
 		spectrum = visa('agilent',dict.address);
 		spectrum.InputBufferSize = 8388608;
@@ -24,19 +24,51 @@ function result = Set_Spectrum(dict)
 		
 		UXAConfig.Model = model;
 		
+		% set instrument screens
+		C = textscan(query(spectrum, ':INSTrument:SCReen:CATalog?'), '%q', 'Delimiter', ',');
+		catalog = C{1}{1};
+		splitCatalog = strsplit(catalog,',');
+		catalogLength = length(splitCatalog);
+		
+		state = 0;
+		for i=1:catalogLength
+			if splitCatalog(i) == "Spectrum Analyzer"
+				state = 1;
+			end
+		end
+		if catalogLength == 1
+			if state == 1
+				fprintf(spectrum, sprintf(':INSTrument:SELect %s', 'SA'));
+				fprintf(spectrum, ':CONFigure:SANalyzer:NDEFault');
+			else
+				fprintf(spectrum, sprintf(':INSTrument:SCReen:REName "%s"', 'Spectrum Analyzer'));
+				fprintf(spectrum, sprintf(':INSTrument:SELect %s', 'SA'));
+				fprintf(spectrum, ':CONFigure:SANalyzer:NDEFault');
+			end
+		else
+			if state == 0
+				fprintf(spectrum, ':INSTrument:SCReen:CREate');	
+				fprintf(spectrum, sprintf(':INSTrument:SCReen:REName "%s"', 'Spectrum Analyzer'));
+				fprintf(spectrum, sprintf(':INSTrument:SELect %s', 'SA'));
+				fprintf(spectrum, ':CONFigure:SANalyzer:NDEFault');
+			else
+				fprintf(spectrum, sprintf(':INSTrument:SCReen:SELect "%s"', 'Spectrum Analyzer'));
+			end
+		end
+		
 		%trigger source and trigger level
-		if dict.trigger == "3"
+		if dict.trigger == 3
 			fprintf(spectrum, sprintf(':TRIGger:SEQuence:SOURce %s', 'IMMediate'));
 			UXAConfig.SA.TriggerSource = "IMM";
-		elseif dict.trigger == "1"
+		elseif dict.trigger == 1
 			fprintf(spectrum, sprintf(':TRIGger:SEQuence:SOURce %s', 'EXTernal1'));
-			fprintf(spectrum, sprintf(':TRIGger1:SEQuence:EXTernal1:LEVel %g', dict.triggerLevel));
+			fprintf(spectrum, sprintf(':TRIGger1:SEQuence:EXTernal1:LEVel %g', dict.trigLevel));
 			UXAConfig.SA.TriggerSource = "EXT1";
-		elseif dict.trigger == "2"
+		elseif dict.trigger == 2
 			fprintf(spectrum, sprintf(':TRIGger:SEQuence:SOURce %s', 'EXTernal2'));
-			fprintf(spectrum, sprintf(':TRIGger1:SEQuence:EXTernal2:LEVel %g', dict.triggerLevel));
+			fprintf(spectrum, sprintf(':TRIGger1:SEQuence:EXTernal2:LEVel %g', dict.trigLevel));
 			UXAConfig.SA.TriggerSource = "EXT2";
-		elseif dict.trigger == "0"
+		elseif dict.trigger == 0
 			errorString = "Please fill out all fields before attempting to set parameters."; 
 		end
 		UXAConfig.SA.TriggerLevel = dict.trigLevel;
@@ -56,9 +88,9 @@ function result = Set_Spectrum(dict)
 		fprintf(spectrum, sprintf(':SENSe:FREQuency:SPAN %g', dict.freqSpan));
 		UXAConfig.FrequencySpan = dict.freqSpan;
 		
-		if dict.resolutionBand >= 1 && dict.resolutionBand <= 8e6 
-			fprintf(spectrum, sprintf(':SENSe:BANDwidth:RESolution %g', dict.resolutionBand));
-			UXAConfig.ResBW = dict.resolutionBand;
+		if dict.resBand >= 1 && dict.resBand <= 8e6 
+			fprintf(spectrum, sprintf(':SENSe:BANDwidth:RESolution %g', dict.resBand));
+			UXAConfig.ResBW = dict.resBand;
 		else
 			errorString = "Resolution bandwidth is out of range.";
 		end
@@ -79,10 +111,10 @@ function result = Set_Spectrum(dict)
 		delete(spectrum);
 		clear spectrum;
 
-	catch
-	   errorString = "A problem has occured, resetting instruments. Use Keysight Connection Expert to check your instrument VISA Addresses.";  
-	   instrreset
-	end
+	% catch
+	   % errorString = "A problem has occured, resetting instruments. Use Keysight Connection Expert to check your instrument VISA Addresses.";  
+	   % instrreset
+	% end
 
 	resultsString = sprintf("%s;%s",partNum,errorString);
 	result = char(resultsString);

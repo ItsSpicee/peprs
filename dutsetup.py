@@ -127,6 +127,8 @@ class Ui_DUTSetup(object):
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
         self.dutReadyButton.setFont(font)
         self.dutReadyButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.dutReadyButton.setStyleSheet("QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 158, 0, 255));color:white;border-radius: 5px; border: 3px solid green;}\n"

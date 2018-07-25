@@ -162,13 +162,18 @@ def fileOpen(self,lineEdit,path):
 	lineEdit.setText(file)
 
 def checkIfDone(array):
-	#checks if a line edit has no text in the field and is enabled, then set the border to red (incomplete)
+	# check if any parameters are unfilled
+	status = 1
 	for key in array:
+		#checks if a line edit has no text in the field and is enabled, then set the border to red (incomplete)
 		if isinstance(key, QLineEdit) and key.text() == "" and key.isEnabled() == True:
-				key.setStyleSheet("border: 1px solid red;")
+			key.setStyleSheet("border: 1px solid red;")
+			status = 0
 		#same for qcomboboxes but checks if index is 0
 		elif isinstance(key,QComboBox) and key.currentIndex() == 0 and key.isEnabled() == True:
-				key.setStyleSheet("border: 1px solid red;")
-			#else reset
+			key.setStyleSheet("border: 1px solid red;")
+			status = 0
+		#else reset
 		else:
 			key.setStyleSheet(None)
+	return status

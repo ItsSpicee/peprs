@@ -6,7 +6,7 @@ function result = Set_AWG(dict)
     % command expert)
     
     % add relevant folders to path
-    addpath(".\RX Calibration\InstrumentFunctions\M8190A")
+    addpath(".\InstrumentFunctions\M8190A")
     
     % initialize variables
     refSrc = "";
@@ -17,18 +17,10 @@ function result = Set_AWG(dict)
     try
         load('arbConfig.mat');
         arbConfig = loadArbConfig(arbConfig);
-        % set visa address
-        if dict.address == ""
-            error = "Please fill out all fields before attempting to set parameters."; 
-            resultsString = sprintf("%s;%s",partNum,error);
-            result = char(resultsString);
-            return
-        else   
-            arbConfig.visaAddr = dict.address;
-        end
+        arbConfig.visaAddr = dict.address;
         f = iqopen(arbConfig);
 
-        idn = query(f, '*IDN?');
+        idn = query(f,'*IDN?');
         splitIdn = strsplit(idn,',');
         partNum = splitIdn{2};
         
@@ -39,8 +31,6 @@ function result = Set_AWG(dict)
         elseif dict.model == 2
             xfprintf(f, sprintf(':TRACe:DWIDth %s', 'WSPeed'));
             arbConfig.model = "M8190A_12bit";
-        elseif dict.model == 0
-            error = "Please fill out all fields before attempting to set parameters."; 
         end
         
         % set reference clock
@@ -59,8 +49,6 @@ function result = Set_AWG(dict)
         elseif dict.refClkSrc == 4
             sampSrc = "EXT";
             arbConfig.clockSource = "ExtClk";
-        elseif dict.refClkSrc == 0
-            error = "Please fill out all fields before attempting to set parameters."; 
         end
         
         % check if ref. clock source is available
@@ -81,7 +69,7 @@ function result = Set_AWG(dict)
         fclose(f);
         delete(f);
         clear f; 
-        rmpath(".\RX Calibration\InstrumentFunctions\M8190A")
+        rmpath(".\InstrumentFunctions\M8190A")
         
     catch
         error = "A problem has occured, resetting instruments. Use Keysight Connection Expert to check your instrument VISA Address.";

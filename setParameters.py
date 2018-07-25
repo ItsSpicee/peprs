@@ -11,7 +11,7 @@ import windowFunctions as win
 incomplete = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #f24646}"
 
 def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,awgSetGeneral,supply):
-	#I had to use an array over a dictionary because I couldn't properly get the object type of the those stored in a dict
+	#Array used instead of dictionary, cannot properly get the object type elements stored in a dict
 	checkDic = [
 		self.ui.address_awg,
 		self.ui.refClockSorce_awg,
@@ -24,26 +24,27 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 
 	flag = 0
 	if awgSetGeneral.isChecked() == True:
-		# call matlab instrument code
-		d={
-			"address": self.ui.address_awg.text(),
-			"refClkSrc": self.ui.refClockSorce_awg.currentIndex(),
-			"refClkFreq": self.ui.extRefFreq_awg.text(),
-			"model": self.ui.model_awg.currentIndex()
-		}
-		#one single call to a windofunctions.py function
-		win.checkIfDone(checkDic)
-		
-		iChannel = self.ui.iChannel_awg.currentIndex()
-		qChannel = self.ui.qChannel_awg.currentIndex()
-		if iChannel == 0 or qChannel == 0:
-			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+		#one single call to a windowfunctions.py function
+		done = win.checkIfDone(checkDic)
+		if done:
+			# call matlab instrument code
+			d={
+				"address": self.ui.address_awg.text(),
+				"refClkSrc": self.ui.refClockSorce_awg.currentIndex(),
+				"refClkFreq": self.ui.extRefFreq_awg.text(),
+				"model": self.ui.model_awg.currentIndex()
+			}
+			iChannel = self.ui.iChannel_awg.currentIndex()
+			qChannel = self.ui.qChannel_awg.currentIndex()
+			if iChannel == 0 or qChannel == 0:
+				instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			else:
+				supply.Set_Channel_Mapping(iChannel,qChannel,"RX",nargout=0)
+				supply.Set_Channel_Mapping(iChannel,qChannel,"AWG",nargout=0)
+				flag = setAWGParams(self,d,supply)
 		else:
-			supply.Set_Channel_Mapping(iChannel,qChannel,"RX",nargout=0)
-			supply.Set_Channel_Mapping(iChannel,qChannel,"AWG",nargout=0)
-			flag = setAWGParams(self,d,supply)
-
-		
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			awgSetGeneral.setChecked(False)
 		
 		if flag == 1:
 			# set MATLAB RXCal parameters
@@ -82,8 +83,7 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 				self.ui.psgButton_vsg.setStyleSheet(greyHover)
 				self.ui.psgButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
 		
-	elif  awgSetGeneral.isChecked() == False:
-
+	elif awgSetGeneral.isChecked() == False:
 		self.ui.awgEquipGeneral.setStyleSheet(None)
 		self.ui.awgButton_vsg.setStyleSheet(buttonSelected)
 		self.ui.awgButton_vsg_2.setStyleSheet(buttonSelected)
@@ -205,8 +205,6 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 	if setButton.isChecked() == True:
 		if averaging != 0 or avgEnabled == False:
 			if demod != 0:
-				setButton.setText("Unset")
-				
 				if typeIdx == 3 or typeIdx == 4: # UXA & PXA
 					# set matlab parameters
 					dUXA={
@@ -226,7 +224,7 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 						"analysisBW": self.ui.analysisBandwidth_sa.text(),
 						"clockRef": self.ui.clockRef_sa.currentIndex(),
 						"trigLevel": self.ui.trigLevel_sa.text(),
-						"trigSource": self.ui.trigSource_sa.text(),
+						"trigSource": self.ui.trigSource_sa.currentIndex(),
 						"address": self.ui.address_sa.text()	
 					}
 					if typeIdx == 3:
@@ -244,6 +242,8 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 						self.ui.awgSetGeneral.setChecked(False)
 					
 					if flag:
+						setButton.setText("Unset")
+						
 						# style mod related widgets
 						self.ui.uxaEquipGeneralVSA.setStyleSheet(boxDone)
 						demod = self.ui.uxaMod.isEnabled()
@@ -253,6 +253,15 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 						self.ui.vsaNextStack.setCurrentIndex(3)
 						self.ui.vsgNextSteps.setCurrentIndex(7)
 						self.ui.up_psg_next.setCurrentIndex(5)
+						if typeIdx == 3: #UXA
+							self.ui.uxaButton_vsa.setStyleSheet(buttonFocus)
+							self.ui.uxaButton_vsa_2.setStyleSheet(buttonFocus)
+							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)			
+						elif typeIdx == 4: #PXA
+							self.ui.pxaButton_vsa.setStyleSheet(buttonFocus)
+							self.ui.pxaButton_vsa_2.setStyleSheet(buttonFocus)
+							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)
+							
 				elif typeIdx == 1 or typeIdx == 2 or typeIdx == 5 or typeIdx == 6:
 					demodScope = self.ui.scopeMod.isEnabled()
 					demodDig = self.ui.digMod.isEnabled()
@@ -261,16 +270,9 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 						self.ui.modButton_vsa_2.setStyleSheet(buttonFocus)
 						self.ui.modButton_vsa.setStyleSheet(buttonFocus)
 				
-				if flag:
-					if typeIdx == 3: #UXA
-						self.ui.uxaButton_vsa.setStyleSheet(buttonFocus)
-						self.ui.uxaButton_vsa_2.setStyleSheet(buttonFocus)
-						setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)			
-					elif typeIdx == 4: #PXA
-						self.ui.pxaButton_vsa.setStyleSheet(buttonFocus)
-						self.ui.pxaButton_vsa_2.setStyleSheet(buttonFocus)
-						setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)	
-					elif typeIdx == 1 or typeIdx == 5: #Scope
+					setButton.setText("Unset")
+						
+					if typeIdx == 1 or typeIdx == 5: #Scope
 						dScope={
 							"driver": self.ui.driverPath_scope.text(),
 							"address": self.ui.address_scope.text(),
@@ -320,6 +322,13 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 							self.ui.vsgNextSteps.setCurrentIndex(6)
 							self.ui.up_psg_next.setCurrentIndex(4)
 							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor)
+			else:
+				self.fillParametersMsg()
+				self.ui.digSet.setChecked(False)
+				self.ui.scopeSet.setChecked(False)
+				self.ui.uxaSet.setChecked(False)
+				self.ui.pxaSet.setChecked(False)
+			
 		else:
 			self.fillParametersMsg()
 			self.ui.digSet.setChecked(False)
@@ -415,7 +424,7 @@ def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,greyButton,buttonSel
 			"frequency": self.ui.powerMeterFrequency.text(),
 			"averaging": averaging
 		}
-		flag = setPowerMeterParams(self,d,self.ui.powerMeterPartNum,self.ui.meterEquip,boxDone,supply,averaging)
+		flag = setPowerMeterParams(self,d,self.ui.powerMeterPartNum,self.ui.meterEquip,boxDone,supply)
 		
 		self.ui.meterButton_meter.setStyleSheet(buttonFocus)
 		self.ui.meterButton_meter_2.setStyleSheet(buttonFocus)
@@ -444,10 +453,11 @@ def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,greyButton,buttonSel
 		
 
 def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,buttonSelect,supply):
+	idx = self.ui.saType.currentIndex()
 	if setButton.isChecked() == True:
 		setButton.setText("Unset")
-		statusList = [self.ui.address_spa.text(),self.ui.attenuation_spa.text(),self.ui.freq_spa.text(),self.ui.freqSpan_spa.text(),self.ui.resBand_spa.text(),self.ui.clockRef_spa.currentIndex(),self.ui.partNum_spa.text()]
-		complete = menu.checkIfDone(statusList)
+		statusList = [self.ui.address_spa.text(),self.ui.freq_spa.text(),self.ui.freqSpan_spa.text(),self.ui.resBand_spa.text(),self.ui.clockRef_spa.currentIndex()]
+		#complete = win.checkIfDone(statusList)
 		d={
 			"address": self.ui.address_spa.text(),
 			"atten": self.ui.attenuation_spa.text(),
@@ -455,25 +465,29 @@ def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,bu
 			"freqSpan": self.ui.freqSpan_spa.text(),
 			"resBand": self.ui.resBand_spa.text(),
 			"clockRef": self.ui.clockRef_spa.currentIndex(),
-			"triggerLevel": self.ui.trigLevel_spa.text(),
+			"trigLevel": self.ui.trigLevel_spa.text(),
 			"trigger": self.ui.trigSource_spa.currentIndex()
 		}	
-		if complete:	
-			flag = setSpectrumAnalyzerParams(self,d,self.ui.partNum_spa,supply,self.ui.saEquip,boxDone)
-			self.ui.saButton_sa.setStyleSheet(buttonFocus)
-			self.ui.saButton_sa_2.setStyleSheet(buttonFocus)
-			self.ui.saButton_sa_3.setStyleSheet(buttonFocus)
-			self.ui.saButton_sa_4.setStyleSheet(buttonFocus)
-			setPrevSAButtons(self,buttonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor)
-			self.ui.saEquip.setStyleSheet(boxDone)
-			self.ui.saNextStack.setCurrentIndex(0)
-			self.ui.meterNextStack.setCurrentIndex(2)
-			self.ui.downNextStack.setCurrentIndex(3)
-			self.ui.vsaNextStack.setCurrentIndex(5)
-			self.ui.up_psg_next.setCurrentIndex(7)
-			self.ui.vsgNextSteps.setCurrentIndex(9)
-		elif not complete:
-			self.ui.saEquip.setStyleSheet(incomplete)
+		#if complete:
+		if idx == 1:
+			model = "UXA";
+		elif idx == 2:
+			model == "PXA"
+		flag = setSpectrumAnalyzerParams(self,d,self.ui.partNum_spa,supply,self.ui.saEquip,boxDone,model)
+		self.ui.saButton_sa.setStyleSheet(buttonFocus)
+		self.ui.saButton_sa_2.setStyleSheet(buttonFocus)
+		self.ui.saButton_sa_3.setStyleSheet(buttonFocus)
+		self.ui.saButton_sa_4.setStyleSheet(buttonFocus)
+		setPrevSAButtons(self,buttonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor)
+		self.ui.saEquip.setStyleSheet(boxDone)
+		self.ui.saNextStack.setCurrentIndex(0)
+		self.ui.meterNextStack.setCurrentIndex(2)
+		self.ui.downNextStack.setCurrentIndex(3)
+		self.ui.vsaNextStack.setCurrentIndex(5)
+		self.ui.up_psg_next.setCurrentIndex(7)
+		self.ui.vsgNextSteps.setCurrentIndex(9)
+		#elif not complete:
+		#	self.ui.saEquip.setStyleSheet(incomplete)
 	elif setButton.isChecked() == False:
 		self.ui.saEquip.setStyleSheet(None)
 		self.ui.saButton_sa.setStyleSheet(buttonSelect)
@@ -1701,8 +1715,8 @@ def setSpectrumAnalyzerAdvancedParams(self,dictionary,equipBox,supply,boxDone):
 		instrParamErrorMessage(self,error)
 		self.ui.saSetAdv.setChecked(False)
 		
-def setSpectrumAnalyzerParams(self,dictionary,partNum,supply,equipBox,boxDone):
-	result = supply.Set_Spectrum(dictionary,nargout=1)
+def setSpectrumAnalyzerParams(self,dictionary,partNum,supply,equipBox,boxDone,model):
+	result = supply.Set_Spectrum(dictionary,model,nargout=1)
 	result = result.split(";")
 	
 	error = result[1]
@@ -1713,10 +1727,10 @@ def setSpectrumAnalyzerParams(self,dictionary,partNum,supply,equipBox,boxDone):
 		equipBox.setStyleSheet(boxDone)
 		flag = 1
 		return flag
-	elif dictionary.address == "":
-		equipBox.setStyleSheet(boxDone)
-		flag = 1
-		return flag
+	# elif dictionary.address == "":
+		# equipBox.setStyleSheet(boxDone)
+		# flag = 1
+		# return flag
 	else:
 		instrParamErrorMessage(self,error)
 		self.ui.saSet.setChecked(False)
@@ -1725,22 +1739,21 @@ def setPowerMeterParams(self,dictionary,partNum,equipBox,boxDone,supply):
 	result = supply.Set_Meter(dictionary,nargout=1)
 	result = result.split(";")
 	error = result[1]
-
-	if error == " " :
-		
+	print(dictionary)
+	
+	if error == " " :	
 		powerMeterPartNum = result[0]
 		partNum.setText(powerMeterPartNum)
 		equipBox.setStyleSheet(boxDone)
 		flag = 1
 		return flag
-	elif A == "":
-		equipBox.setStyleSheet(boxDone)
-		flag = 1
-		return flag
+	# elif dictionary.address == "":
+		# equipBox.setStyleSheet(boxDone)
+		# flag = 1
+		# return flag
 	else:
-		
 		instrParamErrorMessage(self,error)
-		self.ui.meterSet.setChecked(False)
+		#self.ui.meterSet.setChecked(False)
 		
 def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,supply,channel):
 	A = address.text()

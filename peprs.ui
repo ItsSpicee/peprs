@@ -33100,7 +33100,7 @@ QWidget#power2{background-color:rgb(247,247,247)}
 QWidget#power3{background-color:rgb(247,247,247)}</string>
             </property>
             <property name="currentIndex">
-             <number>5</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="vsg">
              <property name="styleSheet">
@@ -37045,8 +37045,8 @@ Analyzer</string>
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>590</width>
-                             <height>500</height>
+                             <width>605</width>
+                             <height>993</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -41692,8 +41692,8 @@ Analyzer</string>
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>590</width>
-                             <height>382</height>
+                             <width>605</width>
+                             <height>1151</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -45732,7 +45732,7 @@ Analyzer</string>
                    <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                   </property>
                   <property name="currentIndex">
-                   <number>1</number>
+                   <number>0</number>
                   </property>
                   <widget class="QWidget" name="vsaStandard">
                    <attribute name="title">
@@ -46264,11 +46264,6 @@ Analyzer</string>
                                <item>
                                 <property name="text">
                                  <string>EXT2</string>
-                                </property>
-                               </item>
-                               <item>
-                                <property name="text">
-                                 <string>EXT3</string>
                                 </property>
                                </item>
                                <item>
@@ -51355,8 +51350,8 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>605</width>
-                         <height>1150</height>
+                         <width>590</width>
+                         <height>382</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -54806,8 +54801,8 @@ Analyzer</string>
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>605</width>
-                         <height>1150</height>
+                         <width>590</width>
+                         <height>382</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -58797,7 +58792,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <x>0</x>
                              <y>0</y>
                              <width>629</width>
-                             <height>993</height>
+                             <height>600</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -62366,8 +62361,8 @@ Analyzer</string>
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>605</width>
-                         <height>1150</height>
+                         <width>590</width>
+                         <height>550</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -70206,7 +70201,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                   <string/>
                  </property>
                  <property name="pixmap">
-                  <pixmap>icons/equipment.png</pixmap>
+                  <pixmap>icons/dashboard-2.png</pixmap>
                  </property>
                  <property name="scaledContents">
                   <bool>false</bool>
