@@ -9,10 +9,6 @@ function Set_VSA_AdvUXA(dict)
 		spectrum.ByteOrder = 'littleEndian';
 		fopen(spectrum);
 		
-		%setting the screen name
-		fprintf(spectrum,'INSTrument:SCReen:CREate');
-		fprintf(spectrum,['INST:SCR:REN "' dict.SAScreen '"']);
-		
 		%internal preamp
 		if dict.preAmp == "1"
 			fprintf(spectrum, sprintf(':SENSe:POWer:RF:GAIN:STATe %d', 1));

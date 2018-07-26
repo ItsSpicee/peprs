@@ -225,8 +225,8 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 						"clockRef": self.ui.clockRef_sa.currentIndex(),
 						"trigLevel": self.ui.trigLevel_sa.text()
 					}
-					supply.Set_Cal_UXAParams(dUXA,"RX",nargout=0)
-					supply.Set_Cal_UXAParams(dUXA,"AWG",nargout=0)
+					#supply.Set_Cal_UXAParams(dUXA,"RX",nargout=0)
+					#supply.Set_Cal_UXAParams(dUXA,"AWG",nargout=0)
 				
 				
 					dAllUXA={
