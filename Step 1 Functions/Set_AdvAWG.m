@@ -10,14 +10,15 @@ function error = Set_AdvAWG(dict)
     end
     
     % add relevant folders to path
-    addpath('.\RX Calibration\InstrumentFunctions\M8190A')
+
+    addpath('.\InstrumentFunctions\M8190A')
     
     % connect to instrument
     load('arbConfig.mat');
     arbConfig = loadArbConfig(arbConfig);
     % set visa address
     if dict.address == ""
-        error = "Please fill out all fields before attempting to set parameters."; 
+        error = "Please fill out general settings before attempting to set advanced parameters."; 
     else   
         arbConfig.visaAddr = dict.address;
     end
@@ -51,7 +52,7 @@ function error = Set_AdvAWG(dict)
     end
     
     error = char(error);
-    rmpath(".\RX Calibration\InstrumentFunctions\M8190A")
+    rmpath('.\InstrumentFunctions\M8190A')
     fclose(f);
     delete(f);
     clear f; 

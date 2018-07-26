@@ -14,7 +14,7 @@ function result = Set_AWG(dict)
     error = "";
     partNum = "";
     
-    try
+%     try
         load('arbConfig.mat');
         arbConfig = loadArbConfig(arbConfig);
         arbConfig.visaAddr = dict.address;
@@ -26,7 +26,15 @@ function result = Set_AWG(dict)
         
         % set model type (12 bit (speed) or 14 bit (precision))
         if dict.model == 1   
-            xfprintf(f, sprintf(':TRACe:DWIDth %s', 'WPRecision'));
+            fprintf(f, sprintf(':TRACe:DWIDth %s', 'WPRecision'));
+            modelError = query(f, ':syst:err?');
+            modelError = strsplit(modelError,',');
+            % replace enter character with nothing
+            modelError = regexprep(modelError{2},'\s+','');
+            errorString = '"Dataoutofrange;INTERNAL:SampleFrequency=12GHzoutofrange125MHz..8GHz."';
+            if strcmp(modelError,errorString)
+                error = "14-bit mode is unavailable on this AWG";
+            end
             arbConfig.model = "M8190A_14bit";
         elseif dict.model == 2
             xfprintf(f, sprintf(':TRACe:DWIDth %s', 'WSPeed'));
@@ -69,12 +77,12 @@ function result = Set_AWG(dict)
         fclose(f);
         delete(f);
         clear f; 
-        rmpath(".\InstrumentFunctions\M8190A")
+        rmpath('.\InstrumentFunctions\M8190A')
         
-    catch
-        error = "A problem has occured, resetting instruments. Use Keysight Connection Expert to check your instrument VISA Address.";
-        instrreset
-    end
+%     catch
+%         error = "A problem has occured, resetting instruments. Use Keysight Connection Expert to check your instrument VISA Address.";
+%         instrreset
+%     end
 
     resultsString = sprintf("%s;%s",partNum,error);
     result = char(resultsString);

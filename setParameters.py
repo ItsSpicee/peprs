@@ -50,12 +50,12 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 			# set MATLAB RXCal parameters
 			awgDict = {
 				"model" : self.ui.partNum_awg.text(),
-				"type" : self.ui.vsgSetup.currentIndex(),
 				"sampleRate" : self.ui.maxSampleRate_awg.text(),
+				"type": self.ui.vsgSetup.currentIndex(),
 				"refClockSrc" : self.ui.refClockSorce_awg.currentIndex(),
 				"extRefClockFreq" : self.ui.extRefFreq_awg.text()
 			}
-			win.checkIfDone(awgDict)
+
 			supply.Set_Cal_VSGParams(awgDict,"RX",nargout=0)
 			supply.Set_Cal_VSGParams(awgDict,"AWG",nargout=0)
 			
@@ -1950,9 +1950,9 @@ def setSpectrumAnalyzerAdvancedParams(self,dictionary,equipBox,supply,boxDone):
 		self.ui.saSetAdv.setChecked(False)
 		
 def setSpectrumAnalyzerParams(self,dictionary,partNum,supply,equipBox,boxDone,model):
+	address = dictionary["address"]
 	result = supply.Set_Spectrum(dictionary,model,nargout=1)
 	result = result.split(";")
-	
 	error = result[1]
 	
 	if error == " ":
@@ -1961,7 +1961,7 @@ def setSpectrumAnalyzerParams(self,dictionary,partNum,supply,equipBox,boxDone,mo
 		equipBox.setStyleSheet(boxDone)
 		flag = 1
 		return flag
-	elif dictionary["address"] == "":
+	elif address == "":
 		equipBox.setStyleSheet(boxDone)
 		flag = 1
 		return flag
@@ -1970,24 +1970,24 @@ def setSpectrumAnalyzerParams(self,dictionary,partNum,supply,equipBox,boxDone,mo
 		self.ui.saSet.setChecked(False)
 		
 def setPowerMeterParams(self,dictionary,partNum,equipBox,boxDone,supply):	
+	address = dictionary["address"]
 	result = supply.Set_Meter(dictionary,nargout=1)
 	result = result.split(";")
 	error = result[1]
-	print(dictionary)
-	
+
 	if error == " " :	
 		powerMeterPartNum = result[0]
 		partNum.setText(powerMeterPartNum)
 		equipBox.setStyleSheet(boxDone)
 		flag = 1
 		return flag
-	elif dictionary["address"] == "":
+	elif address == "":
 		equipBox.setStyleSheet(boxDone)
 		flag = 1
 		return flag
 	else:
 		instrParamErrorMessage(self,error)
-		#self.ui.meterSet.setChecked(False)
+		self.ui.meterSet.setChecked(False)
 		
 def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,supply,channel):
 	A = address.text()
@@ -2008,6 +2008,7 @@ def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,supply
 		self.ui.p1Set.setChecked(False)
 		
 def setAWGParams(self,dictionary,supply):
+	model = dictionary["model"]
 	result = supply.Set_AWG(dictionary,nargout = 1)
 	result = result.split(";")
 	partNum = result[0]
