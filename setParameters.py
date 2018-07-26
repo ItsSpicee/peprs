@@ -55,7 +55,7 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 				"refClockSrc" : self.ui.refClockSorce_awg.currentIndex(),
 				"extRefClockFreq" : self.ui.extRefFreq_awg.text()
 			}
-			checkIfDone(awgDict)
+			win.checkIfDone(awgDict)
 			supply.Set_Cal_VSGParams(awgDict,"RX",nargout=0)
 			supply.Set_Cal_VSGParams(awgDict,"AWG",nargout=0)
 			
@@ -98,6 +98,11 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 		awgSetGeneral.setText("Set")
 		
 def setAdvancedAWG(self,boxDone,setButton,supply):
+	checkDic=[
+		self.ui.trigMode_awg,
+		self.ui.dacRange_awg
+	]
+	
 	d={
 		"address": self.ui.address_awg.text(),
 		"trigMode": self.ui.trigMode_awg.currentIndex(),
@@ -106,13 +111,18 @@ def setAdvancedAWG(self,boxDone,setButton,supply):
 	flag = setAdvAWGParams(self,d,supply)
 	
 	if setButton.isChecked() == True:
-		if flag == 1:
-			# set MATLAB RXCal Param
-			supply.Set_Cal_VSGAdvParams(d.dacRange,nargout=0)
-			
-			setButton.setText("Unset")
-			self.ui.awgEquipAdv.setStyleSheet(boxDone)
-			self.ui.statusBar.showMessage('Successfully Set Advanced Settings',2000)
+		done = win.checkIfDone(checkDic)
+		if done:
+			if flag == 1:
+				# set MATLAB RXCal Param
+				supply.Set_Cal_VSGAdvParams(d["dacRange"],nargout=0)
+				
+				setButton.setText("Unset")
+				self.ui.awgEquipAdv.setStyleSheet(boxDone)
+				self.ui.statusBar.showMessage('Successfully Set Advanced Settings',2000)
+		else:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)			
 	elif setButton.isChecked() == False:
 		self.ui.awgEquipAdv.setStyleSheet(None)
 		setButton.setText("Set")
@@ -206,16 +216,19 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 		if averaging != 0 or avgEnabled == False:
 			if demod != 0:
 				if typeIdx == 3 or typeIdx == 4: # UXA & PXA
+
 					# set matlab parameters
 					dUXA={
 						"analysisBW": self.ui.analysisBandwidth_sa.text(),
 						"address": self.ui.address_sa.text(),
-						"attenuation": self.ui.attenuation_sa.text(),
+						"atten": self.ui.attenuation_sa.text(),
 						"clockRef": self.ui.clockRef_sa.currentIndex(),
 						"trigLevel": self.ui.trigLevel_sa.text()
 					}
 					supply.Set_Cal_UXAParams(dUXA,"RX",nargout=0)
 					supply.Set_Cal_UXAParams(dUXA,"AWG",nargout=0)
+				
+				
 					dAllUXA={
 						"averaging" : self.ui.averagingEnable.currentIndex(),
 						"noAverages": self.ui.noAveragesField_sa.text(),
@@ -407,36 +420,48 @@ def setDown(self,buttonFocus,greyHover,buttonHover,boxDone,greyButton,buttonSele
 		setButton.setText("Set")
 		
 def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,greyButton,buttonSelect,setButton,supply):
-	if setButton.isChecked() == True:
-		flag = 0;
-		setButton.setText("Unset")
-		averaging = ""
-		if self.ui.powerMeterFilter.currentIndex() == 1:
-			averaging = "-1"
-		elif self.ui.powerMeterFilter.currentIndex() == 3:
-			averaging = "-2"
-		elif self.ui.powerMeterFilter.currentIndex() == 2:
-			averaging = self.ui.noAveragesField_meter.text()
-		
-		d={
-			"address": 	self.ui.powerMeterAddress.text(),
-			"offset": self.ui.powerMeterOffset.text(),
-			"frequency": self.ui.powerMeterFrequency.text(),
-			"averaging": averaging
+	checkMeter={
+			self.ui.powerMeterAddress,
+			self.ui.powerMeterOffset,
+			self.ui.powerMeterFrequency,
+			self.ui.powerMeterFilter
 		}
-		flag = setPowerMeterParams(self,d,self.ui.powerMeterPartNum,self.ui.meterEquip,boxDone,supply)
-		
-		self.ui.meterButton_meter.setStyleSheet(buttonFocus)
-		self.ui.meterButton_meter_2.setStyleSheet(buttonFocus)
-		self.ui.meterButton_meter_3.setStyleSheet(buttonFocus)
-		self.ui.meterButton_meter_4.setStyleSheet(buttonFocus)
-		setPrevMeterButtons(self,buttonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor)
-		self.ui.meterEquip.setStyleSheet(boxDone)
-		self.ui.meterNextStack.setCurrentIndex(1)
-		self.ui.downNextStack.setCurrentIndex(2)
-		self.ui.vsaNextStack.setCurrentIndex(4)
-		self.ui.up_psg_next.setCurrentIndex(6)
-		self.ui.vsgNextSteps.setCurrentIndex(8)
+
+	if setButton.isChecked() == True:
+		completed = win.checkIfDone()
+		if completed:
+			flag = 0;
+			setButton.setText("Unset")
+			averaging = ""
+			if self.ui.powerMeterFilter.currentIndex() == 1:
+				averaging = "-1"
+			elif self.ui.powerMeterFilter.currentIndex() == 3:
+				averaging = "-2"
+			elif self.ui.powerMeterFilter.currentIndex() == 2:
+				averaging = self.ui.noAveragesField_meter.text()
+			
+			d={
+				"address": 	self.ui.powerMeterAddress.text(),
+				"offset": self.ui.powerMeterOffset.text(),
+				"frequency": self.ui.powerMeterFrequency.text(),
+				"averaging": averaging
+			}
+			flag = setPowerMeterParams(self,d,self.ui.powerMeterPartNum,self.ui.meterEquip,boxDone,supply)
+			
+			self.ui.meterButton_meter.setStyleSheet(buttonFocus)
+			self.ui.meterButton_meter_2.setStyleSheet(buttonFocus)
+			self.ui.meterButton_meter_3.setStyleSheet(buttonFocus)
+			self.ui.meterButton_meter_4.setStyleSheet(buttonFocus)
+			setPrevMeterButtons(self,buttonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor)
+			self.ui.meterEquip.setStyleSheet(boxDone)
+			self.ui.meterNextStack.setCurrentIndex(1)
+			self.ui.downNextStack.setCurrentIndex(2)
+			self.ui.vsaNextStack.setCurrentIndex(4)
+			self.ui.up_psg_next.setCurrentIndex(6)
+			self.ui.vsgNextSteps.setCurrentIndex(8)
+		else:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)
 	elif setButton.isChecked() == False:
 		self.ui.meterEquip.setStyleSheet(None)
 		self.ui.meterButton_meter.setStyleSheet(buttonSelect)
@@ -454,40 +479,55 @@ def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,greyButton,buttonSel
 
 def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,buttonSelect,supply):
 	idx = self.ui.saType.currentIndex()
+	
+	checkDic=[
+		self.ui.address_spa,
+		self.ui.attenuation_spa,
+		self.ui.freq_spa,
+		self.ui.freqSpan_spa,
+		self.ui.resBand_spa,
+		self.ui.clockRef_spa,
+		self.ui.trigLevel_spa,
+		self.ui.trigSource_spa
+		]
+	
 	if setButton.isChecked() == True:
-		setButton.setText("Unset")
-		statusList = [self.ui.address_spa.text(),self.ui.freq_spa.text(),self.ui.freqSpan_spa.text(),self.ui.resBand_spa.text(),self.ui.clockRef_spa.currentIndex()]
-		#complete = win.checkIfDone(statusList)
-		d={
-			"address": self.ui.address_spa.text(),
-			"atten": self.ui.attenuation_spa.text(),
-			"freq": self.ui.freq_spa.text(),
-			"freqSpan": self.ui.freqSpan_spa.text(),
-			"resBand": self.ui.resBand_spa.text(),
-			"clockRef": self.ui.clockRef_spa.currentIndex(),
-			"trigLevel": self.ui.trigLevel_spa.text(),
-			"trigger": self.ui.trigSource_spa.currentIndex()
-		}	
-		#if complete:
-		if idx == 1:
-			model = "UXA";
-		elif idx == 2:
-			model == "PXA"
-		flag = setSpectrumAnalyzerParams(self,d,self.ui.partNum_spa,supply,self.ui.saEquip,boxDone,model)
-		self.ui.saButton_sa.setStyleSheet(buttonFocus)
-		self.ui.saButton_sa_2.setStyleSheet(buttonFocus)
-		self.ui.saButton_sa_3.setStyleSheet(buttonFocus)
-		self.ui.saButton_sa_4.setStyleSheet(buttonFocus)
-		setPrevSAButtons(self,buttonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor)
-		self.ui.saEquip.setStyleSheet(boxDone)
-		self.ui.saNextStack.setCurrentIndex(0)
-		self.ui.meterNextStack.setCurrentIndex(2)
-		self.ui.downNextStack.setCurrentIndex(3)
-		self.ui.vsaNextStack.setCurrentIndex(5)
-		self.ui.up_psg_next.setCurrentIndex(7)
-		self.ui.vsgNextSteps.setCurrentIndex(9)
-		#elif not complete:
-		#	self.ui.saEquip.setStyleSheet(incomplete)
+		done = win.checkIfDone(checkDic)
+		if done:
+			setButton.setText("Unset")
+			statusList = [self.ui.address_spa.text(),self.ui.freq_spa.text(),self.ui.freqSpan_spa.text(),self.ui.resBand_spa.text(),self.ui.clockRef_spa.currentIndex()]
+			#complete = win.checkIfDone(statusList)
+			d={
+				"address": self.ui.address_spa.text(),
+				"atten": self.ui.attenuation_spa.text(),
+				"freq": self.ui.freq_spa.text(),
+				"freqSpan": self.ui.freqSpan_spa.text(),
+				"resBand": self.ui.resBand_spa.text(),
+				"clockRef": self.ui.clockRef_spa.currentIndex(),
+				"trigLevel": self.ui.trigLevel_spa.text(),
+				"trigger": self.ui.trigSource_spa.currentIndex()
+			}	
+			#if complete:
+			if idx == 1:
+				model = "UXA";
+			elif idx == 2:
+				model == "PXA"
+			flag = setSpectrumAnalyzerParams(self,d,self.ui.partNum_spa,supply,self.ui.saEquip,boxDone,model)
+			self.ui.saButton_sa.setStyleSheet(buttonFocus)
+			self.ui.saButton_sa_2.setStyleSheet(buttonFocus)
+			self.ui.saButton_sa_3.setStyleSheet(buttonFocus)
+			self.ui.saButton_sa_4.setStyleSheet(buttonFocus)
+			setPrevSAButtons(self,buttonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor)
+			self.ui.saEquip.setStyleSheet(boxDone)
+			self.ui.saNextStack.setCurrentIndex(0)
+			self.ui.meterNextStack.setCurrentIndex(2)
+			self.ui.downNextStack.setCurrentIndex(3)
+			self.ui.vsaNextStack.setCurrentIndex(5)
+			self.ui.up_psg_next.setCurrentIndex(7)
+			self.ui.vsgNextSteps.setCurrentIndex(9)
+		else:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)
 	elif setButton.isChecked() == False:
 		self.ui.saEquip.setStyleSheet(None)
 		self.ui.saButton_sa.setStyleSheet(buttonSelect)
@@ -504,28 +544,48 @@ def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,bu
 		setButton.setText("Set")
 		
 def setSAAdv(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,buttonSelect,supply):
-	if setButton.isChecked() == True:
-		
-		d ={
-			"address": self.ui.address_spa.text(),
-			"SAScreen": self.ui.saScrenName_spa.text(),
-			"ACPScreen": self.ui.acpScreenName_spa.text(),
-			"preAmp": self.ui.preampEnable_spa.currentIndex(),
-			"traceType": self.ui.lineEdit_63.text(),
-			"traceNum" : self.ui.traceNum_spa.text(),
-			"traceAvg": self.ui.traceAvg_spa.currentIndex(),
-			"traceAvgCount": self.ui.traceAvgCount_spa.text(),
-			"noiseExtension": self.ui.noiseExtension_spa.text(),
-			"ACPCorrection": self.ui.acpNoiseEnable_spa.currentIndex(),
-			"ACPBand": self.ui.acpBW_spa.text(),
-			"ACPOffset": self.ui.acpOffset_spa.text(),
-			"Detector": self.ui.detector_spa.currentIndex()
+	checkDic={
+			self.ui.address_spa,
+			self.ui.saScrenName_spa,
+			self.ui.acpScreenName_spa,
+			self.ui.preampEnable_spa,
+			self.ui.lineEdit_63,
+			self.ui.traceNum_spa,
+			self.ui.traceAvg_spa,
+			self.ui.traceAvgCount_spa,
+			self.ui.noiseExtension_spa,
+			self.ui.acpNoiseEnable_spa,
+			self.ui.acpBW_spa,
+			self.ui.acpOffset_spa,
+			self.ui.detector_spa
 		}
 		
-		setButton.setText("Unset")
-		self.ui.saEquipAdv.setStyleSheet(boxDone)
-		
-		flag = setSpectrumAnalyzerAdvancedParams(self,d,self.ui.saEquipAdv,supply,boxDone)
+	if setButton.isChecked() == True:
+		done = win.checkIfDone(checkDic)
+		if done:
+			d ={
+				"address": self.ui.address_spa.text(),
+				"SAScreen": self.ui.saScrenName_spa.text(),
+				"ACPScreen": self.ui.acpScreenName_spa.text(),
+				"preAmp": self.ui.preampEnable_spa.currentIndex(),
+				"traceType": self.ui.lineEdit_63.text(),
+				"traceNum" : self.ui.traceNum_spa.text(),
+				"traceAvg": self.ui.traceAvg_spa.currentIndex(),
+				"traceAvgCount": self.ui.traceAvgCount_spa.text(),
+				"noiseExtension": self.ui.noiseExtension_spa.text(),
+				"ACPCorrection": self.ui.acpNoiseEnable_spa.currentIndex(),
+				"ACPBand": self.ui.acpBW_spa.text(),
+				"ACPOffset": self.ui.acpOffset_spa.text(),
+				"Detector": self.ui.detector_spa.currentIndex()
+			}
+			
+			setButton.setText("Unset")
+			self.ui.saEquipAdv.setStyleSheet(boxDone)
+			
+			flag = setSpectrumAnalyzerAdvancedParams(self,d,self.ui.saEquipAdv,supply,boxDone)
+		else:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)
 		
 	elif setButton.isChecked() == False:
 		self.ui.saEquipAdv.setStyleSheet(None)
@@ -533,81 +593,102 @@ def setSAAdv(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton
 		
 		
 def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,buttonSelect,setButton):
+	checkDic[
+		self.ui.p1c1Address,
+		self.ui.p1c1Voltage,
+		self.ui.p1c1Current,
+		self.ui.p1c2Address,
+		self.ui.p1c2Voltage,
+		self.ui.p1c2Current,
+		self.ui.p1c3Address,
+		self.ui.p1c3Voltage,
+		self.ui.p1c3Current,
+		self.ui.p1c4Address,
+		self.ui.p1c4Voltage,
+		self.ui.p1c4Current,
+		self.ui.p1Enabled,
+		self.ui.noChannels_p1
+	]
 	if setButton.isChecked() == True:
-		flag = 0;
-		numberChannels = self.ui.noChannels_p1.currentIndex()
-		vsgType = self.ui.vsgSetup.currentIndex()
-		vsaType = self.ui.vsaType.currentIndex()
-		enabledSupply = self.ui.p1Enabled.currentIndex()
-		p1c1A = self.ui.p1c1Address.text()
-		p1c2A = self.ui.p1c2Address.text()
-		p1c3A = self.ui.p1c3Address.text()
-		p1c4A = self.ui.p1c4Address.text()
-		
-		# set instrument params
-		if enabledSupply == 0 or enabledSupply == 2:
-			if enabledSupply == 2:
-				flag = 1;
-			if p1c1A != "":
-				supply.Output_Toggle(p1c1A,0,nargout=0)
-			if p1c2A != "":
-				supply.Output_Toggle(p1c2A,0,nargout=0)
-			if p1c3A != "":
-				supply.Output_Toggle(p1c3A,0,nargout=0)
-			if p1c4A != "":
-				supply.Output_Toggle(p1c4A,0,nargout=0)
-		else:
-			if numberChannels == 0:
-				instrParamErrorMessage(self,"Please enable and set channel parameters if this supply is in use.")
-				setButton.setChecked(False)
-			elif numberChannels == 1:
-				flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply,str(self.ui.cNumberField_p1c1.currentText()))
-			elif numberChannels == 2:
-				flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply,str(self.ui.cNumberField_p1c1.currentText()))
-				flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,supply,str(self.ui.cNumberField_p1c2.currentText()))
-			elif numberChannels == 3:
-				flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply,str(self.ui.cNumberField_p1c1.currentText()))
-				flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,supply,str(self.ui.cNumberField_p1c2.currentText()))
-				flag = setSupplyParams(self,self.ui.p1c3Address,self.ui.p1c3Voltage,self.ui.p1c3Current,self.ui.p1c3PartNumber,self.ui.p1c3Equip,boxDone,supply,str(self.ui.cNumberField_p1c3.currentText()))
-			elif numberChannels == 4:
-				flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply,str(self.ui.cNumberField_p1c1.currentText()))
-				flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,supply,str(self.ui.cNumberField_p1c2.currentText()))
-				flag = setSupplyParams(self,self.ui.p1c3Address,self.ui.p1c3Voltage,self.ui.p1c3Current,self.ui.p1c3PartNumber,self.ui.p1c3Equip,boxDone,supply,str(self.ui.cNumberField_p1c3.currentText()))
-				flag = setSupplyParams(self,self.ui.p1c4Address,self.ui.p1c4Voltage,self.ui.p1c4Current,self.ui.p1c4PartNumber,self.ui.p1c4Equip,boxDone,supply,str(self.ui.cNumberField_p1c4.currentText()))
-
-		if flag == 1:
-			self.ui.power1Button_p1.setStyleSheet(buttonFocus)
-			self.ui.p1Equip.setStyleSheet(boxDone)
-			setButton.setText("Unset")
+		done = win.checkIfDone(checkDic)
+		if done:
+			flag = 0;
+			numberChannels = self.ui.noChannels_p1.currentIndex()
+			vsgType = self.ui.vsgSetup.currentIndex()
+			vsaType = self.ui.vsaType.currentIndex()
+			enabledSupply = self.ui.p1Enabled.currentIndex()
+			p1c1A = self.ui.p1c1Address.text()
+			p1c2A = self.ui.p1c2Address.text()
+			p1c3A = self.ui.p1c3Address.text()
+			p1c4A = self.ui.p1c4Address.text()
 			
-			if vsgType == 1 or vsgType == 4:
-				if vsaType == 1 or vsaType == 2 or vsaType == 3 or vsaType == 4:
-					self.ui.power1NextStack.setCurrentIndex(3)
-					self.ui.saNextStack.setCurrentIndex(3)
-					self.ui.meterNextStack.setCurrentIndex(5)
-					self.ui.downNextStack.setCurrentIndex(6)
-					self.ui.vsaNextStack.setCurrentIndex(8)
-					self.ui.up_psg_next.setCurrentIndex(10)
-					self.ui.vsgNextSteps.setCurrentIndex(12)
-					setPrevP1Buttons(self,buttonHover,greyButton,greyButton,Qt.ArrowCursor,Qt.ArrowCursor)
-				elif vsaType == 5 or vsaType ==6:
-					self.ui.power1NextStack.setCurrentIndex(2)
-					self.ui.saNextStack.setCurrentIndex(2)
-					self.ui.meterNextStack.setCurrentIndex(4)
-					self.ui.downNextStack.setCurrentIndex(5)
-					self.ui.vsaNextStack.setCurrentIndex(7)
-					self.ui.up_psg_next.setCurrentIndex(9)
-					self.ui.vsgNextSteps.setCurrentIndex(11)
-					setPrevP1Buttons(self,buttonHover,greyButton,greyHover,Qt.ArrowCursor,Qt.PointingHandCursor)
-			elif vsgType == 2 or vsgType == 3:
-				self.ui.power1NextStack.setCurrentIndex(1)
-				self.ui.saNextStack.setCurrentIndex(1)
-				self.ui.meterNextStack.setCurrentIndex(3)
-				self.ui.downNextStack.setCurrentIndex(4)
-				self.ui.vsaNextStack.setCurrentIndex(6)
-				self.ui.up_psg_next.setCurrentIndex(8)
-				self.ui.vsgNextSteps.setCurrentIndex(10)
-				setPrevP1Buttons(self,buttonHover,greyHover,greyButton,Qt.PointingHandCursor,Qt.ArrowCursor)
+			# set instrument params
+			if enabledSupply == 0 or enabledSupply == 2:
+				if enabledSupply == 2:
+					flag = 1;
+				if p1c1A != "":
+					supply.Output_Toggle(p1c1A,0,nargout=0)
+				if p1c2A != "":
+					supply.Output_Toggle(p1c2A,0,nargout=0)
+				if p1c3A != "":
+					supply.Output_Toggle(p1c3A,0,nargout=0)
+				if p1c4A != "":
+					supply.Output_Toggle(p1c4A,0,nargout=0)
+			else:
+				if numberChannels == 0:
+					instrParamErrorMessage(self,"Please enable and set channel parameters if this supply is in use.")
+					setButton.setChecked(False)
+				elif numberChannels == 1:
+					flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply,str(self.ui.cNumberField_p1c1.currentText()))
+				elif numberChannels == 2:
+					flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply,str(self.ui.cNumberField_p1c1.currentText()))
+					flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,supply,str(self.ui.cNumberField_p1c2.currentText()))
+				elif numberChannels == 3:
+					flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply,str(self.ui.cNumberField_p1c1.currentText()))
+					flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,supply,str(self.ui.cNumberField_p1c2.currentText()))
+					flag = setSupplyParams(self,self.ui.p1c3Address,self.ui.p1c3Voltage,self.ui.p1c3Current,self.ui.p1c3PartNumber,self.ui.p1c3Equip,boxDone,supply,str(self.ui.cNumberField_p1c3.currentText()))
+				elif numberChannels == 4:
+					flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply,str(self.ui.cNumberField_p1c1.currentText()))
+					flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,supply,str(self.ui.cNumberField_p1c2.currentText()))
+					flag = setSupplyParams(self,self.ui.p1c3Address,self.ui.p1c3Voltage,self.ui.p1c3Current,self.ui.p1c3PartNumber,self.ui.p1c3Equip,boxDone,supply,str(self.ui.cNumberField_p1c3.currentText()))
+					flag = setSupplyParams(self,self.ui.p1c4Address,self.ui.p1c4Voltage,self.ui.p1c4Current,self.ui.p1c4PartNumber,self.ui.p1c4Equip,boxDone,supply,str(self.ui.cNumberField_p1c4.currentText()))
+
+			if flag == 1:
+				self.ui.power1Button_p1.setStyleSheet(buttonFocus)
+				self.ui.p1Equip.setStyleSheet(boxDone)
+				setButton.setText("Unset")
+				
+				if vsgType == 1 or vsgType == 4:
+					if vsaType == 1 or vsaType == 2 or vsaType == 3 or vsaType == 4:
+						self.ui.power1NextStack.setCurrentIndex(3)
+						self.ui.saNextStack.setCurrentIndex(3)
+						self.ui.meterNextStack.setCurrentIndex(5)
+						self.ui.downNextStack.setCurrentIndex(6)
+						self.ui.vsaNextStack.setCurrentIndex(8)
+						self.ui.up_psg_next.setCurrentIndex(10)
+						self.ui.vsgNextSteps.setCurrentIndex(12)
+						setPrevP1Buttons(self,buttonHover,greyButton,greyButton,Qt.ArrowCursor,Qt.ArrowCursor)
+					elif vsaType == 5 or vsaType ==6:
+						self.ui.power1NextStack.setCurrentIndex(2)
+						self.ui.saNextStack.setCurrentIndex(2)
+						self.ui.meterNextStack.setCurrentIndex(4)
+						self.ui.downNextStack.setCurrentIndex(5)
+						self.ui.vsaNextStack.setCurrentIndex(7)
+						self.ui.up_psg_next.setCurrentIndex(9)
+						self.ui.vsgNextSteps.setCurrentIndex(11)
+						setPrevP1Buttons(self,buttonHover,greyButton,greyHover,Qt.ArrowCursor,Qt.PointingHandCursor)
+				elif vsgType == 2 or vsgType == 3:
+					self.ui.power1NextStack.setCurrentIndex(1)
+					self.ui.saNextStack.setCurrentIndex(1)
+					self.ui.meterNextStack.setCurrentIndex(3)
+					self.ui.downNextStack.setCurrentIndex(4)
+					self.ui.vsaNextStack.setCurrentIndex(6)
+					self.ui.up_psg_next.setCurrentIndex(8)
+					self.ui.vsgNextSteps.setCurrentIndex(10)
+					setPrevP1Buttons(self,buttonHover,greyHover,greyButton,Qt.PointingHandCursor,Qt.ArrowCursor)
+		else:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)		
 	elif setButton.isChecked() == False:
 		self.ui.p1Equip.setStyleSheet(None)
 		unsetPrevP1Buttons(self,greyHover)
@@ -622,75 +703,99 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,butto
 		setButton.setText("Set")
 
 def setP2(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,buttonSelect,setButton):
+	checkDic[
+		self.ui.p2c1Address,
+		self.ui.p2c1Voltage,
+		self.ui.p2c1Current,
+		self.ui.p2c2Address,
+		self.ui.p2c2Voltage,
+		self.ui.p2c2Current,
+		self.ui.p2c3Address,
+		self.ui.p2c3Voltage,
+		self.ui.p2c3Current,
+		self.ui.p2c4Address,
+		self.ui.p2c4Voltage,
+		self.ui.p2c4Current,
+		self.ui.p2Enabled,
+		self.ui.noChannels_p2
+	]
+	
+	
 	if setButton.isChecked() == True:
-		flag = 0;
-		numberChannels = self.ui.noChannels_p2.currentIndex()
-		vsaType = self.ui.vsaType.currentIndex()
-		enabledSupply = self.ui.p2Enabled.currentIndex()
-		p2c1A = self.ui.p2c1Address.text()
-		p2c2A = self.ui.p2c2Address.text()
-		p2c3A = self.ui.p2c3Address.text()
-		p2c4A = self.ui.p2c3Address.text()
+		done = win.checkIfDone(checkDic)
 		
-		# set instrument params
-		if enabledSupply == 0 or enabledSupply == 2:
-			if enabledSupply == 2:
-				flag = 1;
-			if enabledSupply == 0:
-				instrParamErrorMessage(self,"Please fill out the current equipment's parameters before moving on.")
-				setButton.setChecked(False)
-			if p2c1A != "":
-				supply.Output_Toggle(p2c1A,nargout=0)
-			if p2c2A != "":
-				supply.Output_Toggle(p2c2A,nargout=0)
-			if p2c3A != "":
-				supply.Output_Toggle(p2c3A,nargout=0)
-			if p2c4A != "":
-				supply.Output_Toggle(p2c4A,nargout=0)
+		if done:
+			flag = 0;
+			numberChannels = self.ui.noChannels_p2.currentIndex()
+			vsaType = self.ui.vsaType.currentIndex()
+			enabledSupply = self.ui.p2Enabled.currentIndex()
+			p2c1A = self.ui.p2c1Address.text()
+			p2c2A = self.ui.p2c2Address.text()
+			p2c3A = self.ui.p2c3Address.text()
+			p2c4A = self.ui.p2c3Address.text()
+			
+			# set instrument params
+			if enabledSupply == 0 or enabledSupply == 2:
+				if enabledSupply == 2:
+					flag = 1;
+				if enabledSupply == 0:
+					instrParamErrorMessage(self,"Please fill out the current equipment's parameters before moving on.")
+					setButton.setChecked(False)
+				if p2c1A != "":
+					supply.Output_Toggle(p2c1A,nargout=0)
+				if p2c2A != "":
+					supply.Output_Toggle(p2c2A,nargout=0)
+				if p2c3A != "":
+					supply.Output_Toggle(p2c3A,nargout=0)
+				if p2c4A != "":
+					supply.Output_Toggle(p2c4A,nargout=0)
+			else:
+				if numberChannels == 0:
+					instrParamErrorMessage(self,"Please enable and set channel parameters if this supply is in use.")
+					setButton.setChecked(False)
+				elif numberChannels == 1:
+					flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,supply,str(self.ui.cNumberField_p2c1.currentText()))
+				elif numberChannels == 2:
+					flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,supply,str(self.ui.cNumberField_p2c1.currentText()))
+					flag = setSupplyParams(self,self.ui.p2c2Address,self.ui.p2c2Voltage,self.ui.p2c2Current,self.ui.p2c2PartNumber,self.ui.p2c2Equip,boxDone,supply,str(self.ui.cNumberField_p2c2.currentText()))
+				elif numberChannels == 3:
+					flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,supply,str(self.ui.cNumberField_p2c1.currentText()))
+					flag = setSupplyParams(self,self.ui.p2c2Address,self.ui.p2c2Voltage,self.ui.p2c2Current,self.ui.p2c2PartNumber,self.ui.p2c2Equip,boxDone,supply,str(self.ui.cNumberField_p2c2.currentText()))
+					flag = setSupplyParams(self,self.ui.p2c3Address,self.ui.p2c3Voltage,self.ui.p2c3Current,self.ui.p2c3PartNumber,self.ui.p2c3Equip,boxDone,supply,str(self.ui.cNumberField_p2c3.currentText()))
+				elif numberChannels == 4:
+					flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,supply,str(self.ui.cNumberField_p2c1.currentText()))
+					flag = setSupplyParams(self,self.ui.p2c2Address,self.ui.p2c2Voltage,self.ui.p2c2Current,self.ui.p2c2PartNumber,self.ui.p2c2Equip,boxDone,supply,str(self.ui.cNumberField_p2c2.currentText()))
+					flag = setSupplyParams(self,self.ui.p2c3Address,self.ui.p2c3Voltage,self.ui.p2c3Current,self.ui.p2c3PartNumber,self.ui.p2c3Equip,boxDone,supply,str(self.ui.cNumberField_p2c3.currentText()))
+					flag = setSupplyParams(self,self.ui.p2c4Address,self.ui.p2c4Voltage,self.ui.p2c4Current,self.ui.p2c4PartNumber,self.ui.p2c4Equip,boxDone,supply,str(self.ui.cNumberField_p2c4.currentText()))
+			
+			if flag == 1:
+				self.ui.power2Button_p2.setStyleSheet(buttonFocus)
+				self.ui.p2Equip.setStyleSheet(boxDone)
+				setButton.setText("Unset")
+			
+				if vsaType == 1 or vsaType == 2 or vsaType == 3 or vsaType == 4:
+					self.ui.power2NextStack.setCurrentIndex(0)
+					self.ui.power1NextStack.setCurrentIndex(3)
+					self.ui.saNextStack.setCurrentIndex(3)
+					self.ui.meterNextStack.setCurrentIndex(5)
+					self.ui.downNextStack.setCurrentIndex(6)
+					self.ui.vsaNextStack.setCurrentIndex(8)
+					self.ui.up_psg_next.setCurrentIndex(10)
+					self.ui.vsgNextSteps.setCurrentIndex(12)
+					setPrevP2Buttons(self,buttonHover,greyButton)
+				elif vsaType == 5 or vsaType ==6:
+					self.ui.power2NextStack.setCurrentIndex(2)
+					self.ui.power1NextStack.setCurrentIndex(2)
+					self.ui.saNextStack.setCurrentIndex(2)
+					self.ui.meterNextStack.setCurrentIndex(4)
+					self.ui.downNextStack.setCurrentIndex(5)
+					self.ui.vsaNextStack.setCurrentIndex(7)
+					self.ui.up_psg_next.setCurrentIndex(9)
+					self.ui.vsgNextSteps.setCurrentIndex(11)
+					setPrevP2Buttons(self,buttonHover,greyHover)
 		else:
-			if numberChannels == 0:
-				instrParamErrorMessage(self,"Please enable and set channel parameters if this supply is in use.")
-				setButton.setChecked(False)
-			elif numberChannels == 1:
-				flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,supply,str(self.ui.cNumberField_p2c1.currentText()))
-			elif numberChannels == 2:
-				flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,supply,str(self.ui.cNumberField_p2c1.currentText()))
-				flag = setSupplyParams(self,self.ui.p2c2Address,self.ui.p2c2Voltage,self.ui.p2c2Current,self.ui.p2c2PartNumber,self.ui.p2c2Equip,boxDone,supply,str(self.ui.cNumberField_p2c2.currentText()))
-			elif numberChannels == 3:
-				flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,supply,str(self.ui.cNumberField_p2c1.currentText()))
-				flag = setSupplyParams(self,self.ui.p2c2Address,self.ui.p2c2Voltage,self.ui.p2c2Current,self.ui.p2c2PartNumber,self.ui.p2c2Equip,boxDone,supply,str(self.ui.cNumberField_p2c2.currentText()))
-				flag = setSupplyParams(self,self.ui.p2c3Address,self.ui.p2c3Voltage,self.ui.p2c3Current,self.ui.p2c3PartNumber,self.ui.p2c3Equip,boxDone,supply,str(self.ui.cNumberField_p2c3.currentText()))
-			elif numberChannels == 4:
-				flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,supply,str(self.ui.cNumberField_p2c1.currentText()))
-				flag = setSupplyParams(self,self.ui.p2c2Address,self.ui.p2c2Voltage,self.ui.p2c2Current,self.ui.p2c2PartNumber,self.ui.p2c2Equip,boxDone,supply,str(self.ui.cNumberField_p2c2.currentText()))
-				flag = setSupplyParams(self,self.ui.p2c3Address,self.ui.p2c3Voltage,self.ui.p2c3Current,self.ui.p2c3PartNumber,self.ui.p2c3Equip,boxDone,supply,str(self.ui.cNumberField_p2c3.currentText()))
-				flag = setSupplyParams(self,self.ui.p2c4Address,self.ui.p2c4Voltage,self.ui.p2c4Current,self.ui.p2c4PartNumber,self.ui.p2c4Equip,boxDone,supply,str(self.ui.cNumberField_p2c4.currentText()))
-		
-		if flag == 1:
-			self.ui.power2Button_p2.setStyleSheet(buttonFocus)
-			self.ui.p2Equip.setStyleSheet(boxDone)
-			setButton.setText("Unset")
-		
-			if vsaType == 1 or vsaType == 2 or vsaType == 3 or vsaType == 4:
-				self.ui.power2NextStack.setCurrentIndex(0)
-				self.ui.power1NextStack.setCurrentIndex(3)
-				self.ui.saNextStack.setCurrentIndex(3)
-				self.ui.meterNextStack.setCurrentIndex(5)
-				self.ui.downNextStack.setCurrentIndex(6)
-				self.ui.vsaNextStack.setCurrentIndex(8)
-				self.ui.up_psg_next.setCurrentIndex(10)
-				self.ui.vsgNextSteps.setCurrentIndex(12)
-				setPrevP2Buttons(self,buttonHover,greyButton)
-			elif vsaType == 5 or vsaType ==6:
-				self.ui.power2NextStack.setCurrentIndex(2)
-				self.ui.power1NextStack.setCurrentIndex(2)
-				self.ui.saNextStack.setCurrentIndex(2)
-				self.ui.meterNextStack.setCurrentIndex(4)
-				self.ui.downNextStack.setCurrentIndex(5)
-				self.ui.vsaNextStack.setCurrentIndex(7)
-				self.ui.up_psg_next.setCurrentIndex(9)
-				self.ui.vsgNextSteps.setCurrentIndex(11)
-				setPrevP2Buttons(self,buttonHover,greyHover)
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)		
 	elif setButton.isChecked() == False:
 		self.ui.p2Equip.setStyleSheet(None)
 		unsetPrevP2Buttons(self,greyHover)
@@ -706,65 +811,88 @@ def setP2(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,butto
 		setButton.setText("Set")
 	
 def setP3(self,boxDone,buttonFocus,buttonHover,supply,buttonSelect,greyHover,setButton):
-	if setButton.isChecked() == True:
-		flag = 0;
-		numberChannels = self.ui.noChannels_p3.currentIndex()
-		enabledSupply = self.ui.p3Enabled.currentIndex()
-		p3c1A = self.ui.p3c1Address.text()
-		p3c2A = self.ui.p3c2Address.text()
-		p3c3A = self.ui.p3c3Address.text()
-		p3c4A = self.ui.p3c4Address.text()
+	checkDic[
+		self.ui.p3c1Address,
+		self.ui.p3c1Voltage,
+		self.ui.p3c1Current,
+		self.ui.p3c2Address,
+		self.ui.p3c2Voltage,
+		self.ui.p3c2Current,
+		self.ui.p3c3Address,
+		self.ui.p3c3Voltage,
+		self.ui.p3c3Current,
+		self.ui.p3c4Address,
+		self.ui.p3c4Voltage,
+		self.ui.p3c4Current,
+		self.ui.p3Enabled,
+		self.ui.noChannels_p3
+	]
 
-		# set instrument params
-		if enabledSupply == 0 or enabledSupply == 2:
-			if enabledSupply == 2:
-				flag = 1;
-			if enabledSupply == 0:
-				instrParamErrorMessage(self,"Please fill out the current equipment's parameters before moving on.")
-				setButton.setChecked(False)
-			if p3c1A != "":
-				supply.Output_Toggle(p3c1A,nargout=0)
-			if p3c2A != "":
-				supply.Output_Toggle(p3c2A,nargout=0)
-			if p3c3A != "":
-				supply.Output_Toggle(p3c3A,nargout=0)
-			if p3c4A != "":
-				supply.Output_Toggle(p3c4A,nargout=0)
+
+	if setButton.isChecked() == True:
+		done = win.checkIfDone(checkDic)
+		if done:
+			flag = 0;
+			numberChannels = self.ui.noChannels_p3.currentIndex()
+			enabledSupply = self.ui.p3Enabled.currentIndex()
+			p3c1A = self.ui.p3c1Address.text()
+			p3c2A = self.ui.p3c2Address.text()
+			p3c3A = self.ui.p3c3Address.text()
+			p3c4A = self.ui.p3c4Address.text()
+
+			# set instrument params
+			if enabledSupply == 0 or enabledSupply == 2:
+				if enabledSupply == 2:
+					flag = 1;
+				if enabledSupply == 0:
+					instrParamErrorMessage(self,"Please fill out the current equipment's parameters before moving on.")
+					setButton.setChecked(False)
+				if p3c1A != "":
+					supply.Output_Toggle(p3c1A,nargout=0)
+				if p3c2A != "":
+					supply.Output_Toggle(p3c2A,nargout=0)
+				if p3c3A != "":
+					supply.Output_Toggle(p3c3A,nargout=0)
+				if p3c4A != "":
+					supply.Output_Toggle(p3c4A,nargout=0)
+			else:
+				if numberChannels == 0:
+					instrParamErrorMessage(self,"Please enable and set channel parameters if this supply is in use.")
+					setButton.setChecked(False)
+				elif numberChannels == 1:
+					flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,supply,str(self.ui.cNumberField_p3c1.currentText()))
+				elif numberChannels == 2:
+					flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,supply,str(self.ui.cNumberField_p3c1.currentText()))
+					flag = setSupplyParams(self,self.ui.p3c2Address,self.ui.p3c2Voltage,self.ui.p3c2Current,self.ui.p3c2PartNumber,self.ui.p3c2Equip,boxDone,supply,str(self.ui.cNumberField_p3c2.currentText()))
+				elif numberChannels == 3:
+					flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,supply,str(self.ui.cNumberField_p3c1.currentText()))
+					flag = setSupplyParams(self,self.ui.p3c2Address,self.ui.p3c2Voltage,self.ui.p3c2Current,self.ui.p3c2PartNumber,self.ui.p3c2Equip,boxDone,supply,str(self.ui.cNumberField_p3c2.currentText()))
+					flag = setSupplyParams(self,self.ui.p3c3Address,self.ui.p3c3Voltage,self.ui.p3c3Current,self.ui.p3c3PartNumber,self.ui.p3c3Equip,boxDone,supply,str(self.ui.cNumberField_p3c3.currentText()))
+				elif numberChannels == 4:
+					flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,supply,str(self.ui.cNumberField_p3c1.currentText()))
+					flag = setSupplyParams(self,self.ui.p3c2Address,self.ui.p3c2Voltage,self.ui.p3c2Current,self.ui.p3c2PartNumber,self.ui.p3c2Equip,boxDone,supply,str(self.ui.cNumberField_p3c2.currentText()))
+					flag = setSupplyParams(self,self.ui.p3c3Address,self.ui.p3c3Voltage,self.ui.p3c3Current,self.ui.p3c3PartNumber,self.ui.p3c3Equip,boxDone,supply,str(self.ui.cNumberField_p3c3.currentText()))
+					flag = setSupplyParams(self,self.ui.p3c4Address,self.ui.p3c4Voltage,self.ui.p3c4Current,self.ui.p3c4PartNumber,self.ui.p3c4Equip,boxDone,supply,str(self.ui.cNumberField_p3c4.currentText()))
+			
+			if flag == 1:
+				self.ui.p3Equip.setStyleSheet(boxDone)
+				setButton.setText("Unset")
+			
+				self.ui.power3Button_p3.setStyleSheet(buttonFocus)
+				self.ui.power3Button_p3_2.setStyleSheet(buttonFocus)
+				self.ui.power3NextStack.setCurrentIndex(1)
+				self.ui.power2NextStack.setCurrentIndex(0)
+				self.ui.power1NextStack.setCurrentIndex(3)
+				self.ui.saNextStack.setCurrentIndex(3)
+				self.ui.meterNextStack.setCurrentIndex(5)
+				self.ui.downNextStack.setCurrentIndex(6)
+				self.ui.vsaNextStack.setCurrentIndex(8)
+				self.ui.up_psg_next.setCurrentIndex(10)
+				self.ui.vsgNextSteps.setCurrentIndex(12)
+				setPrevP3Buttons(self,buttonHover)
 		else:
-			if numberChannels == 0:
-				instrParamErrorMessage(self,"Please enable and set channel parameters if this supply is in use.")
-				setButton.setChecked(False)
-			elif numberChannels == 1:
-				flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,supply,str(self.ui.cNumberField_p3c1.currentText()))
-			elif numberChannels == 2:
-				flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,supply,str(self.ui.cNumberField_p3c1.currentText()))
-				flag = setSupplyParams(self,self.ui.p3c2Address,self.ui.p3c2Voltage,self.ui.p3c2Current,self.ui.p3c2PartNumber,self.ui.p3c2Equip,boxDone,supply,str(self.ui.cNumberField_p3c2.currentText()))
-			elif numberChannels == 3:
-				flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,supply,str(self.ui.cNumberField_p3c1.currentText()))
-				flag = setSupplyParams(self,self.ui.p3c2Address,self.ui.p3c2Voltage,self.ui.p3c2Current,self.ui.p3c2PartNumber,self.ui.p3c2Equip,boxDone,supply,str(self.ui.cNumberField_p3c2.currentText()))
-				flag = setSupplyParams(self,self.ui.p3c3Address,self.ui.p3c3Voltage,self.ui.p3c3Current,self.ui.p3c3PartNumber,self.ui.p3c3Equip,boxDone,supply,str(self.ui.cNumberField_p3c3.currentText()))
-			elif numberChannels == 4:
-				flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,supply,str(self.ui.cNumberField_p3c1.currentText()))
-				flag = setSupplyParams(self,self.ui.p3c2Address,self.ui.p3c2Voltage,self.ui.p3c2Current,self.ui.p3c2PartNumber,self.ui.p3c2Equip,boxDone,supply,str(self.ui.cNumberField_p3c2.currentText()))
-				flag = setSupplyParams(self,self.ui.p3c3Address,self.ui.p3c3Voltage,self.ui.p3c3Current,self.ui.p3c3PartNumber,self.ui.p3c3Equip,boxDone,supply,str(self.ui.cNumberField_p3c3.currentText()))
-				flag = setSupplyParams(self,self.ui.p3c4Address,self.ui.p3c4Voltage,self.ui.p3c4Current,self.ui.p3c4PartNumber,self.ui.p3c4Equip,boxDone,supply,str(self.ui.cNumberField_p3c4.currentText()))
-		
-		if flag == 1:
-			self.ui.p3Equip.setStyleSheet(boxDone)
-			setButton.setText("Unset")
-		
-			self.ui.power3Button_p3.setStyleSheet(buttonFocus)
-			self.ui.power3Button_p3_2.setStyleSheet(buttonFocus)
-			self.ui.power3NextStack.setCurrentIndex(1)
-			self.ui.power2NextStack.setCurrentIndex(0)
-			self.ui.power1NextStack.setCurrentIndex(3)
-			self.ui.saNextStack.setCurrentIndex(3)
-			self.ui.meterNextStack.setCurrentIndex(5)
-			self.ui.downNextStack.setCurrentIndex(6)
-			self.ui.vsaNextStack.setCurrentIndex(8)
-			self.ui.up_psg_next.setCurrentIndex(10)
-			self.ui.vsgNextSteps.setCurrentIndex(12)
-			setPrevP3Buttons(self,buttonHover)
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)		
 	elif setButton.isChecked() == False:
 		self.ui.p3Equip.setStyleSheet(None)
 		unsetPrevP3Buttons(self,greyHover)
@@ -782,37 +910,47 @@ def setP3(self,boxDone,buttonFocus,buttonHover,supply,buttonSelect,greyHover,set
 		setButton.setText("Set")
 			
 def setVSAMeasDig(self,boxDone,buttonHover,buttonDone,setButton,supply):
+	checkDic=[
+		self.ui.centerFreq_vsaMeas,
+		self.ui.sampRate_vsaMeas,
+		self.ui.noFrameTimes_vsaMeas
+		]
 	vsaType = self.ui.vsaWorkflow_vsaMeas.currentIndex()
 	vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
 	if setButton.isChecked() == True:
-		setButton.setText("Unset")
-		# set MATLAB parameters
-		d={
-			"centerFreq": self.ui.centerFreq_vsaMeas.text(),
-			"sampRate": self.ui.sampRate_vsaMeas.text(),
-			"noFrames": self.ui.noFrameTimes_vsaMeas.text()
-		}
-		supply.Set_VSA_Meas_RXCal(d,nargout=0)
-		supply.Set_VSA_Meas_AWGCal(d,nargout=0)
-		
-		self.ui.vsaMeasGenEquip.setStyleSheet(boxDone)
-		self.ui.vsaMeasGenEquip_2.setStyleSheet(boxDone)
-		self.ui.vsaMeasDigEquip.setStyleSheet(boxDone)
-		self.ui.digMark_vsaMeas.setVisible(True)
-		self.ui.digMark_vsaMeas_2.setVisible(True)
-		# if no downconverter (no prompt to sa, only advanced setting)
-		if vsaType == 0:
-			self.ui.vsaMeasNextStack.setCurrentIndex(7)
-			if vsgType == 3: # vsg
-				self.ui.vsaMeasNextStack.setCurrentIndex(6)
-				setFocusAndHand(self,self.ui.vsgButton_vsaMeas,buttonHover)
-			else:
-				self.ui.vsaMeasNextStack.setCurrentIndex(5)
-				setFocusAndHand(self,self.ui.awgButton_vsaMeas,buttonHover)
-				setFocusAndHand(self,self.ui.awgButton_vsaMeas_2,buttonHover)
-				setFocusAndHand(self,self.ui.awgButton_vsaMeas_3,buttonHover)
-		elif vsaType == 1: # has down
-			self.ui.vsaMeasNextStack.setCurrentIndex(1)
+		done = win.checkIfDone(checkDic)
+		if done:
+			setButton.setText("Unset")
+			# set MATLAB parameters
+			d={
+				"centerFreq": self.ui.centerFreq_vsaMeas.text(),
+				"sampRate": self.ui.sampRate_vsaMeas.text(),
+				"noFrames": self.ui.noFrameTimes_vsaMeas.text()
+			}
+			supply.Set_VSA_Meas_RXCal(d,nargout=0)
+			supply.Set_VSA_Meas_AWGCal(d,nargout=0)
+			
+			self.ui.vsaMeasGenEquip.setStyleSheet(boxDone)
+			self.ui.vsaMeasGenEquip_2.setStyleSheet(boxDone)
+			self.ui.vsaMeasDigEquip.setStyleSheet(boxDone)
+			self.ui.digMark_vsaMeas.setVisible(True)
+			self.ui.digMark_vsaMeas_2.setVisible(True)
+			# if no downconverter (no prompt to sa, only advanced setting)
+			if vsaType == 0:
+				self.ui.vsaMeasNextStack.setCurrentIndex(7)
+				if vsgType == 3: # vsg
+					self.ui.vsaMeasNextStack.setCurrentIndex(6)
+					setFocusAndHand(self,self.ui.vsgButton_vsaMeas,buttonHover)
+				else:
+					self.ui.vsaMeasNextStack.setCurrentIndex(5)
+					setFocusAndHand(self,self.ui.awgButton_vsaMeas,buttonHover)
+					setFocusAndHand(self,self.ui.awgButton_vsaMeas_2,buttonHover)
+					setFocusAndHand(self,self.ui.awgButton_vsaMeas_3,buttonHover)
+			elif vsaType == 1: # has down
+				self.ui.vsaMeasNextStack.setCurrentIndex(1)
+		else:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)	
 	elif setButton.isChecked() == False:
 		self.ui.vsaMeasNextStack.setCurrentIndex(0)
 		self.ui.vsaMeasGenEquip.setStyleSheet(None)
@@ -827,50 +965,61 @@ def setVSAMeasDig(self,boxDone,buttonHover,buttonDone,setButton,supply):
 		setButton.setText("Set")
 		
 def setVSAMeasGen(self,boxDone,buttonHover,buttonDone,setButton,supply):
-	if setButton.isChecked() == True:
-		setButton.setText("Unset")
-
-		# set MATLAB parameters
-		d={
-			"centerFreq": self.ui.centerFreq_vsaMeas_2.text(),
-			"sampRate": self.ui.sampRate_vsaMeas_2.text(),
-			"noFrames": self.ui.noFrameTimes_vsaMeas_2.text()
-		}
-		supply.Set_VSA_Meas_RXCal(d,nargout=0)
+	checkDic=[
+			self.ui.centerFreq_vsaMeas_2,
+			self.ui.sampRate_vsaMeas_2,
+			self.ui.noFrameTimes_vsaMeas_2
+		]
 	
-		vsaType = self.ui.vsaWorkflow_vsaMeas.currentIndex()
-		vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
-		downType = self.ui.single_down_vsaMeas_stack.currentIndex()
-		analyzerType = self.ui.single_vsaMeas_stack.currentIndex()
-		self.ui.vsaMeasGenEquip.setStyleSheet(boxDone)
-		self.ui.vsaMeasGenEquip_2.setStyleSheet(boxDone)
-		if vsaType == 1:
-			if downType == 1: # scope
-				self.ui.scopeMark_vsaMeas.setVisible(True)
-				self.ui.scopeMark_vsaMeas_2.setVisible(True)
-			elif downType == 0: # dig
-				self.ui.digMark_vsaMeas.setVisible(True)
-				self.ui.digMark_vsaMeas_2.setVisible(True)
-		elif vsaType == 0:
-			if analyzerType == 1: # scope
-				self.ui.scopeMark_vsaMeas.setVisible(True)
-				self.ui.scopeMark_vsaMeas_2.setVisible(True)
-			elif analyzerType == 2: # dig
-				self.ui.digMark_vsaMeas.setVisible(True)
-				self.ui.digMark_vsaMeas_2.setVisible(True)
-			elif analyzerType == 3: # uxa
-				self.ui.uxaMark_vsaMeas.setVisible(True)
-			elif analyzerType == 4: # pxa
-				self.ui.pxaMark_vsaMeas.setVisible(True)
-			if vsgType == 3: # vsg
-				self.ui.vsaMeasNextStack.setCurrentIndex(6)
-				setFocusAndHand(self,self.ui.vsgButton_vsaMeas,buttonHover)
-			else:
-				self.ui.vsaMeasNextStack.setCurrentIndex(5)
-				setFocusAndHand(self,self.ui.awgButton_vsaMeas,buttonHover)
-				setFocusAndHand(self,self.ui.awgButton_vsaMeas_2,buttonHover)
-				setFocusAndHand(self,self.ui.awgButton_vsaMeas_3,buttonHover)
-			self.ui.vsaMeasNextStack.setCurrentIndex(1)
+	
+	if setButton.isChecked() == True:
+		done = win.checkIfDone(checkDic)
+		if done:
+			setButton.setText("Unset")
+			# set MATLAB parameters
+			d={
+				"centerFreq": self.ui.centerFreq_vsaMeas_2.text(),
+				"sampRate": self.ui.sampRate_vsaMeas_2.text(),
+				"noFrames": self.ui.noFrameTimes_vsaMeas_2.text()
+			}
+			supply.Set_VSA_Meas_RXCal(d,nargout=0)
+		
+			vsaType = self.ui.vsaWorkflow_vsaMeas.currentIndex()
+			vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
+			downType = self.ui.single_down_vsaMeas_stack.currentIndex()
+			analyzerType = self.ui.single_vsaMeas_stack.currentIndex()
+			self.ui.vsaMeasGenEquip.setStyleSheet(boxDone)
+			self.ui.vsaMeasGenEquip_2.setStyleSheet(boxDone)
+			if vsaType == 1:
+				if downType == 1: # scope
+					self.ui.scopeMark_vsaMeas.setVisible(True)
+					self.ui.scopeMark_vsaMeas_2.setVisible(True)
+				elif downType == 0: # dig
+					self.ui.digMark_vsaMeas.setVisible(True)
+					self.ui.digMark_vsaMeas_2.setVisible(True)
+			elif vsaType == 0:
+				if analyzerType == 1: # scope
+					self.ui.scopeMark_vsaMeas.setVisible(True)
+					self.ui.scopeMark_vsaMeas_2.setVisible(True)
+				elif analyzerType == 2: # dig
+					self.ui.digMark_vsaMeas.setVisible(True)
+					self.ui.digMark_vsaMeas_2.setVisible(True)
+				elif analyzerType == 3: # uxa
+					self.ui.uxaMark_vsaMeas.setVisible(True)
+				elif analyzerType == 4: # pxa
+					self.ui.pxaMark_vsaMeas.setVisible(True)
+				if vsgType == 3: # vsg
+					self.ui.vsaMeasNextStack.setCurrentIndex(6)
+					setFocusAndHand(self,self.ui.vsgButton_vsaMeas,buttonHover)
+				else:
+					self.ui.vsaMeasNextStack.setCurrentIndex(5)
+					setFocusAndHand(self,self.ui.awgButton_vsaMeas,buttonHover)
+					setFocusAndHand(self,self.ui.awgButton_vsaMeas_2,buttonHover)
+					setFocusAndHand(self,self.ui.awgButton_vsaMeas_3,buttonHover)
+				self.ui.vsaMeasNextStack.setCurrentIndex(1)
+		else:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)	
 	elif setButton.isChecked() == False:
 		self.ui.vsaMeasGenEquip.setStyleSheet(None)
 		self.ui.vsaMeasGenEquip_2.setStyleSheet(None)
@@ -901,70 +1050,100 @@ def setVSAMeasAdv(self,boxDone,setButton):
 		setButton.setText("Set")
 	
 def rxCalRoutine(self,boxDone,buttonHover,setButton,supply):
-	if setButton.isChecked() == True:
-		setButton.setText("Unset")
-		
-		# set matlab parameters
-		combDict = {
-			"rfSpacing" : self.ui.rfSpacingField_comb.text(),
-			"ifSpacing" : self.ui.ifSpacingField_comb.text(),
-			"refFile" : self.ui.refFileField_comb.text(),
-			"rfCenterFreq" :self.ui.rfCenterFreqField_comb.text(),
-			"rfCalStartFreq" : self.ui.rfCalStartFreqField_comb.text(),
-			"rfCalStopFreq" : self.ui.rfCalStopFreqField_comb.text(),
-			"loFreqOffset" : self.ui.loFreqOffsetField_comb.text(),
-			"saveLoc" : self.ui.vsaCalSaveLocField_comb.text(),
-			"subRate" : self.ui.subrateField_comb.currentIndex(),
-			"freqRes" : self.ui.freqResField_comb.text(),
-			"despurFlag" : self.ui.despurFlagField_comb.currentIndex(),
-			"spurStart" : self.ui.spurStartField_comb.text(),
-			"spurSpacing" : self.ui.spurSpacingField_comb.text(),
-			"spurEnd" : self.ui.spurEndField_comb.text(),
-			"smoothFlag" : self.ui.smoothFlagField_comb.currentIndex(),
-			"smoothOrder" : self.ui.smoothOrderField_comb.text()
-		}
-		supply.Set_VSA_Calibration(combDict,nargout=0)
-		downDict = {
-			"rfCenterFreq" : self.ui.rfCenterFreq_down.text(),
-			"ifCenterFreq" : self.ui.ifCenterFreq_down.text(),
-			"loFreq" : self.ui.loFreq_down.text(),
-			"mirrorFlag" : self.ui.mirrorFlag_down.currentIndex(),
-			"trigAmp": self.ui.trigAmp_down.text()
-		}
-		supply.Set_Down_Calibration(downDict,nargout=0)
-		
-		vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
-		if vsgType == 3: # vsg
-			self.ui.vsaMeasNextStack.setCurrentIndex(6)
-			setFocusAndHand(self,self.ui.vsgButton_vsaMeas,buttonHover)
-		else:
-			self.ui.vsaMeasNextStack.setCurrentIndex(5)
-			setFocusAndHand(self,self.ui.awgButton_vsaMeas,buttonHover)
-			setFocusAndHand(self,self.ui.awgButton_vsaMeas_2,buttonHover)
-			setFocusAndHand(self,self.ui.awgButton_vsaMeas_3,buttonHover)
-		self.ui.combEquip_vsaMeas.setStyleSheet(boxDone)
-		self.ui.downEquip_vsaMeas.setStyleSheet(boxDone)
-		self.ui.rxEquip_vsaMeas.setStyleSheet(boxDone)
-		self.ui.trigEquip_vsaMeas.setStyleSheet(boxDone)
-		self.ui.vsaResultsStack_vsaMeas.setCurrentIndex(0)
-		self.ui.vsaResultsStack_vsgMeas.setCurrentIndex(0)
-		self.ui.vsaCalResultsStack_algo.setCurrentIndex(0)
-		self.ui.debugVSAStack.setCurrentIndex(0)
-		self.ui.downMark_vsaMeas.setVisible(True)
-		self.ui.downMark_vsgMeas.setVisible(True)
-		self.progressBar = QProgressBar()
-		self.progressBar.setRange(1,10);
-		self.progressBar.setTextVisible(True);
-		self.progressBar.setFormat("Currently Running: RX Calibration Routine")
-		self.ui.statusBar.addWidget(self.progressBar,1)
-		completed = 0
-		while completed < 100:
-			completed = completed + 0.00001
-			self.progressBar.setValue(completed)
-		self.ui.statusBar.removeWidget(self.progressBar)
-		# to show progress bar, need both addWidget() and show()
-		self.ui.statusBar.showMessage("RX Calibration Routine Complete",3000)
+	checkDic[
+		#comb
+		self.ui.rfSpacingField_comb,
+		self.ui.ifSpacingField_comb,
+		self.ui.refFileField_comb,
+		self.ui.rfCenterFreqField_comb,
+		self.ui.rfCalStartFreqField_comb,
+		self.ui.rfCalStopFreqField_comb,
+		self.ui.loFreqOffsetField_comb,
+		self.ui.vsaCalSaveLocField_comb,
+		self.ui.subrateField_comb,
+		self.ui.freqResField_comb,
+		self.ui.despurFlagField_comb,
+		self.ui.spurStartField_comb,
+		self.ui.spurSpacingField_comb,
+		self.ui.spurEndField_comb,
+		self.ui.smoothFlagField_comb,
+		self.ui.smoothOrderField_comb,
+		#other
+		self.ui.rfCenterFreq_down,
+		self.ui.ifCenterFreq_down,
+		self.ui.loFreq_down,
+		self.ui.mirrorFlag_down,
+		self.ui.trigAmp_down
+	]
 
+	if setButton.isChecked() == True:
+		done = win.checkIfDone(checkDic)
+		if done:
+			setButton.setText("Unset")
+			
+			# set matlab parameters
+			combDict = {
+				"rfSpacing" : self.ui.rfSpacingField_comb.text(),
+				"ifSpacing" : self.ui.ifSpacingField_comb.text(),
+				"refFile" : self.ui.refFileField_comb.text(),
+				"rfCenterFreq" :self.ui.rfCenterFreqField_comb.text(),
+				"rfCalStartFreq" : self.ui.rfCalStartFreqField_comb.text(),
+				"rfCalStopFreq" : self.ui.rfCalStopFreqField_comb.text(),
+				"loFreqOffset" : self.ui.loFreqOffsetField_comb.text(),
+				"saveLoc" : self.ui.vsaCalSaveLocField_comb.text(),
+				"subRate" : self.ui.subrateField_comb.currentIndex(),
+				"freqRes" : self.ui.freqResField_comb.text(),
+				"despurFlag" : self.ui.despurFlagField_comb.currentIndex(),
+				"spurStart" : self.ui.spurStartField_comb.text(),
+				"spurSpacing" : self.ui.spurSpacingField_comb.text(),
+				"spurEnd" : self.ui.spurEndField_comb.text(),
+				"smoothFlag" : self.ui.smoothFlagField_comb.currentIndex(),
+				"smoothOrder" : self.ui.smoothOrderField_comb.text()
+			}
+			supply.Set_VSA_Calibration(combDict,nargout=0)
+			downDict = {
+				"rfCenterFreq" : self.ui.rfCenterFreq_down.text(),
+				"ifCenterFreq" : self.ui.ifCenterFreq_down.text(),
+				"loFreq" : self.ui.loFreq_down.text(),
+				"mirrorFlag" : self.ui.mirrorFlag_down.currentIndex(),
+				"trigAmp": self.ui.trigAmp_down.text()
+			}
+			supply.Set_Down_Calibration(downDict,nargout=0)
+			
+			vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
+			if vsgType == 3: # vsg
+				self.ui.vsaMeasNextStack.setCurrentIndex(6)
+				setFocusAndHand(self,self.ui.vsgButton_vsaMeas,buttonHover)
+			else:
+				self.ui.vsaMeasNextStack.setCurrentIndex(5)
+				setFocusAndHand(self,self.ui.awgButton_vsaMeas,buttonHover)
+				setFocusAndHand(self,self.ui.awgButton_vsaMeas_2,buttonHover)
+				setFocusAndHand(self,self.ui.awgButton_vsaMeas_3,buttonHover)
+			self.ui.combEquip_vsaMeas.setStyleSheet(boxDone)
+			self.ui.downEquip_vsaMeas.setStyleSheet(boxDone)
+			self.ui.rxEquip_vsaMeas.setStyleSheet(boxDone)
+			self.ui.trigEquip_vsaMeas.setStyleSheet(boxDone)
+			self.ui.vsaResultsStack_vsaMeas.setCurrentIndex(0)
+			self.ui.vsaResultsStack_vsgMeas.setCurrentIndex(0)
+			self.ui.vsaCalResultsStack_algo.setCurrentIndex(0)
+			self.ui.debugVSAStack.setCurrentIndex(0)
+			self.ui.downMark_vsaMeas.setVisible(True)
+			self.ui.downMark_vsgMeas.setVisible(True)
+			self.progressBar = QProgressBar()
+			self.progressBar.setRange(1,10);
+			self.progressBar.setTextVisible(True);
+			self.progressBar.setFormat("Currently Running: RX Calibration Routine")
+			self.ui.statusBar.addWidget(self.progressBar,1)
+			completed = 0
+			while completed < 100:
+				completed = completed + 0.00001
+				self.progressBar.setValue(completed)
+			self.ui.statusBar.removeWidget(self.progressBar)
+			# to show progress bar, need both addWidget() and show()
+			self.ui.statusBar.showMessage("RX Calibration Routine Complete",3000)
+		else:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)		
 	elif setButton.isChecked() == False:
 		self.ui.combEquip_vsaMeas.setStyleSheet(None)
 		self.ui.downEquip_vsaMeas.setStyleSheet(None)
@@ -977,39 +1156,51 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton,supply):
 		setButton.setText("Set && Run")
 		
 def noRXCalRoutine(self,boxDone,buttonHover,setButton,supply):
+	checkDic[
+		self.ui.rfCenterFreq_down,
+		self.ui.ifCenterFreq_down,
+		self.ui.loFreq_down.text(),
+		self.ui.mirrorFlag_down,
+		self.ui.trigAmp_down,
+		self.ui.vsaCalFileField_comb
+	]
 	if setButton.isChecked() == True:
-		# set matlab parameters
-		vsaCalFile = self.ui.vsaCalFileField_comb.text()
-		supply.Set_VSA_CalFile(vsaCalFile,nargout=0)
-		downDict = {
-			"rfCenterFreq" : self.ui.rfCenterFreq_down.text(),
-			"ifCenterFreq" : self.ui.ifCenterFreq_down.text(),
-			"loFreq" : self.ui.loFreq_down.text(),
-			"mirrorFlag" : self.ui.mirrorFlag_down.currentIndex(),
-			"trigAmp": self.ui.trigAmp_down.text()
-		}
-		supply.Set_Down_Calibration(downDict,nargout=0)
-		setButton.setText("Unset")
+		done = win.checkIfDone(checkDic)
+		if done:
+			# set matlab parameters
+			vsaCalFile = self.ui.vsaCalFileField_comb.text()
+			supply.Set_VSA_CalFile(vsaCalFile,nargout=0)
+			downDict = {
+				"rfCenterFreq" : self.ui.rfCenterFreq_down.text(),
+				"ifCenterFreq" : self.ui.ifCenterFreq_down.text(),
+				"loFreq" : self.ui.loFreq_down.text(),
+				"mirrorFlag" : self.ui.mirrorFlag_down.currentIndex(),
+				"trigAmp": self.ui.trigAmp_down.text()
+			}
+			supply.Set_Down_Calibration(downDict,nargout=0)
+			setButton.setText("Unset")
 
-		vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
-		self.ui.combEquip_vsaMeas.setStyleSheet(boxDone)
-		self.ui.downEquip_vsaMeas.setStyleSheet(boxDone)
-		self.ui.rxEquip_vsaMeas.setStyleSheet(boxDone)
-		self.ui.trigEquip_vsaMeas.setStyleSheet(boxDone)
-		self.ui.vsaResultsStack_vsaMeas.setCurrentIndex(0)
-		self.ui.vsaResultsStack_vsgMeas.setCurrentIndex(0)
-		self.ui.vsaCalResultsStack_algo.setCurrentIndex(0)
-		self.ui.downMark_vsaMeas.setVisible(True)
-		self.ui.downMark_vsgMeas.setVisible(True)
-		if vsgType == 3: # vsg
-			self.ui.vsaMeasNextStack.setCurrentIndex(6)
-			setFocusAndHand(self,self.ui.vsgButton_vsaMeas,buttonHover)
+			vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
+			self.ui.combEquip_vsaMeas.setStyleSheet(boxDone)
+			self.ui.downEquip_vsaMeas.setStyleSheet(boxDone)
+			self.ui.rxEquip_vsaMeas.setStyleSheet(boxDone)
+			self.ui.trigEquip_vsaMeas.setStyleSheet(boxDone)
+			self.ui.vsaResultsStack_vsaMeas.setCurrentIndex(0)
+			self.ui.vsaResultsStack_vsgMeas.setCurrentIndex(0)
+			self.ui.vsaCalResultsStack_algo.setCurrentIndex(0)
+			self.ui.downMark_vsaMeas.setVisible(True)
+			self.ui.downMark_vsgMeas.setVisible(True)
+			if vsgType == 3: # vsg
+				self.ui.vsaMeasNextStack.setCurrentIndex(6)
+				setFocusAndHand(self,self.ui.vsgButton_vsaMeas,buttonHover)
+			else:
+				self.ui.vsaMeasNextStack.setCurrentIndex(5)
+				setFocusAndHand(self,self.ui.awgButton_vsaMeas,buttonHover)
+				setFocusAndHand(self,self.ui.awgButton_vsaMeas_2,buttonHover)
+				setFocusAndHand(self,self.ui.awgButton_vsaMeas_3,buttonHover)
 		else:
-			self.ui.vsaMeasNextStack.setCurrentIndex(5)
-			setFocusAndHand(self,self.ui.awgButton_vsaMeas,buttonHover)
-			setFocusAndHand(self,self.ui.awgButton_vsaMeas_2,buttonHover)
-			setFocusAndHand(self,self.ui.awgButton_vsaMeas_3,buttonHover)
-
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)			
 	elif setButton.isChecked() == False:
 		self.ui.combEquip_vsaMeas.setStyleSheet(None)
 		self.ui.downEquip_vsaMeas.setStyleSheet(None)
@@ -1021,68 +1212,97 @@ def noRXCalRoutine(self,boxDone,buttonHover,setButton,supply):
 		setButton.setText("Set")
 		
 def awgCalRoutine(self,boxDone,setButton,supply):
+	checkDic[
+		self.ui.noIterations_awgCal,
+		self.ui.toneSpacing_awgCal,
+		self.ui.startFreq_awgCal,
+		self.ui.endFreq_awgCal,
+		self.ui.realBasisFlag_awgCal,
+		self.ui.phaseDistr_awgCal,
+		self.ui.freqRes_awgCal,
+		self.ui.awgCalSaveLocField_vsgMeas,
+		
+		self.ui.centerFreq_awgCal,
+		self.ui.ampCorrection_awgCal,
+		self.ui.ampCorrFile_vsgMeas,
+		self.ui.vfs_awgCal,
+		self.ui.trigAmp_awgCal,
+		self.ui.sampleClockFreq_awgCal,
+		
+		self.ui.mirrorFlag_awgCal,
+		self.ui.noRXPeriods_awgCal,
+		self.ui.downFilterFileField_vsgMeas,
+		self.ui.noTXPeriods_awgCal,
+		self.ui.awgChannel_awgCal,
+		self.ui.useVSACal_awgCal,
+		self.ui.vsaCalFileField_vsgMeas
+	]
 	if setButton.isChecked() == True:
-		# Set MATLAB Parameters
-		dAWGCal= {
-			"noIterations" : self.ui.noIterations_awgCal.text(),
-			"toneSpacing" : self.ui.toneSpacing_awgCal.text(),
-			"startFreq" : self.ui.startFreq_awgCal.text(),
-			"endFreq" : self.ui.endFreq_awgCal.text(),
-			"realFlag" : self.ui.realBasisFlag_awgCal.text(),
-			"phaseDistr" : self.ui.phaseDistr_awgCal.text(),
-			"freqRes" : self.ui.freqRes_awgCal.text(),
-			"saveLoc" : self.ui.awgCalSaveLocField_vsgMeas.text()
-		}
-		supply.Set_AWG_Calibration(dAWGCal,nargout=0)
-		dAWGCalGen={
-			"centerFreq" : self.ui.centerFreq_awgCal.text(),
-			"ampCorr" : self.ui.ampCorrection_awgCal.currentIndex(),
-			"ampCorrFile" : self.ui.ampCorrFile_vsgMeas.text(),
-			"vfs" : self.ui.vfs_awgCal.text(),
-			"trigAmp" : self.ui.trigAmp_awgCal.text(),
-			"clkFreq" : self.ui.sampleClockFreq_awgCal.text()
-		}
-		supply.Set_AWGCal_General(dAWGCalGen,nargout=0)
-		dAWGCalParams={
-			"mirror" : self.ui.mirrorFlag_awgCal.currentIndex(),
-			"noRXPeriods" : self.ui.noRXPeriods_awgCal.text(),
-			"downFile" : self.ui.downFilterFileField_vsgMeas.text(),
-			"noTXPeriods" : self.ui.noTXPeriods_awgCal.text(),
-			"awgChannel" : self.ui.awgChannel_awgCal.text(),
-			"vsaCalEnabled" : self.ui.useVSACal_awgCal.currentIndex(),
-			"vsaCalFile" : self.ui.vsaCalFileField_vsgMeas.text()
-		}
-		supply.Set_AWGCal_Settings(dAWGCalParams,nargout=0)
-		
-		setButton.setText("Unset")
-		
-		self.ui.awgEquip_vsgMeas.setStyleSheet(boxDone)
-		self.ui.rxEquip_vsgMeas.setStyleSheet(boxDone)
-		self.ui.vsgEquip_vsgMeas.setStyleSheet(boxDone)
-		self.ui.calEquip_vsgMeas.setStyleSheet(boxDone)
-		self.ui.awgCalEquip_vsgMeas.setStyleSheet(boxDone)
-		self.ui.vsgMeasNextStack.setCurrentIndex(5)
-		self.ui.debugVSGStack.setCurrentIndex(0)
-		self.ui.vsgResultsFileStack_vsgMeas.setCurrentIndex(1)
-		self.ui.vsgCalPaths_algo.setCurrentIndex(1)
-		self.ui.vsgResultsStack_vsgMeas.setCurrentIndex(0)
-		self.ui.awgMark_vsgMeas.setVisible(True)
-		self.ui.awgMark_vsgMeas_2.setVisible(True)
-		self.ui.awgMark_vsgMeas_3.setVisible(True)
-		
-		self.progressBar = QProgressBar()
-		self.progressBar.setRange(1,10);
-		self.progressBar.setTextVisible(True);
-		self.progressBar.setFormat("Currently Running: AWG Calibration Routine")
-		self.ui.statusBar.addWidget(self.progressBar,1)
-		completed = 0
-		while completed < 100:
-			completed = completed + 0.00001
-			self.progressBar.setValue(completed)
-		self.ui.statusBar.removeWidget(self.progressBar)
-		# to show progress bar, need both addWidget() and show()
-		self.ui.statusBar.showMessage("AWG Calibration Routine Complete",3000)
-		
+		done = win.checkIfDone(checkDic)
+		if done:
+			# Set MATLAB Parameters
+			dAWGCal= {
+				"noIterations" : self.ui.noIterations_awgCal.text(),
+				"toneSpacing" : self.ui.toneSpacing_awgCal.text(),
+				"startFreq" : self.ui.startFreq_awgCal.text(),
+				"endFreq" : self.ui.endFreq_awgCal.text(),
+				"realFlag" : self.ui.realBasisFlag_awgCal.text(),
+				"phaseDistr" : self.ui.phaseDistr_awgCal.text(),
+				"freqRes" : self.ui.freqRes_awgCal.text(),
+				"saveLoc" : self.ui.awgCalSaveLocField_vsgMeas.text()
+			}
+			supply.Set_AWG_Calibration(dAWGCal,nargout=0)
+			dAWGCalGen={
+				"centerFreq" : self.ui.centerFreq_awgCal.text(),
+				"ampCorr" : self.ui.ampCorrection_awgCal.currentIndex(),
+				"ampCorrFile" : self.ui.ampCorrFile_vsgMeas.text(),
+				"vfs" : self.ui.vfs_awgCal.text(),
+				"trigAmp" : self.ui.trigAmp_awgCal.text(),
+				"clkFreq" : self.ui.sampleClockFreq_awgCal.text()
+			}
+			supply.Set_AWGCal_General(dAWGCalGen,nargout=0)
+			dAWGCalParams={
+				"mirror" : self.ui.mirrorFlag_awgCal.currentIndex(),
+				"noRXPeriods" : self.ui.noRXPeriods_awgCal.text(),
+				"downFile" : self.ui.downFilterFileField_vsgMeas.text(),
+				"noTXPeriods" : self.ui.noTXPeriods_awgCal.text(),
+				"awgChannel" : self.ui.awgChannel_awgCal.text(),
+				"vsaCalEnabled" : self.ui.useVSACal_awgCal.currentIndex(),
+				"vsaCalFile" : self.ui.vsaCalFileField_vsgMeas.text()
+			}
+			supply.Set_AWGCal_Settings(dAWGCalParams,nargout=0)
+			
+			setButton.setText("Unset")
+			
+			self.ui.awgEquip_vsgMeas.setStyleSheet(boxDone)
+			self.ui.rxEquip_vsgMeas.setStyleSheet(boxDone)
+			self.ui.vsgEquip_vsgMeas.setStyleSheet(boxDone)
+			self.ui.calEquip_vsgMeas.setStyleSheet(boxDone)
+			self.ui.awgCalEquip_vsgMeas.setStyleSheet(boxDone)
+			self.ui.vsgMeasNextStack.setCurrentIndex(5)
+			self.ui.debugVSGStack.setCurrentIndex(0)
+			self.ui.vsgResultsFileStack_vsgMeas.setCurrentIndex(1)
+			self.ui.vsgCalPaths_algo.setCurrentIndex(1)
+			self.ui.vsgResultsStack_vsgMeas.setCurrentIndex(0)
+			self.ui.awgMark_vsgMeas.setVisible(True)
+			self.ui.awgMark_vsgMeas_2.setVisible(True)
+			self.ui.awgMark_vsgMeas_3.setVisible(True)
+			
+			self.progressBar = QProgressBar()
+			self.progressBar.setRange(1,10);
+			self.progressBar.setTextVisible(True);
+			self.progressBar.setFormat("Currently Running: AWG Calibration Routine")
+			self.ui.statusBar.addWidget(self.progressBar,1)
+			completed = 0
+			while completed < 100:
+				completed = completed + 0.00001
+				self.progressBar.setValue(completed)
+			self.ui.statusBar.removeWidget(self.progressBar)
+			# to show progress bar, need both addWidget() and show()
+			self.ui.statusBar.showMessage("AWG Calibration Routine Complete",3000)
+		else:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)			
 	elif setButton.isChecked() == False:
 		setButton.setText("Set && Run")
 		self.ui.awgEquip_vsgMeas.setStyleSheet(None)
@@ -1096,27 +1316,40 @@ def awgCalRoutine(self,boxDone,setButton,supply):
 		self.ui.debugVSGStack.setCurrentIndex(2)
 		
 def noAWGCalRoutine(self,boxDone,setButton,supply):
+	checkDic[
+		self.ui.centerFreq_awgCal_2,
+		self.ui.ampCorrection_awgCal_2,
+		self.ui.ampCorrFileField_vsgMeas,
+		self.ui.vfs_awgCal_2,
+		self.ui.trigAmp_awgCal_2,
+		self.ui.sampleClockFreq_awgCal_2
+	]
 	if setButton.isChecked() == True:
-		# Set MATLAB parameter
-		awgFile = self.ui.awgCalFileField_vsgMeas_2.text()
-		supply.Set_AWG_CalFile(awgFile,nargout=0)
-		dAWGCalGen={
-			"centerFreq" : self.ui.centerFreq_awgCal_2.text(),
-			"ampCorr" : self.ui.ampCorrection_awgCal_2.currentIndex(),
-			"ampCorrFile" : self.ui.ampCorrFileField_vsgMeas.text(),
-			"vfs" : self.ui.vfs_awgCal_2.text(),
-			"trigAmp" : self.ui.trigAmp_awgCal_2.text(),
-			"clkFreq" : self.ui.sampleClockFreq_awgCal_2.text(),
-		}
-		supply.Set_AWGCal_General(dAWGCalGen,nargout=0)
-		
-		setButton.setText("Unset")
-		self.ui.awgEquip_vsgMeas_2.setStyleSheet(boxDone)
-		self.ui.awgCalEquip_vsgMeas_2.setStyleSheet(boxDone)
-		self.ui.vsgMeasNextStack.setCurrentIndex(5)
-		self.ui.awgMark_vsgMeas.setVisible(True)
-		self.ui.awgMark_vsgMeas_2.setVisible(True)
-		self.ui.awgMark_vsgMeas_3.setVisible(True)
+		done = win.checkIfDone(checkDic)
+		if done:
+			# Set MATLAB parameter
+			awgFile = self.ui.awgCalFileField_vsgMeas_2.text()
+			supply.Set_AWG_CalFile(awgFile,nargout=0)
+			dAWGCalGen={
+				"centerFreq" : self.ui.centerFreq_awgCal_2.text(),
+				"ampCorr" : self.ui.ampCorrection_awgCal_2.currentIndex(),
+				"ampCorrFile" : self.ui.ampCorrFileField_vsgMeas.text(),
+				"vfs" : self.ui.vfs_awgCal_2.text(),
+				"trigAmp" : self.ui.trigAmp_awgCal_2.text(),
+				"clkFreq" : self.ui.sampleClockFreq_awgCal_2.text(),
+			}
+			supply.Set_AWGCal_General(dAWGCalGen,nargout=0)
+			
+			setButton.setText("Unset")
+			self.ui.awgEquip_vsgMeas_2.setStyleSheet(boxDone)
+			self.ui.awgCalEquip_vsgMeas_2.setStyleSheet(boxDone)
+			self.ui.vsgMeasNextStack.setCurrentIndex(5)
+			self.ui.awgMark_vsgMeas.setVisible(True)
+			self.ui.awgMark_vsgMeas_2.setVisible(True)
+			self.ui.awgMark_vsgMeas_3.setVisible(True)
+		else:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)
 	elif setButton.isChecked() == False:
 		setButton.setText("Set")
 		self.ui.awgEquip_vsgMeas_2.setStyleSheet(None)
@@ -1126,6 +1359,7 @@ def noAWGCalRoutine(self,boxDone,setButton,supply):
 		self.ui.awgMark_vsgMeas_3.setVisible(False)
 		self.ui.vsgMeasNextStack.setCurrentIndex(4)
 		self.ui.debugVSGStack.setCurrentIndex(2)
+		
 		
 def setAdvAWGVSA_vsgMeas(self,boxDone,setButton):
 	if setButton.isChecked() == True:
@@ -1727,10 +1961,10 @@ def setSpectrumAnalyzerParams(self,dictionary,partNum,supply,equipBox,boxDone,mo
 		equipBox.setStyleSheet(boxDone)
 		flag = 1
 		return flag
-	# elif dictionary.address == "":
-		# equipBox.setStyleSheet(boxDone)
-		# flag = 1
-		# return flag
+	elif dictionary["address"] == "":
+		equipBox.setStyleSheet(boxDone)
+		flag = 1
+		return flag
 	else:
 		instrParamErrorMessage(self,error)
 		self.ui.saSet.setChecked(False)
@@ -1747,10 +1981,10 @@ def setPowerMeterParams(self,dictionary,partNum,equipBox,boxDone,supply):
 		equipBox.setStyleSheet(boxDone)
 		flag = 1
 		return flag
-	# elif dictionary.address == "":
-		# equipBox.setStyleSheet(boxDone)
-		# flag = 1
-		# return flag
+	elif dictionary["address"] == "":
+		equipBox.setStyleSheet(boxDone)
+		flag = 1
+		return flag
 	else:
 		instrParamErrorMessage(self,error)
 		#self.ui.meterSet.setChecked(False)

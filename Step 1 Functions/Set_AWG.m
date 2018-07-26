@@ -6,7 +6,7 @@ function result = Set_AWG(dict)
     % command expert)
     
     % add relevant folders to path
-    addpath(".\InstrumentFunctions\M8190A")
+    addpath('.\InstrumentFunctions\M8190A')
     
     % initialize variables
     refSrc = "";

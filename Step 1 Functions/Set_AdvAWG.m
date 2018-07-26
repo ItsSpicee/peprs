@@ -10,7 +10,7 @@ function error = Set_AdvAWG(dict)
     end
     
     % add relevant folders to path
-    addpath(".\RX Calibration\InstrumentFunctions\M8190A")
+    addpath('.\RX Calibration\InstrumentFunctions\M8190A')
     
     % connect to instrument
     load('arbConfig.mat');

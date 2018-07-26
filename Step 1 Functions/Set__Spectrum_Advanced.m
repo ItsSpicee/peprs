@@ -4,7 +4,7 @@ function result = Set__Spectrum_Advanced(dict)
 	partNum = " ";
 
 	try
-		load(".\InstrumentFunctions\SignalCapture_UXA\UXAConfig.mat")
+		load('.\InstrumentFunctions\SignalCapture_UXA\UXAConfig.mat')
 		spectrum = visa('agilent',dict.address);
 		spectrum.InputBufferSize = 8388608;
 		spectrum.ByteOrder = 'littleEndian';
