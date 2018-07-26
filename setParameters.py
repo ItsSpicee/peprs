@@ -216,65 +216,84 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 		if averaging != 0 or avgEnabled == False:
 			if demod != 0:
 				if typeIdx == 3 or typeIdx == 4: # UXA & PXA
-
-					# set matlab parameters
-					dUXA={
-						"analysisBW": self.ui.analysisBandwidth_sa.text(),
-						"address": self.ui.address_sa.text(),
-						"atten": self.ui.attenuation_sa.text(),
-						"clockRef": self.ui.clockRef_sa.currentIndex(),
-						"trigLevel": self.ui.trigLevel_sa.text()
-					}
-					supply.Set_Cal_UXAParams(dUXA,"RX",nargout=0)
-					supply.Set_Cal_UXAParams(dUXA,"AWG",nargout=0)
-				
-				
-					dAllUXA={
-						"averaging" : self.ui.averagingEnable.currentIndex(),
-						"noAverages": self.ui.noAveragesField_sa.text(),
-						"atten": self.ui.attenuation_sa.text(),
-						"freq": self.ui.freq_sa.text(),
-						"analysisBW": self.ui.analysisBandwidth_sa.text(),
-						"clockRef": self.ui.clockRef_sa.currentIndex(),
-						"trigLevel": self.ui.trigLevel_sa.text(),
-						"trigSource": self.ui.trigSource_sa.currentIndex(),
-						"address": self.ui.address_sa.text()	
-					}
-					if typeIdx == 3:
-						result = supply.Set_VSA_UXA(dAllUXA,"UXA",nargout=1)
-					elif typeIdx == 4:
-						result = supply.Set_VSA_UXA(dAllUXA,"PXA",nargout=1)
-					result = result.split(";")
-					partNum = result[0]
-					error = result[1]
-					if error == "":
-						self.ui.partNum_sa.setText(partNum);
-						flag = 1;
-					else:
-						instrParamErrorMessage(self,error)
-						self.ui.awgSetGeneral.setChecked(False)
+					checkDic[
+						self.ui.analysisBandwidth_sa,
+						self.ui.address_sa,
+						self.ui.attenuation_sa,
+						self.ui.clockRef_sa,
+						self.ui.trigLevel_sa,
+						self.ui.averagingEnable,
+						self.ui.noAveragesField_sa,
+						self.ui.attenuation_sa,
+						self.ui.freq_sa,
+						self.ui.analysisBandwidth_sa,
+						self.ui.clockRef_sa,
+						self.ui.trigLevel_sa,
+						self.ui.trigSource_sa,
+						self.ui.address_sa,
+					]
+					done = win.checkIfDone(checkDic)
+					if done:
+						# set matlab parameters
+						dUXA={
+							"analysisBW": self.ui.analysisBandwidth_sa.text(),
+							"address": self.ui.address_sa.text(),
+							"atten": self.ui.attenuation_sa.text(),
+							"clockRef": self.ui.clockRef_sa.currentIndex(),
+							"trigLevel": self.ui.trigLevel_sa.text()
+						}
+						supply.Set_Cal_UXAParams(dUXA,"RX",nargout=0)
+						supply.Set_Cal_UXAParams(dUXA,"AWG",nargout=0)
 					
-					if flag:
-						setButton.setText("Unset")
+					
+						dAllUXA={
+							"averaging" : self.ui.averagingEnable.currentIndex(),
+							"noAverages": self.ui.noAveragesField_sa.text(),
+							"atten": self.ui.attenuation_sa.text(),
+							"freq": self.ui.freq_sa.text(),
+							"analysisBW": self.ui.analysisBandwidth_sa.text(),
+							"clockRef": self.ui.clockRef_sa.currentIndex(),
+							"trigLevel": self.ui.trigLevel_sa.text(),
+							"trigSource": self.ui.trigSource_sa.currentIndex(),
+							"address": self.ui.address_sa.text()	
+						}
+						if typeIdx == 3:
+							result = supply.Set_VSA_UXA(dAllUXA,"UXA",nargout=1)
+						elif typeIdx == 4:
+							result = supply.Set_VSA_UXA(dAllUXA,"PXA",nargout=1)
+						result = result.split(";")
+						partNum = result[0]
+						error = result[1]
+						if error == "":
+							self.ui.partNum_sa.setText(partNum);
+							flag = 1;
+						else:
+							instrParamErrorMessage(self,error)
+							self.ui.awgSetGeneral.setChecked(False)
 						
-						# style mod related widgets
-						self.ui.uxaEquipGeneralVSA.setStyleSheet(boxDone)
-						demod = self.ui.uxaMod.isEnabled()
-						if demod:
-							setAllDemod(self,boxDone)
-							self.ui.modButton_vsa.setStyleSheet(buttonFocus)
-						self.ui.vsaNextStack.setCurrentIndex(3)
-						self.ui.vsgNextSteps.setCurrentIndex(7)
-						self.ui.up_psg_next.setCurrentIndex(5)
-						if typeIdx == 3: #UXA
-							self.ui.uxaButton_vsa.setStyleSheet(buttonFocus)
-							self.ui.uxaButton_vsa_2.setStyleSheet(buttonFocus)
-							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)			
-						elif typeIdx == 4: #PXA
-							self.ui.pxaButton_vsa.setStyleSheet(buttonFocus)
-							self.ui.pxaButton_vsa_2.setStyleSheet(buttonFocus)
-							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)
+						if flag:
+							setButton.setText("Unset")
 							
+							# style mod related widgets
+							self.ui.uxaEquipGeneralVSA.setStyleSheet(boxDone)
+							demod = self.ui.uxaMod.isEnabled()
+							if demod:
+								setAllDemod(self,boxDone)
+								self.ui.modButton_vsa.setStyleSheet(buttonFocus)
+							self.ui.vsaNextStack.setCurrentIndex(3)
+							self.ui.vsgNextSteps.setCurrentIndex(7)
+							self.ui.up_psg_next.setCurrentIndex(5)
+							if typeIdx == 3: #UXA
+								self.ui.uxaButton_vsa.setStyleSheet(buttonFocus)
+								self.ui.uxaButton_vsa_2.setStyleSheet(buttonFocus)
+								setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)			
+							elif typeIdx == 4: #PXA
+								self.ui.pxaButton_vsa.setStyleSheet(buttonFocus)
+								self.ui.pxaButton_vsa_2.setStyleSheet(buttonFocus)
+								setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)
+					else:
+						instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+						setButton.setChecked(False)		
 				elif typeIdx == 1 or typeIdx == 2 or typeIdx == 5 or typeIdx == 6:
 					demodScope = self.ui.scopeMod.isEnabled()
 					demodDig = self.ui.digMod.isEnabled()
