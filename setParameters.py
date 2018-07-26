@@ -447,7 +447,7 @@ def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,greyButton,buttonSel
 		}
 
 	if setButton.isChecked() == True:
-		completed = win.checkIfDone()
+		completed = win.checkIfDone(checkMeter)
 		if completed:
 			flag = 0;
 			setButton.setText("Unset")
@@ -480,7 +480,7 @@ def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,greyButton,buttonSel
 			self.ui.vsgNextSteps.setCurrentIndex(8)
 		else:
 			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
-			setButton.setChecked(False)
+			#setButton.setChecked(False)
 	elif setButton.isChecked() == False:
 		self.ui.meterEquip.setStyleSheet(None)
 		self.ui.meterButton_meter.setStyleSheet(buttonSelect)
@@ -501,7 +501,6 @@ def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,bu
 	
 	checkDic=[
 		self.ui.address_spa,
-		self.ui.attenuation_spa,
 		self.ui.freq_spa,
 		self.ui.freqSpan_spa,
 		self.ui.resBand_spa,
@@ -568,7 +567,6 @@ def setSAAdv(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton
 			self.ui.saScrenName_spa,
 			self.ui.acpScreenName_spa,
 			self.ui.preampEnable_spa,
-			self.ui.lineEdit_63,
 			self.ui.traceNum_spa,
 			self.ui.traceAvg_spa,
 			self.ui.traceAvgCount_spa,
@@ -576,10 +574,16 @@ def setSAAdv(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton
 			self.ui.acpNoiseEnable_spa,
 			self.ui.acpBW_spa,
 			self.ui.acpOffset_spa,
+			self.ui.lowNoisePath_spa,
+			self.ui.averaging_spa,
+			self.ui.avgCount_spa,
+			self.ui.filterType_spa,
+			self.ui.detector_spa,
 			self.ui.detector_spa
 		}
 		
 	if setButton.isChecked() == True:
+		flag = 0;
 		done = win.checkIfDone(checkDic)
 		if done:
 			d ={
@@ -587,15 +591,19 @@ def setSAAdv(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton
 				"SAScreen": self.ui.saScrenName_spa.text(),
 				"ACPScreen": self.ui.acpScreenName_spa.text(),
 				"preAmp": self.ui.preampEnable_spa.currentIndex(),
-				"traceType": self.ui.lineEdit_63.text(),
 				"traceNum" : self.ui.traceNum_spa.text(),
 				"traceAvg": self.ui.traceAvg_spa.currentIndex(),
 				"traceAvgCount": self.ui.traceAvgCount_spa.text(),
-				"noiseExtension": self.ui.noiseExtension_spa.text(),
+				"noiseExtension": self.ui.noiseExtension_spa.currentIndex(),
 				"ACPCorrection": self.ui.acpNoiseEnable_spa.currentIndex(),
 				"ACPBand": self.ui.acpBW_spa.text(),
 				"ACPOffset": self.ui.acpOffset_spa.text(),
-				"Detector": self.ui.detector_spa.currentIndex()
+				"mw": self.ui.lowNoisePath_spa.currentIndex(),
+				"phaseNoise": self.ui.noiseOptimization_spa.currentIndex(),
+				"averaging": self.ui.averaging_spa.currentIndex(),
+				"avgCount": self.ui.avgCount_spa.text(),
+				"filterType": self.ui.filterType_spa.currentIndex(),
+				"detector": self.ui.detector_spa.currentIndex()
 			}
 			
 			setButton.setText("Unset")
@@ -606,13 +614,17 @@ def setSAAdv(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton
 			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 			setButton.setChecked(False)
 		
+		if flag:
+			setButton.setText("Unset")
+			self.ui.saEquipAdv.setStyleSheet(boxDone)
+		
 	elif setButton.isChecked() == False:
 		self.ui.saEquipAdv.setStyleSheet(None)
 		setButton.setText("Set")
 		
 		
 def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,buttonSelect,setButton):
-	checkDic[
+	checkDic = [
 		self.ui.p1c1Address,
 		self.ui.p1c1Voltage,
 		self.ui.p1c1Current,
@@ -722,7 +734,7 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,butto
 		setButton.setText("Set")
 
 def setP2(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,buttonSelect,setButton):
-	checkDic[
+	checkDic = [
 		self.ui.p2c1Address,
 		self.ui.p2c1Voltage,
 		self.ui.p2c1Current,
@@ -830,7 +842,7 @@ def setP2(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,butto
 		setButton.setText("Set")
 	
 def setP3(self,boxDone,buttonFocus,buttonHover,supply,buttonSelect,greyHover,setButton):
-	checkDic[
+	checkDic = [
 		self.ui.p3c1Address,
 		self.ui.p3c1Voltage,
 		self.ui.p3c1Current,
@@ -989,7 +1001,6 @@ def setVSAMeasGen(self,boxDone,buttonHover,buttonDone,setButton,supply):
 			self.ui.sampRate_vsaMeas_2,
 			self.ui.noFrameTimes_vsaMeas_2
 		]
-	
 	
 	if setButton.isChecked() == True:
 		done = win.checkIfDone(checkDic)

@@ -714,6 +714,8 @@ class Window(QMainWindow):
 		self.ui.trigSource_sa.currentIndexChanged.connect(lambda: param.disableTrigLevelVSA(self))
 		# sa page
 		self.ui.trigSource_spa.currentIndexChanged.connect(lambda: param.disableTrigLevelSA(self))
+		self.ui.averaging_spa.currentIndexChanged.connect(lambda: param.enableAveragingSA(self))
+		self.ui.traceAvg_spa.currentIndexChanged.connect(lambda: param.enableTraceAveragingSA(self))
 		# awg measurement page
 		self.ui.refClockSorce_awg.currentIndexChanged.connect(lambda: param.enableExtClkFreq(self))
 		
