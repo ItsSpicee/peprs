@@ -901,7 +901,7 @@ class Window(QMainWindow):
 					supply.AWG_Output_Toggle(0)
 				if psgSet:
 					#turn off psg
-					#print("this is filler")
+					print("this is filler")
 			else:
 				if awgSet:
 					supply.AWG_Output_Toggle(0)
