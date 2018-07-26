@@ -775,6 +775,25 @@ def disableTrigLevelSA(self):
 	elif trigSource == 0 or trigSource == 3:
 		self.ui.trigLevelLabel_spa.setEnabled(False)
 		self.ui.trigLevel_spa.setEnabled(False)
+		
+def enableAveragingSA(self):
+	idx = self.ui.averaging_spa.currentIndex()
+	if idx == 1:
+		self.ui.avgCountLabel_spa.setEnabled(True)
+		self.ui.avgCount_spa.setEnabled(True)
+	elif idx == 2 or idx == 0:
+		self.ui.avgCountLabel_spa.setEnabled(False)
+		self.ui.avgCount_spa.setEnabled(False)
+	
+def enableTraceAveragingSA(self):
+	idx = self.ui.traceAvg_spa.currentIndex()
+	if idx == 1:
+		self.ui.traceAvgCount_spa.setEnabled(True)
+		self.ui.taceAvgCountLabel_spa.setEnabled(True)
+	elif idx == 2 or idx == 0:
+		self.ui.traceAvgCount_spa.setEnabled(False)
+		self.ui.taceAvgCountLabel_spa.setEnabled(False)
+	
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions called within parameterFunctions	
 

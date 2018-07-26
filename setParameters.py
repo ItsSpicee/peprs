@@ -512,21 +512,26 @@ def setSAAdv(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton
 			"SAScreen": self.ui.saScrenName_spa.text(),
 			"ACPScreen": self.ui.acpScreenName_spa.text(),
 			"preAmp": self.ui.preampEnable_spa.currentIndex(),
-			"traceType": self.ui.lineEdit_63.text(),
 			"traceNum" : self.ui.traceNum_spa.text(),
 			"traceAvg": self.ui.traceAvg_spa.currentIndex(),
 			"traceAvgCount": self.ui.traceAvgCount_spa.text(),
-			"noiseExtension": self.ui.noiseExtension_spa.text(),
+			"noiseExtension": self.ui.noiseExtension_spa.currentIndex(),
 			"ACPCorrection": self.ui.acpNoiseEnable_spa.currentIndex(),
 			"ACPBand": self.ui.acpBW_spa.text(),
 			"ACPOffset": self.ui.acpOffset_spa.text(),
-			"Detector": self.ui.detector_spa.currentIndex()
+			"mw": self.ui.lowNoisePath_spa.currentIndex(),
+			"phaseNoise": self.ui.noiseOptimization_spa.currentIndex(),
+			"averaging": self.ui.averaging_spa.currentIndex(),
+			"avgCount": self.ui.avgCount_spa.text(),
+			"filterType": self.ui.filterType_spa.currentIndex(),
+			"detector": self.ui.detector_spa.currentIndex()
 		}
 		
-		setButton.setText("Unset")
-		self.ui.saEquipAdv.setStyleSheet(boxDone)
-		
 		flag = setSpectrumAnalyzerAdvancedParams(self,d,self.ui.saEquipAdv,supply,boxDone)
+		
+		if flag:
+			setButton.setText("Unset")
+			self.ui.saEquipAdv.setStyleSheet(boxDone)
 		
 	elif setButton.isChecked() == False:
 		self.ui.saEquipAdv.setStyleSheet(None)
