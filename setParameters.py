@@ -106,7 +106,9 @@ def setAdvancedAWG(self,boxDone,setButton,supply):
 	d={
 		"address": self.ui.address_awg.text(),
 		"trigMode": self.ui.trigMode_awg.currentIndex(),
-		"dacRange": self.ui.dacRange_awg.text()
+		"dacRange": self.ui.dacRange_awg.text(),
+		"syncMarker": self.ui.syncMarker_awg.text(),
+		"sampleMarker": self.ui.sampleMarker_awg.text()
 	}
 	flag = setAdvAWGParams(self,d,supply)
 	
@@ -2041,10 +2043,11 @@ def setAWGParams(self,dictionary,supply):
 		return flag
 	else:
 		for x in errorArray:
-			if x == "":
-				continue
-			else:
-				instrParamErrorMessage(self,x)
+			print(x)
+			# if x == "":
+				# continue
+			# else:
+				# instrParamErrorMessage(self,x)
 		self.ui.awgSetGeneral.setChecked(False)
 		
 def setAdvAWGParams(self,dictionary,supply):

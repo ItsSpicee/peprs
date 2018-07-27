@@ -1,4 +1,7 @@
 function error = Set_AdvAWG(dict)
+    dict.sampleMarker = str2double(dict.sampleMarker);
+    dict.syncMarker = str2double(dict.syncMarker);
+
     % initialize variables
     error = "";   
     if dict.dacRange == ""
@@ -50,6 +53,12 @@ function error = Set_AdvAWG(dict)
     else
         error = "Please fill out all fields before attempting to set parameters."; 
     end
+    
+    % set sample marker out
+    fprintf(f, sprintf(':SOURce:MARKer:SAMPle:VOLTage:LEVel:IMMediate:AMPLitude %g', dict.sampleMarker));
+    
+    % set sync marker out
+    fprintf(f, sprintf(':SOURce:MARKer:SYNC:VOLTage:LEVel:IMMediate:AMPLitude %g', dict.syncMarker));
     
     error = char(error);
     rmpath('.\InstrumentFunctions\M8190A')
