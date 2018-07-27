@@ -2039,9 +2039,13 @@ def setAWGParams(self,dictionary,supply):
 			self.ui.maxSampleRate_awg.setText("12e9")
 		flag = 1
 		return flag
-	# else:
-		# instrParamErrorMessage(self,error)
-		# self.ui.awgSetGeneral.setChecked(False)
+	else:
+		for x in errorArray:
+			if x == "":
+				continue
+			else:
+				instrParamErrorMessage(self,x)
+		self.ui.awgSetGeneral.setChecked(False)
 		
 def setAdvAWGParams(self,dictionary,supply):
 	result = supply.Set_AdvAWG(dictionary,nargout=1)

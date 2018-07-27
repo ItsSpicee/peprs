@@ -56,8 +56,8 @@ def changeStepTab(self,safety,quality):
 	vsgStack = self.ui.awgParamsStack_vsgMeas.currentIndex()
 	if maxTrue == False:
 		if i == 2:
-			self.setMinimumSize(1265,650)
-			self.resize(1265, 650)
+			self.setMinimumSize(1265,800)
+			self.resize(1265, 775)
 			self.center()
 		elif i == 1:
 			counterTwo = tabCounterIncrement.counterTwo
@@ -78,8 +78,8 @@ def changeStepTab(self,safety,quality):
 				self.resize(1265,maxHeight)
 				self.center()
 		elif i == 3:
-			self.setMinimumSize(1265,650)
-			self.resize(1265,650)
+			self.setMinimumSize(1265,800)
+			self.resize(1265,775)
 			self.center()
 			
 def switchMeasTabVSA(self):
@@ -177,3 +177,7 @@ def checkIfDone(array):
 		else:
 			key.setStyleSheet(None)
 	return status
+	
+def redock(self):
+	self.ui.errorBar.setFloating(False)
+	

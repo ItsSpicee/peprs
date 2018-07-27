@@ -5,7 +5,7 @@
 import sys
 import os
 from PyQt5 import uic, QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import (QDialogButtonBox,QMessageBox, QTabWidget, QFileDialog,QDialog, QInputDialog, QTextEdit, QLineEdit, QLabel, QFrame, QGridLayout, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QMenu, QAction, qApp, QDesktopWidget, QMessageBox, QToolTip, QPushButton, QApplication, QProgressBar,QSizePolicy)
+from PyQt5.QtWidgets import (QDockWidget,QDialogButtonBox,QMessageBox, QTabWidget, QFileDialog,QDialog, QInputDialog, QTextEdit, QLineEdit, QLabel, QFrame, QGridLayout, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QMenu, QAction, qApp, QDesktopWidget, QMessageBox, QToolTip, QPushButton, QApplication, QProgressBar,QSizePolicy)
 from PyQt5.QtGui import (QCursor, QPen, QPainter, QColor, QIcon, QFont,QGuiApplication)
 from PyQt5.QtCore import (QEvent,Qt, pyqtSlot, QSize)
 
@@ -62,6 +62,9 @@ class Window(QMainWindow):
 			self.ui.dutStackedWidget.setCurrentIndex(1)
 	
 	def initMainUI(self):		
+		
+		# deal with error widget
+		self.ui.redockButton.clicked.connect(lambda: menu.redock(self))
 		
 		# safety and quality check dialog setup and signals
 		safety = QDialog(self)
@@ -192,8 +195,8 @@ class Window(QMainWindow):
 		#pepper_icon.addFile('icons/pepper 24x24.png', QtCore.QSize(24,24))
 		#self.setWindowIcon(pepper_icon)
 		self.ui.statusBar.showMessage('Ready',2000)	
-		self.setMinimumSize(1265,650)
-		self.resize(1265,650)
+		self.setMinimumSize(1265,800)
+		self.resize(1265,800)
 		self.center()
 		
 		# set appropriate pages in stacks
