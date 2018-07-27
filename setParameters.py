@@ -1,6 +1,6 @@
 # setParameters.py contains all the functions that are called whenever a "set" "set & run" or "preview" button is clicked
 
-from PyQt5.QtWidgets import (QProgressBar,QMessageBox)
+from PyQt5.QtWidgets import (QProgressBar,QMessageBox,QLabel)
 from PyQt5.QtGui import (QCursor)
 from PyQt5.QtCore import (Qt)
 
@@ -108,7 +108,8 @@ def setAdvancedAWG(self,boxDone,setButton,supply):
 		"trigMode": self.ui.trigMode_awg.currentIndex(),
 		"dacRange": self.ui.dacRange_awg.text(),
 		"syncMarker": self.ui.syncMarker_awg.text(),
-		"sampleMarker": self.ui.sampleMarker_awg.text()
+		"sampleMarker": self.ui.sampleMarker_awg.text(),
+		"genSet": self.ui.awgSetGeneral.isChecked()
 	}
 	flag = setAdvAWGParams(self,d,supply)
 	
@@ -248,12 +249,14 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 						result = supply.Set_VSA_UXA(dAllUXA,"PXA",nargout=1)
 					result = result.split(";")
 					partNum = result[0]
-					error = result[1]
-					if error == "":
+					errorString = result[1]
+					errorArray = errorString.split("|")
+					errors = determineIfErrors(self,errorArray)
+					if errors == 0:
 						self.ui.partNum_sa.setText(partNum);
 						flag = 1;
 					else:
-						instrParamErrorMessage(self,error)
+						addToErrorLayout(self,errorArray)
 						self.ui.awgSetGeneral.setChecked(False)
 					
 					if flag:
@@ -2021,18 +2024,13 @@ def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,supply
 		self.ui.p1Set.setChecked(False)
 		
 def setAWGParams(self,dictionary,supply):
-	errors = 0;
 	model = dictionary["model"]
 	result = supply.Set_AWG(dictionary,nargout = 1)
 	result = result.split("~")
 	partNum = result[0]
 	errorString = result[1]
 	errorArray = errorString.split("|")
-	for x in errorArray:
-		if x == "":
-			continue
-		else:
-			errors =1
+	errors = determineIfErrors;
 	if errors == 0:
 		self.ui.partNum_awg.setText(partNum)
 		if model == 1:
@@ -2042,19 +2040,36 @@ def setAWGParams(self,dictionary,supply):
 		flag = 1
 		return flag
 	else:
-		for x in errorArray:
-			print(x)
-			# if x == "":
-				# continue
-			# else:
-				# instrParamErrorMessage(self,x)
+		addToErrorLayout(self,errorArray)
 		self.ui.awgSetGeneral.setChecked(False)
 		
 def setAdvAWGParams(self,dictionary,supply):
-	result = supply.Set_AdvAWG(dictionary,nargout=1)
-	if result == "":
+	errorString = supply.Set_AdvAWG(dictionary,nargout=1)
+	errorArray = errorString.split("|")
+	errors = determineIfErrors;
+	if errors == 0:
 		flag = 1
 		return flag
 	else:
-		instrParamErrorMessage(self,result)
+		addToErrorLayout(self,errorArray)
 		self.ui.awgSetAdv.setChecked(False)
+		
+def determineIfErrors(self,errorArray):
+	errors = 0
+	for x in errorArray:
+		if x == "":
+			continue
+		else:
+			errors =1
+	return errors
+	
+def addToErrorLayout(self,errorArray):
+	for x in errorArray:
+		if x == "":
+			continue
+		else:
+			instrParamErrorMessage(self,x)
+			label = QLabel()
+			label.setText(x)
+			label.setAlignment(Qt.AlignTop)
+			self.ui.errorLayout.addWidget(label)

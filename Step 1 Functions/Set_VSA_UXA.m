@@ -15,8 +15,9 @@ function result = Set_VSA_UXA(dict,model)
 	dict.analysisBW = str2double(dict.analysisBW);    
 	errorString = "";
 	partNum = "";
+    errorList = [];
 
-	try
+% 	try
 		load(".\InstrumentFunctions\SignalCapture_UXA\UXAConfig.mat")
 		spectrum = visa('agilent',dict.address);
 		spectrum.InputBufferSize = 8388608;
@@ -32,14 +33,30 @@ function result = Set_VSA_UXA(dict,model)
 		
 		% set instrument screens
 		C = textscan(query(spectrum, ':INSTrument:SCReen:CATalog?'), '%q', 'Delimiter', ',');
+        error = checkError(spectrum);
+        if error ~= ""
+            errorList = [errorList,error];
+        end
 		catalog = C{1}{1};
 		splitCatalog = strsplit(catalog,',');
 		catalogLength = length(splitCatalog);
 		
 		if catalogLength == 1
 			fprintf(spectrum, sprintf(':INSTrument:SCReen:REName "%s"', 'IQ Analyzer'));
+            error = checkError(spectrum);
+            if error ~= ""
+                errorList = [errorList,error];
+            end
 			fprintf(spectrum, sprintf(':INSTrument:SELect %s', 'BASIC'));
+            error = checkError(spectrum);
+            if error ~= ""
+                errorList = [errorList,error];
+            end
 			fprintf(spectrum, ':CONFigure:WAVeform:NDEFault');
+            error = checkError(spectrum);
+            if error ~= ""
+                errorList = [errorList,error];
+            end
 		else
 			state = 0;
 			for i=1:catalogLength
@@ -49,88 +66,103 @@ function result = Set_VSA_UXA(dict,model)
 			end
 			if state == 0
 				fprintf(spectrum, ':INSTrument:SCReen:CREate');	
+                if error ~= ""
+                    errorList = [errorList,error];
+                end
 				fprintf(spectrum, sprintf(':INSTrument:SCReen:REName "%s"', 'IQ Analyzer'));
+                if error ~= ""
+                    errorList = [errorList,error];
+                end
 				fprintf(spectrum, sprintf(':INSTrument:SELect %s', 'BASIC'));
+                if error ~= ""
+                    errorList = [errorList,error];
+                end
 				fprintf(spectrum, ':CONFigure:WAVeform:NDEFault');
+                if error ~= ""
+                    errorList = [errorList,error];
+                end
 			else
 				fprintf(spectrum, sprintf(':INSTrument:SCReen:SELect "%s"', 'IQ Analyzer'));
+                if error ~= ""
+                    errorList = [errorList,error];
+                end
 			end
 		end
 		
-		% turn averaging on or off
-		if dict.averaging == 1
-			fprintf(spectrum, sprintf(':SENSe:WAVeform:AVERage:STATe %d', 1));
-			% determine number of averages
-			fprintf(spectrum, sprintf(':SENSe:WAVeform:AVERage:COUNt %d', dict.noAverages));
-			UXAConfig.NumberSweepAverages = dict.noAverages;
-		elseif dict.averaging == 2
-			fprintf(spectrum, sprintf(':SENSe:WAVeform:AVERage:STATe %d', 0));
-			UXAConfig.NumberSweepAverages = 0;
-		end
-		
-		% set attenuation mode (auto or manual), if manual, set attenuation value
-		if isnan(dict.atten)
-			fprintf(spectrum, sprintf(':SENSe:POWer:RF:ATTenuation:AUTO %d', 1));
-			relAmpl = str2double(query(spectrum, ':SENSe:POWer:RF:ATTenuation?'));
-			UXAConfig.Attenuation = relAmpl;
-		else
-			fprintf(spectrum, sprintf(':SENSe:POWer:RF:ATTenuation:AUTO %d', 0));
-			fprintf(spectrum, sprintf(':SENSe:POWer:RF:ATTenuation %g', dict.atten));
-			UXAConfig.Attenuation = dict.atten;
-		end
-		
-		% set frequency parameters
-		fprintf(spectrum, sprintf(':SENSe:FREQuency:CENTer %g', dict.freq));
-		UXAConfig.Frequency = dict.freq;
-
-		% set frequency reference
-		if dict.clockRef == 1
-			fprintf(spectrum, sprintf(':SENSe:ROSCillator:SOURce %s', 'INTernal'));
-			UXAConfig.freqRef = "INT";
-		elseif dict.clockRef == 2
-			fprintf(spectrum, sprintf(':SENSe:ROSCillator:SOURce %s', 'EXTernal'));
-			UXAConfig.freqRef = "EXT";
-		else
-			errorString = "Please select a reference clock";
-		end
-		
-		% Set the digital IF bandwidth
-		fprintf(spectrum, sprintf(':SENSe:WAVeform:DIF:BANDwidth %g', dict.analysisBW));
-		UXAConfig.AnalysisBW = dict.analysisBW;
-
-		% set trigger parameters
-		if dict.trigSource == 1
-			fprintf(spectrum, sprintf(':TRIGger:WAVeform:SEQuence:SOURce %s', 'EXTernal1'));
-			fprintf(spectrum, sprintf(':TRIGger:SEQuence:EXTernal1:LEVel %g', dict.trigLevel));
-			UXAConfig.SA.TriggerSource = "EXT1";
-		elseif dict.trigSource == 2
-			fprintf(spectrum, sprintf(':TRIGger:WAVeform:SEQuence:SOURce %s', 'EXTernal2'));
-			fprintf(spectrum, sprintf(':TRIGger:SEQuence:EXTernal2:LEVel %g', dict.trigLevel));
-			UXAConfig.SA.TriggerSource = "EXT2";
-		% elseif dict.trigSource == 3
-			% fprintf(spectrum, sprintf(':TRIGger:WAVeform:SEQuence:SOURce %s', 'EXTernal3'));
-			% fprintf(spectrum, sprintf(':TRIGger:SEQuence:EXTernal3:LEVel %g', dict.trigLevel));
-			% UXAConfig.SA.TriggerSource = "EXT3";
-		elseif dict.trigSource == 3
-			% immediate or free run trigger
-			fprintf(spectrum, sprintf(':TRIGger:WAVeform:SEQuence:SOURce %s', 'IMMediate'));
-			UXAConfig.SA.TriggerSource = "IMM";
-			errorString = "Unable to switch to Free Run in current setup.";
-		elseif dict.trigSource == 0
-			errorString = "Please fill out all fields before attempting to set parameters."; 
-		end
-		UXAConfig.SA.TriggerLevel = dict.trigLevel;
-		
-		save(".\InstrumentFunctions\SignalCapture_UXA\UXAConfig.mat","UXAConfig")
+% 		% turn averaging on or off
+% 		if dict.averaging == 1
+% 			fprintf(spectrum, sprintf(':SENSe:WAVeform:AVERage:STATe %d', 1));
+% 			% determine number of averages
+% 			fprintf(spectrum, sprintf(':SENSe:WAVeform:AVERage:COUNt %d', dict.noAverages));
+% 			UXAConfig.NumberSweepAverages = dict.noAverages;
+% 		elseif dict.averaging == 2
+% 			fprintf(spectrum, sprintf(':SENSe:WAVeform:AVERage:STATe %d', 0));
+% 			UXAConfig.NumberSweepAverages = 0;
+% 		end
+% 		
+% 		% set attenuation mode (auto or manual), if manual, set attenuation value
+% 		if isnan(dict.atten)
+% 			fprintf(spectrum, sprintf(':SENSe:POWer:RF:ATTenuation:AUTO %d', 1));
+% 			relAmpl = str2double(query(spectrum, ':SENSe:POWer:RF:ATTenuation?'));
+% 			UXAConfig.Attenuation = relAmpl;
+% 		else
+% 			fprintf(spectrum, sprintf(':SENSe:POWer:RF:ATTenuation:AUTO %d', 0));
+% 			fprintf(spectrum, sprintf(':SENSe:POWer:RF:ATTenuation %g', dict.atten));
+% 			UXAConfig.Attenuation = dict.atten;
+% 		end
+% 		
+% 		% set frequency parameters
+% 		fprintf(spectrum, sprintf(':SENSe:FREQuency:CENTer %g', dict.freq));
+% 		UXAConfig.Frequency = dict.freq;
+% 
+% 		% set frequency reference
+% 		if dict.clockRef == 1
+% 			fprintf(spectrum, sprintf(':SENSe:ROSCillator:SOURce %s', 'INTernal'));
+% 			UXAConfig.freqRef = "INT";
+% 		elseif dict.clockRef == 2
+% 			fprintf(spectrum, sprintf(':SENSe:ROSCillator:SOURce %s', 'EXTernal'));
+% 			UXAConfig.freqRef = "EXT";
+% 		else
+% 			errorString = "Please select a reference clock";
+% 		end
+% 		
+% 		% Set the digital IF bandwidth
+% 		fprintf(spectrum, sprintf(':SENSe:WAVeform:DIF:BANDwidth %g', dict.analysisBW));
+% 		UXAConfig.AnalysisBW = dict.analysisBW;
+% 
+% 		% set trigger parameters
+% 		if dict.trigSource == 1
+% 			fprintf(spectrum, sprintf(':TRIGger:WAVeform:SEQuence:SOURce %s', 'EXTernal1'));
+% 			fprintf(spectrum, sprintf(':TRIGger:SEQuence:EXTernal1:LEVel %g', dict.trigLevel));
+% 			UXAConfig.SA.TriggerSource = "EXT1";
+% 		elseif dict.trigSource == 2
+% 			fprintf(spectrum, sprintf(':TRIGger:WAVeform:SEQuence:SOURce %s', 'EXTernal2'));
+% 			fprintf(spectrum, sprintf(':TRIGger:SEQuence:EXTernal2:LEVel %g', dict.trigLevel));
+% 			UXAConfig.SA.TriggerSource = "EXT2";
+% 		% elseif dict.trigSource == 3
+% 			% fprintf(spectrum, sprintf(':TRIGger:WAVeform:SEQuence:SOURce %s', 'EXTernal3'));
+% 			% fprintf(spectrum, sprintf(':TRIGger:SEQuence:EXTernal3:LEVel %g', dict.trigLevel));
+% 			% UXAConfig.SA.TriggerSource = "EXT3";
+% 		elseif dict.trigSource == 3
+% 			% immediate or free run trigger
+% 			fprintf(spectrum, sprintf(':TRIGger:WAVeform:SEQuence:SOURce %s', 'IMMediate'));
+% 			UXAConfig.SA.TriggerSource = "IMM";
+% 			errorString = "Unable to switch to Free Run in current setup.";
+% 		elseif dict.trigSource == 0
+% 			errorString = "Please fill out all fields before attempting to set parameters."; 
+% 		end
+% 		UXAConfig.SA.TriggerLevel = dict.trigLevel;
+% 		
+% 		save(".\InstrumentFunctions\SignalCapture_UXA\UXAConfig.mat","UXAConfig")
 		% Cleanup
 		fclose(spectrum);
 		delete(spectrum);
 		clear spectrum;
-
-	catch
-	   errorString = "A problem has occured, resetting instruments. Use Keysight Connection Expert to check your instrument VISA Addresses.";  
-	   instrreset
-	end
+% 
+% 	catch
+% 	   errorString = "A problem has occured, resetting instruments. Use Keysight Connection Expert to check your instrument VISA Addresses.";  
+% 	   instrreset
+% 	end
 
 	resultsString = sprintf("%s;%s",partNum,errorString);
 	result = char(resultsString);

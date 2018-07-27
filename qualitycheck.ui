@@ -22,11 +22,11 @@
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0">
-      <property name="spacing">
-       <number>50</number>
+     <layout class="QGridLayout" name="gridLayout" rowstretch="1,1,1,1,1">
+      <property name="verticalSpacing">
+       <number>34</number>
       </property>
-      <item>
+      <item row="0" column="0" colspan="2">
        <widget class="QLabel" name="label_4">
         <property name="font">
          <font>
@@ -42,20 +42,7 @@
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QCheckBox" name="qualityGeneratorCheck">
-        <property name="font">
-         <font>
-          <family>Arial</family>
-          <pointsize>11</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>I've verified the quality of the signal generator output</string>
-        </property>
-       </widget>
-      </item>
-      <item>
+      <item row="3" column="0" colspan="2">
        <widget class="QCheckBox" name="qualityReceiverCheck">
         <property name="font">
          <font>
@@ -71,7 +58,23 @@
         </property>
        </widget>
       </item>
-      <item>
+      <item row="2" column="0" colspan="2">
+       <widget class="QCheckBox" name="qualityGeneratorCheck">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="text">
+         <string>I've verified the quality of the signal generator output</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="2">
        <widget class="QDialogButtonBox" name="qualityCheckButtons">
         <property name="font">
          <font>
@@ -89,6 +92,22 @@
          <bool>true</bool>
         </property>
        </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>DUT Output NMSE:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="lineEdit"/>
       </item>
      </layout>
     </widget>

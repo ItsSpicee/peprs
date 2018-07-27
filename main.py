@@ -64,7 +64,10 @@ class Window(QMainWindow):
 	def initMainUI(self):		
 		
 		# deal with error widget
+		self.ui.errorScrollArea.setMaximumHeight(0)
 		self.ui.redockButton.clicked.connect(lambda: menu.redock(self))
+		self.ui.errorBar.topLevelChanged.connect(lambda: menu.dockSettings(self))
+		self.ui.clearErrorsButton.clicked.connect(lambda: param.clearErrors(self))
 		
 		# safety and quality check dialog setup and signals
 		safety = QDialog(self)
@@ -195,8 +198,8 @@ class Window(QMainWindow):
 		#pepper_icon.addFile('icons/pepper 24x24.png', QtCore.QSize(24,24))
 		#self.setWindowIcon(pepper_icon)
 		self.ui.statusBar.showMessage('Ready',2000)	
-		self.setMinimumSize(1265,800)
-		self.resize(1265,800)
+		self.setMinimumSize(1265,700)
+		self.resize(1265,700)
 		self.center()
 		
 		# set appropriate pages in stacks
@@ -732,7 +735,7 @@ class Window(QMainWindow):
 		screenSize = screen.availableSize()
 		height = screenSize.height()
 		maxHeight = height - 50
-		nmse = safety.ui.dutNMSE.text()
+		nmse = safety.ui.dutMaxPower.text()
 		power = safety.ui.dutPower.text()
 		gain = safety.ui.dutGain.text()
 		papr = safety.ui.paprCheck.text()

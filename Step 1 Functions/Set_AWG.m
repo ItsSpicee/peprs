@@ -16,7 +16,7 @@ function result = Set_AWG(dict)
     errorList = [];
     errorString = "";
     
-%     try
+    try
         load('arbConfig.mat');
         arbConfig = loadArbConfig(arbConfig);
         arbConfig.visaAddr = dict.address;
@@ -98,10 +98,13 @@ function result = Set_AWG(dict)
         clear f; 
         rmpath('.\InstrumentFunctions\M8190A')
         
-%     catch
-%         error = "A problem has occured, resetting instruments. Use Keysight Connection Expert to check your instrument VISA Address.";
-%         instrreset
-%     end
+    catch
+        error = "A problem has occured, resetting instruments. Use Keysight Connection Expert to check your instrument VISA Address.";
+        resultsString = sprintf("%s~%s","",error);
+        result = char(resultsString);
+        instrreset
+        return
+    end
 
     for i=1:length(errorList)
         if i == 1

@@ -82,12 +82,12 @@ class Ui_safetycheck(object):
         self.rfInputLabel_4.setAlignment(QtCore.Qt.AlignCenter)
         self.rfInputLabel_4.setObjectName("rfInputLabel_4")
         self.gridLayout.addWidget(self.rfInputLabel_4, 8, 2, 1, 1)
-        self.dutNMSE = QtWidgets.QLineEdit(self.frame)
+        self.dutMaxPower = QtWidgets.QLineEdit(self.frame)
         font = QtGui.QFont()
         font.setPointSize(10)
-        self.dutNMSE.setFont(font)
-        self.dutNMSE.setObjectName("dutNMSE")
-        self.gridLayout.addWidget(self.dutNMSE, 4, 1, 1, 1)
+        self.dutMaxPower.setFont(font)
+        self.dutMaxPower.setObjectName("dutMaxPower")
+        self.gridLayout.addWidget(self.dutMaxPower, 4, 1, 1, 1)
         self.rfInputLabel_2 = QtWidgets.QLabel(self.frame)
         font = QtGui.QFont()
         font.setFamily("Arial")
@@ -136,14 +136,14 @@ class Ui_safetycheck(object):
         _translate = QtCore.QCoreApplication.translate
         safetycheck.setWindowTitle(_translate("safetycheck", "safetycheck"))
         self.rfOutputLabel_2.setText(_translate("safetycheck", "DUT Estimated Gain:"))
-        self.rfInputLabel.setText(_translate("safetycheck", "DUT Output NMSE:"))
+        self.rfInputLabel.setText(_translate("safetycheck", "DUT Max. Output Power:"))
         self.rfOutputLabel.setText(_translate("safetycheck", "DUT Mean Input Power:"))
         self.rfInputLabel_4.setText(_translate("safetycheck", "dB"))
         self.rfInputLabel_2.setText(_translate("safetycheck", "dBm"))
         self.label_4.setText(_translate("safetycheck", "Before continuing to Step 2, please provide the following information:"))
         self.rfOutputLabel_3.setText(_translate("safetycheck", "Input Signal PAPR:"))
         self.rfInputLabel_3.setText(_translate("safetycheck", "dB"))
-        self.rfInputLabel_5.setText(_translate("safetycheck", "% / dB"))
+        self.rfInputLabel_5.setText(_translate("safetycheck", "dBm"))
 
 
 if __name__ == "__main__":
