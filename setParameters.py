@@ -2019,12 +2019,19 @@ def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,supply
 		self.ui.p1Set.setChecked(False)
 		
 def setAWGParams(self,dictionary,supply):
+	errors = 0;
 	model = dictionary["model"]
 	result = supply.Set_AWG(dictionary,nargout = 1)
-	result = result.split(";")
+	result = result.split("~")
 	partNum = result[0]
-	error = result[1]
-	if error == "":
+	errorString = result[1]
+	errorArray = errorString.split("|")
+	for x in errorArray:
+		if x == "":
+			continue
+		else:
+			errors =1
+	if errors == 0:
 		self.ui.partNum_awg.setText(partNum)
 		if model == 1:
 			self.ui.maxSampleRate_awg.setText("8e9")
@@ -2032,9 +2039,9 @@ def setAWGParams(self,dictionary,supply):
 			self.ui.maxSampleRate_awg.setText("12e9")
 		flag = 1
 		return flag
-	else:
-		instrParamErrorMessage(self,error)
-		self.ui.awgSetGeneral.setChecked(False)
+	# else:
+		# instrParamErrorMessage(self,error)
+		# self.ui.awgSetGeneral.setChecked(False)
 		
 def setAdvAWGParams(self,dictionary,supply):
 	result = supply.Set_AdvAWG(dictionary,nargout=1)

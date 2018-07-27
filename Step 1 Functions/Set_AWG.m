@@ -1,5 +1,7 @@
 % channel 1 and 2 are coupled
 % iqconfig creates arbConfig file
+% uses a modified version of xfprintf from the instrument functions in
+% order to return the error to the GUI instead of MATLAB
 
 function result = Set_AWG(dict)
     % load arbConfig file in order to connect to AWG (cannot do so through
@@ -11,8 +13,8 @@ function result = Set_AWG(dict)
     % initialize variables
     refSrc = "";
     sampSrc = "";
-    error = "";
-    partNum = "";
+    errorList = [];
+    errorString = "";
     
 %     try
         load('arbConfig.mat');
@@ -26,18 +28,25 @@ function result = Set_AWG(dict)
         
         % set model type (12 bit (speed) or 14 bit (precision))
         if dict.model == 1   
-            fprintf(f, sprintf(':TRACe:DWIDth %s', 'WPRecision'));
-            modelError = query(f, ':syst:err?');
-            modelError = strsplit(modelError,',');
-            % replace enter character with nothing
-            modelError = regexprep(modelError{2},'\s+','');
-            errorString = '"Dataoutofrange;INTERNAL:SampleFrequency=12GHzoutofrange125MHz..8GHz."';
-            if strcmp(modelError,errorString)
-                error = "14-bit mode is unavailable on this AWG";
+            s = sprintf(':TRACe:DWIDth %s', 'WPRecision');
+            error = mod_xfprintf(f,s);
+            if error ~= ""
+                if contains(error,'-222')
+                    error = sprintf('%s\n 14-bit mode is unavailable on this AWG',error);
+                end
+                errorList = [errorList,error];
             end
             arbConfig.model = "M8190A_14bit";
         elseif dict.model == 2
-            xfprintf(f, sprintf(':TRACe:DWIDth %s', 'WSPeed'));
+            s = sprintf(':TRACe:DWIDth %s', 'WSPeed');
+            xfprintf(f,s);
+            error = mod_xfprintf(f,s);
+            if error ~= ""
+                if contains(error,'-222')
+                    error = sprintf('%s\n 12-bit mode is unavailable on this AWG',error);
+                end
+                errorList = [errorList,error];
+            end
             arbConfig.model = "M8190A_12bit";
         end
         
@@ -62,15 +71,25 @@ function result = Set_AWG(dict)
         % check if ref. clock source is available
         check = sscanf(query(f, sprintf(':SOURce:ROSCillator:SOURce:CHECk? %s', refSrc)), '%d');
         if check == 1
-            xfprintf(f, sprintf(':SOURce:ROSCillator:SOURce %s', refSrc));
-            xfprintf(f, sprintf(':OUTPut:SCLK:SOURce %s', sampSrc));
+            error = mod_xfprintf(f, sprintf(':SOURce:ROSCillator:SOURce %s', refSrc));
+            if error ~= ""
+                errorList = [errorList,error];
+            end
+            error = mod_xfprintf(f, sprintf(':OUTPut:SCLK:SOURce %s', sampSrc));
+            if error ~= ""
+                errorList = [errorList,error];
+            end
             % set external clock frequency
             if refSrc == "EXT" || sampSrc == "EXT"
-                xfprintf(f, sprintf(':SOURce:ROSCillator:FREQuency %s', dict.refClkFreq));
+                error = mod_xfprintf(f, sprintf(':SOURce:ROSCillator:FREQuency %s', dict.refClkFreq));
+                if error ~= ""
+                    errorList = [errorList,error];
+                end
                 arbConfig.clockFreq = dict.refClkFreq;
             end
         else
             error = "No source available of selected type.";
+            errorList = [errorList,error];
         end
         
         % cleanup
@@ -84,7 +103,14 @@ function result = Set_AWG(dict)
 %         instrreset
 %     end
 
-    resultsString = sprintf("%s;%s",partNum,error);
+    for i=1:length(errorList)
+        if i == 1
+            errorString = errorList(1);
+        else
+            errorString = sprintf('%s|%s',errorString,errorList(i));
+        end
+    end
+    resultsString = sprintf("%s~%s",partNum,errorString);
     result = char(resultsString);
     save("arbConfig.mat","arbConfig")
 end
