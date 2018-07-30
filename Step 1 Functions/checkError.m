@@ -1,8 +1,11 @@
-function error = checkError(f)    
-    result = query(f, 'SYSTem:ERRor:NEXT?');
+function error = checkError(f,s)    
+    error = "";
+	result = query(f, 'SYSTem:ERRor:NEXT?');
     if contains(result,'No error')
         error ="";
     else
-        error = result;
+        s = convertCharsToStrings(s);
+		error = convertCharsToStrings(error);
+		error = sprintf("Error has occured in command %s\n%s",s,result);
     end
 end

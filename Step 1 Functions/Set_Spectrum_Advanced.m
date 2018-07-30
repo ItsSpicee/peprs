@@ -26,7 +26,7 @@ function result = Set_Spectrum_Advanced(dict)
 			UXAConfig.PreampEnable = 0;
 		end
 		
-		%trace number, averaging, number of averages
+		%trace number, averaging
 		% trace number - determines which trace is set
 		% traces can be of type WRITe, AVERage, MAXHold, MINHold. Only use WRITe and AVERage
 		% averaging - true or false
@@ -151,10 +151,7 @@ function result = Set_Spectrum_Advanced(dict)
         elseif dict.detector == 6
             fprintf(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'QPEak'));
         elseif dict.detector == 7
-            fprintf(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'EAVerage'));
-        elseif dict.detector == 8
-            fprintf(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'RAVerage'));
-        end
+             
         	
 		save(".\InstrumentFunctions\SignalCapture_UXA\UXAConfig.mat","UXAConfig")
 		% Cleanup
