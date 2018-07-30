@@ -6539,7 +6539,7 @@ QFrame{background-color:#d1d5de}</string>
                                  <x>0</x>
                                  <y>0</y>
                                  <width>286</width>
-                                 <height>674</height>
+                                 <height>675</height>
                                 </rect>
                                </property>
                                <property name="minimumSize">
@@ -37033,8 +37033,8 @@ Analyzer</string>
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>605</width>
-                             <height>871</height>
+                             <width>590</width>
+                             <height>500</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -41852,8 +41852,8 @@ Analyzer</string>
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>605</width>
-                             <height>1009</height>
+                             <width>590</width>
+                             <height>382</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -45892,7 +45892,7 @@ Analyzer</string>
                    <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                   </property>
                   <property name="currentIndex">
-                   <number>0</number>
+                   <number>1</number>
                   </property>
                   <widget class="QWidget" name="vsaStandard">
                    <attribute name="title">
@@ -48363,7 +48363,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <rect>
                               <x>10</x>
                               <y>10</y>
-                              <width>361</width>
+                              <width>341</width>
                               <height>171</height>
                              </rect>
                             </property>
@@ -48388,8 +48388,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <property name="verticalSpacing">
                               <number>7</number>
                              </property>
-                             <item row="5" column="0" colspan="2">
-                              <widget class="QLabel" name="label_156">
+                             <item row="1" column="0">
+                              <widget class="QLabel" name="label_135">
                                <property name="font">
                                 <font>
                                  <family>Arial</family>
@@ -48397,7 +48397,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                 </font>
                                </property>
                                <property name="text">
-                                <string>Phase Noise Optimization:</string>
+                                <string>Preamp Enable:</string>
                                </property>
                               </widget>
                              </item>
@@ -48439,6 +48439,19 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                </item>
                               </widget>
                              </item>
+                             <item row="5" column="0" colspan="2">
+                              <widget class="QLabel" name="label_156">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>Phase Noise Optimization:</string>
+                               </property>
+                              </widget>
+                             </item>
                              <item row="4" column="0" colspan="2">
                               <widget class="QLabel" name="label_155">
                                <property name="font">
@@ -48450,47 +48463,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                <property name="text">
                                 <string>Low Noise Path:</string>
                                </property>
-                              </widget>
-                             </item>
-                             <item row="1" column="0">
-                              <widget class="QLabel" name="label_135">
-                               <property name="font">
-                                <font>
-                                 <family>Arial</family>
-                                 <pointsize>9</pointsize>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>Preamp Enable:</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="1" column="2" colspan="3">
-                              <widget class="QComboBox" name="preampEnable_vsa">
-                               <property name="font">
-                                <font>
-                                 <family>Arial</family>
-                                 <pointsize>9</pointsize>
-                                </font>
-                               </property>
-                               <property name="layoutDirection">
-                                <enum>Qt::LeftToRight</enum>
-                               </property>
-                               <item>
-                                <property name="text">
-                                 <string>-Select-</string>
-                                </property>
-                               </item>
-                               <item>
-                                <property name="text">
-                                 <string>True</string>
-                                </property>
-                               </item>
-                               <item>
-                                <property name="text">
-                                 <string>False</string>
-                                </property>
-                               </item>
                               </widget>
                              </item>
                              <item row="6" column="2" colspan="3">
@@ -48521,30 +48493,70 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                </item>
                               </widget>
                              </item>
-                             <item row="3" column="0" colspan="2">
-                              <widget class="QLabel" name="label_151">
+                             <item row="1" column="2" colspan="3">
+                              <widget class="QComboBox" name="preampEnable_vsa">
                                <property name="font">
                                 <font>
                                  <family>Arial</family>
                                  <pointsize>9</pointsize>
                                 </font>
                                </property>
-                               <property name="text">
-                                <string>IF Path:</string>
+                               <property name="layoutDirection">
+                                <enum>Qt::LeftToRight</enum>
                                </property>
+                               <item>
+                                <property name="text">
+                                 <string>-Select-</string>
+                                </property>
+                               </item>
+                               <item>
+                                <property name="text">
+                                 <string>True</string>
+                                </property>
+                               </item>
+                               <item>
+                                <property name="text">
+                                 <string>False</string>
+                                </property>
+                               </item>
                               </widget>
                              </item>
-                             <item row="6" column="0" colspan="2">
-                              <widget class="QLabel" name="label_158">
+                             <item row="3" column="2" colspan="3">
+                              <widget class="QComboBox" name="ifPath_vsa">
                                <property name="font">
                                 <font>
                                  <family>Arial</family>
                                  <pointsize>9</pointsize>
                                 </font>
                                </property>
-                               <property name="text">
-                                <string>Filter Type:</string>
+                               <property name="layoutDirection">
+                                <enum>Qt::LeftToRight</enum>
                                </property>
+                               <item>
+                                <property name="text">
+                                 <string>-Select-</string>
+                                </property>
+                               </item>
+                               <item>
+                                <property name="text">
+                                 <string>10 MHz</string>
+                                </property>
+                               </item>
+                               <item>
+                                <property name="text">
+                                 <string>25 MHz</string>
+                                </property>
+                               </item>
+                               <item>
+                                <property name="text">
+                                 <string>40 MHz</string>
+                                </property>
+                               </item>
+                               <item>
+                                <property name="text">
+                                 <string>255 MHz</string>
+                                </property>
+                               </item>
                               </widget>
                              </item>
                              <item row="0" column="0" colspan="4">
@@ -48620,46 +48632,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                </widget>
                               </widget>
                              </item>
-                             <item row="3" column="2" colspan="3">
-                              <widget class="QComboBox" name="ifPath_vsa">
-                               <property name="font">
-                                <font>
-                                 <family>Arial</family>
-                                 <pointsize>9</pointsize>
-                                </font>
-                               </property>
-                               <property name="layoutDirection">
-                                <enum>Qt::LeftToRight</enum>
-                               </property>
-                               <item>
-                                <property name="text">
-                                 <string>-Select-</string>
-                                </property>
-                               </item>
-                               <item>
-                                <property name="text">
-                                 <string>10 MHz</string>
-                                </property>
-                               </item>
-                               <item>
-                                <property name="text">
-                                 <string>25 MHz</string>
-                                </property>
-                               </item>
-                               <item>
-                                <property name="text">
-                                 <string>40 MHz</string>
-                                </property>
-                               </item>
-                               <item>
-                                <property name="text">
-                                 <string>255 MHz</string>
-                                </property>
-                               </item>
-                              </widget>
-                             </item>
-                             <item row="3" column="5">
-                              <widget class="QLabel" name="label_152">
+                             <item row="6" column="0" colspan="2">
+                              <widget class="QLabel" name="label_158">
                                <property name="font">
                                 <font>
                                  <family>Arial</family>
@@ -48667,7 +48641,20 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                 </font>
                                </property>
                                <property name="text">
-                                <string>Hz</string>
+                                <string>Filter Type:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="3" column="0" colspan="2">
+                              <widget class="QLabel" name="label_151">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>IF Path:</string>
                                </property>
                               </widget>
                              </item>
@@ -51080,8 +51067,8 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>605</width>
-                         <height>1008</height>
+                         <width>590</width>
+                         <height>382</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -54531,8 +54518,8 @@ Analyzer</string>
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>605</width>
-                         <height>1008</height>
+                         <width>590</width>
+                         <height>382</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -58522,7 +58509,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <x>0</x>
                              <y>0</y>
                              <width>629</width>
-                             <height>871</height>
+                             <height>600</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
