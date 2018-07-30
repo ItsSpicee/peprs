@@ -303,10 +303,7 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 							elif typeIdx == 4: #PXA
 								self.ui.pxaButton_vsa.setStyleSheet(buttonFocus)
 								self.ui.pxaButton_vsa_2.setStyleSheet(buttonFocus)
-								setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)
-					else:
-						instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
-						setButton.setChecked(False)		
+								setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)	
 				elif typeIdx == 1 or typeIdx == 2 or typeIdx == 5 or typeIdx == 6:
 					demodScope = self.ui.scopeMod.isEnabled()
 					demodDig = self.ui.digMod.isEnabled()
@@ -1632,8 +1629,36 @@ def dpdPreview(self):
 	self.ui.resultsAlgoTabs.setCurrentIndex(4)
 	self.ui.dpdAlgoStack.setCurrentIndex(0)
 	
-def runDPD(self,setBox,setButton):
+def runDPD(self,setBox,setButton,supply):
 	if setButton.isChecked() == True:
+	
+		tx={
+			"FGuard" : float(self.ui.lineEdit_249.text()),
+			"FCarrier" : float(self.ui.lineEdit_268.text()),
+			"SubtractMeanFlag" : float(self.ui.comboBox_135.currentIndex()),
+			"FSampleDAC" : float(self.ui.maxSampleRate_awg.text()),
+			"NumberOfSegments" : float(self.ui.lineEdit_264.text()),
+			"ExpansionMarginEnable": float(self.ui.comboBox_134.currentIndex()),
+			"ExpansionMargin" : float(self.ui.lineEdit_263.text()),
+			"Amp_Corr" : float(self.ui.ampCorrection_awgCal.currentIndex()),
+			"GainExpansion_flag" : float(self.ui.comboBox_136.currentIndex()),
+			"GainExpansion" : float(self.ui.lineEdit_269.text()),
+			"FreqMutiplierFlag" : float(self.ui.comboBox_138.currentIndex()),
+			"FreqMultiplierFactor": float(self.ui.lineEdit_270.text())	
+		}
+		rx={
+			"Type" : float(self.ui.vsaType.currentIndex()),
+			"FCarrier" : float(self.ui.centerFreq_vsaMeas_2.text()),
+			"MirrorSignalFlag" : float(self.ui.mirrorFlag_down.currentIndex()),
+			"FSample" : float(self.ui.sampRate_vsaMeas_2().text()),
+			"FrameTime" : float(self.ui.frameTime_vsaMeas_2.text()),
+			"FrameTimeFlag" : float(self.ui.vsgFrameTime_vsaMeas_2.currentIndex()),
+			"MeasuredPeriods" : float(self.ui.noFrameTimes_vsaMeas_2.text())
+		}
+		
+		supply.Signal_Generation_Test(tx,rx)
+		
+		
 		setButton.setText("Unset")
 		self.ui.dpdTabs.setCurrentIndex(0)
 		self.ui.resultsAlgoTabs.setCurrentIndex(4)

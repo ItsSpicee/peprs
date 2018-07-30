@@ -696,7 +696,7 @@ class Window(QMainWindow):
 		self.ui.vsgButton_vsgMeas.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(0))
 		# algo page
 		self.ui.calValPreview.clicked.connect(lambda: set.calValPreview(self))
-		self.ui.calValRun.clicked.connect(lambda: set.runCalValidation(self,setParams,self.ui.calValRun))
+		self.ui.calValRun.clicked.connect(lambda: set.runCalValidation(self,setParams,self.ui.calValRun,supply))
 		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self))
 		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun))
 		self.ui.dpdPreview.clicked.connect(lambda: set.dpdPreview(self))
