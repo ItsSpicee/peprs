@@ -46,7 +46,7 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 			awgSetGeneral.setChecked(False)
 		
-		if flag == 1:
+		if flag:
 			# set MATLAB RXCal parameters
 			awgDict = {
 				"model" : self.ui.partNum_awg.text(),
@@ -100,7 +100,9 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 def setAdvancedAWG(self,boxDone,setButton,supply):
 	checkDic=[
 		self.ui.trigMode_awg,
-		self.ui.dacRange_awg
+		self.ui.dacRange_awg,
+		self.ui.sampleMarker_awg,
+		self.ui.syncMarker_awg,
 	]
 	
 	d={
@@ -401,11 +403,9 @@ def setVSAAdv(self,boxDone,setButton,supply):
 			}
 			result = supply.Set_VSA_AdvUXA(d,nargout = 1)
 			result = result.split("~")
-			print(result)
 			partNum = result[0]
 			errorString = result[1]
 			errorArray = errorString.split("|")
-			print(errorArray)
 			errors = determineIfErrors(self,errorArray)
 			if errors == 0:
 				self.ui.partNum_sa.setText(partNum);
@@ -2053,7 +2053,7 @@ def setAWGParams(self,dictionary,supply):
 	partNum = result[0]
 	errorString = result[1]
 	errorArray = errorString.split("|")
-	errors = determineIfErrors;
+	errors = determineIfErrors(self,errorArray);
 	if errors == 0:
 		self.ui.partNum_awg.setText(partNum)
 		if model == 1:
@@ -2061,15 +2061,16 @@ def setAWGParams(self,dictionary,supply):
 		elif model == 2:
 			self.ui.maxSampleRate_awg.setText("12e9")
 		flag = 1
-		return flag
 	else:
 		addToErrorLayout(self,errorArray)
 		self.ui.awgSetGeneral.setChecked(False)
+		flag = 0
+	return flag
 		
 def setAdvAWGParams(self,dictionary,supply):
 	errorString = supply.Set_AdvAWG(dictionary,nargout=1)
 	errorArray = errorString.split("|")
-	errors = determineIfErrors;
+	errors = determineIfErrors(self,errorArray);
 	if errors == 0:
 		flag = 1
 		return flag

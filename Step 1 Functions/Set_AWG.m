@@ -31,21 +31,20 @@ function result = Set_AWG(dict)
         % set model type (12 bit (speed) or 14 bit (precision))
         if dict.model == 1   
             s = sprintf(':TRACe:DWIDth %s', 'WPRecision');
-            error = mod_xfprintf(f,s);
+            error = convertCharsToStrings(mod_xfprintf(f,s));
             if error ~= ""
                 if contains(error,'-222')
-                    error = sprintf('%s\n 14-bit mode is unavailable on this AWG',error);
+                    error = sprintf("%s\n 14-bit mode is unavailable on this AWG",error);
                 end
                 errorList = [errorList,error];
             end
             arbConfig.model = "M8190A_14bit";
         elseif dict.model == 2
             s = sprintf(':TRACe:DWIDth %s', 'WSPeed');
-            xfprintf(f,s);
-            error = mod_xfprintf(f,s);
+            error = convertCharsToStrings(mod_xfprintf(f,s));
             if error ~= ""
                 if contains(error,'-222')
-                    error = sprintf('%s\n 12-bit mode is unavailable on this AWG',error);
+                    error = sprintf("%s\n 12-bit mode is unavailable on this AWG",error);
                 end
                 errorList = [errorList,error];
             end
@@ -73,17 +72,17 @@ function result = Set_AWG(dict)
         % check if ref. clock source is available
         check = sscanf(query(f, sprintf(':SOURce:ROSCillator:SOURce:CHECk? %s', refSrc)), '%d');
         if check == 1
-            error = mod_xfprintf(f, sprintf(':SOURce:ROSCillator:SOURce %s', refSrc));
+            error = convertCharsToStrings(mod_xfprintf(f, sprintf(':SOURce:ROSCillator:SOURce %s', refSrc)));
             if error ~= ""
                 errorList = [errorList,error];
             end
-            error = mod_xfprintf(f, sprintf(':OUTPut:SCLK:SOURce %s', sampSrc));
+            error = convertCharsToStrings(mod_xfprintf(f, sprintf(':OUTPut:SCLK:SOURce %s', sampSrc)));
             if error ~= ""
                 errorList = [errorList,error];
             end
             % set external clock frequency
             if refSrc == "EXT" || sampSrc == "EXT"
-                error = mod_xfprintf(f, sprintf(':SOURce:ROSCillator:FREQuency %s', dict.refClkFreq));
+                error = convertCharsToStrings(mod_xfprintf(f, sprintf(':SOURce:ROSCillator:FREQuency %s', dict.refClkFreq)));
                 if error ~= ""
                     errorList = [errorList,error];
                 end
