@@ -8,6 +8,7 @@
     <ul>
     <li>Instrument Control Toolbox</li>
     <li>Python drivers</li>
+    <li>matplotlib</li>
     </ul>
 <li>Qt 5.11.1</li>
     <ul>
@@ -23,6 +24,7 @@
 <p> To install Qt, visit: https://www.qt.io/download. In the installation wizard, make sure the correct version of Qt is selected to be installed. The most recent version is not selected by default.</p>
 <p> To install PyQt5, visit: https://www.riverbankcomputing.com/software/pyqt/download5 </p>
 <p> To install MATLAB Python drivers, follow this link: https://www.mathworks.com/help/matlab/matlab_external/install-the-matlab-engine-for-python.html <br> Administrator privileges are most likely needed to run the "python setup.py install" command. It is therefore important to make sure your python directories are in the system environment variables (for Windows) and that your python and MATLAB bit versions are the same. If you need to reinstall Python, make sure to reinstall PyQt5 as well.</p>
+<p> To install matplotlib, run: pip install matplotlib </p>
 <p> To install the Keysight IO Libraries and add ons, follow this link: https://www.keysight.com/en/pd-1985909/io-libraries-suite?cc=US&lc=eng </p>
 
 <h2>Using MATLAB with Python</h2>
