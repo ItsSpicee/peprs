@@ -465,8 +465,8 @@ switch SignalName %#ok<*NASGU>
         error('Unknown Signal Name');
 end
 
-In_I_ori = load(['Signals\' InI_beforeDPD_path]); In_I_ori = In_I_ori(:, 1);
-In_Q_ori = load(['Signals\' InQ_beforeDPD_path]); In_Q_ori = In_Q_ori(:, 1);
+In_I_ori = load(['.\DPD Data\Signals\' InI_beforeDPD_path]); In_I_ori = In_I_ori(:, 1);
+In_Q_ori = load(['.\DPD Data\Signals\' InQ_beforeDPD_path]); In_Q_ori = In_Q_ori(:, 1);
 
 In_ori     = complex(In_I_ori, In_Q_ori );
 

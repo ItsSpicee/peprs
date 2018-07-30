@@ -6,6 +6,10 @@ path(pathdef); % Resets the paths to remove paths outside this folder
 addpath(genpath('C:\Program Files (x86)\IVI Foundation\IVI\Components\MATLAB')) ;
 addpath(genpath(pwd))%Automatically Adds all paths in directory and subfolders
 instrreset
+
+load(".\DPD Data\Signal Generation Parameters\Signal.mat")
+load('.\DPD Data\Signal Generation Parameters\TX.mat')
+
 %#ok<*UNRCH>
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Instrument control and signal analysis is done with with 32 bit MATLAB
@@ -57,9 +61,8 @@ EVM_flag                    = 0;    % If this flag is one, the code demodulates 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Set Signal Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-SignalName = '5G_NR_OFDM_200MHz_64QAM_Pilots';
+SignalName = Signal.Name;
 % Load in the signal
-Signal.RemoveDCFlag = false;
 ReadInputFiles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Set Receiever Parameters

@@ -1,10 +1,16 @@
 # setParameters.py contains all the functions that are called whenever a "set" "set & run" or "preview" button is clicked
 
-from PyQt5.QtWidgets import (QProgressBar,QMessageBox,QLabel)
+from PyQt5.QtWidgets import (QProgressBar,QMessageBox,QLabel,QPushButton)
 from PyQt5.QtGui import (QCursor)
 from PyQt5.QtCore import (Qt)
 
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
+import matplotlib.pyplot as plt
+
 import windowFunctions as win
+
+import random
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions used in main.py
 
@@ -1606,7 +1612,23 @@ def runCalValidation(self,setBox,setButton):
 		self.ui.algoNextStack.setCurrentIndex(0)
 		self.ui.debugAlgoStack.setCurrentIndex(2)
 
-def preCharPreview(self):
+def preCharPreview(self,supply):
+	d = {
+		"signalName": self.ui.comboBox_81.currentIndex(),
+		"removeDC": self.ui.comboBox_82.currentIndex()
+	}
+	supply.Set_Prechar_Signal(d,nargout=0)
+	supply.Preview_Signal(nargout=0)
+	# fig = supply.openfig(".\Figures\Spectrum.fig")
+	# self.figure.clear()
+	# ax = self.figure.add_subplot(111)
+	# ax.plot(data)
+	# self.figure
+	refresh canvas
+	# self.canvas.draw()
+	
+	self.button.clicked.connect(lambda: plot(self))
+	
 	self.ui.precharTabs.setCurrentIndex(0)
 	self.ui.resultsAlgoTabs.setCurrentIndex(3)
 	self.ui.precharAlgoStack.setCurrentIndex(0)
@@ -2149,3 +2171,5 @@ def addToErrorLayout(self,errorArray):
 			label.setText(x)
 			label.setAlignment(Qt.AlignTop)
 			self.ui.errorLayout.addWidget(label)
+			
+			

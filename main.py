@@ -21,6 +21,10 @@ import parameterFunctions as param
 
 # setup matlab engine
 import matlab.engine
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
+import matplotlib.pyplot as plt
+
 supply = matlab.engine.start_matlab()
 # add all folders and subfolders in peprs to matlab path
 currentPath = os.getcwd();
@@ -62,6 +66,13 @@ class Window(QMainWindow):
 			self.ui.dutStackedWidget.setCurrentIndex(1)
 	
 	def initMainUI(self):		
+		
+		# create matlab plots
+		self.figure = plt.figure()
+		self.canvas = FigureCanvas(self.figure)
+		self.toolbar = NavigationToolbar(self.canvas, self)
+		self.ui.spectrumGraph_prechar.addWidget(self.toolbar)
+		self.ui.spectrumGraph_prechar.addWidget(self.canvas)
 		
 		# deal with error widget
 		self.ui.errorScrollArea.setMaximumHeight(0)
@@ -697,7 +708,7 @@ class Window(QMainWindow):
 		# algo page
 		self.ui.calValPreview.clicked.connect(lambda: set.calValPreview(self))
 		self.ui.calValRun.clicked.connect(lambda: set.runCalValidation(self,setParams,self.ui.calValRun,supply))
-		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self))
+		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self,supply))
 		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun))
 		self.ui.dpdPreview.clicked.connect(lambda: set.dpdPreview(self))
 		self.ui.dpdRun.clicked.connect(lambda: set.runDPD(self,setParams,self.ui.dpdRun))
