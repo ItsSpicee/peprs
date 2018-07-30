@@ -1,12 +1,12 @@
-function result = Set__Spectrum_Advanced(dict)
-	dict.traceAvgNum = str2double(dict.traceAvgNum);
+function result = Set_Spectrum_Advanced(dict)
+	%dict.traceAvgNum = str2double(dict.traceAvgNum);
     dict.ACPBand = str2double(dict.ACPBand);
     dict.ACPOffset = str2double(dict.ACPOffset);
     dict.avgCount = str2double(dict.avgCount);
 	errorString = " ";
 	partNum = " ";
 
-	try
+% 	try
 		load('.\InstrumentFunctions\SignalCapture_UXA\UXAConfig.mat')
 		spectrum = visa('agilent',dict.address);
 		spectrum.InputBufferSize = 8388608;
@@ -15,7 +15,6 @@ function result = Set__Spectrum_Advanced(dict)
 		
 		%setting the screen names
 		UXAConfig.SAScreenName = dict.SAScreen;
-        fprintf(spectrum, sprintf(':INSTrument:SCReen:REName "%s"', dict.SAScreen))
         UXAConfig.ACPScreenName = dict.ACPScreen;
 		
 		%internal preamp
@@ -36,18 +35,15 @@ function result = Set__Spectrum_Advanced(dict)
 		UXAConfig.SA.TraceNumber = str2double(dict.traceNum);
 		if dict.traceAvg == 1
             fprintf(spectrum,sprintf(':TRACe%s:TYPE %s', dict.traceNum,'AVERage'));
-			fprintf(spectrum, sprintf(':SENSe:AVERage:TYPE %s', 'RMS'));
-			fprintf(spectrum, sprintf(':SENSe:DETector:%s %s', dict.traceNum, 'AVERage'));
-			fprintf(spectrum, sprintf(':SENSe:AVERage:COUNt %d', dict.traceAvgNum);
+			%fprintf(spectrum, sprintf(':SENSe:AVERage:COUNt %d', dict.traceAvgNum));
 			UXAConfig.SA.TraceAverage = 1;
-            UXAConfig.SA.TraceAverageCount = dict.traceAvgNum;
+            %UXAConfig.SA.TraceAverageCount = dict.traceAvgNum;
 		elseif dict.traceAvg == 2
 			fprintf(spectrum,sprintf(':TRACe%s:TYPE %s', dict.traceNum,'WRITe'));
-			fprintf(spectrum, sprintf(':SENSe:AVERage:TYPE %s', 'LOG'));
-			fprintf(spectrum, sprintf(':SENSe:DETector:%s %s', dict.traceNum, 'NORMal'));
-			fprintf(spectrum, sprintf(':SENSe:AVERage:COUNt %d', 20);
+            fprintf(spectrum, sprintf(':TRACe%s:ACPower:TYPE %s',dict.traceNum, 'WRITe'));
+			%fprintf(spectrum, sprintf(':SENSe:AVERage:COUNt %d', 20));
 			UXAConfig.SA.TraceAverage = 0;
-            UXAConfig.SA.TraceAverageCount = 20;
+            %UXAConfig.SA.TraceAverageCount = 20;
 		end
 		
 		%Noise Extension
@@ -98,7 +94,7 @@ function result = Set__Spectrum_Advanced(dict)
             phaseType = 1;
         elseif dict.phaseNoise == 2
             % best wide
-            phaseType = =2;
+            phaseType =2;
             UXAConfig.SA.PhaseNoiseOpt = 2;
         elseif dict.phaseNoise == 3
             % fast
@@ -122,26 +118,32 @@ function result = Set__Spectrum_Advanced(dict)
         % averaging
         if dict.averaging == 1
             fprintf(spectrum, sprintf(':SENSe:AVERage:STATe %d', 1));
+            fprintf(spectrum, sprintf('SENSe:ACPR:AVERage:STATe %d', 1));
             fprintf(spectrum, sprintf(':SENSe:AVERage:COUNt %d', dict.avgCount));
+            fprintf(spectrum, sprintf('SENSe:ACPR:AVERage:COUNt %d', dict.avgCount));
         elseif dict.averaging == 2
             fprintf(spectrum, sprintf(':SENSe:AVERage:STATe %d', 0));
+            fprintf(spectrum, sprintf('SENSe:ACPR:AVERage:STATe %d', 0));
             fprintf(spectrum, sprintf(':SENSe:AVERage:COUNt %d', 20));
+            fprintf(spectrum, sprintf('SENSe:ACPR:AVERage:COUNt %d', 20));
         end
         
         %filtering
         if dict.filterType == 1
             fprintf(spectrum, sprintf(':SENSe:BWIDth:SHAPe %s', 'GAUSsian'));
-        elseif dict.filterTpe == 2
+            fprintf(spectrum, sprintf(':SENSe:ACPower:BWIDth:SHAPe %s', 'GAUSsian'));
+        elseif dict.filterType == 2
+            fprintf(spectrum, sprintf(':SENSe:BWIDth:SHAPe %s', 'FLATtop'));
             fprintf(spectrum, sprintf(':SENSe:ACPower:BWIDth:SHAPe %s', 'FLATtop'));
         end
                 
 		%Detector Type
 		if dict.detector == 1
-			fprint(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'NORMal'));
+			fprintf(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'NORMal'));
 		elseif dict.detector == 2
-			fprint(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'AVERage'));
+			fprintf(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'AVERage'));
 		elseif dict.detector == 3
-			fprint(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'POSittive'));
+			fprintf(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'POSittive'));
         elseif dict.detector == 4
             fprintf(spectrum, sprintf(':SENSe:DETector:FUNCtion %s', 'SAMPle'));
         elseif dict.detector == 5
@@ -160,10 +162,10 @@ function result = Set__Spectrum_Advanced(dict)
 		delete(spectrum);
 		clear spectrum;
 		
-	catch
-	   errorString = "A problem has occured, resetting instruments. Use Keysight Connection Expert to check your instrument VISA Addresses.";  
-	   instrreset
-	end
+% 	catch
+% 	   errorString = "A problem has occured, resetting instruments. Use Keysight Connection Expert to check your instrument VISA Addresses.";  
+% 	   instrreset
+% 	end
 
 	resultsString = sprintf("%s;%s",partNum,errorString);
 	result = char(resultsString);

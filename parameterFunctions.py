@@ -785,14 +785,23 @@ def enableAveragingSA(self):
 		self.ui.avgCountLabel_spa.setEnabled(False)
 		self.ui.avgCount_spa.setEnabled(False)
 	
-def enableTraceAveragingSA(self):
-	idx = self.ui.traceAvg_spa.currentIndex()
-	if idx == 1:
-		self.ui.traceAvgCount_spa.setEnabled(True)
-		self.ui.taceAvgCountLabel_spa.setEnabled(True)
-	elif idx == 2 or idx == 0:
-		self.ui.traceAvgCount_spa.setEnabled(False)
-		self.ui.taceAvgCountLabel_spa.setEnabled(False)
+def clearErrors(self):
+	layout = self.ui.errorLayout
+	for i in reversed(range(layout.count())): 
+		widgetToRemove = layout.itemAt(i).widget()
+		# remove it from the layout list
+		layout.removeWidget(widgetToRemove)
+		# remove it from the gui
+		widgetToRemove.setParent(None)
+	
+# def enableTraceAveragingSA(self):
+	# idx = self.ui.traceAvg_spa.currentIndex()
+	# if idx == 1:
+		# self.ui.traceAvgCount_spa.setEnabled(True)
+		# self.ui.taceAvgCountLabel_spa.setEnabled(True)
+	# elif idx == 2 or idx == 0:
+		# self.ui.traceAvgCount_spa.setEnabled(False)
+		# self.ui.taceAvgCountLabel_spa.setEnabled(False)
 	
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions called within parameterFunctions	

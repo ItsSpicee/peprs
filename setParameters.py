@@ -1,6 +1,6 @@
 # setParameters.py contains all the functions that are called whenever a "set" "set & run" or "preview" button is clicked
 
-from PyQt5.QtWidgets import (QProgressBar,QMessageBox)
+from PyQt5.QtWidgets import (QProgressBar,QMessageBox,QLabel)
 from PyQt5.QtGui import (QCursor)
 from PyQt5.QtCore import (Qt)
 
@@ -106,7 +106,10 @@ def setAdvancedAWG(self,boxDone,setButton,supply):
 	d={
 		"address": self.ui.address_awg.text(),
 		"trigMode": self.ui.trigMode_awg.currentIndex(),
-		"dacRange": self.ui.dacRange_awg.text()
+		"dacRange": self.ui.dacRange_awg.text(),
+		"syncMarker": self.ui.syncMarker_awg.text(),
+		"sampleMarker": self.ui.sampleMarker_awg.text(),
+		"genSet": self.ui.awgSetGeneral.isChecked()
 	}
 	flag = setAdvAWGParams(self,d,supply)
 	
@@ -216,35 +219,45 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 		if averaging != 0 or avgEnabled == False:
 			if demod != 0:
 				if typeIdx == 3 or typeIdx == 4: # UXA & PXA
-					checkDic[
-						self.ui.analysisBandwidth_sa,
-						self.ui.address_sa,
-						self.ui.attenuation_sa,
-						self.ui.clockRef_sa,
-						self.ui.trigLevel_sa,
-						self.ui.averagingEnable,
-						self.ui.noAveragesField_sa,
-						self.ui.attenuation_sa,
-						self.ui.freq_sa,
-						self.ui.analysisBandwidth_sa,
-						self.ui.clockRef_sa,
-						self.ui.trigLevel_sa,
-						self.ui.trigSource_sa,
-						self.ui.address_sa,
-					]
-					done = win.checkIfDone(checkDic)
-					if done:
-						# set matlab parameters
-						dUXA={
-							"analysisBW": self.ui.analysisBandwidth_sa.text(),
-							"address": self.ui.address_sa.text(),
-							"atten": self.ui.attenuation_sa.text(),
-							"clockRef": self.ui.clockRef_sa.currentIndex(),
-							"trigLevel": self.ui.trigLevel_sa.text()
-						}
-						supply.Set_Cal_UXAParams(dUXA,"RX",nargout=0)
-						supply.Set_Cal_UXAParams(dUXA,"AWG",nargout=0)
-					
+
+					# set matlab parameters
+					dUXA={
+						"analysisBW": self.ui.analysisBandwidth_sa.text(),
+						"address": self.ui.address_sa.text(),
+						"atten": self.ui.attenuation_sa.text(),
+						"clockRef": self.ui.clockRef_sa.currentIndex(),
+						"trigLevel": self.ui.trigLevel_sa.text()
+					}
+					#supply.Set_Cal_UXAParams(dUXA,"RX",nargout=0)
+					#supply.Set_Cal_UXAParams(dUXA,"AWG",nargout=0)
+				
+				
+					dAllUXA={
+						"averaging" : self.ui.averagingEnable.currentIndex(),
+						"noAverages": self.ui.noAveragesField_sa.text(),
+						"atten": self.ui.attenuation_sa.text(),
+						"freq": self.ui.freq_sa.text(),
+						"analysisBW": self.ui.analysisBandwidth_sa.text(),
+						"clockRef": self.ui.clockRef_sa.currentIndex(),
+						"trigLevel": self.ui.trigLevel_sa.text(),
+						"trigSource": self.ui.trigSource_sa.currentIndex(),
+						"address": self.ui.address_sa.text()	
+					}
+					if typeIdx == 3:
+						result = supply.Set_VSA_UXA(dAllUXA,"UXA",nargout=1)
+					elif typeIdx == 4:
+						result = supply.Set_VSA_UXA(dAllUXA,"PXA",nargout=1)
+					result = result.split(";")
+					partNum = result[0]
+					errorString = result[1]
+					errorArray = errorString.split("|")
+					errors = determineIfErrors(self,errorArray)
+					if errors == 0:
+						self.ui.partNum_sa.setText(partNum);
+						flag = 1;
+					else:
+						addToErrorLayout(self,errorArray)
+						self.ui.awgSetGeneral.setChecked(False)
 					
 						dAllUXA={
 							"averaging" : self.ui.averagingEnable.currentIndex(),
@@ -569,7 +582,7 @@ def setSAAdv(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton
 			self.ui.preampEnable_spa,
 			self.ui.traceNum_spa,
 			self.ui.traceAvg_spa,
-			self.ui.traceAvgCount_spa,
+			#self.ui.traceAvgCount_spa,
 			self.ui.noiseExtension_spa,
 			self.ui.acpNoiseEnable_spa,
 			self.ui.acpBW_spa,
@@ -593,7 +606,7 @@ def setSAAdv(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton
 				"preAmp": self.ui.preampEnable_spa.currentIndex(),
 				"traceNum" : self.ui.traceNum_spa.text(),
 				"traceAvg": self.ui.traceAvg_spa.currentIndex(),
-				"traceAvgCount": self.ui.traceAvgCount_spa.text(),
+				#"traceAvgNum": self.ui.traceAvgCount_spa.text(),
 				"noiseExtension": self.ui.noiseExtension_spa.currentIndex(),
 				"ACPCorrection": self.ui.acpNoiseEnable_spa.currentIndex(),
 				"ACPBand": self.ui.acpBW_spa.text(),
@@ -2040,10 +2053,12 @@ def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,supply
 def setAWGParams(self,dictionary,supply):
 	model = dictionary["model"]
 	result = supply.Set_AWG(dictionary,nargout = 1)
-	result = result.split(";")
+	result = result.split("~")
 	partNum = result[0]
-	error = result[1]
-	if error == "":
+	errorString = result[1]
+	errorArray = errorString.split("|")
+	errors = determineIfErrors;
+	if errors == 0:
 		self.ui.partNum_awg.setText(partNum)
 		if model == 1:
 			self.ui.maxSampleRate_awg.setText("8e9")
@@ -2052,14 +2067,36 @@ def setAWGParams(self,dictionary,supply):
 		flag = 1
 		return flag
 	else:
-		instrParamErrorMessage(self,error)
+		addToErrorLayout(self,errorArray)
 		self.ui.awgSetGeneral.setChecked(False)
 		
 def setAdvAWGParams(self,dictionary,supply):
-	result = supply.Set_AdvAWG(dictionary,nargout=1)
-	if result == "":
+	errorString = supply.Set_AdvAWG(dictionary,nargout=1)
+	errorArray = errorString.split("|")
+	errors = determineIfErrors;
+	if errors == 0:
 		flag = 1
 		return flag
 	else:
-		instrParamErrorMessage(self,result)
+		addToErrorLayout(self,errorArray)
 		self.ui.awgSetAdv.setChecked(False)
+		
+def determineIfErrors(self,errorArray):
+	errors = 0
+	for x in errorArray:
+		if x == "":
+			continue
+		else:
+			errors =1
+	return errors
+	
+def addToErrorLayout(self,errorArray):
+	for x in errorArray:
+		if x == "":
+			continue
+		else:
+			instrParamErrorMessage(self,x)
+			label = QLabel()
+			label.setText(x)
+			label.setAlignment(Qt.AlignTop)
+			self.ui.errorLayout.addWidget(label)

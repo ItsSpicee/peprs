@@ -22,7 +22,7 @@
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0,0,0,0,0,0,0,0">
+     <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0,0,0,0,0,0,0">
       <property name="verticalSpacing">
        <number>20</number>
       </property>
@@ -76,7 +76,7 @@
          </font>
         </property>
         <property name="text">
-         <string>DUT Output NMSE:</string>
+         <string>DUT Max. Output Power:</string>
         </property>
        </widget>
       </item>
@@ -128,7 +128,7 @@
        </widget>
       </item>
       <item row="4" column="1">
-       <widget class="QLineEdit" name="dutNMSE">
+       <widget class="QLineEdit" name="dutMaxPower">
         <property name="font">
          <font>
           <pointsize>10</pointsize>
@@ -206,7 +206,7 @@
          </font>
         </property>
         <property name="text">
-         <string>% / dB</string>
+         <string>dBm</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
