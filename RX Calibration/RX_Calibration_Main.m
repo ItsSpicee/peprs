@@ -19,7 +19,7 @@ instrreset
 % load Cal parameters from GUI
 load(".\Measurement Data\RX Calibration Parameters\Cal.mat");
 load(".\Measurement Data\RX Calibration Parameters\RX.mat");
-load(".\Measurement Data\RX Calibration Parameters\TX.mat")
+load(".\Measurement Data\RX Calibration Parameters\TX.mat");
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Utilize 32-bit MATLAB flag
