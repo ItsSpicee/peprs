@@ -17,10 +17,12 @@ function result = Set_AWG(dict)
     errorString = "";
     
     try
+        instrreset
         load('arbConfig.mat');
         arbConfig = loadArbConfig(arbConfig);
         arbConfig.visaAddr = dict.address;
         f = iqopen(arbConfig);
+		fprintf(f, '*CLS');
 
         idn = query(f,'*IDN?');
         splitIdn = strsplit(idn,',');

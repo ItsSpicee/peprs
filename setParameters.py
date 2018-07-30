@@ -219,7 +219,6 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 		if averaging != 0 or avgEnabled == False:
 			if demod != 0:
 				if typeIdx == 3 or typeIdx == 4: # UXA & PXA
-
 					# set matlab parameters
 					dUXA={
 						"analysisBW": self.ui.analysisBandwidth_sa.text(),
@@ -230,7 +229,6 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 					}
 					#supply.Set_Cal_UXAParams(dUXA,"RX",nargout=0)
 					#supply.Set_Cal_UXAParams(dUXA,"AWG",nargout=0)
-				
 				
 					dAllUXA={
 						"averaging" : self.ui.averagingEnable.currentIndex(),
@@ -247,7 +245,7 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 						result = supply.Set_VSA_UXA(dAllUXA,"UXA",nargout=1)
 					elif typeIdx == 4:
 						result = supply.Set_VSA_UXA(dAllUXA,"PXA",nargout=1)
-					result = result.split(";")
+					result = result.split("~")
 					partNum = result[0]
 					errorString = result[1]
 					errorArray = errorString.split("|")
@@ -387,14 +385,39 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 			self.ui.uxaEquipGeneralVSA.setStyleSheet(None)
 			self.ui.uxaMod.setStyleSheet(None)
 		
-def setVSAAdv(self,boxDone,setButton):
+def setVSAAdv(self,boxDone,setButton,supply):
+	flag = 0;
 	if setButton.isChecked() == True:
 		averaging = self.ui.averagingEnable.currentIndex()
 		demod = self.ui.demodulationEnable.currentIndex()
 		if averaging != 0 and demod != 0:
-			self.ui.uxaVSAAdv.setStyleSheet(boxDone)
-			setButton.setText("Unset")
-			self.ui.statusBar.showMessage('Successfully Set Advanced Settings',2000)
+			d = {
+				"address": self.ui.address_sa.text(),
+				"preamp": self.ui.preampEnable_vsa.currentIndex(),
+				"ifPath": self.ui.ifPath_vsa.currentIndex(),
+				"mwPath": self.ui.mwPath_vsa.currentIndex(),
+				"phaseNoise": self.ui.phaseNoiseOptimization_vsa.currentIndex(),
+				"filterType": self.ui.filterTpye_vsa.currentIndex()
+			}
+			result = supply.Set_VSA_AdvUXA(d,nargout = 1)
+			result = result.split("~")
+			print(result)
+			partNum = result[0]
+			errorString = result[1]
+			errorArray = errorString.split("|")
+			print(errorArray)
+			errors = determineIfErrors(self,errorArray)
+			if errors == 0:
+				self.ui.partNum_sa.setText(partNum);
+				flag = 1;
+			else:
+				addToErrorLayout(self,errorArray)
+				self.ui.awgSetGeneral.setChecked(False)
+			
+			if flag:
+				self.ui.uxaVSAAdv.setStyleSheet(boxDone)
+				setButton.setText("Unset")
+				self.ui.statusBar.showMessage('Successfully Set Advanced Settings',2000)
 		else:
 			self.fillParametersMsg()
 			self.ui.uxaVSASetAdv.setChecked(False)
@@ -2057,7 +2080,7 @@ def setAdvAWGParams(self,dictionary,supply):
 def determineIfErrors(self,errorArray):
 	errors = 0
 	for x in errorArray:
-		if x == "":
+		if x == "" or x == " ":
 			continue
 		else:
 			errors =1
@@ -2065,7 +2088,7 @@ def determineIfErrors(self,errorArray):
 	
 def addToErrorLayout(self,errorArray):
 	for x in errorArray:
-		if x == "":
+		if x == "" or x == " ":
 			continue
 		else:
 			instrParamErrorMessage(self,x)
