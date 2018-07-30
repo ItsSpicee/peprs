@@ -869,7 +869,7 @@ Move to 'DPD' tab.</string>
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>738</width>
+                           <width>590</width>
                            <height>550</height>
                           </rect>
                          </property>
@@ -3665,7 +3665,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>727</width>
+                           <width>590</width>
                            <height>1100</height>
                           </rect>
                          </property>
@@ -6301,7 +6301,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>740</width>
+                           <width>590</width>
                            <height>550</height>
                           </rect>
                          </property>
@@ -9717,7 +9717,14 @@ QFrame{background-color:#d1d5de}</string>
                              </attribute>
                              <layout class="QVBoxLayout" name="verticalLayout_123" stretch="8">
                               <item>
-                               <layout class="QVBoxLayout" name="spectrumGraph_prechar"/>
+                               <layout class="QVBoxLayout" name="spectrumGraph_prechar">
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
+                               </layout>
                               </item>
                              </layout>
                             </widget>
@@ -14150,7 +14157,7 @@ Analyzer</string>
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>601</width>
+                                       <width>590</width>
                                        <height>415</height>
                                       </rect>
                                      </property>
@@ -14485,7 +14492,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>601</width>
+                                       <width>590</width>
                                        <height>415</height>
                                       </rect>
                                      </property>
@@ -14949,7 +14956,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>601</width>
+                                       <width>590</width>
                                        <height>575</height>
                                       </rect>
                                      </property>
@@ -22504,8 +22511,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                  <property name="geometry">
                                   <rect>
                                    <x>0</x>
-                                   <y>-11</y>
-                                   <width>602</width>
+                                   <y>0</y>
+                                   <width>590</width>
                                    <height>900</height>
                                   </rect>
                                  </property>

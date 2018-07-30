@@ -14,7 +14,7 @@ function Plot_Prechar_Spectrum(In, Out, Fs)
         h.windowName = 'Flat Top';
     end
 
-    figure();
+    fig = figure();
     hold on
     grid on
     PSDin = plot(msspectrum(h, In, 'centerDC', true, 'Fs', Fs)) ;
@@ -24,4 +24,5 @@ function Plot_Prechar_Spectrum(In, Out, Fs)
     %legend( 'Input Power Spectrum Density' , 'Output Power Spectrum Density' , 1);
     legend( 'Input Power Spectrum Density' , 'Output Power Spectrum Density','Location','northoutside');
     hold off
+    saveas(fig,".\Figures\Spectrum.png")
 end

@@ -1,12 +1,8 @@
 # setParameters.py contains all the functions that are called whenever a "set" "set & run" or "preview" button is clicked
 
 from PyQt5.QtWidgets import (QProgressBar,QMessageBox,QLabel,QPushButton)
-from PyQt5.QtGui import (QCursor)
-from PyQt5.QtCore import (Qt)
-
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
-import matplotlib.pyplot as plt
+from PyQt5.QtGui import (QCursor,QPixmap)
+from PyQt5.QtCore import (Qt,QSize)
 
 import windowFunctions as win
 
@@ -1613,21 +1609,26 @@ def runCalValidation(self,setBox,setButton):
 		self.ui.debugAlgoStack.setCurrentIndex(2)
 
 def preCharPreview(self,supply):
+	layout = self.ui.spectrumGraph_prechar
+	for i in reversed(range(layout.count())): 
+		widgetToRemove = layout.itemAt(i).widget()
+		layout.removeWidget(widgetToRemove)
+		widgetToRemove.setParent(None)
+	
 	d = {
 		"signalName": self.ui.comboBox_81.currentIndex(),
 		"removeDC": self.ui.comboBox_82.currentIndex()
 	}
 	supply.Set_Prechar_Signal(d,nargout=0)
 	supply.Preview_Signal(nargout=0)
-	# fig = supply.openfig(".\Figures\Spectrum.fig")
-	# self.figure.clear()
-	# ax = self.figure.add_subplot(111)
-	# ax.plot(data)
-	# self.figure
-	refresh canvas
-	# self.canvas.draw()
 	
-	self.button.clicked.connect(lambda: plot(self))
+	figureLabel = QLabel()
+	figureMap = QPixmap("Figures/Spectrum.png")
+	figureLabel.setScaledContents(True)
+	figureLabel.setMaximumSize(QSize(500,400))
+	figureLabel.setAlignment(Qt.AlignCenter|Qt.AlignVCenter)
+	figureLabel.setPixmap(figureMap)
+	self.ui.spectrumGraph_prechar.addWidget(figureLabel)
 	
 	self.ui.precharTabs.setCurrentIndex(0)
 	self.ui.resultsAlgoTabs.setCurrentIndex(3)
@@ -2172,4 +2173,13 @@ def addToErrorLayout(self,errorArray):
 			label.setAlignment(Qt.AlignTop)
 			self.ui.errorLayout.addWidget(label)
 			
-			
+# OLD CODE
+# fig = supply.openfig(".\Figures\Spectrum.fig")
+# self.figure.clear()
+# data = [1,2,3,4]
+# ax = self.figure.add_subplot(111)
+# ax.plot(data)
+# self.figure
+#refresh canvas
+# self.canvas.draw()
+		

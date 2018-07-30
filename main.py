@@ -21,9 +21,6 @@ import parameterFunctions as param
 
 # setup matlab engine
 import matlab.engine
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
-import matplotlib.pyplot as plt
 
 supply = matlab.engine.start_matlab()
 # add all folders and subfolders in peprs to matlab path
@@ -67,12 +64,7 @@ class Window(QMainWindow):
 	
 	def initMainUI(self):		
 		
-		# create matlab plots
-		self.figure = plt.figure()
-		self.canvas = FigureCanvas(self.figure)
-		self.toolbar = NavigationToolbar(self.canvas, self)
-		self.ui.spectrumGraph_prechar.addWidget(self.toolbar)
-		self.ui.spectrumGraph_prechar.addWidget(self.canvas)
+		
 		
 		# deal with error widget
 		self.ui.errorScrollArea.setMaximumHeight(0)
@@ -979,3 +971,15 @@ if __name__ == '__main__':
 # self.ui.runStandard.toggled.connect(lambda: flow.standardSetup(self,greyButton))
 # self.ui.runVSG.toggled.connect(lambda: flow.vsgOnlySetup(self,disabledButton,greyButton))
 # self.ui.runVSA.toggled.connect(lambda: flow.vsaOnlySetup(self,disabledButton,greyButton,greyButton))
+
+# create matlab plots
+
+# from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+# from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
+# import matplotlib.pyplot as plt
+
+# self.figure = plt.figure()
+# self.canvas = FigureCanvas(self.figure)
+# self.toolbar = NavigationToolbar(self.canvas, self)
+# self.ui.spectrumGraph_prechar.addWidget(self.toolbar)
+# self.ui.spectrumGraph_prechar.addWidget(self.canvas)

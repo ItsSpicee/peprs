@@ -12,8 +12,7 @@ function Preview_Signal()
         In_ori = Y_filtered;
     end
     
-    PlotSpectrum(In_ori, In_ori, Signal.Fsample);
+    Plot_Prechar_Spectrum(In_ori, In_ori, Signal.Fsample);
 
     clear Y_filtered Y
-    ProcessInputFiles
 end
