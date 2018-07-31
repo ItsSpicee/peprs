@@ -1670,7 +1670,7 @@ def runDPD(self,setBox,setButton,supply):
 			"FreqMultiplierFactor": float(self.ui.lineEdit_270.text())	
 		}
 		rx={
-			"Type" : float(self.ui.vsaType.currentIndex()),
+			"Type" : self.ui.vsaType.currentText(),
 			"FCarrier" : float(self.ui.centerFreq_vsaMeas_2.text()),
 			"MirrorSignalFlag" : float(self.ui.mirrorFlag_down.currentIndex()),
 			"FSample" : float(self.ui.sampRate_vsaMeas_2().text()),
@@ -1679,7 +1679,8 @@ def runDPD(self,setBox,setButton,supply):
 			"MeasuredPeriods" : float(self.ui.noFrameTimes_vsaMeas_2.text())
 		}
 		
-		supply.Signal_Generation_Test(tx,rx)
+		supply.Set_TXRX_Structures(tx,rx)
+		supply.Signal_Generation_Test()
 		
 		
 		setButton.setText("Unset")
