@@ -24,7 +24,8 @@ PSDin = plot(msspectrum(h, In, 'centerDC', true, 'Fs', Fs)) ;
 set(PSDin, 'Color', 'blue', 'LineWidth', 2) ;
 PSDout = plot(msspectrum(h, Out, 'centerDC', true, 'Fs', Fs)) ;
 set(PSDout, 'Color', 'red', 'LineWidth', 2 ) ;
-legend( 'Input Power Spectrum Density' , 'Output Power Spectrum Density' , 1);
+%legend( 'Input Power Spectrum Density' , 'Output Power Spectrum Density' , 1);
+legend( 'Input Power Spectrum Density' , 'Output Power Spectrum Density','Location','northoutside');
 hold off
 
 end

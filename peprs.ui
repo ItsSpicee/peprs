@@ -183,7 +183,7 @@ QPushButton:hover{background-color:rgb(217, 0, 0);}</string>
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="algoTab">
          <property name="layoutDirection">
@@ -868,8 +868,8 @@ Move to 'DPD' tab.</string>
                          <property name="geometry">
                           <rect>
                            <x>0</x>
-                           <y>-262</y>
-                           <width>738</width>
+                           <y>0</y>
+                           <width>590</width>
                            <height>550</height>
                           </rect>
                          </property>
@@ -7526,7 +7526,7 @@ QFrame{background-color:#d1d5de}</string>
                      <enum>QTabWidget::Rounded</enum>
                     </property>
                     <property name="currentIndex">
-                     <number>1</number>
+                     <number>3</number>
                     </property>
                     <property name="usesScrollButtons">
                      <bool>true</bool>
@@ -9715,65 +9715,16 @@ QFrame{background-color:#d1d5de}</string>
                              <attribute name="title">
                               <string>Spectrum</string>
                              </attribute>
-                             <layout class="QVBoxLayout" name="verticalLayout_105" stretch="1,8">
+                             <layout class="QVBoxLayout" name="verticalLayout_123" stretch="8">
                               <item>
-                               <layout class="QHBoxLayout" name="horizontalLayout_336">
-                                <item>
-                                 <widget class="QLabel" name="label_1113">
-                                  <property name="text">
-                                   <string/>
-                                  </property>
-                                  <property name="pixmap">
-                                   <pixmap>icons/download.png</pixmap>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item>
-                                 <widget class="QLabel" name="label_1114">
-                                  <property name="font">
-                                   <font>
-                                    <family>Arial</family>
-                                    <pointsize>9</pointsize>
-                                   </font>
-                                  </property>
-                                  <property name="text">
-                                   <string>Download Figure</string>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item>
-                                 <spacer name="horizontalSpacer_25">
-                                  <property name="orientation">
-                                   <enum>Qt::Horizontal</enum>
-                                  </property>
-                                  <property name="sizeHint" stdset="0">
-                                   <size>
-                                    <width>40</width>
-                                    <height>20</height>
-                                   </size>
-                                  </property>
-                                 </spacer>
-                                </item>
+                               <layout class="QVBoxLayout" name="spectrumGraph_prechar">
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
                                </layout>
-                              </item>
-                              <item>
-                               <widget class="QLabel" name="label_1110">
-                                <property name="font">
-                                 <font>
-                                  <family>Arial</family>
-                                  <pointsize>10</pointsize>
-                                 </font>
-                                </property>
-                                <property name="frameShape">
-                                 <enum>QFrame::Box</enum>
-                                </property>
-                                <property name="text">
-                                 <string>Spectrum Plot</string>
-                                </property>
-                                <property name="alignment">
-                                 <set>Qt::AlignCenter</set>
-                                </property>
-                               </widget>
                               </item>
                              </layout>
                             </widget>
@@ -10203,7 +10154,7 @@ QFrame{background-color:#d1d5de}</string>
                              </font>
                             </property>
                             <property name="text">
-                             <string>Path to Calibration Validation File:</string>
+                             <string>Path to PreCharacterization Setup File:</string>
                             </property>
                            </widget>
                           </item>
@@ -11871,7 +11822,7 @@ QFrame{background-color:#d1d5de}</string>
 QWidget#vsaMeas{background-color:rgb(247,247,247)}</string>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="vsaMeas">
              <property name="font">
@@ -14164,7 +14115,7 @@ Analyzer</string>
                              <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                             </property>
                             <property name="currentIndex">
-                             <number>0</number>
+                             <number>1</number>
                             </property>
                             <widget class="QWidget" name="widget">
                              <attribute name="title">
@@ -14186,7 +14137,7 @@ Analyzer</string>
                               <item>
                                <widget class="QStackedWidget" name="vsaMeasGenStack">
                                 <property name="currentIndex">
-                                 <number>1</number>
+                                 <number>0</number>
                                 </property>
                                 <widget class="QWidget" name="page_29">
                                  <layout class="QHBoxLayout" name="horizontalLayout_234">
@@ -14206,7 +14157,7 @@ Analyzer</string>
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>601</width>
+                                       <width>590</width>
                                        <height>415</height>
                                       </rect>
                                      </property>
@@ -14540,8 +14491,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                      <property name="geometry">
                                       <rect>
                                        <x>0</x>
-                                       <y>-68</y>
-                                       <width>601</width>
+                                       <y>0</y>
+                                       <width>590</width>
                                        <height>415</height>
                                       </rect>
                                      </property>
@@ -15005,7 +14956,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>601</width>
+                                       <width>590</width>
                                        <height>575</height>
                                       </rect>
                                      </property>
@@ -16601,7 +16552,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>603</width>
+                                 <width>590</width>
                                  <height>370</height>
                                 </rect>
                                </property>
@@ -20136,7 +20087,7 @@ Fill out ‘General Settings’ and select file to use in ‘Calibration Setting
                          <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                         </property>
                         <property name="currentIndex">
-                         <number>1</number>
+                         <number>0</number>
                         </property>
                         <widget class="QWidget" name="upStandardSettings_10">
                          <attribute name="title">
@@ -20217,7 +20168,7 @@ Fill out ‘General Settings’ and select file to use in ‘Calibration Setting
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>600</width>
+                                   <width>590</width>
                                    <height>500</height>
                                   </rect>
                                  </property>
@@ -21555,7 +21506,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                  <property name="geometry">
                                   <rect>
                                    <x>0</x>
-                                   <y>-80</y>
+                                   <y>0</y>
                                    <width>600</width>
                                    <height>350</height>
                                   </rect>
@@ -22560,8 +22511,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                  <property name="geometry">
                                   <rect>
                                    <x>0</x>
-                                   <y>-630</y>
-                                   <width>602</width>
+                                   <y>0</y>
+                                   <width>590</width>
                                    <height>900</height>
                                   </rect>
                                  </property>
@@ -29507,7 +29458,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>602</width>
+                                   <width>590</width>
                                    <height>370</height>
                                   </rect>
                                  </property>
