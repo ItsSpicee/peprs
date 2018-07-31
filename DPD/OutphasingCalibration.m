@@ -143,8 +143,6 @@ RX.TriggerChannel = 4;
 
 % load('FIR_filter_fs_0r4GHz_fpass_0r06GHz_Order815');
 
-autoscaleFlag = 1;
-
 % Set remaining RX parameters
 SetRxParameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

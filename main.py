@@ -63,9 +63,7 @@ class Window(QMainWindow):
 			self.ui.dutStackedWidget.setCurrentIndex(1)
 	
 	def initMainUI(self):		
-		
-		
-		
+
 		# deal with error widget
 		self.ui.errorScrollArea.setMaximumHeight(0)
 		self.ui.redockButton.clicked.connect(lambda: menu.redock(self))
@@ -701,7 +699,7 @@ class Window(QMainWindow):
 		self.ui.calValPreview.clicked.connect(lambda: set.calValPreview(self))
 		self.ui.calValRun.clicked.connect(lambda: set.runCalValidation(self,setParams,self.ui.calValRun,supply))
 		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self,supply))
-		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun))
+		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun,supply))
 		self.ui.dpdPreview.clicked.connect(lambda: set.dpdPreview(self))
 		self.ui.dpdRun.clicked.connect(lambda: set.runDPD(self,setParams,self.ui.dpdRun))
 		self.ui.algoSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.refRXAdvEquip,setParams,self.ui.algoSetAdv))

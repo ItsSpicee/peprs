@@ -366,6 +366,24 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 							self.ui.vsgNextSteps.setCurrentIndex(6)
 							self.ui.up_psg_next.setCurrentIndex(4)
 							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor)
+				# general step 3 vsa parameters
+				dGen = {
+					"AnalysisBandwidth":self.ui.analysisBandwidth_sa.text(),
+					"Attenuation":self.ui.attenuation_sa.text(),
+					"ClockReference":self.ui.clockRef_sa.currentIndex(),
+					"TriggerLevel":self.ui.trigLevel_sa.text(),
+					"Interleaving" : self.ui.interleaving_dig.currentIndex(),
+					"EnableExternalClock_Dig" : self.ui.clockEnabled_dig.currentIndex(),
+					"ExternalClockFrequency" : self.ui.clockFreq_dig.currentIndex(),
+					"VFS" : self.ui.vfs_dig.text(),
+					"ACDCCoupling" : self.ui.coupling_dig.currentIndex(),
+					"DriverPath" : self.ui.driverPath_scope.text(),
+					"EnableExternalClock_Scope" : self.ui.extClkEnabled_scope.currentIndex(),
+					"iChannel" : self.ui.iChannel_awg.currentIndex(),
+					"qChannel" : self.ui.qChannel_awg.currentIndex()
+				}
+				supply.SetRxParameters_GUI(dGen,nargout=0);
+				
 			else:
 				self.fillParametersMsg()
 				self.ui.digSet.setChecked(False)
@@ -1634,8 +1652,78 @@ def preCharPreview(self,supply):
 	self.ui.resultsAlgoTabs.setCurrentIndex(3)
 	self.ui.precharAlgoStack.setCurrentIndex(0)
 	
-def runPrecharacterization(self,setBox,setButton):
+def runPrecharacterization(self,setBox,setButton,supply):
+	ampCorrField = ""
+	trigAmpField = ""
+	fCarrierField = ""
+	fSampleField = ""
+	addressField = ""
 	if setButton.isChecked() == True:
+		awgPage = self.ui.awgParamsStack_vsgMeas.currentIndex()
+		if awgPage == 1:
+			ampCorrField = self.ui.ampCorrection_awgCal.currentIndex()
+			trigAmpField = self.ui.trigAmp_awgCal.text()
+		elif awgPage == 2:
+			ampCorrField = self.ui.ampCorrection_awgCal_2.currentIndex()
+			trigAmpField = self.ui.trigAmp_awgCal_2.text()
+		vsaPage = self.ui.vsaMeasGenStack.currentIndex()
+		if vsaPage == 1:
+			fCarrierField = self.ui.centerFreq_vsaMeas.text()
+			fSampleField = self.ui.sampRate_vsaMeas.text()
+		elif vsaPage == 0:
+			fCarrierField = self.ui.centerFreq_vsaMeas_2.text()
+			fSampleField = self.ui.sampRate_vsaMeas_2.text()
+		vsaType = self.ui.vsaType.currentIndex()
+		if vsaType == 1 or vsaType == 5:
+			addressField = self.ui.address_scope.text()
+		elif vsaType == 2 or vsaType == 6:
+			addressField = self.ui.address_dig.text()
+		elif vsaType == 3 or vsaType == 4:
+			addressField = self.ui.address_sa.text()
+		tx={
+			"Type": self.ui.vsgSetup.currentIndex(),
+			"Model": self.ui.partNum_awg.text(),
+			"FGuard" : self.ui.guardBand_prechar.text(),
+			"FCarrier" : self.ui.centerFreq_prechar.text(),
+			"SubtractMeanFlag" : self.ui.subtractMean_prechar.currentIndex(),
+			"FSampleDAC" : self.ui.maxSampleRate_awg.text(),
+			"NumberOfSegments" : self.ui.noSegments_prechar.text(),
+			"ExpansionMarginEnable": self.ui.enableExpansion_prechar.currentIndex(),
+			"ExpansionMargin" : self.ui.expansionMargin_prechar.text(),
+			"Amp_Corr" : ampCorrField,
+			"GainExpansion_flag" : self.ui.gainExpansionFlag_prechar.currentIndex(),
+			"GainExpansion" : self.ui.gainExpansion_prechar.text(),
+			"FreqMutiplierFlag" : self.ui.freqMultiplierFlag_prechar.currentIndex(),
+			"FreqMultiplierFactor": self.ui.freqMultiplierFactor_prechar.text(),	
+			"ReferenceClockSource": self.ui.refClockSorce_awg.currentIndex(),	
+			"ReferenceClock": self.ui.extRefFreq_awg.text(),	
+			"VFS": self.ui.dacRange_awg.text(),	
+			"TriggerAmplitude": trigAmpField
+		}
+		rx={
+			"Type" : self.ui.vsaType.currentIndex(),
+			"FCarrier" : fCarrierField,
+			"MirrorSignalFlag" : self.ui.mirrorSignal_prechar.currentIndex(),
+			"FSample" : fSampleField,
+			"MeasuredPeriods" : self.ui.noPeriods_prechar.text(),
+			"xLength" : self.ui.crossCorrLength_prechar.text(),
+			"FsampleOverwrite" : self.ui.sampRateOverwrite_prechar.currentIndex(),
+			"SubRate" : self.ui.subRate_prechar.currentIndex(),
+			"AlignFreqDomainFlag" : self.ui.alignFreqDomain_prechar.currentIndex(),
+			"DownconversionFilterFile" : self.ui.downFileField_algo_2.text(),
+			"SubtractDCFlag" : self.ui.subtractDC_prechar.currentIndex(),
+			"VisaAddress": addressField
+			
+		}
+		dSignal = {
+			"signalName": self.ui.comboBox_81.currentIndex(),
+			"removeDC": self.ui.comboBox_82.currentIndex()
+		}
+	
+		supply.Set_Prechar_Signal(dSignal,nargout=0)
+		supply.Set_RXTX_Structures(tx,rx,nargout=0)
+		supply.Signal_Generation_Test(nargout=0)
+		
 		setButton.setText("Unset")
 		self.ui.precharTabs.setCurrentIndex(0)
 		self.ui.resultsAlgoTabs.setCurrentIndex(3)
@@ -1677,35 +1765,6 @@ def dpdPreview(self):
 	
 def runDPD(self,setBox,setButton,supply):
 	if setButton.isChecked() == True:
-	
-		tx={
-			"FGuard" : float(self.ui.lineEdit_249.text()),
-			"FCarrier" : float(self.ui.lineEdit_268.text()),
-			"SubtractMeanFlag" : float(self.ui.comboBox_135.currentIndex()),
-			"FSampleDAC" : float(self.ui.maxSampleRate_awg.text()),
-			"NumberOfSegments" : float(self.ui.lineEdit_264.text()),
-			"ExpansionMarginEnable": float(self.ui.comboBox_134.currentIndex()),
-			"ExpansionMargin" : float(self.ui.lineEdit_263.text()),
-			"Amp_Corr" : float(self.ui.ampCorrection_awgCal.currentIndex()),
-			"GainExpansion_flag" : float(self.ui.comboBox_136.currentIndex()),
-			"GainExpansion" : float(self.ui.lineEdit_269.text()),
-			"FreqMutiplierFlag" : float(self.ui.comboBox_138.currentIndex()),
-			"FreqMultiplierFactor": float(self.ui.lineEdit_270.text())	
-		}
-		rx={
-			"Type" : self.ui.vsaType.currentText(),
-			"FCarrier" : float(self.ui.centerFreq_vsaMeas_2.text()),
-			"MirrorSignalFlag" : float(self.ui.mirrorFlag_down.currentIndex()),
-			"FSample" : float(self.ui.sampRate_vsaMeas_2().text()),
-			"FrameTime" : float(self.ui.frameTime_vsaMeas_2.text()),
-			"FrameTimeFlag" : float(self.ui.vsgFrameTime_vsaMeas_2.currentIndex()),
-			"MeasuredPeriods" : float(self.ui.noFrameTimes_vsaMeas_2.text())
-		}
-		
-		supply.Set_TXRX_Structures(tx,rx)
-		supply.Signal_Generation_Test()
-		
-		
 		setButton.setText("Unset")
 		self.ui.dpdTabs.setCurrentIndex(0)
 		self.ui.resultsAlgoTabs.setCurrentIndex(4)
@@ -2183,4 +2242,5 @@ def addToErrorLayout(self,errorArray):
 # self.figure
 #refresh canvas
 # self.canvas.draw()
+
 		
