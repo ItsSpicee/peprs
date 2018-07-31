@@ -24,5 +24,5 @@ function Plot_Prechar_Spectrum(In, Out, Fs)
     %legend( 'Input Power Spectrum Density' , 'Output Power Spectrum Density' , 1);
     legend( 'Input Power Spectrum Density' , 'Output Power Spectrum Density','Location','northoutside');
     hold off
-    saveas(fig,".\Figures\Spectrum.png")
+    saveas(fig,".\Figures\Prechar_Spectrum.png")
 end

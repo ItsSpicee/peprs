@@ -6,7 +6,10 @@ from PyQt5.QtCore import (Qt,QSize)
 
 import windowFunctions as win
 
-import random
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.offsetbox import (OffsetImage, AnnotationBbox)
+import matplotlib.image as mpimg
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions used in main.py
 
@@ -1640,14 +1643,13 @@ def preCharPreview(self,supply):
 	supply.Set_Prechar_Signal(d,nargout=0)
 	supply.Preview_Signal(nargout=0)
 	
-	figureLabel = QLabel()
-	figureMap = QPixmap("Figures/Spectrum.png")
-	figureLabel.setScaledContents(True)
-	figureLabel.setMaximumSize(QSize(500,400))
-	figureLabel.setAlignment(Qt.AlignCenter|Qt.AlignVCenter)
-	figureLabel.setPixmap(figureMap)
-	self.ui.spectrumGraph_prechar.addWidget(figureLabel)
-	
+	image = mpimg.imread('.\Figures\Prechar_Spectrum.png')
+	self.figure.clear()
+	a = self.figure.add_subplot(1,1,1)
+	imgplot = plt.imshow(image)
+	#refresh canvas
+	self.canvas.draw()
+	 
 	self.ui.precharTabs.setCurrentIndex(0)
 	self.ui.resultsAlgoTabs.setCurrentIndex(3)
 	self.ui.precharAlgoStack.setCurrentIndex(0)
@@ -2232,15 +2234,12 @@ def addToErrorLayout(self,errorArray):
 			label.setText(x)
 			label.setAlignment(Qt.AlignTop)
 			self.ui.errorLayout.addWidget(label)
-			
-# OLD CODE
-# fig = supply.openfig(".\Figures\Spectrum.fig")
-# self.figure.clear()
-# data = [1,2,3,4]
-# ax = self.figure.add_subplot(111)
-# ax.plot(data)
-# self.figure
-#refresh canvas
-# self.canvas.draw()
 
-		
+# OLD CODE
+# figureLabel = QLabel()
+# figureMap = QPixmap("Figures/Spectrum.png")
+# figureLabel.setScaledContents(True)
+# figureLabel.setMaximumSize(QSize(500,400))
+# figureLabel.setAlignment(Qt.AlignCenter|Qt.AlignVCenter)
+# figureLabel.setPixmap(figureMap)
+# self.ui.spectrumGraph_prechar.addWidget(figureLabel)			

@@ -22,6 +22,10 @@ import parameterFunctions as param
 # setup matlab engine
 import matlab.engine
 
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
+import matplotlib.pyplot as plt
+
 supply = matlab.engine.start_matlab()
 # add all folders and subfolders in peprs to matlab path
 currentPath = os.getcwd();
@@ -64,6 +68,13 @@ class Window(QMainWindow):
 	
 	def initMainUI(self):		
 
+		# create matlab plots
+		self.figure = plt.figure()
+		self.canvas = FigureCanvas(self.figure)
+		self.toolbar = NavigationToolbar(self.canvas, self)
+		self.ui.spectrumGraph_prechar.addWidget(self.toolbar)
+		self.ui.spectrumGraph_prechar.addWidget(self.canvas)
+		
 		# deal with error widget
 		self.ui.errorScrollArea.setMaximumHeight(0)
 		self.ui.redockButton.clicked.connect(lambda: menu.redock(self))
@@ -927,26 +938,6 @@ class Window(QMainWindow):
 			self.ui.emergButtonFirst.setStyleSheet(greenButton)
 			self.ui.emergButtonFirst.setText("Turn On DC")	
 
-	# def paintEvent(self,e):
-		# qp = QPainter()
-		# qp.begin(self)
-		# self.drawLines(qp)
-		# qp.end()
-		
-	# def drawLines(self,qp):
-		# pen = QPen(QtCore.Qt.black, 2, QtCore.Qt.SolidLine)
-		# qp.setPen(pen)
-		# qp.drawLine(60,100,70,110)
-		
-	# void LabelWidget::paintEvent(QPaintEvent*)
-	# {
-		# QPainter painter(this)
-		# painter.setPen(Qt::black);
-		# #... Need an appropriate call to painter.translate() for this to work properly
-		# painter.rotate(90);
-		# painter.drawText(QPoint(0,0), _text);
-	# }
-
 if __name__ == '__main__':
 	app = QApplication(sys.argv)
 	window = Window()
@@ -969,15 +960,3 @@ if __name__ == '__main__':
 # self.ui.runStandard.toggled.connect(lambda: flow.standardSetup(self,greyButton))
 # self.ui.runVSG.toggled.connect(lambda: flow.vsgOnlySetup(self,disabledButton,greyButton))
 # self.ui.runVSA.toggled.connect(lambda: flow.vsaOnlySetup(self,disabledButton,greyButton,greyButton))
-
-# create matlab plots
-
-# from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-# from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
-# import matplotlib.pyplot as plt
-
-# self.figure = plt.figure()
-# self.canvas = FigureCanvas(self.figure)
-# self.toolbar = NavigationToolbar(self.canvas, self)
-# self.ui.spectrumGraph_prechar.addWidget(self.toolbar)
-# self.ui.spectrumGraph_prechar.addWidget(self.canvas)
