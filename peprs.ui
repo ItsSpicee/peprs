@@ -868,8 +868,8 @@ Move to 'DPD' tab.</string>
                          <property name="geometry">
                           <rect>
                            <x>0</x>
-                           <y>-262</y>
-                           <width>738</width>
+                           <y>0</y>
+                           <width>590</width>
                            <height>550</height>
                           </rect>
                          </property>
@@ -2266,8 +2266,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          <property name="geometry">
                           <rect>
                            <x>0</x>
-                           <y>-262</y>
-                           <width>738</width>
+                           <y>0</y>
+                           <width>590</width>
                            <height>550</height>
                           </rect>
                          </property>
@@ -3715,7 +3715,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>727</width>
+                           <width>590</width>
                            <height>1100</height>
                           </rect>
                          </property>
@@ -6351,7 +6351,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>740</width>
+                           <width>590</width>
                            <height>550</height>
                           </rect>
                          </property>
@@ -6588,8 +6588,8 @@ QFrame{background-color:#d1d5de}</string>
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>286</width>
-                                 <height>674</height>
+                                 <width>268</width>
+                                 <height>500</height>
                                 </rect>
                                </property>
                                <property name="minimumSize">
@@ -14207,7 +14207,7 @@ Analyzer</string>
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>601</width>
+                                       <width>590</width>
                                        <height>415</height>
                                       </rect>
                                      </property>
@@ -14542,7 +14542,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>601</width>
+                                       <width>590</width>
                                        <height>415</height>
                                       </rect>
                                      </property>
@@ -15006,7 +15006,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>601</width>
+                                       <width>590</width>
                                        <height>575</height>
                                       </rect>
                                      </property>
@@ -20218,7 +20218,7 @@ Fill out ‘General Settings’ and select file to use in ‘Calibration Setting
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>600</width>
+                                   <width>590</width>
                                    <height>500</height>
                                   </rect>
                                  </property>
@@ -21557,7 +21557,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>600</width>
+                                   <width>590</width>
                                    <height>350</height>
                                   </rect>
                                  </property>
@@ -22562,7 +22562,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>602</width>
+                                   <width>590</width>
                                    <height>900</height>
                                   </rect>
                                  </property>
@@ -29508,7 +29508,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>602</width>
+                                   <width>590</width>
                                    <height>370</height>
                                   </rect>
                                  </property>
@@ -29827,7 +29827,7 @@ QFrame{background-color:#d1d5de}</string>
                                    <x>0</x>
                                    <y>0</y>
                                    <width>445</width>
-                                   <height>631</height>
+                                   <height>600</height>
                                   </rect>
                                  </property>
                                  <property name="minimumSize">
@@ -32623,7 +32623,7 @@ Modelling Parameters</string>
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>662</width>
+                                       <width>220</width>
                                        <height>200</height>
                                       </rect>
                                      </property>
@@ -33054,7 +33054,7 @@ QWidget#power2{background-color:rgb(247,247,247)}
 QWidget#power3{background-color:rgb(247,247,247)}</string>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="vsg">
              <property name="styleSheet">
@@ -36948,7 +36948,7 @@ Analyzer</string>
                    <enum>QTabWidget::Rounded</enum>
                   </property>
                   <property name="currentIndex">
-                   <number>0</number>
+                   <number>1</number>
                   </property>
                   <widget class="QWidget" name="tab_7">
                    <property name="styleSheet">
@@ -36976,7 +36976,7 @@ Analyzer</string>
                        <string notr="true"/>
                       </property>
                       <property name="currentIndex">
-                       <number>0</number>
+                       <number>2</number>
                       </property>
                       <widget class="QWidget" name="awgSettings">
                        <layout class="QHBoxLayout" name="horizontalLayout_11">
@@ -37493,8 +37493,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>593</width>
-                             <height>382</height>
+                             <width>605</width>
+                             <height>871</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -37537,7 +37537,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <property name="verticalSpacing">
                               <number>7</number>
                              </property>
-                             <item row="12" column="1" colspan="2">
+                             <item row="13" column="1" colspan="2">
                               <widget class="QLineEdit" name="partNum_vsg">
                                <property name="enabled">
                                 <bool>false</bool>
@@ -37586,7 +37586,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                </property>
                               </widget>
                              </item>
-                             <item row="12" column="0">
+                             <item row="13" column="0">
                               <widget class="QLabel" name="label_47">
                                <property name="font">
                                 <font>
@@ -37798,6 +37798,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                <property name="text">
                                 <string>Hz</string>
                                </property>
+                               <property name="alignment">
+                                <set>Qt::AlignCenter</set>
+                               </property>
                               </widget>
                              </item>
                              <item row="7" column="1" colspan="2">
@@ -37860,8 +37863,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                </property>
                               </widget>
                              </item>
-                             <item row="10" column="2">
-                              <widget class="QLabel" name="label_53">
+                             <item row="12" column="0">
+                              <widget class="QLabel" name="label_40">
                                <property name="font">
                                 <font>
                                  <family>Arial</family>
@@ -37869,11 +37872,11 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                 </font>
                                </property>
                                <property name="text">
-                                <string>Sa/s</string>
+                                <string>Maximum Sample Rate:</string>
                                </property>
                               </widget>
                              </item>
-                             <item row="10" column="1">
+                             <item row="12" column="1">
                               <widget class="QLineEdit" name="maxSampleRate_vsg">
                                <property name="enabled">
                                 <bool>false</bool>
@@ -37898,8 +37901,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                </property>
                               </widget>
                              </item>
-                             <item row="10" column="0">
-                              <widget class="QLabel" name="label_40">
+                             <item row="12" column="2">
+                              <widget class="QLabel" name="label_53">
                                <property name="font">
                                 <font>
                                  <family>Arial</family>
@@ -37907,7 +37910,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                 </font>
                                </property>
                                <property name="text">
-                                <string>Maximum Sample Rate:</string>
+                                <string>Sa/s</string>
                                </property>
                               </widget>
                              </item>
@@ -38250,6 +38253,32 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                </property>
                               </widget>
                              </item>
+                             <item row="3" column="3">
+                              <widget class="QLabel" name="label_44">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>V</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="4" column="3">
+                              <widget class="QLabel" name="label_48">
+                               <property name="font">
+                                <font>
+                                 <family>Arial</family>
+                                 <pointsize>9</pointsize>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>V</string>
+                               </property>
+                              </widget>
+                             </item>
                             </layout>
                            </widget>
                           </widget>
@@ -38309,7 +38338,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <x>0</x>
                              <y>0</y>
                              <width>629</width>
-                             <height>500</height>
+                             <height>871</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -45915,8 +45944,8 @@ Analyzer</string>
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>605</width>
-                             <height>871</height>
+                             <width>590</width>
+                             <height>382</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -47370,8 +47399,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>605</width>
-                             <height>871</height>
+                             <width>593</width>
+                             <height>500</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -48315,7 +48344,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <x>0</x>
                              <y>0</y>
                              <width>629</width>
-                             <height>871</height>
+                             <height>575</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -51033,8 +51062,8 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>605</width>
-                         <height>1008</height>
+                         <width>590</width>
+                         <height>382</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -54484,8 +54513,8 @@ Analyzer</string>
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>605</width>
-                         <height>1008</height>
+                         <width>590</width>
+                         <height>382</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -57872,8 +57901,8 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>605</width>
-                             <height>871</height>
+                             <width>590</width>
+                             <height>382</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -58475,7 +58504,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <x>0</x>
                              <y>0</y>
                              <width>629</width>
-                             <height>871</height>
+                             <height>600</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -61970,8 +61999,8 @@ Analyzer</string>
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>605</width>
-                         <height>1008</height>
+                         <width>590</width>
+                         <height>550</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
