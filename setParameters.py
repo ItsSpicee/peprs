@@ -45,8 +45,8 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 			if iChannel == 0 or qChannel == 0:
 				instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 			else:
-				supply.Set_Channel_Mapping(iChannel,qChannel,"RX",nargout=0)
-				supply.Set_Channel_Mapping(iChannel,qChannel,"AWG",nargout=0)
+				# supply.Set_Channel_Mapping(iChannel,qChannel,"RX",nargout=0)
+				# supply.Set_Channel_Mapping(iChannel,qChannel,"AWG",nargout=0)
 				flag = setAWGParams(self,d,supply)
 		else:
 			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
@@ -55,6 +55,7 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 		if flag:
 			# set MATLAB RXCal parameters
 			awgDict = {
+				"model" : self.ui.partNum_awg.text(),
 				"model" : self.ui.partNum_awg.text(),
 				"sampleRate" : self.ui.maxSampleRate_awg.text(),
 				"type": self.ui.vsgSetup.currentIndex(),
@@ -371,6 +372,35 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 							self.ui.up_psg_next.setCurrentIndex(4)
 							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor)
 				# general step 3 vsa parameters
+				fSampleField = ""
+				vsaPage = self.ui.vsaMeasGenStack.currentIndex()
+				if vsaPage == 1:
+					fSampleField = self.ui.sampRate_vsaMeas.text()
+				elif vsaPage == 0:
+					fSampleField = self.ui.sampRate_vsaMeas_2.text()
+				
+				channelVec = [0,0,0,0]
+				c1 = self.ui.measChannel1.isChecked()
+				c2 = self.ui.measChannel2.isChecked()
+				c2 = self.ui.measChannel3.isChecked()
+				c2 = self.ui.measChannel4.isChecked()
+				if c1:
+					channelVec[0] = 1
+				else:
+					channelVec[0] = 0
+				if c2:
+					channelVec[0] = 1
+				else:
+					channelVec[0] = 0
+				if c3:
+					channelVec[0] = 1
+				else:
+					channelVec[0] = 0
+				if c4:
+					channelVec[0] = 1
+				else:
+					channelVec[0] = 0
+					
 				dGen = {
 					"AnalysisBandwidth":self.ui.analysisBandwidth_sa.text(),
 					"Attenuation":self.ui.attenuation_sa.text(),
@@ -383,8 +413,8 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 					"ACDCCoupling" : self.ui.coupling_dig.currentIndex(),
 					"DriverPath" : self.ui.driverPath_scope.text(),
 					"EnableExternalClock_Scope" : self.ui.extClkEnabled_scope.currentIndex(),
-					"iChannel" : self.ui.iChannel_awg.currentIndex(),
-					"qChannel" : self.ui.qChannel_awg.currentIndex()
+					"ChannelVec": channelVec,
+					"FSample": fSampleField
 				}
 				supply.SetRxParameters_GUI(dGen,nargout=0);
 				
@@ -1640,13 +1670,13 @@ def preCharPreview(self,canvas,figure,supply):
 
 	image = mpimg.imread('.\Figures\Prechar_Spectrum.png')
 	figure.clear()
-	imgplot = plt.imshow(image)
+	ax = figure.add_subplot(111)
+	imgplot = ax.imshow(image)
 	plt.xlabel('Frequency(GHz)')
 	plt.ylabel('Power(dB)')
 	plt.title('Welch Mean-Square Spectrum Estimate')
 	plt.xticks([], [])
 	plt.yticks([], [])
-	plt.axis('scaled')
 	canvas.draw()
 	 
 	self.ui.precharTabs.setCurrentIndex(0)
@@ -1712,7 +1742,12 @@ def runPrecharacterization(self,setBox,setButton,supply):
 			"SubRate" : self.ui.subRate_prechar.currentIndex(),
 			"AlignFreqDomainFlag" : self.ui.alignFreqDomain_prechar.currentIndex(),
 			"DownconversionFilterFile" : self.ui.downFileField_algo_2.text(),
+			"TriggerChannel" : self.ui.trigChannel_scope.text(),
+			"ASMPath" : self.ui.dllFile_uxa.text(),
+			"SetupFile" : self.ui.setupFile_uxa.text(),
+			"DataFile" : self.ui.dataFile_uxa.text(),
 			"SubtractDCFlag" : self.ui.subtractDC_prechar.currentIndex(),
+			"DemodSignalFlag": self.ui.demodulationEnable.currentIndex(),
 			"VisaAddress": addressField
 			
 		}

@@ -21,10 +21,6 @@ Measure_Pout_Eff = false;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Set Transmitter Parameters | RECEIVER PARAMS ALREADY SET IN SET_RXTX_STRUCTURES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-TX.AWG.IQOutput                = 1;   % AWG outputs both I and Q
-TX.Outphasing.Flag           = false;
-TX.AWG.SyncModuleFlag = 0;
-TX.AWG.Position = 1;
 EVM_flag                    = 0;    % If this flag is one, the code demodulates the received signal and 
                                     % computes the symbol ENM
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -36,22 +32,15 @@ ReadInputFiles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Set Receiever Parameters | RECEIVER PARAMS ALREADY SET IN SET_RXTX_STRUCTURES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Overwrite the sampling rate of the receiver (max 450MHz for digitizer is recommanded)
-if RX.FsampleOverwriteGUIFlag == 1
-    RX.FsampleOverwrite = 0 * Signal.Fsample;
-else
-    RX.FsampleOverwrite = 1 * Signal.Fsample;
-end
-%RX.FsampleOverwrite = 0 * Signal.Fsample; % Overwrite the sampling rate of the receiver (max 450MHz for digitizer is recommanded)
-
+% goes with SubRate flag, leave alone for now
+RX.FsampleOverwrite = 0 * Signal.Fsample; % Overwrite the sampling rate of the receiver (max 450MHz for digitizer is recommanded)
 RX.Analyzer.FrameTime = TX.FrameTime; % One measurement frame;
 RX.Analyzer.PointsPerRecord = RX.Analyzer.Fsample * RX.Analyzer.FrameTime * RX.Analyzer.NumberOfMeasuredPeriods;
 
-RX.TriggerChannel = 3;
-
 % VSA Parameters
-RX.VSA.DemodSignalFlag = true;
-SetVSAParameters
+if RX.VSA.ASMPath == "" || RX.VSA.ASMPath ==" "
+    SetVSAParameters
+else
 
 % Set remaining RX parameters
 SetRxParameters

@@ -9,7 +9,7 @@ else
 end
 
 % If we are using a sub-sampling TOR, use the fractional delay alignment
-if RX.SubRate > 1
+if RX.SubRate > 1 % 1 is default, greater than 1 then SubRate flag is true
     FractionalDelayFlag = 1;
 else
     FractionalDelayFlag = 0;
@@ -46,7 +46,7 @@ if (RX.UXA.Downconverter_flag)
         RX.FrameTime, RX.VisaAddress, RX.UXA.Attenuation, RX.UXA.ClockReference)
 end
 
-autoscaleFlag = 1;
+autoscaleFlag = 1; % legacy parameter, leave for now
 save('Scope_in.mat', 'RX', 'autoscaleFlag');
 
 %% OLD CODE

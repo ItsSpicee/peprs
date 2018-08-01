@@ -97,27 +97,43 @@ function result = Set_VSA_UXA(dict,model)
 		UXAConfig.AnalysisBW = dict.analysisBW;
 
 		% set trigger parameters
-		if dict.trigSource == 1
-			errorList = runCommand(spectrum,sprintf(':TRIGger:WAVeform:SEQuence:SOURce %s', 'EXTernal1'),errorList);
-			errorList = runCommand(spectrum,sprintf(':TRIGger:SEQuence:EXTernal1:LEVel %g', dict.trigLevel),errorList);
-			UXAConfig.SA.TriggerLevel = dict.trigLevel;
-			UXAConfig.SA.TriggerSource = "EXT1";
-		elseif dict.trigSource == 2
-			errorList = runCommand(spectrum,sprintf(':TRIGger:WAVeform:SEQuence:SOURce %s', 'EXTernal2'),errorList);
-			errorList = runCommand(spectrum,sprintf(':TRIGger:SEQuence:EXTernal2:LEVel %g', dict.trigLevel),errorList);
-			UXAConfig.SA.TriggerLevel = dict.trigLevel;
-			UXAConfig.SA.TriggerSource = "EXT2";
-		% elseif dict.trigSource == 3
-			% fprintf(spectrum, sprintf(':TRIGger:WAVeform:SEQuence:SOURce %s', 'EXTernal3'));
-			% fprintf(spectrum, sprintf(':TRIGger:SEQuence:EXTernal3:LEVel %g', dict.trigLevel));
-			% UXAConfig.SA.TriggerSource = "EXT3";
-		elseif dict.trigSource == 3
-			% immediate or free run trigger
-			errorList = runCommand(spectrum,sprintf(':TRIGger:WAVeform:SEQuence:SOURce %s', 'IMMediate'),errorList);
-			UXAConfig.SA.TriggerSource = "IMM";
-		elseif dict.trigSource == 0
-			errorString = "Please fill out all fields before attempting to set parameters."; 
-		end
+        % if analysis BW is greater than 500e6, the trigger source must be
+        % EXT3 or IMM
+        if dict.analysisBW > 500e6
+            if dict.trigSource == 3
+                errorList = runCommand(spectrum,sprintf(':TRIGger:WAVeform:SEQuence:SOURce %s', 'EXTernal3'),errorList);
+                errorList = runCommand(spectrum,sprintf(':TRIGger:SEQuence:EXTernal3:LEVel %g', dict.trigLevel),errorList);
+                UXAConfig.SA.TriggerSource = "EXT3";
+            elseif dict.trigSource == 4
+                errorList = runCommand(spectrum,sprintf(':TRIGger:WAVeform:SEQuence:SOURce %s', 'IMMediate'),errorList);
+                UXAConfig.SA.TriggerSource = "IMM";
+            else
+                error = "EXT1 and EXT2 trigger sources are not available when the analysis bandwidth is greater than 500e6.";
+                errorList = [errorList,error];
+            end 
+        else    
+            if dict.trigSource == 1
+                errorList = runCommand(spectrum,sprintf(':TRIGger:WAVeform:SEQuence:SOURce %s', 'EXTernal1'),errorList);
+                errorList = runCommand(spectrum,sprintf(':TRIGger:SEQuence:EXTernal1:LEVel %g', dict.trigLevel),errorList);
+                UXAConfig.SA.TriggerLevel = dict.trigLevel;
+                UXAConfig.SA.TriggerSource = "EXT1";
+            elseif dict.trigSource == 2
+                errorList = runCommand(spectrum,sprintf(':TRIGger:WAVeform:SEQuence:SOURce %s', 'EXTernal2'),errorList);
+                errorList = runCommand(spectrum,sprintf(':TRIGger:SEQuence:EXTernal2:LEVel %g', dict.trigLevel),errorList);
+                UXAConfig.SA.TriggerLevel = dict.trigLevel;
+                UXAConfig.SA.TriggerSource = "EXT2";
+            elseif dict.trigSource == 3
+                errorList = runCommand(spectrum,sprintf(':TRIGger:WAVeform:SEQuence:SOURce %s', 'EXTernal3'),errorList);
+                errorList = runCommand(spectrum,sprintf(':TRIGger:SEQuence:EXTernal3:LEVel %g', dict.trigLevel),errorList);
+                UXAConfig.SA.TriggerSource = "EXT3";
+            elseif dict.trigSource == 4
+                % immediate or free run trigger
+                errorList = runCommand(spectrum,sprintf(':TRIGger:WAVeform:SEQuence:SOURce %s', 'IMMediate'),errorList);
+                UXAConfig.SA.TriggerSource = "IMM";
+            elseif dict.trigSource == 0
+                errorString = "Please fill out all fields before attempting to set parameters."; 
+            end
+        end
 		
 		
 		save(".\InstrumentFunctions\SignalCapture_UXA\UXAConfig.mat","UXAConfig")
