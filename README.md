@@ -50,3 +50,8 @@
 <p>To deploy a Qt app, follow this documentation: http://doc.qt.io/qt-5/deployment.html </p>
 <p>To create a python exe file to use during deployment, choose one of these methods: https://wiki.python.org/moin/PyQt/Deploying_PyQt_Applications </p>
 <p>The application will be statically deployed, so it is very important that the correct qt version is installed </p>
+
+<h2>Usage</h2>
+<h3>Opening and Saving Parameter Settings</h3>
+<p>In the top menu bar, there is the ability to save and open parameter setups. The appropriate text fields, drop downs, checkboxes, and radio buttons will be set to the appropriate value when saved and loaded. However, you will still have to set all of the appropriate buttons in the GUI i.e. push the "Set" or "Set & Run" buttons.</p>
+
