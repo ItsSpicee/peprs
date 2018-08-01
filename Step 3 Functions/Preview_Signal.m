@@ -13,6 +13,5 @@ function Preview_Signal()
     end
     
     Plot_Prechar_Spectrum(In_ori, In_ori, Signal.Fsample);
-
     clear Y_filtered Y
 end

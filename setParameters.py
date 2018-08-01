@@ -10,6 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.offsetbox import (OffsetImage, AnnotationBbox)
 import matplotlib.image as mpimg
+import random
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions used in main.py
 
@@ -1629,26 +1630,24 @@ def runCalValidation(self,setBox,setButton):
 		self.ui.algoNextStack.setCurrentIndex(0)
 		self.ui.debugAlgoStack.setCurrentIndex(2)
 
-def preCharPreview(self,supply):
-	layout = self.ui.spectrumGraph_prechar
-	for i in reversed(range(layout.count())): 
-		widgetToRemove = layout.itemAt(i).widget()
-		layout.removeWidget(widgetToRemove)
-		widgetToRemove.setParent(None)
-	
+def preCharPreview(self,canvas,figure,supply):	
 	d = {
 		"signalName": self.ui.comboBox_81.currentIndex(),
 		"removeDC": self.ui.comboBox_82.currentIndex()
 	}
 	supply.Set_Prechar_Signal(d,nargout=0)
 	supply.Preview_Signal(nargout=0)
-	
+
 	image = mpimg.imread('.\Figures\Prechar_Spectrum.png')
-	self.figure.clear()
-	a = self.figure.add_subplot(1,1,1)
+	figure.clear()
 	imgplot = plt.imshow(image)
-	#refresh canvas
-	self.canvas.draw()
+	plt.xlabel('Frequency(GHz)')
+	plt.ylabel('Power(dB)')
+	plt.title('Welch Mean-Square Spectrum Estimate')
+	plt.xticks([], [])
+	plt.yticks([], [])
+	plt.axis('scaled')
+	canvas.draw()
 	 
 	self.ui.precharTabs.setCurrentIndex(0)
 	self.ui.resultsAlgoTabs.setCurrentIndex(3)

@@ -25,6 +25,10 @@ import matlab.engine
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+
+import random
+
 
 supply = matlab.engine.start_matlab()
 # add all folders and subfolders in peprs to matlab path
@@ -69,11 +73,11 @@ class Window(QMainWindow):
 	def initMainUI(self):				
 		
 		# create matlab plots
-		self.figure = plt.figure()
-		self.canvas = FigureCanvas(self.figure)
-		self.toolbar = NavigationToolbar(self.canvas, self)
-		self.ui.spectrumGraph_prechar.addWidget(self.toolbar)
-		self.ui.spectrumGraph_prechar.addWidget(self.canvas)
+		precharSpectrumFigure = plt.figure()
+		precharSpectrumCanvas = FigureCanvas(precharSpectrumFigure)
+		precharSpectrumToolbar = NavigationToolbar(precharSpectrumCanvas, self)
+		self.ui.spectrumGraph_prechar.addWidget(precharSpectrumToolbar)
+		self.ui.spectrumGraph_prechar.addWidget(precharSpectrumCanvas)
 		
 		# deal with error widget
 		self.ui.errorScrollArea.setMaximumHeight(0)
@@ -285,7 +289,8 @@ class Window(QMainWindow):
 		self.ui.resultsAlgoTabs.setCurrentIndex(2)
 		self.ui.calWorkflowTabs.setCurrentIndex(0)
 		self.ui.dpdAlgoStack.setCurrentIndex(1)
-		self.ui.precharAlgoStack.setCurrentIndex(1)
+		# CHANGED from 1
+		self.ui.precharAlgoStack.setCurrentIndex(0)
 		self.ui.vsaCalResultsStack_algo.setCurrentIndex(0)
 		self.ui.vsgCalTabs_algo.setCurrentIndex(0)
 		self.ui.vsgCalResults_algo.setCurrentIndex(0)
@@ -709,7 +714,7 @@ class Window(QMainWindow):
 		# algo page
 		self.ui.calValPreview.clicked.connect(lambda: set.calValPreview(self))
 		self.ui.calValRun.clicked.connect(lambda: set.runCalValidation(self,setParams,self.ui.calValRun,supply))
-		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self,supply))
+		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self,precharSpectrumCanvas,precharSpectrumFigure,supply))
 		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun,supply))
 		self.ui.dpdPreview.clicked.connect(lambda: set.dpdPreview(self))
 		self.ui.dpdRun.clicked.connect(lambda: set.runDPD(self,setParams,self.ui.dpdRun))
