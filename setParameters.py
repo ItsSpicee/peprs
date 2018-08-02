@@ -1761,17 +1761,44 @@ def runPrecharacterization(self,setBox,setButton,spectrumCanvas,spectrumFigure,g
 		supply.Set_Prechar_Signal(dSignal,nargout=0)
 		supply.Set_RXTX_Structures(tx,rx,nargout=0)
 		
+		self.ui.debugAlgoStack.setCurrentIndex(0)
+		
 		# self.progressBar = QProgressBar()
-		# self.progressBar.setRange(1,10);
+		# self.progressBar.setRange(1,7);
 		# self.progressBar.setTextVisible(True);
-		# self.progressBar.setFormat("Currently Running: PreCharacterization Setup Routine")
 		# self.ui.statusBar.addWidget(self.progressBar,1)
 		# completed = 0
-		# while completed < 100:
-			# completed = completed + 0.00001
-			# self.progressBar.setValue(completed)
+		# self.progressBar.setValue(completed)
+		# self.progressBar.setFormat("Currently Running: Set Parameters")
+		# supply.Set_Parameters_PrecharDebug(nargout=0)
+		# completed = 1
+		# self.progressBar.setValue(completed)
+		# self.progressBar.setFormat("Currently Running: Prepare Signal for Upload")
+		# supply.Prepare_Signal_Upload_PrecharDebug(nargout=0)
+		# completed = 2
+		# self.progressBar.setValue(completed)
+		# self.progressBar.setFormat("Currently Running: Upload Signal")
+		# supply.Upload_Signal_PrecharDebug(nargout=0)
+		# completed = 3
+		# self.progressBar.setValue(completed)
+		# self.progressBar.setFormat("Currently Running: Download Signal")
+		# supply.Download_Signal_PrecharDebug(nargout=0)
+		# completed = 4
+		# self.progressBar.setValue(completed)
+		# self.progressBar.setFormat("Currently Running: Align & Analyze Signals")
+		# supply.Analyze_Signal_PrecharDebug(nargout=0)
+		# completed = 5
+		# self.progressBar.setValue(completed)
+		# self.progressBar.setFormat("Currently Running: Save Spectrum & VSA Data")
+		# supply.Save_Data_PrecharDebug(nargout=0)
+		# completed = 6
+		# self.progressBar.setValue(completed)
+		# self.progressBar.setFormat("Currently Running: Save Signal Generation Measurements")
+		# supply.Save_Measurements_PrecharDebug(nargout=0)
+		# completed = 7
+		# self.progressBar.setValue(completed)
 		# self.ui.statusBar.removeWidget(self.progressBar)
-		# to show progress bar, need both addWidget() and show()
+		# self.ui.statusBar.showMessage("PreCharacterization Setup Routine Complete",3000)
 		
 		result = supply.Signal_Generation_Test(nargout=1)
 		result = result.split("~")
@@ -1780,8 +1807,6 @@ def runPrecharacterization(self,setBox,setButton,spectrumCanvas,spectrumFigure,g
 		inputPAPR = result[2]
 		outputPAPR = result[3]
 	
-		self.ui.statusBar.showMessage("PreCharacterization Setup Routine Complete",3000)
-		
 		self.ui.nmsePercent_prechar.setText(nmsePercent)
 		self.ui.nmseDB_prechar.setText(nmseDB)
 		self.ui.inputPAPR_prechar.setText(inputPAPR)
@@ -1825,7 +1850,6 @@ def runPrecharacterization(self,setBox,setButton,spectrumCanvas,spectrumFigure,g
 		self.ui.precharTabs.setCurrentIndex(0)
 		self.ui.resultsAlgoTabs.setCurrentIndex(3)
 		self.ui.algoNextStack.setCurrentIndex(3)
-		self.ui.debugAlgoStack.setCurrentIndex(0)
 		self.ui.precharAlgoStack.setCurrentIndex(0)
 		self.ui.precharSignalEquip.setStyleSheet(setBox)
 		self.ui.precharCalFilesEquip.setStyleSheet(setBox)

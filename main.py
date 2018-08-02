@@ -17,6 +17,7 @@ import setParameters as set
 import workflowNav as flow
 import windowFunctions as menu
 import parameterFunctions as param
+import debugFunctions as debug
 #import PowerSupplyPkg
 
 # setup matlab engine
@@ -725,11 +726,19 @@ class Window(QMainWindow):
 		# algo page
 		self.ui.calValPreview.clicked.connect(lambda: set.calValPreview(self))
 		self.ui.calValRun.clicked.connect(lambda: set.runCalValidation(self,setParams,self.ui.calValRun,supply))
-		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self,precharSpectrumCanvas,precharSpectrumFigure,supply))
-		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun,precharSpectrumCanvas,precharSpectrumFigure,precharGainCanvas,precharGainFigure,precharPhaseCanvas,precharPhaseFigure,supply))
 		self.ui.dpdPreview.clicked.connect(lambda: set.dpdPreview(self))
 		self.ui.dpdRun.clicked.connect(lambda: set.runDPD(self,setParams,self.ui.dpdRun))
 		self.ui.algoSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.refRXAdvEquip,setParams,self.ui.algoSetAdv))
+		# prechar tab
+		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self,precharSpectrumCanvas,precharSpectrumFigure,supply))
+		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun,precharSpectrumCanvas,precharSpectrumFigure,precharGainCanvas,precharGainFigure,precharPhaseCanvas,precharPhaseFigure,supply))
+		self.ui.setParameters_precharDebug.clicked.connect(lambda: debug.setParametersPrechar(self,supply))
+		self.ui.prepareSignal_precharDebug.clicked.connect(lambda: debug.prepareSignalPrechar(self,supply))
+		self.ui.upload_precharDebug.clicked.connect(lambda: debug.uploadSignalPrechar(self,supply))
+		self.ui.download_precharDebug.clicked.connect(lambda: debug.downloadSignalPrechar(self,supply))
+		self.ui.analyze_precharDebug.clicked.connect(lambda: debug.analyzeSignalPrechar(self,supply))
+		self.ui.saveData_precharDebug.clicked.connect(lambda: debug.saveDataPrechar(self,supply))
+		self.ui.saveMeasurements_precharDebug.clicked.connect(lambda: debug.saveMeasurementsPrechar(self,supply))
 		
 		# control parameter changes
 		# vsa equipment page
