@@ -66,7 +66,10 @@ class Window(QMainWindow):
 		elif mimoChecked == True or misoChecked or simoChecked:
 			self.ui.dutStackedWidget.setCurrentIndex(1)
 	
-	def initMainUI(self):				
+	def initMainUI(self):
+
+		#disable advanced power meter settings since there are none
+		self.ui.meterEquipTabs.setTabEnabled(1, False)
 		
 		# create matlab plots
 		self.figure = plt.figure()

@@ -74,6 +74,7 @@ def displayVsg(self,greyHover,greyButton):
 			self.ui.vsgNextSteps.setCurrentIndex(4)
 
 def displayVsa(self,unsetBox,greyHover,greyButton):	
+	self.ui.vsaEquipTabs.setTabEnabled(1, True)
 	vsaIdx = self.ui.vsaType.currentIndex()
 	averaging = self.ui.averagingEnable.currentIndex()
 	demod = self.ui.demodulationEnable.currentIndex()
@@ -114,6 +115,10 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 		self.ui.scopeMod.setEnabled(False)
 		if vsaIdx == 1:
 			self.ui.vsaWorkflow.setCurrentIndex(1)
+			
+			#removes advance tab
+			self.ui.vsaEquipTabs.setTabEnabled(1, False)
+			
 			self.ui.single_vsa_stack.setCurrentIndex(0)
 			self.ui.vsaEquipStack.setCurrentIndex(1)
 			self.ui.vsaAdvancedStack.setCurrentIndex(1)
@@ -127,6 +132,8 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.scopeEquip_homo.setEnabled(True)
 		elif vsaIdx == 2:
 			self.ui.vsaWorkflow.setCurrentIndex(1)
+			#removes advance tab
+			self.ui.vsaEquipTabs.setTabEnabled(1, False)
 			self.ui.single_vsa_stack.setCurrentIndex(1)
 			self.ui.vsaEquipStack.setCurrentIndex(2)
 			self.ui.vsaAdvancedStack.setCurrentIndex(1)
@@ -172,6 +179,8 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.scopeEquip_homo.setEnabled(False)
 		elif vsaIdx == 5:
 			self.ui.vsaEquipStack.setCurrentIndex(1)
+			#removes advance tab
+			self.ui.vsaEquipTabs.setTabEnabled(1, False)
 			self.ui.vsaAdvancedStack.setCurrentIndex(1)
 			self.ui.vsaMeasGenStack.setCurrentIndex(0)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(1)
@@ -184,6 +193,8 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.scopeEquip_homo.setEnabled(True)
 		elif vsaIdx == 6:
 			self.ui.vsaEquipStack.setCurrentIndex(2)
+			#removes advance tab
+			self.ui.vsaEquipTabs.setTabEnabled(1, False)
 			self.ui.vsaAdvancedStack.setCurrentIndex(1)
 			self.ui.vsaMeasGenStack.setCurrentIndex(1)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(1)
@@ -199,6 +210,8 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 		self.ui.digMod.setEnabled(True)
 		self.ui.scopeMod.setEnabled(True)	
 		if vsaIdx == 1:
+		#removes advance tab
+			self.ui.vsaEquipTabs.setTabEnabled(1, False)
 			digOrScopeSet(self,1,averaging,demod,scopeChecked,greyHover,unsetBox,vsaIdx)
 			self.ui.vsaWorkflow.setCurrentIndex(2)
 			self.ui.single_mod_vsa_stack.setCurrentIndex(0)
@@ -211,6 +224,8 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			setVSAWorkflowsWithModNoDown(self,2,0,False)
 			self.ui.scopeEquip_homo.setEnabled(True)
 		elif vsaIdx == 2:
+		#removes advance tab
+			self.ui.vsaEquipTabs.setTabEnabled(1, False)
 			digOrScopeSet(self,2,averaging,demod,digChecked,greyHover,unsetBox,vsaIdx)
 			self.ui.vsaWorkflow.setCurrentIndex(2)
 			self.ui.single_mod_vsa_stack.setCurrentIndex(1)
@@ -247,6 +262,8 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			setVSAWorkflowsWithModNoDown(self,2,3,True)
 			self.ui.scopeEquip_homo.setEnabled(False)
 		elif vsaIdx == 5:
+		#removes advance tab
+			self.ui.vsaEquipTabs.setTabEnabled(1, False)
 			digOrScopeDownSet(self,1,averaging,demod,scopeChecked,greyButton,greyHover,unsetBox,vsaIdx)
 			self.ui.vsaMeasGenStack.setCurrentIndex(0)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(1)
@@ -258,6 +275,8 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.single_down_vsaMeas_stack.setCurrentIndex(1)
 			self.ui.scopeEquip_homo.setEnabled(True)
 		elif vsaIdx == 6:
+		#removes advance tab
+			self.ui.vsaEquipTabs.setTabEnabled(1, False)
 			digOrScopeDownSet(self,2,averaging,demod,digChecked,greyButton,greyHover,unsetBox,vsaIdx)
 			self.ui.vsaMeasGenStack.setCurrentIndex(1)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(1)
@@ -273,6 +292,8 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 		self.ui.digMod.setEnabled(False)
 		self.ui.scopeMod.setEnabled(False)
 		if vsaIdx == 1:
+			#removes advance tab
+			self.ui.vsaEquipTabs.setTabEnabled(1, False)
 			digOrScopeSet(self,1,averaging,demod,scopeChecked,greyHover,unsetBox,vsaIdx)
 			self.ui.vsaWorkflow.setCurrentIndex(1)
 			self.ui.single_vsa_stack.setCurrentIndex(0)
@@ -285,6 +306,8 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			setVSAWorkflowsNoModNoDown(self,1,0,False)
 			self.ui.scopeEquip_homo.setEnabled(True)
 		elif vsaIdx == 2:
+			#removes advance tab
+			self.ui.vsaEquipTabs.setTabEnabled(1, False)
 			digOrScopeSet(self,2,averaging,demod,digChecked,greyHover,unsetBox,vsaIdx)
 			self.ui.vsaWorkflow.setCurrentIndex(1)
 			self.ui.single_vsa_stack.setCurrentIndex(1)
@@ -309,6 +332,7 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			setVSAWorkflowsNoModNoDown(self,1,2,True)
 			self.ui.scopeEquip_homo.setEnabled(False)
 		elif vsaIdx == 4:
+
 			uxaOrPxaSet(self,1,averaging,demod,pxaChecked,greyHover,unsetBox)
 			self.ui.vsaWorkflow.setCurrentIndex(1)
 			self.ui.single_vsa_stack.setCurrentIndex(3)
@@ -321,6 +345,8 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			setVSAWorkflowsNoModNoDown(self,1,3,True)
 			self.ui.scopeEquip_homo.setEnabled(False)
 		elif vsaIdx == 5:
+		#removes advance tab
+			self.ui.vsaEquipTabs.setTabEnabled(1, False)
 			digOrScopeDownSet(self,1,averaging,demod,scopeChecked,greyButton,greyHover,unsetBox,vsaIdx)
 			self.ui.vsaMeasGenStack.setCurrentIndex(0)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(1)
@@ -332,6 +358,8 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 			self.ui.single_down_vsaMeas_stack.setCurrentIndex(1)
 			self.ui.scopeEquip_homo.setEnabled(True)
 		elif vsaIdx == 6:	
+		#removes advance tab
+			self.ui.vsaEquipTabs.setTabEnabled(1, False)
 			digOrScopeDownSet(self,2,averaging,demod,digChecked,greyButton,greyHover,unsetBox,vsaIdx)
 			self.ui.vsaMeasGenStack.setCurrentIndex(1)
 			self.ui.vsaWorkflow_vsaMeas.setCurrentIndex(1)
@@ -354,8 +382,11 @@ def copyDemod(self,changedModField,replacedFieldOne,replacedFieldTwo):
 	replacedFieldTwo.blockSignals(False)
 	
 def displaySa(self,buttonSelected,buttonFocus,buttonHover,greyHover,greyButton):
+
 	saIdx = self.ui.saType.currentIndex()
 	saChecked = self.ui.saSet.isChecked()
+	self.ui.saEquipTabs.setTabEnabled(0, True)
+	self.ui.saEquipTabs.setTabEnabled(1, True)
 	if saIdx == 0:
 		self.ui.saNextStack.setCurrentIndex(4)
 		self.ui.saEquipStandardStack.setCurrentIndex(1)
@@ -389,6 +420,9 @@ def displaySa(self,buttonSelected,buttonFocus,buttonHover,greyHover,greyButton):
 			self.ui.saButton_sa_4.setStyleSheet(buttonSelected)
 			set.setPrevSAButtons(self,greyHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor)
 	elif saIdx == 3:
+		#disables the parameter tabs since index 3 is no sa 
+		self.ui.saEquipTabs.setTabEnabled(0, False)
+		self.ui.saEquipTabs.setTabEnabled(1, False)
 		self.ui.saNextStack.setCurrentIndex(0)
 		self.ui.meterNextStack.setCurrentIndex(2)
 		self.ui.downNextStack.setCurrentIndex(3)
