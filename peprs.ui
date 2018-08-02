@@ -183,7 +183,7 @@ QPushButton:hover{background-color:rgb(217, 0, 0);}</string>
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="algoTab">
          <property name="layoutDirection">
@@ -2586,7 +2586,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                               </font>
                              </property>
                              <property name="text">
-                              <string/>
+                              <string>2000</string>
                              </property>
                             </widget>
                            </item>
@@ -9145,7 +9145,7 @@ QFrame{background-color:#d1d5de}</string>
                              <enum>QTabWidget::North</enum>
                             </property>
                             <property name="currentIndex">
-                             <number>0</number>
+                             <number>3</number>
                             </property>
                             <widget class="QWidget" name="tab_25">
                              <attribute name="title">
@@ -9347,11 +9347,11 @@ QFrame{background-color:#d1d5de}</string>
                             </widget>
                             <widget class="QWidget" name="tab_27">
                              <attribute name="title">
-                              <string>NMSE, ACPR</string>
+                              <string>NMSE, ACPR, PAPR</string>
                              </attribute>
                              <layout class="QHBoxLayout" name="horizontalLayout_334">
                               <item>
-                               <widget class="QGroupBox" name="groupBox_17">
+                               <widget class="QGroupBox" name="groupBox_20">
                                 <property name="font">
                                  <font>
                                   <pointsize>10</pointsize>
@@ -9363,9 +9363,12 @@ QFrame{background-color:#d1d5de}</string>
                                 <property name="title">
                                  <string/>
                                 </property>
-                                <layout class="QGridLayout" name="gridLayout_91" rowstretch="2,2,2,2,11" columnstretch="2,2,0,2,2,2,4,1">
-                                 <item row="3" column="6">
-                                  <widget class="QLineEdit" name="lineEdit_234">
+                                <layout class="QGridLayout" name="gridLayout_102" columnstretch="1,0,1,0,0,0,0,1,0,1,1">
+                                 <property name="verticalSpacing">
+                                  <number>10</number>
+                                 </property>
+                                 <item row="5" column="2" colspan="3">
+                                  <widget class="QLineEdit" name="lineEdit_255">
                                    <property name="sizePolicy">
                                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                                      <horstretch>0</horstretch>
@@ -9395,21 +9398,8 @@ QFrame{background-color:#d1d5de}</string>
                                    </property>
                                   </widget>
                                  </item>
-                                 <item row="3" column="0">
-                                  <widget class="QLabel" name="label_1125">
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>10</pointsize>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string>Iteration's Min. ACPR:</string>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                 <item row="1" column="4">
-                                  <widget class="QLabel" name="label_1131">
+                                 <item row="1" column="7">
+                                  <widget class="QLabel" name="label_1144">
                                    <property name="font">
                                     <font>
                                      <family>Arial</family>
@@ -9421,8 +9411,34 @@ QFrame{background-color:#d1d5de}</string>
                                    </property>
                                   </widget>
                                  </item>
+                                 <item row="1" column="0">
+                                  <widget class="QLabel" name="label_1150">
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>10</pointsize>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string>Iteration's NMSE:</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="5" column="5">
+                                  <widget class="QLabel" name="label_923">
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>8</pointsize>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string>dBm</string>
+                                   </property>
+                                  </widget>
+                                 </item>
                                  <item row="0" column="0">
-                                  <widget class="QLabel" name="label_1122">
+                                  <widget class="QLabel" name="label_1151">
                                    <property name="font">
                                     <font>
                                      <family>Arial</family>
@@ -9435,83 +9451,8 @@ QFrame{background-color:#d1d5de}</string>
                                    </property>
                                   </widget>
                                  </item>
-                                 <item row="1" column="1">
-                                  <widget class="QLineEdit" name="lineEdit_236">
-                                   <property name="sizePolicy">
-                                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                                     <horstretch>0</horstretch>
-                                     <verstretch>0</verstretch>
-                                    </sizepolicy>
-                                   </property>
-                                   <property name="minimumSize">
-                                    <size>
-                                     <width>0</width>
-                                     <height>0</height>
-                                    </size>
-                                   </property>
-                                   <property name="maximumSize">
-                                    <size>
-                                     <width>16777215</width>
-                                     <height>25</height>
-                                    </size>
-                                   </property>
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>9</pointsize>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string/>
-                                   </property>
-                                  </widget>
-                                 </item>
                                  <item row="3" column="5">
-                                  <widget class="QLabel" name="label_1133">
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>10</pointsize>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string>Iteration's Max. ACPR:</string>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                 <item row="3" column="1" colspan="3">
-                                  <widget class="QLineEdit" name="lineEdit_233">
-                                   <property name="sizePolicy">
-                                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                                     <horstretch>0</horstretch>
-                                     <verstretch>0</verstretch>
-                                    </sizepolicy>
-                                   </property>
-                                   <property name="minimumSize">
-                                    <size>
-                                     <width>0</width>
-                                     <height>0</height>
-                                    </size>
-                                   </property>
-                                   <property name="maximumSize">
-                                    <size>
-                                     <width>16777215</width>
-                                     <height>25</height>
-                                    </size>
-                                   </property>
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>9</pointsize>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string/>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                 <item row="3" column="4">
-                                  <widget class="QLabel" name="label_1130">
+                                  <widget class="QLabel" name="label_1153">
                                    <property name="font">
                                     <font>
                                      <family>Arial</family>
@@ -9523,21 +9464,8 @@ QFrame{background-color:#d1d5de}</string>
                                    </property>
                                   </widget>
                                  </item>
-                                 <item row="3" column="7">
-                                  <widget class="QLabel" name="label_1144">
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>8</pointsize>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string>dBc/dBc</string>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                 <item row="1" column="2">
-                                  <widget class="QLabel" name="label_1132">
+                                 <item row="1" column="3">
+                                  <widget class="QLabel" name="label_1160">
                                    <property name="font">
                                     <font>
                                      <family>Arial</family>
@@ -9552,22 +9480,21 @@ QFrame{background-color:#d1d5de}</string>
                                    </property>
                                   </widget>
                                  </item>
-                                 <item row="2" column="0">
-                                  <widget class="QLabel" name="label_1124">
+                                 <item row="3" column="0" colspan="2">
+                                  <widget class="QLabel" name="label_1161">
                                    <property name="font">
                                     <font>
                                      <family>Arial</family>
                                      <pointsize>10</pointsize>
-                                     <underline>true</underline>
                                     </font>
                                    </property>
                                    <property name="text">
-                                    <string>ACPR</string>
+                                    <string>Iteration's Min. ACPR:</string>
                                    </property>
                                   </widget>
                                  </item>
-                                 <item row="1" column="3">
-                                  <widget class="QLineEdit" name="lineEdit_235">
+                                 <item row="1" column="1" colspan="2">
+                                  <widget class="QLineEdit" name="lineEdit_256">
                                    <property name="sizePolicy">
                                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                                      <horstretch>0</horstretch>
@@ -9597,8 +9524,111 @@ QFrame{background-color:#d1d5de}</string>
                                    </property>
                                   </widget>
                                  </item>
-                                 <item row="1" column="0">
-                                  <widget class="QLabel" name="label_1123">
+                                 <item row="3" column="2" colspan="3">
+                                  <widget class="QLineEdit" name="lineEdit_257">
+                                   <property name="sizePolicy">
+                                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                                     <horstretch>0</horstretch>
+                                     <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                   </property>
+                                   <property name="minimumSize">
+                                    <size>
+                                     <width>0</width>
+                                     <height>0</height>
+                                    </size>
+                                   </property>
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>16777215</width>
+                                     <height>25</height>
+                                    </size>
+                                   </property>
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>9</pointsize>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string/>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="4" column="0">
+                                  <widget class="QLabel" name="label_1162">
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>10</pointsize>
+                                     <underline>true</underline>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string>PAPR</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="2" column="0">
+                                  <widget class="QLabel" name="label_1163">
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>10</pointsize>
+                                     <underline>true</underline>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string>ACPR</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="3" column="9">
+                                  <widget class="QLineEdit" name="lineEdit_258">
+                                   <property name="sizePolicy">
+                                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                                     <horstretch>0</horstretch>
+                                     <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                   </property>
+                                   <property name="minimumSize">
+                                    <size>
+                                     <width>0</width>
+                                     <height>0</height>
+                                    </size>
+                                   </property>
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>16777215</width>
+                                     <height>25</height>
+                                    </size>
+                                   </property>
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>9</pointsize>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string/>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="5" column="10">
+                                  <widget class="QLabel" name="label_924">
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>8</pointsize>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string>dBm</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="5" column="0">
+                                  <widget class="QLabel" name="label_1165">
                                    <property name="font">
                                     <font>
                                      <family>Arial</family>
@@ -9606,12 +9636,43 @@ QFrame{background-color:#d1d5de}</string>
                                     </font>
                                    </property>
                                    <property name="text">
-                                    <string>Iteration's NMSE:</string>
+                                    <string>Input PAPR:</string>
                                    </property>
                                   </widget>
                                  </item>
-                                 <item row="4" column="4">
-                                  <spacer name="verticalSpacer_15">
+                                 <item row="1" column="4" colspan="3">
+                                  <widget class="QLineEdit" name="lineEdit_259">
+                                   <property name="sizePolicy">
+                                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                                     <horstretch>0</horstretch>
+                                     <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                   </property>
+                                   <property name="minimumSize">
+                                    <size>
+                                     <width>0</width>
+                                     <height>0</height>
+                                    </size>
+                                   </property>
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>16777215</width>
+                                     <height>25</height>
+                                    </size>
+                                   </property>
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>9</pointsize>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string/>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="6" column="7">
+                                  <spacer name="verticalSpacer_18">
                                    <property name="orientation">
                                     <enum>Qt::Vertical</enum>
                                    </property>
@@ -9622,6 +9683,79 @@ QFrame{background-color:#d1d5de}</string>
                                     </size>
                                    </property>
                                   </spacer>
+                                 </item>
+                                 <item row="3" column="7" colspan="2">
+                                  <widget class="QLabel" name="label_1166">
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>10</pointsize>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string>Iteration's Max. ACPR:</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="5" column="8" colspan="2">
+                                  <widget class="QLineEdit" name="lineEdit_261">
+                                   <property name="sizePolicy">
+                                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                                     <horstretch>0</horstretch>
+                                     <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                   </property>
+                                   <property name="minimumSize">
+                                    <size>
+                                     <width>0</width>
+                                     <height>0</height>
+                                    </size>
+                                   </property>
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>16777215</width>
+                                     <height>25</height>
+                                    </size>
+                                   </property>
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>9</pointsize>
+                                    </font>
+                                   </property>
+                                   <property name="toolTip">
+                                    <string>PAPR after calibration and predistortion.</string>
+                                   </property>
+                                   <property name="text">
+                                    <string/>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="5" column="7">
+                                  <widget class="QLabel" name="label_1171">
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>10</pointsize>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string>Output  PAPR:</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="3" column="10">
+                                  <widget class="QLabel" name="label_1172">
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>8</pointsize>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string>dBc/dBc</string>
+                                   </property>
+                                  </widget>
                                  </item>
                                 </layout>
                                </widget>
@@ -9777,7 +9911,7 @@ QFrame{background-color:#d1d5de}</string>
                              <enum>QTabWidget::North</enum>
                             </property>
                             <property name="currentIndex">
-                             <number>0</number>
+                             <number>3</number>
                             </property>
                             <widget class="QWidget" name="tab_29">
                              <attribute name="title">
@@ -9800,65 +9934,16 @@ QFrame{background-color:#d1d5de}</string>
                              <attribute name="title">
                               <string>Gain Distortion</string>
                              </attribute>
-                             <layout class="QVBoxLayout" name="verticalLayout_106" stretch="1,8">
+                             <layout class="QHBoxLayout" name="horizontalLayout_337">
                               <item>
-                               <layout class="QHBoxLayout" name="horizontalLayout_337">
-                                <item>
-                                 <widget class="QLabel" name="label_1126">
-                                  <property name="text">
-                                   <string/>
-                                  </property>
-                                  <property name="pixmap">
-                                   <pixmap>icons/download.png</pixmap>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item>
-                                 <widget class="QLabel" name="label_1127">
-                                  <property name="font">
-                                   <font>
-                                    <family>Arial</family>
-                                    <pointsize>9</pointsize>
-                                   </font>
-                                  </property>
-                                  <property name="text">
-                                   <string>Download Figure</string>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item>
-                                 <spacer name="horizontalSpacer_26">
-                                  <property name="orientation">
-                                   <enum>Qt::Horizontal</enum>
-                                  </property>
-                                  <property name="sizeHint" stdset="0">
-                                   <size>
-                                    <width>40</width>
-                                    <height>20</height>
-                                   </size>
-                                  </property>
-                                 </spacer>
-                                </item>
+                               <layout class="QVBoxLayout" name="gainGraph_prechar">
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
                                </layout>
-                              </item>
-                              <item>
-                               <widget class="QLabel" name="label_1121">
-                                <property name="font">
-                                 <font>
-                                  <family>Arial</family>
-                                  <pointsize>10</pointsize>
-                                 </font>
-                                </property>
-                                <property name="frameShape">
-                                 <enum>QFrame::Box</enum>
-                                </property>
-                                <property name="text">
-                                 <string>Gain Distortion Plot</string>
-                                </property>
-                                <property name="alignment">
-                                 <set>Qt::AlignCenter</set>
-                                </property>
-                               </widget>
                               </item>
                              </layout>
                             </widget>
@@ -9866,75 +9951,26 @@ QFrame{background-color:#d1d5de}</string>
                              <attribute name="title">
                               <string>Phase Distortion</string>
                              </attribute>
-                             <layout class="QVBoxLayout" name="verticalLayout_107" stretch="1,8">
+                             <layout class="QHBoxLayout" name="horizontalLayout_338">
                               <item>
-                               <layout class="QHBoxLayout" name="horizontalLayout_338">
-                                <item>
-                                 <widget class="QLabel" name="label_1134">
-                                  <property name="text">
-                                   <string/>
-                                  </property>
-                                  <property name="pixmap">
-                                   <pixmap>icons/download.png</pixmap>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item>
-                                 <widget class="QLabel" name="label_1129">
-                                  <property name="font">
-                                   <font>
-                                    <family>Arial</family>
-                                    <pointsize>9</pointsize>
-                                   </font>
-                                  </property>
-                                  <property name="text">
-                                   <string>Download Figure</string>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item>
-                                 <spacer name="horizontalSpacer_27">
-                                  <property name="orientation">
-                                   <enum>Qt::Horizontal</enum>
-                                  </property>
-                                  <property name="sizeHint" stdset="0">
-                                   <size>
-                                    <width>40</width>
-                                    <height>20</height>
-                                   </size>
-                                  </property>
-                                 </spacer>
-                                </item>
+                               <layout class="QVBoxLayout" name="phaseGraph_prechar">
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
                                </layout>
-                              </item>
-                              <item>
-                               <widget class="QLabel" name="label_1128">
-                                <property name="font">
-                                 <font>
-                                  <family>Arial</family>
-                                  <pointsize>10</pointsize>
-                                 </font>
-                                </property>
-                                <property name="frameShape">
-                                 <enum>QFrame::Box</enum>
-                                </property>
-                                <property name="text">
-                                 <string>Phase Distortion Plot</string>
-                                </property>
-                                <property name="alignment">
-                                 <set>Qt::AlignCenter</set>
-                                </property>
-                               </widget>
                               </item>
                              </layout>
                             </widget>
                             <widget class="QWidget" name="tab_32">
                              <attribute name="title">
-                              <string>NMSE, ACPR</string>
+                              <string>NMSE, PAPR</string>
                              </attribute>
-                             <layout class="QHBoxLayout" name="horizontalLayout_339">
+                             <layout class="QHBoxLayout" name="horizontalLayout_336">
                               <item>
-                               <widget class="QGroupBox" name="groupBox_18">
+                               <widget class="QGroupBox" name="groupBox_17">
                                 <property name="font">
                                  <font>
                                   <pointsize>10</pointsize>
@@ -9946,66 +9982,27 @@ QFrame{background-color:#d1d5de}</string>
                                 <property name="title">
                                  <string/>
                                 </property>
-                                <layout class="QGridLayout" name="gridLayout_92" rowstretch="1,1,1,1,6" columnstretch="2,2,0,2,2,2,4,1">
-                                 <item row="3" column="6">
-                                  <widget class="QLineEdit" name="lineEdit_237">
-                                   <property name="sizePolicy">
-                                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                                     <horstretch>0</horstretch>
-                                     <verstretch>0</verstretch>
-                                    </sizepolicy>
-                                   </property>
-                                   <property name="minimumSize">
-                                    <size>
-                                     <width>0</width>
-                                     <height>0</height>
-                                    </size>
-                                   </property>
-                                   <property name="maximumSize">
-                                    <size>
-                                     <width>16777215</width>
-                                     <height>25</height>
-                                    </size>
-                                   </property>
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>9</pointsize>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string/>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                 <item row="3" column="0">
-                                  <widget class="QLabel" name="label_1135">
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>10</pointsize>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string>Iteration's Min. ACPR:</string>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                 <item row="1" column="4">
-                                  <widget class="QLabel" name="label_1136">
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>8</pointsize>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string>%/dB</string>
-                                   </property>
-                                  </widget>
-                                 </item>
+                                <layout class="QGridLayout" name="gridLayout_91" rowstretch="0,0,0,0,0,0" columnstretch="0,0,1,0,1,1,0,2,0">
+                                 <property name="leftMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="topMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="rightMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="bottomMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="horizontalSpacing">
+                                  <number>6</number>
+                                 </property>
+                                 <property name="verticalSpacing">
+                                  <number>15</number>
+                                 </property>
                                  <item row="0" column="0">
-                                  <widget class="QLabel" name="label_1137">
+                                  <widget class="QLabel" name="label_789">
                                    <property name="font">
                                     <font>
                                      <family>Arial</family>
@@ -10018,125 +10015,8 @@ QFrame{background-color:#d1d5de}</string>
                                    </property>
                                   </widget>
                                  </item>
-                                 <item row="1" column="1">
-                                  <widget class="QLineEdit" name="lineEdit_238">
-                                   <property name="sizePolicy">
-                                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                                     <horstretch>0</horstretch>
-                                     <verstretch>0</verstretch>
-                                    </sizepolicy>
-                                   </property>
-                                   <property name="minimumSize">
-                                    <size>
-                                     <width>0</width>
-                                     <height>0</height>
-                                    </size>
-                                   </property>
-                                   <property name="maximumSize">
-                                    <size>
-                                     <width>16777215</width>
-                                     <height>25</height>
-                                    </size>
-                                   </property>
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>9</pointsize>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string/>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                 <item row="3" column="5">
-                                  <widget class="QLabel" name="label_1138">
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>10</pointsize>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string>Iteration's Max. ACPR:</string>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                 <item row="3" column="1" colspan="3">
-                                  <widget class="QLineEdit" name="lineEdit_239">
-                                   <property name="sizePolicy">
-                                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                                     <horstretch>0</horstretch>
-                                     <verstretch>0</verstretch>
-                                    </sizepolicy>
-                                   </property>
-                                   <property name="minimumSize">
-                                    <size>
-                                     <width>0</width>
-                                     <height>0</height>
-                                    </size>
-                                   </property>
-                                   <property name="maximumSize">
-                                    <size>
-                                     <width>16777215</width>
-                                     <height>25</height>
-                                    </size>
-                                   </property>
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>9</pointsize>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string/>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                 <item row="3" column="4">
-                                  <widget class="QLabel" name="label_1139">
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>8</pointsize>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string>dBc/dBc</string>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                 <item row="3" column="7">
-                                  <widget class="QLabel" name="label_1145">
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>8</pointsize>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string>dBc/dBc</string>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                 <item row="1" column="2">
-                                  <widget class="QLabel" name="label_1140">
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>20</pointsize>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string>/</string>
-                                   </property>
-                                   <property name="alignment">
-                                    <set>Qt::AlignCenter</set>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                 <item row="2" column="0">
-                                  <widget class="QLabel" name="label_1141">
+                                 <item row="3" column="0">
+                                  <widget class="QLabel" name="label_926">
                                    <property name="font">
                                     <font>
                                      <family>Arial</family>
@@ -10145,12 +10025,38 @@ QFrame{background-color:#d1d5de}</string>
                                     </font>
                                    </property>
                                    <property name="text">
-                                    <string>ACPR</string>
+                                    <string>PAPR</string>
                                    </property>
                                   </widget>
                                  </item>
-                                 <item row="1" column="3">
-                                  <widget class="QLineEdit" name="lineEdit_240">
+                                 <item row="4" column="0">
+                                  <widget class="QLabel" name="label_792">
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>10</pointsize>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string>Input PAPR:</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="4" column="5">
+                                  <widget class="QLabel" name="label_938">
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>8</pointsize>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string>dBm</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="4" column="7">
+                                  <widget class="QLineEdit" name="outputPAPR_prechar">
                                    <property name="sizePolicy">
                                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                                      <horstretch>0</horstretch>
@@ -10175,13 +10081,16 @@ QFrame{background-color:#d1d5de}</string>
                                      <pointsize>9</pointsize>
                                     </font>
                                    </property>
+                                   <property name="toolTip">
+                                    <string>PAPR after calibration and predistortion.</string>
+                                   </property>
                                    <property name="text">
                                     <string/>
                                    </property>
                                   </widget>
                                  </item>
                                  <item row="1" column="0">
-                                  <widget class="QLabel" name="label_1142">
+                                  <widget class="QLabel" name="label_791">
                                    <property name="font">
                                     <font>
                                      <family>Arial</family>
@@ -10193,8 +10102,156 @@ QFrame{background-color:#d1d5de}</string>
                                    </property>
                                   </widget>
                                  </item>
-                                 <item row="4" column="4">
-                                  <spacer name="verticalSpacer_16">
+                                 <item row="1" column="2">
+                                  <widget class="QLineEdit" name="nmsePercent_prechar">
+                                   <property name="sizePolicy">
+                                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                                     <horstretch>0</horstretch>
+                                     <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                   </property>
+                                   <property name="minimumSize">
+                                    <size>
+                                     <width>0</width>
+                                     <height>0</height>
+                                    </size>
+                                   </property>
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>16777215</width>
+                                     <height>25</height>
+                                    </size>
+                                   </property>
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>9</pointsize>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string/>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="4" column="8">
+                                  <widget class="QLabel" name="label_927">
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>8</pointsize>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string>dBm</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="1" column="5">
+                                  <widget class="QLabel" name="label_931">
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>8</pointsize>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string>% / dB</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="1" column="3">
+                                  <widget class="QLabel" name="label_932">
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>20</pointsize>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string>/</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="1" column="4">
+                                  <widget class="QLineEdit" name="nmseDB_prechar">
+                                   <property name="sizePolicy">
+                                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                                     <horstretch>0</horstretch>
+                                     <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                   </property>
+                                   <property name="minimumSize">
+                                    <size>
+                                     <width>0</width>
+                                     <height>0</height>
+                                    </size>
+                                   </property>
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>16777215</width>
+                                     <height>25</height>
+                                    </size>
+                                   </property>
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>9</pointsize>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string/>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="4" column="2" colspan="3">
+                                  <widget class="QLineEdit" name="inputPAPR_prechar">
+                                   <property name="sizePolicy">
+                                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                                     <horstretch>0</horstretch>
+                                     <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                   </property>
+                                   <property name="minimumSize">
+                                    <size>
+                                     <width>0</width>
+                                     <height>0</height>
+                                    </size>
+                                   </property>
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>16777215</width>
+                                     <height>25</height>
+                                    </size>
+                                   </property>
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>9</pointsize>
+                                    </font>
+                                   </property>
+                                   <property name="toolTip">
+                                    <string>PAPR before calibration and predistortion.</string>
+                                   </property>
+                                   <property name="text">
+                                    <string/>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="4" column="6">
+                                  <widget class="QLabel" name="label_940">
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>10</pointsize>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string>Output PAPR:</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="5" column="5">
+                                  <spacer name="verticalSpacer_15">
                                    <property name="orientation">
                                     <enum>Qt::Vertical</enum>
                                    </property>
@@ -10361,7 +10418,7 @@ QFrame{background-color:#d1d5de}</string>
                              <enum>QTabWidget::North</enum>
                             </property>
                             <property name="currentIndex">
-                             <number>2</number>
+                             <number>4</number>
                             </property>
                             <widget class="QWidget" name="tab_33">
                              <attribute name="title">
@@ -10963,7 +11020,7 @@ QFrame{background-color:#d1d5de}</string>
                             </widget>
                             <widget class="QWidget" name="tab_36">
                              <attribute name="title">
-                              <string>NMSE, PAPR, Power</string>
+                              <string>NMSE, ACPR, PAPR, Power</string>
                              </attribute>
                              <layout class="QVBoxLayout" name="verticalLayout_25">
                               <item>
@@ -11029,7 +11086,7 @@ QFrame{background-color:#d1d5de}</string>
                                   <number>6</number>
                                  </property>
                                  <property name="verticalSpacing">
-                                  <number>3</number>
+                                  <number>15</number>
                                  </property>
                                  <item row="2" column="0">
                                   <widget class="QLabel" name="label_740">
@@ -11646,6 +11703,19 @@ QFrame{background-color:#d1d5de}</string>
                                  </item>
                                 </layout>
                                </widget>
+                              </item>
+                              <item>
+                               <spacer name="verticalSpacer_17">
+                                <property name="orientation">
+                                 <enum>Qt::Vertical</enum>
+                                </property>
+                                <property name="sizeHint" stdset="0">
+                                 <size>
+                                  <width>20</width>
+                                  <height>40</height>
+                                 </size>
+                                </property>
+                               </spacer>
                               </item>
                              </layout>
                             </widget>
@@ -33072,7 +33142,7 @@ QWidget#power2{background-color:rgb(247,247,247)}
 QWidget#power3{background-color:rgb(247,247,247)}</string>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="vsg">
              <property name="styleSheet">
@@ -33206,7 +33276,7 @@ QPushButton{ border:3px solid rgb(0, 0, 127);  background-color:qlineargradient(
                          <string notr="true"/>
                         </property>
                         <property name="currentIndex">
-                         <number>1</number>
+                         <number>2</number>
                         </property>
                         <widget class="QWidget" name="vsgGeneral">
                          <widget class="QPushButton" name="vsgButton_vsg_2">
@@ -37511,8 +37581,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>605</width>
-                             <height>871</height>
+                             <width>593</width>
+                             <height>382</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -38045,7 +38115,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <x>0</x>
                              <y>0</y>
                              <width>629</width>
-                             <height>871</height>
+                             <height>500</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -46814,8 +46884,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>605</width>
-                             <height>871</height>
+                             <width>593</width>
+                             <height>382</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -47487,8 +47557,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>605</width>
-                             <height>871</height>
+                             <width>593</width>
+                             <height>500</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -48432,7 +48502,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <x>0</x>
                              <y>0</y>
                              <width>629</width>
-                             <height>871</height>
+                             <height>575</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -51165,8 +51235,8 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>605</width>
-                         <height>1008</height>
+                         <width>590</width>
+                         <height>382</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -54616,8 +54686,8 @@ Analyzer</string>
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>605</width>
-                         <height>1008</height>
+                         <width>590</width>
+                         <height>382</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -58004,8 +58074,8 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>605</width>
-                             <height>871</height>
+                             <width>590</width>
+                             <height>382</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -58612,7 +58682,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <x>0</x>
                              <y>0</y>
                              <width>629</width>
-                             <height>871</height>
+                             <height>600</height>
                             </rect>
                            </property>
                            <property name="minimumSize">

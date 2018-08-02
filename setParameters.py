@@ -1660,30 +1660,30 @@ def runCalValidation(self,setBox,setButton):
 		self.ui.algoNextStack.setCurrentIndex(0)
 		self.ui.debugAlgoStack.setCurrentIndex(2)
 
-def preCharPreview(self,canvas,figure,supply):	
+def preCharPreview(self,spectrumCanvas,spectrumFiguresupply):	
 	d = {
 		"signalName": self.ui.comboBox_81.currentIndex(),
 		"removeDC": self.ui.comboBox_82.currentIndex()
 	}
 	supply.Set_Prechar_Signal(d,nargout=0)
-	supply.Preview_Signal(nargout=0)
+	supply.Preview_Prechar_Signal(nargout=0)
 
-	image = mpimg.imread('.\Figures\Prechar_Spectrum.png')
-	figure.clear()
-	ax = figure.add_subplot(111)
-	imgplot = ax.imshow(image)
+	spectrumImage = mpimg.imread('.\Figures\Prechar_Spectrum_Input.png')
+	spectrumFigure.clear()
+	ax = spectrumFigure.add_subplot(111)
+	ax.imshow(spectrumImage)
 	plt.xlabel('Frequency(GHz)')
 	plt.ylabel('Power(dB)')
 	plt.title('Welch Mean-Square Spectrum Estimate')
 	plt.xticks([], [])
 	plt.yticks([], [])
-	canvas.draw()
+	spectrumCanvas.draw()
 	 
 	self.ui.precharTabs.setCurrentIndex(0)
 	self.ui.resultsAlgoTabs.setCurrentIndex(3)
 	self.ui.precharAlgoStack.setCurrentIndex(0)
 	
-def runPrecharacterization(self,setBox,setButton,supply):
+def runPrecharacterization(self,setBox,setButton,spectrumCanvas,spectrumFigure,gainCanvas,gainFigure,phaseCanvas,phaseFigure,supply):
 	ampCorrField = ""
 	trigAmpField = ""
 	fCarrierField = ""
@@ -1727,6 +1727,8 @@ def runPrecharacterization(self,setBox,setButton,supply):
 			"FreqMutiplierFlag" : self.ui.freqMultiplierFlag_prechar.currentIndex(),
 			"FreqMultiplierFactor": self.ui.freqMultiplierFactor_prechar.text(),	
 			"ReferenceClockSource": self.ui.refClockSorce_awg.currentIndex(),	
+			"iChannel": self.ui.iChannel_awg.currentIndex(),	
+			"qChannel": self.ui.qChannel_awg.currentIndex(),	
 			"ReferenceClock": self.ui.extRefFreq_awg.text(),	
 			"VFS": self.ui.dacRange_awg.text(),	
 			"TriggerAmplitude": trigAmpField
@@ -1758,7 +1760,66 @@ def runPrecharacterization(self,setBox,setButton,supply):
 	
 		supply.Set_Prechar_Signal(dSignal,nargout=0)
 		supply.Set_RXTX_Structures(tx,rx,nargout=0)
-		supply.Signal_Generation_Test(nargout=0)
+		
+		# self.progressBar = QProgressBar()
+		# self.progressBar.setRange(1,10);
+		# self.progressBar.setTextVisible(True);
+		# self.progressBar.setFormat("Currently Running: PreCharacterization Setup Routine")
+		# self.ui.statusBar.addWidget(self.progressBar,1)
+		# completed = 0
+		# while completed < 100:
+			# completed = completed + 0.00001
+			# self.progressBar.setValue(completed)
+		# self.ui.statusBar.removeWidget(self.progressBar)
+		# to show progress bar, need both addWidget() and show()
+		
+		result = supply.Signal_Generation_Test(nargout=1)
+		result = result.split("~")
+		nmsePercent = result[0]
+		nmseDB = result[1]
+		inputPAPR = result[2]
+		outputPAPR = result[3]
+	
+		self.ui.statusBar.showMessage("PreCharacterization Setup Routine Complete",3000)
+		
+		self.ui.nmsePercent_prechar.setText(nmsePercent)
+		self.ui.nmseDB_prechar.setText(nmseDB)
+		self.ui.inputPAPR_prechar.setText(inputPAPR)
+		self.ui.outputPAPR_prechar.setText(outputPAPR)
+		
+		
+		spectrumImage = mpimg.imread('.\Figures\Prechar_Spectrum_Output.png')
+		spectrumFigure.clear()
+		sax = spectrumFigure.add_subplot(111)
+		sax.imshow(spectrumImage)
+		sax.set_xlabel('Frequency(GHz)')
+		sax.set_ylabel('Power(dB)')
+		sax.set_title('Welch Mean-Square Spectrum Estimate')
+		sax.set_xticks([], [])
+		sax.set_yticks([], [])
+		spectrumCanvas.draw()
+		
+		gainImage = mpimg.imread('.\Figures\Prechar_Gain.png')
+		gainFigure.clear()
+		gax = gainFigure.add_subplot(111)
+		gax.imshow(gainImage)
+		gax.set_xlabel('Input Power (dBm)')
+		gax.set_ylabel('Gain Distortion (dB)')
+		gax.set_title('Gain Distortion')
+		gax.set_xticks([], [])
+		gax.set_yticks([], [])
+		gainCanvas.draw()
+			
+		phaseImage = mpimg.imread('.\Figures\Prechar_Phase.png')
+		phaseFigure.clear()
+		pax = phaseFigure.add_subplot(111)
+		pax.imshow(phaseImage)
+		pax.set_xlabel('Input Power (dBm)')
+		pax.set_ylabel('Phase Distortion (degree)')
+		pax.set_title('AM/PM Distortion')
+		pax.set_xticks([], [])
+		pax.set_yticks([], [])
+		phaseCanvas.draw()
 		
 		setButton.setText("Unset")
 		self.ui.precharTabs.setCurrentIndex(0)
@@ -1771,19 +1832,7 @@ def runPrecharacterization(self,setBox,setButton,supply):
 		self.ui.precharRefRXEquip.setStyleSheet(setBox)
 		self.ui.precharVSGEquip.setStyleSheet(setBox)
 		self.ui.precharAWGEquip.setStyleSheet(setBox)
-		
-		self.progressBar = QProgressBar()
-		self.progressBar.setRange(1,10);
-		self.progressBar.setTextVisible(True);
-		self.progressBar.setFormat("Currently Running: PreCharacterization Setup Routine")
-		self.ui.statusBar.addWidget(self.progressBar,1)
-		completed = 0
-		while completed < 100:
-			completed = completed + 0.00001
-			self.progressBar.setValue(completed)
-		self.ui.statusBar.removeWidget(self.progressBar)
-		# to show progress bar, need both addWidget() and show()
-		self.ui.statusBar.showMessage("PreCharacterization Setup Routine Complete",3000)	
+			
 	elif setButton.isChecked() == False:
 		setButton.setText("Set && Run")
 		self.ui.algoNextStack.setCurrentIndex(2)

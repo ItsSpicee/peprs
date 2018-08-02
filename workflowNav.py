@@ -29,19 +29,21 @@ def awgOnClick(self,unactiveButton,activeButton,buttonPHover):
 def upOnClick(self,buttonGreyPHover,buttonGreyP):
 	awgSet = self.ui.awgSetGeneral.isChecked()
 	upSet = self.ui.upSet.isChecked()
+	
+	self.ui.equipStack.setCurrentIndex(1)
+	self.ui.up_psg_stack.setCurrentIndex(0)
+	
 	if awgSet:
-		self.ui.equipStack.setCurrentIndex(1)
-		self.ui.up_psg_stack.setCurrentIndex(0)
 		self.ui.up_psg_workflow.setCurrentIndex(0)
 		
-		if upSet:
-			self.ui.vsaButton_up.setStyleSheet(buttonGreyPHover)
-			self.ui.vsaButton_up.setCursor(QCursor(Qt.PointingHandCursor))
-		else:
-			self.ui.vsaButton_up.setStyleSheet(buttonGreyP)
-			self.ui.vsaButton_up.setCursor(QCursor(Qt.ArrowCursor))
+	if upSet:
+		self.ui.vsaButton_up.setStyleSheet(buttonGreyPHover)
+		self.ui.vsaButton_up.setCursor(QCursor(Qt.PointingHandCursor))
 	else:
-		self.fillParametersMsg()
+		self.ui.vsaButton_up.setStyleSheet(buttonGreyP)
+		self.ui.vsaButton_up.setCursor(QCursor(Qt.ArrowCursor))
+	# else:
+		# self.fillParametersMsg()
 	
 def psgOnClick(self,buttonGreyPHover,buttonGreyP):
 	awgSet = self.ui.awgSetGeneral.isChecked()

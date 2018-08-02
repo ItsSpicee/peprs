@@ -1,4 +1,4 @@
-function Preview_Signal()   
+function Preview_Prechar_Signal()   
     load(".\DPD Data\Signal Generation Parameters\Signal.mat")
     load('.\DPD Data\Signal Generation Parameters\TX.mat')
     EVM_flag = 0;

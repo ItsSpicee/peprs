@@ -79,6 +79,18 @@ class Window(QMainWindow):
 		self.ui.spectrumGraph_prechar.addWidget(precharSpectrumToolbar)
 		self.ui.spectrumGraph_prechar.addWidget(precharSpectrumCanvas)
 		
+		precharGainFigure = plt.figure()
+		precharGainCanvas = FigureCanvas(precharGainFigure)
+		precharGainToolbar = NavigationToolbar(precharGainCanvas, self)
+		self.ui.gainGraph_prechar.addWidget(precharGainToolbar)
+		self.ui.gainGraph_prechar.addWidget(precharGainCanvas)
+		
+		precharPhaseFigure = plt.figure()
+		precharPhaseCanvas = FigureCanvas(precharPhaseFigure)
+		precharPhaseToolbar = NavigationToolbar(precharPhaseCanvas, self)
+		self.ui.phaseGraph_prechar.addWidget(precharPhaseToolbar)
+		self.ui.phaseGraph_prechar.addWidget(precharPhaseCanvas)
+		
 		# deal with error widget
 		self.ui.errorScrollArea.setMaximumHeight(0)
 		self.ui.redockButton.clicked.connect(lambda: menu.redock(self))
@@ -289,8 +301,7 @@ class Window(QMainWindow):
 		self.ui.resultsAlgoTabs.setCurrentIndex(2)
 		self.ui.calWorkflowTabs.setCurrentIndex(0)
 		self.ui.dpdAlgoStack.setCurrentIndex(1)
-		# CHANGED from 1
-		self.ui.precharAlgoStack.setCurrentIndex(0)
+		self.ui.precharAlgoStack.setCurrentIndex(1)
 		self.ui.vsaCalResultsStack_algo.setCurrentIndex(0)
 		self.ui.vsgCalTabs_algo.setCurrentIndex(0)
 		self.ui.vsgCalResults_algo.setCurrentIndex(0)
@@ -715,7 +726,7 @@ class Window(QMainWindow):
 		self.ui.calValPreview.clicked.connect(lambda: set.calValPreview(self))
 		self.ui.calValRun.clicked.connect(lambda: set.runCalValidation(self,setParams,self.ui.calValRun,supply))
 		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self,precharSpectrumCanvas,precharSpectrumFigure,supply))
-		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun,supply))
+		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun,precharSpectrumCanvas,precharSpectrumFigure,precharGainCanvas,precharGainFigure,precharPhaseCanvas,precharPhaseFigure,supply))
 		self.ui.dpdPreview.clicked.connect(lambda: set.dpdPreview(self))
 		self.ui.dpdRun.clicked.connect(lambda: set.runDPD(self,setParams,self.ui.dpdRun))
 		self.ui.algoSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.refRXAdvEquip,setParams,self.ui.algoSetAdv))

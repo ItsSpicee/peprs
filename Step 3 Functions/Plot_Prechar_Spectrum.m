@@ -27,5 +27,6 @@ function Plot_Prechar_Spectrum(In, Out, Fs)
     xlabel('')
     ylabel('')
     hold off
-    saveas(fig,".\Figures\Prechar_Spectrum.png")
+    
+    saveas(fig,".\Figures\Prechar_Spectrum_Input.png")
 end
