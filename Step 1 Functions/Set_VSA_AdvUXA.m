@@ -20,6 +20,9 @@ function result = Set_VSA_AdvUXA(dict)
 		fopen(spectrum);
 		fprintf(spectrum, '*CLS');
 		
+        % turn off electronic attenuator
+        errorList = runCommand(spectrum, sprintf(':SENSe:POWer:RF:EATTenuation:STATe %d', 0),errorList);
+        
 		%internal preamp
 		if dict.preamp == 1
 			errorList = runCommand(spectrum,sprintf(':SENSe:POWer:RF:GAIN:STATe %d', 1),errorList);

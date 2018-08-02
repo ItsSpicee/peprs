@@ -28,8 +28,7 @@ function [I, Q] = IQCapture_UXA (Freq, AnalysisBW, Fsample, time, UXAAdd, Atten,
     obj.OnOff = false;
     obj.scale_type = '';
     obj.Initialized = true;
-            
-    complexData = zeros(round(time*Fsample),1);
+    
     try 
         fopen(obj.handle);
         freq_read = query(obj.handle,':SENSe:FREQuency:RF:CENTer?');
@@ -60,17 +59,21 @@ function [I, Q] = IQCapture_UXA (Freq, AnalysisBW, Fsample, time, UXAAdd, Atten,
         fprintf(obj.handle,[':WAVeform:SWEep:TIME ' capture_time]);
 %         fprintf(obj.handle,':READ:WAV0?');
 
+        fprintf(obj.handle,':FETCh:WAV0?');
+        data = binblockread(obj.handle,'float32');
+        fscanf(obj.handle); %removes the terminator character
         for i  = 1:numAvg
             fprintf(obj.handle,':FETCh:WAV0?');
-            data = binblockread(obj.handle,'float32');
+            data = data + binblockread(obj.handle,'float32');
             fscanf(obj.handle); %removes the terminator character
 %             if (i == 1)
 %                 ref = complex(data(1:2:length(data)),  data(2:2:length(data)));
 %             else
 %                 [~,~] = AdjustDelay(ref,complex(data(1:2:length(data)),  data(2:2:length(data))),100);
 %             end
-            complexData = complexData + complex(data(1:2:length(data)),  data(2:2:length(data)));
         end
+        complexData = complex(data(1:2:length(data)),  data(2:2:length(data)));
+
         
         I = real(complexData) ./ numAvg;
         Q = imag(complexData) ./ numAvg;

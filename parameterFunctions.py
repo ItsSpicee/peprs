@@ -760,10 +760,10 @@ def enableChannelOptions(self):
 		
 def disableTrigLevelVSA(self):
 	trigSource = self.ui.trigSource_sa.currentIndex()
-	if trigSource == 1 or trigSource == 2:
+	if trigSource == 1 or trigSource == 2 or trigSource == 3:
 		self.ui.trigLevelLabel_sa.setEnabled(True)
 		self.ui.trigLevel_sa.setEnabled(True)
-	elif trigSource == 0 or trigSource == 3:
+	elif trigSource == 0 or trigSource == 4:
 		self.ui.trigLevelLabel_sa.setEnabled(False)
 		self.ui.trigLevel_sa.setEnabled(False)
 		

@@ -22,7 +22,7 @@ Measure_Pout_Eff = false;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Set Transmitter Parameters | RECEIVER PARAMS ALREADY SET IN SET_RXTX_STRUCTURES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-TX.IQmod_flag = 0;
+TX.IQmod_flag = 
 
 EVM_flag                    = 0;    % If this flag is one, the code demodulates the received signal and 
                                     % computes the symbol ENM

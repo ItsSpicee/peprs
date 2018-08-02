@@ -2,7 +2,8 @@ function AWG_M8195A_DAC_Amplitude(Channel,Amplitude)
 % Configure the DAC Amplitude for the M8190A
 % Channel - Specify the channel to be set (1 or 2)
 % Amplitude - Voltage Amplitude (between 0.1 and 0.7 V)
-    load('arbConfig.mat');
+    load('.\Step 1 Functions\arbConfig.mat');
+    arbConfig.visaAddr = "TCPIP0::localhost::hislip5::INSTR ";
     arbConfig = loadArbConfig(arbConfig);
         % these two lines are written to change the address of the AWG
         % manaually since I could not open it with iqtools.

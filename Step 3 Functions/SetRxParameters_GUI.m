@@ -62,7 +62,7 @@ function SetRxParameters_GUI(dict)
         RX.EnableExternalReferenceClock = false;
     end
     
-    RX.channelVec = dict.channelVec;
+    %RX.channelVec = dict.channelVec;
     
     save('.\DPD Data\Signal Generation Parameters\RX.mat','RX')
 end

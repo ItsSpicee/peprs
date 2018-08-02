@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'peprs.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt5 UI code generator 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -1114,7 +1114,7 @@ class Ui_peprs(object):
         self.calValScroll_2.setWidgetResizable(True)
         self.calValScroll_2.setObjectName("calValScroll_2")
         self.calValScrollWidgetContents_2 = QtWidgets.QWidget()
-        self.calValScrollWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 738, 550))
+        self.calValScrollWidgetContents_2.setGeometry(QtCore.QRect(0, -61, 738, 550))
         self.calValScrollWidgetContents_2.setMinimumSize(QtCore.QSize(590, 550))
         self.calValScrollWidgetContents_2.setObjectName("calValScrollWidgetContents_2")
         self.precharRefRXEquip = QtWidgets.QGroupBox(self.calValScrollWidgetContents_2)
@@ -7136,7 +7136,7 @@ class Ui_peprs(object):
         self.psgEquipScroll_7.setWidgetResizable(True)
         self.psgEquipScroll_7.setObjectName("psgEquipScroll_7")
         self.psgEquipScrollWidgetContents_9 = QtWidgets.QWidget()
-        self.psgEquipScrollWidgetContents_9.setGeometry(QtCore.QRect(0, 0, 590, 415))
+        self.psgEquipScrollWidgetContents_9.setGeometry(QtCore.QRect(0, 0, 601, 415))
         self.psgEquipScrollWidgetContents_9.setMinimumSize(QtCore.QSize(590, 415))
         self.psgEquipScrollWidgetContents_9.setObjectName("psgEquipScrollWidgetContents_9")
         self.vsaMeasGenEquip_2 = QtWidgets.QGroupBox(self.psgEquipScrollWidgetContents_9)
@@ -22920,7 +22920,7 @@ class Ui_peprs(object):
         self.uxaVSAEquipAdvScroll.setWidgetResizable(True)
         self.uxaVSAEquipAdvScroll.setObjectName("uxaVSAEquipAdvScroll")
         self.uxaVSAEquipAdvScrollWidgetContents = QtWidgets.QWidget()
-        self.uxaVSAEquipAdvScrollWidgetContents.setGeometry(QtCore.QRect(0, 0, 629, 575))
+        self.uxaVSAEquipAdvScrollWidgetContents.setGeometry(QtCore.QRect(0, 0, 629, 871))
         self.uxaVSAEquipAdvScrollWidgetContents.setMinimumSize(QtCore.QSize(629, 575))
         self.uxaVSAEquipAdvScrollWidgetContents.setObjectName("uxaVSAEquipAdvScrollWidgetContents")
         self.uxaVSAAdv = QtWidgets.QGroupBox(self.uxaVSAEquipAdvScrollWidgetContents)
@@ -32637,7 +32637,7 @@ class Ui_peprs(object):
         self.menuBar.addAction(self.menu_Preferences.menuAction())
 
         self.retranslateUi(peprs)
-        self.stepTabs.setCurrentIndex(0)
+        self.stepTabs.setCurrentIndex(2)
         self.algoNextStack.setCurrentIndex(3)
         self.algoTabs.setCurrentIndex(1)
         self.sampRateOverwrite_prechar.setCurrentIndex(2)
@@ -32662,7 +32662,7 @@ class Ui_peprs(object):
         self.single_down_vsaMeas_stack.setCurrentIndex(0)
         self.vsaMeasNextStack.setCurrentIndex(3)
         self.rightFlowStack.setCurrentIndex(0)
-        self.vsaMeasParamTabs.setCurrentIndex(1)
+        self.vsaMeasParamTabs.setCurrentIndex(0)
         self.vsaMeasGenStack.setCurrentIndex(1)
         self.downStack_vsaMeas.setCurrentIndex(1)
         self.subrateField_comb.setCurrentIndex(1)
@@ -32691,7 +32691,7 @@ class Ui_peprs(object):
         self.vsgResultsStack_vsgMeas.setCurrentIndex(0)
         self.vsgResultsTabs_vsgMeas.setCurrentIndex(0)
         self.vsgResultsFileStack_vsgMeas.setCurrentIndex(0)
-        self.equipStack.setCurrentIndex(0)
+        self.equipStack.setCurrentIndex(2)
         self.vsgWorkflows.setCurrentIndex(2)
         self.vsaWorkflow_vsg.setCurrentIndex(0)
         self.single_vsg_stack.setCurrentIndex(0)
@@ -32722,7 +32722,7 @@ class Ui_peprs(object):
         self.single_mod_down_vsa_stack.setCurrentIndex(0)
         self.single_down_vsa_stack.setCurrentIndex(0)
         self.vsaNextStack.setCurrentIndex(3)
-        self.vsaEquipTabs.setCurrentIndex(0)
+        self.vsaEquipTabs.setCurrentIndex(1)
         self.vsaEquipStack.setCurrentIndex(0)
         self.uxa_pxa_titleStack.setCurrentIndex(1)
         self.uxa_pxa_set.setCurrentIndex(0)
@@ -32730,7 +32730,7 @@ class Ui_peprs(object):
         self.mwPath_vsa.setCurrentIndex(1)
         self.filterTpye_vsa.setCurrentIndex(2)
         self.preampEnable_vsa.setCurrentIndex(2)
-        self.ifPath_vsa.setCurrentIndex(4)
+        self.ifPath_vsa.setCurrentIndex(0)
         self.uxa_pxa_titleStackAdv.setCurrentIndex(0)
         self.phaseNoiseOptimization_vsa.setCurrentIndex(1)
         self.vsgWorkflowForDown.setCurrentIndex(3)
