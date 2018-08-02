@@ -13,6 +13,7 @@ function Set_RXTX_Structures(txd,rxd)
     rxd.MeasuredPeriods = str2double(rxd.MeasuredPeriods);
     rxd.FSample = str2double(rxd.FSample);
     rxd.xLength = str2double(rxd.xLength);
+    rxd.TriggerChannel = str2double(rxd.TriggerChannel);
     
     %load structures
     load(".\DPD Data\Signal Generation Parameters\Signal.mat","Signal")
@@ -47,7 +48,13 @@ function Set_RXTX_Structures(txd,rxd)
     end
     
     TX.AWG.NumberOfSegments = txd.NumberOfSegments; % Number of segments in the uploaded signal to the AWG
-    TX.AWG.IQOutput = 1;   % AWG outputs both I and Q
+    
+    if txd.iChannel == 1 || txd.qChannel == 1
+        TX.AWG.IQOutput = 0;   
+    else
+        TX.AWG.IQOutput = 1; % AWG outputs both I and Q
+    end
+    
     TX.AWG.DataFormat = 'DNRZ';
 
     if txd.ExpansionMarginEnable == 1
@@ -80,6 +87,7 @@ function Set_RXTX_Structures(txd,rxd)
     end 
     TX.FreqMultiplier.Factor = txd.FreqMultiplierFactor;
 
+    % just hardcoard these for now
     TX.Outphasing.Flag = false;
     TX.AWG.SyncModuleFlag = 0;
     TX.AWG.Position = 1;
@@ -127,8 +135,6 @@ function Set_RXTX_Structures(txd,rxd)
     else
         RX.SubRate = 1;
     end
-      
-    RX.FsampleOverwriteGUIFlag = rxd.FsampleOverwrite;
     
     % If we are receiving at IF, then we downconvert digitally to process at
     % baseband. After downconversion, we need to filter the signal with a LPF
@@ -140,8 +146,8 @@ function Set_RXTX_Structures(txd,rxd)
         RX.SubtractDCFlag = false;
     end
     
-    RX.TriggerChannel = 3;
-    if (TX.AWG.Position == 1)
+    RX.TriggerChannel = rxd.TriggerChannel;
+    if TX.AWG.Position == 1
         RX.TriggerChannel = 3;
     else
         RX.TriggerChannel = 3;
@@ -154,6 +160,18 @@ function Set_RXTX_Structures(txd,rxd)
         RX.alignFreqDomainFlag = 0;
     end
     RX.xCovLength = rxd.xLength;
+    
+    RX.PositiveDelayFlag = 1; % originally based off of Cal.Signal.TrainingLength, now just make sure it is 1
+    
+    if rxd.DemodSignalFlag == 1
+        RX.VSA.DemodSignalFlag = true;
+    else
+        RX.VSA.DemodSignalFlag = false;
+    end
+    
+    RX.VSA.ASMPath = rxd.ASMPath;
+    RX.VSA.SetupFile = rxd.SetupFile;
+    RX.VSA.DataFile = rxd.DataFile;
     
     save('.\DPD Data\Signal Generation Parameters\RX.mat','RX')
     save('.\DPD Data\Signal Generation Parameters\TX.mat','TX')

@@ -11,6 +11,8 @@ import matplotlib.pyplot as plt
 from matplotlib.offsetbox import (OffsetImage, AnnotationBbox)
 import matplotlib.image as mpimg
 
+import random
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions used in main.py
 
@@ -45,8 +47,8 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 			if iChannel == 0 or qChannel == 0:
 				instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 			else:
-				supply.Set_Channel_Mapping(iChannel,qChannel,"RX",nargout=0)
-				supply.Set_Channel_Mapping(iChannel,qChannel,"AWG",nargout=0)
+				# supply.Set_Channel_Mapping(iChannel,qChannel,"RX",nargout=0)
+				# supply.Set_Channel_Mapping(iChannel,qChannel,"AWG",nargout=0)
 				flag = setAWGParams(self,d,supply)
 		else:
 			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
@@ -55,6 +57,7 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 		if flag:
 			# set MATLAB RXCal parameters
 			awgDict = {
+				"model" : self.ui.partNum_awg.text(),
 				"model" : self.ui.partNum_awg.text(),
 				"sampleRate" : self.ui.maxSampleRate_awg.text(),
 				"type": self.ui.vsgSetup.currentIndex(),
@@ -371,6 +374,35 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 							self.ui.up_psg_next.setCurrentIndex(4)
 							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor)
 				# general step 3 vsa parameters
+				fSampleField = ""
+				vsaPage = self.ui.vsaMeasGenStack.currentIndex()
+				if vsaPage == 1:
+					fSampleField = self.ui.sampRate_vsaMeas.text()
+				elif vsaPage == 0:
+					fSampleField = self.ui.sampRate_vsaMeas_2.text()
+				
+				channelVec = [0,0,0,0]
+				c1 = self.ui.measChannel1.isChecked()
+				c2 = self.ui.measChannel2.isChecked()
+				c2 = self.ui.measChannel3.isChecked()
+				c2 = self.ui.measChannel4.isChecked()
+				if c1:
+					channelVec[0] = 1
+				else:
+					channelVec[0] = 0
+				if c2:
+					channelVec[0] = 1
+				else:
+					channelVec[0] = 0
+				if c3:
+					channelVec[0] = 1
+				else:
+					channelVec[0] = 0
+				if c4:
+					channelVec[0] = 1
+				else:
+					channelVec[0] = 0
+					
 				dGen = {
 					"AnalysisBandwidth":self.ui.analysisBandwidth_sa.text(),
 					"Attenuation":self.ui.attenuation_sa.text(),
@@ -383,8 +415,8 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 					"ACDCCoupling" : self.ui.coupling_dig.currentIndex(),
 					"DriverPath" : self.ui.driverPath_scope.text(),
 					"EnableExternalClock_Scope" : self.ui.extClkEnabled_scope.currentIndex(),
-					"iChannel" : self.ui.iChannel_awg.currentIndex(),
-					"qChannel" : self.ui.qChannel_awg.currentIndex()
+					"ChannelVec": channelVec,
+					"FSample": fSampleField
 				}
 				supply.SetRxParameters_GUI(dGen,nargout=0);
 				
@@ -1630,32 +1662,30 @@ def runCalValidation(self,setBox,setButton):
 		self.ui.algoNextStack.setCurrentIndex(0)
 		self.ui.debugAlgoStack.setCurrentIndex(2)
 
-def preCharPreview(self,supply):
-	layout = self.ui.spectrumGraph_prechar
-	for i in reversed(range(layout.count())): 
-		widgetToRemove = layout.itemAt(i).widget()
-		layout.removeWidget(widgetToRemove)
-		widgetToRemove.setParent(None)
-	
+def preCharPreview(self,spectrumCanvas,spectrumFiguresupply):	
 	d = {
 		"signalName": self.ui.comboBox_81.currentIndex(),
 		"removeDC": self.ui.comboBox_82.currentIndex()
 	}
 	supply.Set_Prechar_Signal(d,nargout=0)
-	supply.Preview_Signal(nargout=0)
-	
-	image = mpimg.imread('.\Figures\Prechar_Spectrum.png')
-	self.figure.clear()
-	a = self.figure.add_subplot(1,1,1)
-	imgplot = plt.imshow(image)
-	#refresh canvas
-	self.canvas.draw()
+	supply.Preview_Prechar_Signal(nargout=0)
+
+	spectrumImage = mpimg.imread('.\Figures\Prechar_Spectrum_Input.png')
+	spectrumFigure.clear()
+	ax = spectrumFigure.add_subplot(111)
+	ax.imshow(spectrumImage)
+	plt.xlabel('Frequency(GHz)')
+	plt.ylabel('Power(dB)')
+	plt.title('Welch Mean-Square Spectrum Estimate')
+	plt.xticks([], [])
+	plt.yticks([], [])
+	spectrumCanvas.draw()
 	 
 	self.ui.precharTabs.setCurrentIndex(0)
 	self.ui.resultsAlgoTabs.setCurrentIndex(3)
 	self.ui.precharAlgoStack.setCurrentIndex(0)
 	
-def runPrecharacterization(self,setBox,setButton,supply):
+def runPrecharacterization(self,setBox,setButton,spectrumCanvas,spectrumFigure,gainCanvas,gainFigure,phaseCanvas,phaseFigure,supply):
 	ampCorrField = ""
 	trigAmpField = ""
 	fCarrierField = ""
@@ -1699,6 +1729,8 @@ def runPrecharacterization(self,setBox,setButton,supply):
 			"FreqMutiplierFlag" : self.ui.freqMultiplierFlag_prechar.currentIndex(),
 			"FreqMultiplierFactor": self.ui.freqMultiplierFactor_prechar.text(),	
 			"ReferenceClockSource": self.ui.refClockSorce_awg.currentIndex(),	
+			"iChannel": self.ui.iChannel_awg.currentIndex(),	
+			"qChannel": self.ui.qChannel_awg.currentIndex(),	
 			"ReferenceClock": self.ui.extRefFreq_awg.text(),	
 			"VFS": self.ui.dacRange_awg.text(),	
 			"TriggerAmplitude": trigAmpField
@@ -1714,7 +1746,12 @@ def runPrecharacterization(self,setBox,setButton,supply):
 			"SubRate" : self.ui.subRate_prechar.currentIndex(),
 			"AlignFreqDomainFlag" : self.ui.alignFreqDomain_prechar.currentIndex(),
 			"DownconversionFilterFile" : self.ui.downFileField_algo_2.text(),
+			"TriggerChannel" : self.ui.trigChannel_scope.text(),
+			"ASMPath" : self.ui.dllFile_uxa.text(),
+			"SetupFile" : self.ui.setupFile_uxa.text(),
+			"DataFile" : self.ui.dataFile_uxa.text(),
 			"SubtractDCFlag" : self.ui.subtractDC_prechar.currentIndex(),
+			"DemodSignalFlag": self.ui.demodulationEnable.currentIndex(),
 			"VisaAddress": addressField
 			
 		}
@@ -1725,32 +1762,103 @@ def runPrecharacterization(self,setBox,setButton,supply):
 	
 		supply.Set_Prechar_Signal(dSignal,nargout=0)
 		supply.Set_RXTX_Structures(tx,rx,nargout=0)
-		supply.Signal_Generation_Test(nargout=0)
+		
+		self.ui.debugAlgoStack.setCurrentIndex(0)
+		
+		# self.progressBar = QProgressBar()
+		# self.progressBar.setRange(1,7);
+		# self.progressBar.setTextVisible(True);
+		# self.ui.statusBar.addWidget(self.progressBar,1)
+		# completed = 0
+		# self.progressBar.setValue(completed)
+		# self.progressBar.setFormat("Currently Running: Set Parameters")
+		# supply.Set_Parameters_PrecharDebug(nargout=0)
+		# completed = 1
+		# self.progressBar.setValue(completed)
+		# self.progressBar.setFormat("Currently Running: Prepare Signal for Upload")
+		# supply.Prepare_Signal_Upload_PrecharDebug(nargout=0)
+		# completed = 2
+		# self.progressBar.setValue(completed)
+		# self.progressBar.setFormat("Currently Running: Upload Signal")
+		# supply.Upload_Signal_PrecharDebug(nargout=0)
+		# completed = 3
+		# self.progressBar.setValue(completed)
+		# self.progressBar.setFormat("Currently Running: Download Signal")
+		# supply.Download_Signal_PrecharDebug(nargout=0)
+		# completed = 4
+		# self.progressBar.setValue(completed)
+		# self.progressBar.setFormat("Currently Running: Align & Analyze Signals")
+		# supply.Analyze_Signal_PrecharDebug(nargout=0)
+		# completed = 5
+		# self.progressBar.setValue(completed)
+		# self.progressBar.setFormat("Currently Running: Save Spectrum & VSA Data")
+		# supply.Save_Data_PrecharDebug(nargout=0)
+		# completed = 6
+		# self.progressBar.setValue(completed)
+		# self.progressBar.setFormat("Currently Running: Save Signal Generation Measurements")
+		# supply.Save_Measurements_PrecharDebug(nargout=0)
+		# completed = 7
+		# self.progressBar.setValue(completed)
+		# self.ui.statusBar.removeWidget(self.progressBar)
+		# self.ui.statusBar.showMessage("PreCharacterization Setup Routine Complete",3000)
+		
+		result = supply.Signal_Generation_Test(nargout=1)
+		result = result.split("~")
+		nmsePercent = result[0]
+		nmseDB = result[1]
+		inputPAPR = result[2]
+		outputPAPR = result[3]
+	
+		self.ui.nmsePercent_prechar.setText(nmsePercent)
+		self.ui.nmseDB_prechar.setText(nmseDB)
+		self.ui.inputPAPR_prechar.setText(inputPAPR)
+		self.ui.outputPAPR_prechar.setText(outputPAPR)
+		
+		
+		spectrumImage = mpimg.imread('.\Figures\Prechar_Spectrum_Output.png')
+		spectrumFigure.clear()
+		sax = spectrumFigure.add_subplot(111)
+		sax.imshow(spectrumImage)
+		sax.set_xlabel('Frequency(GHz)')
+		sax.set_ylabel('Power(dB)')
+		sax.set_title('Welch Mean-Square Spectrum Estimate')
+		sax.set_xticks([], [])
+		sax.set_yticks([], [])
+		spectrumCanvas.draw()
+		
+		gainImage = mpimg.imread('.\Figures\Prechar_Gain.png')
+		gainFigure.clear()
+		gax = gainFigure.add_subplot(111)
+		gax.imshow(gainImage)
+		gax.set_xlabel('Input Power (dBm)')
+		gax.set_ylabel('Gain Distortion (dB)')
+		gax.set_title('Gain Distortion')
+		gax.set_xticks([], [])
+		gax.set_yticks([], [])
+		gainCanvas.draw()
+			
+		phaseImage = mpimg.imread('.\Figures\Prechar_Phase.png')
+		phaseFigure.clear()
+		pax = phaseFigure.add_subplot(111)
+		pax.imshow(phaseImage)
+		pax.set_xlabel('Input Power (dBm)')
+		pax.set_ylabel('Phase Distortion (degree)')
+		pax.set_title('AM/PM Distortion')
+		pax.set_xticks([], [])
+		pax.set_yticks([], [])
+		phaseCanvas.draw()
 		
 		setButton.setText("Unset")
 		self.ui.precharTabs.setCurrentIndex(0)
 		self.ui.resultsAlgoTabs.setCurrentIndex(3)
 		self.ui.algoNextStack.setCurrentIndex(3)
-		self.ui.debugAlgoStack.setCurrentIndex(0)
 		self.ui.precharAlgoStack.setCurrentIndex(0)
 		self.ui.precharSignalEquip.setStyleSheet(setBox)
 		self.ui.precharCalFilesEquip.setStyleSheet(setBox)
 		self.ui.precharRefRXEquip.setStyleSheet(setBox)
 		self.ui.precharVSGEquip.setStyleSheet(setBox)
 		self.ui.precharAWGEquip.setStyleSheet(setBox)
-		
-		self.progressBar = QProgressBar()
-		self.progressBar.setRange(1,10);
-		self.progressBar.setTextVisible(True);
-		self.progressBar.setFormat("Currently Running: PreCharacterization Setup Routine")
-		self.ui.statusBar.addWidget(self.progressBar,1)
-		completed = 0
-		while completed < 100:
-			completed = completed + 0.00001
-			self.progressBar.setValue(completed)
-		self.ui.statusBar.removeWidget(self.progressBar)
-		# to show progress bar, need both addWidget() and show()
-		self.ui.statusBar.showMessage("PreCharacterization Setup Routine Complete",3000)	
+			
 	elif setButton.isChecked() == False:
 		setButton.setText("Set && Run")
 		self.ui.algoNextStack.setCurrentIndex(2)

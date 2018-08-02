@@ -18,4 +18,13 @@ if nargin == 3
     
 end
 
+saveFig = figure('visible','off');
+plot(10*log10(abs(In).^2/100)+30, 20*log10(abs(Out)./abs(In)), '.') 
+if nargin == 3
+    xlim([-20 11]);
+    ylim([-5 5]);
+%     saveas(f,[ save_string '.jpg'])
+end
+saveas(saveFig,".\Figures\Prechar_Gain.png")
+
 end

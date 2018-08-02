@@ -3,7 +3,7 @@ function SetRxParameters_GUI(dict)
     dict.Attenuation = str2double(dict.Attenuation);
     dict.TriggerLevel = str2double(dict.TriggerLevel);
     dict.VFS = str2double(dict.VFS);
-    channelMap = [0 0; 0 0];
+    dict.FSample = str2double(dict.FSample);
     load('.\DPD Data\Algorithm Parameters\RX.mat')
     
     % Digitizer Parameters
@@ -24,18 +24,22 @@ function SetRxParameters_GUI(dict)
     end
     RX.VFS = dict.VFS; % Digitzer full scale peak to peak voltage reference (1 or 2 V)
     
-%     if (RX.Fsample > 1e9)
-%         RX.EnableInterleaving  = true;       % Enable interleaving
-%     end 
-    if dict.Interleaving == 1
-        RX.Digitzer.interleaving_flag = 1;
+    % interleaving must be true if the sampling frequency > 1e9
+    if (dict.FSample > 1e9)
+        RX.EnableInterleaving  = true;       % Enable interleaving
     else
-        RX.Digitzer.interleaving_flag = 0;
-    end
+        if dict.Interleaving == 1
+            RX.Digitzer.interleaving_flag = 1;
+        else
+            RX.Digitzer.interleaving_flag = 0;
+        end
+    end 
+    
     
     % UXA Parameters
-    % RX.UXA.Downconverter_flag = 0; % Use UXA as a downconverter to feed the signal into the scope
-    % RX.UXA.Downcversion_RF_Freq = 28e9; % The RF frequency that the UXA is seeing at its RF input port when used in downconversion mode
+    RX.UXA.Downconverter_flag = 0; % Leave as 0, Use UXA as a downconverter to feed the signal into the scope
+    RX.UXA.Downcversion_RF_Freq = 28e9; % The RF frequency that the UXA is seeing at its RF input port when used in downconversion mode
+    
     RX.UXA.AnalysisBandwidth = dict.AnalysisBandwidth;
     RX.UXA.Attenuation = dict.Attenuation;
     if dict.ClockReference == 1
@@ -57,21 +61,8 @@ function SetRxParameters_GUI(dict)
     else
         RX.EnableExternalReferenceClock = false;
     end
-    if dict.iChannel == 1
-        channelMap(1,:) = 1;
-    elseif dict.iChannel == 2
-        channelMap(1,1) = 1;
-    elseif dict.iChannel == 3
-        channelMap(2,1) = 1;
-    end
-    if dict.qChannel == 1
-        channelMap(2,:) = 1;
-    elseif dict.qChannel == 2
-        channelMap(1,2) = 1;
-    elseif dict.qChannel == 3
-        channelMap(2,2) = 1;
-    end  
-    RX.channelVec = channelMap;
+    
+    RX.channelVec = dict.channelVec;
     
     save('.\DPD Data\Signal Generation Parameters\RX.mat','RX')
 end

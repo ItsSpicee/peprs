@@ -17,6 +17,7 @@ import setParameters as set
 import workflowNav as flow
 import windowFunctions as menu
 import parameterFunctions as param
+import debugFunctions as debug
 #import PowerSupplyPkg
 
 # setup matlab engine
@@ -25,6 +26,10 @@ import matlab.engine
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+
+import random
+
 
 supply = matlab.engine.start_matlab()
 # add all folders and subfolders in peprs to matlab path
@@ -72,11 +77,23 @@ class Window(QMainWindow):
 		self.ui.meterEquipTabs.setTabEnabled(1, False)
 		
 		# create matlab plots
-		self.figure = plt.figure()
-		self.canvas = FigureCanvas(self.figure)
-		self.toolbar = NavigationToolbar(self.canvas, self)
-		self.ui.spectrumGraph_prechar.addWidget(self.toolbar)
-		self.ui.spectrumGraph_prechar.addWidget(self.canvas)
+		precharSpectrumFigure = plt.figure()
+		precharSpectrumCanvas = FigureCanvas(precharSpectrumFigure)
+		precharSpectrumToolbar = NavigationToolbar(precharSpectrumCanvas, self)
+		self.ui.spectrumGraph_prechar.addWidget(precharSpectrumToolbar)
+		self.ui.spectrumGraph_prechar.addWidget(precharSpectrumCanvas)
+		
+		precharGainFigure = plt.figure()
+		precharGainCanvas = FigureCanvas(precharGainFigure)
+		precharGainToolbar = NavigationToolbar(precharGainCanvas, self)
+		self.ui.gainGraph_prechar.addWidget(precharGainToolbar)
+		self.ui.gainGraph_prechar.addWidget(precharGainCanvas)
+		
+		precharPhaseFigure = plt.figure()
+		precharPhaseCanvas = FigureCanvas(precharPhaseFigure)
+		precharPhaseToolbar = NavigationToolbar(precharPhaseCanvas, self)
+		self.ui.phaseGraph_prechar.addWidget(precharPhaseToolbar)
+		self.ui.phaseGraph_prechar.addWidget(precharPhaseCanvas)
 		
 		# deal with error widget
 		self.ui.errorScrollArea.setMaximumHeight(0)
@@ -142,15 +159,15 @@ class Window(QMainWindow):
 		self.ui.filePushButton_46.clicked.connect(lambda: menu.fileBrowse(self, self.ui.awgCalFileField_vsgMeas,".\Measurement Data"))
 		self.ui.filePushButton_47.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFilterFileField_vsgMeas,".\Measurement Data\\Utility Data"))
 		self.ui.filePushButton_48.clicked.connect(lambda: menu.fileSave(self, self.ui.awgCalSaveLocField_vsgMeas,".\Measurement Data"))
-		self.ui.filePushButton_49.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dllFile_uxa,".\Equipment Setup\Demodulator"))
-		self.ui.filePushButton_50.clicked.connect(lambda: menu.fileBrowse(self, self.ui.setupFile_uxa,".\Equipment Setup\Demodulator"))
-		self.ui.filePushButton_51.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dataFile_uxa,".\Equipment Setup\Demodulator"))
-		self.ui.filePushButton_52.clicked.connect(lambda: menu.fileBrowse(self, self.ui.setupFile_scope,".\Equipment Setup\Demodulator"))
-		self.ui.filePushButton_53.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dllFile_scope,".\Equipment Setup\Demodulator"))
-		self.ui.filePushButton_54.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dataFile_scope,".\Equipment Setup\Demodulator"))
-		self.ui.filePushButton_55.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dllFile_dig,".\Equipment Setup\Demodulator"))
-		self.ui.filePushButton_56.clicked.connect(lambda: menu.fileBrowse(self, self.ui.setupFile_dig,".\Equipment Setup\Demodulator"))
-		self.ui.filePushButton_57.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dataFile_dig,".\Equipment Setup\Demodulator"))
+		self.ui.filePushButton_49.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dllFile_uxa,"C:\Program Files\Agilent"))
+		self.ui.filePushButton_50.clicked.connect(lambda: menu.fileBrowse(self, self.ui.setupFile_uxa,".\DPD"))
+		self.ui.filePushButton_51.clicked.connect(lambda: menu.fileSave(self, self.ui.dataFile_uxa,""))
+		self.ui.filePushButton_52.clicked.connect(lambda: menu.fileBrowse(self, self.ui.setupFile_scope,".\DPD"))
+		self.ui.filePushButton_53.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dllFile_scope,"C:\Program Files\Agilent"))
+		self.ui.filePushButton_54.clicked.connect(lambda: menu.fileSave(self, self.ui.dataFile_scope,""))
+		self.ui.filePushButton_55.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dllFile_dig,"C:\Program Files\Agilent"))
+		self.ui.filePushButton_56.clicked.connect(lambda: menu.fileBrowse(self, self.ui.setupFile_dig,".\DPD"))
+		self.ui.filePushButton_57.clicked.connect(lambda: menu.fileSave(self, self.ui.dataFile_dig,""))
 		self.ui.filePushButton_16.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_algo_3,".\Measurement Data\\Utility Data"))
 		self.ui.filePushButton_19.clicked.connect(lambda: menu.fileBrowse(self, self.ui.refFileField_comb,".\Measurement Data\Comb_Generator_Files"))
 		self.ui.filePushButton_21.clicked.connect(lambda: menu.fileBrowse(self,self.ui.driverPath_scope,".\Equipment Setup\Scope"))
@@ -712,11 +729,19 @@ class Window(QMainWindow):
 		# algo page
 		self.ui.calValPreview.clicked.connect(lambda: set.calValPreview(self))
 		self.ui.calValRun.clicked.connect(lambda: set.runCalValidation(self,setParams,self.ui.calValRun,supply))
-		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self,supply))
-		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun,supply))
 		self.ui.dpdPreview.clicked.connect(lambda: set.dpdPreview(self))
 		self.ui.dpdRun.clicked.connect(lambda: set.runDPD(self,setParams,self.ui.dpdRun))
 		self.ui.algoSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.refRXAdvEquip,setParams,self.ui.algoSetAdv))
+		# prechar tab
+		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self,precharSpectrumCanvas,precharSpectrumFigure,supply))
+		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun,precharSpectrumCanvas,precharSpectrumFigure,precharGainCanvas,precharGainFigure,precharPhaseCanvas,precharPhaseFigure,supply))
+		self.ui.setParameters_precharDebug.clicked.connect(lambda: debug.setParametersPrechar(self,supply))
+		self.ui.prepareSignal_precharDebug.clicked.connect(lambda: debug.prepareSignalPrechar(self,supply))
+		self.ui.upload_precharDebug.clicked.connect(lambda: debug.uploadSignalPrechar(self,supply))
+		self.ui.download_precharDebug.clicked.connect(lambda: debug.downloadSignalPrechar(self,supply))
+		self.ui.analyze_precharDebug.clicked.connect(lambda: debug.analyzeSignalPrechar(self,supply))
+		self.ui.saveData_precharDebug.clicked.connect(lambda: debug.saveDataPrechar(self,supply))
+		self.ui.saveMeasurements_precharDebug.clicked.connect(lambda: debug.saveMeasurementsPrechar(self,supply))
 		
 		# control parameter changes
 		# vsa equipment page

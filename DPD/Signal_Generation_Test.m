@@ -1,3 +1,4 @@
+function data = Signal_Generation_Test()
 clc
 clear
 close all
@@ -21,10 +22,6 @@ Measure_Pout_Eff = false;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Set Transmitter Parameters | RECEIVER PARAMS ALREADY SET IN SET_RXTX_STRUCTURES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-TX.AWG.IQOutput                = 1;   % AWG outputs both I and Q
-TX.Outphasing.Flag           = false;
-TX.AWG.SyncModuleFlag = 0;
-TX.AWG.Position = 1;
 EVM_flag                    = 0;    % If this flag is one, the code demodulates the received signal and 
                                     % computes the symbol ENM
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -36,22 +33,17 @@ ReadInputFiles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Set Receiever Parameters | RECEIVER PARAMS ALREADY SET IN SET_RXTX_STRUCTURES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Overwrite the sampling rate of the receiver (max 450MHz for digitizer is recommanded)
-if RX.FsampleOverwriteGUIFlag == 1
-    RX.FsampleOverwrite = 0 * Signal.Fsample;
-else
-    RX.FsampleOverwrite = 1 * Signal.Fsample;
-end
-%RX.FsampleOverwrite = 0 * Signal.Fsample; % Overwrite the sampling rate of the receiver (max 450MHz for digitizer is recommanded)
-
+% goes with SubRate flag, leave alone for now
+RX.FsampleOverwrite = 0 * Signal.Fsample; % Overwrite the sampling rate of the receiver (max 450MHz for digitizer is recommanded)
 RX.Analyzer.FrameTime = TX.FrameTime; % One measurement frame;
+RX.Analyzer.Fsample = Signal.Fsample;
 RX.Analyzer.PointsPerRecord = RX.Analyzer.Fsample * RX.Analyzer.FrameTime * RX.Analyzer.NumberOfMeasuredPeriods;
 
-RX.TriggerChannel = 3;
-
 % VSA Parameters
-RX.VSA.DemodSignalFlag = true;
-SetVSAParameters
+RX.VSA.DemodSignalFlag = false;
+% if RX.VSA.ASMPath == "" || RX.VSA.ASMPath ==" "
+%     SetVSAParameters
+% end
 
 % Set remaining RX parameters
 SetRxParameters
@@ -60,9 +52,9 @@ SetRxParameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Activate calibration
 Cal.AWG.Calflag = false;
-Cal.TX.Calflag  = true;
-Cal.TX.IQCal    = true;
-Cal.RX.Calflag  = true;
+Cal.TX.Calflag  = false;
+Cal.TX.IQCal    = false;
+Cal.RX.Calflag  = false;
 
 % AWG Calibration file
 Cal.AWG.CalFile_I = '.\Measurement Data\AWG_CalResults\AWG_Cal_3105MHz_I.mat';
@@ -96,40 +88,45 @@ IterationCount = 1;
 memTrunc = 0;
 
 UploadSignal
-AWG_Upload_Script
+% AWG_Upload_Script
 
-% if (strcmp(RX.Type,'Scope'))
-%     CaptureScope_64bit
-% end
-% 
+if (strcmp(RX.Type,'Scope'))
+    CaptureScope_64bit
+end
+
+Rec = In_ori;
 % DownloadSignal
-% 
-% disp(' %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
-% disp([' Input Signal']);
-% CheckPower(In_ori,1);
-% disp(' %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
-% disp([' Output Signal']);
-% CheckPower(Rec,1);
-% disp(' %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
-% Rec = SetMeanPower(Rec, 0);
-% 
-% if (RX.SubRate > 1)
-%     FractionalDelayFlag = 1;
-% else 
-%     FractionalDelayFlag = 0;
-% end
-% 
-% [In_D, Out_D, NMSE] = AlignAndAnalyzeSignals(In_ori, Rec, RX.Fsample, RX.alignFreqDomainFlag, RX.xCovLength, FractionalDelayFlag, RX.SubRate);
-% 
-% % Save EVM Results
-% if (RX.VSA.DemodSignalFlag)
-%     savevsarecording('Out_D_IFOut.mat', Out_D, Signal.Fsample, 0);
-%     measEVM = CalculateDemodEVM(RX.VSA.ASMPath,RX.VSA.SetupFile, strcat(RX.VSA.DataFile, 'Out_D_IFOut.mat'));
-%     display([ 'EVM         = ' num2str(measEVM.evm)      ' %']);
-% end
-% 
-% display([ 'NMSE         = ' num2str(NMSE)      ' % or ' num2str(10*log10((NMSE/100)^2))      ' dB ']);
-% 
-% % [SAMeas, figHandle] = Save_Spectrum_Data();
-% 
+
+disp(' %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
+disp([' Input Signal']);
+CheckPower(In_ori,1);
+disp(' %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
+disp([' Output Signal']);
+CheckPower(Rec,1);
+disp(' %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
+Rec = SetMeanPower(Rec, 0);
+
+if (RX.SubRate > 1)
+    FractionalDelayFlag = 1;
+else 
+    FractionalDelayFlag = 0;
+end
+
+[In_D, Out_D, NMSE] = AlignAndAnalyzeSignals(In_ori, Rec, RX.Fsample, RX.alignFreqDomainFlag, RX.xCovLength, FractionalDelayFlag, RX.SubRate);
+
+% Save EVM Results
+if (RX.VSA.DemodSignalFlag)
+    savevsarecording('Out_D_IFOut.mat', Out_D, Signal.Fsample, 0);
+    measEVM = CalculateDemodEVM(RX.VSA.ASMPath,RX.VSA.SetupFile, strcat(RX.VSA.DataFile, 'Out_D_IFOut.mat'));
+    display([ 'EVM         = ' num2str(measEVM.evm)      ' %']);
+end
+
+display([ 'NMSE         = ' num2str(NMSE)      ' % or ' num2str(10*log10((NMSE/100)^2))      ' dB ']);
+
+% [SAMeas, figHandle] = Save_Spectrum_Data();
+
 % SaveSignalGenerationMeasurements
+
+dBnmse = 10*log10((NMSE/100)^2);
+data = sprintf('%f~%f~%f~%f',NMSE,dBnmse,TX.AWG.ExpansionMarginSettings.PAPR_original,TX.AWG.ExpansionMarginSettings.PAPR_input);
+end

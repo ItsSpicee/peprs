@@ -1,7 +1,7 @@
 %% This function is used to plot the AM/PM characteristic
 function PlotAMPM(In, Out, save_string)
 [In, Out] = UnifyLength(In, Out) ;
-figure()
+fig = figure();
 hold on
 grid on
 % Compute the phase distortion
@@ -26,5 +26,14 @@ if nargin == 3
 %     saveas(f,[ save_string '.jpg'])
     
 end
+
+saveFig = figure('visible','off');
+plot( 10*log10(abs(In).^ 2/100)+30, Phaseout.*(180/pi), 'r.')
+if nargin == 3
+    xlim([-20 11]);
+	ylim([-40 40]);
+%     saveas(f,[ save_string '.jpg'])   
+end
+saveas(saveFig,".\Figures\Prechar_Phase.png")
 
 end
