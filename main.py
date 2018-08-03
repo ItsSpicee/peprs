@@ -7,7 +7,7 @@ import os
 from PyQt5 import uic, QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (QDockWidget,QDialogButtonBox,QMessageBox, QTabWidget, QFileDialog,QDialog, QInputDialog, QTextEdit, QLineEdit, QLabel, QFrame, QGridLayout, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QMenu, QAction, qApp, QDesktopWidget, QMessageBox, QToolTip, QPushButton, QApplication, QProgressBar,QSizePolicy)
 from PyQt5.QtGui import (QCursor, QPen, QPainter, QColor, QIcon, QFont,QGuiApplication)
-from PyQt5.QtCore import (QEvent,Qt, pyqtSlot, QSize, QSettings)
+from PyQt5.QtCore import (QEvent,Qt, pyqtSlot, QSize, QSettings,QThread)
 
 from peprs import Ui_peprs
 from dutsetup import Ui_DUTSetup
@@ -31,13 +31,13 @@ import matplotlib.image as mpimg
 import random
 
 
-supply = matlab.engine.start_matlab()
+matlab = matlab.engine.start_matlab()
 # add all folders and subfolders in peprs to matlab path
 currentPath = os.getcwd();
-allPaths = supply.genpath(currentPath)
-supply.addpath(allPaths)
+allPaths = matlab.genpath(currentPath)
+matlab.addpath(allPaths)
 
-#supply = PowerSupplyPkg.initialize()
+#matlab = PowerSupplyPkg.initialize()
 
 class Window(QMainWindow):
 	def __init__(self):
@@ -388,47 +388,47 @@ class Window(QMainWindow):
 		
 		# control parameter set buttons
 		# vsg page
-		self.ui.awgSetGeneral.clicked.connect(lambda: set.setGeneralAWG(self,setFocusButton,setParams,greyHover,unsetFocusButton,greyButton,self.ui.awgSetGeneral,supply))
+		self.ui.awgSetGeneral.clicked.connect(lambda: set.setGeneralAWG(self,setFocusButton,setParams,greyHover,unsetFocusButton,greyButton,self.ui.awgSetGeneral,matlab))
 		self.ui.vsgSetGeneral.clicked.connect(lambda: set.setGeneralVSG(self,setFocusButton,setParams,greyHover,unsetFocusButton,greyButton,self.ui.vsgSetGeneral))
 		self.ui.vsgSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.vsgEquipAdv,setParams,self.ui.vsgSetAdv))
-		self.ui.awgSetAdv.clicked.connect(lambda: set.setAdvancedAWG(self,setParams,self.ui.awgSetAdv,supply))
+		self.ui.awgSetAdv.clicked.connect(lambda: set.setAdvancedAWG(self,setParams,self.ui.awgSetAdv,matlab))
 		# upconverter page
 		self.ui.upSet.clicked.connect(lambda: set.setUp(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.upSet))
 		self.ui.psgSet.clicked.connect(lambda: set.setPSG(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.psgSet))
 		# vsa page
-		self.ui.uxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.uxaSet,supply))
-		self.ui.pxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.pxaSet,supply))
-		self.ui.uxaVSASetAdv.clicked.connect(lambda: set.setVSAAdv(self,setParams,self.ui.uxaVSASetAdv,supply))
-		self.ui.scopeSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.scopeSet,supply))
-		self.ui.digSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.digSet,supply))
+		self.ui.uxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.uxaSet,matlab))
+		self.ui.pxaSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.pxaSet,matlab))
+		self.ui.uxaVSASetAdv.clicked.connect(lambda: set.setVSAAdv(self,setParams,self.ui.uxaVSASetAdv,matlab))
+		self.ui.scopeSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.scopeSet,matlab))
+		self.ui.digSet.clicked.connect(lambda: set.setVSA(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.digSet,matlab))
 		# downconverter page
 		self.ui.downSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.downEquipAdv,setParams,self.ui.downSetAdv))
 		self.ui.downSet.clicked.connect(lambda: set.setDown(self,setFocusButton,greyHover,setButtonHover,setParams,greyButton,unsetFocusButton,self.ui.downSet))
 		# meter page
-		self.ui.meterSet.clicked.connect(lambda: set.setMeter(self,setFocusButton,setButtonHover,greyHover,setParams,greyButton,unsetFocusButton,self.ui.meterSet,supply))
+		self.ui.meterSet.clicked.connect(lambda: set.setMeter(self,setFocusButton,setButtonHover,greyHover,setParams,greyButton,unsetFocusButton,self.ui.meterSet,matlab))
 		
 		# sa page
-		self.ui.saSetAdv.clicked.connect(lambda: set.setSAAdv(self,setFocusButton,setButtonHover,greyHover,setParams,self.ui.saSetAdv,greyButton,unsetFocusButton,supply))
+		self.ui.saSetAdv.clicked.connect(lambda: set.setSAAdv(self,setFocusButton,setButtonHover,greyHover,setParams,self.ui.saSetAdv,greyButton,unsetFocusButton,matlab))
 
-		self.ui.saSet.clicked.connect(lambda: set.setSA(self,setFocusButton,setButtonHover,greyHover,setParams,self.ui.saSet,greyButton,unsetFocusButton,supply))
+		self.ui.saSet.clicked.connect(lambda: set.setSA(self,setFocusButton,setButtonHover,greyHover,setParams,self.ui.saSet,greyButton,unsetFocusButton,matlab))
 
 		# power 1 page
-		self.ui.p1Set.clicked.connect(lambda: set.setP1(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton,supply,unsetFocusButton,self.ui.p1Set))
+		self.ui.p1Set.clicked.connect(lambda: set.setP1(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton,matlab,unsetFocusButton,self.ui.p1Set))
 		# power 2 page
-		self.ui.p2Set.clicked.connect(lambda: set.setP2(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton,supply,unsetFocusButton,self.ui.p2Set))
+		self.ui.p2Set.clicked.connect(lambda: set.setP2(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton,matlab,unsetFocusButton,self.ui.p2Set))
 		# power 3 page
-		self.ui.p3Set.clicked.connect(lambda: set.setP3(self,setParams,setFocusButton,setButtonHover,supply,unsetFocusButton,greyHover,self.ui.p3Set))
+		self.ui.p3Set.clicked.connect(lambda: set.setP3(self,setParams,setFocusButton,setButtonHover,matlab,unsetFocusButton,greyHover,self.ui.p3Set))
 		# vsa meas page
-		self.ui.vsaMeasSet.clicked.connect(lambda: set.setVSAMeasDig(self,setParams,setButtonHover,setButton,self.ui.vsaMeasSet,supply))
-		self.ui.vsaMeasSet_2.clicked.connect(lambda: set.setVSAMeasGen(self,setParams,setButtonHover,setButton,self.ui.vsaMeasSet_2,supply))
-		self.ui.set_run_vsa.clicked.connect(lambda: set.rxCalRoutine(self,setParams,setButtonHover,self.ui.set_run_vsa,supply))
-		self.ui.downSetVSAMeas.clicked.connect(lambda: set.noRXCalRoutine(self,setParams,setButtonHover,self.ui.downSetVSAMeas,supply))
+		self.ui.vsaMeasSet.clicked.connect(lambda: set.setVSAMeasDig(self,setParams,setButtonHover,setButton,self.ui.vsaMeasSet,matlab))
+		self.ui.vsaMeasSet_2.clicked.connect(lambda: set.setVSAMeasGen(self,setParams,setButtonHover,setButton,self.ui.vsaMeasSet_2,matlab))
+		self.ui.set_run_vsa.clicked.connect(lambda: set.rxCalRoutine(self,setParams,setButtonHover,self.ui.set_run_vsa,matlab))
+		self.ui.downSetVSAMeas.clicked.connect(lambda: set.noRXCalRoutine(self,setParams,setButtonHover,self.ui.downSetVSAMeas,matlab))
 		self.ui.vsaMeasAdvSet.clicked.connect(lambda: set.setVSAMeasAdv(self,setParams,self.ui.vsaMeasAdvSet))
 		# vsg meas page
-		self.ui.awgSet_vsgMeas.clicked.connect(lambda: set.noAWGCalRoutine(self,setParams,self.ui.awgSet_vsgMeas,supply))
+		self.ui.awgSet_vsgMeas.clicked.connect(lambda: set.noAWGCalRoutine(self,setParams,self.ui.awgSet_vsgMeas,matlab))
 		self.ui.awgPreview_vsgMeas.clicked.connect(lambda: set.awgPreview(self))
 		self.ui.awgPreviewRun_vsgMeas.clicked.connect(lambda: set.awgPreview(self))
-		self.ui.awgSetRun_vsgMeas.clicked.connect(lambda: set.awgCalRoutine(self,setParams,self.ui.awgSetRun_vsgMeas,supply))
+		self.ui.awgSetRun_vsgMeas.clicked.connect(lambda: set.awgCalRoutine(self,setParams,self.ui.awgSetRun_vsgMeas,matlab))
 		self.ui.setAdv_vsgMeas.clicked.connect(lambda: set.setAdvAWG_vsgMeas(self,setParams,self.ui.setAdv_vsgMeas))
 		self.ui.setAdv_vsgMeas_2.clicked.connect(lambda: set.setAdvAWGVSA_vsgMeas(self,setParams,self.ui.setAdv_vsgMeas_2))
 		self.ui.upSet_vsgMeas.clicked.connect(lambda: set.setUpVSGMeas(self,setParams,self.ui.upSet_vsgMeas))
@@ -733,19 +733,19 @@ class Window(QMainWindow):
 		self.ui.vsgButton_vsgMeas.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(0))
 		# algo page
 		self.ui.calValPreview.clicked.connect(lambda: set.calValPreview(self))
-		self.ui.calValRun.clicked.connect(lambda: set.runCalValidation(self,setParams,self.ui.calValRun,supply))
+		self.ui.calValRun.clicked.connect(lambda: set.runCalValidation(self,setParams,self.ui.calValRun,matlab))
 		self.ui.dpdPreview.clicked.connect(lambda: set.dpdPreview(self))
 		self.ui.dpdRun.clicked.connect(lambda: set.runDPD(self,setParams,self.ui.dpdRun))
 		# prechar tab
-		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self,precharSpectrumCanvas,precharSpectrumFigure,supply))
-		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun,precharSpectrumCanvas,precharSpectrumFigure,precharGainCanvas,precharGainFigure,precharPhaseCanvas,precharPhaseFigure,supply))
-		self.ui.setParameters_precharDebug.clicked.connect(lambda: debug.setParametersPrechar(self,supply))
-		self.ui.prepareSignal_precharDebug.clicked.connect(lambda: debug.prepareSignalPrechar(self,supply))
-		self.ui.upload_precharDebug.clicked.connect(lambda: debug.uploadSignalPrechar(self,supply))
-		self.ui.download_precharDebug.clicked.connect(lambda: debug.downloadSignalPrechar(self,supply))
-		self.ui.analyze_precharDebug.clicked.connect(lambda: debug.analyzeSignalPrechar(self,supply))
-		self.ui.saveData_precharDebug.clicked.connect(lambda: debug.saveDataPrechar(self,supply))
-		self.ui.saveMeasurements_precharDebug.clicked.connect(lambda: debug.saveMeasurementsPrechar(self,supply))
+		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self,precharSpectrumCanvas,precharSpectrumFigure,matlab))
+		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun,precharSpectrumCanvas,precharSpectrumFigure,precharGainCanvas,precharGainFigure,precharPhaseCanvas,precharPhaseFigure,matlab))
+		self.ui.setParameters_precharDebug.clicked.connect(lambda: debug.setParametersPrechar(self,matlab))
+		self.ui.prepareSignal_precharDebug.clicked.connect(lambda: debug.prepareSignalPrechar(self,matlab))
+		self.ui.upload_precharDebug.clicked.connect(lambda: debug.uploadSignalPrechar(self,matlab))
+		self.ui.download_precharDebug.clicked.connect(lambda: debug.downloadSignalPrechar(self,matlab))
+		self.ui.analyze_precharDebug.clicked.connect(lambda: debug.analyzeSignalPrechar(self,matlab))
+		self.ui.saveData_precharDebug.clicked.connect(lambda: debug.saveDataPrechar(self,matlab))
+		self.ui.saveMeasurements_precharDebug.clicked.connect(lambda: debug.saveMeasurementsPrechar(self,matlab))
 		
 		# control parameter changes
 		# vsa equipment page
@@ -888,7 +888,7 @@ class Window(QMainWindow):
 					if x == "":
 						continue
 					else:
-						supply.Output_Toggle(x,1,nargout=0)
+						matlab.Output_Toggle(x,1,nargout=0)
 						self.statusBar().showMessage("DC turned ON",2000)
 						self.ui.emergButtonFirst.setStyleSheet(redButton)
 						self.ui.emergButtonFirst.setText("Turn Off DC")
@@ -906,7 +906,7 @@ class Window(QMainWindow):
 						if x == "":
 							continue
 						else:
-							supply.Output_Toggle(x,0,nargout=0)
+							matlab.Output_Toggle(x,0,nargout=0)
 					self.statusBar().showMessage("DC turned OFF",2000)
 					self.ui.emergButtonFirst.setStyleSheet(greenButton)
 					self.ui.emergButtonFirst.setText("Turn On DC")
@@ -925,10 +925,10 @@ class Window(QMainWindow):
 						if awgType == 3:
 							#turn on psg
 							self.statusBar().showMessage("PSG RF turned ON (test)",1500)
-							supply.AWG_Output_Toggle(1)
+							matlab.AWG_Output_Toggle(1)
 							self.statusBar().showMessage("AWG RF turned ON",1500)
 						else:
-							supply.AWG_Output_Toggle(1)
+							matlab.AWG_Output_Toggle(1)
 							self.statusBar().showMessage("RF turned ON ",2000)
 						self.ui.emergButtonSecond.setStyleSheet(redButton)
 						self.ui.emergButtonSecond.setText("Turn Off RF")
@@ -937,31 +937,31 @@ class Window(QMainWindow):
 						self.ui.emergButtonSecond.setChecked(False)
 			else:
 				if awgType == 3:
-					supply.AWG_Output_Toggle(0)
+					matlab.AWG_Output_Toggle(0)
 					self.statusBar().showMessage("AWG RF turned OFF",1500)
 					#turn off psg
 					self.statusBar().showMessage("PSG RF turned OFF (test)",1500)
 				else:
-					supply.AWG_Output_Toggle(0)
+					matlab.AWG_Output_Toggle(0)
 					self.statusBar().showMessage("RF turned OFF",2000)
 				self.ui.emergButtonSecond.setStyleSheet(greenButton)
 				self.ui.emergButtonSecond.setText("Turn On RF")
 		elif button == 3:
 			if awgType == 3:
 				if awgSet:
-					supply.AWG_Output_Toggle(0)
+					matlab.AWG_Output_Toggle(0)
 				if psgSet:
 					#turn off psg
 					print("this is filler")
 			else:
 				if awgSet:
-					supply.AWG_Output_Toggle(0)
+					matlab.AWG_Output_Toggle(0)
 			if len(addressList) != 1:
 				for x in addressList:
 					if x == "":
 						continue
 					else:
-						supply.Output_Toggle(x,0,nargout=0)
+						matlab.Output_Toggle(x,0,nargout=0)
 			
 			self.statusBar().showMessage("RF and DC turned OFF (test)",2000)
 			self.ui.emergButtonSecond.setStyleSheet(greenButton)

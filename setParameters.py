@@ -2,7 +2,7 @@
 
 from PyQt5.QtWidgets import (QProgressBar,QMessageBox,QLabel,QPushButton)
 from PyQt5.QtGui import (QCursor,QPixmap)
-from PyQt5.QtCore import (Qt,QSize)
+from PyQt5.QtCore import (Qt,QSize,QThread,pyqtSignal)
 
 import windowFunctions as win
 
@@ -10,15 +10,50 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.offsetbox import (OffsetImage, AnnotationBbox)
 import matplotlib.image as mpimg
-
-import random
+from main import matlab as matlab
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions used in main.py
 
 incomplete = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #f24646}"
 
-def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,awgSetGeneral,supply):
+class runSignalGenerationThread(QThread):
+	updateBar = pyqtSignal(str,QProgressBar)
+	
+	def __init__(self,bar):
+		QThread.__init__(self)
+		self.bar = bar
+		
+	def __del__(self):
+		self.wait()
+		
+	def run(self):
+		completed = "0"
+		self.updateBar.emit(completed,self.bar)
+		matlab.Set_Parameters_PrecharDebug(nargout=0)
+		completed = "1"
+		self.updateBar.emit(completed,self.bar)
+		matlab.Prepare_Signal_Upload_PrecharDebug(nargout=0)
+		completed = "2"
+		self.updateBar.emit(completed,self.bar)
+		matlab.Upload_Signal_PrecharDebug(nargout=0)
+		completed = "3"
+		self.updateBar.emit(completed,self.bar)
+		matlab.Download_Signal_PrecharDebug(nargout=0)
+		completed = "4"
+		self.updateBar.emit(completed,self.bar)
+		matlab.Analyze_Signal_PrecharDebug(nargout=0)
+		completed = "5"
+		self.updateBar.emit(completed,self.bar)
+		matlab.Save_Data_PrecharDebug(nargout=0)
+		completed = "6"
+		self.updateBar.emit(completed,self.bar)
+		# ADD RESULT RETURNING FUNCTIONALITY
+		result = matlab.Save_Measurements_PrecharDebug(nargout=1)
+		completed = "7"
+		self.updateBar.emit(completed,self.bar)
+
+def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,awgSetGeneral,matlab):
 	#Array used instead of dictionary, cannot properly get the object type elements stored in a dict
 	checkDic = [
 		self.ui.address_awg,
@@ -47,9 +82,9 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 			if iChannel == 0 or qChannel == 0:
 				instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 			else:
-				# supply.Set_Channel_Mapping(iChannel,qChannel,"RX",nargout=0)
-				# supply.Set_Channel_Mapping(iChannel,qChannel,"AWG",nargout=0)
-				flag = setAWGParams(self,d,supply)
+				# matlab.Set_Channel_Mapping(iChannel,qChannel,"RX",nargout=0)
+				# matlab.Set_Channel_Mapping(iChannel,qChannel,"AWG",nargout=0)
+				flag = setAWGParams(self,d,matlab)
 		else:
 			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 			awgSetGeneral.setChecked(False)
@@ -65,8 +100,8 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 				"extRefClockFreq" : self.ui.extRefFreq_awg.text()
 			}
 
-			supply.Set_Cal_VSGParams(awgDict,"RX",nargout=0)
-			supply.Set_Cal_VSGParams(awgDict,"AWG",nargout=0)
+			matlab.Set_Cal_VSGParams(awgDict,"RX",nargout=0)
+			matlab.Set_Cal_VSGParams(awgDict,"AWG",nargout=0)
 			
 			self.ui.awgButton_vsg.setStyleSheet(buttonFocus)
 			self.ui.awgButton_vsg_2.setStyleSheet(buttonFocus)
@@ -106,7 +141,7 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 		self.ui.vsgNextSteps.setCurrentIndex(1)
 		awgSetGeneral.setText("Set")
 		
-def setAdvancedAWG(self,boxDone,setButton,supply):
+def setAdvancedAWG(self,boxDone,setButton,matlab):
 	checkDic=[
 		self.ui.trigMode_awg,
 		self.ui.dacRange_awg,
@@ -122,14 +157,14 @@ def setAdvancedAWG(self,boxDone,setButton,supply):
 		"sampleMarker": self.ui.sampleMarker_awg.text(),
 		"genSet": self.ui.awgSetGeneral.isChecked()
 	}
-	flag = setAdvAWGParams(self,d,supply)
+	flag = setAdvAWGParams(self,d,matlab)
 	
 	if setButton.isChecked() == True:
 		done = win.checkIfDone(checkDic)
 		if done:
 			if flag == 1:
 				# set MATLAB RXCal Param
-				supply.Set_Cal_VSGAdvParams(d["dacRange"],nargout=0)
+				matlab.Set_Cal_VSGAdvParams(d["dacRange"],nargout=0)
 				
 				setButton.setText("Unset")
 				self.ui.awgEquipAdv.setStyleSheet(boxDone)
@@ -218,7 +253,7 @@ def setPSG(self,buttonFocus,buttonDone,boxDone,greyHover,greyButton,buttonSelect
 		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.ArrowCursor))
 		setButton.setText("Set")
 		
-def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSelect,setButton,supply):
+def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSelect,setButton,matlab):
 	averaging = self.ui.averagingEnable.currentIndex()
 	avgEnabled = self.ui.averagingEnable.isEnabled()
 	demod = self.ui.demodulationEnable.currentIndex()
@@ -238,8 +273,8 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 						"clockRef": self.ui.clockRef_sa.currentIndex(),
 						"trigLevel": self.ui.trigLevel_sa.text()
 					}
-					#supply.Set_Cal_UXAParams(dUXA,"RX",nargout=0)
-					#supply.Set_Cal_UXAParams(dUXA,"AWG",nargout=0)
+					#matlab.Set_Cal_UXAParams(dUXA,"RX",nargout=0)
+					#matlab.Set_Cal_UXAParams(dUXA,"AWG",nargout=0)
 				
 					dAllUXA={
 						"averaging" : self.ui.averagingEnable.currentIndex(),
@@ -253,9 +288,9 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 						"address": self.ui.address_sa.text()	
 					}
 					if typeIdx == 3:
-						result = supply.Set_VSA_UXA(dAllUXA,"UXA",nargout=1)
+						result = matlab.Set_VSA_UXA(dAllUXA,"UXA",nargout=1)
 					elif typeIdx == 4:
-						result = supply.Set_VSA_UXA(dAllUXA,"PXA",nargout=1)
+						result = matlab.Set_VSA_UXA(dAllUXA,"PXA",nargout=1)
 					result = result.split("~")
 					partNum = result[0]
 					errorString = result[1]
@@ -280,9 +315,9 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 							"address": self.ui.address_sa.text()	
 						}
 						if typeIdx == 3:
-							result = supply.Set_VSA_UXA(dAllUXA,"UXA",nargout=1)
+							result = matlab.Set_VSA_UXA(dAllUXA,"UXA",nargout=1)
 						elif typeIdx == 4:
-							result = supply.Set_VSA_UXA(dAllUXA,"PXA",nargout=1)
+							result = matlab.Set_VSA_UXA(dAllUXA,"PXA",nargout=1)
 						result = result.split(";")
 						partNum = result[0]
 						error = result[1]
@@ -331,8 +366,8 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 							"autoScale": self.ui.autoscale_scope.currentIndex(),
 							"trigChannel": self.ui.trigChannel_scope.text()
 						}
-						supply.Set_Cal_ScopeParams(dScope,"RX",nargout=0)
-						supply.Set_Cal_ScopeParams(dScope,"AWG",nargout=0)
+						matlab.Set_Cal_ScopeParams(dScope,"RX",nargout=0)
+						matlab.Set_Cal_ScopeParams(dScope,"AWG",nargout=0)
 						self.ui.scopeEquipGeneral.setStyleSheet(boxDone)
 						self.ui.scopeButton_vsa.setStyleSheet(buttonFocus)
 						self.ui.scopeButton_vsa_2.setStyleSheet(buttonFocus)
@@ -356,8 +391,8 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 							"coupling":self.ui.coupling_dig.currentIndex(),
 							"vfs":self.ui.vfs_dig.text(),
 						}
-						supply.Set_Cal_DigitizerParams(dDigitizer,"RX",nargout=0)
-						supply.Set_Cal_DigitizerParams(dDigitizer,"AWG",nargout=0)
+						matlab.Set_Cal_DigitizerParams(dDigitizer,"RX",nargout=0)
+						matlab.Set_Cal_DigitizerParams(dDigitizer,"AWG",nargout=0)
 						self.ui.digEquipGeneral.setStyleSheet(boxDone)
 						self.ui.digButton_vsa.setStyleSheet(buttonFocus)
 						self.ui.digButton_vsa_2.setStyleSheet(buttonFocus)
@@ -418,7 +453,7 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 					#"ChannelVec": channelVec,
 					"FSample": fSampleField
 				}
-				supply.SetRxParameters_GUI(dGen,nargout=0);
+				matlab.SetRxParameters_GUI(dGen,nargout=0);
 				
 			else:
 				self.fillParametersMsg()
@@ -467,7 +502,7 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 			self.ui.uxaEquipGeneralVSA.setStyleSheet(None)
 			self.ui.uxaMod.setStyleSheet(None)
 		
-def setVSAAdv(self,boxDone,setButton,supply):
+def setVSAAdv(self,boxDone,setButton,matlab):
 	flag = 0;
 	if setButton.isChecked() == True:
 		averaging = self.ui.averagingEnable.currentIndex()
@@ -481,7 +516,7 @@ def setVSAAdv(self,boxDone,setButton,supply):
 				"phaseNoise": self.ui.phaseNoiseOptimization_vsa.currentIndex(),
 				"filterType": self.ui.filterTpye_vsa.currentIndex()
 			}
-			result = supply.Set_VSA_AdvUXA(d,nargout = 1)
+			result = matlab.Set_VSA_AdvUXA(d,nargout = 1)
 			result = result.split("~")
 			partNum = result[0]
 			errorString = result[1]
@@ -527,7 +562,7 @@ def setDown(self,buttonFocus,greyHover,buttonHover,boxDone,greyButton,buttonSele
 		self.ui.vsgNextSteps.setCurrentIndex(6)
 		setButton.setText("Set")
 		
-def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,greyButton,buttonSelect,setButton,supply):
+def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,greyButton,buttonSelect,setButton,matlab):
 	checkMeter={
 			self.ui.powerMeterAddress,
 			self.ui.powerMeterOffset,
@@ -554,7 +589,7 @@ def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,greyButton,buttonSel
 				"frequency": self.ui.powerMeterFrequency.text(),
 				"averaging": averaging
 			}
-			flag = setPowerMeterParams(self,d,self.ui.powerMeterPartNum,self.ui.meterEquip,boxDone,supply)
+			flag = setPowerMeterParams(self,d,self.ui.powerMeterPartNum,self.ui.meterEquip,boxDone,matlab)
 			
 			self.ui.meterButton_meter.setStyleSheet(buttonFocus)
 			self.ui.meterButton_meter_2.setStyleSheet(buttonFocus)
@@ -585,7 +620,7 @@ def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,greyButton,buttonSel
 		setButton.setText("Set")
 		
 
-def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,buttonSelect,supply):
+def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,buttonSelect,matlab):
 	idx = self.ui.saType.currentIndex()
 	
 	checkDic=[
@@ -619,7 +654,7 @@ def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,bu
 				model = "UXA";
 			elif idx == 2:
 				model == "PXA"
-			flag = setSpectrumAnalyzerParams(self,d,self.ui.partNum_spa,supply,self.ui.saEquip,boxDone,model)
+			flag = setSpectrumAnalyzerParams(self,d,self.ui.partNum_spa,matlab,self.ui.saEquip,boxDone,model)
 			self.ui.saButton_sa.setStyleSheet(buttonFocus)
 			self.ui.saButton_sa_2.setStyleSheet(buttonFocus)
 			self.ui.saButton_sa_3.setStyleSheet(buttonFocus)
@@ -650,7 +685,7 @@ def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,bu
 		self.ui.vsgNextSteps.setCurrentIndex(8)
 		setButton.setText("Set")
 		
-def setSAAdv(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,buttonSelect,supply):
+def setSAAdv(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,buttonSelect,matlab):
 	checkDic={
 			self.ui.address_spa,
 			self.ui.saScrenName_spa,
@@ -698,7 +733,7 @@ def setSAAdv(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton
 			setButton.setText("Unset")
 			self.ui.saEquipAdv.setStyleSheet(boxDone)
 			
-			flag = setSpectrumAnalyzerAdvancedParams(self,d,self.ui.saEquipAdv,supply,boxDone)
+			flag = setSpectrumAnalyzerAdvancedParams(self,d,self.ui.saEquipAdv,matlab,boxDone)
 		else:
 			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 			setButton.setChecked(False)
@@ -712,7 +747,7 @@ def setSAAdv(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton
 		setButton.setText("Set")
 		
 		
-def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,buttonSelect,setButton):
+def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,matlab,buttonSelect,setButton):
 	checkDic = [
 		self.ui.p1c1Address,
 		self.ui.p1c1Voltage,
@@ -747,31 +782,31 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,butto
 				if enabledSupply == 2:
 					flag = 1;
 				if p1c1A != "":
-					supply.Output_Toggle(p1c1A,0,nargout=0)
+					matlab.Output_Toggle(p1c1A,0,nargout=0)
 				if p1c2A != "":
-					supply.Output_Toggle(p1c2A,0,nargout=0)
+					matlab.Output_Toggle(p1c2A,0,nargout=0)
 				if p1c3A != "":
-					supply.Output_Toggle(p1c3A,0,nargout=0)
+					matlab.Output_Toggle(p1c3A,0,nargout=0)
 				if p1c4A != "":
-					supply.Output_Toggle(p1c4A,0,nargout=0)
+					matlab.Output_Toggle(p1c4A,0,nargout=0)
 			else:
 				if numberChannels == 0:
 					instrParamErrorMessage(self,"Please enable and set channel parameters if this supply is in use.")
 					setButton.setChecked(False)
 				elif numberChannels == 1:
-					flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply,str(self.ui.cNumberField_p1c1.currentText()))
+					flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,matlab,str(self.ui.cNumberField_p1c1.currentText()))
 				elif numberChannels == 2:
-					flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply,str(self.ui.cNumberField_p1c1.currentText()))
-					flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,supply,str(self.ui.cNumberField_p1c2.currentText()))
+					flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,matlab,str(self.ui.cNumberField_p1c1.currentText()))
+					flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,matlab,str(self.ui.cNumberField_p1c2.currentText()))
 				elif numberChannels == 3:
-					flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply,str(self.ui.cNumberField_p1c1.currentText()))
-					flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,supply,str(self.ui.cNumberField_p1c2.currentText()))
-					flag = setSupplyParams(self,self.ui.p1c3Address,self.ui.p1c3Voltage,self.ui.p1c3Current,self.ui.p1c3PartNumber,self.ui.p1c3Equip,boxDone,supply,str(self.ui.cNumberField_p1c3.currentText()))
+					flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,matlab,str(self.ui.cNumberField_p1c1.currentText()))
+					flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,matlab,str(self.ui.cNumberField_p1c2.currentText()))
+					flag = setSupplyParams(self,self.ui.p1c3Address,self.ui.p1c3Voltage,self.ui.p1c3Current,self.ui.p1c3PartNumber,self.ui.p1c3Equip,boxDone,matlab,str(self.ui.cNumberField_p1c3.currentText()))
 				elif numberChannels == 4:
-					flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,supply,str(self.ui.cNumberField_p1c1.currentText()))
-					flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,supply,str(self.ui.cNumberField_p1c2.currentText()))
-					flag = setSupplyParams(self,self.ui.p1c3Address,self.ui.p1c3Voltage,self.ui.p1c3Current,self.ui.p1c3PartNumber,self.ui.p1c3Equip,boxDone,supply,str(self.ui.cNumberField_p1c3.currentText()))
-					flag = setSupplyParams(self,self.ui.p1c4Address,self.ui.p1c4Voltage,self.ui.p1c4Current,self.ui.p1c4PartNumber,self.ui.p1c4Equip,boxDone,supply,str(self.ui.cNumberField_p1c4.currentText()))
+					flag = setSupplyParams(self,self.ui.p1c1Address,self.ui.p1c1Voltage,self.ui.p1c1Current,self.ui.p1c1PartNumber,self.ui.p1c1Equip,boxDone,matlab,str(self.ui.cNumberField_p1c1.currentText()))
+					flag = setSupplyParams(self,self.ui.p1c2Address,self.ui.p1c2Voltage,self.ui.p1c2Current,self.ui.p1c2PartNumber,self.ui.p1c2Equip,boxDone,matlab,str(self.ui.cNumberField_p1c2.currentText()))
+					flag = setSupplyParams(self,self.ui.p1c3Address,self.ui.p1c3Voltage,self.ui.p1c3Current,self.ui.p1c3PartNumber,self.ui.p1c3Equip,boxDone,matlab,str(self.ui.cNumberField_p1c3.currentText()))
+					flag = setSupplyParams(self,self.ui.p1c4Address,self.ui.p1c4Voltage,self.ui.p1c4Current,self.ui.p1c4PartNumber,self.ui.p1c4Equip,boxDone,matlab,str(self.ui.cNumberField_p1c4.currentText()))
 
 			if flag == 1:
 				self.ui.power1Button_p1.setStyleSheet(buttonFocus)
@@ -822,7 +857,7 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,butto
 		self.ui.vsgNextSteps.setCurrentIndex(9)
 		setButton.setText("Set")
 
-def setP2(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,buttonSelect,setButton):
+def setP2(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,matlab,buttonSelect,setButton):
 	checkDic = [
 		self.ui.p2c1Address,
 		self.ui.p2c1Voltage,
@@ -862,31 +897,31 @@ def setP2(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,butto
 					instrParamErrorMessage(self,"Please fill out the current equipment's parameters before moving on.")
 					setButton.setChecked(False)
 				if p2c1A != "":
-					supply.Output_Toggle(p2c1A,nargout=0)
+					matlab.Output_Toggle(p2c1A,nargout=0)
 				if p2c2A != "":
-					supply.Output_Toggle(p2c2A,nargout=0)
+					matlab.Output_Toggle(p2c2A,nargout=0)
 				if p2c3A != "":
-					supply.Output_Toggle(p2c3A,nargout=0)
+					matlab.Output_Toggle(p2c3A,nargout=0)
 				if p2c4A != "":
-					supply.Output_Toggle(p2c4A,nargout=0)
+					matlab.Output_Toggle(p2c4A,nargout=0)
 			else:
 				if numberChannels == 0:
 					instrParamErrorMessage(self,"Please enable and set channel parameters if this supply is in use.")
 					setButton.setChecked(False)
 				elif numberChannels == 1:
-					flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,supply,str(self.ui.cNumberField_p2c1.currentText()))
+					flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,matlab,str(self.ui.cNumberField_p2c1.currentText()))
 				elif numberChannels == 2:
-					flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,supply,str(self.ui.cNumberField_p2c1.currentText()))
-					flag = setSupplyParams(self,self.ui.p2c2Address,self.ui.p2c2Voltage,self.ui.p2c2Current,self.ui.p2c2PartNumber,self.ui.p2c2Equip,boxDone,supply,str(self.ui.cNumberField_p2c2.currentText()))
+					flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,matlab,str(self.ui.cNumberField_p2c1.currentText()))
+					flag = setSupplyParams(self,self.ui.p2c2Address,self.ui.p2c2Voltage,self.ui.p2c2Current,self.ui.p2c2PartNumber,self.ui.p2c2Equip,boxDone,matlab,str(self.ui.cNumberField_p2c2.currentText()))
 				elif numberChannels == 3:
-					flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,supply,str(self.ui.cNumberField_p2c1.currentText()))
-					flag = setSupplyParams(self,self.ui.p2c2Address,self.ui.p2c2Voltage,self.ui.p2c2Current,self.ui.p2c2PartNumber,self.ui.p2c2Equip,boxDone,supply,str(self.ui.cNumberField_p2c2.currentText()))
-					flag = setSupplyParams(self,self.ui.p2c3Address,self.ui.p2c3Voltage,self.ui.p2c3Current,self.ui.p2c3PartNumber,self.ui.p2c3Equip,boxDone,supply,str(self.ui.cNumberField_p2c3.currentText()))
+					flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,matlab,str(self.ui.cNumberField_p2c1.currentText()))
+					flag = setSupplyParams(self,self.ui.p2c2Address,self.ui.p2c2Voltage,self.ui.p2c2Current,self.ui.p2c2PartNumber,self.ui.p2c2Equip,boxDone,matlab,str(self.ui.cNumberField_p2c2.currentText()))
+					flag = setSupplyParams(self,self.ui.p2c3Address,self.ui.p2c3Voltage,self.ui.p2c3Current,self.ui.p2c3PartNumber,self.ui.p2c3Equip,boxDone,matlab,str(self.ui.cNumberField_p2c3.currentText()))
 				elif numberChannels == 4:
-					flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,supply,str(self.ui.cNumberField_p2c1.currentText()))
-					flag = setSupplyParams(self,self.ui.p2c2Address,self.ui.p2c2Voltage,self.ui.p2c2Current,self.ui.p2c2PartNumber,self.ui.p2c2Equip,boxDone,supply,str(self.ui.cNumberField_p2c2.currentText()))
-					flag = setSupplyParams(self,self.ui.p2c3Address,self.ui.p2c3Voltage,self.ui.p2c3Current,self.ui.p2c3PartNumber,self.ui.p2c3Equip,boxDone,supply,str(self.ui.cNumberField_p2c3.currentText()))
-					flag = setSupplyParams(self,self.ui.p2c4Address,self.ui.p2c4Voltage,self.ui.p2c4Current,self.ui.p2c4PartNumber,self.ui.p2c4Equip,boxDone,supply,str(self.ui.cNumberField_p2c4.currentText()))
+					flag = setSupplyParams(self,self.ui.p2c1Address,self.ui.p2c1Voltage,self.ui.p2c1Current,self.ui.p2c1PartNumber,self.ui.p2c1Equip,boxDone,matlab,str(self.ui.cNumberField_p2c1.currentText()))
+					flag = setSupplyParams(self,self.ui.p2c2Address,self.ui.p2c2Voltage,self.ui.p2c2Current,self.ui.p2c2PartNumber,self.ui.p2c2Equip,boxDone,matlab,str(self.ui.cNumberField_p2c2.currentText()))
+					flag = setSupplyParams(self,self.ui.p2c3Address,self.ui.p2c3Voltage,self.ui.p2c3Current,self.ui.p2c3PartNumber,self.ui.p2c3Equip,boxDone,matlab,str(self.ui.cNumberField_p2c3.currentText()))
+					flag = setSupplyParams(self,self.ui.p2c4Address,self.ui.p2c4Voltage,self.ui.p2c4Current,self.ui.p2c4PartNumber,self.ui.p2c4Equip,boxDone,matlab,str(self.ui.cNumberField_p2c4.currentText()))
 			
 			if flag == 1:
 				self.ui.power2Button_p2.setStyleSheet(buttonFocus)
@@ -930,7 +965,7 @@ def setP2(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,supply,butto
 		self.ui.vsgNextSteps.setCurrentIndex(10)
 		setButton.setText("Set")
 	
-def setP3(self,boxDone,buttonFocus,buttonHover,supply,buttonSelect,greyHover,setButton):
+def setP3(self,boxDone,buttonFocus,buttonHover,matlab,buttonSelect,greyHover,setButton):
 	checkDic = [
 		self.ui.p3c1Address,
 		self.ui.p3c1Voltage,
@@ -968,31 +1003,31 @@ def setP3(self,boxDone,buttonFocus,buttonHover,supply,buttonSelect,greyHover,set
 					instrParamErrorMessage(self,"Please fill out the current equipment's parameters before moving on.")
 					setButton.setChecked(False)
 				if p3c1A != "":
-					supply.Output_Toggle(p3c1A,nargout=0)
+					matlab.Output_Toggle(p3c1A,nargout=0)
 				if p3c2A != "":
-					supply.Output_Toggle(p3c2A,nargout=0)
+					matlab.Output_Toggle(p3c2A,nargout=0)
 				if p3c3A != "":
-					supply.Output_Toggle(p3c3A,nargout=0)
+					matlab.Output_Toggle(p3c3A,nargout=0)
 				if p3c4A != "":
-					supply.Output_Toggle(p3c4A,nargout=0)
+					matlab.Output_Toggle(p3c4A,nargout=0)
 			else:
 				if numberChannels == 0:
 					instrParamErrorMessage(self,"Please enable and set channel parameters if this supply is in use.")
 					setButton.setChecked(False)
 				elif numberChannels == 1:
-					flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,supply,str(self.ui.cNumberField_p3c1.currentText()))
+					flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,matlab,str(self.ui.cNumberField_p3c1.currentText()))
 				elif numberChannels == 2:
-					flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,supply,str(self.ui.cNumberField_p3c1.currentText()))
-					flag = setSupplyParams(self,self.ui.p3c2Address,self.ui.p3c2Voltage,self.ui.p3c2Current,self.ui.p3c2PartNumber,self.ui.p3c2Equip,boxDone,supply,str(self.ui.cNumberField_p3c2.currentText()))
+					flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,matlab,str(self.ui.cNumberField_p3c1.currentText()))
+					flag = setSupplyParams(self,self.ui.p3c2Address,self.ui.p3c2Voltage,self.ui.p3c2Current,self.ui.p3c2PartNumber,self.ui.p3c2Equip,boxDone,matlab,str(self.ui.cNumberField_p3c2.currentText()))
 				elif numberChannels == 3:
-					flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,supply,str(self.ui.cNumberField_p3c1.currentText()))
-					flag = setSupplyParams(self,self.ui.p3c2Address,self.ui.p3c2Voltage,self.ui.p3c2Current,self.ui.p3c2PartNumber,self.ui.p3c2Equip,boxDone,supply,str(self.ui.cNumberField_p3c2.currentText()))
-					flag = setSupplyParams(self,self.ui.p3c3Address,self.ui.p3c3Voltage,self.ui.p3c3Current,self.ui.p3c3PartNumber,self.ui.p3c3Equip,boxDone,supply,str(self.ui.cNumberField_p3c3.currentText()))
+					flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,matlab,str(self.ui.cNumberField_p3c1.currentText()))
+					flag = setSupplyParams(self,self.ui.p3c2Address,self.ui.p3c2Voltage,self.ui.p3c2Current,self.ui.p3c2PartNumber,self.ui.p3c2Equip,boxDone,matlab,str(self.ui.cNumberField_p3c2.currentText()))
+					flag = setSupplyParams(self,self.ui.p3c3Address,self.ui.p3c3Voltage,self.ui.p3c3Current,self.ui.p3c3PartNumber,self.ui.p3c3Equip,boxDone,matlab,str(self.ui.cNumberField_p3c3.currentText()))
 				elif numberChannels == 4:
-					flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,supply,str(self.ui.cNumberField_p3c1.currentText()))
-					flag = setSupplyParams(self,self.ui.p3c2Address,self.ui.p3c2Voltage,self.ui.p3c2Current,self.ui.p3c2PartNumber,self.ui.p3c2Equip,boxDone,supply,str(self.ui.cNumberField_p3c2.currentText()))
-					flag = setSupplyParams(self,self.ui.p3c3Address,self.ui.p3c3Voltage,self.ui.p3c3Current,self.ui.p3c3PartNumber,self.ui.p3c3Equip,boxDone,supply,str(self.ui.cNumberField_p3c3.currentText()))
-					flag = setSupplyParams(self,self.ui.p3c4Address,self.ui.p3c4Voltage,self.ui.p3c4Current,self.ui.p3c4PartNumber,self.ui.p3c4Equip,boxDone,supply,str(self.ui.cNumberField_p3c4.currentText()))
+					flag = setSupplyParams(self,self.ui.p3c1Address,self.ui.p3c1Voltage,self.ui.p3c1Current,self.ui.p3c1PartNumber,self.ui.p3c1Equip,boxDone,matlab,str(self.ui.cNumberField_p3c1.currentText()))
+					flag = setSupplyParams(self,self.ui.p3c2Address,self.ui.p3c2Voltage,self.ui.p3c2Current,self.ui.p3c2PartNumber,self.ui.p3c2Equip,boxDone,matlab,str(self.ui.cNumberField_p3c2.currentText()))
+					flag = setSupplyParams(self,self.ui.p3c3Address,self.ui.p3c3Voltage,self.ui.p3c3Current,self.ui.p3c3PartNumber,self.ui.p3c3Equip,boxDone,matlab,str(self.ui.cNumberField_p3c3.currentText()))
+					flag = setSupplyParams(self,self.ui.p3c4Address,self.ui.p3c4Voltage,self.ui.p3c4Current,self.ui.p3c4PartNumber,self.ui.p3c4Equip,boxDone,matlab,str(self.ui.cNumberField_p3c4.currentText()))
 			
 			if flag == 1:
 				self.ui.p3Equip.setStyleSheet(boxDone)
@@ -1029,7 +1064,7 @@ def setP3(self,boxDone,buttonFocus,buttonHover,supply,buttonSelect,greyHover,set
 		self.ui.vsgNextSteps.setCurrentIndex(11)
 		setButton.setText("Set")
 			
-def setVSAMeasDig(self,boxDone,buttonHover,buttonDone,setButton,supply):
+def setVSAMeasDig(self,boxDone,buttonHover,buttonDone,setButton,matlab):
 	checkDic=[
 		self.ui.centerFreq_vsaMeas,
 		self.ui.sampRate_vsaMeas,
@@ -1047,8 +1082,8 @@ def setVSAMeasDig(self,boxDone,buttonHover,buttonDone,setButton,supply):
 				"sampRate": self.ui.sampRate_vsaMeas.text(),
 				"noFrames": self.ui.noFrameTimes_vsaMeas.text()
 			}
-			supply.Set_VSA_Meas_RXCal(d,nargout=0)
-			supply.Set_VSA_Meas_AWGCal(d,nargout=0)
+			matlab.Set_VSA_Meas_RXCal(d,nargout=0)
+			matlab.Set_VSA_Meas_AWGCal(d,nargout=0)
 			
 			self.ui.vsaMeasGenEquip.setStyleSheet(boxDone)
 			self.ui.vsaMeasGenEquip_2.setStyleSheet(boxDone)
@@ -1083,7 +1118,7 @@ def setVSAMeasDig(self,boxDone,buttonHover,buttonDone,setButton,supply):
 		setColourAndCursor(self,self.ui.vsgButton_vsaMeas,buttonDone,Qt.ArrowCursor)
 		setButton.setText("Set")
 		
-def setVSAMeasGen(self,boxDone,buttonHover,buttonDone,setButton,supply):
+def setVSAMeasGen(self,boxDone,buttonHover,buttonDone,setButton,matlab):
 	checkDic=[
 			self.ui.centerFreq_vsaMeas_2,
 			self.ui.sampRate_vsaMeas_2,
@@ -1100,7 +1135,7 @@ def setVSAMeasGen(self,boxDone,buttonHover,buttonDone,setButton,supply):
 				"sampRate": self.ui.sampRate_vsaMeas_2.text(),
 				"noFrames": self.ui.noFrameTimes_vsaMeas_2.text()
 			}
-			supply.Set_VSA_Meas_RXCal(d,nargout=0)
+			matlab.Set_VSA_Meas_RXCal(d,nargout=0)
 		
 			vsaType = self.ui.vsaWorkflow_vsaMeas.currentIndex()
 			vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
@@ -1168,7 +1203,7 @@ def setVSAMeasAdv(self,boxDone,setButton):
 		self.ui.vsaMeasAdvEquip.setStyleSheet(None)
 		setButton.setText("Set")
 	
-def rxCalRoutine(self,boxDone,buttonHover,setButton,supply):
+def rxCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 	checkDic = [
 		#comb
 		self.ui.rfSpacingField_comb,
@@ -1219,7 +1254,7 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton,supply):
 				"smoothFlag" : self.ui.smoothFlagField_comb.currentIndex(),
 				"smoothOrder" : self.ui.smoothOrderField_comb.text()
 			}
-			supply.Set_VSA_Calibration(combDict,nargout=0)
+			matlab.Set_VSA_Calibration(combDict,nargout=0)
 			downDict = {
 				"rfCenterFreq" : self.ui.rfCenterFreq_down.text(),
 				"ifCenterFreq" : self.ui.ifCenterFreq_down.text(),
@@ -1227,7 +1262,7 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton,supply):
 				"mirrorFlag" : self.ui.mirrorFlag_down.currentIndex(),
 				"trigAmp": self.ui.trigAmp_down.text()
 			}
-			supply.Set_Down_Calibration(downDict,nargout=0)
+			matlab.Set_Down_Calibration(downDict,nargout=0)
 			
 			vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
 			if vsgType == 3: # vsg
@@ -1274,7 +1309,7 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton,supply):
 		self.ui.vsaMeasNextStack.setCurrentIndex(4)
 		setButton.setText("Set && Run")
 		
-def noRXCalRoutine(self,boxDone,buttonHover,setButton,supply):
+def noRXCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 	checkDic = [
 		self.ui.rfCenterFreq_down,
 		self.ui.ifCenterFreq_down,
@@ -1288,7 +1323,7 @@ def noRXCalRoutine(self,boxDone,buttonHover,setButton,supply):
 		if done:
 			# set matlab parameters
 			vsaCalFile = self.ui.vsaCalFileField_comb.text()
-			supply.Set_VSA_CalFile(vsaCalFile,nargout=0)
+			matlab.Set_VSA_CalFile(vsaCalFile,nargout=0)
 			downDict = {
 				"rfCenterFreq" : self.ui.rfCenterFreq_down.text(),
 				"ifCenterFreq" : self.ui.ifCenterFreq_down.text(),
@@ -1296,7 +1331,7 @@ def noRXCalRoutine(self,boxDone,buttonHover,setButton,supply):
 				"mirrorFlag" : self.ui.mirrorFlag_down.currentIndex(),
 				"trigAmp": self.ui.trigAmp_down.text()
 			}
-			supply.Set_Down_Calibration(downDict,nargout=0)
+			matlab.Set_Down_Calibration(downDict,nargout=0)
 			setButton.setText("Unset")
 
 			vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
@@ -1330,7 +1365,7 @@ def noRXCalRoutine(self,boxDone,buttonHover,setButton,supply):
 		self.ui.vsaMeasNextStack.setCurrentIndex(3)
 		setButton.setText("Set")
 		
-def awgCalRoutine(self,boxDone,setButton,supply):
+def awgCalRoutine(self,boxDone,setButton,matlab):
 	checkDic = [
 		self.ui.noIterations_awgCal,
 		self.ui.toneSpacing_awgCal,
@@ -1370,7 +1405,7 @@ def awgCalRoutine(self,boxDone,setButton,supply):
 				"freqRes" : self.ui.freqRes_awgCal.text(),
 				"saveLoc" : self.ui.awgCalSaveLocField_vsgMeas.text()
 			}
-			supply.Set_AWG_Calibration(dAWGCal,nargout=0)
+			matlab.Set_AWG_Calibration(dAWGCal,nargout=0)
 			dAWGCalGen={
 				"centerFreq" : self.ui.centerFreq_awgCal.text(),
 				"ampCorr" : self.ui.ampCorrection_awgCal.currentIndex(),
@@ -1379,7 +1414,7 @@ def awgCalRoutine(self,boxDone,setButton,supply):
 				"trigAmp" : self.ui.trigAmp_awgCal.text(),
 				"clkFreq" : self.ui.sampleClockFreq_awgCal.text()
 			}
-			supply.Set_AWGCal_General(dAWGCalGen,nargout=0)
+			matlab.Set_AWGCal_General(dAWGCalGen,nargout=0)
 			dAWGCalParams={
 				"mirror" : self.ui.mirrorFlag_awgCal.currentIndex(),
 				"noRXPeriods" : self.ui.noRXPeriods_awgCal.text(),
@@ -1389,7 +1424,7 @@ def awgCalRoutine(self,boxDone,setButton,supply):
 				"vsaCalEnabled" : self.ui.useVSACal_awgCal.currentIndex(),
 				"vsaCalFile" : self.ui.vsaCalFileField_vsgMeas.text()
 			}
-			supply.Set_AWGCal_Settings(dAWGCalParams,nargout=0)
+			matlab.Set_AWGCal_Settings(dAWGCalParams,nargout=0)
 			
 			setButton.setText("Unset")
 			
@@ -1434,7 +1469,7 @@ def awgCalRoutine(self,boxDone,setButton,supply):
 		self.ui.vsgMeasNextStack.setCurrentIndex(3)
 		self.ui.debugVSGStack.setCurrentIndex(2)
 		
-def noAWGCalRoutine(self,boxDone,setButton,supply):
+def noAWGCalRoutine(self,boxDone,setButton,matlab):
 	checkDic = [
 		self.ui.centerFreq_awgCal_2,
 		self.ui.ampCorrection_awgCal_2,
@@ -1448,7 +1483,7 @@ def noAWGCalRoutine(self,boxDone,setButton,supply):
 		if done:
 			# Set MATLAB parameter
 			awgFile = self.ui.awgCalFileField_vsgMeas_2.text()
-			supply.Set_AWG_CalFile(awgFile,nargout=0)
+			matlab.Set_AWG_CalFile(awgFile,nargout=0)
 			dAWGCalGen={
 				"centerFreq" : self.ui.centerFreq_awgCal_2.text(),
 				"ampCorr" : self.ui.ampCorrection_awgCal_2.currentIndex(),
@@ -1457,7 +1492,7 @@ def noAWGCalRoutine(self,boxDone,setButton,supply):
 				"trigAmp" : self.ui.trigAmp_awgCal_2.text(),
 				"clkFreq" : self.ui.sampleClockFreq_awgCal_2.text(),
 			}
-			supply.Set_AWGCal_General(dAWGCalGen,nargout=0)
+			matlab.Set_AWGCal_General(dAWGCalGen,nargout=0)
 			
 			setButton.setText("Unset")
 			self.ui.awgEquip_vsgMeas_2.setStyleSheet(boxDone)
@@ -1662,13 +1697,13 @@ def runCalValidation(self,setBox,setButton):
 		self.ui.algoNextStack.setCurrentIndex(0)
 		self.ui.debugAlgoStack.setCurrentIndex(2)
 
-def preCharPreview(self,spectrumCanvas,spectrumFigure,supply):	
+def preCharPreview(self,spectrumCanvas,spectrumFigure,matlab):	
 	d = {
 		"signalName": self.ui.comboBox_81.currentIndex(),
 		"removeDC": self.ui.comboBox_82.currentIndex()
 	}
-	supply.Set_Prechar_Signal(d,nargout=0)
-	supply.Preview_Prechar_Signal(nargout=0)
+	matlab.Set_Prechar_Signal(d,nargout=0)
+	matlab.Preview_Prechar_Signal(nargout=0)
 
 	spectrumImage = mpimg.imread('.\Figures\Prechar_Spectrum_Input.png')
 	spectrumFigure.clear()
@@ -1685,13 +1720,14 @@ def preCharPreview(self,spectrumCanvas,spectrumFigure,supply):
 	self.ui.resultsAlgoTabs.setCurrentIndex(3)
 	self.ui.precharAlgoStack.setCurrentIndex(0)
 	
-def runPrecharacterization(self,setBox,setButton,spectrumCanvas,spectrumFigure,gainCanvas,gainFigure,phaseCanvas,phaseFigure,supply):
+def runPrecharacterization(self,setBox,setButton,spectrumCanvas,spectrumFigure,gainCanvas,gainFigure,phaseCanvas,phaseFigure,matlab):
 	ampCorrField = ""
 	trigAmpField = ""
 	fCarrierField = ""
 	fSampleField = ""
 	addressField = ""
 	if setButton.isChecked() == True:
+		# choose proper fields from stacked widgets to be sent to dictionaries
 		awgPage = self.ui.awgParamsStack_vsgMeas.currentIndex()
 		if awgPage == 1:
 			ampCorrField = self.ui.ampCorrection_awgCal.currentIndex()
@@ -1713,6 +1749,7 @@ def runPrecharacterization(self,setBox,setButton,spectrumCanvas,spectrumFigure,g
 			addressField = self.ui.address_dig.text()
 		elif vsaType == 3 or vsaType == 4:
 			addressField = self.ui.address_sa.text()
+		# define all relevant dictionaries
 		tx={
 			"Type": self.ui.vsgSetup.currentIndex(),
 			"Model": self.ui.partNum_awg.text(),
@@ -1759,105 +1796,44 @@ def runPrecharacterization(self,setBox,setButton,spectrumCanvas,spectrumFigure,g
 			"signalName": self.ui.comboBox_81.currentIndex(),
 			"removeDC": self.ui.comboBox_82.currentIndex()
 		}
-	
-		supply.Set_Prechar_Signal(dSignal,nargout=0)
-		supply.Set_RXTX_Structures(tx,rx,nargout=0)
+		# set signal dictionary
+		matlab.Set_Prechar_Signal(dSignal,nargout=0)
+		# set signal generation dictionary
+		matlab.Set_RXTX_Structures(tx,rx,nargout=0)
 		
+		# make debugging panel visible
 		self.ui.debugAlgoStack.setCurrentIndex(0)
 		
-		# self.progressBar = QProgressBar()
-		# self.progressBar.setRange(1,7);
-		# self.progressBar.setTextVisible(True);
-		# self.ui.statusBar.addWidget(self.progressBar,1)
-		# completed = 0
-		# self.progressBar.setValue(completed)
-		# self.progressBar.setFormat("Currently Running: Set Parameters")
-		# supply.Set_Parameters_PrecharDebug(nargout=0)
-		# completed = 1
-		# self.progressBar.setValue(completed)
-		# self.progressBar.setFormat("Currently Running: Prepare Signal for Upload")
-		# supply.Prepare_Signal_Upload_PrecharDebug(nargout=0)
-		# completed = 2
-		# self.progressBar.setValue(completed)
-		# self.progressBar.setFormat("Currently Running: Upload Signal")
-		# supply.Upload_Signal_PrecharDebug(nargout=0)
-		# completed = 3
-		# self.progressBar.setValue(completed)
-		# self.progressBar.setFormat("Currently Running: Download Signal")
-		# supply.Download_Signal_PrecharDebug(nargout=0)
-		# completed = 4
-		# self.progressBar.setValue(completed)
-		# self.progressBar.setFormat("Currently Running: Align & Analyze Signals")
-		# supply.Analyze_Signal_PrecharDebug(nargout=0)
-		# completed = 5
-		# self.progressBar.setValue(completed)
-		# self.progressBar.setFormat("Currently Running: Save Spectrum & VSA Data")
-		# supply.Save_Data_PrecharDebug(nargout=0)
-		# completed = 6
-		# self.progressBar.setValue(completed)
-		# self.progressBar.setFormat("Currently Running: Save Signal Generation Measurements")
-		# supply.Save_Measurements_PrecharDebug(nargout=0)
-		# completed = 7
-		# self.progressBar.setValue(completed)
-		# self.ui.statusBar.removeWidget(self.progressBar)
-		# self.ui.statusBar.showMessage("PreCharacterization Setup Routine Complete",3000)
+		# create progress bar
+		progressBar = QProgressBar()
+		progressBar.setRange(0,7);
+		progressBar.setTextVisible(True);
+		self.ui.statusBar.addWidget(progressBar,1)
 		
-		result = supply.Signal_Generation_Test(nargout=1)
-		result = result.split("~")
-		nmsePercent = result[0]
-		nmseDB = result[1]
-		inputPAPR = result[2]
-		outputPAPR = result[3]
+		# create thread to run signal generation routine
+		self.precharThread = runSignalGenerationThread(progressBar)
+		# connect signals to the thread
+		# as routine is run, update progress bar and step
+		self.precharThread.updateBar.connect(updateBar)
+		# when routine is finished, perform relevant gui changes
+		self.precharThread.finished.connect(lambda: finishPrecharRoutine(self,progressBar,setBox,setButton,spectrumCanvas,spectrumFigure,gainCanvas,gainFigure,phaseCanvas,phaseFigure,matlab))
+		# begin running signal generation
+		self.precharThread.start()
+		
+		# result = matlab.Signal_Generation_Test(nargout=1)
+		# result = result.split("~")
+		# nmsePercent = result[0]
+		# nmseDB = result[1]
+		# inputPAPR = result[2]
+		# outputPAPR = result[3]
 	
-		self.ui.nmsePercent_prechar.setText(nmsePercent)
-		self.ui.nmseDB_prechar.setText(nmseDB)
-		self.ui.inputPAPR_prechar.setText(inputPAPR)
-		self.ui.outputPAPR_prechar.setText(outputPAPR)
+		# self.ui.nmsePercent_prechar.setText(nmsePercent)
+		# self.ui.nmseDB_prechar.setText(nmseDB)
+		# self.ui.inputPAPR_prechar.setText(inputPAPR)
+		# self.ui.outputPAPR_prechar.setText(outputPAPR)
 		
-		
-		spectrumImage = mpimg.imread('.\Figures\Prechar_Spectrum_Output.png')
-		spectrumFigure.clear()
-		sax = spectrumFigure.add_subplot(111)
-		sax.imshow(spectrumImage)
-		sax.set_xlabel('Frequency(GHz)')
-		sax.set_ylabel('Power(dB)')
-		sax.set_title('Welch Mean-Square Spectrum Estimate')
-		sax.set_xticks([], [])
-		sax.set_yticks([], [])
-		spectrumCanvas.draw()
-		
-		gainImage = mpimg.imread('.\Figures\Prechar_Gain.png')
-		gainFigure.clear()
-		gax = gainFigure.add_subplot(111)
-		gax.imshow(gainImage)
-		gax.set_xlabel('Input Power (dBm)')
-		gax.set_ylabel('Gain Distortion (dB)')
-		gax.set_title('Gain Distortion')
-		gax.set_xticks([], [])
-		gax.set_yticks([], [])
-		gainCanvas.draw()
+
 			
-		phaseImage = mpimg.imread('.\Figures\Prechar_Phase.png')
-		phaseFigure.clear()
-		pax = phaseFigure.add_subplot(111)
-		pax.imshow(phaseImage)
-		pax.set_xlabel('Input Power (dBm)')
-		pax.set_ylabel('Phase Distortion (degree)')
-		pax.set_title('AM/PM Distortion')
-		pax.set_xticks([], [])
-		pax.set_yticks([], [])
-		phaseCanvas.draw()
-		
-		setButton.setText("Unset")
-		self.ui.precharTabs.setCurrentIndex(0)
-		self.ui.resultsAlgoTabs.setCurrentIndex(3)
-		self.ui.algoNextStack.setCurrentIndex(3)
-		self.ui.precharAlgoStack.setCurrentIndex(0)
-		self.ui.precharSignalEquip.setStyleSheet(setBox)
-		self.ui.precharCalFilesEquip.setStyleSheet(setBox)
-		self.ui.precharRefRXEquip.setStyleSheet(setBox)
-		self.ui.precharVSGEquip.setStyleSheet(setBox)
-		self.ui.precharAWGEquip.setStyleSheet(setBox)
 			
 	elif setButton.isChecked() == False:
 		setButton.setText("Set && Run")
@@ -1874,7 +1850,7 @@ def dpdPreview(self):
 	self.ui.resultsAlgoTabs.setCurrentIndex(4)
 	self.ui.dpdAlgoStack.setCurrentIndex(0)
 	
-def runDPD(self,setBox,setButton,supply):
+def runDPD(self,setBox,setButton,matlab):
 	if setButton.isChecked() == True:
 		setButton.setText("Unset")
 		self.ui.dpdTabs.setCurrentIndex(0)
@@ -2222,8 +2198,8 @@ def instrParamErrorMessage(self,error):
 	msg.setStandardButtons(QMessageBox.Ok)
 	msg.exec_();
 	
-def setSpectrumAnalyzerAdvancedParams(self,dictionary,equipBox,supply,boxDone):
-	result = supply.Set_Spectrum_Advanced(dictionary,nargout=1)
+def setSpectrumAnalyzerAdvancedParams(self,dictionary,equipBox,matlab,boxDone):
+	result = matlab.Set_Spectrum_Advanced(dictionary,nargout=1)
 	result = result.split(";")
 	error = result[1]
 	if error == " ":
@@ -2234,9 +2210,9 @@ def setSpectrumAnalyzerAdvancedParams(self,dictionary,equipBox,supply,boxDone):
 		instrParamErrorMessage(self,error)
 		self.ui.saSetAdv.setChecked(False)
 		
-def setSpectrumAnalyzerParams(self,dictionary,partNum,supply,equipBox,boxDone,model):
+def setSpectrumAnalyzerParams(self,dictionary,partNum,matlab,equipBox,boxDone,model):
 	address = dictionary["address"]
-	result = supply.Set_Spectrum(dictionary,model,nargout=1)
+	result = matlab.Set_Spectrum(dictionary,model,nargout=1)
 	result = result.split(";")
 	error = result[1]
 	
@@ -2254,9 +2230,9 @@ def setSpectrumAnalyzerParams(self,dictionary,partNum,supply,equipBox,boxDone,mo
 		instrParamErrorMessage(self,error)
 		self.ui.saSet.setChecked(False)
 		
-def setPowerMeterParams(self,dictionary,partNum,equipBox,boxDone,supply):	
+def setPowerMeterParams(self,dictionary,partNum,equipBox,boxDone,matlab):	
 	address = dictionary["address"]
-	result = supply.Set_Meter(dictionary,nargout=1)
+	result = matlab.Set_Meter(dictionary,nargout=1)
 	result = result.split(";")
 	error = result[1]
 
@@ -2274,12 +2250,12 @@ def setPowerMeterParams(self,dictionary,partNum,equipBox,boxDone,supply):
 		instrParamErrorMessage(self,error)
 		self.ui.meterSet.setChecked(False)
 		
-def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,supply,channel):
+def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,matlab,channel):
 	A = address.text()
 	V = voltage.text()
 	C = current.text()
 	
-	result = supply.Set_Supply(A,V,C,channel,nargout=1)
+	result = matlab.Set_Supply(A,V,C,channel,nargout=1)
 	result = result.split(";")
 	error = result[1]
 	if error == " ":
@@ -2292,9 +2268,9 @@ def setSupplyParams(self,address,voltage,current,partNum,equipBox,boxDone,supply
 		instrParamErrorMessage(self,error)
 		self.ui.p1Set.setChecked(False)
 		
-def setAWGParams(self,dictionary,supply):
+def setAWGParams(self,dictionary,matlab):
 	model = dictionary["model"]
-	result = supply.Set_AWG(dictionary,nargout = 1)
+	result = matlab.Set_AWG(dictionary,nargout = 1)
 	result = result.split("~")
 	partNum = result[0]
 	errorString = result[1]
@@ -2313,8 +2289,8 @@ def setAWGParams(self,dictionary,supply):
 		flag = 0
 	return flag
 		
-def setAdvAWGParams(self,dictionary,supply):
-	errorString = supply.Set_AdvAWG(dictionary,nargout=1)
+def setAdvAWGParams(self,dictionary,matlab):
+	errorString = matlab.Set_AdvAWG(dictionary,nargout=1)
 	errorArray = errorString.split("|")
 	errors = determineIfErrors(self,errorArray);
 	if errors == 0:
@@ -2343,12 +2319,80 @@ def addToErrorLayout(self,errorArray):
 			label.setText(x)
 			label.setAlignment(Qt.AlignTop)
 			self.ui.errorLayout.addWidget(label)
-
-# OLD CODE
-# figureLabel = QLabel()
-# figureMap = QPixmap("Figures/Spectrum.png")
-# figureLabel.setScaledContents(True)
-# figureLabel.setMaximumSize(QSize(500,400))
-# figureLabel.setAlignment(Qt.AlignCenter|Qt.AlignVCenter)
-# figureLabel.setPixmap(figureMap)
-# self.ui.spectrumGraph_prechar.addWidget(figureLabel)			
+			
+def updateBar(stepNumber,bar):
+	if stepNumber == "0": 
+		bar.setValue(float(stepNumber))
+		bar.setFormat("Currently Running: Set Parameters")
+	elif stepNumber == "1":
+		bar.setFormat("Currently Running: Prepare Signal for Upload")
+		bar.setValue(float(stepNumber))
+	elif stepNumber == "2":
+		bar.setFormat("Currently Running: Upload Signal")
+		bar.setValue(float(stepNumber))
+	elif stepNumber == "3":
+		bar.setFormat("Currently Running: Download Signal")
+		bar.setValue(float(stepNumber))
+	elif stepNumber == "4":
+		bar.setFormat("Currently Running: Align & Analyze Signals")
+		bar.setValue(float(stepNumber))
+	elif stepNumber == "5":
+		bar.setFormat("Currently Running: Save Spectrum & VSA Data")
+		bar.setValue(float(stepNumber))
+	elif stepNumber == "6":
+		bar.setFormat("Currently Running: Save Signal Generation Measurements")
+		bar.setValue(float(stepNumber))
+	elif stepNumber == "7":
+		bar.setValue(float(stepNumber))
+		
+def finishPrecharRoutine(self,bar,setBox,setButton,spectrumCanvas,spectrumFigure,gainCanvas,gainFigure,phaseCanvas,phaseFigure,matlab):
+	# remove progress bar
+	self.ui.statusBar.removeWidget(bar)
+	self.ui.statusBar.showMessage("Routine Complete",3000)
+	
+	# embed plots into GUI
+	spectrumImage = mpimg.imread('.\Figures\Prechar_Spectrum_Output.png')
+	spectrumFigure.clear()
+	sax = spectrumFigure.add_subplot(111)
+	sax.imshow(spectrumImage)
+	sax.set_xlabel('Frequency(GHz)')
+	sax.set_ylabel('Power(dB)')
+	sax.set_title('Welch Mean-Square Spectrum Estimate')
+	sax.set_xticks([], [])
+	sax.set_yticks([], [])
+	spectrumCanvas.draw()
+	
+	gainImage = mpimg.imread('.\Figures\Prechar_Gain.png')
+	gainFigure.clear()
+	gax = gainFigure.add_subplot(111)
+	gax.imshow(gainImage)
+	gax.set_xlabel('Input Power (dBm)')
+	gax.set_ylabel('Gain Distortion (dB)')
+	gax.set_title('Gain Distortion')
+	gax.set_xticks([], [])
+	gax.set_yticks([], [])
+	gainCanvas.draw()
+		
+	phaseImage = mpimg.imread('.\Figures\Prechar_Phase.png')
+	phaseFigure.clear()
+	pax = phaseFigure.add_subplot(111)
+	pax.imshow(phaseImage)
+	pax.set_xlabel('Input Power (dBm)')
+	pax.set_ylabel('Phase Distortion (degree)')
+	pax.set_title('AM/PM Distortion')
+	pax.set_xticks([], [])
+	pax.set_yticks([], [])
+	phaseCanvas.draw()
+	
+	# change styling and GUI pages
+	setButton.setText("Unset")
+	self.ui.precharTabs.setCurrentIndex(0)
+	self.ui.resultsAlgoTabs.setCurrentIndex(3)
+	self.ui.algoNextStack.setCurrentIndex(3)
+	self.ui.precharAlgoStack.setCurrentIndex(0)
+	self.ui.precharSignalEquip.setStyleSheet(setBox)
+	self.ui.precharCalFilesEquip.setStyleSheet(setBox)
+	self.ui.precharRefRXEquip.setStyleSheet(setBox)
+	self.ui.precharVSGEquip.setStyleSheet(setBox)
+	self.ui.precharAWGEquip.setStyleSheet(setBox)
+	
