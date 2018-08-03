@@ -183,7 +183,7 @@ QPushButton:hover{background-color:rgb(217, 0, 0);}</string>
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="algoTab">
          <property name="layoutDirection">
@@ -2266,7 +2266,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          <property name="geometry">
                           <rect>
                            <x>0</x>
-                           <y>-61</y>
+                           <y>0</y>
                            <width>738</width>
                            <height>550</height>
                           </rect>
@@ -2304,8 +2304,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                            <string/>
                           </property>
                           <layout class="QGridLayout" name="gridLayout_31">
-                           <item row="2" column="3" colspan="2">
-                            <widget class="QComboBox" name="sampRateOverwrite_prechar">
+                           <item row="10" column="3" colspan="2">
+                            <widget class="QComboBox" name="subRate_prechar">
                              <property name="enabled">
                               <bool>false</bool>
                              </property>
@@ -2338,8 +2338,75 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              </item>
                             </widget>
                            </item>
-                           <item row="5" column="3" colspan="2">
-                            <widget class="QComboBox" name="mirrorSignal_prechar">
+                           <item row="8" column="4">
+                            <widget class="QLabel" name="label_612">
+                             <property name="font">
+                              <font>
+                               <family>Arial</family>
+                               <pointsize>9</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Sa</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="1" column="0" colspan="2">
+                            <widget class="QLabel" name="label_667">
+                             <property name="font">
+                              <font>
+                               <family>Arial</family>
+                               <pointsize>9</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>No.of Measured Periods:</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="3" column="3">
+                            <widget class="QLineEdit" name="downFileField_algo_2">
+                             <property name="minimumSize">
+                              <size>
+                               <width>30</width>
+                               <height>24</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <family>Arial</family>
+                               <pointsize>9</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="8" column="3">
+                            <widget class="QLineEdit" name="crossCorrLength_prechar">
+                             <property name="minimumSize">
+                              <size>
+                               <width>30</width>
+                               <height>24</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <family>Arial</family>
+                               <pointsize>9</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>2000</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="4" column="3" colspan="2">
+                            <widget class="QComboBox" name="subtractDC_prechar">
                              <property name="font">
                               <font>
                                <family>Arial</family>
@@ -2366,8 +2433,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              </item>
                             </widget>
                            </item>
-                           <item row="7" column="0" colspan="3">
-                            <widget class="QLabel" name="label_670">
+                           <item row="8" column="0" colspan="2">
+                            <widget class="QLabel" name="label_669">
                              <property name="enabled">
                               <bool>true</bool>
                              </property>
@@ -2378,49 +2445,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                               </font>
                              </property>
                              <property name="text">
-                              <string>Align Frequency Domain:</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="5" column="0" colspan="3">
-                            <widget class="QLabel" name="label_668">
-                             <property name="font">
-                              <font>
-                               <family>Arial</family>
-                               <pointsize>9</pointsize>
-                              </font>
-                             </property>
-                             <property name="text">
-                              <string>Mirror Signal Flag:</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="2" column="0" colspan="3">
-                            <widget class="QLabel" name="label_877">
-                             <property name="enabled">
-                              <bool>false</bool>
-                             </property>
-                             <property name="font">
-                              <font>
-                               <family>Arial</family>
-                               <pointsize>9</pointsize>
-                              </font>
-                             </property>
-                             <property name="text">
-                              <string>Sampling Rate Overwrite:</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="4" column="0" colspan="3">
-                            <widget class="QLabel" name="label_876">
-                             <property name="font">
-                              <font>
-                               <family>Arial</family>
-                               <pointsize>9</pointsize>
-                              </font>
-                             </property>
-                             <property name="text">
-                              <string>Subtract DC Flag:</string>
+                              <string>Cross Correlation Length:</string>
                              </property>
                             </widget>
                            </item>
@@ -2435,22 +2460,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              </property>
                              <property name="flat">
                               <bool>true</bool>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="8" column="0" colspan="2">
-                            <widget class="QLabel" name="label_669">
-                             <property name="enabled">
-                              <bool>true</bool>
-                             </property>
-                             <property name="font">
-                              <font>
-                               <family>Arial</family>
-                               <pointsize>9</pointsize>
-                              </font>
-                             </property>
-                             <property name="text">
-                              <string>Cross Correlation Length:</string>
                              </property>
                             </widget>
                            </item>
@@ -2480,6 +2489,19 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                <string>False</string>
                               </property>
                              </item>
+                            </widget>
+                           </item>
+                           <item row="4" column="0" colspan="3">
+                            <widget class="QLabel" name="label_876">
+                             <property name="font">
+                              <font>
+                               <family>Arial</family>
+                               <pointsize>9</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Subtract DC Flag:</string>
+                             </property>
                             </widget>
                            </item>
                            <item row="3" column="0">
@@ -2514,8 +2536,37 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              </property>
                             </widget>
                            </item>
-                           <item row="4" column="3" colspan="2">
-                            <widget class="QComboBox" name="subtractDC_prechar">
+                           <item row="5" column="0" colspan="3">
+                            <widget class="QLabel" name="label_668">
+                             <property name="font">
+                              <font>
+                               <family>Arial</family>
+                               <pointsize>9</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Mirror Signal Flag:</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="7" column="0" colspan="3">
+                            <widget class="QLabel" name="label_670">
+                             <property name="enabled">
+                              <bool>true</bool>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <family>Arial</family>
+                               <pointsize>9</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Align Frequency Domain:</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="5" column="3" colspan="2">
+                            <widget class="QComboBox" name="mirrorSignal_prechar">
                              <property name="font">
                               <font>
                                <family>Arial</family>
@@ -2542,73 +2593,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              </item>
                             </widget>
                            </item>
-                           <item row="1" column="0" colspan="2">
-                            <widget class="QLabel" name="label_667">
-                             <property name="font">
-                              <font>
-                               <family>Arial</family>
-                               <pointsize>9</pointsize>
-                              </font>
-                             </property>
-                             <property name="text">
-                              <string>No.of Measured Periods:</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="8" column="4">
-                            <widget class="QLabel" name="label_612">
-                             <property name="font">
-                              <font>
-                               <family>Arial</family>
-                               <pointsize>9</pointsize>
-                              </font>
-                             </property>
-                             <property name="text">
-                              <string>Sa</string>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="8" column="3">
-                            <widget class="QLineEdit" name="crossCorrLength_prechar">
-                             <property name="minimumSize">
-                              <size>
-                               <width>30</width>
-                               <height>24</height>
-                              </size>
-                             </property>
-                             <property name="font">
-                              <font>
-                               <family>Arial</family>
-                               <pointsize>9</pointsize>
-                              </font>
-                             </property>
-                             <property name="text">
-                              <string>2000</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="3" column="3">
-                            <widget class="QLineEdit" name="downFileField_algo_2">
-                             <property name="minimumSize">
-                              <size>
-                               <width>30</width>
-                               <height>24</height>
-                              </size>
-                             </property>
-                             <property name="font">
-                              <font>
-                               <family>Arial</family>
-                               <pointsize>9</pointsize>
-                              </font>
-                             </property>
-                             <property name="text">
-                              <string/>
-                             </property>
-                            </widget>
-                           </item>
                            <item row="0" column="0" colspan="4">
                             <widget class="QLabel" name="label_477">
                              <property name="font">
@@ -2625,7 +2609,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              </property>
                             </widget>
                            </item>
-                           <item row="6" column="0">
+                           <item row="10" column="0">
                             <widget class="QLabel" name="label_708">
                              <property name="enabled">
                               <bool>false</bool>
@@ -2641,8 +2625,24 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              </property>
                             </widget>
                            </item>
-                           <item row="6" column="3" colspan="2">
-                            <widget class="QComboBox" name="subRate_prechar">
+                           <item row="11" column="0">
+                            <widget class="QLabel" name="label_877">
+                             <property name="enabled">
+                              <bool>false</bool>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <family>Arial</family>
+                               <pointsize>9</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Sampling Rate Overwrite:</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="11" column="3" colspan="2">
+                            <widget class="QComboBox" name="sampRateOverwrite_prechar">
                              <property name="enabled">
                               <bool>false</bool>
                              </property>
@@ -6345,160 +6345,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          </spacer>
                         </item>
                        </layout>
-                      </item>
-                     </layout>
-                    </widget>
-                    <widget class="QWidget" name="tab_3">
-                     <attribute name="title">
-                      <string>Advanced</string>
-                     </attribute>
-                     <layout class="QHBoxLayout" name="horizontalLayout_292">
-                      <item>
-                       <widget class="QScrollArea" name="calValScroll_4">
-                        <property name="verticalScrollBarPolicy">
-                         <enum>Qt::ScrollBarAlwaysOn</enum>
-                        </property>
-                        <property name="horizontalScrollBarPolicy">
-                         <enum>Qt::ScrollBarAlwaysOff</enum>
-                        </property>
-                        <property name="widgetResizable">
-                         <bool>true</bool>
-                        </property>
-                        <widget class="QWidget" name="calValScrollWidgetContents_4">
-                         <property name="geometry">
-                          <rect>
-                           <x>0</x>
-                           <y>0</y>
-                           <width>740</width>
-                           <height>550</height>
-                          </rect>
-                         </property>
-                         <property name="minimumSize">
-                          <size>
-                           <width>590</width>
-                           <height>550</height>
-                          </size>
-                         </property>
-                         <widget class="QGroupBox" name="refRXAdvEquip">
-                          <property name="geometry">
-                           <rect>
-                            <x>20</x>
-                            <y>20</y>
-                            <width>331</width>
-                            <height>67</height>
-                           </rect>
-                          </property>
-                          <property name="minimumSize">
-                           <size>
-                            <width>290</width>
-                            <height>0</height>
-                           </size>
-                          </property>
-                          <property name="font">
-                           <font>
-                            <kerning>false</kerning>
-                           </font>
-                          </property>
-                          <property name="layoutDirection">
-                           <enum>Qt::LeftToRight</enum>
-                          </property>
-                          <property name="title">
-                           <string/>
-                          </property>
-                          <layout class="QGridLayout" name="gridLayout_36">
-                           <item row="2" column="0">
-                            <widget class="QLabel" name="label_1041">
-                             <property name="font">
-                              <font>
-                               <family>Arial</family>
-                               <pointsize>9</pointsize>
-                              </font>
-                             </property>
-                             <property name="text">
-                              <string>SubRate Flag:</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="0" column="0" colspan="2">
-                            <widget class="QLabel" name="label_1040">
-                             <property name="font">
-                              <font>
-                               <family>Arial</family>
-                               <pointsize>10</pointsize>
-                               <weight>50</weight>
-                               <bold>false</bold>
-                               <underline>true</underline>
-                              </font>
-                             </property>
-                             <property name="text">
-                              <string>Reference Reciever Settings</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="2" column="1">
-                            <widget class="QComboBox" name="comboBox_127">
-                             <property name="font">
-                              <font>
-                               <family>Arial</family>
-                               <pointsize>9</pointsize>
-                              </font>
-                             </property>
-                             <property name="layoutDirection">
-                              <enum>Qt::LeftToRight</enum>
-                             </property>
-                             <item>
-                              <property name="text">
-                               <string>-Select-</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>True</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>False</string>
-                              </property>
-                             </item>
-                            </widget>
-                           </item>
-                          </layout>
-                         </widget>
-                        </widget>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="algoSetAdv">
-                        <property name="minimumSize">
-                         <size>
-                          <width>75</width>
-                          <height>31</height>
-                         </size>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <pointsize>9</pointsize>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
-                        </property>
-                        <property name="cursor">
-                         <cursorShape>PointingHandCursor</cursorShape>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true">QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 158, 0, 255));color:white;border-radius: 5px; border: 3px solid green;}
-
-QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 134, 0, 255), stop:1 rgba(0, 184, 0, 255));}
-</string>
-                        </property>
-                        <property name="text">
-                         <string>Set</string>
-                        </property>
-                        <property name="checkable">
-                         <bool>true</bool>
-                        </property>
-                       </widget>
                       </item>
                      </layout>
                     </widget>
@@ -13470,7 +13316,7 @@ Analyzer</string>
                           <string notr="true">QFrame{background-color:#d1d5de}</string>
                          </property>
                          <property name="currentIndex">
-                          <number>3</number>
+                          <number>1</number>
                          </property>
                          <widget class="QWidget" name="page_42">
                           <layout class="QHBoxLayout" name="horizontalLayout_212">
@@ -15016,7 +14862,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                               <item>
                                <widget class="QStackedWidget" name="downStack_vsaMeas">
                                 <property name="currentIndex">
-                                 <number>1</number>
+                                 <number>0</number>
                                 </property>
                                 <widget class="QWidget" name="page_135">
                                  <layout class="QHBoxLayout" name="horizontalLayout_38">
@@ -21622,8 +21468,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                  <property name="geometry">
                                   <rect>
                                    <x>0</x>
-                                   <y>0</y>
-                                   <width>590</width>
+                                   <y>-80</y>
+                                   <width>600</width>
                                    <height>350</height>
                                   </rect>
                                  </property>
@@ -22584,7 +22430,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           <item>
                            <widget class="QStackedWidget" name="upParamsStack_vsgMeas">
                             <property name="currentIndex">
-                             <number>1</number>
+                             <number>2</number>
                             </property>
                             <widget class="QWidget" name="page_39">
                              <layout class="QHBoxLayout" name="horizontalLayout_39">
@@ -22627,8 +22473,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                  <property name="geometry">
                                   <rect>
                                    <x>0</x>
-                                   <y>0</y>
-                                   <width>590</width>
+                                   <y>-144</y>
+                                   <width>602</width>
                                    <height>900</height>
                                   </rect>
                                  </property>
@@ -24891,7 +24737,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>590</width>
+                                   <width>602</width>
                                    <height>700</height>
                                   </rect>
                                  </property>
@@ -29431,7 +29277,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>590</width>
+                                   <width>602</width>
                                    <height>370</height>
                                   </rect>
                                  </property>
@@ -29574,7 +29420,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>590</width>
+                                   <width>602</width>
                                    <height>370</height>
                                   </rect>
                                  </property>
@@ -29893,7 +29739,7 @@ QFrame{background-color:#d1d5de}</string>
                                    <x>0</x>
                                    <y>0</y>
                                    <width>445</width>
-                                   <height>600</height>
+                                   <height>631</height>
                                   </rect>
                                  </property>
                                  <property name="minimumSize">
@@ -32689,7 +32535,7 @@ Modelling Parameters</string>
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>220</width>
+                                       <width>662</width>
                                        <height>200</height>
                                       </rect>
                                      </property>
@@ -37014,7 +36860,7 @@ Analyzer</string>
                    <enum>QTabWidget::Rounded</enum>
                   </property>
                   <property name="currentIndex">
-                   <number>0</number>
+                   <number>1</number>
                   </property>
                   <widget class="QWidget" name="tab_7">
                    <property name="styleSheet">
@@ -38093,7 +37939,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <x>0</x>
                              <y>0</y>
                              <width>629</width>
-                             <height>500</height>
+                             <height>871</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -41871,7 +41717,7 @@ Analyzer</string>
                    <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                   </property>
                   <property name="currentIndex">
-                   <number>0</number>
+                   <number>1</number>
                   </property>
                   <widget class="QWidget" name="upStandardSettings">
                    <attribute name="title">
@@ -41893,7 +41739,7 @@ Analyzer</string>
                     <item>
                      <widget class="QStackedWidget" name="up_psg_stack">
                       <property name="currentIndex">
-                       <number>0</number>
+                       <number>1</number>
                       </property>
                       <widget class="QWidget" name="upGeneral">
                        <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -42188,8 +42034,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>590</width>
-                             <height>382</height>
+                             <width>605</width>
+                             <height>1009</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -46010,8 +45856,8 @@ Analyzer</string>
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>605</width>
-                             <height>871</height>
+                             <width>590</width>
+                             <height>382</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -51190,7 +51036,7 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                    <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                   </property>
                   <property name="currentIndex">
-                   <number>0</number>
+                   <number>1</number>
                   </property>
                   <widget class="QWidget" name="upStandardSettings_2">
                    <attribute name="title">
@@ -51213,8 +51059,8 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>590</width>
-                         <height>382</height>
+                         <width>605</width>
+                         <height>1008</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -51491,8 +51337,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>590</width>
-                         <height>382</height>
+                         <width>605</width>
+                         <height>1008</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -54641,7 +54487,7 @@ Analyzer</string>
                    <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                   </property>
                   <property name="currentIndex">
-                   <number>0</number>
+                   <number>1</number>
                   </property>
                   <widget class="QWidget" name="upStandardSettings_4">
                    <attribute name="title">
@@ -54664,8 +54510,8 @@ Analyzer</string>
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>590</width>
-                         <height>382</height>
+                         <width>605</width>
+                         <height>1008</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -58010,7 +57856,7 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                    <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                   </property>
                   <property name="currentIndex">
-                   <number>0</number>
+                   <number>1</number>
                   </property>
                   <widget class="QWidget" name="vsaStandard_2">
                    <attribute name="title">
@@ -58052,8 +57898,8 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>590</width>
-                             <height>382</height>
+                             <width>605</width>
+                             <height>871</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -58660,7 +58506,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <x>0</x>
                              <y>0</y>
                              <width>629</width>
-                             <height>600</height>
+                             <height>871</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -62132,7 +61978,7 @@ Analyzer</string>
                    <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                   </property>
                   <property name="currentIndex">
-                   <number>0</number>
+                   <number>1</number>
                   </property>
                   <widget class="QWidget" name="upStandardSettings_6">
                    <attribute name="title">
@@ -62155,8 +62001,8 @@ Analyzer</string>
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>590</width>
-                         <height>550</height>
+                         <width>605</width>
+                         <height>1008</height>
                         </rect>
                        </property>
                        <property name="minimumSize">

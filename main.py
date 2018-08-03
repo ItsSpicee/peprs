@@ -73,8 +73,13 @@ class Window(QMainWindow):
 	
 	def initMainUI(self):
 
-		#disable advanced power meter settings since there are none
+		#disable advanced settings tabs if there are none
+		self.ui.upEquipTabs.setTabEnabled(1, False)
 		self.ui.meterEquipTabs.setTabEnabled(1, False)
+		self.ui.power1EquipTabs.setTabEnabled(1,False)
+		self.ui.power2EquipTabs.setTabEnabled(1,False)
+		self.ui.power3EquipTabs.setTabEnabled(1,False)
+		self.ui.saMeasTabs.setTabEnabled(0,False)
 		
 		# create matlab plots
 		precharSpectrumFigure = plt.figure()
@@ -284,7 +289,7 @@ class Window(QMainWindow):
 		self.ui.vsaResultsStack_vsaMeas.setCurrentIndex(1)
 		self.ui.vsaMeasRunStack.setCurrentIndex(1)
 		self.ui.downStack_vsaMeas.setCurrentIndex(0)
-		self.ui.saMeasTabs.setCurrentIndex(0)
+		self.ui.saMeasTabs.setCurrentIndex(1)
 		self.ui.filePushButton_2.setEnabled(False)
 		# vsg meas page
 		self.ui.debugVSGStack.setCurrentIndex(2)
@@ -731,7 +736,6 @@ class Window(QMainWindow):
 		self.ui.calValRun.clicked.connect(lambda: set.runCalValidation(self,setParams,self.ui.calValRun,supply))
 		self.ui.dpdPreview.clicked.connect(lambda: set.dpdPreview(self))
 		self.ui.dpdRun.clicked.connect(lambda: set.runDPD(self,setParams,self.ui.dpdRun))
-		self.ui.algoSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.refRXAdvEquip,setParams,self.ui.algoSetAdv))
 		# prechar tab
 		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self,precharSpectrumCanvas,precharSpectrumFigure,supply))
 		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun,precharSpectrumCanvas,precharSpectrumFigure,precharGainCanvas,precharGainFigure,precharPhaseCanvas,precharPhaseFigure,supply))

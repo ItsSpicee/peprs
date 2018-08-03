@@ -1,4 +1,4 @@
-function result = Set_AdvAWG(dict)
+function errorString = Set_AdvAWG(dict)
     dict.sampleMarker = str2double(dict.sampleMarker);
     dict.syncMarker = str2double(dict.syncMarker);
     dict.dacRange = str2double(dict.dacRange);
@@ -69,7 +69,6 @@ function result = Set_AdvAWG(dict)
             errorString = sprintf('%s|%s',errorString,errorList(i));
         end
     end
-    result = char(errorString);
     rmpath('.\InstrumentFunctions\M8190A')
     fclose(f);
     delete(f);

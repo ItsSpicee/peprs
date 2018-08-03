@@ -124,20 +124,17 @@ def saOnClick(self):
 		self.ui.equipStack.setCurrentIndex(5)
 		
 def p1OnClick(self):
-	self.ui.power1EquipTabs.setTabEnabled(1,False)
 	saChecked = self.ui.saSet.isChecked()
 	saType = self.ui.saType.currentIndex()
 	if saChecked or saType == 3:
 		self.ui.equipStack.setCurrentIndex(6)
 		
 def p2OnClick(self):
-	self.ui.power2EquipTabs.setTabEnabled(1,False)
 	p1Checked = self.ui.p1Set.isChecked()
 	if p1Checked:
 		self.ui.equipStack.setCurrentIndex(7)
 		
 def p3OnClick(self):
-	self.ui.power3EquipTabs.setTabEnabled(1,False)
 	vsgType = self.ui.vsgSetup.currentIndex()
 	p1Checked = self.ui.p1Set.isChecked()
 	p2Checked = self.ui.p2Set.isChecked()

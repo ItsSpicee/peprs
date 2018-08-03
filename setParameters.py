@@ -1057,7 +1057,6 @@ def setVSAMeasDig(self,boxDone,buttonHover,buttonDone,setButton,supply):
 			self.ui.digMark_vsaMeas_2.setVisible(True)
 			# if no downconverter (no prompt to sa, only advanced setting)
 			if vsaType == 0:
-				self.ui.vsaMeasNextStack.setCurrentIndex(7)
 				if vsgType == 3: # vsg
 					self.ui.vsaMeasNextStack.setCurrentIndex(6)
 					setFocusAndHand(self,self.ui.vsgButton_vsaMeas,buttonHover)
@@ -1113,9 +1112,11 @@ def setVSAMeasGen(self,boxDone,buttonHover,buttonDone,setButton,supply):
 				if downType == 1: # scope
 					self.ui.scopeMark_vsaMeas.setVisible(True)
 					self.ui.scopeMark_vsaMeas_2.setVisible(True)
+					self.ui.vsaMeasNextStack.setCurrentIndex(1)
 				elif downType == 0: # dig
 					self.ui.digMark_vsaMeas.setVisible(True)
 					self.ui.digMark_vsaMeas_2.setVisible(True)
+					self.ui.vsaMeasNextStack.setCurrentIndex(1)
 			elif vsaType == 0:
 				if analyzerType == 1: # scope
 					self.ui.scopeMark_vsaMeas.setVisible(True)
@@ -1135,7 +1136,6 @@ def setVSAMeasGen(self,boxDone,buttonHover,buttonDone,setButton,supply):
 					setFocusAndHand(self,self.ui.awgButton_vsaMeas,buttonHover)
 					setFocusAndHand(self,self.ui.awgButton_vsaMeas_2,buttonHover)
 					setFocusAndHand(self,self.ui.awgButton_vsaMeas_3,buttonHover)
-				self.ui.vsaMeasNextStack.setCurrentIndex(1)
 		else:
 			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 			setButton.setChecked(False)	
@@ -1169,7 +1169,7 @@ def setVSAMeasAdv(self,boxDone,setButton):
 		setButton.setText("Set")
 	
 def rxCalRoutine(self,boxDone,buttonHover,setButton,supply):
-	checkDic[
+	checkDic = [
 		#comb
 		self.ui.rfSpacingField_comb,
 		self.ui.ifSpacingField_comb,
@@ -1275,7 +1275,7 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton,supply):
 		setButton.setText("Set && Run")
 		
 def noRXCalRoutine(self,boxDone,buttonHover,setButton,supply):
-	checkDic[
+	checkDic = [
 		self.ui.rfCenterFreq_down,
 		self.ui.ifCenterFreq_down,
 		self.ui.loFreq_down.text(),
@@ -1331,7 +1331,7 @@ def noRXCalRoutine(self,boxDone,buttonHover,setButton,supply):
 		setButton.setText("Set")
 		
 def awgCalRoutine(self,boxDone,setButton,supply):
-	checkDic[
+	checkDic = [
 		self.ui.noIterations_awgCal,
 		self.ui.toneSpacing_awgCal,
 		self.ui.startFreq_awgCal,
@@ -1435,7 +1435,7 @@ def awgCalRoutine(self,boxDone,setButton,supply):
 		self.ui.debugVSGStack.setCurrentIndex(2)
 		
 def noAWGCalRoutine(self,boxDone,setButton,supply):
-	checkDic[
+	checkDic = [
 		self.ui.centerFreq_awgCal_2,
 		self.ui.ampCorrection_awgCal_2,
 		self.ui.ampCorrFileField_vsgMeas,
