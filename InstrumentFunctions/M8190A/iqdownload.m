@@ -138,7 +138,7 @@ if (size(iqdata,1) < size(iqdata,2))
 end
 
 % try to load the configuration from the file arbConfig.mat
-load('arbConfig.mat');
+load('.\Step 1 Functions\arbConfig.mat');
 arbConfig = loadArbConfig(arbConfig);
 
 % set default channelMapping is none was specified
@@ -186,7 +186,9 @@ if (normalize && ~isempty(iqdata))
 end
 
 % apply DAC range
-if (isfield(arbConfig, 'DACRange') && arbConfig.DACRange ~= 1)
+dacRangeField = isfield(arbConfig, 'DACRange');
+dacRangeValue = arbConfig.DACRange ~= 1;
+if (dacRangeField && dacRangeValue)
     iqdata = iqdata .* arbConfig.DACRange;
 end
     
@@ -240,7 +242,8 @@ if (isfield(arbConfig, 'interleaving') && arbConfig.interleaving)
     end
 end
     
-    
+% display(arbConfig)
+PlotSpectrum(iqdata,iqdata,12e9);
 %% establish a connection and download the data
     switch (arbConfig.model)
         case { '81180A' '81180B' }

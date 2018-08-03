@@ -1,7 +1,7 @@
 function result = Set_AdvAWG(dict)
     dict.sampleMarker = str2double(dict.sampleMarker);
     dict.syncMarker = str2double(dict.syncMarker);
-    dacRange = str2double(dict.dacRange);
+    dict.dacRange = str2double(dict.dacRange);
     
     % initialize variables
     errorList = [];
@@ -11,7 +11,7 @@ function result = Set_AdvAWG(dict)
     addpath('.\InstrumentFunctions\M8190A')
     
     % connect to instrument
-    load('arbConfig.mat');
+    load('.\Step 1 Functions\arbConfig.mat');
     arbConfig = loadArbConfig(arbConfig);
     % set visa address
     if dict.address == "" || dict.genSet == false
@@ -23,11 +23,11 @@ function result = Set_AdvAWG(dict)
     f = iqopen(arbConfig);    
 
     % set DAC Range
-    if dacRange < 0.1 || dacRange > 0.7
+    if dict.dacRange < 0.1 || dict.dacRange > 0.7
         error = "The Voltage should be between 0.1 and 0.7 V'";
         errorList = [errorList,error];
     else 
-         error = mod_xfprintf(f, sprintf(':SOURce:DAC:VOLTage:LEVel:IMMediate:AMPLitude %g', dacRange));
+         error = mod_xfprintf(f, sprintf(':SOURce:DAC:VOLTage:LEVel:IMMediate:AMPLitude %g', dict.dacRange));
          addToErrorList(error,errorList)
          arbConfig.DACRange = dict.dacRange;
     end
@@ -74,5 +74,5 @@ function result = Set_AdvAWG(dict)
     fclose(f);
     delete(f);
     clear f; 
-    save("arbConfig.mat","arbConfig")
+    save(".\Step 1 Functions\arbConfig.mat","arbConfig")
 end

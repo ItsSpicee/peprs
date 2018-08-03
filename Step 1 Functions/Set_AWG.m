@@ -18,7 +18,7 @@ function result = Set_AWG(dict)
     
     try
         instrreset
-        load('arbConfig.mat');
+        load('.\Step 1 Functions\arbConfig.mat');
         arbConfig = loadArbConfig(arbConfig);
         arbConfig.visaAddr = dict.address;
         f = iqopen(arbConfig);
@@ -86,7 +86,7 @@ function result = Set_AWG(dict)
                 if error ~= ""
                     errorList = [errorList,error];
                 end
-                arbConfig.clockFreq = dict.refClkFreq;
+                arbConfig.clockFreq = str2double(dict.refClkFreq);
             end
         else
             error = "No source available of selected type.";
@@ -116,7 +116,7 @@ function result = Set_AWG(dict)
     end
     resultsString = sprintf("%s~%s",partNum,errorString);
     result = char(resultsString);
-    save("arbConfig.mat","arbConfig")
+    save('.\Step 1 Functions\arbConfig.mat','arbConfig')
 end
 
 % OLD CODE

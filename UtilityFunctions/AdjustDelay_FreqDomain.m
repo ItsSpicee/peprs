@@ -78,7 +78,7 @@ plot( lags , Cxy , '.r' ) ;
 grid off ;
 xlabel ( 'Lags' , 'FontSize' , 12 ) ;
 ylabel ( 'Cross-Correlation' , 'FontSize' , 12 ) ;
-legend ( '\fontsize{12}Cross-Correlation' , 4 ) ;
+legend ( 'Cross-Correlation' , 'Location', 'northoutside') ;
 % adjust the axis properties for IEEE publication
 set( gca , 'LineWidth' , 2  ) ;
 set( gca , 'FontSize'  , 12 ) ;

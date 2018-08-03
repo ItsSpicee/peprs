@@ -1,5 +1,5 @@
 function errorList = addToErrorList(error,errorList)
-    if error ~= "" or error ~= " "
+    if error ~= "" || error ~= " "
         errorList = [errorList,error];
     end
 end

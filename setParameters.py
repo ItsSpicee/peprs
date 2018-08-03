@@ -381,27 +381,27 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 				elif vsaPage == 0:
 					fSampleField = self.ui.sampRate_vsaMeas_2.text()
 				
-				channelVec = [0,0,0,0]
-				c1 = self.ui.measChannel1.isChecked()
-				c2 = self.ui.measChannel2.isChecked()
-				c2 = self.ui.measChannel3.isChecked()
-				c2 = self.ui.measChannel4.isChecked()
-				if c1:
-					channelVec[0] = 1
-				else:
-					channelVec[0] = 0
-				if c2:
-					channelVec[0] = 1
-				else:
-					channelVec[0] = 0
-				if c3:
-					channelVec[0] = 1
-				else:
-					channelVec[0] = 0
-				if c4:
-					channelVec[0] = 1
-				else:
-					channelVec[0] = 0
+				# channelVec = [0,0,0,0]
+				# c1 = self.ui.measChannel1.isChecked()
+				# c2 = self.ui.measChannel2.isChecked()
+				# c2 = self.ui.measChannel3.isChecked()
+				# c2 = self.ui.measChannel4.isChecked()
+				# if c1:
+					# channelVec[0] = 1
+				# else:
+					# channelVec[0] = 0
+				# if c2:
+					# channelVec[0] = 1
+				# else:
+					# channelVec[0] = 0
+				# if c3:
+					# channelVec[0] = 1
+				# else:
+					# channelVec[0] = 0
+				# if c4:
+					# channelVec[0] = 1
+				# else:
+					# channelVec[0] = 0
 					
 				dGen = {
 					"AnalysisBandwidth":self.ui.analysisBandwidth_sa.text(),
@@ -415,7 +415,7 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 					"ACDCCoupling" : self.ui.coupling_dig.currentIndex(),
 					"DriverPath" : self.ui.driverPath_scope.text(),
 					"EnableExternalClock_Scope" : self.ui.extClkEnabled_scope.currentIndex(),
-					"ChannelVec": channelVec,
+					#"ChannelVec": channelVec,
 					"FSample": fSampleField
 				}
 				supply.SetRxParameters_GUI(dGen,nargout=0);
@@ -1662,7 +1662,7 @@ def runCalValidation(self,setBox,setButton):
 		self.ui.algoNextStack.setCurrentIndex(0)
 		self.ui.debugAlgoStack.setCurrentIndex(2)
 
-def preCharPreview(self,spectrumCanvas,spectrumFiguresupply):	
+def preCharPreview(self,spectrumCanvas,spectrumFigure,supply):	
 	d = {
 		"signalName": self.ui.comboBox_81.currentIndex(),
 		"removeDC": self.ui.comboBox_82.currentIndex()

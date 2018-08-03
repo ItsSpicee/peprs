@@ -8,9 +8,9 @@ addpath(genpath('C:\Program Files (x86)\IVI Foundation\IVI\Components\MATLAB')) 
 addpath(genpath(pwd))%Automatically Adds all paths in directory and subfolders
 instrreset
 
-load(".\DPD Data\Signal Generation Parameters\Signal.mat")
-load(".\DPD Data\Signal Generation Parameters\RX.mat");
-load(".\DPD Data\Signal Generation Parameters\TX.mat");
+load('.\DPD Data\Signal Generation Parameters\Signal.mat')
+load('.\DPD Data\Signal Generation Parameters\RX.mat');
+load('.\DPD Data\Signal Generation Parameters\TX.mat');
 
 %#ok<*UNRCH>
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -22,6 +22,8 @@ Measure_Pout_Eff = false;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Set Transmitter Parameters | RECEIVER PARAMS ALREADY SET IN SET_RXTX_STRUCTURES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+TX.IQmod_flag = 0;
+
 EVM_flag                    = 0;    % If this flag is one, the code demodulates the received signal and 
                                     % computes the symbol ENM
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -36,14 +38,14 @@ ReadInputFiles
 % goes with SubRate flag, leave alone for now
 RX.FsampleOverwrite = 0 * Signal.Fsample; % Overwrite the sampling rate of the receiver (max 450MHz for digitizer is recommanded)
 RX.Analyzer.FrameTime = TX.FrameTime; % One measurement frame;
-RX.Analyzer.Fsample = Signal.Fsample;
+%RX.Analyzer.Fsample = Signal.Fsample;
 RX.Analyzer.PointsPerRecord = RX.Analyzer.Fsample * RX.Analyzer.FrameTime * RX.Analyzer.NumberOfMeasuredPeriods;
 
 % VSA Parameters
-RX.VSA.DemodSignalFlag = false;
-% if RX.VSA.ASMPath == "" || RX.VSA.ASMPath ==" "
-%     SetVSAParameters
-% end
+% RX.VSA.DemodSignalFlag = false;
+if RX.VSA.ASMPath == "" || RX.VSA.ASMPath ==" "
+    SetVSAParameters
+end
 
 % Set remaining RX parameters
 SetRxParameters
@@ -88,14 +90,14 @@ IterationCount = 1;
 memTrunc = 0;
 
 UploadSignal
-% AWG_Upload_Script
+AWG_Upload_Script
 
 if (strcmp(RX.Type,'Scope'))
     CaptureScope_64bit
 end
 
-Rec = In_ori;
-% DownloadSignal
+% Rec = In_ori;
+DownloadSignal
 
 disp(' %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
 disp([' Input Signal']);
@@ -123,9 +125,9 @@ end
 
 display([ 'NMSE         = ' num2str(NMSE)      ' % or ' num2str(10*log10((NMSE/100)^2))      ' dB ']);
 
-% [SAMeas, figHandle] = Save_Spectrum_Data();
+%[SAMeas, figHandle] = Save_Spectrum_Data();
 
-% SaveSignalGenerationMeasurements
+%SaveSignalGenerationMeasurements
 
 dBnmse = 10*log10((NMSE/100)^2);
 data = sprintf('%f~%f~%f~%f',NMSE,dBnmse,TX.AWG.ExpansionMarginSettings.PAPR_original,TX.AWG.ExpansionMarginSettings.PAPR_input);
