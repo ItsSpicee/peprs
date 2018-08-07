@@ -92,7 +92,6 @@ function Set_RXTX_Structures(txd,rxd)
     TX.AWG.SyncModuleFlag = 0;
     TX.AWG.Position = 1;
     
-    % SetTXParameters function replacement
     % Choose between 'Backplane', 'Internal', 'External'
     if txd.ReferenceClockSource == 1
         TX.AWG.ReferenceClockSource = 'Backplane';

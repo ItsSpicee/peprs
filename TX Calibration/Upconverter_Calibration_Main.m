@@ -13,6 +13,10 @@ path(pathdef); % Resets the paths to remove paths outside this folder
 addpath(genpath('C:\Program Files (x86)\IVI Foundation\IVI\Components\MATLAB')) ;
 addpath(genpath(pwd))%Automatically Adds all paths in directory and subfolders
 instrreset
+
+load('./Measurement Data/Heterodyne Calibration Parameters/Cal.mat')
+load('./Measurement Data/Heterodyne Calibration Parameters/TX.mat')
+
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Utilize 32-bit MATLAB flag
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -21,44 +25,15 @@ Cal.Processing32BitFlag = 0;
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Set Calibration Signal Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Cal.Signal.ToneSpacing               = 5e6;     
-Cal.Signal.StartingToneFreq          = -1502e6;
-Cal.Signal.EndingToneFreq            = 1502e6;
-Cal.Signal.BW = Cal.Signal.EndingToneFreq - Cal.Signal.StartingToneFreq;
-% Optional Multitone Settings
-Cal.Signal.MultitoneOptions.RealBasisFlag = 0;
-Cal.Signal.MultitoneOptions.PhaseDistr = 'Schroeder';
-% PAPR limits when generating the signals
-Cal.Signal.MultitoneOptions.PAPRmin  = 8;
-Cal.Signal.MultitoneOptions.PAPRmax  = 9;
-% Frequency resolution to use to search for the tones
-Cal.FreqRes = 500e3;
-
-% Receiver calibration files
-Cal.RX.Calflag = false;
-Cal.RX.CalFile = '.\RX_CalResults\RX_CalResults_fc6r25GHz_BW3GHz.mat';
 
 % Calibration file complex baseband frequency
 tonesBaseband = (Cal.Signal.StartingToneFreq : Cal.Signal.ToneSpacing : Cal.Signal.EndingToneFreq);
-Cal.Directory = 'Upconverter_CalResults';
-Cal.Filename  = 'Upconverter_Cal_fIF1r0GHz_fTXIF6r25GHz_3GHz_v2';
 
-% Training length to use for getting the LUT table
-Cal.NumIterations = 4;
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Set TX Parameters
 %  Description: AWG frame time is picked to ensure that the signal length
 %  is multiples of minimum segment length at the AWG sampling rate
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-TX.Type                       = 'AWG';             % Choose between 'AWG'
-TX.AWG_Model                  = 'M8190A';          % Choose bewteen 'M8190A' and 'M8195A'
-TX.Fsample                    = 12e9;               % AWG sample rate
-TX.ReferenceClockSource       = 'External';       % Choose between 'Backplane', 'Internal', 'External'
-TX.ReferenceClock             = 10e6;             % External reference clock frequency
-TX.MinimumSegmentLength       = 320;               % Minimum AWG segment length
-TX.VFS                        = 0.7;               % AWG full scale voltage amp
-TX.TriggerAmplitude           = 1.5;               % Trigger signal amplitude
-TX.NumberOfTransmittedPeriods = 50;
 
 % Expansion Margin Settings
 TX.AWG.ExpansionMarginSettings.ExpansionMarginEnable = 0;
@@ -258,11 +233,8 @@ end
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Save Inverse Model Data
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-if (~exist(Cal.Directory,'dir'))
-    mkdir(Cal.Directory);
-    addpath(genpath(Cal.Directory));
-end
-save(['.\' Cal.Directory '\' Cal.Filename], 'H_Tx_freq_inverse', 'tonesBaseband');
+addpath(genpath(Cal.SaveLocation));
+save([Cal.SaveLocation], 'H_Tx_freq_inverse', 'tonesBaseband');
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Apply the inverse model to the verification signal
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

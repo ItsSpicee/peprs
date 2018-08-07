@@ -1524,7 +1524,7 @@ def noAWGCalRoutine(self,boxDone,setButton,matlab):
 				"ampCorrFile" : self.ui.ampCorrFileField_vsgMeas.text(),
 				"vfs" : self.ui.vfs_awgCal_2.text(),
 				"trigAmp" : self.ui.trigAmp_awgCal_2.text(),
-				"clkFreq" : self.ui.sampleClockFreq_awgCal_2.text(),
+				"clkFreq" : self.ui.sampleClockFreq_awgCal_2.text()
 			}
 			matlab.Set_AWGCal_General(dAWGCalGen,nargout=0)
 			
@@ -1604,8 +1604,53 @@ def setUpVSGMeas(self,boxDone,setButton):
 def setHetero(self,boxDone,setButton):
 	if setButton.isChecked() == True:
 		setButton.setText("Unset")
+			
+		cal = {
+			"ToneSpacing" : self.ui.toneSpacing_hetero.text(),
+			"StartingToneFreq" : self.ui.startTone_hetero.text(),
+			"EndingToneFreq " : self.ui.endTone_hetero.text(),
+			"RealBasisFlag" : self.ui.realBasisFlag_hetero.currentIndex(),
+			"PhaseDistr" : self.ui.phaseDistribution_hetero.currentIndex(),
+			"PAPRmin" : self.ui.paprMin_hetero.text(),
+			"PAPRmax" : self.ui.paprMax_hetero.text(),
+			"FreqRes" : self.ui.freqResolution_hetero.text(),
+			"NumIterations" : self.ui.noIterations_hetero.text(),
+			"SaveLocation" : self.ui.upCalSaveLocField_vsgMeas.text()
+			"rxCalFlag" : self.ui.vsaCalFileEnable_hetero.currentIndex()
+			"rxCalFile" : self.ui.vsaCalFileField_vsgMeas_2.text()
+		}
 		
+		tx={
+			"Type": self.ui.vsgSetup.currentIndex(),
+			"Model": self.ui.partNum_awg.text(),
+			"Fsample" : self.ui.maxSampleRate_awg.text(),
+			"ReferenceClockSource": self.ui.refClockSorce_awg.currentIndex(),
+			"ReferenceClock": self.ui.extRefFreq_awg.text(),
+			"VFS": self.ui.dacRange_awg.text(),	
+			"TriggerAmplitude": trigAmpField,
+			"NumberOfTransmittedPeriods": self.ui.noTXPeriods_hetero.text(),
+			"ExpansionMarginEnable": self.ui.enableExpansion_prechar.currentIndex(),
+			"ExpansionMargin" : self.ui.expansionMargin_prechar.text(),
+			"Fcarrier" : self.ui.vsgCenterFreq_hetero.text(),
+			
+			
+			# "FGuard" : self.ui.guardBand_prechar.text(),
+			# "FCarrier" : self.ui.centerFreq_prechar.text(),
+			# "SubtractMeanFlag" : self.ui.subtractMean_prechar.currentIndex(),
+			
+			# "NumberOfSegments" : self.ui.noSegments_prechar.text(),
+			
+			# "Amp_Corr" : ampCorrField,
+			# "GainExpansion_flag" : self.ui.gainExpansionFlag_prechar.currentIndex(),
+			# "GainExpansion" : self.ui.gainExpansion_prechar.text(),
+			# "FreqMutiplierFlag" : self.ui.freqMultiplierFlag_prechar.currentIndex(),
+			# "FreqMultiplierFactor": self.ui.freqMultiplierFactor_prechar.text(),	
+				
+			# "iChannel": self.ui.iChannel_awg.currentIndex(),	
+			# "qChannel": self.ui.qChannel_awg.currentIndex(),	
+				
 
+		}
 		
 		self.ui.calEquip_hetero.setStyleSheet(boxDone)
 		self.ui.rxEquip_hetero.setStyleSheet(boxDone)
