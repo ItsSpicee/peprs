@@ -869,7 +869,7 @@ Move to 'DPD' tab.</string>
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>590</width>
+                           <width>738</width>
                            <height>550</height>
                           </rect>
                          </property>
@@ -3733,7 +3733,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>590</width>
+                           <width>727</width>
                            <height>1100</height>
                           </rect>
                          </property>
@@ -6487,8 +6487,8 @@ QFrame{background-color:#d1d5de}</string>
                                    <property name="verticalSpacing">
                                     <number>0</number>
                                    </property>
-                                   <item row="5" column="1">
-                                    <widget class="QPushButton" name="analyze_precharDebug">
+                                   <item row="6" column="1">
+                                    <widget class="QPushButton" name="saveMeasurements_precharDebug">
                                      <property name="minimumSize">
                                       <size>
                                        <width>0</width>
@@ -6505,12 +6505,33 @@ QFrame{background-color:#d1d5de}</string>
                                       <cursorShape>PointingHandCursor</cursorShape>
                                      </property>
                                      <property name="text">
-                                      <string>Align &amp;&amp; Analyze Signals</string>
+                                      <string>Save Signal Generation Measurements</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="6" column="0">
+                                    <widget class="QLabel" name="label_432">
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>11</pointsize>
+                                       <weight>75</weight>
+                                       <bold>true</bold>
+                                      </font>
+                                     </property>
+                                     <property name="styleSheet">
+                                      <string notr="true">QLabel {background-color:none}</string>
+                                     </property>
+                                     <property name="text">
+                                      <string>7)</string>
+                                     </property>
+                                     <property name="alignment">
+                                      <set>Qt::AlignCenter</set>
                                      </property>
                                     </widget>
                                    </item>
                                    <item row="5" column="0">
-                                    <widget class="QLabel" name="label_427">
+                                    <widget class="QLabel" name="label_431">
                                      <property name="font">
                                       <font>
                                        <family>Arial</family>
@@ -6523,15 +6544,15 @@ QFrame{background-color:#d1d5de}</string>
                                       <string notr="true">QLabel {background-color:none}</string>
                                      </property>
                                      <property name="text">
-                                      <string>5)</string>
+                                      <string>6)</string>
                                      </property>
                                      <property name="alignment">
                                       <set>Qt::AlignCenter</set>
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="4" column="1">
-                                    <widget class="QPushButton" name="download_precharDebug">
+                                   <item row="5" column="1">
+                                    <widget class="QPushButton" name="saveData_precharDebug">
                                      <property name="minimumSize">
                                       <size>
                                        <width>0</width>
@@ -6548,12 +6569,12 @@ QFrame{background-color:#d1d5de}</string>
                                       <cursorShape>PointingHandCursor</cursorShape>
                                      </property>
                                      <property name="text">
-                                      <string>Download Signal</string>
+                                      <string>Save Spectrum &amp;&amp; VSA Data</string>
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="4" column="0">
-                                    <widget class="QLabel" name="label_426">
+                                   <item row="0" column="0">
+                                    <widget class="QLabel" name="label_422">
                                      <property name="font">
                                       <font>
                                        <family>Arial</family>
@@ -6566,103 +6587,14 @@ QFrame{background-color:#d1d5de}</string>
                                       <string notr="true">QLabel {background-color:none}</string>
                                      </property>
                                      <property name="text">
-                                      <string>4)</string>
+                                      <string>1)</string>
                                      </property>
                                      <property name="alignment">
                                       <set>Qt::AlignCenter</set>
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="3" column="1">
-                                    <widget class="QPushButton" name="upload_precharDebug">
-                                     <property name="minimumSize">
-                                      <size>
-                                       <width>0</width>
-                                       <height>30</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>10</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="cursor">
-                                      <cursorShape>PointingHandCursor</cursorShape>
-                                     </property>
-                                     <property name="text">
-                                      <string>Upload Signal</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="3" column="0">
-                                    <widget class="QLabel" name="label_425">
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>11</pointsize>
-                                       <weight>75</weight>
-                                       <bold>true</bold>
-                                      </font>
-                                     </property>
-                                     <property name="styleSheet">
-                                      <string notr="true">QLabel {background-color:none}</string>
-                                     </property>
-                                     <property name="text">
-                                      <string>3)</string>
-                                     </property>
-                                     <property name="alignment">
-                                      <set>Qt::AlignCenter</set>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="2" column="1">
-                                    <widget class="QPushButton" name="prepareSignal_precharDebug">
-                                     <property name="minimumSize">
-                                      <size>
-                                       <width>0</width>
-                                       <height>30</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>10</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="cursor">
-                                      <cursorShape>PointingHandCursor</cursorShape>
-                                     </property>
-                                     <property name="styleSheet">
-                                      <string notr="true"/>
-                                     </property>
-                                     <property name="text">
-                                      <string>Prepare Signal for Upload</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="2" column="0">
-                                    <widget class="QLabel" name="label_424">
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>11</pointsize>
-                                       <weight>75</weight>
-                                       <bold>true</bold>
-                                      </font>
-                                     </property>
-                                     <property name="styleSheet">
-                                      <string notr="true">QLabel {background-color:none}</string>
-                                     </property>
-                                     <property name="text">
-                                      <string>2)</string>
-                                     </property>
-                                     <property name="alignment">
-                                      <set>Qt::AlignCenter</set>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="1" column="1">
+                                   <item row="0" column="1">
                                     <widget class="QPushButton" name="setParameters_precharDebug">
                                      <property name="minimumSize">
                                       <size>
@@ -6688,7 +6620,7 @@ QFrame{background-color:#d1d5de}</string>
                                     </widget>
                                    </item>
                                    <item row="1" column="0">
-                                    <widget class="QLabel" name="label_422">
+                                    <widget class="QLabel" name="label_424">
                                      <property name="font">
                                       <font>
                                        <family>Arial</family>
@@ -6701,36 +6633,40 @@ QFrame{background-color:#d1d5de}</string>
                                       <string notr="true">QLabel {background-color:none}</string>
                                      </property>
                                      <property name="text">
-                                      <string>1)</string>
+                                      <string>2)</string>
                                      </property>
                                      <property name="alignment">
                                       <set>Qt::AlignCenter</set>
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="6" column="0">
-                                    <widget class="QLabel" name="label_431">
+                                   <item row="1" column="1">
+                                    <widget class="QPushButton" name="prepareSignal_precharDebug">
+                                     <property name="minimumSize">
+                                      <size>
+                                       <width>0</width>
+                                       <height>30</height>
+                                      </size>
+                                     </property>
                                      <property name="font">
                                       <font>
                                        <family>Arial</family>
-                                       <pointsize>11</pointsize>
-                                       <weight>75</weight>
-                                       <bold>true</bold>
+                                       <pointsize>10</pointsize>
                                       </font>
                                      </property>
+                                     <property name="cursor">
+                                      <cursorShape>PointingHandCursor</cursorShape>
+                                     </property>
                                      <property name="styleSheet">
-                                      <string notr="true">QLabel {background-color:none}</string>
+                                      <string notr="true"/>
                                      </property>
                                      <property name="text">
-                                      <string>6)</string>
-                                     </property>
-                                     <property name="alignment">
-                                      <set>Qt::AlignCenter</set>
+                                      <string>Prepare Signal for Upload</string>
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="6" column="1">
-                                    <widget class="QPushButton" name="saveData_precharDebug">
+                                   <item row="4" column="1">
+                                    <widget class="QPushButton" name="analyze_precharDebug">
                                      <property name="minimumSize">
                                       <size>
                                        <width>0</width>
@@ -6747,12 +6683,12 @@ QFrame{background-color:#d1d5de}</string>
                                       <cursorShape>PointingHandCursor</cursorShape>
                                      </property>
                                      <property name="text">
-                                      <string>Save Spectrum &amp;&amp; VSA Data</string>
+                                      <string>Align &amp;&amp; Analyze Signals</string>
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="7" column="0">
-                                    <widget class="QLabel" name="label_432">
+                                   <item row="4" column="0">
+                                    <widget class="QLabel" name="label_427">
                                      <property name="font">
                                       <font>
                                        <family>Arial</family>
@@ -6765,15 +6701,15 @@ QFrame{background-color:#d1d5de}</string>
                                       <string notr="true">QLabel {background-color:none}</string>
                                      </property>
                                      <property name="text">
-                                      <string>7)</string>
+                                      <string>5)</string>
                                      </property>
                                      <property name="alignment">
                                       <set>Qt::AlignCenter</set>
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="7" column="1">
-                                    <widget class="QPushButton" name="saveMeasurements_precharDebug">
+                                   <item row="3" column="1">
+                                    <widget class="QPushButton" name="download_precharDebug">
                                      <property name="minimumSize">
                                       <size>
                                        <width>0</width>
@@ -6790,12 +6726,33 @@ QFrame{background-color:#d1d5de}</string>
                                       <cursorShape>PointingHandCursor</cursorShape>
                                      </property>
                                      <property name="text">
-                                      <string>Save Signal Generation Measurements</string>
+                                      <string>Download Signal</string>
                                      </property>
                                     </widget>
                                    </item>
-                                   <item row="0" column="0" colspan="2">
-                                    <widget class="QPushButton" name="runAll_precharDebug">
+                                   <item row="3" column="0">
+                                    <widget class="QLabel" name="label_426">
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>11</pointsize>
+                                       <weight>75</weight>
+                                       <bold>true</bold>
+                                      </font>
+                                     </property>
+                                     <property name="styleSheet">
+                                      <string notr="true">QLabel {background-color:none}</string>
+                                     </property>
+                                     <property name="text">
+                                      <string>4)</string>
+                                     </property>
+                                     <property name="alignment">
+                                      <set>Qt::AlignCenter</set>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="2" column="1">
+                                    <widget class="QPushButton" name="upload_precharDebug">
                                      <property name="minimumSize">
                                       <size>
                                        <width>0</width>
@@ -6806,12 +6763,34 @@ QFrame{background-color:#d1d5de}</string>
                                       <font>
                                        <family>Arial</family>
                                        <pointsize>10</pointsize>
+                                      </font>
+                                     </property>
+                                     <property name="cursor">
+                                      <cursorShape>PointingHandCursor</cursorShape>
+                                     </property>
+                                     <property name="text">
+                                      <string>Upload Signal</string>
+                                     </property>
+                                    </widget>
+                                   </item>
+                                   <item row="2" column="0">
+                                    <widget class="QLabel" name="label_425">
+                                     <property name="font">
+                                      <font>
+                                       <family>Arial</family>
+                                       <pointsize>11</pointsize>
                                        <weight>75</weight>
                                        <bold>true</bold>
                                       </font>
                                      </property>
+                                     <property name="styleSheet">
+                                      <string notr="true">QLabel {background-color:none}</string>
+                                     </property>
                                      <property name="text">
-                                      <string>RUN ALL</string>
+                                      <string>3)</string>
+                                     </property>
+                                     <property name="alignment">
+                                      <set>Qt::AlignCenter</set>
                                      </property>
                                     </widget>
                                    </item>
@@ -14454,7 +14433,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>590</width>
+                                       <width>601</width>
                                        <height>415</height>
                                       </rect>
                                      </property>
@@ -48326,7 +48305,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <x>0</x>
                              <y>0</y>
                              <width>629</width>
-                             <height>575</height>
+                             <height>871</height>
                             </rect>
                            </property>
                            <property name="minimumSize">

@@ -7,8 +7,8 @@ try
         CaptureScope_64bit
     end
 
-    Rec = In_ori;
-    % DownloadSignal
+    %Rec = In_ori;
+    DownloadSignal
 catch
     error = 'An error has occurred while attempting to download the signal.';
 end

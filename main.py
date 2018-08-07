@@ -82,23 +82,23 @@ class Window(QMainWindow):
 		self.ui.saMeasTabs.setTabEnabled(0,False)
 		
 		# create matlab plots
-		precharSpectrumFigure = plt.figure()
-		precharSpectrumCanvas = FigureCanvas(precharSpectrumFigure)
-		precharSpectrumToolbar = NavigationToolbar(precharSpectrumCanvas, self)
-		self.ui.spectrumGraph_prechar.addWidget(precharSpectrumToolbar)
-		self.ui.spectrumGraph_prechar.addWidget(precharSpectrumCanvas)
+		self.precharSpectrumFigure = plt.figure()
+		self.precharSpectrumCanvas = FigureCanvas(self.precharSpectrumFigure)
+		self.precharSpectrumToolbar = NavigationToolbar(self.precharSpectrumCanvas, self)
+		self.ui.spectrumGraph_prechar.addWidget(self.precharSpectrumToolbar)
+		self.ui.spectrumGraph_prechar.addWidget(self.precharSpectrumCanvas)
 		
-		precharGainFigure = plt.figure()
-		precharGainCanvas = FigureCanvas(precharGainFigure)
-		precharGainToolbar = NavigationToolbar(precharGainCanvas, self)
-		self.ui.gainGraph_prechar.addWidget(precharGainToolbar)
-		self.ui.gainGraph_prechar.addWidget(precharGainCanvas)
+		self.precharGainFigure = plt.figure()
+		self.precharGainCanvas = FigureCanvas(self.precharGainFigure)
+		self.precharGainToolbar = NavigationToolbar(self.precharGainCanvas, self)
+		self.ui.gainGraph_prechar.addWidget(self.precharGainToolbar)
+		self.ui.gainGraph_prechar.addWidget(self.precharGainCanvas)
 		
-		precharPhaseFigure = plt.figure()
-		precharPhaseCanvas = FigureCanvas(precharPhaseFigure)
-		precharPhaseToolbar = NavigationToolbar(precharPhaseCanvas, self)
-		self.ui.phaseGraph_prechar.addWidget(precharPhaseToolbar)
-		self.ui.phaseGraph_prechar.addWidget(precharPhaseCanvas)
+		self.precharPhaseFigure = plt.figure()
+		self.precharPhaseCanvas = FigureCanvas(self.precharPhaseFigure)
+		self.precharPhaseToolbar = NavigationToolbar(self.precharPhaseCanvas, self)
+		self.ui.phaseGraph_prechar.addWidget(self.precharPhaseToolbar)
+		self.ui.phaseGraph_prechar.addWidget(self.precharPhaseCanvas)
 		
 		# deal with error widget
 		self.ui.errorScrollArea.setMaximumHeight(0)
@@ -738,7 +738,7 @@ class Window(QMainWindow):
 		self.ui.dpdRun.clicked.connect(lambda: set.runDPD(self,setParams,self.ui.dpdRun))
 		# prechar tab
 		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self,precharSpectrumCanvas,precharSpectrumFigure,matlab))
-		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun,precharSpectrumCanvas,precharSpectrumFigure,precharGainCanvas,precharGainFigure,precharPhaseCanvas,precharPhaseFigure,matlab))
+		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun,matlab))
 		self.ui.setParameters_precharDebug.clicked.connect(lambda: debug.setParametersPrechar(self,matlab))
 		self.ui.prepareSignal_precharDebug.clicked.connect(lambda: debug.prepareSignalPrechar(self,matlab))
 		self.ui.upload_precharDebug.clicked.connect(lambda: debug.uploadSignalPrechar(self,matlab))
@@ -880,19 +880,33 @@ class Window(QMainWindow):
 		psgSet = self.ui.psgSet.isChecked()
 		
 		if button == 1:
+			# if turn on DC is selected
 			if firstChecked == True:
+				# alert if no power supplies have been set
 				if len(addressList) == 1:
 					self.statusBar().showMessage("No DC supplies have been set",2000)
 					self.ui.emergButtonFirst.setChecked(False)
-				for x in addressList:
-					if x == "":
-						continue
-					else:
-						matlab.Output_Toggle(x,1,nargout=0)
-						self.statusBar().showMessage("DC turned ON",2000)
-						self.ui.emergButtonFirst.setStyleSheet(redButton)
-						self.ui.emergButtonFirst.setText("Turn Off DC")
+				# if RF is on before DC, turn off RF
+				if secondChecked == True:
+					msg = QMessageBox(self)
+					msg.setIcon(QMessageBox.Critical)
+					msg.setWindowTitle('Incorrect Order')
+					msg.setText("Please turn off RF before turning on DC")
+					msg.setStandardButtons(QMessageBox.Ok)
+					msg.exec_();
+				else:
+					# if DC supplies have been set, turn on all power supplies
+					for x in addressList:
+						if x == "":
+							continue
+						else:
+							matlab.Output_Toggle(x,1,nargout=0)
+							self.statusBar().showMessage("DC turned ON",2000)
+							self.ui.emergButtonFirst.setStyleSheet(redButton)
+							self.ui.emergButtonFirst.setText("Turn Off DC")	
+			# if turn off DC is selected
 			else:
+				# if RF is on 
 				if secondChecked == True:
 					msg = QMessageBox(self)
 					msg.setIcon(QMessageBox.Critical)
@@ -911,8 +925,10 @@ class Window(QMainWindow):
 					self.ui.emergButtonFirst.setStyleSheet(greenButton)
 					self.ui.emergButtonFirst.setText("Turn On DC")
 		elif button == 2:
+			# if turn on RF is selected
 			if secondChecked == True:
-				if firstChecked == False:
+				# if DC is off and supplies have been set, give error
+				if firstChecked == False and len(addressList) != 1:
 					msg = QMessageBox(self)
 					msg.setIcon(QMessageBox.Critical)
 					msg.setWindowTitle('Incorrect Order')
@@ -935,6 +951,7 @@ class Window(QMainWindow):
 					else:
 						self.statusBar().showMessage("AWG has not been set",2000)
 						self.ui.emergButtonSecond.setChecked(False)
+			# if turn off RF is selected
 			else:
 				if awgType == 3:
 					matlab.AWG_Output_Toggle(0)
@@ -946,6 +963,7 @@ class Window(QMainWindow):
 					self.statusBar().showMessage("RF turned OFF",2000)
 				self.ui.emergButtonSecond.setStyleSheet(greenButton)
 				self.ui.emergButtonSecond.setText("Turn On RF")
+		# turn off all
 		elif button == 3:
 			if awgType == 3:
 				if awgSet:

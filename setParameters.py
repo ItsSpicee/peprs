@@ -18,40 +18,74 @@ from main import matlab as matlab
 incomplete = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #f24646}"
 
 class runSignalGenerationThread(QThread):
-	updateBar = pyqtSignal(str,QProgressBar)
+	updateBar = pyqtSignal(object,str,QProgressBar,object,object)
+	updateData = pyqtSignal(object,str)
+	errorOccurred = pyqtSignal(object,str) 
 	
-	def __init__(self,bar):
+	def __init__(self,bar,main,style,button):
 		QThread.__init__(self)
 		self.bar = bar
+		self.main = main
+		self.style = style
+		self.button = button
 		
 	def __del__(self):
 		self.wait()
 		
 	def run(self):
 		completed = "0"
-		self.updateBar.emit(completed,self.bar)
-		matlab.Set_Parameters_PrecharDebug(nargout=0)
-		completed = "1"
-		self.updateBar.emit(completed,self.bar)
-		matlab.Prepare_Signal_Upload_PrecharDebug(nargout=0)
-		completed = "2"
-		self.updateBar.emit(completed,self.bar)
-		matlab.Upload_Signal_PrecharDebug(nargout=0)
-		completed = "3"
-		self.updateBar.emit(completed,self.bar)
-		matlab.Download_Signal_PrecharDebug(nargout=0)
-		completed = "4"
-		self.updateBar.emit(completed,self.bar)
-		matlab.Analyze_Signal_PrecharDebug(nargout=0)
-		completed = "5"
-		self.updateBar.emit(completed,self.bar)
-		matlab.Save_Data_PrecharDebug(nargout=0)
-		completed = "6"
-		self.updateBar.emit(completed,self.bar)
-		# ADD RESULT RETURNING FUNCTIONALITY
+		self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
+		result = matlab.Set_Parameters_PrecharDebug(nargout=1)
+		if result == "":
+			completed = "1"
+			self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
+		else:
+			self.errorOccurred.emit(self.main,result)
+			return
+		result = matlab.Prepare_Signal_Upload_PrecharDebug(nargout=1)
+		if result == "":
+			completed = "2"
+			self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
+		else:
+			self.errorOccurred.emit(self.main,result)
+			return	
+		result = matlab.Upload_Signal_PrecharDebug(nargout=1)
+		if result == "":
+			completed = "3"
+			self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
+		else:
+			self.errorOccurred.emit(self.main,result)
+			return		
+		result = matlab.Download_Signal_PrecharDebug(nargout=1)
+		if result == "":
+			completed = "4"
+			self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
+		else:
+			self.errorOccurred.emit(self.main,result)
+			return		
+		result = matlab.Analyze_Signal_PrecharDebug(nargout=1)
+		if result == "":
+			completed = "5"
+			self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
+		else:
+			self.errorOccurred.emit(self.main,result)
+			return	
+		result = matlab.Save_Data_PrecharDebug(nargout=1)
+		if result == "":
+			completed = "6"
+			self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
+		else:
+			self.errorOccurred.emit(self.main,result)
+			return
 		result = matlab.Save_Measurements_PrecharDebug(nargout=1)
-		completed = "7"
-		self.updateBar.emit(completed,self.bar)
+		resultSplit = result.split("~")
+		if resultSplit[0] == "":
+			self.updateData.emit(self.main,result)
+			completed = "7"
+			self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
+		else:
+			self.errorOccurred.emit(self.main,result)
+			return
 
 def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,awgSetGeneral,matlab):
 	#Array used instead of dictionary, cannot properly get the object type elements stored in a dict
@@ -1661,7 +1695,7 @@ def calValPreview(self):
 	self.ui.resultsAlgoTabs.setCurrentIndex(2)
 	self.ui.calValResultsStack.setCurrentIndex(0)
 	
-def runCalValidation(self,setBox,setButton):
+def runCalValidation(self,setBox,setButton,matlab):
 	if setButton.isChecked() == True:
 		setButton.setText("Unset")
 		self.ui.calValTabs.setCurrentIndex(0)
@@ -1709,24 +1743,30 @@ def preCharPreview(self,spectrumCanvas,spectrumFigure,matlab):
 	spectrumFigure.clear()
 	ax = spectrumFigure.add_subplot(111)
 	ax.imshow(spectrumImage)
-	plt.xlabel('Frequency(GHz)')
-	plt.ylabel('Power(dB)')
-	plt.title('Welch Mean-Square Spectrum Estimate')
-	plt.xticks([], [])
-	plt.yticks([], [])
+	ax.set_xlabel('Frequency(GHz)')
+	ax.set_ylabel('Power(dB)')
+	ax.set_title('Welch Mean-Square Spectrum Estimate')
+	ax.set_xticks([], [])
+	ax.set_yticks([], [])
 	spectrumCanvas.draw()
 	 
 	self.ui.precharTabs.setCurrentIndex(0)
 	self.ui.resultsAlgoTabs.setCurrentIndex(3)
 	self.ui.precharAlgoStack.setCurrentIndex(0)
 	
-def runPrecharacterization(self,setBox,setButton,spectrumCanvas,spectrumFigure,gainCanvas,gainFigure,phaseCanvas,phaseFigure,matlab):
+def runPrecharacterization(self,setBox,setButton,matlab):
 	ampCorrField = ""
 	trigAmpField = ""
 	fCarrierField = ""
 	fSampleField = ""
 	addressField = ""
+	
+	rfOn = self.ui.emergButtonSecond.isChecked()
+	
 	if setButton.isChecked() == True:
+		if rfOn == False:
+			instrParamErrorMessage(self,"Turn on RF before attempting to run precharacterization setup.")
+			return
 		# choose proper fields from stacked widgets to be sent to dictionaries
 		awgPage = self.ui.awgParamsStack_vsgMeas.currentIndex()
 		if awgPage == 1:
@@ -1811,29 +1851,16 @@ def runPrecharacterization(self,setBox,setButton,spectrumCanvas,spectrumFigure,g
 		self.ui.statusBar.addWidget(progressBar,1)
 		
 		# create thread to run signal generation routine
-		self.precharThread = runSignalGenerationThread(progressBar)
+		self.precharThread = runSignalGenerationThread(progressBar,self,setBox,setButton)
 		# connect signals to the thread
 		# as routine is run, update progress bar and step
 		self.precharThread.updateBar.connect(updateBar)
-		# when routine is finished, perform relevant gui changes
-		self.precharThread.finished.connect(lambda: finishPrecharRoutine(self,progressBar,setBox,setButton,spectrumCanvas,spectrumFigure,gainCanvas,gainFigure,phaseCanvas,phaseFigure,matlab))
+		# when nmse and papr are available, update gui
+		self.precharThread.updateData.connect(updateData)
+		# if error occurs, break thread and alery
+		self.precharThread.errorOccurred.connect(errorOccurred)
 		# begin running signal generation
-		self.precharThread.start()
-		
-		# result = matlab.Signal_Generation_Test(nargout=1)
-		# result = result.split("~")
-		# nmsePercent = result[0]
-		# nmseDB = result[1]
-		# inputPAPR = result[2]
-		# outputPAPR = result[3]
-	
-		# self.ui.nmsePercent_prechar.setText(nmsePercent)
-		# self.ui.nmseDB_prechar.setText(nmseDB)
-		# self.ui.inputPAPR_prechar.setText(inputPAPR)
-		# self.ui.outputPAPR_prechar.setText(outputPAPR)
-		
-
-			
+		self.precharThread.start()	
 			
 	elif setButton.isChecked() == False:
 		setButton.setText("Set && Run")
@@ -2198,6 +2225,14 @@ def instrParamErrorMessage(self,error):
 	msg.setStandardButtons(QMessageBox.Ok)
 	msg.exec_();
 	
+def algoRunErrorMessage(self,error):
+	msg = QMessageBox(self)
+	msg.setIcon(QMessageBox.Critical)
+	msg.setWindowTitle('Unable to Run')
+	msg.setText(error)
+	msg.setStandardButtons(QMessageBox.Ok)
+	msg.exec_();
+	
 def setSpectrumAnalyzerAdvancedParams(self,dictionary,equipBox,matlab,boxDone):
 	result = matlab.Set_Spectrum_Advanced(dictionary,nargout=1)
 	result = result.split(";")
@@ -2320,13 +2355,26 @@ def addToErrorLayout(self,errorArray):
 			label.setAlignment(Qt.AlignTop)
 			self.ui.errorLayout.addWidget(label)
 			
-def updateBar(stepNumber,bar):
+def updateBar(self,stepNumber,bar,setBox,setButton):
 	if stepNumber == "0": 
 		bar.setValue(float(stepNumber))
 		bar.setFormat("Currently Running: Set Parameters")
 	elif stepNumber == "1":
 		bar.setFormat("Currently Running: Prepare Signal for Upload")
 		bar.setValue(float(stepNumber))
+		
+		# style parameter boxes that were set in step 0
+		self.ui.precharSignalEquip.setStyleSheet(setBox)
+		self.ui.precharCalFilesEquip.setStyleSheet(setBox)
+		self.ui.precharRefRXEquip.setStyleSheet(setBox)
+		self.ui.precharVSGEquip.setStyleSheet(setBox)
+		self.ui.precharAWGEquip.setStyleSheet(setBox)
+		setButton.setText("Unset")
+		
+		# switch to prechar tab
+		self.ui.precharTabs.setCurrentIndex(0)
+		self.ui.resultsAlgoTabs.setCurrentIndex(3)
+		
 	elif stepNumber == "2":
 		bar.setFormat("Currently Running: Upload Signal")
 		bar.setValue(float(stepNumber))
@@ -2339,60 +2387,76 @@ def updateBar(stepNumber,bar):
 	elif stepNumber == "5":
 		bar.setFormat("Currently Running: Save Spectrum & VSA Data")
 		bar.setValue(float(stepNumber))
+		
+		# embed plots into GUI (created in step 4)
+		spectrumImage = mpimg.imread('.\Figures\Prechar_Spectrum_Output.png')
+		self.precharSpectrumFigure.clear()
+		sax = self.precharSpectrumFigure.add_subplot(111)
+		sax.imshow(spectrumImage)
+		sax.set_xlabel('Frequency(GHz)')
+		sax.set_ylabel('Power(dB)')
+		sax.set_title('Welch Mean-Square Spectrum Estimate')
+		sax.set_xticks([], [])
+		sax.set_yticks([], [])
+		self.precharSpectrumCanvas.draw()
+		
+		gainImage = mpimg.imread('.\Figures\Prechar_Gain.png')
+		self.precharGainFigure.clear()
+		gax = self.precharGainFigure.add_subplot(111)
+		gax.imshow(gainImage)
+		gax.set_xlabel('Input Power (dBm)')
+		gax.set_ylabel('Gain Distortion (dB)')
+		gax.set_title('Gain Distortion')
+		gax.set_xticks([], [])
+		gax.set_yticks([], [])
+		self.precharGainCanvas.draw()
+			
+		phaseImage = mpimg.imread('.\Figures\Prechar_Phase.png')
+		self.precharPhaseFigure.clear()
+		pax = self.precharPhaseFigure.add_subplot(111)
+		pax.imshow(phaseImage)
+		pax.set_xlabel('Input Power (dBm)')
+		pax.set_ylabel('Phase Distortion (degree)')
+		pax.set_title('AM/PM Distortion')
+		pax.set_xticks([], [])
+		pax.set_yticks([], [])
+		self.precharPhaseCanvas.draw()
+		
+		# switch gui page to show plots
+		self.ui.precharAlgoStack.setCurrentIndex(0)
+		
 	elif stepNumber == "6":
 		bar.setFormat("Currently Running: Save Signal Generation Measurements")
 		bar.setValue(float(stepNumber))
 	elif stepNumber == "7":
 		bar.setValue(float(stepNumber))
+		# remove progress bar
+		self.ui.statusBar.removeWidget(bar)
+		self.ui.statusBar.showMessage("Routine Complete",3000)
+		# change next stack
+		self.ui.algoNextStack.setCurrentIndex(3)
 		
-def finishPrecharRoutine(self,bar,setBox,setButton,spectrumCanvas,spectrumFigure,gainCanvas,gainFigure,phaseCanvas,phaseFigure,matlab):
-	# remove progress bar
-	self.ui.statusBar.removeWidget(bar)
-	self.ui.statusBar.showMessage("Routine Complete",3000)
+def updateData(self,result):
+	# add nmse and papr data into GUI
+	result = result.split("~")
+	nmsePercent = result[1]
+	nmseDB = result[2]
+	inputPAPR = result[3]
+	outputPAPR = result[4]
+	nmsePercent = str(round(float(nmsePercent), 2))
+	# nmseDB can be -inf, cannot round this so skip
+	try:
+		nmseDB = str(round(float(nmseDB), 2))
+	except:
+		pass
+	inputPAPR = str(round(float(inputPAPR), 2))
+	outputPAPR = str(round(float(outputPAPR), 2))
 	
-	# embed plots into GUI
-	spectrumImage = mpimg.imread('.\Figures\Prechar_Spectrum_Output.png')
-	spectrumFigure.clear()
-	sax = spectrumFigure.add_subplot(111)
-	sax.imshow(spectrumImage)
-	sax.set_xlabel('Frequency(GHz)')
-	sax.set_ylabel('Power(dB)')
-	sax.set_title('Welch Mean-Square Spectrum Estimate')
-	sax.set_xticks([], [])
-	sax.set_yticks([], [])
-	spectrumCanvas.draw()
+	self.ui.nmsePercent_prechar.setText(nmsePercent)
+	self.ui.nmseDB_prechar.setText(nmseDB)
+	self.ui.inputPAPR_prechar.setText(inputPAPR)
+	self.ui.outputPAPR_prechar.setText(outputPAPR)
 	
-	gainImage = mpimg.imread('.\Figures\Prechar_Gain.png')
-	gainFigure.clear()
-	gax = gainFigure.add_subplot(111)
-	gax.imshow(gainImage)
-	gax.set_xlabel('Input Power (dBm)')
-	gax.set_ylabel('Gain Distortion (dB)')
-	gax.set_title('Gain Distortion')
-	gax.set_xticks([], [])
-	gax.set_yticks([], [])
-	gainCanvas.draw()
-		
-	phaseImage = mpimg.imread('.\Figures\Prechar_Phase.png')
-	phaseFigure.clear()
-	pax = phaseFigure.add_subplot(111)
-	pax.imshow(phaseImage)
-	pax.set_xlabel('Input Power (dBm)')
-	pax.set_ylabel('Phase Distortion (degree)')
-	pax.set_title('AM/PM Distortion')
-	pax.set_xticks([], [])
-	pax.set_yticks([], [])
-	phaseCanvas.draw()
-	
-	# change styling and GUI pages
-	setButton.setText("Unset")
-	self.ui.precharTabs.setCurrentIndex(0)
-	self.ui.resultsAlgoTabs.setCurrentIndex(3)
-	self.ui.algoNextStack.setCurrentIndex(3)
-	self.ui.precharAlgoStack.setCurrentIndex(0)
-	self.ui.precharSignalEquip.setStyleSheet(setBox)
-	self.ui.precharCalFilesEquip.setStyleSheet(setBox)
-	self.ui.precharRefRXEquip.setStyleSheet(setBox)
-	self.ui.precharVSGEquip.setStyleSheet(setBox)
-	self.ui.precharAWGEquip.setStyleSheet(setBox)
+def errorOccurred(self,error):
+	algoRunErrorMessage(self,error)
 	
