@@ -35,14 +35,6 @@ tonesBaseband = (Cal.Signal.StartingToneFreq : Cal.Signal.ToneSpacing : Cal.Sign
 %  is multiples of minimum segment length at the AWG sampling rate
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Expansion Margin Settings
-TX.AWG.ExpansionMarginSettings.ExpansionMarginEnable = 0;
-TX.AWG.ExpansionMarginSettings.ExpansionMargin = 2;
-
-% AWG channel for calibration
-TX.AWG_Channel                = 1;
-TX.Fcarrier                   = 1e9;
-
 % TX Trigger Frame Time Calculation
 MinimumNumberOfSegments        = (1 / Cal.Signal.ToneSpacing) * TX.Fsample / TX.MinimumSegmentLength;
 [num den]                      = rat(MinimumNumberOfSegments);
@@ -54,45 +46,14 @@ clear num den
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Set RX Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-RX.Type                    = 'Scope';    % Choose between 'Digitizer', 'Scope', 'UXA' for the receiver
-RX.Fcarrier                = 6.250e9;       % Center frequency of the received tones
-RX.MirrorSignalFlag        = true;      % Receiving the mirror signal or not
-RX.XCorrLength             = 2e3;
-RX.Analyzer.Fsample                 = 40e9;        % Sampling rate of the receiver
 RX.FrameTime               = TX.FrameTime;     % One measurement frame;
-RX.NumberOfMeasuredPeriods = 2;          % Number of measured frames;
 RX.Analyzer.PointsPerRecord= RX.Analyzer.Fsample * RX.FrameTime * RX.NumberOfMeasuredPeriods;
 
-RX.VisaAddress             = 'USB0::0x0957::0x9001::MY48240314::0::INSTR';
-
-% RX.ScopeIVIDriverPath      = 'C:\Users\a38chung\Desktop\Scope\AgilentInfiniium.mdd';
 % Scope Parameters
-RX.EnableExternalReferenceClock = false;
-RX.TriggerChannel               = 3;
-RX.channelVec                   = [1 0 0 0];
 autoscaleFlag = 1;
 
-% Digitizer Parameters
-RX.EnableExternalClock     = false;
-RX.ExternalClockFrequency  = 1.906e9;    % For half rate 1.998 GSa/s, quarter rate 1.906 GSa/s
-RX.ACDCCoupling            = 1;
-RX.VFS                     = 1;          % Digitzer full scale peak to peak voltage reference (1 or 2 V)
-if (RX.Analyzer.Fsample > 1e9)
-    RX.EnableInterleaving  = true;       % Enable interleaving
-end
-
 % UXA Parameters
-RX.UXA.AnalysisBandwidth    = 1e9;
-RX.UXA.IFPath               = 1e9;
-RX.UXA.Attenuation          = 6;  % dB
-RX.UXA.SpurFrequency        = 250e6; % Spur from the UXA do not put a tone here
-RX.UXA.ClockReference       = 'Internal';
-if (RX.UXA.IFPath > 500e6)
-    RX.UXA.TriggerPort          = 'EXT3';
-else
-    RX.UXA.TriggerPort          = 'EXT1';
-end
-RX.UXA.TriggerLevel         = 250; % mV
+RX.UXA.SpurFrequency = 250e6; % Spur from the UXA do not put a tone here
 
 if (Cal.Processing32BitFlag)
     instrreset
@@ -105,7 +66,7 @@ if (Cal.Processing32BitFlag)
 end
 
 % Downconversion filter if we receive at IF
-load FIR_LPF_fs40e9_fpass1r6e9_Order815
+load RX.DownFile
 RX.Filter = Num;
 clear Num
 
@@ -200,11 +161,10 @@ for i = 1:Cal.NumIterations
     end
 
     % Align and analyze the signals - if it is real we do not adjust the phase
-    alignFreqDomainFlag = 1;
     if (Cal.Signal.MultitoneOptions.RealBasisFlag)
         [ In_D_test, Out_D_test, NMSE_Before] = AlignAndAnalyzeRealSignals( TrainingSignal, Rec, TX.Fsample);
     else
-        [ In_D_test, Out_D_test, NMSE_Before] = AlignAndAnalyzeSignals( TrainingSignal, Rec, TX.Fsample, alignFreqDomainFlag, RX.XCorrLength);
+        [ In_D_test, Out_D_test, NMSE_Before] = AlignAndAnalyzeSignals( TrainingSignal, Rec, TX.Fsample, RX.alignFreqDomainFlag, RX.XCorrLength);
     end
     display([ 'NMSE Before         = ' num2str(NMSE_Before)      ' % ' ]);
     %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -290,5 +250,5 @@ end
 Rec = resample(Rec, DownSampleScope, UpSampleScope);
 
 % Align and analyze the signals
-[ In_D_test, Out_D_test, NMSE_After] = AlignAndAnalyzeSignals( VerificationSignal, Rec, TX.Fsample, alignFreqDomainFlag, RX.XCorrLength);
+[ In_D_test, Out_D_test, NMSE_After] = AlignAndAnalyzeSignals( VerificationSignal, Rec, TX.Fsample, RX.alignFreqDomainFlag, RX.XCorrLength);
 display([ 'NMSE After          = ' num2str(NMSE_After)      ' % ' ]);

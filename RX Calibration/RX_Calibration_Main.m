@@ -55,17 +55,8 @@ tones_freq = (-1.51e9:Cal.RFToneSpacing:1.51e9).';
 RX.FrameTime = 1 / Cal.RFToneSpacing;     % One measurement frame/period
 RX.Analyzer.PointsPerRecord = RX.Analyzer.Fsample * RX.FrameTime * RX.NumberOfMeasuredPeriods;
 
-% Digitizer Parameters
-if (RX.Analyzer.Fsample > 1e9)
-    RX.EnableInterleaving  = true;       % Enable interleaving
-end
-
-% UXA
-if (RX.UXA.AnalysisBandwidth > 500e6)
-    RX.UXA.TriggerPort = 'EXT3';
-else
-    RX.UXA.TriggerPort = 'EXT1';
-end
+% Scope Parameters
+RX.Scope.autoscaleFlag = true;
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Set Trigger Signal Parameters

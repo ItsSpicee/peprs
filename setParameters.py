@@ -124,19 +124,6 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 			awgSetGeneral.setChecked(False)
 		
 		if flag:
-			# set MATLAB RXCal parameters
-			awgDict = {
-				"model" : self.ui.partNum_awg.text(),
-				"model" : self.ui.partNum_awg.text(),
-				"sampleRate" : self.ui.maxSampleRate_awg.text(),
-				"type": self.ui.vsgSetup.currentIndex(),
-				"refClockSrc" : self.ui.refClockSorce_awg.currentIndex(),
-				"extRefClockFreq" : self.ui.extRefFreq_awg.text()
-			}
-
-			matlab.Set_Cal_VSGParams(awgDict,"RX",nargout=0)
-			matlab.Set_Cal_VSGParams(awgDict,"AWG",nargout=0)
-			
 			self.ui.awgButton_vsg.setStyleSheet(buttonFocus)
 			self.ui.awgButton_vsg_2.setStyleSheet(buttonFocus)
 			self.ui.awgButton_vsg_3.setStyleSheet(buttonFocus)
@@ -197,9 +184,6 @@ def setAdvancedAWG(self,boxDone,setButton,matlab):
 		done = win.checkIfDone(checkDic)
 		if done:
 			if flag == 1:
-				# set MATLAB RXCal Param
-				matlab.Set_Cal_VSGAdvParams(d["dacRange"],nargout=0)
-				
 				setButton.setText("Unset")
 				self.ui.awgEquipAdv.setStyleSheet(boxDone)
 				self.ui.statusBar.showMessage('Successfully Set Advanced Settings',2000)
@@ -299,17 +283,6 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 		if averaging != 0 or avgEnabled == False:
 			if demod != 0:
 				if typeIdx == 3 or typeIdx == 4: # UXA & PXA
-					# set matlab parameters
-					dUXA={
-						"analysisBW": self.ui.analysisBandwidth_sa.text(),
-						"address": self.ui.address_sa.text(),
-						"atten": self.ui.attenuation_sa.text(),
-						"clockRef": self.ui.clockRef_sa.currentIndex(),
-						"trigLevel": self.ui.trigLevel_sa.text()
-					}
-					#matlab.Set_Cal_UXAParams(dUXA,"RX",nargout=0)
-					#matlab.Set_Cal_UXAParams(dUXA,"AWG",nargout=0)
-				
 					dAllUXA={
 						"averaging" : self.ui.averagingEnable.currentIndex(),
 						"noAverages": self.ui.noAveragesField_sa.text(),
@@ -393,15 +366,6 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 					setButton.setText("Unset")
 						
 					if typeIdx == 1 or typeIdx == 5: #Scope
-						dScope={
-							"driver": self.ui.driverPath_scope.text(),
-							"address": self.ui.address_scope.text(),
-							"enableClock": self.ui.extClkEnabled_scope.currentIndex(),
-							"autoScale": self.ui.autoscale_scope.currentIndex(),
-							"trigChannel": self.ui.trigChannel_scope.text()
-						}
-						matlab.Set_Cal_ScopeParams(dScope,"RX",nargout=0)
-						matlab.Set_Cal_ScopeParams(dScope,"AWG",nargout=0)
 						self.ui.scopeEquipGeneral.setStyleSheet(boxDone)
 						self.ui.scopeButton_vsa.setStyleSheet(buttonFocus)
 						self.ui.scopeButton_vsa_2.setStyleSheet(buttonFocus)
@@ -418,15 +382,6 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 							self.ui.up_psg_next.setCurrentIndex(4)
 							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor)
 					elif typeIdx == 2 or typeIdx ==6: #Digitizer
-						dDigitizer ={
-							"address":self.ui.address_dig.text(),
-							"enableClock":self.ui.clockEnabled_dig.currentIndex(),
-							"clockFreq":self.ui.clockFreq_dig.currentIndex(),
-							"coupling":self.ui.coupling_dig.currentIndex(),
-							"vfs":self.ui.vfs_dig.text(),
-						}
-						matlab.Set_Cal_DigitizerParams(dDigitizer,"RX",nargout=0)
-						matlab.Set_Cal_DigitizerParams(dDigitizer,"AWG",nargout=0)
 						self.ui.digEquipGeneral.setStyleSheet(boxDone)
 						self.ui.digButton_vsa.setStyleSheet(buttonFocus)
 						self.ui.digButton_vsa_2.setStyleSheet(buttonFocus)
@@ -450,27 +405,27 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 				elif vsaPage == 0:
 					fSampleField = self.ui.sampRate_vsaMeas_2.text()
 				
-				# channelVec = [0,0,0,0]
-				# c1 = self.ui.measChannel1.isChecked()
-				# c2 = self.ui.measChannel2.isChecked()
-				# c2 = self.ui.measChannel3.isChecked()
-				# c2 = self.ui.measChannel4.isChecked()
-				# if c1:
-					# channelVec[0] = 1
-				# else:
-					# channelVec[0] = 0
-				# if c2:
-					# channelVec[0] = 1
-				# else:
-					# channelVec[0] = 0
-				# if c3:
-					# channelVec[0] = 1
-				# else:
-					# channelVec[0] = 0
-				# if c4:
-					# channelVec[0] = 1
-				# else:
-					# channelVec[0] = 0
+				channelVec = [0,0,0,0]
+				c1 = self.ui.measChannel1.isChecked()
+				c2 = self.ui.measChannel2.isChecked()
+				c3 = self.ui.measChannel3.isChecked()
+				c4 = self.ui.measChannel4.isChecked()
+				if c1:
+					channelVec[0] = 1
+				elif c1 == False:
+					channelVec[0] = 0
+				if c2:
+					channelVec[1] = 1
+				elif c2 == False:
+					channelVec[1] = 0
+				if c3:
+					channelVec[2] = 1
+				elif c3 == False:
+					channelVec[2] = 0
+				if c4:
+					channelVec[3] = 1
+				elif c4 == False:
+					channelVec[3] = 0
 					
 				dGen = {
 					"AnalysisBandwidth":self.ui.analysisBandwidth_sa.text(),
@@ -484,7 +439,7 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 					"ACDCCoupling" : self.ui.coupling_dig.currentIndex(),
 					"DriverPath" : self.ui.driverPath_scope.text(),
 					"EnableExternalClock_Scope" : self.ui.extClkEnabled_scope.currentIndex(),
-					#"ChannelVec": channelVec,
+					"ChannelVec": channelVec,
 					"FSample": fSampleField
 				}
 				matlab.SetRxParameters_GUI(dGen,nargout=0);
@@ -1110,15 +1065,6 @@ def setVSAMeasDig(self,boxDone,buttonHover,buttonDone,setButton,matlab):
 		done = win.checkIfDone(checkDic)
 		if done:
 			setButton.setText("Unset")
-			# set MATLAB parameters
-			d={
-				"centerFreq": self.ui.centerFreq_vsaMeas.text(),
-				"sampRate": self.ui.sampRate_vsaMeas.text(),
-				"noFrames": self.ui.noFrameTimes_vsaMeas.text()
-			}
-			matlab.Set_VSA_Meas_RXCal(d,nargout=0)
-			matlab.Set_VSA_Meas_AWGCal(d,nargout=0)
-			
 			self.ui.vsaMeasGenEquip.setStyleSheet(boxDone)
 			self.ui.vsaMeasGenEquip_2.setStyleSheet(boxDone)
 			self.ui.vsaMeasDigEquip.setStyleSheet(boxDone)
@@ -1163,14 +1109,6 @@ def setVSAMeasGen(self,boxDone,buttonHover,buttonDone,setButton,matlab):
 		done = win.checkIfDone(checkDic)
 		if done:
 			setButton.setText("Unset")
-			# set MATLAB parameters
-			d={
-				"centerFreq": self.ui.centerFreq_vsaMeas_2.text(),
-				"sampRate": self.ui.sampRate_vsaMeas_2.text(),
-				"noFrames": self.ui.noFrameTimes_vsaMeas_2.text()
-			}
-			matlab.Set_VSA_Meas_RXCal(d,nargout=0)
-		
 			vsaType = self.ui.vsaWorkflow_vsaMeas.currentIndex()
 			vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
 			downType = self.ui.single_down_vsaMeas_stack.currentIndex()
@@ -1269,33 +1207,108 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 		if done:
 			setButton.setText("Unset")
 			
-			# set matlab parameters
-			combDict = {
-				"rfSpacing" : self.ui.rfSpacingField_comb.text(),
-				"ifSpacing" : self.ui.ifSpacingField_comb.text(),
-				"refFile" : self.ui.refFileField_comb.text(),
-				"rfCenterFreq" :self.ui.rfCenterFreqField_comb.text(),
-				"rfCalStartFreq" : self.ui.rfCalStartFreqField_comb.text(),
-				"rfCalStopFreq" : self.ui.rfCalStopFreqField_comb.text(),
-				"loFreqOffset" : self.ui.loFreqOffsetField_comb.text(),
-				"saveLoc" : self.ui.vsaCalSaveLocField_comb.text(),
-				"subRate" : self.ui.subrateField_comb.currentIndex(),
-				"freqRes" : self.ui.freqResField_comb.text(),
-				"despurFlag" : self.ui.despurFlagField_comb.currentIndex(),
-				"spurStart" : self.ui.spurStartField_comb.text(),
-				"spurSpacing" : self.ui.spurSpacingField_comb.text(),
-				"spurEnd" : self.ui.spurEndField_comb.text(),
-				"smoothFlag" : self.ui.smoothFlagField_comb.currentIndex(),
-				"smoothOrder" : self.ui.smoothOrderField_comb.text()
+			# determine whcih fields to use
+			
+			addressField = ""
+			fCarrierField = ""
+			fSampleField = ""
+			noFramesField = ""
+			
+			vsaPage = self.ui.vsaMeasGenStack.currentIndex()
+			if vsaPage == 1:
+				fCarrierField = self.ui.centerFreq_vsaMeas.text()
+				fSampleField = self.ui.sampRate_vsaMeas.text()
+				noFramesField = self.ui.noFrameTimes_vsaMeas.text()
+			elif vsaPage == 0:
+				fCarrierField = self.ui.centerFreq_vsaMeas_2.text()
+				fSampleField = self.ui.sampRate_vsaMeas_2.text()
+				noFramesField = self.ui.noFrameTimes_vsaMeas_2.text()
+			vsaType = self.ui.vsaType.currentIndex()
+			if vsaType == 1 or vsaType == 5:
+				addressField = self.ui.address_scope.text()
+			elif vsaType == 2 or vsaType == 6:
+				addressField = self.ui.address_dig.text()
+			elif vsaType == 3 or vsaType == 4:
+				addressField = self.ui.address_sa.text()
+			channelVec = [0,0,0,0]
+			c1 = self.ui.measChannel1.isChecked()
+			c2 = self.ui.measChannel2.isChecked()
+			c3 = self.ui.measChannel3.isChecked()
+			c4 = self.ui.measChannel4.isChecked()
+			if c1:
+				channelVec[0] = 1
+			elif c1 == False:
+				channelVec[0] = 0
+			if c2:
+				channelVec[1] = 1
+			elif c2 == False:
+				channelVec[1] = 0
+			if c3:
+				channelVec[2] = 1
+			elif c3 == False:
+				channelVec[2] = 0
+			if c4:
+				channelVec[3] = 1
+			elif c4 == False:
+				channelVec[3] = 0
+				
+			# define dictionaries
+			cal = {
+				"RFToneSpacing" : self.ui.rfSpacingField_comb.text(),
+				"IFToneSpacing" : self.ui.ifSpacingField_comb.text(),
+				"CombReferenceFile" : self.ui.refFileField_comb.text(),
+				"RFCenterFrequency" :self.ui.rfCenterFreqField_comb.text(),
+				"RFCalibrationStartFrequency" : self.ui.rfCalStartFreqField_comb.text(),
+				"RFCalibrationStopFrequency" : self.ui.rfCalStopFreqField_comb.text(),
+				"LOFrequencyOffset" : self.ui.loFreqOffsetField_comb.text(),
+				"SaveLocation" : self.ui.vsaCalSaveLocField_comb.text(),
+				"SubRateFlag" : self.ui.subrateField_comb.currentIndex(),
+				"FreqRes" : self.ui.freqResField_comb.text(),
+				"DespurFlag" : self.ui.despurFlagField_comb.currentIndex(),
+				"ScopeSpurStart" : self.ui.spurStartField_comb.text(),
+				"ScopeSpurSpacing" : self.ui.spurSpacingField_comb.text(),
+				"ScopeSpurEnd" : self.ui.spurEndField_comb.text(),
+				"MovingAverageFlag" : self.ui.smoothFlagField_comb.currentIndex(),
+				"MovingAverageOrder" : self.ui.smoothOrderField_comb.text(),
 			}
-			matlab.Set_VSA_Calibration(combDict,nargout=0)
+			rx = {
+				"Type" : self.ui.vsaType.currentIndex(),
+				"Fcarrier" : fCarrierField,
+				"mirrorFlag" : self.ui.mirrorFlag_down.currentIndex(),
+				"Fsample" : fSampleField,
+				"NumberOfMeasuredPeriods" : noFramesField,
+				"VisaAddress": addressField,
+				"DriverPath" : self.ui.driverPath_scope.text(),
+				"EnableExternalClock_Scope" : self.ui.extClkEnabled_scope.currentIndex(),
+				"TriggerChannel" : self.ui.trigChannel_scope.text(),
+				"ChannelVec": channelVec,
+				"EnableExternalClock_Dig" : self.ui.clockEnabled_dig.currentIndex(),
+				"ExternalClockFrequency" : self.ui.clockFreq_dig.currentIndex(),
+				"ACDCCoupling" : self.ui.coupling_dig.currentIndex(),
+				"VFS" : self.ui.vfs_dig.text(),
+				"Interleaving" : self.ui.interleaving_dig.currentIndex(),
+				"AnalysisBandwidth":self.ui.analysisBandwidth_sa.text(),
+				"Attenuation":self.ui.attenuation_sa.text(),
+				"TriggerLevel":self.ui.trigLevel_sa.text(),
+				"ClockReference" : self.ui.clockRef_sa.currentIndex(),
+			}
+			tx = {
+				"Type": self.ui.vsgSetup.currentIndex(),
+				"Model": self.ui.partNum_awg.text(),
+				"Fsample" : self.ui.maxSampleRate_awg.text(),
+				"ReferenceClockSource": self.ui.refClockSorce_awg.currentIndex(),
+				"ReferenceClock": self.ui.extRefFreq_awg.text(),
+				"VFS": self.ui.dacRange_awg.text(),	
+				"TriggerAmplitude": self.ui.trigAmp_down.text()
+			}
 			downDict = {
 				"rfCenterFreq" : self.ui.rfCenterFreq_down.text(),
 				"ifCenterFreq" : self.ui.ifCenterFreq_down.text(),
 				"loFreq" : self.ui.loFreq_down.text(),
-				"mirrorFlag" : self.ui.mirrorFlag_down.currentIndex(),
-				"trigAmp": self.ui.trigAmp_down.text()
 			}
+			
+			# set matlab parameters
+			matlab.Set_VSA_Calibration(cal,rx,tx,nargout=0)
 			matlab.Set_Down_Calibration(downDict,nargout=0)
 			
 			vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
@@ -1348,22 +1361,16 @@ def noRXCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 		self.ui.rfCenterFreq_down,
 		self.ui.ifCenterFreq_down,
 		self.ui.loFreq_down.text(),
-		self.ui.mirrorFlag_down,
-		self.ui.trigAmp_down,
 		self.ui.vsaCalFileField_comb
 	]
 	if setButton.isChecked() == True:
 		done = win.checkIfDone(checkDic)
 		if done:
 			# set matlab parameters
-			vsaCalFile = self.ui.vsaCalFileField_comb.text()
-			matlab.Set_VSA_CalFile(vsaCalFile,nargout=0)
 			downDict = {
 				"rfCenterFreq" : self.ui.rfCenterFreq_down.text(),
 				"ifCenterFreq" : self.ui.ifCenterFreq_down.text(),
 				"loFreq" : self.ui.loFreq_down.text(),
-				"mirrorFlag" : self.ui.mirrorFlag_down.currentIndex(),
-				"trigAmp": self.ui.trigAmp_down.text()
 			}
 			matlab.Set_Down_Calibration(downDict,nargout=0)
 			setButton.setText("Unset")
@@ -1428,38 +1435,98 @@ def awgCalRoutine(self,boxDone,setButton,matlab):
 	if setButton.isChecked() == True:
 		done = win.checkIfDone(checkDic)
 		if done:
-			# Set MATLAB Parameters
-			dAWGCal= {
-				"noIterations" : self.ui.noIterations_awgCal.text(),
-				"toneSpacing" : self.ui.toneSpacing_awgCal.text(),
-				"startFreq" : self.ui.startFreq_awgCal.text(),
-				"endFreq" : self.ui.endFreq_awgCal.text(),
-				"realFlag" : self.ui.realBasisFlag_awgCal.text(),
-				"phaseDistr" : self.ui.phaseDistr_awgCal.text(),
-				"freqRes" : self.ui.freqRes_awgCal.text(),
-				"saveLoc" : self.ui.awgCalSaveLocField_vsgMeas.text()
-			}
-			matlab.Set_AWG_Calibration(dAWGCal,nargout=0)
-			dAWGCalGen={
-				"centerFreq" : self.ui.centerFreq_awgCal.text(),
-				"ampCorr" : self.ui.ampCorrection_awgCal.currentIndex(),
-				"ampCorrFile" : self.ui.ampCorrFile_vsgMeas.text(),
-				"vfs" : self.ui.vfs_awgCal.text(),
-				"trigAmp" : self.ui.trigAmp_awgCal.text(),
-				"clkFreq" : self.ui.sampleClockFreq_awgCal.text()
-			}
-			matlab.Set_AWGCal_General(dAWGCalGen,nargout=0)
-			dAWGCalParams={
-				"mirror" : self.ui.mirrorFlag_awgCal.currentIndex(),
-				"noRXPeriods" : self.ui.noRXPeriods_awgCal.text(),
-				"downFile" : self.ui.downFilterFileField_vsgMeas.text(),
-				"noTXPeriods" : self.ui.noTXPeriods_awgCal.text(),
-				"awgChannel" : self.ui.awgChannel_awgCal.text(),
-				"vsaCalEnabled" : self.ui.useVSACal_awgCal.currentIndex(),
+			fCarrierField = ""
+			fSampleField = ""
+			addressField = ""
+			
+			# determine which field on which page should be used
+			vsaPage = self.ui.vsaMeasGenStack.currentIndex()
+			if vsaPage == 1:
+				fCarrierField = self.ui.centerFreq_vsaMeas.text()
+				fSampleField = self.ui.sampRate_vsaMeas.text()
+			elif vsaPage == 0:
+				fCarrierField = self.ui.centerFreq_vsaMeas_2.text()
+				fSampleField = self.ui.sampRate_vsaMeas_2.text()
+			vsaType = self.ui.vsaType.currentIndex()
+			if vsaType == 1 or vsaType == 5:
+				addressField = self.ui.address_scope.text()
+			elif vsaType == 2 or vsaType == 6:
+				addressField = self.ui.address_dig.text()
+			elif vsaType == 3 or vsaType == 4:
+				addressField = self.ui.address_sa.text()
+			channelVec = [0,0,0,0]
+			c1 = self.ui.measChannel1.isChecked()
+			c2 = self.ui.measChannel2.isChecked()
+			c3 = self.ui.measChannel3.isChecked()
+			c4 = self.ui.measChannel4.isChecked()
+			if c1:
+				channelVec[0] = 1
+			elif c1 == False:
+				channelVec[0] = 0
+			if c2:
+				channelVec[1] = 1
+			elif c2 == False:
+				channelVec[1] = 0
+			if c3:
+				channelVec[2] = 1
+			elif c3 == False:
+				channelVec[2] = 0
+			if c4:
+				channelVec[3] = 1
+			elif c4 == False:
+				channelVec[3] = 0
+			
+			#define dictionaries
+			cal = {
+				"NumIterations" : self.ui.noIterations_awgCal.text(),
+				"ToneSpacing" : self.ui.toneSpacing_awgCal.text(),
+				"StartingToneFreq" : self.ui.startFreq_awgCal.text(),
+				"EndingToneFreq" : self.ui.endFreq_awgCal.text(),
+				"RealBasisFlag" : self.ui.realBasisFlag_awgCal.text(),
+				"PhaseDistr" : self.ui.phaseDistr_awgCal.text(),
+				"Fres" : self.ui.freqRes_awgCal.text(),
+				"SaveLocation" : self.ui.awgCalSaveLocField_vsgMeas.text(),
+				"PAPRmin" : self.ui.paprMin_awg.text(),
+				"PAPRmax" : self.ui.paprMax_awg.text(),
+				"vsaCalFlag" : self.ui.useVSACal_awgCal.currentIndex(),
 				"vsaCalFile" : self.ui.vsaCalFileField_vsgMeas.text()
 			}
-			matlab.Set_AWGCal_Settings(dAWGCalParams,nargout=0)
-			
+			tx = {
+				"Type": self.ui.vsgSetup.currentIndex(),
+				"Model": self.ui.partNum_awg.text(),
+				"Fsample" : self.ui.maxSampleRate_awg.text(),
+				"ReferenceClockSource": self.ui.refClockSorce_awg.currentIndex(),
+				"ReferenceClock" : self.ui.sampleClockFreq_awgCal.text(),
+				"VFS" : self.ui.vfs_awgCal.text(),
+				"TriggerAmplitude" : self.ui.trigAmp_awgCal.text(),
+				"Fcarrier" : self.ui.centerFreq_awgCal.text(),
+				"NumberOfTransmittedPeriods" : self.ui.noTXPeriods_awgCal.text(),
+				"AWG_Channel" : self.ui.awgChannel_awgCal.text(),
+			}
+			rx = {
+				"Type" : self.ui.vsaType.currentIndex(),
+				"Fcarrier" : fCarrierField,
+				"MirrorFlag" : self.ui.mirrorFlag_awgCal.currentIndex(),
+				"Fsample" : fSampleField,
+				"NumberOfMeasuredPeriods" : self.ui.noRXPeriods_awgCal.text(),
+				"VisaAddress": addressField,
+				"DriverPath": self.ui.driverPath_scope.text(),
+				"EnableExternalClock_Scope": self.ui.extClkEnabled_scope.currentIndex(),
+				"ChannelVec": channelVec,
+				"EnableExternalClock_Dig" : self.ui.clockEnabled_dig.currentIndex(),
+				"ExternalClockFrequency" : self.ui.clockFreq_dig.currentIndex(),
+				"ACDCCoupling" : self.ui.coupling_dig.currentIndex(),
+				"VFS" : self.ui.vfs_dig.text(),
+				"Interleaving" : self.ui.interleaving_dig.currentIndex(),
+				"AnalysisBandwidth" : self.ui.analysisBandwidth_sa.text(),
+				"Attenuation" : self.ui.attenuation_sa.text(),
+				"ClockReference" : self.ui.clockRef_sa.currentIndex(),
+				"TriggerLevel": self.ui.trigLevel_sa.text(),
+				"FilterFile" : self.ui.downFilterFileField_vsgMeas.text(),
+			}
+			# set matlab parameters
+			matlab.Set_AWG_Calibration(cal,tx,rx,nargout=0)
+
 			setButton.setText("Unset")
 			
 			self.ui.awgEquip_vsgMeas.setStyleSheet(boxDone)
@@ -1515,19 +1582,6 @@ def noAWGCalRoutine(self,boxDone,setButton,matlab):
 	if setButton.isChecked() == True:
 		done = win.checkIfDone(checkDic)
 		if done:
-			# Set MATLAB parameter
-			awgFile = self.ui.awgCalFileField_vsgMeas_2.text()
-			matlab.Set_AWG_CalFile(awgFile,nargout=0)
-			dAWGCalGen={
-				"centerFreq" : self.ui.centerFreq_awgCal_2.text(),
-				"ampCorr" : self.ui.ampCorrection_awgCal_2.currentIndex(),
-				"ampCorrFile" : self.ui.ampCorrFileField_vsgMeas.text(),
-				"vfs" : self.ui.vfs_awgCal_2.text(),
-				"trigAmp" : self.ui.trigAmp_awgCal_2.text(),
-				"clkFreq" : self.ui.sampleClockFreq_awgCal_2.text()
-			}
-			matlab.Set_AWGCal_General(dAWGCalGen,nargout=0)
-			
 			setButton.setText("Unset")
 			self.ui.awgEquip_vsgMeas_2.setStyleSheet(boxDone)
 			self.ui.awgCalEquip_vsgMeas_2.setStyleSheet(boxDone)
@@ -1601,10 +1655,61 @@ def setUpVSGMeas(self,boxDone,setButton):
 		self.ui.psgMark_vsgMeas.setVisible(False)
 		self.ui.vsgMeasNextStack.setCurrentIndex(7)
 		
-def setHetero(self,boxDone,setButton):
+def setHetero(self,boxDone,setButton,matlab):
 	if setButton.isChecked() == True:
 		setButton.setText("Unset")
-			
+		
+		addressField = ""
+		vfsField = ""
+		trigAmpField = ""
+		fCarrierField = ""
+		fSampleField = ""
+		
+		# determine which field on which page should be used
+		awgCalPage = self.ui.awgParamsStack_vsgMeas.currentIndex()
+		if awgCalPage == 2:
+			vfsField = self.ui.vfs_awgCal_2.text()
+			trigAmpField = self.ui.trigAmp_awgCal_2.text()
+		elif awgCalPage == 1:
+			vfsField = self.ui.vfs_awgCal.text()
+			trigAmpField = self.ui.trigAmp_awgCal.text()
+		vsaPage = self.ui.vsaMeasGenStack.currentIndex()
+		if vsaPage == 1:
+			fCarrierField = self.ui.centerFreq_vsaMeas.text()
+			fSampleField = self.ui.sampRate_vsaMeas.text()
+		elif vsaPage == 0:
+			fCarrierField = self.ui.centerFreq_vsaMeas_2.text()
+			fSampleField = self.ui.sampRate_vsaMeas_2.text()
+		vsaType = self.ui.vsaType.currentIndex()
+		if vsaType == 1 or vsaType == 5:
+			addressField = self.ui.address_scope.text()
+		elif vsaType == 2 or vsaType == 6:
+			addressField = self.ui.address_dig.text()
+		elif vsaType == 3 or vsaType == 4:
+			addressField = self.ui.address_sa.text()
+		channelVec = [0,0,0,0]
+		c1 = self.ui.measChannel1.isChecked()
+		c2 = self.ui.measChannel2.isChecked()
+		c3 = self.ui.measChannel3.isChecked()
+		c4 = self.ui.measChannel4.isChecked()
+		if c1:
+			channelVec[0] = 1
+		elif c1 == False:
+			channelVec[0] = 0
+		if c2:
+			channelVec[1] = 1
+		elif c2 == False:
+			channelVec[1] = 0
+		if c3:
+			channelVec[2] = 1
+		elif c3 == False:
+			channelVec[2] = 0
+		if c4:
+			channelVec[3] = 1
+		elif c4 == False:
+			channelVec[3] = 0
+		
+		#define dictionaries
 		cal = {
 			"ToneSpacing" : self.ui.toneSpacing_hetero.text(),
 			"StartingToneFreq" : self.ui.startTone_hetero.text(),
@@ -1615,43 +1720,48 @@ def setHetero(self,boxDone,setButton):
 			"PAPRmax" : self.ui.paprMax_hetero.text(),
 			"FreqRes" : self.ui.freqResolution_hetero.text(),
 			"NumIterations" : self.ui.noIterations_hetero.text(),
-			"SaveLocation" : self.ui.upCalSaveLocField_vsgMeas.text()
-			"rxCalFlag" : self.ui.vsaCalFileEnable_hetero.currentIndex()
+			"SaveLocation" : self.ui.upCalSaveLocField_vsgMeas.text(),
+			"rxCalFlag" : self.ui.vsaCalFileEnable_hetero.currentIndex(),
 			"rxCalFile" : self.ui.vsaCalFileField_vsgMeas_2.text()
 		}
-		
 		tx={
 			"Type": self.ui.vsgSetup.currentIndex(),
 			"Model": self.ui.partNum_awg.text(),
 			"Fsample" : self.ui.maxSampleRate_awg.text(),
 			"ReferenceClockSource": self.ui.refClockSorce_awg.currentIndex(),
 			"ReferenceClock": self.ui.extRefFreq_awg.text(),
-			"VFS": self.ui.dacRange_awg.text(),	
+			"VFS": vfsField,	
 			"TriggerAmplitude": trigAmpField,
 			"NumberOfTransmittedPeriods": self.ui.noTXPeriods_hetero.text(),
-			"ExpansionMarginEnable": self.ui.enableExpansion_prechar.currentIndex(),
-			"ExpansionMargin" : self.ui.expansionMargin_prechar.text(),
+			"ExpansionMarginEnable": self.ui.expansionMarginEnable_hetero.currentIndex(),
+			"ExpansionMargin" : self.ui.expansionMargin_hetero.text(),
 			"Fcarrier" : self.ui.vsgCenterFreq_hetero.text(),
-			
-			
-			# "FGuard" : self.ui.guardBand_prechar.text(),
-			# "FCarrier" : self.ui.centerFreq_prechar.text(),
-			# "SubtractMeanFlag" : self.ui.subtractMean_prechar.currentIndex(),
-			
-			# "NumberOfSegments" : self.ui.noSegments_prechar.text(),
-			
-			# "Amp_Corr" : ampCorrField,
-			# "GainExpansion_flag" : self.ui.gainExpansionFlag_prechar.currentIndex(),
-			# "GainExpansion" : self.ui.gainExpansion_prechar.text(),
-			# "FreqMutiplierFlag" : self.ui.freqMultiplierFlag_prechar.currentIndex(),
-			# "FreqMultiplierFactor": self.ui.freqMultiplierFactor_prechar.text(),	
-				
-			# "iChannel": self.ui.iChannel_awg.currentIndex(),	
-			# "qChannel": self.ui.qChannel_awg.currentIndex(),	
-				
-
+			"AWG_Channel" : self.ui.awgChannel_awgCal.text()
 		}
-		
+		rx={
+			"Type" : self.ui.vsaType.currentIndex(),
+			"FCarrier" : fCarrierField,
+			"MirrorSignalFlag" : self.ui.mirrorFlag_hetero.currentIndex(),
+			"XCorrLength" : self.ui.xCorrLength_vsgMeas.text(),
+			"FSample" : fSampleField,
+			"MeasuredPeriods" : self.ui.noRXPeriods_hetero.text(),
+			"VisaAddress": addressField,
+			"EnableExternalClock_Scope" : self.ui.extClkEnabled_scope.currentIndex(),
+			"TriggerChannel" : self.ui.trigChannel_scope.text(),
+			"ChannelVec": channelVec,
+			"EnableExternalClock_Dig" : self.ui.clockEnabled_dig.currentIndex(),
+			"ExternalClockFrequency" : self.ui.clockFreq_dig.currentIndex(),
+			"ACDCCoupling" : self.ui.coupling_dig.currentIndex(),
+			"VFS" : self.ui.vfs_dig.text(),
+			"Interleaving" : self.ui.interleaving_dig.currentIndex(),
+			"AnalysisBandwidth":self.ui.analysisBandwidth_sa.text(),
+			"Attenuation":self.ui.attenuation_sa.text(),
+			"TriggerLevel":self.ui.trigLevel_sa.text(),
+			"IFPath":self.ui.ifPath_vsa.currentIndex(),
+			"AlignFreqDomainFlag" : self.ui.freqDomainAlign_hetero.currentIndex(),
+			"DownconversionFilterFile" : self.ui.downFileField_vsgMeas.text()
+		}
+		matlab.Set_Heterodyne_Calibration(cal,tx,rx,nargout=0)
 		self.ui.calEquip_hetero.setStyleSheet(boxDone)
 		self.ui.rxEquip_hetero.setStyleSheet(boxDone)
 		self.ui.vsgEquip_hetero.setStyleSheet(boxDone)

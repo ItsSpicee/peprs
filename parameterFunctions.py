@@ -697,6 +697,8 @@ def enableVSACalFile(self,boxDone,boxUnset):
 	self.ui.smoothFlagLabel_comb.setEnabled(checked)
 	self.ui.smoothOrderField_comb.setEnabled(checked)
 	self.ui.smoothOrderLabel_comb.setEnabled(checked)
+	self.ui.rxEquip_vsaMeas.setEnabled(checked)
+	self.ui.trigEquip_vsaMeas.setEnabled(checked)
 		
 	if checked:
 		self.ui.vsaCalFileLabel_comb.setEnabled(False)
