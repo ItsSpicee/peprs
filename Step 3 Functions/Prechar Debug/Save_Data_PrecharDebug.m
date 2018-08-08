@@ -11,7 +11,7 @@ try
 
     display([ 'NMSE         = ' num2str(NMSE)      ' % or ' num2str(10*log10((NMSE/100)^2))      ' dB ']);
 
-    % [SAMeas, figHandle] = Save_Spectrum_Data();
+%     [SAMeas, figHandle] = Save_Spectrum_Data();
 catch
     error = 'An error has occurred while attempting to save data.';
 end

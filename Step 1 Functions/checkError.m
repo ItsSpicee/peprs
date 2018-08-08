@@ -5,7 +5,7 @@ function error = checkError(f,s)
         error ="";
     else
         s = convertCharsToStrings(s);
-		error = convertCharsToStrings(error);
+		result = convertCharsToStrings(result);
 		error = sprintf("Error has occured in command %s\n%s",s,result);
     end
 end

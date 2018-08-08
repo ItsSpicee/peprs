@@ -20,7 +20,7 @@ incomplete = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #f
 class runSignalGenerationThread(QThread):
 	updateBar = pyqtSignal(object,str,QProgressBar,object,object)
 	updateData = pyqtSignal(object,str)
-	errorOccurred = pyqtSignal(object,str) 
+	errorOccurred = pyqtSignal(object,str,object) 
 	
 	def __init__(self,bar,main,style,button):
 		QThread.__init__(self)
@@ -40,42 +40,42 @@ class runSignalGenerationThread(QThread):
 			completed = "1"
 			self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
 		else:
-			self.errorOccurred.emit(self.main,result)
+			self.errorOccurred.emit(self.main,result,self.bar)
 			return
 		result = matlab.Prepare_Signal_Upload_PrecharDebug(nargout=1)
 		if result == "":
 			completed = "2"
 			self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
 		else:
-			self.errorOccurred.emit(self.main,result)
+			self.errorOccurred.emit(self.main,result,self.bar)
 			return	
 		result = matlab.Upload_Signal_PrecharDebug(nargout=1)
 		if result == "":
 			completed = "3"
 			self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
 		else:
-			self.errorOccurred.emit(self.main,result)
+			self.errorOccurred.emit(self.main,result,self.bar)
 			return		
 		result = matlab.Download_Signal_PrecharDebug(nargout=1)
 		if result == "":
 			completed = "4"
 			self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
 		else:
-			self.errorOccurred.emit(self.main,result)
+			self.errorOccurred.emit(self.main,result,self.bar)
 			return		
 		result = matlab.Analyze_Signal_PrecharDebug(nargout=1)
 		if result == "":
 			completed = "5"
 			self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
 		else:
-			self.errorOccurred.emit(self.main,result)
+			self.errorOccurred.emit(self.main,result,self.bar)
 			return	
 		result = matlab.Save_Data_PrecharDebug(nargout=1)
 		if result == "":
 			completed = "6"
 			self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
 		else:
-			self.errorOccurred.emit(self.main,result)
+			self.errorOccurred.emit(self.main,result,self.bar)
 			return
 		result = matlab.Save_Measurements_PrecharDebug(nargout=1)
 		resultSplit = result.split("~")
@@ -84,7 +84,7 @@ class runSignalGenerationThread(QThread):
 			completed = "7"
 			self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
 		else:
-			self.errorOccurred.emit(self.main,result)
+			self.errorOccurred.emit(self.main,result,self.bar)
 			return
 
 def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,awgSetGeneral,matlab):
@@ -309,52 +309,27 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 					else:
 						addToErrorLayout(self,errorArray)
 						self.ui.awgSetGeneral.setChecked(False)
-					
-						dAllUXA={
-							"averaging" : self.ui.averagingEnable.currentIndex(),
-							"noAverages": self.ui.noAveragesField_sa.text(),
-							"atten": self.ui.attenuation_sa.text(),
-							"freq": self.ui.freq_sa.text(),
-							"analysisBW": self.ui.analysisBandwidth_sa.text(),
-							"clockRef": self.ui.clockRef_sa.currentIndex(),
-							"trigLevel": self.ui.trigLevel_sa.text(),
-							"trigSource": self.ui.trigSource_sa.currentIndex(),
-							"address": self.ui.address_sa.text()	
-						}
-						if typeIdx == 3:
-							result = matlab.Set_VSA_UXA(dAllUXA,"UXA",nargout=1)
-						elif typeIdx == 4:
-							result = matlab.Set_VSA_UXA(dAllUXA,"PXA",nargout=1)
-						result = result.split(";")
-						partNum = result[0]
-						error = result[1]
-						if error == "":
-							self.ui.partNum_sa.setText(partNum);
-							flag = 1;
-						else:
-							instrParamErrorMessage(self,error)
-							self.ui.awgSetGeneral.setChecked(False)
 						
-						if flag:
-							setButton.setText("Unset")
-							
-							# style mod related widgets
-							self.ui.uxaEquipGeneralVSA.setStyleSheet(boxDone)
-							demod = self.ui.uxaMod.isEnabled()
-							if demod:
-								setAllDemod(self,boxDone)
-								self.ui.modButton_vsa.setStyleSheet(buttonFocus)
-							self.ui.vsaNextStack.setCurrentIndex(3)
-							self.ui.vsgNextSteps.setCurrentIndex(7)
-							self.ui.up_psg_next.setCurrentIndex(5)
-							if typeIdx == 3: #UXA
-								self.ui.uxaButton_vsa.setStyleSheet(buttonFocus)
-								self.ui.uxaButton_vsa_2.setStyleSheet(buttonFocus)
-								setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)			
-							elif typeIdx == 4: #PXA
-								self.ui.pxaButton_vsa.setStyleSheet(buttonFocus)
-								self.ui.pxaButton_vsa_2.setStyleSheet(buttonFocus)
-								setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)	
+					if flag:
+						setButton.setText("Unset")
+						
+						# style mod related widgets
+						self.ui.uxaEquipGeneralVSA.setStyleSheet(boxDone)
+						demod = self.ui.uxaMod.isEnabled()
+						if demod:
+							setAllDemod(self,boxDone)
+							self.ui.modButton_vsa.setStyleSheet(buttonFocus)
+						self.ui.vsaNextStack.setCurrentIndex(3)
+						self.ui.vsgNextSteps.setCurrentIndex(7)
+						self.ui.up_psg_next.setCurrentIndex(5)
+						if typeIdx == 3: #UXA
+							self.ui.uxaButton_vsa.setStyleSheet(buttonFocus)
+							self.ui.uxaButton_vsa_2.setStyleSheet(buttonFocus)
+							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)			
+						elif typeIdx == 4: #PXA
+							self.ui.pxaButton_vsa.setStyleSheet(buttonFocus)
+							self.ui.pxaButton_vsa_2.setStyleSheet(buttonFocus)
+							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)	
 				elif typeIdx == 1 or typeIdx == 2 or typeIdx == 5 or typeIdx == 6:
 					demodScope = self.ui.scopeMod.isEnabled()
 					demodDig = self.ui.digMod.isEnabled()
@@ -1921,6 +1896,7 @@ def runPrecharacterization(self,setBox,setButton,matlab):
 	if setButton.isChecked() == True:
 		if rfOn == False:
 			instrParamErrorMessage(self,"Turn on RF before attempting to run precharacterization setup.")
+			self.ui.emergButtonSecond.setChecked(False)
 			return
 		# choose proper fields from stacked widgets to be sent to dictionaries
 		awgPage = self.ui.awgParamsStack_vsgMeas.currentIndex()
@@ -2612,6 +2588,8 @@ def updateData(self,result):
 	self.ui.inputPAPR_prechar.setText(inputPAPR)
 	self.ui.outputPAPR_prechar.setText(outputPAPR)
 	
-def errorOccurred(self,error):
+def errorOccurred(self,error,bar):
 	algoRunErrorMessage(self,error)
+	self.ui.statusBar.removeWidget(bar)
+	self.ui.statusBar.showMessage("Routine Crashed",3000)
 	

@@ -1,4 +1,6 @@
 function AWG_Output_Toggle(state)
+    instrreset
+    addpath('.\InstrumentFunctions\M8190A')
     load('arbConfig');
     arbConfig = loadArbConfig(arbConfig);
     f = iqopen(arbConfig);
@@ -7,4 +9,5 @@ function AWG_Output_Toggle(state)
     elseif state == 0
         xfprintf(f, sprintf(':OUTPut1:NORMal:STATe %d', 0));
     end
+    rmpath('.\InstrumentFunctions\M8190A')
 end            

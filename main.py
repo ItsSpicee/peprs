@@ -941,10 +941,10 @@ class Window(QMainWindow):
 						if awgType == 3:
 							#turn on psg
 							self.statusBar().showMessage("PSG RF turned ON (test)",1500)
-							matlab.AWG_Output_Toggle(1)
+							matlab.AWG_Output_Toggle(1,nargout=0)
 							self.statusBar().showMessage("AWG RF turned ON",1500)
 						else:
-							matlab.AWG_Output_Toggle(1)
+							matlab.AWG_Output_Toggle(1,nargout=0)
 							self.statusBar().showMessage("RF turned ON ",2000)
 						self.ui.emergButtonSecond.setStyleSheet(redButton)
 						self.ui.emergButtonSecond.setText("Turn Off RF")
@@ -954,12 +954,12 @@ class Window(QMainWindow):
 			# if turn off RF is selected
 			else:
 				if awgType == 3:
-					matlab.AWG_Output_Toggle(0)
+					matlab.AWG_Output_Toggle(0,nargout=0)
 					self.statusBar().showMessage("AWG RF turned OFF",1500)
 					#turn off psg
 					self.statusBar().showMessage("PSG RF turned OFF (test)",1500)
 				else:
-					matlab.AWG_Output_Toggle(0)
+					matlab.AWG_Output_Toggle(0,nargout=0)
 					self.statusBar().showMessage("RF turned OFF",2000)
 				self.ui.emergButtonSecond.setStyleSheet(greenButton)
 				self.ui.emergButtonSecond.setText("Turn On RF")
@@ -967,13 +967,13 @@ class Window(QMainWindow):
 		elif button == 3:
 			if awgType == 3:
 				if awgSet:
-					matlab.AWG_Output_Toggle(0)
+					matlab.AWG_Output_Toggle(0,nargout=0)
 				if psgSet:
 					#turn off psg
 					print("this is filler")
 			else:
 				if awgSet:
-					matlab.AWG_Output_Toggle(0)
+					matlab.AWG_Output_Toggle(0,nargout=0)
 			if len(addressList) != 1:
 				for x in addressList:
 					if x == "":
