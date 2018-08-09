@@ -111,6 +111,10 @@ class Window(QMainWindow):
 		safety.ui = Ui_safetycheck()
 		safety.ui.setupUi(safety)
 		safety.setWindowTitle('DUT Information - Safety Check')
+		safety.setWindowFlags(self.windowFlags() | QtCore.Qt.CustomizeWindowHint)
+
+		# disable (but not hide) close button
+		safety.setWindowFlags(self.windowFlags() & ~QtCore.Qt.WindowCloseButtonHint)
 		safety.ui.safetyCheckButtons.accepted.connect(lambda: self.safetyComplete(safety))
 		safety.ui.safetyCheckButtons.rejected.connect(lambda: self.safetyCancel(safety))
 		
