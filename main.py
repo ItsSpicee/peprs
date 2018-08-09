@@ -122,6 +122,10 @@ class Window(QMainWindow):
 		quality.ui = Ui_qualitycheck()
 		quality.ui.setupUi(quality)
 		quality.setWindowTitle('Quality Check')
+		quality.setWindowFlags(self.windowFlags() | QtCore.Qt.CustomizeWindowHint)
+
+		# disable (but not hide) close button
+		quality.setWindowFlags(self.windowFlags() & ~QtCore.Qt.WindowCloseButtonHint)
 		quality.ui.qualityCheckButtons.accepted.connect(lambda: self.qualityComplete(quality))
 		quality.ui.qualityCheckButtons.rejected.connect(lambda: self.qualityCancel(quality))
 		#quality.closeEvent()
