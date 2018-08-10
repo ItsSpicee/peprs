@@ -138,30 +138,20 @@ class Window(QMainWindow):
 		self.ui.filePushButton_6.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileQField_algo,".\Measurement Data"))
 		self.ui.filePushButton.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_comb,".\Measurement Data\RX_CalResults"))
 		self.ui.filePushButton_2.clicked.connect(lambda: menu.fileSave(self, self.ui.vsaCalSaveLocField_comb,".\Measurement Data"))
-		self.ui.filePushButton_17.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upCalFileField_vsgMeas_2,".\Measurement Data"))
 		self.ui.filePushButton_18.clicked.connect(lambda: menu.fileSave(self, self.ui.upCalSaveLocField_vsgMeas,".\Measurement Data\\Upconverter_CalResults"))
 		self.ui.filePushButton_20.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_vsgMeas,".\Measurement Data\\Utility Data\TX Calibration"))
 		self.ui.filePushButton_24.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_vsgMeas_2,".\Measurement Data"))
 		self.ui.filePushButton_25.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqFileField_vsgMeas,".\Measurement Data"))
-		self.ui.filePushButton_26.clicked.connect(lambda: menu.fileSave(self, self.ui.iqSaveLocField_vsgMeas,".\Measurement Data"))
-		self.ui.filePushButton_27.clicked.connect(lambda: menu.fileSave(self, self.ui.vsgCalSaveLocField_vsgMeas,".\Measurement Data"))
-		self.ui.filePushButton_28.clicked.connect(lambda: menu.fileSave(self, self.ui.calStructSaveLocField_vsgMeas,".\Measurement Data"))
 		self.ui.filePushButton_29.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upCalFileField_vsgMeas,".\Measurement Data"))
-		self.ui.filePushButton_30.clicked.connect(lambda: menu.fileSave(self, self.ui.upSaveLocField_vsgMeas,".\Measurement Data"))
 		self.ui.filePushButton_31.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileIField_vsgMeas,".\Measurement Data"))
 		self.ui.filePushButton_32.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileQField_vsgMeas,".\Measurement Data"))
 		self.ui.filePushButton_33.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFielField_vsgMeas,".\Measurement Data"))
-		self.ui.filePushButton_36.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqFileField_vsgMeas_3,".\Measurement Data"))
 		self.ui.filePushButton_37.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_vsgMeas_2,".\Measurement Data\\Utility Data"))
 		self.ui.filePushButton_38.clicked.connect(lambda: menu.fileSave(self, self.ui.iqSaveLocField_vsgMeas_3,".\Measurement Data"))
 		self.ui.filePushButton_39.clicked.connect(lambda: menu.fileSave(self, self.ui.vsgCalSaveLocField_vsgMeas_3,".\Measurement Data"))
 		self.ui.filePushButton_40.clicked.connect(lambda: menu.fileSave(self, self.ui.calStructSaveLocField_vsgMeas_3,".\Measurement Data"))
-		self.ui.filePushButton_41.clicked.connect(lambda: menu.fileBrowse(self, self.ui.awgCalFileField_vsgMeas_2,".\Measurement Data"))
-		self.ui.filePushButton_42.clicked.connect(lambda: menu.fileBrowse(self, self.ui.ampCorrFileField_vsgMeas,".\Measurement Data"))
-		self.ui.filePushButton_43.clicked.connect(lambda: menu.fileSave(self, self.ui.awgCalSaveLocField_vsgMeas_2,".\Measurement Data"))
+		self.ui.filePushButton_41.clicked.connect(lambda: menu.fileBrowse(self, self.ui.awgCalFileField_vsgMeas,".\Measurement Data"))
 		self.ui.filePushButton_44.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_vsgMeas,".\Measurement Data"))
-		self.ui.filePushButton_45.clicked.connect(lambda: menu.fileBrowse(self, self.ui.ampCorrFile_vsgMeas,".\Measurement Data"))
-		self.ui.filePushButton_46.clicked.connect(lambda: menu.fileBrowse(self, self.ui.awgCalFileField_vsgMeas,".\Measurement Data"))
 		self.ui.filePushButton_47.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFilterFileField_vsgMeas,".\Measurement Data\\Utility Data"))
 		self.ui.filePushButton_48.clicked.connect(lambda: menu.fileSave(self, self.ui.awgCalSaveLocField_vsgMeas,".\Measurement Data"))
 		self.ui.filePushButton_49.clicked.connect(lambda: menu.fileBrowse(self, self.ui.dllFile_uxa,"C:\Program Files\Agilent"))
@@ -205,7 +195,7 @@ class Window(QMainWindow):
 		redButton = "QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(179, 0, 0, 255), stop:1 rgba(214, 0, 0, 255));color:white;border-radius: 5px; border: 3px solid rgb(143, 0, 0);} QPushButton:hover{background-color:rgb(217, 0, 0);}"
 		
 		# set splitters
-		sizeList = [450,450]
+		sizeList = [500,400]
 		self.ui.vsaMeasSplitter.setSizes(sizeList)
 		self.ui.vsgMeasSplitter.setSizes(sizeList)
 		self.ui.algoSplitter.setSizes(sizeList)
@@ -318,7 +308,6 @@ class Window(QMainWindow):
 		
 		# setting visibility of components
 		# vsa meas page
-		self.ui.calAdviceText.setVisible(False)
 		self.ui.downMark_vsaMeas.setVisible(False)
 		self.ui.downMark_vsaMeas_2.setVisible(False)
 		self.ui.uxaMark_vsaMeas.setVisible(False)
@@ -339,16 +328,10 @@ class Window(QMainWindow):
 		self.ui.digMark_vsaMeas_4.setVisible(False)
 		self.ui.downMark_vsgMeas.setVisible(False)
 		self.ui.downMark_vsgMeas_2.setVisible(False)
-		# self.ui.uxaMark_vsgMeas.setVisible(False)
-		# self.ui.pxaMark_vsgMeas.setVisible(False)
 		self.ui.saMark_vsgMeas.setVisible(False)
 		self.ui.saMark_vsgMeas_2.setVisible(False)
 		self.ui.saMark_vsgMeas_3.setVisible(False)
 		self.ui.saMark_vsgMeas_4.setVisible(False)
-		# self.ui.scopeMark_vsgMeas.setVisible(False)
-		# self.ui.scopeMark_vsgMeas_2.setVisible(False)
-		# self.ui.digMark_vsgMeas.setVisible(False)
-		# self.ui.digMark_vsgMeas_2.setVisible(False)
 		self.ui.awgMark_vsgMeas.setVisible(False)
 		self.ui.awgMark_vsgMeas_2.setVisible(False)
 		self.ui.awgMark_vsgMeas_3.setVisible(False)
@@ -798,8 +781,6 @@ class Window(QMainWindow):
 		#self.ui.traceAvg_spa.currentIndexChanged.connect(lambda: param.enableTraceAveragingSA(self))
 		# awg measurement page
 		self.ui.refClockSorce_awg.currentIndexChanged.connect(lambda: param.enableExtClkFreq(self))
-		self.ui.ampCorrection_awgCal_2.currentIndexChanged.connect(lambda: param.enableAmpCorr(self,self.ui.ampCorrection_awgCal_2))
-		self.ui.ampCorrection_awgCal.currentIndexChanged.connect(lambda: param.enableAmpCorr(self,self.ui.ampCorrection_awgCal))
 		# heterodyne calibration page
 		self.ui.expansionMarginEnable_hetero.currentIndexChanged.connect(lambda: param.enableExpansionMargin(self))
 		self.ui.vsaCalFileEnable_hetero.currentIndexChanged.connect(lambda: param.enableVSACalFileHetero(self))

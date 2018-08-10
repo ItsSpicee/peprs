@@ -852,23 +852,6 @@ def clearErrors(self):
 		layout.removeWidget(widgetToRemove)
 		# remove it from the gui
 		widgetToRemove.setParent(None)
-		
-def enableAmpCorr(self,dropdown):
-	idx = dropdown.currentIndex();
-	if idx == 1:
-		self.ui.ampCorrFileField_vsgMeas.setEnabled(True)
-		self.ui.ampCorrFile_vsgMeas.setEnabled(True)
-		self.ui.ampCorrFileLabel_awgCal.setEnabled(True)
-		self.ui.ampCorrFileLabel_awgCal_2.setEnabled(True)
-		self.ui.filePushButton_45.setEnabled(True)
-		self.ui.filePushButton_42.setEnabled(True)
-	else:
-		self.ui.ampCorrFileField_vsgMeas.setEnabled(False)
-		self.ui.ampCorrFile_vsgMeas.setEnabled(False)
-		self.ui.ampCorrFileLabel_awgCal.setEnabled(False)
-		self.ui.ampCorrFileLabel_awgCal_2.setEnabled(False)
-		self.ui.filePushButton_45.setEnabled(False)
-		self.ui.filePushButton_42.setEnabled(False)
 	
 def enableExpansionMargin(self):
 	idx = self.ui.expansionMarginEnable_hetero.currentIndex();
