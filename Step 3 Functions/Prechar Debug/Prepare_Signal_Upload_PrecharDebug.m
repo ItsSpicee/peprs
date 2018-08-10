@@ -5,6 +5,9 @@ try
     % Prepare the signal for upload
     % Limits PAPR, and filters out of band noise
     ProcessInputFiles
+    if strcmp(error,'')
+        return
+    end
     PrepareData
 catch
     error = 'An error has occurred while attempting to prepare signal for upload.';

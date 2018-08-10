@@ -65,6 +65,7 @@ def changeStepTab(self,safety,quality):
 	downEnabled = self.ui.vsaWorkflow_vsaMeas.currentIndex()
 	upEnabled = self.ui.vsgWorkflow_vsgMeas.currentIndex()
 	vsgStack = self.ui.awgParamsStack_vsgMeas.currentIndex()
+	safetyState = self.ui.actionEnable_Safety_Check.isChecked()
 	if maxTrue == False:
 		if i == 2:
 			self.setMinimumSize(1265,700)
@@ -72,7 +73,7 @@ def changeStepTab(self,safety,quality):
 			self.center()
 		elif i == 1:
 			counterTwo = tabCounterIncrement.counterTwo
-			if counterTwo == 0:
+			if counterTwo == 0 and safetyState:
 				safety.exec_()
 				tabCounterIncrement(self,"up")
 			else:
@@ -81,7 +82,7 @@ def changeStepTab(self,safety,quality):
 				self.center()
 		elif i == 0:
 			counterThree = tabCounterIncrement.counterThree
-			if counterThree == 0:
+			if counterThree == 0 and safetyState:
 				quality.exec_()
 				tabCounterIncrement(self,"up")
 			else:

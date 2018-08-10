@@ -1,4 +1,5 @@
-function Plot_Prechar_Spectrum(In, Out, Fs)
+function error = Plot_Prechar_Spectrum(In, Out, Fs)
+    error = '';
     switch nargin
     case 2
         Fs = 100e6;
@@ -14,6 +15,11 @@ function Plot_Prechar_Spectrum(In, Out, Fs)
         h.windowName = 'Flat Top';
     end
 
+    if h.SegmentLength > length(In)
+        error = sprintf('Number of samples must be greater than %f. The current number of samples is %f',h.SegmentLength,length(In));
+        return
+    end
+    
     fig = figure();
     hold on
     grid on

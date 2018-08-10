@@ -28,7 +28,6 @@ set(PSDout, 'Color', 'red', 'LineWidth', 2 ) ;
 legend( 'Input Power Spectrum Density' , 'Output Power Spectrum Density','Location','northoutside');
 hold off
 
-
 saveFig = figure('visible','off');
 PSDin = plot(msspectrum(h, In, 'centerDC', true, 'Fs', Fs)) ;
 set(PSDin, 'Color', 'blue', 'LineWidth', 2) ;

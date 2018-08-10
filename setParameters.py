@@ -18,62 +18,61 @@ from main import matlab as matlab
 incomplete = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #f24646}"
 
 class runSignalGenerationThread(QThread):
-	updateBar = pyqtSignal(object,str,QProgressBar,object,object)
+	updateBar = pyqtSignal(object,str,QProgressBar,object)
 	updateData = pyqtSignal(object,str)
 	errorOccurred = pyqtSignal(object,str,object) 
 	
-	def __init__(self,bar,main,style,button):
+	def __init__(self,bar,main,style):
 		QThread.__init__(self)
 		self.bar = bar
 		self.main = main
 		self.style = style
-		self.button = button
 		
 	def __del__(self):
 		self.wait()
 		
 	def run(self):
 		completed = "0"
-		self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
+		self.updateBar.emit(self.main,completed,self.bar,self.style)
 		result = matlab.Set_Parameters_PrecharDebug(nargout=1)
 		if result == "":
 			completed = "1"
-			self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
+			self.updateBar.emit(self.main,completed,self.bar,self.style)
 		else:
 			self.errorOccurred.emit(self.main,result,self.bar)
 			return
 		result = matlab.Prepare_Signal_Upload_PrecharDebug(nargout=1)
 		if result == "":
 			completed = "2"
-			self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
+			self.updateBar.emit(self.main,completed,self.bar,self.style)
 		else:
 			self.errorOccurred.emit(self.main,result,self.bar)
 			return	
 		result = matlab.Upload_Signal_PrecharDebug(nargout=1)
 		if result == "":
 			completed = "3"
-			self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
+			self.updateBar.emit(self.main,completed,self.bar,self.style)
 		else:
 			self.errorOccurred.emit(self.main,result,self.bar)
 			return		
 		result = matlab.Download_Signal_PrecharDebug(nargout=1)
 		if result == "":
 			completed = "4"
-			self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
+			self.updateBar.emit(self.main,completed,self.bar,self.style)
 		else:
 			self.errorOccurred.emit(self.main,result,self.bar)
 			return		
 		result = matlab.Analyze_Signal_PrecharDebug(nargout=1)
 		if result == "":
 			completed = "5"
-			self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
+			self.updateBar.emit(self.main,completed,self.bar,self.style)
 		else:
 			self.errorOccurred.emit(self.main,result,self.bar)
 			return	
 		result = matlab.Save_Data_PrecharDebug(nargout=1)
 		if result == "":
 			completed = "6"
-			self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
+			self.updateBar.emit(self.main,completed,self.bar,self.style)
 		else:
 			self.errorOccurred.emit(self.main,result,self.bar)
 			return
@@ -82,11 +81,80 @@ class runSignalGenerationThread(QThread):
 		if resultSplit[0] == "":
 			self.updateData.emit(self.main,result)
 			completed = "7"
-			self.updateBar.emit(self.main,completed,self.bar,self.style,self.button)
+			self.updateBar.emit(self.main,completed,self.bar,self.style)
 		else:
 			self.errorOccurred.emit(self.main,result,self.bar)
 			return
 
+class runHeterodyneCalibrationThread(QThread):
+	updateBar = pyqtSignal(object,str,QProgressBar,object)
+	#updateData = pyqtSignal(object,str)
+	errorOccurred = pyqtSignal(object,str,object) 
+	
+	def __init__(self,bar,main,style):
+		QThread.__init__(self)
+		self.bar = bar
+		self.main = main
+		self.style = style
+	
+	def __del__(self):
+		self.wait()
+		
+	def run(self):
+		completed = "0"
+		self.updateBar.emit(self.main,completed,self.bar,self.style)
+		result = matlab.Set_Parameters_HeterodyneDebug(nargout=1)
+		if result == "":
+			completed = "1"
+			self.updateBar.emit(self.main,completed,self.bar,self.style)
+		else:
+			self.errorOccurred.emit(self.main,result,self.bar)
+			return
+		result = matlab.Initialize_Drivers_HeterodyneDebug(nargout=1)
+		if result == "":
+			completed = "2"
+			self.updateBar.emit(self.main,completed,self.bar,self.style)
+		else:
+			self.errorOccurred.emit(self.main,result,self.bar)
+			return	
+		result = matlab.Generate_Signal_HeterodyneDebug(nargout=1)
+		if result == "":
+			completed = "3"
+			self.updateBar.emit(self.main,completed,self.bar,self.style)
+		else:
+			self.errorOccurred.emit(self.main,result,self.bar)
+			return		
+		result = matlab.Iterate_HeterodyneDebug(nargout=1)
+		if result == "":
+			completed = "7"
+			self.updateBar.emit(self.main,completed,self.bar,self.style)
+		else:
+			self.errorOccurred.emit(self.main,result,self.bar)
+			return		
+		# result = matlab.Analyze_Signal_PrecharDebug(nargout=1)
+		# if result == "":
+			# completed = "5"
+			# self.updateBar.emit(self.main,completed,self.bar,self.style)
+		# else:
+			# self.errorOccurred.emit(self.main,result,self.bar)
+			# return	
+		# result = matlab.Save_Data_PrecharDebug(nargout=1)
+		# if result == "":
+			# completed = "6"
+			# self.updateBar.emit(self.main,completed,self.bar,self.style)
+		# else:
+			# self.errorOccurred.emit(self.main,result,self.bar)
+			# return
+		# result = matlab.Save_Measurements_PrecharDebug(nargout=1)
+		# resultSplit = result.split("~")
+		# if resultSplit[0] == "":
+			# self.updateData.emit(self.main,result)
+			# completed = "7"
+			# self.updateBar.emit(self.main,completed,self.bar,self.style)
+		# else:
+			# self.errorOccurred.emit(self.main,result,self.bar)
+			# return
+			
 def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,awgSetGeneral,matlab):
 	#Array used instead of dictionary, cannot properly get the object type elements stored in a dict
 	checkDic = [
@@ -1031,8 +1099,7 @@ def setP3(self,boxDone,buttonFocus,buttonHover,matlab,buttonSelect,greyHover,set
 def setVSAMeasDig(self,boxDone,buttonHover,buttonDone,setButton,matlab):
 	checkDic=[
 		self.ui.centerFreq_vsaMeas,
-		self.ui.sampRate_vsaMeas,
-		self.ui.noFrameTimes_vsaMeas
+		self.ui.sampRate_vsaMeas
 		]
 	vsaType = self.ui.vsaWorkflow_vsaMeas.currentIndex()
 	vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
@@ -1076,8 +1143,7 @@ def setVSAMeasDig(self,boxDone,buttonHover,buttonDone,setButton,matlab):
 def setVSAMeasGen(self,boxDone,buttonHover,buttonDone,setButton,matlab):
 	checkDic=[
 			self.ui.centerFreq_vsaMeas_2,
-			self.ui.sampRate_vsaMeas_2,
-			self.ui.noFrameTimes_vsaMeas_2
+			self.ui.sampRate_vsaMeas_2
 		]
 	
 	if setButton.isChecked() == True:
@@ -1094,22 +1160,32 @@ def setVSAMeasGen(self,boxDone,buttonHover,buttonDone,setButton,matlab):
 				if downType == 1: # scope
 					self.ui.scopeMark_vsaMeas.setVisible(True)
 					self.ui.scopeMark_vsaMeas_2.setVisible(True)
+					self.ui.scopeMark_vsaMeas_3.setVisible(True)
+					self.ui.scopeMark_vsaMeas_4.setVisible(True)
 					self.ui.vsaMeasNextStack.setCurrentIndex(1)
 				elif downType == 0: # dig
 					self.ui.digMark_vsaMeas.setVisible(True)
 					self.ui.digMark_vsaMeas_2.setVisible(True)
+					self.ui.digMark_vsaMeas_3.setVisible(True)
+					self.ui.digMark_vsaMeas_4.setVisible(True)
 					self.ui.vsaMeasNextStack.setCurrentIndex(1)
 			elif vsaType == 0:
 				if analyzerType == 1: # scope
 					self.ui.scopeMark_vsaMeas.setVisible(True)
 					self.ui.scopeMark_vsaMeas_2.setVisible(True)
+					self.ui.scopeMark_vsaMeas_3.setVisible(True)
+					self.ui.scopeMark_vsaMeas_4.setVisible(True)
 				elif analyzerType == 2: # dig
 					self.ui.digMark_vsaMeas.setVisible(True)
 					self.ui.digMark_vsaMeas_2.setVisible(True)
+					self.ui.digMark_vsaMeas_3.setVisible(True)
+					self.ui.digMark_vsaMeas_4.setVisible(True)
 				elif analyzerType == 3: # uxa
 					self.ui.uxaMark_vsaMeas.setVisible(True)
+					self.ui.uxaMark_vsaMeas_2.setVisible(True)
 				elif analyzerType == 4: # pxa
 					self.ui.pxaMark_vsaMeas.setVisible(True)
+					self.ui.pxaMark_vsaMeas_2.setVisible(True)
 				if vsgType == 3: # vsg
 					self.ui.vsaMeasNextStack.setCurrentIndex(6)
 					setFocusAndHand(self,self.ui.vsgButton_vsaMeas,buttonHover)
@@ -1127,10 +1203,16 @@ def setVSAMeasGen(self,boxDone,buttonHover,buttonDone,setButton,matlab):
 		self.ui.vsaMeasNextStack.setCurrentIndex(0)
 		self.ui.digMark_vsaMeas.setVisible(False)
 		self.ui.digMark_vsaMeas_2.setVisible(False)
+		self.ui.digMark_vsaMeas_3.setVisible(False)
+		self.ui.digMark_vsaMeas_4.setVisible(False)
 		self.ui.scopeMark_vsaMeas.setVisible(False)
 		self.ui.scopeMark_vsaMeas_2.setVisible(False)
+		self.ui.scopeMark_vsaMeas_3.setVisible(False)
+		self.ui.scopeMark_vsaMeas_4.setVisible(False)
 		self.ui.uxaMark_vsaMeas.setVisible(False)
+		self.ui.uxaMark_vsaMeas_2.setVisible(False)
 		self.ui.pxaMark_vsaMeas.setVisible(False)
+		self.ui.pxaMark_vsaMeas_2.setVisible(False)
 		setColourAndCursor(self,self.ui.awgButton_vsaMeas,buttonDone,Qt.ArrowCursor)
 		setColourAndCursor(self,self.ui.awgButton_vsaMeas_2,buttonDone,Qt.ArrowCursor)
 		setColourAndCursor(self,self.ui.awgButton_vsaMeas_3,buttonDone,Qt.ArrowCursor)
@@ -1144,8 +1226,12 @@ def setVSAMeasAdv(self,boxDone,setButton):
 		self.ui.vsaMeasAdvEquip.setStyleSheet(boxDone)
 		self.ui.saMark_vsaMeas.setVisible(True)
 		self.ui.saMark_vsaMeas_2.setVisible(True)
+		self.ui.saMark_vsaMeas_3.setVisible(True)
+		self.ui.saMark_vsaMeas_4.setVisible(True)
 		self.ui.saMark_vsgMeas.setVisible(True)
 		self.ui.saMark_vsgMeas_2.setVisible(True)
+		self.ui.saMark_vsgMeas_3.setVisible(True)
+		self.ui.saMark_vsgMeas_4.setVisible(True)
 	elif  setButton.isChecked() == False:
 		self.ui.vsaMeasAdvEquip.setStyleSheet(None)
 		setButton.setText("Set")
@@ -1187,17 +1273,14 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 			addressField = ""
 			fCarrierField = ""
 			fSampleField = ""
-			noFramesField = ""
 			
 			vsaPage = self.ui.vsaMeasGenStack.currentIndex()
 			if vsaPage == 1:
 				fCarrierField = self.ui.centerFreq_vsaMeas.text()
 				fSampleField = self.ui.sampRate_vsaMeas.text()
-				noFramesField = self.ui.noFrameTimes_vsaMeas.text()
 			elif vsaPage == 0:
 				fCarrierField = self.ui.centerFreq_vsaMeas_2.text()
 				fSampleField = self.ui.sampRate_vsaMeas_2.text()
-				noFramesField = self.ui.noFrameTimes_vsaMeas_2.text()
 			vsaType = self.ui.vsaType.currentIndex()
 			if vsaType == 1 or vsaType == 5:
 				addressField = self.ui.address_scope.text()
@@ -1251,7 +1334,7 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 				"Fcarrier" : fCarrierField,
 				"mirrorFlag" : self.ui.mirrorFlag_down.currentIndex(),
 				"Fsample" : fSampleField,
-				"NumberOfMeasuredPeriods" : noFramesField,
+				"NumberOfMeasuredPeriods" : self.ui.noFrameTimes_down.text(),
 				"VisaAddress": addressField,
 				"DriverPath" : self.ui.driverPath_scope.text(),
 				"EnableExternalClock_Scope" : self.ui.extClkEnabled_scope.currentIndex(),
@@ -1304,7 +1387,9 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 			self.ui.vsaCalResultsStack_algo.setCurrentIndex(0)
 			self.ui.debugVSAStack.setCurrentIndex(0)
 			self.ui.downMark_vsaMeas.setVisible(True)
+			self.ui.downMark_vsaMeas_2.setVisible(True)
 			self.ui.downMark_vsgMeas.setVisible(True)
+			self.ui.downMark_vsgMeas_2.setVisible(True)
 			self.progressBar = QProgressBar()
 			self.progressBar.setRange(1,10);
 			self.progressBar.setTextVisible(True);
@@ -1326,7 +1411,9 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 		self.ui.rxEquip_vsaMeas.setStyleSheet(None)
 		self.ui.trigEquip_vsaMeas.setStyleSheet(None)
 		self.ui.downMark_vsaMeas.setVisible(False)
+		self.ui.downMark_vsaMeas_2.setVisible(False)
 		self.ui.downMark_vsgMeas.setVisible(False)
+		self.ui.downMark_vsgMeas_2.setVisible(False)
 		self.ui.debugVSAStack.setCurrentIndex(1)
 		self.ui.vsaMeasNextStack.setCurrentIndex(4)
 		setButton.setText("Set && Run")
@@ -1335,7 +1422,7 @@ def noRXCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 	checkDic = [
 		self.ui.rfCenterFreq_down,
 		self.ui.ifCenterFreq_down,
-		self.ui.loFreq_down.text(),
+		self.ui.loFreq_down,
 		self.ui.vsaCalFileField_comb
 	]
 	if setButton.isChecked() == True:
@@ -1359,7 +1446,9 @@ def noRXCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 			self.ui.vsaResultsStack_vsgMeas.setCurrentIndex(0)
 			self.ui.vsaCalResultsStack_algo.setCurrentIndex(0)
 			self.ui.downMark_vsaMeas.setVisible(True)
+			self.ui.downMark_vsaMeas_2.setVisible(True)
 			self.ui.downMark_vsgMeas.setVisible(True)
+			self.ui.downMark_vsgMeas_2.setVisible(True)
 			if vsgType == 3: # vsg
 				self.ui.vsaMeasNextStack.setCurrentIndex(6)
 				setFocusAndHand(self,self.ui.vsgButton_vsaMeas,buttonHover)
@@ -1377,7 +1466,9 @@ def noRXCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 		self.ui.rxEquip_vsaMeas.setStyleSheet(None)
 		self.ui.trigEquip_vsaMeas.setStyleSheet(None)
 		self.ui.downMark_vsaMeas.setVisible(False)
+		self.ui.downMark_vsaMeas_2.setVisible(False)
 		self.ui.downMark_vsgMeas.setVisible(False)
+		self.ui.downMark_vsgMeas_2.setVisible(False)
 		self.ui.vsaMeasNextStack.setCurrentIndex(3)
 		setButton.setText("Set")
 		
@@ -1688,7 +1779,7 @@ def setHetero(self,boxDone,setButton,matlab):
 		cal = {
 			"ToneSpacing" : self.ui.toneSpacing_hetero.text(),
 			"StartingToneFreq" : self.ui.startTone_hetero.text(),
-			"EndingToneFreq " : self.ui.endTone_hetero.text(),
+			"EndingToneFreq" : self.ui.endTone_hetero.text(),
 			"RealBasisFlag" : self.ui.realBasisFlag_hetero.currentIndex(),
 			"PhaseDistr" : self.ui.phaseDistribution_hetero.currentIndex(),
 			"PAPRmin" : self.ui.paprMin_hetero.text(),
@@ -1731,37 +1822,46 @@ def setHetero(self,boxDone,setButton,matlab):
 			"Interleaving" : self.ui.interleaving_dig.currentIndex(),
 			"AnalysisBandwidth":self.ui.analysisBandwidth_sa.text(),
 			"Attenuation":self.ui.attenuation_sa.text(),
+			"ClockReference":self.ui.clockRef_sa.currentIndex(),
 			"TriggerLevel":self.ui.trigLevel_sa.text(),
 			"IFPath":self.ui.ifPath_vsa.currentIndex(),
 			"AlignFreqDomainFlag" : self.ui.freqDomainAlign_hetero.currentIndex(),
 			"DownconversionFilterFile" : self.ui.downFileField_vsgMeas.text()
 		}
+
 		matlab.Set_Heterodyne_Calibration(cal,tx,rx,nargout=0)
-		self.ui.calEquip_hetero.setStyleSheet(boxDone)
-		self.ui.rxEquip_hetero.setStyleSheet(boxDone)
-		self.ui.vsgEquip_hetero.setStyleSheet(boxDone)
-		self.ui.upCalEquipHetero_hetero.setStyleSheet(boxDone)
-		self.ui.upEquip_hetero.setStyleSheet(boxDone)
-		self.ui.vsgMeasNextStack.setCurrentIndex(8)
-		self.ui.vsgResultsFileStack_vsgMeas.setCurrentIndex(1)
-		self.ui.vsgCalPaths_algo.setCurrentIndex(1)
-		self.ui.debugVSGStack.setCurrentIndex(0)
-		self.ui.vsgResultsStack_vsgMeas.setCurrentIndex(0)
-		self.ui.upMark_vsgMeas.setVisible(True)
-		self.ui.psgMark_vsgMeas.setVisible(True)
+		#matlab.Upconverter_Calibration_Main(nargout=0)
 		
-		self.progressBar = QProgressBar()
-		self.progressBar.setRange(1,10);
-		self.progressBar.setTextVisible(True);
-		self.progressBar.setFormat("Currently Running: Heterodyne Calibration Routine")
-		self.ui.statusBar.addWidget(self.progressBar,1)
-		completed = 0
-		while completed < 100:
-			completed = completed + 0.00001
-			self.progressBar.setValue(completed)
-		self.ui.statusBar.removeWidget(self.progressBar)
-		# to show progress bar, need both addWidget() and show()
-		self.ui.statusBar.showMessage("Heterodyne Calibration Routine Complete",3000)
+		# create progress bar
+		progressBar = QProgressBar()
+		progressBar.setRange(0,11);
+		progressBar.setTextVisible(True);
+		self.ui.statusBar.addWidget(progressBar,1)
+		
+		# create thread to run signal generation routine
+		self.heterodyneThread = runHeterodyneCalibrationThread(progressBar,self,boxDone)
+		# connect signals to the thread
+		# as routine is run, update progress bar and step
+		self.heterodyneThread.updateBar.connect(updateHeterodyneBar)
+		# when nmse and papr are available, update gui
+		# self.heterodyneThread.updateData.connect(updateHeterodyneData)
+		# if error occurs, break thread and alery
+		self.heterodyneThread.errorOccurred.connect(errorOccurred)
+		# begin running signal generation
+		self.heterodyneThread.start()	
+		
+		# self.progressBar = QProgressBar()
+		# self.progressBar.setRange(1,10);
+		# self.progressBar.setTextVisible(True);
+		# self.progressBar.setFormat("Currently Running: Heterodyne Calibration Routine")
+		# self.ui.statusBar.addWidget(self.progressBar,1)
+		# completed = 0
+		# while completed < 100:
+			# completed = completed + 0.00001
+			# self.progressBar.setValue(completed)
+		# self.ui.statusBar.removeWidget(self.progressBar)
+		## to show progress bar, need both addWidget() and show()
+		# self.ui.statusBar.showMessage("Heterodyne Calibration Routine Complete",3000)
 		
 	elif setButton.isChecked() == False:
 		setButton.setText("Set && Run")
@@ -1837,7 +1937,6 @@ def runCalValidation(self,setBox,setButton,matlab):
 		self.ui.calValCalFilesEquip.setStyleSheet(setBox)
 		self.ui.calValRefRXEquip.setStyleSheet(setBox)
 		self.ui.calValVSGEquip.setStyleSheet(setBox)
-		self.ui.calValAWGEquip.setStyleSheet(setBox)
 		
 		self.progressBar = QProgressBar()
 		self.progressBar.setRange(1,10);
@@ -1857,32 +1956,108 @@ def runCalValidation(self,setBox,setButton,matlab):
 		self.ui.calValCalFilesEquip.setStyleSheet(None)
 		self.ui.calValRefRXEquip.setStyleSheet(None)
 		self.ui.calValVSGEquip.setStyleSheet(None)
-		self.ui.calValAWGEquip.setStyleSheet(None)
 		self.ui.algoNextStack.setCurrentIndex(0)
 		self.ui.debugAlgoStack.setCurrentIndex(2)
 
-def preCharPreview(self,spectrumCanvas,spectrumFigure,matlab):	
-	d = {
-		"signalName": self.ui.comboBox_81.currentIndex(),
-		"removeDC": self.ui.comboBox_82.currentIndex()
+def preCharPreview(self,matlab):	
+	# d = {
+		# "signalName": self.ui.comboBox_81.currentIndex(),
+	# }
+	# matlab.Set_Prechar_Signal(d,nargout=0)
+	
+	ampCorrField = ""
+	trigAmpField = ""
+	fCarrierField = ""
+	fSampleField = ""
+	addressField = ""
+	
+	# choose proper fields from stacked widgets to be sent to dictionaries
+	awgPage = self.ui.awgParamsStack_vsgMeas.currentIndex()
+	if awgPage == 1:
+		ampCorrField = self.ui.ampCorrection_awgCal.currentIndex()
+		trigAmpField = self.ui.trigAmp_awgCal.text()
+	elif awgPage == 2:
+		ampCorrField = self.ui.ampCorrection_awgCal_2.currentIndex()
+		trigAmpField = self.ui.trigAmp_awgCal_2.text()
+	vsaPage = self.ui.vsaMeasGenStack.currentIndex()
+	if vsaPage == 1:
+		fCarrierField = self.ui.centerFreq_vsaMeas.text()
+		fSampleField = self.ui.sampRate_vsaMeas.text()
+	elif vsaPage == 0:
+		fCarrierField = self.ui.centerFreq_vsaMeas_2.text()
+		fSampleField = self.ui.sampRate_vsaMeas_2.text()
+	vsaType = self.ui.vsaType.currentIndex()
+	if vsaType == 1 or vsaType == 5:
+		addressField = self.ui.address_scope.text()
+	elif vsaType == 2 or vsaType == 6:
+		addressField = self.ui.address_dig.text()
+	elif vsaType == 3 or vsaType == 4:
+		addressField = self.ui.address_sa.text()
+	
+	tx={
+		"Type": self.ui.vsgSetup.currentIndex(),
+		"Model": self.ui.partNum_awg.text(),
+		"FGuard" : self.ui.guardBand_prechar.text(),
+		"FCarrier" : self.ui.centerFreq_prechar.text(),
+		"FSampleDAC" : self.ui.maxSampleRate_awg.text(),
+		"NumberOfSegments" : self.ui.noSegments_prechar.text(),
+		"Amp_Corr" : ampCorrField,
+		"GainExpansion_flag" : self.ui.gainExpansionFlag_prechar.currentIndex(),
+		"GainExpansion" : self.ui.gainExpansion_prechar.text(),
+		"FreqMutiplierFlag" : self.ui.freqMultiplierFlag_prechar.currentIndex(),
+		"FreqMultiplierFactor": self.ui.freqMultiplierFactor_prechar.text(),	
+		"ReferenceClockSource": self.ui.refClockSorce_awg.currentIndex(),	
+		"iChannel": self.ui.iChannel_awg.currentIndex(),	
+		"qChannel": self.ui.qChannel_awg.currentIndex(),	
+		"ReferenceClock": self.ui.extRefFreq_awg.text(),	
+		"VFS": self.ui.dacRange_awg.text(),	
+		"TriggerAmplitude": trigAmpField
 	}
-	matlab.Set_Prechar_Signal(d,nargout=0)
-	matlab.Preview_Prechar_Signal(nargout=0)
-
-	spectrumImage = mpimg.imread('.\Figures\Prechar_Spectrum_Input.png')
-	spectrumFigure.clear()
-	ax = spectrumFigure.add_subplot(111)
-	ax.imshow(spectrumImage)
-	ax.set_xlabel('Frequency(GHz)')
-	ax.set_ylabel('Power(dB)')
-	ax.set_title('Welch Mean-Square Spectrum Estimate')
-	ax.set_xticks([], [])
-	ax.set_yticks([], [])
-	spectrumCanvas.draw()
-	 
-	self.ui.precharTabs.setCurrentIndex(0)
-	self.ui.resultsAlgoTabs.setCurrentIndex(3)
-	self.ui.precharAlgoStack.setCurrentIndex(0)
+	rx={
+		"Type" : self.ui.vsaType.currentIndex(),
+		"FCarrier" : fCarrierField,
+		"MirrorSignalFlag" : self.ui.mirrorSignal_prechar.currentIndex(),
+		"FSample" : fSampleField,
+		"MeasuredPeriods" : self.ui.noPeriods_prechar.text(),
+		"xLength" : self.ui.crossCorrLength_prechar.text(),
+		"FsampleOverwrite" : self.ui.sampRateOverwrite_prechar.currentIndex(),
+		"SubRate" : self.ui.subRate_prechar.currentIndex(),
+		"AlignFreqDomainFlag" : self.ui.alignFreqDomain_prechar.currentIndex(),
+		"DownconversionFilterFile" : self.ui.downFileField_algo_2.text(),
+		"TriggerChannel" : self.ui.trigChannel_scope.text(),
+		"ASMPath" : self.ui.dllFile_uxa.text(),
+		"SetupFile" : self.ui.setupFile_uxa.text(),
+		"DataFile" : self.ui.dataFile_uxa.text(),
+		"DemodSignalFlag": self.ui.demodulationEnable.currentIndex(),
+		"VisaAddress": addressField
+		
+	}
+	dSignal = {
+		"signalName": self.ui.comboBox_81.currentIndex(),
+	}
+	# set signal dictionary
+	matlab.Set_Prechar_Signal(dSignal,nargout=0)
+	# set signal generation dictionary
+	matlab.Set_RXTX_Structures(tx,rx,nargout=0)
+	result = matlab.Preview_Prechar_Signal(nargout=1)
+	print(result)
+	if result != "":
+		instrParamErrorMessage(self,result)
+	else:
+		spectrumImage = mpimg.imread('.\Figures\Prechar_Spectrum_Input.png')
+		self.precharSpectrumFigure.clear()
+		ax = self.precharSpectrumFigure.add_subplot(111)
+		ax.imshow(spectrumImage)
+		ax.set_xlabel('Frequency(GHz)')
+		ax.set_ylabel('Power(dB)')
+		ax.set_title('Welch Mean-Square Spectrum Estimate')
+		ax.set_xticks([], [])
+		ax.set_yticks([], [])
+		self.precharSpectrumCanvas.draw()
+		 
+		self.ui.precharTabs.setCurrentIndex(0)
+		self.ui.resultsAlgoTabs.setCurrentIndex(3)
+		self.ui.precharAlgoStack.setCurrentIndex(0)
 	
 def runPrecharacterization(self,setBox,setButton,matlab):
 	ampCorrField = ""
@@ -1926,11 +2101,8 @@ def runPrecharacterization(self,setBox,setButton,matlab):
 			"Model": self.ui.partNum_awg.text(),
 			"FGuard" : self.ui.guardBand_prechar.text(),
 			"FCarrier" : self.ui.centerFreq_prechar.text(),
-			"SubtractMeanFlag" : self.ui.subtractMean_prechar.currentIndex(),
 			"FSampleDAC" : self.ui.maxSampleRate_awg.text(),
 			"NumberOfSegments" : self.ui.noSegments_prechar.text(),
-			"ExpansionMarginEnable": self.ui.enableExpansion_prechar.currentIndex(),
-			"ExpansionMargin" : self.ui.expansionMargin_prechar.text(),
 			"Amp_Corr" : ampCorrField,
 			"GainExpansion_flag" : self.ui.gainExpansionFlag_prechar.currentIndex(),
 			"GainExpansion" : self.ui.gainExpansion_prechar.text(),
@@ -1958,14 +2130,12 @@ def runPrecharacterization(self,setBox,setButton,matlab):
 			"ASMPath" : self.ui.dllFile_uxa.text(),
 			"SetupFile" : self.ui.setupFile_uxa.text(),
 			"DataFile" : self.ui.dataFile_uxa.text(),
-			"SubtractDCFlag" : self.ui.subtractDC_prechar.currentIndex(),
 			"DemodSignalFlag": self.ui.demodulationEnable.currentIndex(),
 			"VisaAddress": addressField
 			
 		}
 		dSignal = {
 			"signalName": self.ui.comboBox_81.currentIndex(),
-			"removeDC": self.ui.comboBox_82.currentIndex()
 		}
 		# set signal dictionary
 		matlab.Set_Prechar_Signal(dSignal,nargout=0)
@@ -1982,12 +2152,12 @@ def runPrecharacterization(self,setBox,setButton,matlab):
 		self.ui.statusBar.addWidget(progressBar,1)
 		
 		# create thread to run signal generation routine
-		self.precharThread = runSignalGenerationThread(progressBar,self,setBox,setButton)
+		self.precharThread = runSignalGenerationThread(progressBar,self,setBox)
 		# connect signals to the thread
 		# as routine is run, update progress bar and step
-		self.precharThread.updateBar.connect(updateBar)
+		self.precharThread.updateBar.connect(updatePrecharBar)
 		# when nmse and papr are available, update gui
-		self.precharThread.updateData.connect(updateData)
+		self.precharThread.updateData.connect(updatePrecharData)
 		# if error occurs, break thread and alery
 		self.precharThread.errorOccurred.connect(errorOccurred)
 		# begin running signal generation
@@ -2001,7 +2171,6 @@ def runPrecharacterization(self,setBox,setButton,matlab):
 		self.ui.precharCalFilesEquip.setStyleSheet(None)
 		self.ui.precharRefRXEquip.setStyleSheet(None)
 		self.ui.precharVSGEquip.setStyleSheet(None)
-		self.ui.precharAWGEquip.setStyleSheet(None)
 		
 def dpdPreview(self):
 	self.ui.dpdTabs.setCurrentIndex(0)
@@ -2486,7 +2655,7 @@ def addToErrorLayout(self,errorArray):
 			label.setAlignment(Qt.AlignTop)
 			self.ui.errorLayout.addWidget(label)
 			
-def updateBar(self,stepNumber,bar,setBox,setButton):
+def updatePrecharBar(self,stepNumber,bar,setBox):
 	if stepNumber == "0": 
 		bar.setValue(float(stepNumber))
 		bar.setFormat("Currently Running: Set Parameters")
@@ -2499,8 +2668,7 @@ def updateBar(self,stepNumber,bar,setBox,setButton):
 		self.ui.precharCalFilesEquip.setStyleSheet(setBox)
 		self.ui.precharRefRXEquip.setStyleSheet(setBox)
 		self.ui.precharVSGEquip.setStyleSheet(setBox)
-		self.ui.precharAWGEquip.setStyleSheet(setBox)
-		setButton.setText("Unset")
+		self.ui.precharRun.setText("Unset")
 		
 		# switch to prechar tab
 		self.ui.precharTabs.setCurrentIndex(0)
@@ -2567,7 +2735,7 @@ def updateBar(self,stepNumber,bar,setBox,setButton):
 		# change next stack
 		self.ui.algoNextStack.setCurrentIndex(3)
 		
-def updateData(self,result):
+def updatePrecharData(self,result):
 	# add nmse and papr data into GUI
 	result = result.split("~")
 	nmsePercent = result[1]
@@ -2587,6 +2755,91 @@ def updateData(self,result):
 	self.ui.nmseDB_prechar.setText(nmseDB)
 	self.ui.inputPAPR_prechar.setText(inputPAPR)
 	self.ui.outputPAPR_prechar.setText(outputPAPR)
+	
+def updateHeterodyneBar(self,stepNumber,bar,boxDone):
+	if stepNumber == "0": 
+		bar.setValue(float(stepNumber))
+		bar.setFormat("Currently Running: Set Parameters")
+	elif stepNumber == "1":
+		bar.setFormat("Currently Running: Initialize VSA Drivers")
+		bar.setValue(float(stepNumber))
+		
+		# style parameter boxes that were set in step 0
+		self.ui.calEquip_hetero.setStyleSheet(boxDone)
+		self.ui.rxEquip_hetero.setStyleSheet(boxDone)
+		self.ui.vsgEquip_hetero.setStyleSheet(boxDone)
+		self.ui.upCalEquipHetero_hetero.setStyleSheet(boxDone)
+		self.ui.upEquip_hetero.setStyleSheet(boxDone)
+		self.ui.upMark_vsgMeas.setVisible(True)
+		self.ui.psgMark_vsgMeas.setVisible(True)
+		
+		# switch to heterodyne tab
+		self.ui.vsgMeasNextStack.setCurrentIndex(8)
+		self.ui.vsgResultsFileStack_vsgMeas.setCurrentIndex(1)
+		self.ui.vsgCalPaths_algo.setCurrentIndex(1)
+		self.ui.debugVSGStack.setCurrentIndex(0)
+		self.ui.vsgResultsStack_vsgMeas.setCurrentIndex(0)
+		
+	elif stepNumber == "2":
+		bar.setFormat("Currently Running: Generate Multi-Tone Signal")
+		bar.setValue(float(stepNumber))
+	elif stepNumber == "3":
+		bar.setFormat("Currently Running: Iteration Loop")
+		bar.setValue(float(stepNumber))
+	elif stepNumber == "7":
+		bar.setFormat("Currently Running: Save Inverse Model Data")
+		bar.setValue(float(stepNumber))
+	# elif stepNumber == "5":
+		# bar.setFormat("Currently Running: Save Spectrum & VSA Data")
+		# bar.setValue(float(stepNumber))
+		
+		# # embed plots into GUI (created in step 4)
+		# spectrumImage = mpimg.imread('.\Figures\Prechar_Spectrum_Output.png')
+		# self.precharSpectrumFigure.clear()
+		# sax = self.precharSpectrumFigure.add_subplot(111)
+		# sax.imshow(spectrumImage)
+		# sax.set_xlabel('Frequency(GHz)')
+		# sax.set_ylabel('Power(dB)')
+		# sax.set_title('Welch Mean-Square Spectrum Estimate')
+		# sax.set_xticks([], [])
+		# sax.set_yticks([], [])
+		# self.precharSpectrumCanvas.draw()
+		
+		# gainImage = mpimg.imread('.\Figures\Prechar_Gain.png')
+		# self.precharGainFigure.clear()
+		# gax = self.precharGainFigure.add_subplot(111)
+		# gax.imshow(gainImage)
+		# gax.set_xlabel('Input Power (dBm)')
+		# gax.set_ylabel('Gain Distortion (dB)')
+		# gax.set_title('Gain Distortion')
+		# gax.set_xticks([], [])
+		# gax.set_yticks([], [])
+		# self.precharGainCanvas.draw()
+			
+		# phaseImage = mpimg.imread('.\Figures\Prechar_Phase.png')
+		# self.precharPhaseFigure.clear()
+		# pax = self.precharPhaseFigure.add_subplot(111)
+		# pax.imshow(phaseImage)
+		# pax.set_xlabel('Input Power (dBm)')
+		# pax.set_ylabel('Phase Distortion (degree)')
+		# pax.set_title('AM/PM Distortion')
+		# pax.set_xticks([], [])
+		# pax.set_yticks([], [])
+		# self.precharPhaseCanvas.draw()
+		
+		# # switch gui page to show plots
+		# self.ui.precharAlgoStack.setCurrentIndex(0)
+		
+	# elif stepNumber == "6":
+		# bar.setFormat("Currently Running: Save Signal Generation Measurements")
+		# bar.setValue(float(stepNumber))
+	# elif stepNumber == "7":
+		# bar.setValue(float(stepNumber))
+		# # remove progress bar
+		# self.ui.statusBar.removeWidget(bar)
+		# self.ui.statusBar.showMessage("Routine Complete",3000)
+		# # change next stack
+		# self.ui.algoNextStack.setCurrentIndex(3)
 	
 def errorOccurred(self,error,bar):
 	algoRunErrorMessage(self,error)

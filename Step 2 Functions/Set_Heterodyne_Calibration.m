@@ -59,14 +59,14 @@ Cal.FreqRes = FreqRes; % Frequency resolution to use to search for the tones
 Cal.NumIterations = NumIterations; % Training length to use for getting the LUT table
 
 % Receiver calibration files
-if rxCalFlag == 1
+if cd.rxCalFlag == 1
     Cal.RX.Calflag = true;
 else
     Cal.RX.Calflag = false;
 end
-Cal.RX.CalFile = rxCalFile;
+Cal.RX.CalFile = cd.rxCalFile;
 
-Cal.SaveLocation = SaveLocation;
+Cal.SaveLocation = cd.SaveLocation;
 
 % variable reliant
 Cal.Signal.BW = Cal.Signal.EndingToneFreq - Cal.Signal.StartingToneFreq;
