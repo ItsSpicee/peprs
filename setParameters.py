@@ -16,6 +16,7 @@ from main import matlab as matlab
 # functions used in main.py
 
 incomplete = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #f24646}"
+redBorder = "QComboBox{background-color:rgb(247, 247, 247); border:2px solid #f24646}"
 
 class runSignalGenerationThread(QThread):
 	updateBar = pyqtSignal(object,str,QProgressBar,object)
@@ -356,17 +357,23 @@ def setPSG(self,buttonFocus,buttonDone,boxDone,greyHover,greyButton,buttonSelect
 		setButton.setText("Set")
 		
 def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSelect,setButton,matlab):
-	
+	# define variables
 	averaging = self.ui.averagingEnable.currentIndex()
 	avgEnabled = self.ui.averagingEnable.isEnabled()
 	demod = self.ui.demodulationEnable.currentIndex()
 	typeIdx = self.ui.vsaType.currentIndex()
 	flag = 0;
 	
+	# make averaging and demodulation enabled grey to get a fresh start
+	self.ui.averagingEnable.setStyleSheet(None)
+	self.ui.demodulationEnable.setStyleSheet(None)
+	
 	# if all top vsa parameters are filled out
 	if setButton.isChecked() == True:
 		if averaging != 0 or avgEnabled == False:
+			self.ui.averagingEnable.setStyleSheet(None)
 			if demod != 0:
+				self.ui.demodulationEnable.setStyleSheet(None)
 				if typeIdx == 3 or typeIdx == 4: # UXA & PXA
 					checkDic=[
 						self.ui.averagingEnable,
@@ -580,13 +587,21 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 				
 			else:
 				self.fillParametersMsg()
+				# highlight parameters in dark blue section if necessary
+				self.ui.demodulationEnable.setStyleSheet(redBorder)
+				if averaging == 0 and avgEnabled == True:
+					self.ui.averagingEnable.setStyleSheet(redBorder)
 				self.ui.digSet.setChecked(False)
 				self.ui.scopeSet.setChecked(False)
 				self.ui.uxaSet.setChecked(False)
 				self.ui.pxaSet.setChecked(False)
-			
+				
 		else:
 			self.fillParametersMsg()
+			# highlight parameters in red in dark blue section if necessary
+			self.ui.averagingEnable.setStyleSheet(redBorder)
+			if demod == 0:
+				self.ui.demodulationEnable.setStyleSheet(redBorder)
 			self.ui.digSet.setChecked(False)
 			self.ui.scopeSet.setChecked(False)
 			self.ui.uxaSet.setChecked(False)
@@ -1581,6 +1596,8 @@ def awgCalRoutine(self,boxDone,setButton,matlab):
 		self.ui.endFreq_awgCal,
 		self.ui.realBasisFlag_awgCal,
 		self.ui.phaseDistr_awgCal,
+		self.ui.paprMin_awg,
+		self.ui.paprMax_awg,
 		self.ui.freqRes_awgCal,
 		self.ui.awgCalSaveLocField_vsgMeas,
 		
@@ -1742,7 +1759,8 @@ def noAWGCalRoutine(self,boxDone,setButton,matlab):
 		self.ui.ampCorrection_awgCal_2,
 		self.ui.vfs_awgCal_2,
 		self.ui.trigAmp_awgCal_2,
-		self.ui.sampleClockFreq_awgCal_2
+		self.ui.sampleClockFreq_awgCal_2,
+		self.ui.awgCalFileField_vsgMeas,
 	]
 	if setButton.isChecked() == True:
 		done = win.checkIfDone(checkDic)
