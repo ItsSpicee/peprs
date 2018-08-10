@@ -3,7 +3,6 @@ function Set_RXTX_Structures(txd,rxd)
     txd.FCarrier = str2double(txd.FCarrier);
     txd.FSampleDAC = str2double(txd.FSampleDAC);
     txd.NumberOfSegments = str2double(txd.NumberOfSegments);
-    txd.ExpansionMargin = str2double(txd.ExpansionMargin);
     txd.GainExpansion = str2double(txd.GainExpansion);
     txd.FreqMultiplierFactor = str2double(txd.FreqMultiplierFactor);
     txd.ReferenceClock = str2double(txd.ReferenceClock);
@@ -40,12 +39,6 @@ function Set_RXTX_Structures(txd,rxd)
 	elseif txd.FSampleDAC == 12e9
 	   TX.AWG.MinimumSegmentLength = 320;
     end
-
-    if txd.SubtractMeanFlag == 1
-        TX.SubtractMeanFlag = 1;
-    else
-        TX.SubtractMeanFlag = 0;
-    end
     
     TX.AWG.NumberOfSegments = txd.NumberOfSegments; % Number of segments in the uploaded signal to the AWG
     
@@ -56,13 +49,6 @@ function Set_RXTX_Structures(txd,rxd)
     end
     
     TX.AWG.DataFormat = 'DNRZ';
-
-    if txd.ExpansionMarginEnable == 1
-       TX.AWG.ExpansionMarginSettings.ExpansionMarginEnable = 1;
-    else
-        TX.AWG.ExpansionMarginSettings.ExpansionMarginEnable = 0;
-    end
-    TX.AWG.ExpansionMarginSettings.ExpansionMargin = txd.ExpansionMargin; %It is used to maintain the average power of AWG when the PAPR of the pre-distorted signal increases.
     
     % amplitude correction for the AWG (set to true - recommended)
     if txd.Amp_Corr == 1
@@ -92,7 +78,6 @@ function Set_RXTX_Structures(txd,rxd)
     TX.AWG.SyncModuleFlag = 0;
     TX.AWG.Position = 1;
     
-    % SetTXParameters function replacement
     % Choose between 'Backplane', 'Internal', 'External'
     if txd.ReferenceClockSource == 1
         TX.AWG.ReferenceClockSource = 'Backplane';
@@ -139,12 +124,6 @@ function Set_RXTX_Structures(txd,rxd)
     % If we are receiving at IF, then we downconvert digitally to process at
     % baseband. After downconversion, we need to filter the signal with a LPF
     RX.DownconversionFilterFile = rxd.DownconversionFilterFile;  
-
-    if rxd.SubtractDCFlag == 1
-        RX.SubtractDCFlag = true;
-    else
-        RX.SubtractDCFlag = false;
-    end
     
     RX.TriggerChannel = rxd.TriggerChannel;
     if TX.AWG.Position == 1

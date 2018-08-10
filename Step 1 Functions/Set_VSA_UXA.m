@@ -19,7 +19,13 @@ function result = Set_VSA_UXA(dict,model)
     error = "";
 
 	try
-		
+		if dict.address == ""
+			errorString = "Fill out general VSA parameters before attempting to set advanced parameters.";
+			resultsString = sprintf("%s~%s","",errorString);
+			result = char(resultsString);
+			return
+		end
+        
 		load(".\InstrumentFunctions\SignalCapture_UXA\UXAConfig.mat")
 		spectrum = visa('agilent',dict.address);
 		spectrum.InputBufferSize = 8388608;

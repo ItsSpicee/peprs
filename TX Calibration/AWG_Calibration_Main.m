@@ -26,12 +26,8 @@ Cal.Processing32BitFlag = 1;
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Set Calibration Signal Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Cal.LearningParam                    = 0.2; % currently irrelevant
-Cal.Mse                              = zeros(Cal.NumIterations,1);
-   
-% PAPR limits when generating the signals
-Cal.Signal.MultitoneOptions.PAPRmin  = 8;
-Cal.Signal.MultitoneOptions.PAPRmax  = 9;
+Cal.LearningParam = 0.2; % currently irrelevant
+Cal.Mse = zeros(Cal.NumIterations,1);
 
 % Calibration file complex baseband frequency
 tonesBaseband = (Cal.Signal.StartingToneFreq : Cal.Signal.ToneSpacing : Cal.Signal.EndingToneFreq);
@@ -52,21 +48,8 @@ TX.FrameTime                   = TX.NumberOfTransmittedPeriods * MinimumNumberOf
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Set RX Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 RX.FrameTime               = TX.FrameTime;     % One measurement frame;
 RX.PointsPerRecord         = RX.Fsample * RX.FrameTime * RX.NumberOfMeasuredPeriods;
-
-% Digitizer Parameters
-if (RX.Fsample > 1e9)
-    RX.EnableInterleaving  = true;       % Enable interleaving
-end
-
-% UXA
-if (RX.UXA.AnalysisBandwidth > 500e6)
-    RX.UXA.TriggerPort          = 'EXT3';
-else
-    RX.UXA.TriggerPort          = 'EXT1';
-end
 
 % Downconversion filter
 load RX.FilterFile
@@ -199,6 +182,7 @@ end
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Save Inverse Model Data
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+addpath(genpath(Cal.SaveLocation));
 save(Cal.SaveLocation, 'H_Tx_freq_inverse', 'tonesBaseband');
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Apply the inverse model to the verification signal

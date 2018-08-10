@@ -1,10 +1,17 @@
-function Prepare_Signal_Upload_PrecharDebug()
+function error = Prepare_Signal_Upload_PrecharDebug()
 load(".\DPD Data\Signal Generation Parameters\workspace.mat");
-
-% Prepare the signal for upload
-% Limits PAPR, and filters out of band noise
-ProcessInputFiles
-PrepareData
+error = '';
+try
+    % Prepare the signal for upload
+    % Limits PAPR, and filters out of band noise
+    ProcessInputFiles
+    if strcmp(error,'')
+        return
+    end
+    PrepareData
+catch
+    error = 'An error has occurred while attempting to prepare signal for upload.';
+end
 
 save(".\DPD Data\Signal Generation Parameters\workspace.mat");
 end

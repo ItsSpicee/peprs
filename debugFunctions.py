@@ -21,7 +21,8 @@ def uploadSignalPrechar(self,matlab):
 	error = matlab.Upload_Signal_PrecharDebug(nargout=1)
 	if error != "":
 		debugErrorMessage(self,error)
-	self.statusBar().showMessage('Successfully uploaded signal',2000)
+	else:
+		self.statusBar().showMessage('Successfully uploaded signal',2000)
 	
 def downloadSignalPrechar(self,matlab):
 	setGreyPrecharButtons(self)
@@ -29,7 +30,8 @@ def downloadSignalPrechar(self,matlab):
 	error = matlab.Download_Signal_PrecharDebug(nargout=1)
 	if error != "":
 		debugErrorMessage(self,error)
-	self.statusBar().showMessage('Successfully downloaded signal',2000)
+	else:
+		self.statusBar().showMessage('Successfully downloaded signal',2000)
 	
 def analyzeSignalPrechar(self,matlab):
 	setGreyPrecharButtons(self)
@@ -37,7 +39,8 @@ def analyzeSignalPrechar(self,matlab):
 	error = matlab.Analyze_Signal_PrecharDebug(nargout=1)
 	if error != "":
 		debugErrorMessage(self,error)
-	self.statusBar().showMessage('Successfully analyzed signal',2000)	
+	else:
+		self.statusBar().showMessage('Successfully analyzed signal',2000)	
 	
 def saveDataPrechar(self,matlab):
 	setGreyPrecharButtons(self)
@@ -45,7 +48,8 @@ def saveDataPrechar(self,matlab):
 	error = matlab.Save_Data_PrecharDebug(nargout=1)
 	if error != "":
 		debugErrorMessage(self,error)
-	self.statusBar().showMessage('Successfully saved data',2000)	
+	else:
+		self.statusBar().showMessage('Successfully saved data',2000)	
 	
 def saveMeasurementsPrechar(self,matlab):
 	setGreyPrecharButtons(self)
@@ -59,7 +63,8 @@ def saveMeasurementsPrechar(self,matlab):
 	outputPAPR = result[4]
 	if error != "":
 		debugErrorMessage(self,error)
-	self.statusBar().showMessage('Successfully saved measurements',2000)	
+	else:
+		self.statusBar().showMessage('Successfully saved measurements',2000)	
 	
 ######## FUNCTIONS USED WITHIN THIS FILE ########
 	

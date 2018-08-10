@@ -36,6 +36,10 @@ function AWG_M8190A_IQSignalUpload(SignalsCell, ...
 %       - MultichannelFlag - whether or not the AWGs are configured in a
 %       multichannel configuration
 %--------------------------------------------------------------------------
+    
+    %added
+    instrreset
+
     % Parse optional arguments
     OptionalArguments = varargin;
     [SignalBandwidthCell, IQOutputEnable, CorrectionEnabled, DisplaySignal, ChannelSelectSettings, ...
@@ -164,6 +168,7 @@ function AWG_M8190A_IQSignalUpload(SignalsCell, ...
                
         % Modified iqdownload code
         iqtotaldata  = iqtotaldata + complex(IQOffsets.I_Offset, IQOffsets.Q_Offset);
+        PlotSpectrum(iqtotaldata,iqtotaldata,fs)
         if ~RunSettings.SyncModuleFlag
             iqdownload(repmat(iqtotaldata, rept, 1), fs, 'channelMapping', channelMapping, ...
                 'segmentNumber', segmentNum, 'marker', repmat(marker, rept, 1), 'run', RunSettings.RunFlag);

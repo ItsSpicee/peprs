@@ -1,7 +1,14 @@
 <h1> PEPRS - Performance Enhancement for Processing Radio Signals </h1>
 <p> PEPRS is a Spring 2018 Co-op project that aims to streamline the process of running signal processing algorithms. It also makes it easier for developers to use algortighms developed by other people. It can perform RX calibration, TX calibration, and DPD. </p> 
 
-<h2>Installation Procedures for Developers</h2>
+<h2>Table of Contents</h2>
+<p>
+<a name="#install">Installation Procedures</a>
+<br>
+<a name="#matlab_python">Using Matlab with Python</a> 
+</p>
+
+<h2>Installation Procedures</h2>
 <p>PEPRS is created with PyQt5 and MATLAB. <br> Installation requirements: </p>
 <ul>
 <li>MATLAB 2014 and up</li>
@@ -53,5 +60,6 @@
 
 <h2>Usage</h2>
 <h3>Opening and Saving Parameter Settings</h3>
-<p>In the top menu bar, there is the ability to save and open parameter setups. The appropriate text fields, drop downs, checkboxes, and radio buttons will be set to the appropriate value when saved and loaded. However, you will still have to set all of the appropriate buttons in the GUI i.e. push the "Set" or "Set & Run" buttons.</p>
-
+<p>In the top menu bar under File, there is the ability to save and open parameter setups. The appropriate text fields, drop downs, checkboxes, and radio buttons will be set to the appropriate value when saved and loaded. However, you will still have to set all of the appropriate buttons in the GUI i.e. push the "Set" or "Set & Run" buttons.</p>
+<h3>Enabling Safety and Quality Checks</h3>
+<p>In the top menu bar under Preferences, there is the ability to enable or disable the safety and quality checks. These checks appear before you can move to the Step 2 tab or the DPD tab respectively.</p>

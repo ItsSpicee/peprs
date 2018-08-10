@@ -82,23 +82,23 @@ class Window(QMainWindow):
 		self.ui.saMeasTabs.setTabEnabled(0,False)
 		
 		# create matlab plots
-		precharSpectrumFigure = plt.figure()
-		precharSpectrumCanvas = FigureCanvas(precharSpectrumFigure)
-		precharSpectrumToolbar = NavigationToolbar(precharSpectrumCanvas, self)
-		self.ui.spectrumGraph_prechar.addWidget(precharSpectrumToolbar)
-		self.ui.spectrumGraph_prechar.addWidget(precharSpectrumCanvas)
+		self.precharSpectrumFigure = plt.figure()
+		self.precharSpectrumCanvas = FigureCanvas(self.precharSpectrumFigure)
+		self.precharSpectrumToolbar = NavigationToolbar(self.precharSpectrumCanvas, self)
+		self.ui.spectrumGraph_prechar.addWidget(self.precharSpectrumToolbar)
+		self.ui.spectrumGraph_prechar.addWidget(self.precharSpectrumCanvas)
 		
-		precharGainFigure = plt.figure()
-		precharGainCanvas = FigureCanvas(precharGainFigure)
-		precharGainToolbar = NavigationToolbar(precharGainCanvas, self)
-		self.ui.gainGraph_prechar.addWidget(precharGainToolbar)
-		self.ui.gainGraph_prechar.addWidget(precharGainCanvas)
+		self.precharGainFigure = plt.figure()
+		self.precharGainCanvas = FigureCanvas(self.precharGainFigure)
+		self.precharGainToolbar = NavigationToolbar(self.precharGainCanvas, self)
+		self.ui.gainGraph_prechar.addWidget(self.precharGainToolbar)
+		self.ui.gainGraph_prechar.addWidget(self.precharGainCanvas)
 		
-		precharPhaseFigure = plt.figure()
-		precharPhaseCanvas = FigureCanvas(precharPhaseFigure)
-		precharPhaseToolbar = NavigationToolbar(precharPhaseCanvas, self)
-		self.ui.phaseGraph_prechar.addWidget(precharPhaseToolbar)
-		self.ui.phaseGraph_prechar.addWidget(precharPhaseCanvas)
+		self.precharPhaseFigure = plt.figure()
+		self.precharPhaseCanvas = FigureCanvas(self.precharPhaseFigure)
+		self.precharPhaseToolbar = NavigationToolbar(self.precharPhaseCanvas, self)
+		self.ui.phaseGraph_prechar.addWidget(self.precharPhaseToolbar)
+		self.ui.phaseGraph_prechar.addWidget(self.precharPhaseCanvas)
 		
 		# deal with error widget
 		self.ui.errorScrollArea.setMaximumHeight(0)
@@ -147,8 +147,8 @@ class Window(QMainWindow):
 		self.ui.filePushButton.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_comb,".\Measurement Data\RX_CalResults"))
 		self.ui.filePushButton_2.clicked.connect(lambda: menu.fileSave(self, self.ui.vsaCalSaveLocField_comb,".\Measurement Data"))
 		self.ui.filePushButton_17.clicked.connect(lambda: menu.fileBrowse(self, self.ui.upCalFileField_vsgMeas_2,".\Measurement Data"))
-		self.ui.filePushButton_18.clicked.connect(lambda: menu.fileSave(self, self.ui.upCalSaveLocField_vsgMeas,".\Measurement Data"))
-		self.ui.filePushButton_20.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_vsgMeas,".\Measurement Data\\Utility Data"))
+		self.ui.filePushButton_18.clicked.connect(lambda: menu.fileSave(self, self.ui.upCalSaveLocField_vsgMeas,".\Measurement Data\\Upconverter_CalResults"))
+		self.ui.filePushButton_20.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_vsgMeas,".\Measurement Data\\Utility Data\TX Calibration"))
 		self.ui.filePushButton_24.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_vsgMeas_2,".\Measurement Data"))
 		self.ui.filePushButton_25.clicked.connect(lambda: menu.fileBrowse(self, self.ui.iqFileField_vsgMeas,".\Measurement Data"))
 		self.ui.filePushButton_26.clicked.connect(lambda: menu.fileSave(self, self.ui.iqSaveLocField_vsgMeas,".\Measurement Data"))
@@ -328,19 +328,31 @@ class Window(QMainWindow):
 		# vsa meas page
 		self.ui.calAdviceText.setVisible(False)
 		self.ui.downMark_vsaMeas.setVisible(False)
+		self.ui.downMark_vsaMeas_2.setVisible(False)
 		self.ui.uxaMark_vsaMeas.setVisible(False)
+		self.ui.uxaMark_vsaMeas_2.setVisible(False)
 		self.ui.pxaMark_vsaMeas.setVisible(False)
+		self.ui.pxaMark_vsaMeas_2.setVisible(False)
 		self.ui.saMark_vsaMeas.setVisible(False)
 		self.ui.saMark_vsaMeas_2.setVisible(False)
+		self.ui.saMark_vsaMeas_3.setVisible(False)
+		self.ui.saMark_vsaMeas_4.setVisible(False)
 		self.ui.scopeMark_vsaMeas.setVisible(False)
 		self.ui.scopeMark_vsaMeas_2.setVisible(False)
+		self.ui.scopeMark_vsaMeas_3.setVisible(False)
+		self.ui.scopeMark_vsaMeas_4.setVisible(False)
 		self.ui.digMark_vsaMeas.setVisible(False)
 		self.ui.digMark_vsaMeas_2.setVisible(False)
+		self.ui.digMark_vsaMeas_3.setVisible(False)
+		self.ui.digMark_vsaMeas_4.setVisible(False)
 		self.ui.downMark_vsgMeas.setVisible(False)
+		self.ui.downMark_vsgMeas_2.setVisible(False)
 		# self.ui.uxaMark_vsgMeas.setVisible(False)
 		# self.ui.pxaMark_vsgMeas.setVisible(False)
 		self.ui.saMark_vsgMeas.setVisible(False)
 		self.ui.saMark_vsgMeas_2.setVisible(False)
+		self.ui.saMark_vsgMeas_3.setVisible(False)
+		self.ui.saMark_vsgMeas_4.setVisible(False)
 		# self.ui.scopeMark_vsgMeas.setVisible(False)
 		# self.ui.scopeMark_vsgMeas_2.setVisible(False)
 		# self.ui.digMark_vsgMeas.setVisible(False)
@@ -440,7 +452,7 @@ class Window(QMainWindow):
 		self.ui.setAdv_vsgMeas.clicked.connect(lambda: set.setAdvAWG_vsgMeas(self,setParams,self.ui.setAdv_vsgMeas))
 		self.ui.setAdv_vsgMeas_2.clicked.connect(lambda: set.setAdvAWGVSA_vsgMeas(self,setParams,self.ui.setAdv_vsgMeas_2))
 		self.ui.upSet_vsgMeas.clicked.connect(lambda: set.setUpVSGMeas(self,setParams,self.ui.upSet_vsgMeas))
-		self.ui.heteroRun.clicked.connect(lambda: set.setHetero(self,setParams,self.ui.heteroRun))
+		self.ui.heteroRun.clicked.connect(lambda: set.setHetero(self,setParams,self.ui.heteroRun,matlab))
 		self.ui.homoRun.clicked.connect(lambda: set.setHomo(self,setParams,self.ui.homoRun))
 		
 		# control workflow navigation
@@ -712,13 +724,22 @@ class Window(QMainWindow):
 		# vsa meas page
 		self.ui.saButton_vsaMeas.clicked.connect(lambda: self.ui.rightFlowStack.setCurrentIndex(1))
 		self.ui.saButton_vsaMeas_2.clicked.connect(lambda: self.ui.rightFlowStack.setCurrentIndex(1))
+		self.ui.saButton_vsaMeas_3.clicked.connect(lambda: self.ui.rightFlowStack.setCurrentIndex(1))
+		self.ui.saButton_vsaMeas_4.clicked.connect(lambda: self.ui.rightFlowStack.setCurrentIndex(1))
 		self.ui.downButton_vsaMeas.clicked.connect(lambda: flow.switchVSAMeas(self,1))
+		self.ui.downButton_vsaMeas_2.clicked.connect(lambda: flow.switchVSAMeas(self,1))
 		self.ui.scopeButton_vsaMeas.clicked.connect(lambda: flow.switchVSAMeas(self,0))
 		self.ui.scopeButton_vsaMeas_2.clicked.connect(lambda: flow.switchVSAMeas(self,0))
+		self.ui.scopeButton_vsaMeas_3.clicked.connect(lambda: flow.switchVSAMeas(self,0))
+		self.ui.scopeButton_vsaMeas_4.clicked.connect(lambda: flow.switchVSAMeas(self,0))
 		self.ui.digButton_vsaMeas.clicked.connect(lambda: flow.switchVSAMeas(self,0))
 		self.ui.digButton_vsaMeas_2.clicked.connect(lambda: flow.switchVSAMeas(self,0))
+		self.ui.digButton_vsaMeas_3.clicked.connect(lambda: flow.switchVSAMeas(self,0))
+		self.ui.digButton_vsaMeas_4.clicked.connect(lambda: flow.switchVSAMeas(self,0))
 		self.ui.uxaButton_vsaMeas.clicked.connect(lambda: flow.switchVSAMeas(self,0))
+		self.ui.uxaButton_vsaMeas_2.clicked.connect(lambda: flow.switchVSAMeas(self,0))
 		self.ui.pxaButton_vsaMeas.clicked.connect(lambda: flow.switchVSAMeas(self,0))
+		self.ui.pxaButton_vsaMeas_2.clicked.connect(lambda: flow.switchVSAMeas(self,0))
 		self.ui.awgButton_vsaMeas.clicked.connect(lambda: flow.awgVSAMeasOnClick(self))
 		self.ui.awgButton_vsaMeas_2.clicked.connect(lambda: flow.awgVSAMeasOnClick(self))
 		self.ui.awgButton_vsaMeas_3.clicked.connect(lambda: flow.awgVSAMeasOnClick(self))
@@ -726,13 +747,22 @@ class Window(QMainWindow):
 		# vsg meas page
 		self.ui.saButton_vsgMeas.clicked.connect(lambda: flow.saVSGMeasOnClick(self))
 		self.ui.saButton_vsgMeas_2.clicked.connect(lambda: flow.saVSGMeasOnClick(self))
+		self.ui.saButton_vsgMeas_3.clicked.connect(lambda: flow.saVSGMeasOnClick(self))
+		self.ui.saButton_vsgMeas_4.clicked.connect(lambda: flow.saVSGMeasOnClick(self))
 		self.ui.downButton_vsgMeas.clicked.connect(lambda: flow.downVSGMeasOnClick(self))
+		self.ui.downButton_vsgMeas_2.clicked.connect(lambda: flow.downVSGMeasOnClick(self))
 		self.ui.scopeButton_vsgMeas.clicked.connect(lambda: flow.analyzerVSGMeasOnClick(self))
 		self.ui.scopeButton_vsgMeas_2.clicked.connect(lambda: flow.analyzerVSGMeasOnClick(self))
+		self.ui.scopeButton_vsgMeas_3.clicked.connect(lambda: flow.analyzerVSGMeasOnClick(self))
+		self.ui.scopeButton_vsgMeas_4.clicked.connect(lambda: flow.analyzerVSGMeasOnClick(self))
 		self.ui.digButton_vsgMeas.clicked.connect(lambda: flow.analyzerVSGMeasOnClick(self))
 		self.ui.digButton_vsgMeas_2.clicked.connect(lambda: flow.analyzerVSGMeasOnClick(self))
+		self.ui.digButton_vsgMeas_3.clicked.connect(lambda: flow.analyzerVSGMeasOnClick(self))
+		self.ui.digButton_vsgMeas_4.clicked.connect(lambda: flow.analyzerVSGMeasOnClick(self))
 		self.ui.uxaButton_vsgMeas.clicked.connect(lambda: flow.analyzerVSGMeasOnClick(self))
+		self.ui.uxaButton_vsgMeas_2.clicked.connect(lambda: flow.analyzerVSGMeasOnClick(self))
 		self.ui.pxaButton_vsgMeas.clicked.connect(lambda: flow.analyzerVSGMeasOnClick(self))
+		self.ui.pxaButton_vsgMeas_2.clicked.connect(lambda: flow.analyzerVSGMeasOnClick(self))
 		self.ui.psgButton_vsgMeas.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(1))
 		self.ui.upButton_vsgMeas.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(1))
 		self.ui.awgButton_vsgMeas.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(0))
@@ -745,8 +775,8 @@ class Window(QMainWindow):
 		self.ui.dpdPreview.clicked.connect(lambda: set.dpdPreview(self))
 		self.ui.dpdRun.clicked.connect(lambda: set.runDPD(self,setParams,self.ui.dpdRun))
 		# prechar tab
-		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self,precharSpectrumCanvas,precharSpectrumFigure,matlab))
-		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun,precharSpectrumCanvas,precharSpectrumFigure,precharGainCanvas,precharGainFigure,precharPhaseCanvas,precharPhaseFigure,matlab))
+		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self,matlab))
+		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun,matlab))
 		self.ui.setParameters_precharDebug.clicked.connect(lambda: debug.setParametersPrechar(self,matlab))
 		self.ui.prepareSignal_precharDebug.clicked.connect(lambda: debug.prepareSignalPrechar(self,matlab))
 		self.ui.upload_precharDebug.clicked.connect(lambda: debug.uploadSignalPrechar(self,matlab))
@@ -776,6 +806,12 @@ class Window(QMainWindow):
 		#self.ui.traceAvg_spa.currentIndexChanged.connect(lambda: param.enableTraceAveragingSA(self))
 		# awg measurement page
 		self.ui.refClockSorce_awg.currentIndexChanged.connect(lambda: param.enableExtClkFreq(self))
+		self.ui.ampCorrection_awgCal_2.currentIndexChanged.connect(lambda: param.enableAmpCorr(self,self.ui.ampCorrection_awgCal_2))
+		self.ui.ampCorrection_awgCal.currentIndexChanged.connect(lambda: param.enableAmpCorr(self,self.ui.ampCorrection_awgCal))
+		# heterodyne calibration page
+		self.ui.expansionMarginEnable_hetero.currentIndexChanged.connect(lambda: param.enableExpansionMargin(self))
+		self.ui.vsaCalFileEnable_hetero.currentIndexChanged.connect(lambda: param.enableVSACalFileHetero(self))
+		
 		
 		# show on window
 		self.show()	
@@ -888,19 +924,33 @@ class Window(QMainWindow):
 		psgSet = self.ui.psgSet.isChecked()
 		
 		if button == 1:
+			# if turn on DC is selected
 			if firstChecked == True:
+				# alert if no power supplies have been set
 				if len(addressList) == 1:
 					self.statusBar().showMessage("No DC supplies have been set",2000)
 					self.ui.emergButtonFirst.setChecked(False)
-				for x in addressList:
-					if x == "":
-						continue
-					else:
-						matlab.Output_Toggle(x,1,nargout=0)
-						self.statusBar().showMessage("DC turned ON",2000)
-						self.ui.emergButtonFirst.setStyleSheet(redButton)
-						self.ui.emergButtonFirst.setText("Turn Off DC")
+				# if RF is on before DC, turn off RF
+				if secondChecked == True:
+					msg = QMessageBox(self)
+					msg.setIcon(QMessageBox.Critical)
+					msg.setWindowTitle('Incorrect Order')
+					msg.setText("Please turn off RF before turning on DC")
+					msg.setStandardButtons(QMessageBox.Ok)
+					msg.exec_();
+				else:
+					# if DC supplies have been set, turn on all power supplies
+					for x in addressList:
+						if x == "":
+							continue
+						else:
+							matlab.Output_Toggle(x,1,nargout=0)
+							self.statusBar().showMessage("DC turned ON",2000)
+							self.ui.emergButtonFirst.setStyleSheet(redButton)
+							self.ui.emergButtonFirst.setText("Turn Off DC")	
+			# if turn off DC is selected
 			else:
+				# if RF is on 
 				if secondChecked == True:
 					msg = QMessageBox(self)
 					msg.setIcon(QMessageBox.Critical)
@@ -919,8 +969,10 @@ class Window(QMainWindow):
 					self.ui.emergButtonFirst.setStyleSheet(greenButton)
 					self.ui.emergButtonFirst.setText("Turn On DC")
 		elif button == 2:
+			# if turn on RF is selected
 			if secondChecked == True:
-				if firstChecked == False:
+				# if DC is off and supplies have been set, give error
+				if firstChecked == False and len(addressList) != 1:
 					msg = QMessageBox(self)
 					msg.setIcon(QMessageBox.Critical)
 					msg.setWindowTitle('Incorrect Order')
@@ -933,37 +985,39 @@ class Window(QMainWindow):
 						if awgType == 3:
 							#turn on psg
 							self.statusBar().showMessage("PSG RF turned ON (test)",1500)
-							matlab.AWG_Output_Toggle(1)
+							matlab.AWG_Output_Toggle(1,nargout=0)
 							self.statusBar().showMessage("AWG RF turned ON",1500)
 						else:
-							matlab.AWG_Output_Toggle(1)
+							matlab.AWG_Output_Toggle(1,nargout=0)
 							self.statusBar().showMessage("RF turned ON ",2000)
 						self.ui.emergButtonSecond.setStyleSheet(redButton)
 						self.ui.emergButtonSecond.setText("Turn Off RF")
 					else:
 						self.statusBar().showMessage("AWG has not been set",2000)
 						self.ui.emergButtonSecond.setChecked(False)
+			# if turn off RF is selected
 			else:
 				if awgType == 3:
-					matlab.AWG_Output_Toggle(0)
+					matlab.AWG_Output_Toggle(0,nargout=0)
 					self.statusBar().showMessage("AWG RF turned OFF",1500)
 					#turn off psg
 					self.statusBar().showMessage("PSG RF turned OFF (test)",1500)
 				else:
-					matlab.AWG_Output_Toggle(0)
+					matlab.AWG_Output_Toggle(0,nargout=0)
 					self.statusBar().showMessage("RF turned OFF",2000)
 				self.ui.emergButtonSecond.setStyleSheet(greenButton)
 				self.ui.emergButtonSecond.setText("Turn On RF")
+		# turn off all
 		elif button == 3:
 			if awgType == 3:
 				if awgSet:
-					matlab.AWG_Output_Toggle(0)
+					matlab.AWG_Output_Toggle(0,nargout=0)
 				if psgSet:
 					#turn off psg
 					print("this is filler")
 			else:
 				if awgSet:
-					matlab.AWG_Output_Toggle(0)
+					matlab.AWG_Output_Toggle(0,nargout=0)
 			if len(addressList) != 1:
 				for x in addressList:
 					if x == "":

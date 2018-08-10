@@ -9,10 +9,5 @@ function Set_Prechar_Signal(dict)
     elseif dict.signalName == 4
         Signal.Name = "5G_NR_OFDM_400MHz";
     end
-    if dict.removeDC == 1
-        Signal.RemoveDCFlag = true;
-    elseif dict.removeDC == 2
-        Signal.RemoveDCFlag = false;
-    end
     save(".\DPD Data\Signal Generation Parameters\Signal.mat","Signal")
 end

@@ -6,7 +6,7 @@ try
     IterationCount = 1;
     memTrunc = 0;
     UploadSignal
-    %AWG_Upload_Script
+    AWG_Upload_Script
 catch
     error = 'An error has occurred while attempting to upload the signal.';
 end

@@ -1,8 +1,9 @@
 function result = Save_Measurements_PrecharDebug()
 error = '';
+data = '';
 load(".\DPD Data\Signal Generation Parameters\workspace.mat");
 try
-    SaveSignalGenerationMeasurements
+%     SaveSignalGenerationMeasurements
     dBnmse = 10*log10((NMSE/100)^2);
     data = sprintf('%f~%f~%f~%f',NMSE,dBnmse,TX.AWG.ExpansionMarginSettings.PAPR_original,TX.AWG.ExpansionMarginSettings.PAPR_input);
 catch

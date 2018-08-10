@@ -23,6 +23,11 @@ Measure_Pout_Eff = false;
 %% Set Transmitter Parameters | RECEIVER PARAMS ALREADY SET IN SET_RXTX_STRUCTURES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 TX.IQmod_flag = 0;
+% Expansion Margin removed from GUI
+TX.AWG.ExpansionMarginSettings.ExpansionMarginEnable = 0;
+TX.AWG.ExpansionMarginSettings.ExpansionMargin = 4; 
+
+TX.SubtractMeanFlag            = 0; % removed from GUI
 
 EVM_flag                    = 0;    % If this flag is one, the code demodulates the received signal and 
                                     % computes the symbol ENM
@@ -31,6 +36,7 @@ EVM_flag                    = 0;    % If this flag is one, the code demodulates 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 SignalName = Signal.Name;
 % Load in the signal
+Signal.RemoveDCFlag = false; % removed from GUI
 ReadInputFiles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Set Receiever Parameters | RECEIVER PARAMS ALREADY SET IN SET_RXTX_STRUCTURES
@@ -40,6 +46,8 @@ RX.FsampleOverwrite = 0 * Signal.Fsample; % Overwrite the sampling rate of the r
 RX.Analyzer.FrameTime = TX.FrameTime; % One measurement frame;
 %RX.Analyzer.Fsample = Signal.Fsample;
 RX.Analyzer.PointsPerRecord = RX.Analyzer.Fsample * RX.Analyzer.FrameTime * RX.Analyzer.NumberOfMeasuredPeriods;
+
+RX.SubtractDCFlag = false; % removed from GUI
 
 % VSA Parameters
 % RX.VSA.DemodSignalFlag = false;

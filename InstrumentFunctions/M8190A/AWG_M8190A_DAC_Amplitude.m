@@ -3,6 +3,8 @@ function AWG_M8190A_DAC_Amplitude(Channel,Amplitude)
 % Channel - Specify the channel to be set (1 or 2)
 % Amplitude - Voltage Amplitude (between 0.1 and 0.7 V)
     
+    instrreset
+
     load('.\Step 1 Functions\arbConfig.mat');
     arbConfig = loadArbConfig(arbConfig);
     f = iqopen(arbConfig);
