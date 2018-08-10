@@ -773,7 +773,8 @@ class Window(QMainWindow):
 		self.ui.calValPreview.clicked.connect(lambda: set.calValPreview(self))
 		self.ui.calValRun.clicked.connect(lambda: set.runCalValidation(self,setParams,self.ui.calValRun,matlab))
 		self.ui.dpdPreview.clicked.connect(lambda: set.dpdPreview(self))
-		self.ui.dpdRun.clicked.connect(lambda: set.runDPD(self,setParams,self.ui.dpdRun))
+		#previously no matlab param
+		self.ui.dpdRun.clicked.connect(lambda: set.runDPD(self,setParams,self.ui.dpdRun,matlab))
 		# prechar tab
 		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self,matlab))
 		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun,matlab))

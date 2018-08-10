@@ -263,13 +263,29 @@ def setAdvancedAWG(self,boxDone,setButton,matlab):
 		setButton.setText("Set")
 		
 def setGeneralVSG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,vsgSetGeneral):
+	checkDic=[
+		self.ui.refClockSorce_vsg,
+		self.ui.extRefFreq_vsg,
+		self.ui.iChannel_vsg,
+		self.ui.qChannel_vsg,
+		self.ui.model_vsg,
+		self.ui.address_vsg,
+		self.ui.maxSampleRate_vsg
+		
+	]
+
 	if vsgSetGeneral.isChecked() == True:
-		vsgSetGeneral.setText("Unset")
-		self.ui.vsgButton_vsg.setStyleSheet(buttonFocus)
-		self.ui.vsgEquipGeneral.setStyleSheet(boxDone)
-		self.ui.vsgNextSteps.setCurrentIndex(5)
-		self.ui.vsaButton_vsg.setStyleSheet(greyHover)
-		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
+		done = win.checkIfDone(checkDic)
+		if done:
+			vsgSetGeneral.setText("Unset")
+			self.ui.vsgButton_vsg.setStyleSheet(buttonFocus)
+			self.ui.vsgEquipGeneral.setStyleSheet(boxDone)
+			self.ui.vsgNextSteps.setCurrentIndex(5)
+			self.ui.vsaButton_vsg.setStyleSheet(greyHover)
+			self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
+		else:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			vsgSetGeneral.setChecked(False)
 	elif  vsgSetGeneral.isChecked() == False:
 		self.ui.vsgEquipGeneral.setStyleSheet(None)
 		self.ui.vsgButton_vsg.setStyleSheet(buttonSelected)
@@ -340,6 +356,7 @@ def setPSG(self,buttonFocus,buttonDone,boxDone,greyHover,greyButton,buttonSelect
 		setButton.setText("Set")
 		
 def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSelect,setButton,matlab):
+	
 	averaging = self.ui.averagingEnable.currentIndex()
 	avgEnabled = self.ui.averagingEnable.isEnabled()
 	demod = self.ui.demodulationEnable.currentIndex()
@@ -351,95 +368,169 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 		if averaging != 0 or avgEnabled == False:
 			if demod != 0:
 				if typeIdx == 3 or typeIdx == 4: # UXA & PXA
-					dAllUXA={
-						"averaging" : self.ui.averagingEnable.currentIndex(),
-						"noAverages": self.ui.noAveragesField_sa.text(),
-						"atten": self.ui.attenuation_sa.text(),
-						"freq": self.ui.freq_sa.text(),
-						"analysisBW": self.ui.analysisBandwidth_sa.text(),
-						"clockRef": self.ui.clockRef_sa.currentIndex(),
-						"trigLevel": self.ui.trigLevel_sa.text(),
-						"trigSource": self.ui.trigSource_sa.currentIndex(),
-						"address": self.ui.address_sa.text()	
-					}
-					if typeIdx == 3:
-						result = matlab.Set_VSA_UXA(dAllUXA,"UXA",nargout=1)
-					elif typeIdx == 4:
-						result = matlab.Set_VSA_UXA(dAllUXA,"PXA",nargout=1)
-					result = result.split("~")
-					partNum = result[0]
-					errorString = result[1]
-					errorArray = errorString.split("|")
-					errors = determineIfErrors(self,errorArray)
-					if errors == 0:
-						self.ui.partNum_sa.setText(partNum);
-						flag = 1;
+					checkDic=[
+						self.ui.averagingEnable,
+						self.ui.demodulationEnable,
+						self.ui.vsaType,
+						self.ui.noAveragesField_sa,
+						self.ui.attenuation_sa,
+						self.ui.freq_sa,
+						self.ui.analysisBandwidth_sa,
+						self.ui.clockRef_sa,
+						self.ui.trigLevel_sa,
+						self.ui.trigSource_sa,
+						self.ui.address_sa,
+						self.ui.dllFile_uxa,
+						self.ui.setupFile_uxa,
+						self.ui.dataFile_uxa
+					]
+					done = win.checkIfDone(checkDic)
+					if done:
+						dAllUXA={
+							"averaging" : self.ui.averagingEnable.currentIndex(),
+							"noAverages": self.ui.noAveragesField_sa.text(),
+							"atten": self.ui.attenuation_sa.text(),
+							"freq": self.ui.freq_sa.text(),
+							"analysisBW": self.ui.analysisBandwidth_sa.text(),
+							"clockRef": self.ui.clockRef_sa.currentIndex(),
+							"trigLevel": self.ui.trigLevel_sa.text(),
+							"trigSource": self.ui.trigSource_sa.currentIndex(),
+							"address": self.ui.address_sa.text()	
+						}
+						if typeIdx == 3:
+							result = matlab.Set_VSA_UXA(dAllUXA,"UXA",nargout=1)
+						elif typeIdx == 4:
+							result = matlab.Set_VSA_UXA(dAllUXA,"PXA",nargout=1)
+						result = result.split("~")
+						partNum = result[0]
+						errorString = result[1]
+						errorArray = errorString.split("|")
+						errors = determineIfErrors(self,errorArray)
+						if errors == 0:
+							self.ui.partNum_sa.setText(partNum);
+							flag = 1;
+						else:
+							addToErrorLayout(self,errorArray)
+							self.ui.awgSetGeneral.setChecked(False)
+							
+						if flag:
+							setButton.setText("Unset")
+							
+							# style mod related widgets
+							self.ui.uxaEquipGeneralVSA.setStyleSheet(boxDone)
+							demod = self.ui.uxaMod.isEnabled()
+							if demod:
+								setAllDemod(self,boxDone)
+								self.ui.modButton_vsa.setStyleSheet(buttonFocus)
+							self.ui.vsaNextStack.setCurrentIndex(3)
+							self.ui.vsgNextSteps.setCurrentIndex(7)
+							self.ui.up_psg_next.setCurrentIndex(5)
+							if typeIdx == 3: #UXA
+								self.ui.uxaButton_vsa.setStyleSheet(buttonFocus)
+								self.ui.uxaButton_vsa_2.setStyleSheet(buttonFocus)
+								setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)			
+							elif typeIdx == 4: #PXA
+								self.ui.pxaButton_vsa.setStyleSheet(buttonFocus)
+								self.ui.pxaButton_vsa_2.setStyleSheet(buttonFocus)
+								setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)
 					else:
-						addToErrorLayout(self,errorArray)
-						self.ui.awgSetGeneral.setChecked(False)
-						
-					if flag:
-						setButton.setText("Unset")
-						
-						# style mod related widgets
-						self.ui.uxaEquipGeneralVSA.setStyleSheet(boxDone)
-						demod = self.ui.uxaMod.isEnabled()
-						if demod:
-							setAllDemod(self,boxDone)
-							self.ui.modButton_vsa.setStyleSheet(buttonFocus)
-						self.ui.vsaNextStack.setCurrentIndex(3)
-						self.ui.vsgNextSteps.setCurrentIndex(7)
-						self.ui.up_psg_next.setCurrentIndex(5)
-						if typeIdx == 3: #UXA
-							self.ui.uxaButton_vsa.setStyleSheet(buttonFocus)
-							self.ui.uxaButton_vsa_2.setStyleSheet(buttonFocus)
-							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)			
-						elif typeIdx == 4: #PXA
-							self.ui.pxaButton_vsa.setStyleSheet(buttonFocus)
-							self.ui.pxaButton_vsa_2.setStyleSheet(buttonFocus)
-							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)	
+						instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+						setButton.setChecked(False)
 				elif typeIdx == 1 or typeIdx == 2 or typeIdx == 5 or typeIdx == 6:
-					demodScope = self.ui.scopeMod.isEnabled()
-					demodDig = self.ui.digMod.isEnabled()
-					if demodScope or demodDig:
-						setAllDemod(self,boxDone)
-						self.ui.modButton_vsa_2.setStyleSheet(buttonFocus)
-						self.ui.modButton_vsa.setStyleSheet(buttonFocus)
+					
 				
 					setButton.setText("Unset")
 						
 					if typeIdx == 1 or typeIdx == 5: #Scope
-						self.ui.scopeEquipGeneral.setStyleSheet(boxDone)
-						self.ui.scopeButton_vsa.setStyleSheet(buttonFocus)
-						self.ui.scopeButton_vsa_2.setStyleSheet(buttonFocus)
-						self.ui.scopeButton_vsa_3.setStyleSheet(buttonFocus)
-						self.ui.scopeButton_vsa_4.setStyleSheet(buttonFocus)
-						if typeIdx == 1:
-							self.ui.vsaNextStack.setCurrentIndex(3)
-							self.ui.vsgNextSteps.setCurrentIndex(7)
-							self.ui.up_psg_next.setCurrentIndex(5)
-							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)
-						elif typeIdx == 5:
-							self.ui.vsaNextStack.setCurrentIndex(2)
-							self.ui.vsgNextSteps.setCurrentIndex(6)
-							self.ui.up_psg_next.setCurrentIndex(4)
-							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor)
+						
+						checker = [
+							self.ui.averagingEnable,
+							self.ui.demodulationEnable,
+							self.ui.vsaType,
+							
+							self.ui.noAveragesField_scope,
+							self.ui.extClkEnabled_scope,
+							self.ui.trigChannel_scope,
+							self.ui.driverPath_scope,
+							self.ui.acquisition_scope,
+							self.ui.address_scope,
+							self.ui.dllFile_scope,
+							self.ui.setupFile_scope,
+							self.ui.dataFile_scope
+						]
+						done = win.checkIfDone(checker)
+						if done:
+							demodScope = self.ui.scopeMod.isEnabled()
+							demodDig = self.ui.digMod.isEnabled()
+							if demodScope or demodDig:
+								setAllDemod(self,boxDone)
+								self.ui.modButton_vsa_2.setStyleSheet(buttonFocus)
+								self.ui.modButton_vsa.setStyleSheet(buttonFocus)
+							self.ui.scopeEquipGeneral.setStyleSheet(boxDone)
+							self.ui.scopeButton_vsa.setStyleSheet(buttonFocus)
+							self.ui.scopeButton_vsa_2.setStyleSheet(buttonFocus)
+							self.ui.scopeButton_vsa_3.setStyleSheet(buttonFocus)
+							self.ui.scopeButton_vsa_4.setStyleSheet(buttonFocus)
+							if typeIdx == 1:
+								self.ui.vsaNextStack.setCurrentIndex(3)
+								self.ui.vsgNextSteps.setCurrentIndex(7)
+								self.ui.up_psg_next.setCurrentIndex(5)
+								setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)
+							elif typeIdx == 5:
+								self.ui.vsaNextStack.setCurrentIndex(2)
+								self.ui.vsgNextSteps.setCurrentIndex(6)
+								self.ui.up_psg_next.setCurrentIndex(4)
+								setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor)
+						else:
+							instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+							setButton.setChecked(False)
 					elif typeIdx == 2 or typeIdx ==6: #Digitizer
-						self.ui.digEquipGeneral.setStyleSheet(boxDone)
-						self.ui.digButton_vsa.setStyleSheet(buttonFocus)
-						self.ui.digButton_vsa_2.setStyleSheet(buttonFocus)
-						self.ui.digButton_vsa_3.setStyleSheet(buttonFocus)
-						self.ui.digButton_vsa_4.setStyleSheet(buttonFocus)
-						if typeIdx == 2:
-							self.ui.vsaNextStack.setCurrentIndex(3)
-							self.ui.vsgNextSteps.setCurrentIndex(7)
-							self.ui.up_psg_next.setCurrentIndex(5)
-							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)
-						elif typeIdx == 6:
-							self.ui.vsaNextStack.setCurrentIndex(2)
-							self.ui.vsgNextSteps.setCurrentIndex(6)
-							self.ui.up_psg_next.setCurrentIndex(4)
-							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor)
+						checkah=[
+							self.ui.averagingEnable,
+							self.ui.demodulationEnable,
+							self.ui.vsaType,
+							
+							self.ui.refSource_dig,
+							self.ui.trigSource_dig,
+							self.ui.trigLevel_dig,
+							self.ui.clockEnabled_dig,
+							self.ui.clockFreq_dig,
+							self.ui.coupling_dig,
+							self.ui.vfs_dig,
+							self.ui.interleaving_dig,
+							self.ui.c1Interleave_dig,
+							self.ui.c2Interleave_dig,
+							self.ui.address_dig,
+							self.ui.dllFile_dig,
+							self.ui.setupFile_dig,
+							self.ui.dataFile_dig
+						]
+						done = win.checkIfDone(checkah)
+						if done:
+							demodScope = self.ui.scopeMod.isEnabled()
+							demodDig = self.ui.digMod.isEnabled()
+							if demodScope or demodDig:
+								setAllDemod(self,boxDone)
+								self.ui.modButton_vsa_2.setStyleSheet(buttonFocus)
+								self.ui.modButton_vsa.setStyleSheet(buttonFocus)
+							self.ui.digEquipGeneral.setStyleSheet(boxDone)
+							self.ui.digButton_vsa.setStyleSheet(buttonFocus)
+							self.ui.digButton_vsa_2.setStyleSheet(buttonFocus)
+							self.ui.digButton_vsa_3.setStyleSheet(buttonFocus)
+							self.ui.digButton_vsa_4.setStyleSheet(buttonFocus)
+							if typeIdx == 2:
+								self.ui.vsaNextStack.setCurrentIndex(3)
+								self.ui.vsgNextSteps.setCurrentIndex(7)
+								self.ui.up_psg_next.setCurrentIndex(5)
+								setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)
+							elif typeIdx == 6:
+								self.ui.vsaNextStack.setCurrentIndex(2)
+								self.ui.vsgNextSteps.setCurrentIndex(6)
+								self.ui.up_psg_next.setCurrentIndex(4)
+								setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor)
+						else:
+							instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+							setButton.setChecked(False)
 				# general step 3 vsa parameters
 				fSampleField = ""
 				vsaPage = self.ui.vsaMeasGenStack.currentIndex()
@@ -573,16 +664,26 @@ def setVSAAdv(self,boxDone,setButton,matlab):
 		setButton.setText("Set")
 		
 def setDown(self,buttonFocus,greyHover,buttonHover,boxDone,greyButton,buttonSelect,setButton):
+	checkDic = [
+		self.ui.comboBox_58,
+		self.ui.lineEdit_47,
+		self.ui.lineEdit_48
+	]
+	done = win.checkIfDone(checkDic)
 	if setButton.isChecked() == True:
-		setButton.setText("Unset")
-		self.ui.downButton_down.setStyleSheet(buttonFocus)
-		self.ui.downButton_down_2.setStyleSheet(buttonFocus)
-		self.ui.downEquip.setStyleSheet(boxDone)
-		setPrevDownButtons(self,buttonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor)
-		self.ui.downNextStack.setCurrentIndex(1)
-		self.ui.vsaNextStack.setCurrentIndex(3)
-		self.ui.up_psg_next.setCurrentIndex(5)
-		self.ui.vsgNextSteps.setCurrentIndex(7)
+		if done:
+			setButton.setText("Unset")
+			self.ui.downButton_down.setStyleSheet(buttonFocus)
+			self.ui.downButton_down_2.setStyleSheet(buttonFocus)
+			self.ui.downEquip.setStyleSheet(boxDone)
+			setPrevDownButtons(self,buttonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor)
+			self.ui.downNextStack.setCurrentIndex(1)
+			self.ui.vsaNextStack.setCurrentIndex(3)
+			self.ui.up_psg_next.setCurrentIndex(5)
+			self.ui.vsgNextSteps.setCurrentIndex(7)
+		else:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)
 	elif setButton.isChecked() == False:
 		self.ui.downEquip.setStyleSheet(None)
 		self.ui.downButton_down.setStyleSheet(buttonSelect)
@@ -1926,30 +2027,58 @@ def calValPreview(self):
 	self.ui.calValResultsStack.setCurrentIndex(0)
 	
 def runCalValidation(self,setBox,setButton,matlab):
+	checkDic = [
+		self.ui.comboBox_68,
+		self.ui.comboBox_112,
+		self.ui.vsaCalFileField_algo,
+		self.ui.comboBox_113,
+		self.ui.calFileIField_algo,
+		self.ui.calFileQField_algo,
+		self.ui.lineEdit_246,
+		self.ui.comboBox_85,
+		self.ui.comboBox_114,
+		self.ui.lineEdit_249,
+		self.ui.lineEdit_248,
+		self.ui.downFileField_algo,
+		self.ui.comboBox,
+		self.ui.comboBox_2,
+		self.ui.lineEdit_245,
+		self.ui.lineEdit_250,
+		self.ui.comboBox_117,
+		self.ui.comboBox_116,
+		self.ui.lineEdit_251,
+		self.ui.comboBox_118,
+		self.ui.lineEdit_252,
+	]
+	done = win.checkIfDone(checkDic)
 	if setButton.isChecked() == True:
-		setButton.setText("Unset")
-		self.ui.calValTabs.setCurrentIndex(0)
-		self.ui.resultsAlgoTabs.setCurrentIndex(2)
-		self.ui.algoNextStack.setCurrentIndex(1)
-		self.ui.debugAlgoStack.setCurrentIndex(0)
-		self.ui.calValResultsStack.setCurrentIndex(0)
-		self.ui.calValSignalEquip.setStyleSheet(setBox)
-		self.ui.calValCalFilesEquip.setStyleSheet(setBox)
-		self.ui.calValRefRXEquip.setStyleSheet(setBox)
-		self.ui.calValVSGEquip.setStyleSheet(setBox)
-		
-		self.progressBar = QProgressBar()
-		self.progressBar.setRange(1,10);
-		self.progressBar.setTextVisible(True);
-		self.progressBar.setFormat("Currently Running: Calibration Validation Routine")
-		self.ui.statusBar.addWidget(self.progressBar,1)
-		completed = 0
-		while completed < 100:
-			completed = completed + 0.00001
-			self.progressBar.setValue(completed)
-		self.ui.statusBar.removeWidget(self.progressBar)
-		# to show progress bar, need both addWidget() and show()
-		self.ui.statusBar.showMessage("Calibration Validation Routine Complete",3000)	
+		if done:
+			setButton.setText("Unset")
+			self.ui.calValTabs.setCurrentIndex(0)
+			self.ui.resultsAlgoTabs.setCurrentIndex(2)
+			self.ui.algoNextStack.setCurrentIndex(1)
+			self.ui.debugAlgoStack.setCurrentIndex(0)
+			self.ui.calValResultsStack.setCurrentIndex(0)
+			self.ui.calValSignalEquip.setStyleSheet(setBox)
+			self.ui.calValCalFilesEquip.setStyleSheet(setBox)
+			self.ui.calValRefRXEquip.setStyleSheet(setBox)
+			self.ui.calValVSGEquip.setStyleSheet(setBox)
+			
+			self.progressBar = QProgressBar()
+			self.progressBar.setRange(1,10);
+			self.progressBar.setTextVisible(True);
+			self.progressBar.setFormat("Currently Running: Calibration Validation Routine")
+			self.ui.statusBar.addWidget(self.progressBar,1)
+			completed = 0
+			while completed < 100:
+				completed = completed + 0.00001
+				self.progressBar.setValue(completed)
+			self.ui.statusBar.removeWidget(self.progressBar)
+			# to show progress bar, need both addWidget() and show()
+			self.ui.statusBar.showMessage("Calibration Validation Routine Complete",3000)
+		else:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)	
 	elif setButton.isChecked() == False:
 		setButton.setText("Set && Run")
 		self.ui.calValSignalEquip.setStyleSheet(None)
@@ -2067,102 +2196,128 @@ def runPrecharacterization(self,setBox,setButton,matlab):
 	addressField = ""
 	
 	rfOn = self.ui.emergButtonSecond.isChecked()
+	checkDic = [
+		self.ui.comboBox_81,
+		self.ui.comboBox_121,
+		self.ui.vsaCalFileField_algo_2,
+		self.ui.comboBox_122,
+		self.ui.calFileIField_algo_2,
+		self.ui.calFileQField_algo_2,
+		self.ui.noPeriods_prechar,
+		self.ui.mirrorSignal_prechar,
+		self.ui.alignFreqDomain_prechar,
+		self.ui.guardBand_prechar,
+		self.ui.crossCorrLength_prechar,
+		self.ui.downFileField_algo_2,
+		self.ui.subRate_prechar,
+		self.ui.sampRateOverwrite_prechar,
+		self.ui.noSegments_prechar,
+		self.ui.centerFreq_prechar,
+		self.ui.gainExpansionFlag_prechar,
+		self.ui.gainExpansion_prechar,
+		self.ui.freqMultiplierFlag_prechar,
+		self.ui.freqMultiplierFactor_prechar
+	]
+	done = win.checkIfDone(checkDic)
 	
 	if setButton.isChecked() == True:
-		if rfOn == False:
-			instrParamErrorMessage(self,"Turn on RF before attempting to run precharacterization setup.")
-			self.ui.emergButtonSecond.setChecked(False)
-			return
-		# choose proper fields from stacked widgets to be sent to dictionaries
-		awgPage = self.ui.awgParamsStack_vsgMeas.currentIndex()
-		if awgPage == 1:
-			ampCorrField = self.ui.ampCorrection_awgCal.currentIndex()
-			trigAmpField = self.ui.trigAmp_awgCal.text()
-		elif awgPage == 2:
-			ampCorrField = self.ui.ampCorrection_awgCal_2.currentIndex()
-			trigAmpField = self.ui.trigAmp_awgCal_2.text()
-		vsaPage = self.ui.vsaMeasGenStack.currentIndex()
-		if vsaPage == 1:
-			fCarrierField = self.ui.centerFreq_vsaMeas.text()
-			fSampleField = self.ui.sampRate_vsaMeas.text()
-		elif vsaPage == 0:
-			fCarrierField = self.ui.centerFreq_vsaMeas_2.text()
-			fSampleField = self.ui.sampRate_vsaMeas_2.text()
-		vsaType = self.ui.vsaType.currentIndex()
-		if vsaType == 1 or vsaType == 5:
-			addressField = self.ui.address_scope.text()
-		elif vsaType == 2 or vsaType == 6:
-			addressField = self.ui.address_dig.text()
-		elif vsaType == 3 or vsaType == 4:
-			addressField = self.ui.address_sa.text()
-		# define all relevant dictionaries
-		tx={
-			"Type": self.ui.vsgSetup.currentIndex(),
-			"Model": self.ui.partNum_awg.text(),
-			"FGuard" : self.ui.guardBand_prechar.text(),
-			"FCarrier" : self.ui.centerFreq_prechar.text(),
-			"FSampleDAC" : self.ui.maxSampleRate_awg.text(),
-			"NumberOfSegments" : self.ui.noSegments_prechar.text(),
-			"Amp_Corr" : ampCorrField,
-			"GainExpansion_flag" : self.ui.gainExpansionFlag_prechar.currentIndex(),
-			"GainExpansion" : self.ui.gainExpansion_prechar.text(),
-			"FreqMutiplierFlag" : self.ui.freqMultiplierFlag_prechar.currentIndex(),
-			"FreqMultiplierFactor": self.ui.freqMultiplierFactor_prechar.text(),	
-			"ReferenceClockSource": self.ui.refClockSorce_awg.currentIndex(),	
-			"iChannel": self.ui.iChannel_awg.currentIndex(),	
-			"qChannel": self.ui.qChannel_awg.currentIndex(),	
-			"ReferenceClock": self.ui.extRefFreq_awg.text(),	
-			"VFS": self.ui.dacRange_awg.text(),	
-			"TriggerAmplitude": trigAmpField
-		}
-		rx={
-			"Type" : self.ui.vsaType.currentIndex(),
-			"FCarrier" : fCarrierField,
-			"MirrorSignalFlag" : self.ui.mirrorSignal_prechar.currentIndex(),
-			"FSample" : fSampleField,
-			"MeasuredPeriods" : self.ui.noPeriods_prechar.text(),
-			"xLength" : self.ui.crossCorrLength_prechar.text(),
-			"FsampleOverwrite" : self.ui.sampRateOverwrite_prechar.currentIndex(),
-			"SubRate" : self.ui.subRate_prechar.currentIndex(),
-			"AlignFreqDomainFlag" : self.ui.alignFreqDomain_prechar.currentIndex(),
-			"DownconversionFilterFile" : self.ui.downFileField_algo_2.text(),
-			"TriggerChannel" : self.ui.trigChannel_scope.text(),
-			"ASMPath" : self.ui.dllFile_uxa.text(),
-			"SetupFile" : self.ui.setupFile_uxa.text(),
-			"DataFile" : self.ui.dataFile_uxa.text(),
-			"DemodSignalFlag": self.ui.demodulationEnable.currentIndex(),
-			"VisaAddress": addressField
+		if done:
+			if rfOn == False:
+				instrParamErrorMessage(self,"Turn on RF before attempting to run precharacterization setup.")
+				self.ui.emergButtonSecond.setChecked(False)
+				return
+			# choose proper fields from stacked widgets to be sent to dictionaries
+			awgPage = self.ui.awgParamsStack_vsgMeas.currentIndex()
+			if awgPage == 1:
+				ampCorrField = self.ui.ampCorrection_awgCal.currentIndex()
+				trigAmpField = self.ui.trigAmp_awgCal.text()
+			elif awgPage == 2:
+				ampCorrField = self.ui.ampCorrection_awgCal_2.currentIndex()
+				trigAmpField = self.ui.trigAmp_awgCal_2.text()
+			vsaPage = self.ui.vsaMeasGenStack.currentIndex()
+			if vsaPage == 1:
+				fCarrierField = self.ui.centerFreq_vsaMeas.text()
+				fSampleField = self.ui.sampRate_vsaMeas.text()
+			elif vsaPage == 0:
+				fCarrierField = self.ui.centerFreq_vsaMeas_2.text()
+				fSampleField = self.ui.sampRate_vsaMeas_2.text()
+			vsaType = self.ui.vsaType.currentIndex()
+			if vsaType == 1 or vsaType == 5:
+				addressField = self.ui.address_scope.text()
+			elif vsaType == 2 or vsaType == 6:
+				addressField = self.ui.address_dig.text()
+			elif vsaType == 3 or vsaType == 4:
+				addressField = self.ui.address_sa.text()
+			# define all relevant dictionaries
+			tx={
+				"Type": self.ui.vsgSetup.currentIndex(),
+				"Model": self.ui.partNum_awg.text(),
+				"FGuard" : self.ui.guardBand_prechar.text(),
+				"FCarrier" : self.ui.centerFreq_prechar.text(),
+				"FSampleDAC" : self.ui.maxSampleRate_awg.text(),
+				"NumberOfSegments" : self.ui.noSegments_prechar.text(),
+				"Amp_Corr" : ampCorrField,
+				"GainExpansion_flag" : self.ui.gainExpansionFlag_prechar.currentIndex(),
+				"GainExpansion" : self.ui.gainExpansion_prechar.text(),
+				"FreqMutiplierFlag" : self.ui.freqMultiplierFlag_prechar.currentIndex(),
+				"FreqMultiplierFactor": self.ui.freqMultiplierFactor_prechar.text(),	
+				"ReferenceClockSource": self.ui.refClockSorce_awg.currentIndex(),	
+				"iChannel": self.ui.iChannel_awg.currentIndex(),	
+				"qChannel": self.ui.qChannel_awg.currentIndex(),	
+				"ReferenceClock": self.ui.extRefFreq_awg.text(),	
+				"VFS": self.ui.dacRange_awg.text(),	
+				"TriggerAmplitude": trigAmpField
+			}
+			rx={
+				"Type" : self.ui.vsaType.currentIndex(),
+				"FCarrier" : fCarrierField,
+				"MirrorSignalFlag" : self.ui.mirrorSignal_prechar.currentIndex(),
+				"FSample" : fSampleField,
+				"MeasuredPeriods" : self.ui.noPeriods_prechar.text(),
+				"xLength" : self.ui.crossCorrLength_prechar.text(),
+				"FsampleOverwrite" : self.ui.sampRateOverwrite_prechar.currentIndex(),
+				"SubRate" : self.ui.subRate_prechar.currentIndex(),
+				"AlignFreqDomainFlag" : self.ui.alignFreqDomain_prechar.currentIndex(),
+				"DownconversionFilterFile" : self.ui.downFileField_algo_2.text(),
+				"TriggerChannel" : self.ui.trigChannel_scope.text(),
+				"ASMPath" : self.ui.dllFile_uxa.text(),
+				"SetupFile" : self.ui.setupFile_uxa.text(),
+				"DataFile" : self.ui.dataFile_uxa.text(),
+				"DemodSignalFlag": self.ui.demodulationEnable.currentIndex(),
+				"VisaAddress": addressField
+				
+			}
+			dSignal = {
+				"signalName": self.ui.comboBox_81.currentIndex(),
+			}
+			# set signal dictionary
+			matlab.Set_Prechar_Signal(dSignal,nargout=0)
+			# set signal generation dictionary
+			matlab.Set_RXTX_Structures(tx,rx,nargout=0)
 			
-		}
-		dSignal = {
-			"signalName": self.ui.comboBox_81.currentIndex(),
-		}
-		# set signal dictionary
-		matlab.Set_Prechar_Signal(dSignal,nargout=0)
-		# set signal generation dictionary
-		matlab.Set_RXTX_Structures(tx,rx,nargout=0)
-		
-		# make debugging panel visible
-		self.ui.debugAlgoStack.setCurrentIndex(0)
-		
-		# create progress bar
-		progressBar = QProgressBar()
-		progressBar.setRange(0,7);
-		progressBar.setTextVisible(True);
-		self.ui.statusBar.addWidget(progressBar,1)
-		
-		# create thread to run signal generation routine
-		self.precharThread = runSignalGenerationThread(progressBar,self,setBox)
-		# connect signals to the thread
-		# as routine is run, update progress bar and step
-		self.precharThread.updateBar.connect(updatePrecharBar)
-		# when nmse and papr are available, update gui
-		self.precharThread.updateData.connect(updatePrecharData)
-		# if error occurs, break thread and alery
-		self.precharThread.errorOccurred.connect(errorOccurred)
-		# begin running signal generation
-		self.precharThread.start()	
+			# make debugging panel visible
+			self.ui.debugAlgoStack.setCurrentIndex(0)
 			
+			# create progress bar
+			progressBar = QProgressBar()
+			progressBar.setRange(0,7);
+			progressBar.setTextVisible(True);
+			self.ui.statusBar.addWidget(progressBar,1)
+			
+			# create thread to run signal generation routine
+			self.precharThread = runSignalGenerationThread(progressBar,self,setBox)
+			# connect signals to the thread
+			# as routine is run, update progress bar and step
+			self.precharThread.updateBar.connect(updatePrecharBar)
+			# when nmse and papr are available, update gui
+			self.precharThread.updateData.connect(updatePrecharData)
+			# if error occurs, break thread and alery
+			self.precharThread.errorOccurred.connect(errorOccurred)
+			# begin running signal generation
+			self.precharThread.start()	
+		else:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)	
 	elif setButton.isChecked() == False:
 		setButton.setText("Set && Run")
 		self.ui.algoNextStack.setCurrentIndex(2)
@@ -2178,34 +2333,95 @@ def dpdPreview(self):
 	self.ui.dpdAlgoStack.setCurrentIndex(0)
 	
 def runDPD(self,setBox,setButton,matlab):
+
+	checkDic = [
+		self.ui.comboBox_130,
+		self.ui.comboBox_131,
+		self.ui.customIField_algo,
+		self.ui.customQField_algo,
+		self.ui.comboBox_132,
+		self.ui.vsaCalFileField_algo_3,
+		self.ui.comboBox_133,
+		self.ui.calFileIField_algo_3,
+		self.ui.calFileQField_algo_3,
+		self.ui.comboBox_134,
+		self.ui.lineEdit_263,
+		self.ui.lineEdit_264,
+		self.ui.lineEdit_265,
+		self.ui.lineEdit_266,
+		self.ui.downFileField_algo_3,
+		self.ui.comboBox_84,
+		self.ui.comboBox_128,
+		self.ui.lineEdit_267,
+		self.ui.lineEdit_268,
+		self.ui.comboBox_135,
+		self.ui.comboBox_136,
+		self.ui.lineEdit_269,
+		self.ui.comboBox_138,
+		self.ui.lineEdit_270,
+		self.ui.lineEdit_284,
+		self.ui.lineEdit_283,
+		self.ui.comboBox_140,
+		self.ui.comboBox_129,
+		self.ui.comboBox_139,
+		self.ui.comboBox_141,
+		self.ui.comboBox_154,
+		self.ui.comboBox_153,
+		self.ui.comboBox_155,
+		self.ui.lineEdit_282,
+		self.ui.lineEdit_281,
+		self.ui.lineEdit_280,
+		self.ui.lineEdit_279,
+		self.ui.lineEdit_278,
+		self.ui.comboBox_156,
+		self.ui.comboBox_157,
+		self.ui.comboBox_158,
+		self.ui.comboBox_159,
+		self.ui.lineEdit_277,
+		self.ui.lineEdit_276,
+		self.ui.lineEdit_275,
+		self.ui.comboBox_161,
+		self.ui.comboBox_162,
+		self.ui.lineEdit_274,
+		self.ui.comboBox_160,
+		self.ui.lineEdit_273,
+		self.ui.lineEdit_272,
+		self.ui.lineEdit_271
+	]
+	done = win.checkIfDone(checkDic)
+	
 	if setButton.isChecked() == True:
-		setButton.setText("Unset")
-		self.ui.dpdTabs.setCurrentIndex(0)
-		self.ui.resultsAlgoTabs.setCurrentIndex(4)
-		self.ui.algoNextStack.setCurrentIndex(5)
-		self.ui.debugAlgoStack.setCurrentIndex(1)
-		self.ui.dpdAlgoStack.setCurrentIndex(0)
-		self.ui.dpdSignalEquip.setStyleSheet(setBox)
-		self.ui.dpdCalFilesEquip.setStyleSheet(setBox)
-		self.ui.dpdGeneralEquip.setStyleSheet(setBox)
-		self.ui.dpdModelEquip.setStyleSheet(setBox)
-		self.ui.dpdAWGEquip.setStyleSheet(setBox)
-		self.ui.dpdRefRXEquip.setStyleSheet(setBox)
-		self.ui.dpdVSGEquip.setStyleSheet(setBox)
-		self.ui.dpdTrainingEquip.setStyleSheet(setBox)
-		
-		self.progressBar = QProgressBar()
-		self.progressBar.setRange(1,10);
-		self.progressBar.setTextVisible(True);
-		self.progressBar.setFormat("Currently Running: PreCharacterization Setup Routine")
-		self.ui.statusBar.addWidget(self.progressBar,1)
-		completed = 0
-		while completed < 100:
-			completed = completed + 0.00001
-			self.progressBar.setValue(completed)
-		self.ui.statusBar.removeWidget(self.progressBar)
-		# to show progress bar, need both addWidget() and show()
-		self.ui.statusBar.showMessage("PreCharacterization Setup Routine Complete",3000)	
+		if done:
+			setButton.setText("Unset")
+			self.ui.dpdTabs.setCurrentIndex(0)
+			self.ui.resultsAlgoTabs.setCurrentIndex(4)
+			self.ui.algoNextStack.setCurrentIndex(5)
+			self.ui.debugAlgoStack.setCurrentIndex(1)
+			self.ui.dpdAlgoStack.setCurrentIndex(0)
+			self.ui.dpdSignalEquip.setStyleSheet(setBox)
+			self.ui.dpdCalFilesEquip.setStyleSheet(setBox)
+			self.ui.dpdGeneralEquip.setStyleSheet(setBox)
+			self.ui.dpdModelEquip.setStyleSheet(setBox)
+			self.ui.dpdAWGEquip.setStyleSheet(setBox)
+			self.ui.dpdRefRXEquip.setStyleSheet(setBox)
+			self.ui.dpdVSGEquip.setStyleSheet(setBox)
+			self.ui.dpdTrainingEquip.setStyleSheet(setBox)
+			
+			self.progressBar = QProgressBar()
+			self.progressBar.setRange(1,10);
+			self.progressBar.setTextVisible(True);
+			self.progressBar.setFormat("Currently Running: PreCharacterization Setup Routine")
+			self.ui.statusBar.addWidget(self.progressBar,1)
+			completed = 0
+			while completed < 100:
+				completed = completed + 0.00001
+				self.progressBar.setValue(completed)
+			self.ui.statusBar.removeWidget(self.progressBar)
+			# to show progress bar, need both addWidget() and show()
+			self.ui.statusBar.showMessage("PreCharacterization Setup Routine Complete",3000)	
+		else:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)	
 	elif setButton.isChecked() == False:
 		setButton.setText("Set && Run")
 		self.ui.algoNextStack.setCurrentIndex(4)
