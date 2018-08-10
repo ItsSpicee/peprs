@@ -1271,20 +1271,20 @@ def setVSAMeasGen(self,boxDone,buttonHover,buttonDone,setButton,matlab):
 					self.ui.digMark_vsaMeas_4.setVisible(True)
 					self.ui.vsaMeasNextStack.setCurrentIndex(1)
 			elif vsaType == 0:
-				if analyzerType == 1: # scope
+				if analyzerType == 0: # scope
 					self.ui.scopeMark_vsaMeas.setVisible(True)
 					self.ui.scopeMark_vsaMeas_2.setVisible(True)
 					self.ui.scopeMark_vsaMeas_3.setVisible(True)
 					self.ui.scopeMark_vsaMeas_4.setVisible(True)
-				elif analyzerType == 2: # dig
+				elif analyzerType == 1: # dig
 					self.ui.digMark_vsaMeas.setVisible(True)
 					self.ui.digMark_vsaMeas_2.setVisible(True)
 					self.ui.digMark_vsaMeas_3.setVisible(True)
 					self.ui.digMark_vsaMeas_4.setVisible(True)
-				elif analyzerType == 3: # uxa
+				elif analyzerType == 2: # uxa
 					self.ui.uxaMark_vsaMeas.setVisible(True)
 					self.ui.uxaMark_vsaMeas_2.setVisible(True)
-				elif analyzerType == 4: # pxa
+				elif analyzerType == 3: # pxa
 					self.ui.pxaMark_vsaMeas.setVisible(True)
 					self.ui.pxaMark_vsaMeas_2.setVisible(True)
 				if vsgType == 3: # vsg
@@ -1586,7 +1586,6 @@ def awgCalRoutine(self,boxDone,setButton,matlab):
 		
 		self.ui.centerFreq_awgCal,
 		self.ui.ampCorrection_awgCal,
-		self.ui.ampCorrFile_vsgMeas,
 		self.ui.vfs_awgCal,
 		self.ui.trigAmp_awgCal,
 		self.ui.sampleClockFreq_awgCal,
@@ -1741,7 +1740,6 @@ def noAWGCalRoutine(self,boxDone,setButton,matlab):
 	checkDic = [
 		self.ui.centerFreq_awgCal_2,
 		self.ui.ampCorrection_awgCal_2,
-		self.ui.ampCorrFileField_vsgMeas,
 		self.ui.vfs_awgCal_2,
 		self.ui.trigAmp_awgCal_2,
 		self.ui.sampleClockFreq_awgCal_2

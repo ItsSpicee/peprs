@@ -102,16 +102,12 @@ def switchMeasTabVSA(self):
 	vsaDownRunChecked = self.ui.set_run_vsa.isChecked()
 	downStack = self.ui.downStack_vsaMeas.currentIndex()
 	vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
-	if currentTab == 0 or currentTab == 2:
-		self.ui.calAdviceText.setVisible(False)
-	elif currentTab == 1:
+	if currentTab == 1:
 		if downStack == 1:
-			self.ui.calAdviceText.setVisible(True)
 			if vsaDownChecked == False and vsaDownRunChecked == False:
 				if vsaChecked or vsaChecked_2:
 					self.ui.vsaMeasNextStack.setCurrentIndex(2)
 		else:
-			self.ui.calAdviceText.setVisible(False)
 			if vsgType == 3: # vsg
 				self.ui.vsaMeasNextStack.setCurrentIndex(6)
 			else:
