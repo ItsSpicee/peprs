@@ -58,7 +58,29 @@
 <p>To create a python exe file to use during deployment, choose one of these methods: https://wiki.python.org/moin/PyQt/Deploying_PyQt_Applications </p>
 <p>The application will be statically deployed, so it is very important that the correct qt version is installed </p>
 
-<h2>Usage</h2>
+<h2>GUI Features aka How to Use the GUI</h2>
+<h3>Copying the Repository</h3>
+<p>The repository can be located in the working drive in the 'peprs' folder. Clone this repo to your local computer.</p>
+<p>For more information on setting up and using a git repo on a server, visit this link: https://gist.github.com/wlbr/1685405</p>
+<h3>Starting the GUI</h3>
+<p>To start the GUI, there are two possible methods. 
+<br>
+1) Open the 'main.py' file in your file explorer 
+<br>
+2) Open command prompt (windows) or terminal (mac). Navigate to your cloned repository (using the cd command) and run main.py. Command prompt will allow you to see extra feedback typically displayed in matlab when running scripts. This information is not always displayed in the GUI.
+</p>
+<h3>Welcoming Dialog</h3>
+<p>After running main, the first thing that appears is a dialog window asking you to choose your desired DUT setup. Currently, the only option that is accessible and functional is the SISO DUT.</p>
+<h3>Next Steps</h3>
+<p>Throughout the GUI, there is a 'Next Step' section that will prompt you on what action you should take if you ever need guidance.</p>
+<h3>Tabs</h3>
+<p>The GUI consists of four tabs, each of which will be explained below.</p>
+<h4>Dashboard Tab</h4>
+<p>The dashboard tab is the landing page after the DUT setup is selected. It shows the setup of the equipment workbench.</p>
+<h4>Step 1 - Set Equipment</h4>
+<p></p>
+<h4>Step 2 - Set Measurements</h4>
+<h4>Step 3 - Set & Run Algorithms</h4>
 <h3>Opening and Saving Parameter Settings</h3>
 <p>In the top menu bar under File, there is the ability to save and open parameter setups. The appropriate text fields, drop downs, checkboxes, and radio buttons will be set to the appropriate value when saved and loaded. However, you will still have to set all of the appropriate buttons in the GUI i.e. push the "Set" or "Set & Run" buttons.</p>
 <h3>Enabling Safety and Quality Checks</h3>
