@@ -52,12 +52,14 @@ def closeButton(self):
 	if reply == QMessageBox.Yes:
 		qApp.quit()
 
-def changeStepTab(self,safety,quality):
+def changeStepTab(self,safety):
+	# determine size window should be set to 
 	maxTrue = self.isMaximized()
 	screen = QGuiApplication.primaryScreen()
 	screenSize = screen.availableSize()
 	height = screenSize.height()
 	maxHeight = height - 50
+	
 	i = self.ui.stepTabs.currentIndex()
 	measStack = self.ui.measStack.currentIndex()
 	measTabVsa = self.ui.vsaMeasParamTabs.currentIndex()
@@ -66,6 +68,10 @@ def changeStepTab(self,safety,quality):
 	upEnabled = self.ui.vsgWorkflow_vsgMeas.currentIndex()
 	vsgStack = self.ui.awgParamsStack_vsgMeas.currentIndex()
 	safetyState = self.ui.actionEnable_Safety_Check.isChecked()
+	# has calibration been done parameters
+	vsgCal = self.ui.vsgCalType.currentIndex()
+	vsaCal = self.ui.generateVSACalCheck.isChecked()
+	
 	if maxTrue == False:
 		if i == 2:
 			self.setMinimumSize(1265,700)
@@ -81,14 +87,14 @@ def changeStepTab(self,safety,quality):
 				self.resize(1265,maxHeight)
 				self.center()
 		elif i == 0:
-			counterThree = tabCounterIncrement.counterThree
-			if counterThree == 0 and safetyState:
-				quality.exec_()
-				tabCounterIncrement(self,"up")
+			self.setMinimumSize(1265,maxHeight)
+			self.resize(1265,maxHeight)
+			self.center()
+			# if no calibration has been done, disable calibration validation tab
+			if vsgCal == 0 and vsaCal == False:
+				self.ui.algoTabs.setTabEnabled(0,False)
 			else:
-				self.setMinimumSize(1265,maxHeight)
-				self.resize(1265,maxHeight)
-				self.center()
+				self.ui.algoTabs.setTabEnabled(0,True)
 		elif i == 3:
 			self.setMinimumSize(1265,700)
 			self.resize(1265,700)
@@ -135,9 +141,15 @@ def switchMeasTabVSG(self):
 			self.ui.upParamsStack_vsgMeas.setCurrentIndex(4)
 			if awgChecked or awgRunChecked:
 				self.ui.vsgMeasNextStack.setCurrentIndex(8)
-				
-def switchAlgoTab(self):
+# called when tab in step 3 is changed (cal val, prechar, dpd)				
+def switchAlgoTab(self,quality):
 	currentTab = self.ui.algoTabs.currentIndex()
+	safetyState = self.ui.actionEnable_Safety_Check.isChecked()
+	if currentTab == 2:
+		counterThree = tabCounterIncrement.counterThree
+		if counterThree == 0 and safetyState:
+			quality.exec_()
+			tabCounterIncrement(self,"up")
 
 def fileBrowse(self, lineEdit,path):
 	fileInfo = str(QFileDialog.getOpenFileName(self,"Choose a File",path))
@@ -168,7 +180,7 @@ def fileOpen(self,lineEdit,path):
 	file = file.replace("(","")
 	lineEdit.clear()
 	lineEdit.setText(file)
-
+# check to see that all parameters are filled out when set, if not, outline them in red
 def checkIfDone(array):
 	# check if any parameters are unfilled
 	status = 1

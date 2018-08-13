@@ -1,16 +1,19 @@
-# setParameters.py contains all the functions that are called whenever a "set" "set & run" or "preview" button is clicked
+# setParameters.py contains all the functions that are called whenever a "set", "set & run", "update", or "preview" button is clicked
 
+# import relevant Qt classes
 from PyQt5.QtWidgets import (QProgressBar,QMessageBox,QLabel,QPushButton)
 from PyQt5.QtGui import (QCursor,QPixmap)
 from PyQt5.QtCore import (Qt,QSize,QThread,pyqtSignal)
 
+# import python files and variables
 import windowFunctions as win
+from main import matlab as matlab
 
+# import matplotlib library and numpy
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.offsetbox import (OffsetImage, AnnotationBbox)
 import matplotlib.image as mpimg
-from main import matlab as matlab
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions used in main.py
@@ -18,6 +21,7 @@ from main import matlab as matlab
 incomplete = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #f24646}"
 redBorder = "QComboBox{background-color:rgb(247, 247, 247); border:2px solid #f24646}"
 
+# thread that is called when signal generation/precharacterization setup is run
 class runSignalGenerationThread(QThread):
 	updateBar = pyqtSignal(object,str,QProgressBar,object)
 	updateData = pyqtSignal(object,str)
@@ -33,9 +37,12 @@ class runSignalGenerationThread(QThread):
 		self.wait()
 		
 	def run(self):
+		# update progress bar
 		completed = "0"
 		self.updateBar.emit(self.main,completed,self.bar,self.style)
+		# run part of signal generation routine
 		result = matlab.Set_Parameters_PrecharDebug(nargout=1)
+		# if no errors, update bar again, else return error
 		if result == "":
 			completed = "1"
 			self.updateBar.emit(self.main,completed,self.bar,self.style)
@@ -78,6 +85,7 @@ class runSignalGenerationThread(QThread):
 			self.errorOccurred.emit(self.main,result,self.bar)
 			return
 		result = matlab.Save_Measurements_PrecharDebug(nargout=1)
+		# returning data values as well, not just error
 		resultSplit = result.split("~")
 		if resultSplit[0] == "":
 			self.updateData.emit(self.main,result)
@@ -87,6 +95,7 @@ class runSignalGenerationThread(QThread):
 			self.errorOccurred.emit(self.main,result,self.bar)
 			return
 
+# thread that is called when heterodyne calibration is run
 class runHeterodyneCalibrationThread(QThread):
 	updateBar = pyqtSignal(object,str,QProgressBar,object)
 	#updateData = pyqtSignal(object,str)
@@ -157,7 +166,7 @@ class runHeterodyneCalibrationThread(QThread):
 			# return
 			
 def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,awgSetGeneral,matlab):
-	#Array used instead of dictionary, cannot properly get the object type elements stored in a dict
+	# array to check that all parameters are filled out when set button is clicked
 	checkDic = [
 		self.ui.address_awg,
 		self.ui.refClockSorce_awg,
@@ -167,13 +176,14 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 		self.ui.qChannel_awg,
 		self.ui.maxSampleRate_awg
 	]
-
+	
 	flag = 0
 	if awgSetGeneral.isChecked() == True:
-		#one single call to a windowfunctions.py function
+		# check if all parameters are filled
 		done = win.checkIfDone(checkDic)
 		if done:
 			# call matlab instrument code
+			# define dictionary for matlab struct
 			d={
 				"address": self.ui.address_awg.text(),
 				"refClkSrc": self.ui.refClockSorce_awg.currentIndex(),
