@@ -1,7 +1,7 @@
 % channel 1 and 2 are coupled
 % iqconfig creates arbConfig file
 % uses a modified version of xfprintf from the instrument functions in
-% order to return the error to the GUI instead of MATLAB
+% order to return the error to GUI instead of MATLAB
 
 function result = Set_AWG(dict)
     % load arbConfig file in order to connect to AWG (cannot do so through
@@ -118,8 +118,3 @@ function result = Set_AWG(dict)
     result = char(resultsString);
     save('.\Step 1 Functions\arbConfig.mat','arbConfig')
 end
-
-% OLD CODE
-% start signal generation on channel 1 (both if coupled)
-%fprintf(f, ':INITiate:IMMediate1');
-%clearvars -except arbConfig result

@@ -164,6 +164,23 @@ class runHeterodyneCalibrationThread(QThread):
 		# else:
 			# self.errorOccurred.emit(self.main,result,self.bar)
 			# return
+
+# thread called when RX calibration is run			
+# class runRXCalibrationThread(QThread):
+	# updateBar = pyqtSignal(object,str,QProgressBar,object)
+	# #updateData = pyqtSignal(object,str)
+	# errorOccurred = pyqtSignal(object,str,object) 
+	
+	# def __init__(self,bar,main,style):
+		# QThread.__init__(self)
+		# self.bar = bar
+		# self.main = main
+		# self.style = style
+	
+	# def __del__(self):
+		# self.wait()
+		
+	# def run(self):
 			
 def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,awgSetGeneral,matlab):
 	# array to check that all parameters are filled out when set button is clicked
@@ -176,7 +193,7 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 		self.ui.qChannel_awg,
 		self.ui.maxSampleRate_awg
 	]
-	
+	# flag for determining if code was run without errors
 	flag = 0
 	if awgSetGeneral.isChecked() == True:
 		# check if all parameters are filled
@@ -190,14 +207,7 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 				"refClkFreq": self.ui.extRefFreq_awg.text(),
 				"model": self.ui.model_awg.currentIndex()
 			}
-			iChannel = self.ui.iChannel_awg.currentIndex()
-			qChannel = self.ui.qChannel_awg.currentIndex()
-			if iChannel == 0 or qChannel == 0:
-				instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
-			else:
-				# matlab.Set_Channel_Mapping(iChannel,qChannel,"RX",nargout=0)
-				# matlab.Set_Channel_Mapping(iChannel,qChannel,"AWG",nargout=0)
-				flag = setAWGParams(self,d,matlab)
+			flag = setAWGParams(self,d,matlab)
 		else:
 			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 			awgSetGeneral.setChecked(False)
@@ -1399,7 +1409,6 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 		#other
 		self.ui.rfCenterFreq_down,
 		self.ui.ifCenterFreq_down,
-		self.ui.noFrameTimes_down,
 		self.ui.loFreq_down,
 		self.ui.mirrorFlag_down,
 		self.ui.trigAmp_down
@@ -1411,18 +1420,19 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 			setButton.setText("Unset")
 			
 			# determine whcih fields to use
-			
 			addressField = ""
 			fCarrierField = ""
 			fSampleField = ""
-			
+			noPeriodsField = ""
 			vsaPage = self.ui.vsaMeasGenStack.currentIndex()
 			if vsaPage == 1:
 				fCarrierField = self.ui.centerFreq_vsaMeas.text()
 				fSampleField = self.ui.sampRate_vsaMeas.text()
+				noPeriodsField = self.ui.noFrameTimes_vsaMeas_2.text()
 			elif vsaPage == 0:
 				fCarrierField = self.ui.centerFreq_vsaMeas_2.text()
 				fSampleField = self.ui.sampRate_vsaMeas_2.text()
+				noPeriodsField = self.ui.noFrameTimes_vsaMeas_2.tex()
 			vsaType = self.ui.vsaType.currentIndex()
 			if vsaType == 1 or vsaType == 5:
 				addressField = self.ui.address_scope.text()
@@ -1476,7 +1486,7 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 				"Fcarrier" : fCarrierField,
 				"mirrorFlag" : self.ui.mirrorFlag_down.currentIndex(),
 				"Fsample" : fSampleField,
-				"NumberOfMeasuredPeriods" : self.ui.noFrameTimes_down.text(),
+				"NumberOfMeasuredPeriods" : noPeriodsField,
 				"VisaAddress": addressField,
 				"DriverPath" : self.ui.driverPath_scope.text(),
 				"EnableExternalClock_Scope" : self.ui.extClkEnabled_scope.currentIndex(),
@@ -1634,7 +1644,6 @@ def awgCalRoutine(self,boxDone,setButton,matlab):
 		self.ui.sampleClockFreq_awgCal,
 		
 		self.ui.mirrorFlag_awgCal,
-		self.ui.noRXPeriods_awgCal,
 		self.ui.downFilterFileField_vsgMeas,
 		self.ui.noTXPeriods_awgCal,
 		self.ui.awgChannel_awgCal,
@@ -1647,15 +1656,18 @@ def awgCalRoutine(self,boxDone,setButton,matlab):
 			fCarrierField = ""
 			fSampleField = ""
 			addressField = ""
+			noPeriodsField = ""
 			
 			# determine which field on which page should be used
 			vsaPage = self.ui.vsaMeasGenStack.currentIndex()
 			if vsaPage == 1:
 				fCarrierField = self.ui.centerFreq_vsaMeas.text()
-				fSampleField = self.ui.sampRate_vsaMeas.text()
+				fSampleField = self.ui.sampRate_vsaMeas.text(),
+				noPeriodsField = self.ui.noFrameTimes_vsaMeas.text()
 			elif vsaPage == 0:
 				fCarrierField = self.ui.centerFreq_vsaMeas_2.text()
-				fSampleField = self.ui.sampRate_vsaMeas_2.text()
+				fSampleField = self.ui.sampRate_vsaMeas_2.text(),
+				noPeriodsField = self.ui.noFrameTimes_vsaMeas_2.text()
 			vsaType = self.ui.vsaType.currentIndex()
 			if vsaType == 1 or vsaType == 5:
 				addressField = self.ui.address_scope.text()
@@ -1717,7 +1729,7 @@ def awgCalRoutine(self,boxDone,setButton,matlab):
 				"Fcarrier" : fCarrierField,
 				"MirrorFlag" : self.ui.mirrorFlag_awgCal.currentIndex(),
 				"Fsample" : fSampleField,
-				"NumberOfMeasuredPeriods" : self.ui.noRXPeriods_awgCal.text(),
+				"NumberOfMeasuredPeriods" : noPeriodsField,
 				"VisaAddress": addressField,
 				"DriverPath": self.ui.driverPath_scope.text(),
 				"EnableExternalClock_Scope": self.ui.extClkEnabled_scope.currentIndex(),
@@ -1919,10 +1931,7 @@ def setHetero(self,boxDone,setButton,matlab):
 		self.ui.comboBox_102,
 		self.ui.mirrorFlag_hetero,
 		self.ui.freqDomainAlign_hetero,
-		self.ui.noRXPeriods_hetero,
 		self.ui.downFileField_vsgMeas,
-		self.ui.noTXPeriods_hetero,
-		self.ui.vsgCenterFreq_hetero,
 		self.ui.expansionMarginEnable_hetero,
 		self.ui.expansionMargin_hetero,
 		self.ui.vsaCalFileEnable_hetero,
@@ -1949,22 +1958,30 @@ def setHetero(self,boxDone,setButton,matlab):
 			trigAmpField = ""
 			fCarrierField = ""
 			fSampleField = ""
-			
+			noPeriodsField = ""
+			noTXPeriodsField = ""
+			vsgCenterFreqField = ""
 			# determine which field on which page should be used
 			awgCalPage = self.ui.awgParamsStack_vsgMeas.currentIndex()
 			if awgCalPage == 2:
 				vfsField = self.ui.vfs_awgCal_2.text()
 				trigAmpField = self.ui.trigAmp_awgCal_2.text()
+				noTXPeriodsField = self.ui.noTXPeriods_awgMeas.text()
+				vsgCenterFreqField = self.ui.centerFreq_awgCal_2.text()
 			elif awgCalPage == 1:
 				vfsField = self.ui.vfs_awgCal.text()
 				trigAmpField = self.ui.trigAmp_awgCal.text()
+				noTXPeriodsField = self.ui.noTXPeriods_awgCal.text()
+				vsgCenterFreqField = self.ui.centerFreq_awgCal.text()
 			vsaPage = self.ui.vsaMeasGenStack.currentIndex()
 			if vsaPage == 1:
 				fCarrierField = self.ui.centerFreq_vsaMeas.text()
 				fSampleField = self.ui.sampRate_vsaMeas.text()
+				noPeriodsField = self.ui.noFrameTimes_vsaMeas.text()
 			elif vsaPage == 0:
 				fCarrierField = self.ui.centerFreq_vsaMeas_2.text()
 				fSampleField = self.ui.sampRate_vsaMeas_2.text()
+				noPeriodsField = self.ui.noFrameTimes_vsaMeas_2.text()
 			vsaType = self.ui.vsaType.currentIndex()
 			if vsaType == 1 or vsaType == 5:
 				addressField = self.ui.address_scope.text()
@@ -2017,11 +2034,11 @@ def setHetero(self,boxDone,setButton,matlab):
 				"ReferenceClock": self.ui.extRefFreq_awg.text(),
 				"VFS": vfsField,	
 				"TriggerAmplitude": trigAmpField,
-				"NumberOfTransmittedPeriods": self.ui.noTXPeriods_hetero.text(),
+				"NumberOfTransmittedPeriods": noTXPeriodsField,
 				"ExpansionMarginEnable": self.ui.expansionMarginEnable_hetero.currentIndex(),
 				"ExpansionMargin" : self.ui.expansionMargin_hetero.text(),
-				"Fcarrier" : self.ui.vsgCenterFreq_hetero.text(),
-				"AWG_Channel" : self.ui.awgChannel_awgCal.text()
+				"Fcarrier" : vsgCenterFreqField,
+				"AWG_Channel" : self.ui.vsgChannel_hetero.text()
 			}
 			rx={
 				"Type" : self.ui.vsaType.currentIndex(),
@@ -2029,7 +2046,7 @@ def setHetero(self,boxDone,setButton,matlab):
 				"MirrorSignalFlag" : self.ui.mirrorFlag_hetero.currentIndex(),
 				"XCorrLength" : self.ui.xCorrLength_vsgMeas.text(),
 				"FSample" : fSampleField,
-				"MeasuredPeriods" : self.ui.noRXPeriods_hetero.text(),
+				"MeasuredPeriods" : noPeriodsField,
 				"VisaAddress": addressField,
 				"EnableExternalClock_Scope" : self.ui.extClkEnabled_scope.currentIndex(),
 				"TriggerChannel" : self.ui.trigChannel_scope.text(),
@@ -2116,11 +2133,8 @@ def setHomo(self,boxDone,setButton):
 		self.ui.comboBox_142,
 		self.ui.lineEdit_199,
 		self.ui.comboBox_150,
-		self.ui.lineEdit_200,
 		self.ui.downFileField_vsgMeas_2,
-		self.ui.lineEdit_201,
 		self.ui.lineEdit_202,
-		self.ui.lineEdit_203,
 		self.ui.lineEdit_204,
 		self.ui.lineEdit_205,
 		self.ui.lineEdit_206,
@@ -2129,6 +2143,7 @@ def setHomo(self,boxDone,setButton):
 		self.ui.comboBox_152,
 		self.ui.calFileIField_vsgMeas,
 		self.ui.calFileQField_vsgMeas,
+		self.ui.vsgChannel_homo,
 		self.ui.comboBox_151,
 		self.ui.vsaCalFielField_vsgMeas,
 		self.ui.comboBox_148,
@@ -2212,7 +2227,6 @@ def runCalValidation(self,setBox,setButton,matlab):
 		self.ui.comboBox_113,
 		self.ui.calFileIField_algo,
 		self.ui.calFileQField_algo,
-		self.ui.lineEdit_246,
 		self.ui.comboBox_85,
 		self.ui.comboBox_114,
 		self.ui.lineEdit_249,
@@ -2220,8 +2234,6 @@ def runCalValidation(self,setBox,setButton,matlab):
 		self.ui.downFileField_algo,
 		self.ui.comboBox,
 		self.ui.comboBox_2,
-		self.ui.lineEdit_245,
-		self.ui.lineEdit_250,
 		self.ui.comboBox_117,
 		self.ui.comboBox_116,
 		self.ui.lineEdit_251,
@@ -2277,22 +2289,31 @@ def preCharPreview(self,matlab):
 	fCarrierField = ""
 	fSampleField = ""
 	addressField = ""
+	noPeriodsField = ""
+	vsgCenterFreqField = ""
+	noSegmentsField = ""
 	
 	# choose proper fields from stacked widgets to be sent to dictionaries
 	awgPage = self.ui.awgParamsStack_vsgMeas.currentIndex()
 	if awgPage == 1:
 		ampCorrField = self.ui.ampCorrection_awgCal.currentIndex()
 		trigAmpField = self.ui.trigAmp_awgCal.text()
+		vsgCenterFreqField = self.ui.centerFreq_awgCal.text()
+		noSegmentsField = self.ui.noTXPeriods_awgCal.text()
 	elif awgPage == 2:
 		ampCorrField = self.ui.ampCorrection_awgCal_2.currentIndex()
 		trigAmpField = self.ui.trigAmp_awgCal_2.text()
+		vsgCenterFreqField = self.ui.centerFreq_awgCal_2.text()
+		noSegmentsField = self.ui.noTXPeriods_awgMeas.text()
 	vsaPage = self.ui.vsaMeasGenStack.currentIndex()
 	if vsaPage == 1:
 		fCarrierField = self.ui.centerFreq_vsaMeas.text()
 		fSampleField = self.ui.sampRate_vsaMeas.text()
+		noPeriodsField = self.ui.noFrameTimes_vsaMeas.text()
 	elif vsaPage == 0:
 		fCarrierField = self.ui.centerFreq_vsaMeas_2.text()
 		fSampleField = self.ui.sampRate_vsaMeas_2.text()
+		noPeriodsField = self.ui.noFrameTimes_vsaMeas_2.text()
 	vsaType = self.ui.vsaType.currentIndex()
 	if vsaType == 1 or vsaType == 5:
 		addressField = self.ui.address_scope.text()
@@ -2305,9 +2326,9 @@ def preCharPreview(self,matlab):
 		"Type": self.ui.vsgSetup.currentIndex(),
 		"Model": self.ui.partNum_awg.text(),
 		"FGuard" : self.ui.guardBand_prechar.text(),
-		"FCarrier" : self.ui.centerFreq_prechar.text(),
+		"FCarrier" : vsgCenterFreqField,
 		"FSampleDAC" : self.ui.maxSampleRate_awg.text(),
-		"NumberOfSegments" : self.ui.noSegments_prechar.text(),
+		"NumberOfSegments" : noSegmentsField,
 		"Amp_Corr" : ampCorrField,
 		"GainExpansion_flag" : self.ui.gainExpansionFlag_prechar.currentIndex(),
 		"GainExpansion" : self.ui.gainExpansion_prechar.text(),
@@ -2325,7 +2346,7 @@ def preCharPreview(self,matlab):
 		"FCarrier" : fCarrierField,
 		"MirrorSignalFlag" : self.ui.mirrorSignal_prechar.currentIndex(),
 		"FSample" : fSampleField,
-		"MeasuredPeriods" : self.ui.noPeriods_prechar.text(),
+		"MeasuredPeriods" : noPeriodsField,
 		"xLength" : self.ui.crossCorrLength_prechar.text(),
 		"FsampleOverwrite" : self.ui.sampRateOverwrite_prechar.currentIndex(),
 		"SubRate" : self.ui.subRate_prechar.currentIndex(),
@@ -2372,6 +2393,9 @@ def runPrecharacterization(self,setBox,setButton,matlab):
 	fCarrierField = ""
 	fSampleField = ""
 	addressField = ""
+	noPeriodsField = ""
+	vsgCenterFreqField = ""
+	noSegmentsField = ""
 	
 	rfOn = self.ui.emergButtonSecond.isChecked()
 	checkDic = [
@@ -2381,7 +2405,6 @@ def runPrecharacterization(self,setBox,setButton,matlab):
 		self.ui.comboBox_122,
 		self.ui.calFileIField_algo_2,
 		self.ui.calFileQField_algo_2,
-		self.ui.noPeriods_prechar,
 		self.ui.mirrorSignal_prechar,
 		self.ui.alignFreqDomain_prechar,
 		self.ui.guardBand_prechar,
@@ -2389,8 +2412,6 @@ def runPrecharacterization(self,setBox,setButton,matlab):
 		self.ui.downFileField_algo_2,
 		self.ui.subRate_prechar,
 		self.ui.sampRateOverwrite_prechar,
-		self.ui.noSegments_prechar,
-		self.ui.centerFreq_prechar,
 		self.ui.gainExpansionFlag_prechar,
 		self.ui.gainExpansion_prechar,
 		self.ui.freqMultiplierFlag_prechar,
@@ -2409,16 +2430,22 @@ def runPrecharacterization(self,setBox,setButton,matlab):
 			if awgPage == 1:
 				ampCorrField = self.ui.ampCorrection_awgCal.currentIndex()
 				trigAmpField = self.ui.trigAmp_awgCal.text()
+				vsgCenterFreqField = self.ui.centerFreq_awgCal.text()
+				noSegmentsField = self.ui.noTXPeriods_awgCal.text()
 			elif awgPage == 2:
 				ampCorrField = self.ui.ampCorrection_awgCal_2.currentIndex()
 				trigAmpField = self.ui.trigAmp_awgCal_2.text()
+				vsgCenterFreqField = self.ui.centerFreq_awgCal_2.text()
+				noSegmentsField = self.ui.noTXPeriods_awgMeas.text()
 			vsaPage = self.ui.vsaMeasGenStack.currentIndex()
 			if vsaPage == 1:
 				fCarrierField = self.ui.centerFreq_vsaMeas.text()
 				fSampleField = self.ui.sampRate_vsaMeas.text()
+				noPeriodsField = self.ui.noFrameTimes_vsaMeas.text()
 			elif vsaPage == 0:
 				fCarrierField = self.ui.centerFreq_vsaMeas_2.text()
 				fSampleField = self.ui.sampRate_vsaMeas_2.text()
+				noPeriodsField = self.ui.noFrameTimes_vsaMeas_2.text()
 			vsaType = self.ui.vsaType.currentIndex()
 			if vsaType == 1 or vsaType == 5:
 				addressField = self.ui.address_scope.text()
@@ -2431,9 +2458,9 @@ def runPrecharacterization(self,setBox,setButton,matlab):
 				"Type": self.ui.vsgSetup.currentIndex(),
 				"Model": self.ui.partNum_awg.text(),
 				"FGuard" : self.ui.guardBand_prechar.text(),
-				"FCarrier" : self.ui.centerFreq_prechar.text(),
+				"FCarrier" : vsgCenterFreqField,
 				"FSampleDAC" : self.ui.maxSampleRate_awg.text(),
-				"NumberOfSegments" : self.ui.noSegments_prechar.text(),
+				"NumberOfSegments" : noSegmentsField,
 				"Amp_Corr" : ampCorrField,
 				"GainExpansion_flag" : self.ui.gainExpansionFlag_prechar.currentIndex(),
 				"GainExpansion" : self.ui.gainExpansion_prechar.text(),
@@ -2451,7 +2478,7 @@ def runPrecharacterization(self,setBox,setButton,matlab):
 				"FCarrier" : fCarrierField,
 				"MirrorSignalFlag" : self.ui.mirrorSignal_prechar.currentIndex(),
 				"FSample" : fSampleField,
-				"MeasuredPeriods" : self.ui.noPeriods_prechar.text(),
+				"MeasuredPeriods" : noPeriodsField,
 				"xLength" : self.ui.crossCorrLength_prechar.text(),
 				"FsampleOverwrite" : self.ui.sampRateOverwrite_prechar.currentIndex(),
 				"SubRate" : self.ui.subRate_prechar.currentIndex(),
@@ -2524,14 +2551,10 @@ def runDPD(self,setBox,setButton,matlab):
 		self.ui.calFileQField_algo_3,
 		self.ui.comboBox_134,
 		self.ui.lineEdit_263,
-		self.ui.lineEdit_264,
-		self.ui.lineEdit_265,
-		self.ui.lineEdit_266,
 		self.ui.downFileField_algo_3,
 		self.ui.comboBox_84,
 		self.ui.comboBox_128,
 		self.ui.lineEdit_267,
-		self.ui.lineEdit_268,
 		self.ui.comboBox_135,
 		self.ui.comboBox_136,
 		self.ui.lineEdit_269,
@@ -2580,7 +2603,6 @@ def runDPD(self,setBox,setButton,matlab):
 			self.ui.dpdCalFilesEquip.setStyleSheet(setBox)
 			self.ui.dpdGeneralEquip.setStyleSheet(setBox)
 			self.ui.dpdModelEquip.setStyleSheet(setBox)
-			self.ui.dpdAWGEquip.setStyleSheet(setBox)
 			self.ui.dpdRefRXEquip.setStyleSheet(setBox)
 			self.ui.dpdVSGEquip.setStyleSheet(setBox)
 			self.ui.dpdTrainingEquip.setStyleSheet(setBox)

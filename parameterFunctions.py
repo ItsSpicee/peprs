@@ -721,14 +721,14 @@ def enableChannelOptions(self):
 	# 0 = Select, 1 = None, 2 = Channel 1, 3 = Channel 2
 	iIdx = self.ui.iChannel_awg.currentIndex()
 	qIdx = self.ui.qChannel_awg.currentIndex()
+	# check that channels are not both I or Q
 	if iIdx == qIdx and iIdx != 0 and iIdx != 1:
-		msg = QMessageBox(self)
-		msg.setIcon(QMessageBox.Critical)
-		msg.setWindowTitle('Invalid Field Settings')
-		msg.setText("Cannot set Channel 1 and Channel 2 to be the same signal part. Select 'None' for channel to output complete RF signal.")
-		msg.setStandardButtons(QMessageBox.Ok)
-		msg.exec_();
-		
+		invalidFieldError(self,"Cannot set Channel 1 and Channel 2 to be the same signal part. Select 'None' for channel to output complete RF signal.")
+		self.ui.iChannel_awg.setCurrentIndex(0)
+		self.ui.qChannel_awg.setCurrentIndex(0)
+	# check that not only one channel outputs RF
+	if (iIdx == 1 and (qIdx != 1 and qIdx != 0)) or (qIdx == 1 and (iIdx != 1 and iIdx != 0)):
+		invalidFieldError(self,"Must set both Channel 1 and Channel 2 to None.")
 		self.ui.iChannel_awg.setCurrentIndex(0)
 		self.ui.qChannel_awg.setCurrentIndex(0)
 		
@@ -787,6 +787,29 @@ def enableVSACalFileHetero(self):
 		self.ui.vsaCalFileLabel_hetero.setEnabled(False)
 		self.ui.vsaCalFileField_vsgMeas_2.setEnabled(False)
 		self.ui.filePushButton_24.setEnabled(False)
+	
+def invalidFieldError(self,error):
+	msg = QMessageBox(self)
+	msg.setIcon(QMessageBox.Critical)
+	msg.setWindowTitle('Invalid Field Settings')
+	msg.setText(error)
+	msg.setStandardButtons(QMessageBox.Ok)
+	msg.exec_();
+	
+def copyUXACenterFreq(self):
+	uxaText = self.ui.freq_sa.text()
+	self.ui.centerFreq_vsaMeas.setText(uxaText)
+	self.ui.centerFreq_vsaMeas_2.setText(uxaText)
+	
+def copyAWGExternalFreq(self):
+	awgText = self.ui.extRefFreq_awg.text()
+	self.ui.sampleClockFreq_awgCal_2.setText(awgText)
+	self.ui.sampleClockFreq_awgCal.setText(awgText)
+	
+def copyAWGDacRange(self):
+	awgText = self.ui.dacRange_awg.text()
+	self.ui.vfs_awgCal.setText(awgText)
+	self.ui.vfs_awgCal_2.setText(awgText)
 	
 # def enableTraceAveragingSA(self):
 	# idx = self.ui.traceAvg_spa.currentIndex()

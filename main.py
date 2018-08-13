@@ -347,6 +347,8 @@ class Window(QMainWindow):
 		# define parameter functions that should be called on dropdown and field changes
 		# vsg equipment page
 		self.ui.vsgSetup.currentIndexChanged.connect(lambda: param.displayVsg(self,greyHover,greyButton))
+		self.ui.extRefFreq_awg.textChanged.connect(lambda: param.copyAWGExternalFreq(self))
+		self.ui.dacRange_awg.textChanged.connect(lambda: param.copyAWGDacRange(self))
 		# vsa equipment page
 		self.ui.vsaType.currentIndexChanged.connect(lambda: param.displayVsa(self,unsetParams,greyHover,greyButton))
 		self.ui.demodulationEnable.currentIndexChanged.connect(lambda: param.displayVsa(self,unsetParams,greyHover,greyButton))
@@ -362,6 +364,7 @@ class Window(QMainWindow):
 		self.ui.dataFile_dig.textChanged.connect(lambda: param.copyDemod(self, self.ui.dataFile_dig,self.ui.dataFile_scope,self.ui.dataFile_uxa))
 		# vsa equipment page - uxa
 		self.ui.trigSource_sa.currentIndexChanged.connect(lambda: param.disableTrigLevelVSA(self))
+		self.ui.freq_sa.textChanged.connect(lambda: param.copyUXACenterFreq(self))
 		# sa page
 		self.ui.saType.currentIndexChanged.connect(lambda: param.displaySa(self,blueSelect,setFocusButton,setButtonHover,greyHover,greyButton))
 		self.ui.trigSource_spa.currentIndexChanged.connect(lambda: param.disableTrigLevelSA(self))

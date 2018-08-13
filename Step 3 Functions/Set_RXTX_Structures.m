@@ -42,12 +42,26 @@ function Set_RXTX_Structures(txd,rxd)
     
     TX.AWG.NumberOfSegments = txd.NumberOfSegments; % Number of segments in the uploaded signal to the AWG
     
-    if txd.iChannel == 1 || txd.qChannel == 1
-        TX.AWG.IQOutput = 0;   
-    else
-        TX.AWG.IQOutput = 1; % AWG outputs both I and Q
+    % if AWG outputs both I and Q, TX.AWG.IQOutput is 1
+    % ChannelSelectSettings == 2: channelMapping = [0 0; 1 0] ; %Set I to channel 2
+    % ChannelSelectSettings == 1: channelMapping = [1 0; 0 1] ; %Set I to channel 1 
+    % ChannelSelectSettings == 0: channelMapping = [1 1; 1 1] ; %Set RF to both channels 
+    % else channelMapping = [1 0; 0 1] ; %Set I to channel 1 and Q to channel 2 
+    % only need one channel, error checking done in GUI parameterFunctions
+    % 1: None, 2: Channel 1, 3: Channel 2
+    if txd.iChannel == 1 || txd.qChannel == 1 
+        TX.AWG.ChannelSelectSettings = 0;
+        TX.AWG.IQOutput = 0;
+    elseif txd.iChannel == 2
+        TX.AWG.ChannelSelectSettings = 1;
+        TX.AWG.IQOutput = 1;
+    elseif txd.iChannel == 3
+        TX.AWG.ChannelSelectSettings = 2;
+        TX.AWG.IQOutput = 1;
     end
     
+    % the function for formatting the data type doesn't exist anymore,
+    % currently irrelevant (AWG_M8190A_DAC_Format_Data)
     TX.AWG.DataFormat = 'DNRZ';
     
     % amplitude correction for the AWG (set to true - recommended)
