@@ -1,14 +1,14 @@
-# contains callbacks to ui components and a few miscellaneous functions that function better in main.py (e.g. rely on event, used by multiple files. rely on parameter from signal)
-#1265, 950
-# tabWidget->setTabEnabled(1, false);
+# contains callbacks for ui components and a few miscellaneous functions that function better in main.py (e.g. rely on event, used by multiple files, rely on parameter from signal)
 
+# import relevant Qt classes
 import sys
 import os
 from PyQt5 import uic, QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (QDockWidget,QDialogButtonBox,QMessageBox, QTabWidget, QFileDialog,QDialog, QInputDialog, QTextEdit, QLineEdit, QLabel, QFrame, QGridLayout, QHBoxLayout, QVBoxLayout, QWidget, QMainWindow, QMenu, QAction, qApp, QDesktopWidget, QMessageBox, QToolTip, QPushButton, QApplication, QProgressBar,QSizePolicy)
-from PyQt5.QtGui import (QCursor, QPen, QPainter, QColor, QIcon, QFont,QGuiApplication)
-from PyQt5.QtCore import (QEvent,Qt, pyqtSlot, QSize, QSettings,QThread)
+from PyQt5.QtGui import (QIcon, QFont,QGuiApplication)
+from PyQt5.QtCore import (QEvent,Qt, pyqtSlot, QSize, QSettings)
 
+# import python files
 from peprs import Ui_peprs
 from dutsetup import Ui_DUTSetup
 from safetycheck import Ui_safetycheck
@@ -18,50 +18,50 @@ import workflowNav as flow
 import windowFunctions as menu
 import parameterFunctions as param
 import debugFunctions as debug
-#import PowerSupplyPkg
 
-# setup matlab engine
-import matlab.engine
-
+# import relevant matplotlib library components (used to create plots)
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
-import random
-
-
+# setup and start matlab engine
+import matlab.engine
 matlab = matlab.engine.start_matlab()
+
 # add all folders and subfolders in peprs to matlab path
 currentPath = os.getcwd();
 allPaths = matlab.genpath(currentPath)
 matlab.addpath(allPaths)
 
-#matlab = PowerSupplyPkg.initialize()
+# to include a matlab package (do not need a matlab license to call matlab functions)
+#import PackageName
+#matlab = PackageName.initialize()
 
 class Window(QMainWindow):
+	# set DUT setup as the main window
 	def __init__(self):
 		super(Window,self).__init__()
 		self.ui = Ui_DUTSetup()
 		self.ui.setupUi(self)
 		self.initDutUI()
-		
+	# set details of the DUT window then show the window	
 	def initDutUI(self):
 		self.ui.dutStackedWidget.setCurrentIndex(0)
 		self.ui.dutReadyButton.clicked.connect(self.dutReady)
 		self.setWindowTitle('PEPRS - Performance Enhancement for Processing Radio Signals')
 		self.ui.backButton.clicked.connect(lambda: self.goBack(0))
 		self.show()
-		
-		
+	# if DUT setup other than SISO is selected, give an option to go back to the original menu	
 	def goBack(self, index):
 		self.ui.dutStackedWidget.setCurrentIndex(index)
-		
+	# controls what happens when DUT setup is selected	
 	def dutReady(self):
 		mimoChecked = self.ui.mimoRadio.isChecked()
 		misoChecked = self.ui.misoRadio.isChecked()
 		simoChecked = self.ui.simoRadio.isChecked()
 		if self.ui.sisoRadio.isChecked() == True:
+			# change main window to peprs
 			self.hide()
 			self.ui.dutStackedWidget.hide()
 			self.ui = Ui_peprs()
@@ -72,7 +72,29 @@ class Window(QMainWindow):
 			self.ui.dutStackedWidget.setCurrentIndex(1)
 	
 	def initMainUI(self):
-
+		# declare styling variables
+		unsetFocusButton = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:0.994318, y1:0.682, x2:1, y2:0, stop:0 rgba(72, 144, 216, 255), stop:1 rgba(83, 170, 252, 255)); border-radius:5px;color:white;font-weight:bold;}"
+		setButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none;font-weight:bold;}"
+		setFocusButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none;font-weight:700;font-size:11px}"
+		setButtonHover = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none;font-weight:bold;} QPushButton:hover{background-color:rgb(28, 126, 159);}"
+		setParams = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #515a70}"
+		unsetParams = "QGroupBox{background-color:rgb(247, 247, 247)}"
+		greyButton = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;}"
+		greyHover = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px;color:black} QPushButton:hover{background-color:rgb(243, 243, 243);}"
+		blueSelect = "QPushButton{ border:3px solid rgb(0, 0, 127);  background-color:qlineargradient(spread:pad, x1:0.994318, y1:0.682, x2:1, y2:0, stop:0 rgba(72, 144, 216, 255), stop:1 rgba(83, 170, 252, 255)); border-radius:5px;color:white}"
+		greenButton = "QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 158, 0, 255));color:white;border-radius: 5px; border: 3px solid green;} QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 134, 0, 255), stop:1 rgba(0, 184, 0, 255));}"
+		redButton = "QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(179, 0, 0, 255), stop:1 rgba(214, 0, 0, 255));color:white;border-radius: 5px; border: 3px solid rgb(143, 0, 0);} QPushButton:hover{background-color:rgb(217, 0, 0);}"
+	
+		# set window details
+		self.setWindowTitle('PEPRS - Performance Enhancement for Processing Radio Signals')
+		#pepper_icon = QtGui.QIcon()
+		#pepper_icon.addFile('icons/pepper 24x24.png', QtCore.QSize(24,24))
+		#self.setWindowIcon(pepper_icon)
+		self.ui.statusBar.showMessage('Ready',2000)	
+		self.setMinimumSize(1265,700)
+		self.resize(1265,700)
+		self.center()
+		
 		#disable advanced settings tabs if there are none
 		self.ui.upEquipTabs.setTabEnabled(1, False)
 		self.ui.meterEquipTabs.setTabEnabled(1, False)
@@ -81,7 +103,7 @@ class Window(QMainWindow):
 		self.ui.power3EquipTabs.setTabEnabled(1,False)
 		self.ui.saMeasTabs.setTabEnabled(0,False)
 		
-		# create matlab plots
+		# create matlab plotting areas where figures will eventually be uploaded
 		self.precharSpectrumFigure = plt.figure()
 		self.precharSpectrumCanvas = FigureCanvas(self.precharSpectrumFigure)
 		self.precharSpectrumToolbar = NavigationToolbar(self.precharSpectrumCanvas, self)
@@ -100,7 +122,7 @@ class Window(QMainWindow):
 		self.ui.phaseGraph_prechar.addWidget(self.precharPhaseToolbar)
 		self.ui.phaseGraph_prechar.addWidget(self.precharPhaseCanvas)
 		
-		# deal with error widget
+		# define functionality for the equipment error messages widget
 		self.ui.errorScrollArea.setMaximumHeight(0)
 		self.ui.redockButton.clicked.connect(lambda: menu.redock(self))
 		self.ui.errorBar.topLevelChanged.connect(lambda: menu.dockSettings(self))
@@ -128,9 +150,8 @@ class Window(QMainWindow):
 		quality.setWindowFlags(self.windowFlags() & ~QtCore.Qt.WindowCloseButtonHint)
 		quality.ui.qualityCheckButtons.accepted.connect(lambda: self.qualityComplete(quality))
 		quality.ui.qualityCheckButtons.rejected.connect(lambda: self.qualityCancel(quality))
-		#quality.closeEvent()
 		
-		#setting up file import buttons
+		# setting up file buttons
 		self.ui.filePushButton_13.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_algo_3,".\Measurement Data"))
 		self.ui.filePushButton_14.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileIField_algo_3,".\Measurement Data"))
 		self.ui.filePushButton_15.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileQField_algo_3,".\Measurement Data"))
@@ -188,32 +209,19 @@ class Window(QMainWindow):
 		self.ui.filePushButton_69.clicked.connect(lambda: menu.fileOpen(self, self.ui.calValPathField_algo_2,".\Measurement Data"))
 		self.ui.filePushButton_70.clicked.connect(lambda: menu.fileOpen(self, self.ui.dpdMeasPathField_algo,".\DPD Data"))
 		self.ui.filePushButton_71.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsaCalPathField_algo,".\Measurement Data"))
-	
-		# styling variables
-		unsetFocusButton = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:0.994318, y1:0.682, x2:1, y2:0, stop:0 rgba(72, 144, 216, 255), stop:1 rgba(83, 170, 252, 255)); border-radius:5px;color:white;font-weight:bold;}"
-		setButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none;font-weight:bold;}"
-		setFocusButton = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none;font-weight:700;font-size:11px}"
-		setButtonHover = "QPushButton{ background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(17, 75, 95, 255), stop:1 rgba(22, 105, 132, 255)); border-radius:5px; color:white;border:none;font-weight:bold;} QPushButton:hover{background-color:rgb(28, 126, 159);}"
-		setParams = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #515a70}"
-		unsetParams = "QGroupBox{background-color:rgb(247, 247, 247)}"
-		greyButton = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px; color:black;}"
-		greyHover = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:5px;color:black} QPushButton:hover{background-color:rgb(243, 243, 243);}"
-		blueSelect = "QPushButton{ border:3px solid rgb(0, 0, 127);  background-color:qlineargradient(spread:pad, x1:0.994318, y1:0.682, x2:1, y2:0, stop:0 rgba(72, 144, 216, 255), stop:1 rgba(83, 170, 252, 255)); border-radius:5px;color:white}"
-		greenButton = "QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 158, 0, 255));color:white;border-radius: 5px; border: 3px solid green;} QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 134, 0, 255), stop:1 rgba(0, 184, 0, 255));}"
-		redButton = "QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(179, 0, 0, 255), stop:1 rgba(214, 0, 0, 255));color:white;border-radius: 5px; border: 3px solid rgb(143, 0, 0);} QPushButton:hover{background-color:rgb(217, 0, 0);}"
 		
-		# set splitters
+		# set splitters for step 2 and step 3, dragable bar to see either top or bottom contents of the page
 		sizeList = [500,400]
 		self.ui.vsaMeasSplitter.setSizes(sizeList)
 		self.ui.vsgMeasSplitter.setSizes(sizeList)
 		self.ui.algoSplitter.setSizes(sizeList)
 		
-		# emergency on and off buttons
+		# dc and rf on and off buttons
 		self.ui.emergButtonFirst.clicked.connect(lambda: self.toggleOutput(1,redButton,greenButton))
 		self.ui.emergButtonSecond.clicked.connect(lambda: self.toggleOutput(2,redButton,greenButton))
 		self.ui.allOffButton.clicked.connect(lambda: self.toggleOutput(3,redButton,greenButton))
 		
-		# keep widget space when hidden
+		# keep widget space when hidden (doesn't resize GUI when components are hidden)
 		retainVsa = QSizePolicy(self.ui.debuggingPanel_vsa.sizePolicy())
 		retainVsg = QSizePolicy(self.ui.debuggingPanel_vsg.sizePolicy())
 		retainVsa.setRetainSizeWhenHidden(True)
@@ -227,17 +235,7 @@ class Window(QMainWindow):
 		self.ui.actionQuit.triggered.connect(lambda: menu.closeButton(self))	
 		self.ui.actionEnable_Safety_Check.triggered.connect(self.toggleCheck)
 		
-		# set window details
-		self.setWindowTitle('PEPRS - Performance Enhancement for Processing Radio Signals')
-		#pepper_icon = QtGui.QIcon()
-		#pepper_icon.addFile('icons/pepper 24x24.png', QtCore.QSize(24,24))
-		#self.setWindowIcon(pepper_icon)
-		self.ui.statusBar.showMessage('Ready',2000)	
-		self.setMinimumSize(1265,700)
-		self.resize(1265,700)
-		self.center()
-		
-		# set appropriate pages in stacks
+		# set appropriate pages in stacked widgets
 		self.ui.stepTabs.setCurrentIndex(3) # dashboard
 		self.ui.equipStack.setCurrentIndex(0) # vsg settings page
 		self.ui.measStack.setCurrentIndex(0)
@@ -313,7 +311,6 @@ class Window(QMainWindow):
 		self.ui.vsgCalTabs_algo.setCurrentIndex(0)
 		self.ui.vsgCalResults_algo.setCurrentIndex(0)
 		
-		
 		# setting visibility of components
 		# vsa meas page
 		self.ui.downMark_vsaMeas.setVisible(False)
@@ -346,14 +343,38 @@ class Window(QMainWindow):
 		self.ui.vsgMark_vsgMeas.setVisible(False)
 		self.ui.psgMark_vsgMeas.setVisible(False)
 		self.ui.upMark_vsgMeas.setVisible(False)
-		# algo tab
 		
-		# dropdown and field changes
+		# define parameter functions that should be called on dropdown and field changes
+		# vsg equipment page
 		self.ui.vsgSetup.currentIndexChanged.connect(lambda: param.displayVsg(self,greyHover,greyButton))
+		# vsa equipment page
 		self.ui.vsaType.currentIndexChanged.connect(lambda: param.displayVsa(self,unsetParams,greyHover,greyButton))
 		self.ui.demodulationEnable.currentIndexChanged.connect(lambda: param.displayVsa(self,unsetParams,greyHover,greyButton))
 		self.ui.averagingEnable.currentIndexChanged.connect(lambda: param.displayVsa(self,unsetParams,greyHover,greyButton))
+		self.ui.dllFile_scope.textChanged.connect(lambda: param.copyDemod(self, self.ui.dllFile_scope, self.ui.dllFile_uxa, self.ui.dllFile_dig))
+		self.ui.setupFile_scope.textChanged.connect(lambda: param.copyDemod(self, self.ui.setupFile_scope,self.ui.setupFile_uxa,self.ui.setupFile_dig))
+		self.ui.dataFile_scope.textChanged.connect(lambda: param.copyDemod(self, self.ui.dataFile_scope,self.ui.dataFile_uxa,self.ui.dataFile_dig))
+		self.ui.dllFile_uxa.textChanged.connect(lambda: param.copyDemod(self, self.ui.dllFile_uxa, self.ui.dllFile_scope, self.ui.dllFile_dig))
+		self.ui.setupFile_uxa.textChanged.connect(lambda: param.copyDemod(self, self.ui.setupFile_uxa,self.ui.setupFile_scope,self.ui.setupFile_dig))
+		self.ui.dataFile_uxa.textChanged.connect(lambda: param.copyDemod(self, self.ui.dataFile_uxa,self.ui.dataFile_scope,self.ui.dataFile_dig))
+		self.ui.dllFile_dig.textChanged.connect(lambda: param.copyDemod(self, self.ui.dllFile_dig, self.ui.dllFile_scope, self.ui.dllFile_uxa))
+		self.ui.setupFile_dig.textChanged.connect(lambda: param.copyDemod(self, self.ui.setupFile_dig,self.ui.setupFile_scope,self.ui.setupFile_uxa))
+		self.ui.dataFile_dig.textChanged.connect(lambda: param.copyDemod(self, self.ui.dataFile_dig,self.ui.dataFile_scope,self.ui.dataFile_uxa))
+		# vsa equipment page - uxa
+		self.ui.trigSource_sa.currentIndexChanged.connect(lambda: param.disableTrigLevelVSA(self))
+		# sa page
 		self.ui.saType.currentIndexChanged.connect(lambda: param.displaySa(self,blueSelect,setFocusButton,setButtonHover,greyHover,greyButton))
+		self.ui.trigSource_spa.currentIndexChanged.connect(lambda: param.disableTrigLevelSA(self))
+		self.ui.averaging_spa.currentIndexChanged.connect(lambda: param.enableAveragingSA(self))
+		#self.ui.traceAvg_spa.currentIndexChanged.connect(lambda: param.enableTraceAveragingSA(self))
+		# power supplies
+		self.ui.noChannels_p1.currentIndexChanged.connect(lambda: param.enableChannel(self))
+		self.ui.noChannels_p2.currentIndexChanged.connect(lambda: param.enableChannel(self))
+		self.ui.noChannels_p3.currentIndexChanged.connect(lambda: param.enableChannel(self))
+		self.ui.p1Enabled.currentIndexChanged.connect(lambda: param.enableSupplyOne(self))
+		self.ui.p2Enabled.currentIndexChanged.connect(lambda: param.enableSupplyTwo(self))
+		self.ui.p3Enabled.currentIndexChanged.connect(lambda: param.enableSupplyThree(self))
+		# vsa meas page
 		self.ui.generateVSACalCheck.stateChanged.connect(lambda: param.enableVSACalFile(self,setParams,unsetParams))
 		self.ui.calFilePromptNo.toggled.connect(lambda: self.ui.vsaMeasNextStack.setCurrentIndex(4))
 		self.ui.calFilePromptYes.toggled.connect(lambda: self.ui.vsaMeasNextStack.setCurrentIndex(3))
@@ -361,6 +382,12 @@ class Window(QMainWindow):
 		self.ui.yesCalRXButton.clicked.connect(lambda: self.ui.vsaMeasNextStack.setCurrentIndex(3))
 		self.ui.vsgFrameTime_vsaMeas.currentIndexChanged.connect(lambda: param.determineFrameTimeEnable(self,self.ui.vsgFrameTime_vsaMeas))
 		self.ui.vsgFrameTime_vsaMeas_2.currentIndexChanged.connect(lambda: param.determineFrameTimeEnable(self,self.ui.vsgFrameTime_vsaMeas_2))
+		self.ui.iChannel_awg.currentIndexChanged.connect(lambda: param.enableChannelOptions(self))
+		self.ui.qChannel_awg.currentIndexChanged.connect(lambda: param.enableChannelOptions(self))
+		self.ui.vsaMeasParamTabs.currentChanged.connect(lambda: menu.switchMeasTabVSA(self))
+		self.ui.vsgMeasParamTabs.currentChanged.connect(lambda: menu.switchMeasTabVSG(self))
+		self.ui.algoTabs.currentChanged.connect(lambda: menu.switchAlgoTab(self,quality))
+		# vsg meas page
 		self.ui.calFilePromptNo_vsgMeas.toggled.connect(lambda: self.ui.vsgMeasNextStack.setCurrentIndex(1))
 		self.ui.calFilePromptYes_vsgMeas.toggled.connect(lambda: self.ui.vsgMeasNextStack.setCurrentIndex(2))
 		self.ui.vsgCalFilePromptYes.toggled.connect(lambda: self.ui.vsgMeasNextStack.setCurrentIndex(3))
@@ -370,26 +397,15 @@ class Window(QMainWindow):
 		self.ui.noCalRXButton_vsgNext.clicked.connect(lambda: self.ui.vsgMeasNextStack.setCurrentIndex(1))
 		self.ui.yesCalRXButton_vsgNext.clicked.connect(lambda: self.ui.vsgMeasNextStack.setCurrentIndex(2))
 		self.ui.vsgCalType.currentIndexChanged.connect(lambda: param.displayVSGMeas(self))
-		# power supplies
-		self.ui.noChannels_p1.currentIndexChanged.connect(lambda: param.enableChannel(self))
-		self.ui.noChannels_p2.currentIndexChanged.connect(lambda: param.enableChannel(self))
-		self.ui.noChannels_p3.currentIndexChanged.connect(lambda: param.enableChannel(self))
-		self.ui.p1Enabled.currentIndexChanged.connect(lambda: param.enableSupplyOne(self))
-		self.ui.p2Enabled.currentIndexChanged.connect(lambda: param.enableSupplyTwo(self))
-		self.ui.p3Enabled.currentIndexChanged.connect(lambda: param.enableSupplyThree(self))
-		# vsa meas page
-		self.ui.iChannel_awg.currentIndexChanged.connect(lambda: param.enableChannelOptions(self))
-		self.ui.qChannel_awg.currentIndexChanged.connect(lambda: param.enableChannelOptions(self))
-	
-		# expand/shrink depending on which step tab is clicked
-		self.ui.stepTabs.currentChanged.connect(lambda: menu.changeStepTab(self,safety,quality))
-
-		# vsa meas page
-		self.ui.vsaMeasParamTabs.currentChanged.connect(lambda: menu.switchMeasTabVSA(self))
-		self.ui.vsgMeasParamTabs.currentChanged.connect(lambda: menu.switchMeasTabVSG(self))
-		self.ui.algoTabs.currentChanged.connect(lambda: menu.switchAlgoTab(self))
+		# awg measurement page
+		self.ui.refClockSorce_awg.currentIndexChanged.connect(lambda: param.enableExtClkFreq(self))
+		# heterodyne calibration page
+		self.ui.expansionMarginEnable_hetero.currentIndexChanged.connect(lambda: param.enableExpansionMargin(self))
+		self.ui.vsaCalFileEnable_hetero.currentIndexChanged.connect(lambda: param.enableVSACalFileHetero(self))
+		# expand/shrink window depending on which step tab is clicked
+		self.ui.stepTabs.currentChanged.connect(lambda: menu.changeStepTab(self,safety))
 		
-		# control parameter set buttons
+		# define set parameter functions that are called when a set/update button is clicked
 		# vsg page
 		self.ui.awgSetGeneral.clicked.connect(lambda: set.setGeneralAWG(self,setFocusButton,setParams,greyHover,unsetFocusButton,greyButton,self.ui.awgSetGeneral,matlab))
 		self.ui.vsgSetGeneral.clicked.connect(lambda: set.setGeneralVSG(self,setFocusButton,setParams,greyHover,unsetFocusButton,greyButton,self.ui.vsgSetGeneral))
@@ -409,12 +425,9 @@ class Window(QMainWindow):
 		self.ui.downSet.clicked.connect(lambda: set.setDown(self,setFocusButton,greyHover,setButtonHover,setParams,greyButton,unsetFocusButton,self.ui.downSet))
 		# meter page
 		self.ui.meterSet.clicked.connect(lambda: set.setMeter(self,setFocusButton,setButtonHover,greyHover,setParams,greyButton,unsetFocusButton,self.ui.meterSet,matlab))
-		
 		# sa page
 		self.ui.saSetAdv.clicked.connect(lambda: set.setSAAdv(self,setFocusButton,setButtonHover,greyHover,setParams,self.ui.saSetAdv,greyButton,unsetFocusButton,matlab))
-
 		self.ui.saSet.clicked.connect(lambda: set.setSA(self,setFocusButton,setButtonHover,greyHover,setParams,self.ui.saSet,greyButton,unsetFocusButton,matlab))
-
 		# power 1 page
 		self.ui.p1Set.clicked.connect(lambda: set.setP1(self,setParams,setFocusButton,setButtonHover,greyHover,greyButton,matlab,unsetFocusButton,self.ui.p1Set))
 		# power 2 page
@@ -437,8 +450,26 @@ class Window(QMainWindow):
 		self.ui.upSet_vsgMeas.clicked.connect(lambda: set.setUpVSGMeas(self,setParams,self.ui.upSet_vsgMeas))
 		self.ui.heteroRun.clicked.connect(lambda: set.setHetero(self,setParams,self.ui.heteroRun,matlab))
 		self.ui.homoRun.clicked.connect(lambda: set.setHomo(self,setParams,self.ui.homoRun))
+		# algo page
+		self.ui.calValPreview.clicked.connect(lambda: set.calValPreview(self))
+		self.ui.calValRun.clicked.connect(lambda: set.runCalValidation(self,setParams,self.ui.calValRun,matlab))
+		self.ui.dpdPreview.clicked.connect(lambda: set.dpdPreview(self))
+		self.ui.dpdRun.clicked.connect(lambda: set.runDPD(self,setParams,self.ui.dpdRun,matlab))
+		# prechar tab
+		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self,matlab))
+		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun,matlab))
 		
-		# control workflow navigation
+		# define debug functions that are run when a debugging panel button is selected
+		# prechar
+		self.ui.setParameters_precharDebug.clicked.connect(lambda: debug.setParametersPrechar(self,matlab))
+		self.ui.prepareSignal_precharDebug.clicked.connect(lambda: debug.prepareSignalPrechar(self,matlab))
+		self.ui.upload_precharDebug.clicked.connect(lambda: debug.uploadSignalPrechar(self,matlab))
+		self.ui.download_precharDebug.clicked.connect(lambda: debug.downloadSignalPrechar(self,matlab))
+		self.ui.analyze_precharDebug.clicked.connect(lambda: debug.analyzeSignalPrechar(self,matlab))
+		self.ui.saveData_precharDebug.clicked.connect(lambda: debug.saveDataPrechar(self,matlab))
+		self.ui.saveMeasurements_precharDebug.clicked.connect(lambda: debug.saveMeasurementsPrechar(self,matlab))
+		
+		# control workflow (next steps, dashboard) navigation
 		# vsg page
 		self.ui.upButton_vsg.clicked.connect(lambda: flow.upOnClick(self,greyHover,greyButton))
 		self.ui.psgButton_vsg.clicked.connect(lambda: flow.psgOnClick(self,greyHover,greyButton))
@@ -752,63 +783,25 @@ class Window(QMainWindow):
 		self.ui.awgButton_vsgMeas_2.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(0))
 		self.ui.awgButton_vsgMeas_3.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(0))
 		self.ui.vsgButton_vsgMeas.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(0))
-		# algo page
-		self.ui.calValPreview.clicked.connect(lambda: set.calValPreview(self))
-		self.ui.calValRun.clicked.connect(lambda: set.runCalValidation(self,setParams,self.ui.calValRun,matlab))
-		self.ui.dpdPreview.clicked.connect(lambda: set.dpdPreview(self))
-		#previously no matlab param
-		self.ui.dpdRun.clicked.connect(lambda: set.runDPD(self,setParams,self.ui.dpdRun,matlab))
-		# prechar tab
-		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self,matlab))
-		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun,matlab))
-		self.ui.setParameters_precharDebug.clicked.connect(lambda: debug.setParametersPrechar(self,matlab))
-		self.ui.prepareSignal_precharDebug.clicked.connect(lambda: debug.prepareSignalPrechar(self,matlab))
-		self.ui.upload_precharDebug.clicked.connect(lambda: debug.uploadSignalPrechar(self,matlab))
-		self.ui.download_precharDebug.clicked.connect(lambda: debug.downloadSignalPrechar(self,matlab))
-		self.ui.analyze_precharDebug.clicked.connect(lambda: debug.analyzeSignalPrechar(self,matlab))
-		self.ui.saveData_precharDebug.clicked.connect(lambda: debug.saveDataPrechar(self,matlab))
-		self.ui.saveMeasurements_precharDebug.clicked.connect(lambda: debug.saveMeasurementsPrechar(self,matlab))
 		
-		# control parameter changes
-		# vsa equipment page
-		self.ui.dllFile_scope.textChanged.connect(lambda: param.copyDemod(self, self.ui.dllFile_scope, self.ui.dllFile_uxa, self.ui.dllFile_dig))
-		self.ui.setupFile_scope.textChanged.connect(lambda: param.copyDemod(self, self.ui.setupFile_scope,self.ui.setupFile_uxa,self.ui.setupFile_dig))
-		self.ui.dataFile_scope.textChanged.connect(lambda: param.copyDemod(self, self.ui.dataFile_scope,self.ui.dataFile_uxa,self.ui.dataFile_dig))
-		
-		self.ui.dllFile_uxa.textChanged.connect(lambda: param.copyDemod(self, self.ui.dllFile_uxa, self.ui.dllFile_scope, self.ui.dllFile_dig))
-		self.ui.setupFile_uxa.textChanged.connect(lambda: param.copyDemod(self, self.ui.setupFile_uxa,self.ui.setupFile_scope,self.ui.setupFile_dig))
-		self.ui.dataFile_uxa.textChanged.connect(lambda: param.copyDemod(self, self.ui.dataFile_uxa,self.ui.dataFile_scope,self.ui.dataFile_dig))
-		
-		self.ui.dllFile_dig.textChanged.connect(lambda: param.copyDemod(self, self.ui.dllFile_dig, self.ui.dllFile_scope, self.ui.dllFile_uxa))
-		self.ui.setupFile_dig.textChanged.connect(lambda: param.copyDemod(self, self.ui.setupFile_dig,self.ui.setupFile_scope,self.ui.setupFile_uxa))
-		self.ui.dataFile_dig.textChanged.connect(lambda: param.copyDemod(self, self.ui.dataFile_dig,self.ui.dataFile_scope,self.ui.dataFile_uxa))
-		# vsa equipment page - uxa
-		self.ui.trigSource_sa.currentIndexChanged.connect(lambda: param.disableTrigLevelVSA(self))
-		# sa page
-		self.ui.trigSource_spa.currentIndexChanged.connect(lambda: param.disableTrigLevelSA(self))
-		self.ui.averaging_spa.currentIndexChanged.connect(lambda: param.enableAveragingSA(self))
-		#self.ui.traceAvg_spa.currentIndexChanged.connect(lambda: param.enableTraceAveragingSA(self))
-		# awg measurement page
-		self.ui.refClockSorce_awg.currentIndexChanged.connect(lambda: param.enableExtClkFreq(self))
-		# heterodyne calibration page
-		self.ui.expansionMarginEnable_hetero.currentIndexChanged.connect(lambda: param.enableExpansionMargin(self))
-		self.ui.vsaCalFileEnable_hetero.currentIndexChanged.connect(lambda: param.enableVSACalFileHetero(self))
-		
-		
-		# show on window
+		# show window
 		self.show()	
 	
+	#### functions that are called in this file ####
+	# check to make sure the safety check is complete
 	def safetyComplete(self,safety):
+		# determine what peprs window size should be set to
 		maxTrue = self.isMaximized()
 		screen = QGuiApplication.primaryScreen()
 		screenSize = screen.availableSize()
 		height = screenSize.height()
 		maxHeight = height - 50
-		nmse = safety.ui.dutMaxPower.text()
+		# safety check fields
+		maxPower = safety.ui.dutMaxPower.text()
 		power = safety.ui.dutPower.text()
 		gain = safety.ui.dutGain.text()
 		papr = safety.ui.paprCheck.text()
-		if nmse != "" and power != "" and gain != "" and papr != "":
+		if maxPower != "" and power != "" and gain != "" and papr != "":
 			safety.done(0)
 			self.setMinimumSize(1265,maxHeight)
 			self.resize(1265,maxHeight)
@@ -820,16 +813,19 @@ class Window(QMainWindow):
 			msg.setText("Please fill out all fields before moving on")
 			msg.setStandardButtons(QMessageBox.Ok)
 			msg.exec_();
-	
+	# check to make sure the quality check is complete
 	def qualityComplete(self,quality):
+		# determine what peprs window size should be set to
 		maxTrue = self.isMaximized()
 		screen = QGuiApplication.primaryScreen()
 		screenSize = screen.availableSize()
 		height = screenSize.height()
 		maxHeight = height - 50
+		# quality check fields
+		nmse = quality.ui.dutNmse.text()
 		rxCheck = quality.ui.qualityReceiverCheck.isChecked()
 		txCheck = quality.ui.qualityGeneratorCheck.isChecked()
-		if rxCheck and txCheck:
+		if rxCheck and txCheck and nmse != "":
 			quality.done(0)
 			self.setMinimumSize(1265,maxHeight)
 			self.resize(1265,maxHeight)
@@ -841,30 +837,30 @@ class Window(QMainWindow):
 			msg.setText("Please fill out all fields before moving on")
 			msg.setStandardButtons(QMessageBox.Ok)
 			msg.exec_();
-			
+	# safety check cancel button clicked
 	def safetyCancel(self,safety):
 		safety.done(0)
 		menu.tabCounterIncrement(self,"down")
 		self.ui.stepTabs.setCurrentIndex(2)
-		
+	# quality check cancel button clicked	
 	def qualityCancel(self,quality):
 		quality.done(0)
 		menu.tabCounterIncrement(self,"down")
 		self.ui.stepTabs.setCurrentIndex(1)
-	
+	# if peprs window is closed
 	def closeEvent(self,event):
 		reply=QMessageBox.question(self,'Exit Confirmation',"Are you sure you want to close the program?",QMessageBox.Yes|QMessageBox.No,QMessageBox.No)
 		if reply == QMessageBox.Yes:
 			event.accept()
 		else:
 			event.ignore()
-			
+	# if safety/quality check is enabled or disabled		
 	def toggleCheck(self,state):
 		if state:
 			self.statusBar().showMessage('Safety Check Enabled',2000)
 		else:
 			self.statusBar().showMessage('Safety Check Disabled',2000)
-		
+			
 	def fillParametersMsg(self):
 		msg = QMessageBox(self)
 		msg.setIcon(QMessageBox.Critical)
@@ -872,7 +868,7 @@ class Window(QMainWindow):
 		msg.setText("Please fill out the current equipment's parameters before moving on.")
 		msg.setStandardButtons(QMessageBox.Ok)
 		msg.exec_();
-		
+	# center windows	
 	def center(self):
 		# get a rectangle specifying main window geometry
 		qr = self.frameGeometry()
@@ -882,7 +878,7 @@ class Window(QMainWindow):
 		qr.moveCenter(cp)
 		# move top-left point of the application window to top-left point of qr rectangle
 		self.move(qr.topLeft())
-		
+	# control rf/dc on or off
 	def toggleOutput(self,button,redButton,greenButton):
 		# turn on dc then rf, turn off rf then dc
 		# for rf: turn off awg then turn off psg, turn on psg then turn on rf
@@ -1021,17 +1017,5 @@ if __name__ == '__main__':
 	
 # OLD CODE
 
-#import matlab.engine
-#eng = matlab.engine.start_matlab()
-
 # alternative ui file loading method
 #uic.loadUi('peprs.ui',self)
-
-# set scroll area contents
-#self.ui.vsgEquipScroll.setWidget(self.ui.vsgEquipScrollWidgetContents)
-
-# control dash radio buttons
-# disabledButton = "QPushButton {color:grey}"
-# self.ui.runStandard.toggled.connect(lambda: flow.standardSetup(self,greyButton))
-# self.ui.runVSG.toggled.connect(lambda: flow.vsgOnlySetup(self,disabledButton,greyButton))
-# self.ui.runVSA.toggled.connect(lambda: flow.vsaOnlySetup(self,disabledButton,greyButton,greyButton))
