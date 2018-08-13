@@ -1786,16 +1786,7 @@ def noAWGCalRoutine(self,boxDone,setButton,matlab):
 		self.ui.vfs_awgCal_2,
 		self.ui.trigAmp_awgCal_2,
 		self.ui.sampleClockFreq_awgCal_2,
-		self.ui.awgCalFileField_vsgMeas_2,
-		self.ui.noIterations_awgCal_2,
-		self.ui.toneSpacing_awgCal_2,
-		self.ui.startFreq_awgCal_2,
-		self.ui.endFreq_awgCal_2,
-		self.ui.realBasisFlag_awgCal_2,
-		self.ui.phaseDistr_awgCal_2,
-		self.ui.freqRes_awgCal_2,
-		self.ui.awgCalSaveLocField_vsgMeas_2
-
+		self.ui.awgCalFileField_vsgMeas
 	]
 	if setButton.isChecked() == True:
 		done = win.checkIfDone(checkDic)
@@ -1868,50 +1859,38 @@ def awgPreview(self):
 	
 def setUpVSGMeas(self,boxDone,setButton):
 	checkDic = [
-		self.ui.centerFreq_awgCal,
-		self.ui.ampCorrection_awgCal,
-		self.ui.ampCorrFile_vsgMeas,
-		self.ui.vfs_awgCal,
-		self.ui.trigAmp_awgCal,
-		self.ui.noTXPeriods_awgCal,
-		self.ui.awgChannel_awgCal,
-		self.ui.sampleClockFreq_awgCal,
-		self.ui.mirrorFlag_awgCal,
-		self.ui.noRXPeriods_awgCal,
-		self.ui.downFilterFileField_vsgMeas,
-		self.ui.noIterations_awgCal,
-		self.ui.toneSpacing_awgCal.
-		self.ui.startFreq_awgCal,
-		self.ui.endFreq_awgCal,
-		self.ui.realBasisFlag_awgCal,
-		self.ui.phaseDistr_awgCal,
-		self.ui.paprMin_awg,
-		self.ui.paprMax_awg,
-		self.ui.freqRes_awgCal,
-		self.ui.awgCalSaveLocField_vsgMeas,
-		self.ui.awgCalFileField_vsgMeas,
-		self.ui.useVSACal_awgCal,
-		self.ui.vsaCalFileField_vsgMeas
+		self.ui.comboBox_87,
+		self.ui.lineEdit_144,
+		self.ui.lineEdit_143,
+		self.ui.lineEdit_142,
+		self.ui.lineEdit_141,
+		self.ui.lineEdit_140,
+		self.ui.lineEdit_139,
+		self.ui.lineEdit_138,
+		self.ui.lineEdit_137,
+		self.ui.lineEdit_136,
+		self.ui.lineEdit_135,
+		self.ui.lineEdit_134,
+		self.ui.lineEdit_133,
+		self.ui.lineEdit_132,
+		self.ui.comboBox_96,
+		self.ui.upCalFileField_vsgMeas,
+		self.ui.iqFileField_vsgMeas
 	]
-	
 	
 	if setButton.isChecked() == True:
 		done = win.checkIfDone(checkDic)
 		if done:
 			setButton.setText("Unset")
-
-			awgChecked = self.ui.awgSet_vsgMeas.isChecked()
-			awgRunChecked = self.ui.awgSetRun_vsgMeas.isChecked()
-			if awgChecked or awgRunChecked:
-				self.ui.upCalHomoEquip_vsgMeas.setStyleSheet(boxDone)
-				self.ui.upCalHeteroEquip_vsgMeas.setStyleSheet(boxDone)
-				self.ui.upEquip_vsgMeas.setStyleSheet(boxDone)
-				self.ui.vsgMeasNextStack.setCurrentIndex(8)
-				self.ui.upMark_vsgMeas.setVisible(True)
-				self.ui.psgMark_vsgMeas.setVisible(True)
-			else:
-				instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
-				setButton.setChecked(False)
+			self.ui.upCalHomoEquip_vsgMeas.setStyleSheet(boxDone)
+			self.ui.upCalHeteroEquip_vsgMeas.setStyleSheet(boxDone)
+			self.ui.upEquip_vsgMeas.setStyleSheet(boxDone)
+			self.ui.vsgMeasNextStack.setCurrentIndex(8)
+			self.ui.upMark_vsgMeas.setVisible(True)
+			self.ui.psgMark_vsgMeas.setVisible(True)
+		else:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)
 	elif setButton.isChecked() == False:
 		setButton.setText("Set")
 		self.ui.upCalHomoEquip_vsgMeas.setStyleSheet(None)
@@ -1948,23 +1927,17 @@ def setHetero(self,boxDone,setButton,matlab):
 		self.ui.expansionMargin_hetero,
 		self.ui.vsaCalFileEnable_hetero,
 		self.ui.vsaCalFileField_vsgMeas_2,
-		self.ui.upCalFileField_vsgMeas_2,
 		self.ui.toneSpacing_hetero,
 		self.ui.startTone_hetero,
 		self.ui.endTone_hetero,
 		self.ui.realBasisFlag_hetero,
 		self.ui.phaseDistribution_hetero,
-		self.ui.paprMin_heter,
+		self.ui.paprMin_hetero,
 		self.ui.paprMax_hetero,
 		self.ui.freqResolution_hetero,
 		self.ui.noIterations_hetero,			
 		self.ui.upCalSaveLocField_vsgMeas
-	
-		
-		
 	]
-	
-
 
 	if setButton.isChecked() == True:
 		done = win.checkIfDone(checkDic)
@@ -2153,13 +2126,11 @@ def setHomo(self,boxDone,setButton):
 		self.ui.lineEdit_206,
 		self.ui.lineEdit_207,
 		self.ui.lineEdit_208,
-		self.ui.lineEdit_209,
 		self.ui.comboBox_152,
 		self.ui.calFileIField_vsgMeas,
 		self.ui.calFileQField_vsgMeas,
 		self.ui.comboBox_151,
 		self.ui.vsaCalFielField_vsgMeas,
-		self.ui.iqFileField_vsgMeas_3,
 		self.ui.comboBox_148,
 		self.ui.lineEdit_214,
 		self.ui.lineEdit_215,

@@ -846,7 +846,7 @@ Move to 'DPD' tab.</string>
                      <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                     </property>
                     <property name="currentIndex">
-                     <number>2</number>
+                     <number>1</number>
                     </property>
                     <widget class="QWidget" name="widget">
                      <attribute name="title">
@@ -869,7 +869,7 @@ Move to 'DPD' tab.</string>
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>738</width>
+                           <width>590</width>
                            <height>550</height>
                           </rect>
                          </property>
@@ -2206,7 +2206,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          <property name="geometry">
                           <rect>
                            <x>0</x>
-                           <y>-262</y>
+                           <y>0</y>
                            <width>738</width>
                            <height>550</height>
                           </rect>
@@ -3503,7 +3503,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          <property name="geometry">
                           <rect>
                            <x>0</x>
-                           <y>-370</y>
+                           <y>0</y>
                            <width>727</width>
                            <height>1000</height>
                           </rect>
@@ -11557,7 +11557,7 @@ QFrame{background-color:#d1d5de}</string>
 QWidget#vsaMeas{background-color:rgb(247,247,247)}</string>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="vsaMeas">
              <property name="font">
@@ -15141,7 +15141,7 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                              <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                             </property>
                             <property name="currentIndex">
-                             <number>1</number>
+                             <number>0</number>
                             </property>
                             <widget class="QWidget" name="widget">
                              <attribute name="title">
@@ -15183,7 +15183,7 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>590</width>
+                                       <width>601</width>
                                        <height>415</height>
                                       </rect>
                                      </property>
@@ -15235,6 +15235,9 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                                        </item>
                                        <item row="3" column="3" colspan="2">
                                         <widget class="QComboBox" name="vsgFrameTime_vsaMeas_2">
+                                         <property name="enabled">
+                                          <bool>false</bool>
+                                         </property>
                                          <property name="font">
                                           <font>
                                            <family>Arial</family>
@@ -15243,6 +15246,9 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                                          </property>
                                          <property name="layoutDirection">
                                           <enum>Qt::LeftToRight</enum>
+                                         </property>
+                                         <property name="currentIndex">
+                                          <number>1</number>
                                          </property>
                                          <item>
                                           <property name="text">
@@ -15306,7 +15312,7 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                                        <item row="4" column="0" colspan="3">
                                         <widget class="QLabel" name="label_5">
                                          <property name="enabled">
-                                          <bool>false</bool>
+                                          <bool>true</bool>
                                          </property>
                                          <property name="font">
                                           <font>
@@ -15359,9 +15365,6 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                                            <pointsize>9</pointsize>
                                           </font>
                                          </property>
-                                         <property name="toolTip">
-                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Center frequency of the received tones.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                                         </property>
                                          <property name="text">
                                           <string/>
                                          </property>
@@ -15380,9 +15383,6 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                                            <family>Arial</family>
                                            <pointsize>9</pointsize>
                                           </font>
-                                         </property>
-                                         <property name="toolTip">
-                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&amp;lt;html&amp;gt;&amp;lt;head/&amp;gt;&amp;lt;body&amp;gt;&amp;lt;p&amp;gt;For the UXA, the receiver sampling rate should be 1.25x the analysis bandwidth.&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                          </property>
                                          <property name="whatsThis">
                                           <string/>
@@ -15408,9 +15408,6 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                                            <family>Arial</family>
                                            <pointsize>9</pointsize>
                                           </font>
-                                         </property>
-                                         <property name="toolTip">
-                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Calculated if 'VSG Related Frame Time' is True. Needs to be provided if False.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                          </property>
                                          <property name="text">
                                           <string/>
@@ -15440,7 +15437,7 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                                           </font>
                                          </property>
                                          <property name="toolTip">
-                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When VSG Related Frame Time is true, the measurement time is calculated and the number of recorded frame times is set (in other parts of the GUI).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When VSG Related Frame Time is true, the measurement time is calculated and the number of recorded frame times is set (in other parts of the GUI). Needs to be provided if VSG Related Frame Time is false.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                          </property>
                                          <property name="styleSheet">
                                           <string notr="true">QLabel {border: 1px solid black; border-radius:8px; background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(127, 194, 229, 255), stop:1 rgba(225, 242, 251, 255))}
@@ -15546,6 +15543,44 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
+                                       <item row="1" column="5">
+                                        <widget class="QLabel" name="label_345">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>16</width>
+                                           <height>16</height>
+                                          </size>
+                                         </property>
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>16</width>
+                                           <height>16</height>
+                                          </size>
+                                         </property>
+                                         <property name="font">
+                                          <font>
+                                           <family>Arial</family>
+                                           <pointsize>10</pointsize>
+                                           <weight>75</weight>
+                                           <bold>true</bold>
+                                          </font>
+                                         </property>
+                                         <property name="toolTip">
+                                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Center frequency of the received tones.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                         </property>
+                                         <property name="styleSheet">
+                                          <string notr="true">QLabel {border: 1px solid black; border-radius:8px; background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(127, 194, 229, 255), stop:1 rgba(225, 242, 251, 255))}
+
+QLabel:hover {background-color:rgb(221, 240, 250)}</string>
+                                         </property>
+                                         <property name="text">
+                                          <string>?</string>
+                                         </property>
+                                         <property name="alignment">
+                                          <set>Qt::AlignCenter</set>
+                                         </property>
+                                        </widget>
+                                       </item>
                                       </layout>
                                      </widget>
                                     </widget>
@@ -15602,7 +15637,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                      <property name="geometry">
                                       <rect>
                                        <x>0</x>
-                                       <y>0</y>
+                                       <y>-27</y>
                                        <width>601</width>
                                        <height>415</height>
                                       </rect>
@@ -16154,7 +16189,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                      <property name="geometry">
                                       <rect>
                                        <x>0</x>
-                                       <y>0</y>
+                                       <y>-285</y>
                                        <width>601</width>
                                        <height>575</height>
                                       </rect>
@@ -18045,28 +18080,6 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="1" column="1">
-                                        <widget class="QLineEdit" name="trigAmp_down">
-                                         <property name="enabled">
-                                          <bool>false</bool>
-                                         </property>
-                                         <property name="minimumSize">
-                                          <size>
-                                           <width>30</width>
-                                           <height>24</height>
-                                          </size>
-                                         </property>
-                                         <property name="font">
-                                          <font>
-                                           <family>Arial</family>
-                                           <pointsize>9</pointsize>
-                                          </font>
-                                         </property>
-                                         <property name="text">
-                                          <string/>
-                                         </property>
-                                        </widget>
-                                       </item>
                                        <item row="1" column="2">
                                         <widget class="QLabel" name="label_655">
                                          <property name="font">
@@ -18080,6 +18093,16 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                          <property name="alignment">
                                           <set>Qt::AlignCenter</set>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item row="1" column="1">
+                                        <widget class="QLineEdit" name="trigAmp_down">
+                                         <property name="minimumSize">
+                                          <size>
+                                           <width>0</width>
+                                           <height>24</height>
+                                          </size>
                                          </property>
                                         </widget>
                                        </item>
@@ -18294,7 +18317,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>603</width>
+                                 <width>590</width>
                                  <height>370</height>
                                 </rect>
                                </property>
@@ -23167,7 +23190,7 @@ Fill out ‘General Settings’ and select file to use in ‘Calibration Setting
                           <item>
                            <widget class="QStackedWidget" name="awgParamsStack_vsgMeas">
                             <property name="currentIndex">
-                             <number>1</number>
+                             <number>2</number>
                             </property>
                             <widget class="QWidget" name="page_56">
                              <layout class="QHBoxLayout" name="horizontalLayout_36">
@@ -23222,7 +23245,7 @@ Fill out ‘General Settings’ and select file to use in ‘Calibration Setting
                                  <property name="geometry">
                                   <rect>
                                    <x>0</x>
-                                   <y>0</y>
+                                   <y>-171</y>
                                    <width>600</width>
                                    <height>525</height>
                                   </rect>
@@ -24692,7 +24715,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                  <property name="geometry">
                                   <rect>
                                    <x>0</x>
-                                   <y>0</y>
+                                   <y>-80</y>
                                    <width>600</width>
                                    <height>350</height>
                                   </rect>
@@ -25205,7 +25228,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           <item>
                            <widget class="QStackedWidget" name="upParamsStack_vsgMeas">
                             <property name="currentIndex">
-                             <number>3</number>
+                             <number>1</number>
                             </property>
                             <widget class="QWidget" name="page_39">
                              <layout class="QHBoxLayout" name="horizontalLayout_39">
@@ -28269,7 +28292,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                  <property name="geometry">
                                   <rect>
                                    <x>0</x>
-                                   <y>0</y>
+                                   <y>-830</y>
                                    <width>602</width>
                                    <height>1100</height>
                                   </rect>
@@ -28285,7 +28308,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                    <rect>
                                     <x>5</x>
                                     <y>10</y>
-                                    <width>301</width>
+                                    <width>291</width>
                                     <height>491</height>
                                    </rect>
                                   </property>
@@ -29039,9 +29062,9 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                  <widget class="QGroupBox" name="upCalEquipHomo_homo">
                                   <property name="geometry">
                                    <rect>
-                                    <x>310</x>
+                                    <x>300</x>
                                     <y>220</y>
-                                    <width>293</width>
+                                    <width>300</width>
                                     <height>541</height>
                                    </rect>
                                   </property>
@@ -29937,7 +29960,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                    <rect>
                                     <x>5</x>
                                     <y>610</y>
-                                    <width>301</width>
+                                    <width>291</width>
                                     <height>131</height>
                                    </rect>
                                   </property>
@@ -30153,7 +30176,7 @@ QPushButton:hover {background-color:rgb(221, 240, 250)}</string>
                                    <rect>
                                     <x>5</x>
                                     <y>750</y>
-                                    <width>301</width>
+                                    <width>291</width>
                                     <height>284</height>
                                    </rect>
                                   </property>
@@ -30569,9 +30592,9 @@ QPushButton:hover {background-color:rgb(221, 240, 250)}</string>
                                  <widget class="QGroupBox" name="calEquip_homo">
                                   <property name="geometry">
                                    <rect>
-                                    <x>310</x>
+                                    <x>300</x>
                                     <y>10</y>
-                                    <width>290</width>
+                                    <width>300</width>
                                     <height>191</height>
                                    </rect>
                                   </property>
@@ -30856,7 +30879,7 @@ QPushButton:hover {background-color:rgb(221, 240, 250)}</string>
                                    <rect>
                                     <x>5</x>
                                     <y>520</y>
-                                    <width>301</width>
+                                    <width>291</width>
                                     <height>71</height>
                                    </rect>
                                   </property>
@@ -31537,7 +31560,7 @@ QFrame{background-color:#d1d5de}</string>
                                    <x>0</x>
                                    <y>0</y>
                                    <width>445</width>
-                                   <height>631</height>
+                                   <height>600</height>
                                   </rect>
                                  </property>
                                  <property name="minimumSize">
