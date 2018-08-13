@@ -1200,7 +1200,9 @@ def setP3(self,boxDone,buttonFocus,buttonHover,matlab,buttonSelect,greyHover,set
 def setVSAMeasDig(self,boxDone,buttonHover,buttonDone,setButton,matlab):
 	checkDic=[
 		self.ui.centerFreq_vsaMeas,
-		self.ui.sampRate_vsaMeas
+		self.ui.sampRate_vsaMeas,
+		self.ui.vsgFrameTime_vsaMeas_2,
+		self.ui.frameTime_vsaMeas_2
 		]
 	vsaType = self.ui.vsaWorkflow_vsaMeas.currentIndex()
 	vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
@@ -1244,7 +1246,9 @@ def setVSAMeasDig(self,boxDone,buttonHover,buttonDone,setButton,matlab):
 def setVSAMeasGen(self,boxDone,buttonHover,buttonDone,setButton,matlab):
 	checkDic=[
 			self.ui.centerFreq_vsaMeas_2,
-			self.ui.sampRate_vsaMeas_2
+			self.ui.sampRate_vsaMeas_2,
+			self.ui.vsgFrameTime_vsaMeas_2,
+			self.ui.frameTime_vsaMeas_2
 		]
 	
 	if setButton.isChecked() == True:
@@ -1321,18 +1325,29 @@ def setVSAMeasGen(self,boxDone,buttonHover,buttonDone,setButton,matlab):
 		setButton.setText("Set")
 
 def setVSAMeasAdv(self,boxDone,setButton):
-	if setButton.isChecked() == True:
-		setButton.setText("Unset")
+	
+	checkDic =[
+		self.ui.lineEdit_285
+	]
 
-		self.ui.vsaMeasAdvEquip.setStyleSheet(boxDone)
-		self.ui.saMark_vsaMeas.setVisible(True)
-		self.ui.saMark_vsaMeas_2.setVisible(True)
-		self.ui.saMark_vsaMeas_3.setVisible(True)
-		self.ui.saMark_vsaMeas_4.setVisible(True)
-		self.ui.saMark_vsgMeas.setVisible(True)
-		self.ui.saMark_vsgMeas_2.setVisible(True)
-		self.ui.saMark_vsgMeas_3.setVisible(True)
-		self.ui.saMark_vsgMeas_4.setVisible(True)
+
+	if setButton.isChecked() == True:
+		done = win.checkIfDone(checkDic)
+		if done:
+			setButton.setText("Unset")
+
+			self.ui.vsaMeasAdvEquip.setStyleSheet(boxDone)
+			self.ui.saMark_vsaMeas.setVisible(True)
+			self.ui.saMark_vsaMeas_2.setVisible(True)
+			self.ui.saMark_vsaMeas_3.setVisible(True)
+			self.ui.saMark_vsaMeas_4.setVisible(True)
+			self.ui.saMark_vsgMeas.setVisible(True)
+			self.ui.saMark_vsgMeas_2.setVisible(True)
+			self.ui.saMark_vsgMeas_3.setVisible(True)
+			self.ui.saMark_vsgMeas_4.setVisible(True)
+		else:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)	
 	elif  setButton.isChecked() == False:
 		self.ui.vsaMeasAdvEquip.setStyleSheet(None)
 		setButton.setText("Set")
@@ -1359,6 +1374,7 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 		#other
 		self.ui.rfCenterFreq_down,
 		self.ui.ifCenterFreq_down,
+		self.ui.noFrameTimes_down,
 		self.ui.loFreq_down,
 		self.ui.mirrorFlag_down,
 		self.ui.trigAmp_down
@@ -1744,7 +1760,16 @@ def noAWGCalRoutine(self,boxDone,setButton,matlab):
 		self.ui.ampCorrFileField_vsgMeas,
 		self.ui.vfs_awgCal_2,
 		self.ui.trigAmp_awgCal_2,
-		self.ui.sampleClockFreq_awgCal_2
+		self.ui.sampleClockFreq_awgCal_2,
+		self.ui.awgCalFileField_vsgMeas_2,
+		self.ui.noIterations_awgCal_2,
+		self.ui.toneSpacing_awgCal_2,
+		self.ui.startFreq_awgCal_2,
+		self.ui.endFreq_awgCal_2,
+		self.ui.realBasisFlag_awgCal_2,
+		self.ui.phaseDistr_awgCal_2,
+		self.ui.freqRes_awgCal_2,
+		self.ui.awgCalSaveLocField_vsgMeas_2
 	]
 	if setButton.isChecked() == True:
 		done = win.checkIfDone(checkDic)
@@ -1771,13 +1796,21 @@ def noAWGCalRoutine(self,boxDone,setButton,matlab):
 		
 		
 def setAdvAWGVSA_vsgMeas(self,boxDone,setButton):
+	checkDic = [
+		self.ui.lineEdit_86,
+		self.ui.xCorrLength_vsgMeas
+	]
 	if setButton.isChecked() == True:
-		setButton.setText("Unset")
-		self.ui.setAdv_vsgMeas.setText("Unset")
-		self.ui.awgAdvEquip_vsgMeas_2.setStyleSheet(boxDone)
-		self.ui.awgAdvEquip_vsgMeas.setStyleSheet(boxDone)
-		self.ui.vsaAdvEquip_vsgMeas.setStyleSheet(boxDone)
-		
+		done = win.checkIfDone(checkDic)
+		if done:
+			setButton.setText("Unset")
+			self.ui.setAdv_vsgMeas.setText("Unset")
+			self.ui.awgAdvEquip_vsgMeas_2.setStyleSheet(boxDone)
+			self.ui.awgAdvEquip_vsgMeas.setStyleSheet(boxDone)
+			self.ui.vsaAdvEquip_vsgMeas.setStyleSheet(boxDone)
+		else:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)
 	elif setButton.isChecked() == False:
 		setButton.setText("Set")
 		self.ui.setAdv_vsgMeas.setText("Set")
@@ -1786,11 +1819,18 @@ def setAdvAWGVSA_vsgMeas(self,boxDone,setButton):
 		self.ui.vsaAdvEquip_vsgMeas.setStyleSheet(None)	
 			
 def setAdvAWG_vsgMeas(self,boxDone,setButton):
-	if setButton.isChecked() == True:
-		setButton.setText("Unset")
-		self.ui.awgAdvEquip_vsgMeas_2.setStyleSheet(boxDone)
-		self.ui.awgAdvEquip_vsgMeas.setStyleSheet(boxDone)
+
+	checkDic = [self.ui.lineEdit_85]
 	
+	if setButton.isChecked() == True:
+		done = win.checkIfDone(checkDic)
+		if done:
+			setButton.setText("Unset")
+			self.ui.awgAdvEquip_vsgMeas_2.setStyleSheet(boxDone)
+			self.ui.awgAdvEquip_vsgMeas.setStyleSheet(boxDone)
+		else:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)
 	elif setButton.isChecked() == False:
 		setButton.setText("Set")
 		self.ui.awgAdvEquip_vsgMeas_2.setStyleSheet(None)
@@ -1801,18 +1841,51 @@ def awgPreview(self):
 	self.ui.resultsTabs_vsgMeas.setCurrentIndex(1)
 	
 def setUpVSGMeas(self,boxDone,setButton):
+	checkDic = [
+		self.ui.centerFreq_awgCal,
+		self.ui.ampCorrection_awgCal,
+		self.ui.ampCorrFile_vsgMeas,
+		self.ui.vfs_awgCal,
+		self.ui.trigAmp_awgCal,
+		self.ui.noTXPeriods_awgCal,
+		self.ui.awgChannel_awgCal,
+		self.ui.sampleClockFreq_awgCal,
+		self.ui.mirrorFlag_awgCal,
+		self.ui.noRXPeriods_awgCal,
+		self.ui.downFilterFileField_vsgMeas,
+		self.ui.noIterations_awgCal,
+		self.ui.toneSpacing_awgCal.
+		self.ui.startFreq_awgCal,
+		self.ui.endFreq_awgCal,
+		self.ui.realBasisFlag_awgCal,
+		self.ui.phaseDistr_awgCal,
+		self.ui.paprMin_awg,
+		self.ui.paprMax_awg,
+		self.ui.freqRes_awgCal,
+		self.ui.awgCalSaveLocField_vsgMeas,
+		self.ui.awgCalFileField_vsgMeas,
+		self.ui.useVSACal_awgCal,
+		self.ui.vsaCalFileField_vsgMeas
+	]
+	
+	
 	if setButton.isChecked() == True:
-		setButton.setText("Unset")
+		done = win.checkIfDone(checkDic)
+		if done:
+			setButton.setText("Unset")
 
-		awgChecked = self.ui.awgSet_vsgMeas.isChecked()
-		awgRunChecked = self.ui.awgSetRun_vsgMeas.isChecked()
-		if awgChecked or awgRunChecked:
-			self.ui.upCalHomoEquip_vsgMeas.setStyleSheet(boxDone)
-			self.ui.upCalHeteroEquip_vsgMeas.setStyleSheet(boxDone)
-			self.ui.upEquip_vsgMeas.setStyleSheet(boxDone)
-			self.ui.vsgMeasNextStack.setCurrentIndex(8)
-			self.ui.upMark_vsgMeas.setVisible(True)
-			self.ui.psgMark_vsgMeas.setVisible(True)
+			awgChecked = self.ui.awgSet_vsgMeas.isChecked()
+			awgRunChecked = self.ui.awgSetRun_vsgMeas.isChecked()
+			if awgChecked or awgRunChecked:
+				self.ui.upCalHomoEquip_vsgMeas.setStyleSheet(boxDone)
+				self.ui.upCalHeteroEquip_vsgMeas.setStyleSheet(boxDone)
+				self.ui.upEquip_vsgMeas.setStyleSheet(boxDone)
+				self.ui.vsgMeasNextStack.setCurrentIndex(8)
+				self.ui.upMark_vsgMeas.setVisible(True)
+				self.ui.psgMark_vsgMeas.setVisible(True)
+			else:
+				instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+				setButton.setChecked(False)
 	elif setButton.isChecked() == False:
 		setButton.setText("Set")
 		self.ui.upCalHomoEquip_vsgMeas.setStyleSheet(None)
@@ -1823,147 +1896,195 @@ def setUpVSGMeas(self,boxDone,setButton):
 		self.ui.vsgMeasNextStack.setCurrentIndex(7)
 		
 def setHetero(self,boxDone,setButton,matlab):
-	if setButton.isChecked() == True:
-		setButton.setText("Unset")
+	checkDic = [
+		self.ui.comboBox_103,
+		self.ui.lineEdit_155,
+		self.ui.lineEdit_156,
+		self.ui.lineEdit_157,
+		self.ui.lineEdit_158,
+		self.ui.lineEdit_159,
+		self.ui.lineEdit_161,
+		self.ui.lineEdit_162,
+		self.ui.lineEdit_163,
+		self.ui.lineEdit_160,
+		self.ui.lineEdit_164,
+		self.ui.lineEdit_165,
+		self.ui.lineEdit_166,
+		self.ui.lineEdit_167,
+		self.ui.comboBox_102,
+		self.ui.mirrorFlag_hetero,
+		self.ui.freqDomainAlign_hetero,
+		self.ui.noRXPeriods_hetero,
+		self.ui.downFileField_vsgMeas,
+		self.ui.noTXPeriods_hetero,
+		self.ui.vsgCenterFreq_hetero,
+		self.ui.expansionMarginEnable_hetero,
+		self.ui.expansionMargin_hetero,
+		self.ui.vsaCalFileEnable_hetero,
+		self.ui.vsaCalFileField_vsgMeas_2,
+		self.ui.upCalFileField_vsgMeas_2,
+		self.ui.toneSpacing_hetero,
+		self.ui.startTone_hetero,
+		self.ui.endTone_hetero,
+		self.ui.realBasisFlag_hetero,
+		self.ui.phaseDistribution_hetero,
+		self.ui.paprMin_heter,
+		self.ui.paprMax_hetero,
+		self.ui.freqResolution_hetero,
+		self.ui.noIterations_hetero,			
+		self.ui.upCalSaveLocField_vsgMeas
+	
 		
-		addressField = ""
-		vfsField = ""
-		trigAmpField = ""
-		fCarrierField = ""
-		fSampleField = ""
 		
-		# determine which field on which page should be used
-		awgCalPage = self.ui.awgParamsStack_vsgMeas.currentIndex()
-		if awgCalPage == 2:
-			vfsField = self.ui.vfs_awgCal_2.text()
-			trigAmpField = self.ui.trigAmp_awgCal_2.text()
-		elif awgCalPage == 1:
-			vfsField = self.ui.vfs_awgCal.text()
-			trigAmpField = self.ui.trigAmp_awgCal.text()
-		vsaPage = self.ui.vsaMeasGenStack.currentIndex()
-		if vsaPage == 1:
-			fCarrierField = self.ui.centerFreq_vsaMeas.text()
-			fSampleField = self.ui.sampRate_vsaMeas.text()
-		elif vsaPage == 0:
-			fCarrierField = self.ui.centerFreq_vsaMeas_2.text()
-			fSampleField = self.ui.sampRate_vsaMeas_2.text()
-		vsaType = self.ui.vsaType.currentIndex()
-		if vsaType == 1 or vsaType == 5:
-			addressField = self.ui.address_scope.text()
-		elif vsaType == 2 or vsaType == 6:
-			addressField = self.ui.address_dig.text()
-		elif vsaType == 3 or vsaType == 4:
-			addressField = self.ui.address_sa.text()
-		channelVec = [0,0,0,0]
-		c1 = self.ui.measChannel1.isChecked()
-		c2 = self.ui.measChannel2.isChecked()
-		c3 = self.ui.measChannel3.isChecked()
-		c4 = self.ui.measChannel4.isChecked()
-		if c1:
-			channelVec[0] = 1
-		elif c1 == False:
-			channelVec[0] = 0
-		if c2:
-			channelVec[1] = 1
-		elif c2 == False:
-			channelVec[1] = 0
-		if c3:
-			channelVec[2] = 1
-		elif c3 == False:
-			channelVec[2] = 0
-		if c4:
-			channelVec[3] = 1
-		elif c4 == False:
-			channelVec[3] = 0
-		
-		#define dictionaries
-		cal = {
-			"ToneSpacing" : self.ui.toneSpacing_hetero.text(),
-			"StartingToneFreq" : self.ui.startTone_hetero.text(),
-			"EndingToneFreq" : self.ui.endTone_hetero.text(),
-			"RealBasisFlag" : self.ui.realBasisFlag_hetero.currentIndex(),
-			"PhaseDistr" : self.ui.phaseDistribution_hetero.currentIndex(),
-			"PAPRmin" : self.ui.paprMin_hetero.text(),
-			"PAPRmax" : self.ui.paprMax_hetero.text(),
-			"FreqRes" : self.ui.freqResolution_hetero.text(),
-			"NumIterations" : self.ui.noIterations_hetero.text(),
-			"SaveLocation" : self.ui.upCalSaveLocField_vsgMeas.text(),
-			"rxCalFlag" : self.ui.vsaCalFileEnable_hetero.currentIndex(),
-			"rxCalFile" : self.ui.vsaCalFileField_vsgMeas_2.text()
-		}
-		tx={
-			"Type": self.ui.vsgSetup.currentIndex(),
-			"Model": self.ui.partNum_awg.text(),
-			"Fsample" : self.ui.maxSampleRate_awg.text(),
-			"ReferenceClockSource": self.ui.refClockSorce_awg.currentIndex(),
-			"ReferenceClock": self.ui.extRefFreq_awg.text(),
-			"VFS": vfsField,	
-			"TriggerAmplitude": trigAmpField,
-			"NumberOfTransmittedPeriods": self.ui.noTXPeriods_hetero.text(),
-			"ExpansionMarginEnable": self.ui.expansionMarginEnable_hetero.currentIndex(),
-			"ExpansionMargin" : self.ui.expansionMargin_hetero.text(),
-			"Fcarrier" : self.ui.vsgCenterFreq_hetero.text(),
-			"AWG_Channel" : self.ui.awgChannel_awgCal.text()
-		}
-		rx={
-			"Type" : self.ui.vsaType.currentIndex(),
-			"FCarrier" : fCarrierField,
-			"MirrorSignalFlag" : self.ui.mirrorFlag_hetero.currentIndex(),
-			"XCorrLength" : self.ui.xCorrLength_vsgMeas.text(),
-			"FSample" : fSampleField,
-			"MeasuredPeriods" : self.ui.noRXPeriods_hetero.text(),
-			"VisaAddress": addressField,
-			"EnableExternalClock_Scope" : self.ui.extClkEnabled_scope.currentIndex(),
-			"TriggerChannel" : self.ui.trigChannel_scope.text(),
-			"ChannelVec": channelVec,
-			"EnableExternalClock_Dig" : self.ui.clockEnabled_dig.currentIndex(),
-			"ExternalClockFrequency" : self.ui.clockFreq_dig.currentIndex(),
-			"ACDCCoupling" : self.ui.coupling_dig.currentIndex(),
-			"VFS" : self.ui.vfs_dig.text(),
-			"Interleaving" : self.ui.interleaving_dig.currentIndex(),
-			"AnalysisBandwidth":self.ui.analysisBandwidth_sa.text(),
-			"Attenuation":self.ui.attenuation_sa.text(),
-			"ClockReference":self.ui.clockRef_sa.currentIndex(),
-			"TriggerLevel":self.ui.trigLevel_sa.text(),
-			"IFPath":self.ui.ifPath_vsa.currentIndex(),
-			"AlignFreqDomainFlag" : self.ui.freqDomainAlign_hetero.currentIndex(),
-			"DownconversionFilterFile" : self.ui.downFileField_vsgMeas.text()
-		}
+	]
+	
 
-		matlab.Set_Heterodyne_Calibration(cal,tx,rx,nargout=0)
-		#matlab.Upconverter_Calibration_Main(nargout=0)
-		
-		# create progress bar
-		progressBar = QProgressBar()
-		progressBar.setRange(0,11);
-		progressBar.setTextVisible(True);
-		self.ui.statusBar.addWidget(progressBar,1)
-		
-		# create thread to run signal generation routine
-		self.heterodyneThread = runHeterodyneCalibrationThread(progressBar,self,boxDone)
-		# connect signals to the thread
-		# as routine is run, update progress bar and step
-		self.heterodyneThread.updateBar.connect(updateHeterodyneBar)
-		# when nmse and papr are available, update gui
-		# self.heterodyneThread.updateData.connect(updateHeterodyneData)
-		# if error occurs, break thread and alery
-		self.heterodyneThread.errorOccurred.connect(errorOccurred)
-		# begin running signal generation
-		self.heterodyneThread.start()	
-		
-		# self.progressBar = QProgressBar()
-		# self.progressBar.setRange(1,10);
-		# self.progressBar.setTextVisible(True);
-		# self.progressBar.setFormat("Currently Running: Heterodyne Calibration Routine")
-		# self.ui.statusBar.addWidget(self.progressBar,1)
-		# completed = 0
-		# while completed < 100:
-			# completed = completed + 0.00001
-			# self.progressBar.setValue(completed)
-		# self.ui.statusBar.removeWidget(self.progressBar)
-		## to show progress bar, need both addWidget() and show()
-		# self.ui.statusBar.showMessage("Heterodyne Calibration Routine Complete",3000)
-		
+
+	if setButton.isChecked() == True:
+		done = win.checkIfDone(checkDic)
+		if done:
+			setButton.setText("Unset")
+			
+			addressField = ""
+			vfsField = ""
+			trigAmpField = ""
+			fCarrierField = ""
+			fSampleField = ""
+			
+			# determine which field on which page should be used
+			awgCalPage = self.ui.awgParamsStack_vsgMeas.currentIndex()
+			if awgCalPage == 2:
+				vfsField = self.ui.vfs_awgCal_2.text()
+				trigAmpField = self.ui.trigAmp_awgCal_2.text()
+			elif awgCalPage == 1:
+				vfsField = self.ui.vfs_awgCal.text()
+				trigAmpField = self.ui.trigAmp_awgCal.text()
+			vsaPage = self.ui.vsaMeasGenStack.currentIndex()
+			if vsaPage == 1:
+				fCarrierField = self.ui.centerFreq_vsaMeas.text()
+				fSampleField = self.ui.sampRate_vsaMeas.text()
+			elif vsaPage == 0:
+				fCarrierField = self.ui.centerFreq_vsaMeas_2.text()
+				fSampleField = self.ui.sampRate_vsaMeas_2.text()
+			vsaType = self.ui.vsaType.currentIndex()
+			if vsaType == 1 or vsaType == 5:
+				addressField = self.ui.address_scope.text()
+			elif vsaType == 2 or vsaType == 6:
+				addressField = self.ui.address_dig.text()
+			elif vsaType == 3 or vsaType == 4:
+				addressField = self.ui.address_sa.text()
+			channelVec = [0,0,0,0]
+			c1 = self.ui.measChannel1.isChecked()
+			c2 = self.ui.measChannel2.isChecked()
+			c3 = self.ui.measChannel3.isChecked()
+			c4 = self.ui.measChannel4.isChecked()
+			if c1:
+				channelVec[0] = 1
+			elif c1 == False:
+				channelVec[0] = 0
+			if c2:
+				channelVec[1] = 1
+			elif c2 == False:
+				channelVec[1] = 0
+			if c3:
+				channelVec[2] = 1
+			elif c3 == False:
+				channelVec[2] = 0
+			if c4:
+				channelVec[3] = 1
+			elif c4 == False:
+				channelVec[3] = 0
+			
+			#define dictionaries
+			cal = {
+				"ToneSpacing" : self.ui.toneSpacing_hetero.text(),
+				"StartingToneFreq" : self.ui.startTone_hetero.text(),
+				"EndingToneFreq" : self.ui.endTone_hetero.text(),
+				"RealBasisFlag" : self.ui.realBasisFlag_hetero.currentIndex(),
+				"PhaseDistr" : self.ui.phaseDistribution_hetero.currentIndex(),
+				"PAPRmin" : self.ui.paprMin_hetero.text(),
+				"PAPRmax" : self.ui.paprMax_hetero.text(),
+				"FreqRes" : self.ui.freqResolution_hetero.text(),
+				"NumIterations" : self.ui.noIterations_hetero.text(),
+				"SaveLocation" : self.ui.upCalSaveLocField_vsgMeas.text(),
+				"rxCalFlag" : self.ui.vsaCalFileEnable_hetero.currentIndex(),
+				"rxCalFile" : self.ui.vsaCalFileField_vsgMeas_2.text()
+			}
+			tx={
+				"Type": self.ui.vsgSetup.currentIndex(),
+				"Model": self.ui.partNum_awg.text(),
+				"Fsample" : self.ui.maxSampleRate_awg.text(),
+				"ReferenceClockSource": self.ui.refClockSorce_awg.currentIndex(),
+				"ReferenceClock": self.ui.extRefFreq_awg.text(),
+				"VFS": vfsField,	
+				"TriggerAmplitude": trigAmpField,
+				"NumberOfTransmittedPeriods": self.ui.noTXPeriods_hetero.text(),
+				"ExpansionMarginEnable": self.ui.expansionMarginEnable_hetero.currentIndex(),
+				"ExpansionMargin" : self.ui.expansionMargin_hetero.text(),
+				"Fcarrier" : self.ui.vsgCenterFreq_hetero.text(),
+				"AWG_Channel" : self.ui.awgChannel_awgCal.text()
+			}
+			rx={
+				"Type" : self.ui.vsaType.currentIndex(),
+				"FCarrier" : fCarrierField,
+				"MirrorSignalFlag" : self.ui.mirrorFlag_hetero.currentIndex(),
+				"XCorrLength" : self.ui.xCorrLength_vsgMeas.text(),
+				"FSample" : fSampleField,
+				"MeasuredPeriods" : self.ui.noRXPeriods_hetero.text(),
+				"VisaAddress": addressField,
+				"EnableExternalClock_Scope" : self.ui.extClkEnabled_scope.currentIndex(),
+				"TriggerChannel" : self.ui.trigChannel_scope.text(),
+				"ChannelVec": channelVec,
+				"EnableExternalClock_Dig" : self.ui.clockEnabled_dig.currentIndex(),
+				"ExternalClockFrequency" : self.ui.clockFreq_dig.currentIndex(),
+				"ACDCCoupling" : self.ui.coupling_dig.currentIndex(),
+				"VFS" : self.ui.vfs_dig.text(),
+				"Interleaving" : self.ui.interleaving_dig.currentIndex(),
+				"AnalysisBandwidth":self.ui.analysisBandwidth_sa.text(),
+				"Attenuation":self.ui.attenuation_sa.text(),
+				"ClockReference":self.ui.clockRef_sa.currentIndex(),
+				"TriggerLevel":self.ui.trigLevel_sa.text(),
+				"IFPath":self.ui.ifPath_vsa.currentIndex(),
+				"AlignFreqDomainFlag" : self.ui.freqDomainAlign_hetero.currentIndex(),
+				"DownconversionFilterFile" : self.ui.downFileField_vsgMeas.text()
+			}
+
+			matlab.Set_Heterodyne_Calibration(cal,tx,rx,nargout=0)
+			#matlab.Upconverter_Calibration_Main(nargout=0)
+			
+			# create progress bar
+			progressBar = QProgressBar()
+			progressBar.setRange(0,11);
+			progressBar.setTextVisible(True);
+			self.ui.statusBar.addWidget(progressBar,1)
+			
+			# create thread to run signal generation routine
+			self.heterodyneThread = runHeterodyneCalibrationThread(progressBar,self,boxDone)
+			# connect signals to the thread
+			# as routine is run, update progress bar and step
+			self.heterodyneThread.updateBar.connect(updateHeterodyneBar)
+			# when nmse and papr are available, update gui
+			# self.heterodyneThread.updateData.connect(updateHeterodyneData)
+			# if error occurs, break thread and alery
+			self.heterodyneThread.errorOccurred.connect(errorOccurred)
+			# begin running signal generation
+			self.heterodyneThread.start()	
+			
+			# self.progressBar = QProgressBar()
+			# self.progressBar.setRange(1,10);
+			# self.progressBar.setTextVisible(True);
+			# self.progressBar.setFormat("Currently Running: Heterodyne Calibration Routine")
+			# self.ui.statusBar.addWidget(self.progressBar,1)
+			# completed = 0
+			# while completed < 100:
+				# completed = completed + 0.00001
+				# self.progressBar.setValue(completed)
+			# self.ui.statusBar.removeWidget(self.progressBar)
+			## to show progress bar, need both addWidget() and show()
+			# self.ui.statusBar.showMessage("Heterodyne Calibration Routine Complete",3000)
+		else:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)
 	elif setButton.isChecked() == False:
 		setButton.setText("Set && Run")
 		self.ui.calEquip_hetero.setStyleSheet(None)
@@ -1977,37 +2098,97 @@ def setHetero(self,boxDone,setButton,matlab):
 		self.ui.vsgMeasNextStack.setCurrentIndex(7)
 		
 def setHomo(self,boxDone,setButton):
+	
+	checkDic = [
+		self.ui.comboBox_143,
+		self.ui.lineEdit_186,
+		self.ui.lineEdit_187,
+		self.ui.lineEdit_188,
+		self.ui.lineEdit_189,
+		self.ui.lineEdit_190,
+		self.ui.lineEdit_191,
+		self.ui.lineEdit_192,
+		self.ui.lineEdit_193,
+		self.ui.lineEdit_194,
+		self.ui.lineEdit_195,
+		self.ui.lineEdit_196,
+		self.ui.lineEdit_197,
+		self.ui.lineEdit_198,
+		self.ui.comboBox_142,
+		self.ui.lineEdit_199,
+		self.ui.comboBox_150,
+		self.ui.lineEdit_200,
+		self.ui.downFileField_vsgMeas_2,
+		self.ui.lineEdit_201,
+		self.ui.lineEdit_202,
+		self.ui.lineEdit_203,
+		self.ui.lineEdit_204,
+		self.ui.lineEdit_205,
+		self.ui.lineEdit_206,
+		self.ui.lineEdit_207,
+		self.ui.lineEdit_208,
+		self.ui.lineEdit_209,
+		self.ui.comboBox_152,
+		self.ui.calFileIField_vsgMeas,
+		self.ui.calFileQField_vsgMeas,
+		self.ui.comboBox_151,
+		self.ui.vsaCalFielField_vsgMeas,
+		self.ui.iqFileField_vsgMeas_3,
+		self.ui.comboBox_148,
+		self.ui.lineEdit_214,
+		self.ui.lineEdit_215,
+		self.ui.comboBox_146,
+		self.ui.lineEdit_216,
+		self.ui.lineEdit_217,
+		self.ui.lineEdit_218,
+		self.ui.lineEdit_219,
+		self.ui.lineEdit_220,
+		self.ui.lineEdit_221,
+		self.ui.comboBox_149,
+		self.ui.comboBox_147,
+		self.ui.lineEdit_222,	
+		self.ui.lineEdit_260,
+		self.ui.iqSaveLocField_vsgMeas_3,
+		self.ui.vsgCalSaveLocField_vsgMeas_3,
+		self.ui.calStructSaveLocField_vsgMeas_3
+	]
+	
 	if setButton.isChecked() == True:
-		setButton.setText("Unset")
-		
+		done = win.checkIfDone(checkDic)
+		if done:
+			setButton.setText("Unset")
+			
 
 
-		self.ui.calEquip_homo.setStyleSheet(boxDone)
-		self.ui.rxEquip_homo.setStyleSheet(boxDone)
-		self.ui.vsgEquip_homo.setStyleSheet(boxDone)
-		self.ui.upCalEquipHomo_homo.setStyleSheet(boxDone)
-		self.ui.upEquip_homo.setStyleSheet(boxDone)
-		self.ui.scopeEquip_homo.setStyleSheet(boxDone)
-		self.ui.vsgMeasNextStack.setCurrentIndex(8)
-		self.ui.debugVSGStack.setCurrentIndex(1)
-		self.ui.vsgResultsFileStack_vsgMeas.setCurrentIndex(0)
-		self.ui.vsgCalPaths_algo.setCurrentIndex(0)
-		self.ui.vsgResultsStack_vsgMeas.setCurrentIndex(0)
-		self.ui.upMark_vsgMeas.setVisible(True)
-		self.ui.psgMark_vsgMeas.setVisible(True)
-		
-		self.progressBar = QProgressBar()
-		self.progressBar.setRange(1,10);
-		self.progressBar.setTextVisible(True);
-		self.progressBar.setFormat("Currently Running: Homodyne Calibration Routine")
-		self.ui.statusBar.addWidget(self.progressBar,1)
-		completed = 0
-		while completed < 100:
-			completed = completed + 0.00001
-			self.progressBar.setValue(completed)
-		self.ui.statusBar.removeWidget(self.progressBar)
-		# to show progress bar, need both addWidget() and show()
-		self.ui.statusBar.showMessage("Homodyne Calibration Routine Complete",3000)
+			self.ui.calEquip_homo.setStyleSheet(boxDone)
+			self.ui.rxEquip_homo.setStyleSheet(boxDone)
+			self.ui.vsgEquip_homo.setStyleSheet(boxDone)
+			self.ui.upCalEquipHomo_homo.setStyleSheet(boxDone)
+			self.ui.upEquip_homo.setStyleSheet(boxDone)
+			self.ui.scopeEquip_homo.setStyleSheet(boxDone)
+			self.ui.vsgMeasNextStack.setCurrentIndex(8)
+			self.ui.debugVSGStack.setCurrentIndex(1)
+			self.ui.vsgResultsFileStack_vsgMeas.setCurrentIndex(0)
+			self.ui.vsgCalPaths_algo.setCurrentIndex(0)
+			self.ui.vsgResultsStack_vsgMeas.setCurrentIndex(0)
+			self.ui.upMark_vsgMeas.setVisible(True)
+			self.ui.psgMark_vsgMeas.setVisible(True)
+			
+			self.progressBar = QProgressBar()
+			self.progressBar.setRange(1,10);
+			self.progressBar.setTextVisible(True);
+			self.progressBar.setFormat("Currently Running: Homodyne Calibration Routine")
+			self.ui.statusBar.addWidget(self.progressBar,1)
+			completed = 0
+			while completed < 100:
+				completed = completed + 0.00001
+				self.progressBar.setValue(completed)
+			self.ui.statusBar.removeWidget(self.progressBar)
+			# to show progress bar, need both addWidget() and show()
+			self.ui.statusBar.showMessage("Homodyne Calibration Routine Complete",3000)
+		else:
+			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+			setButton.setChecked(False)
 	elif setButton.isChecked() == False:
 		setButton.setText("Set && Run")
 		self.ui.calEquip_homo.setStyleSheet(None)
