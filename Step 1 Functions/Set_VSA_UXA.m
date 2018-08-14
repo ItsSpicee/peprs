@@ -18,9 +18,9 @@ function result = Set_VSA_UXA(dict,model)
     errorList = [];
     error = "";
 
-	try
+% 	try
 		if dict.address == ""
-			errorString = "Fill out general VSA parameters before attempting to set advanced parameters.";
+			errorString = "Fill out general VSA parameters before attempting to set parameters.";
 			resultsString = sprintf("%s~%s","",errorString);
 			result = char(resultsString);
 			return
@@ -31,7 +31,7 @@ function result = Set_VSA_UXA(dict,model)
 		spectrum.InputBufferSize = 8388608;
 		spectrum.ByteOrder = 'littleEndian';
 		fopen(spectrum);
-		fprintf(spectrum, '*CLS');
+		fprintf(spectrum,'*CLS');
 		UXAConfig.Address = dict.address;
 		
 		idn = query(spectrum, '*IDN?');
@@ -148,10 +148,10 @@ function result = Set_VSA_UXA(dict,model)
 		delete(spectrum);
 		clear spectrum;
 
-	catch
-	   errorString = "A problem has occured, resetting instruments. Use Keysight Connection Expert to check your instrument VISA Addresses.";  
-	   instrreset
-	end
+% 	catch
+% 	   errorString = "A problem has occured, resetting instruments. Use Keysight Connection Expert to check your instrument VISA Addresses.";  
+% 	   instrreset
+% 	end
 
 	for i=1:length(errorList)
         if i == 1

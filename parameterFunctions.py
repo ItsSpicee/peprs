@@ -811,6 +811,54 @@ def copyAWGDacRange(self):
 	self.ui.vfs_awgCal.setText(awgText)
 	self.ui.vfs_awgCal_2.setText(awgText)
 	
+# enable or disable file fields based on vsa val. dropdown selection
+def enableVSACalPrechar(self):
+	idx = self.ui.useVSACal_prechar.currentIndex()
+	if idx == 0 or idx == 2:
+		self.ui.vsaCalFileLabel_prechar.setEnabled(False)
+		self.ui.vsaCalFileField_algo_2.setEnabled(False)
+		self.ui.filePushButton_8.setEnabled(False)
+	else:
+		self.ui.vsaCalFileLabel_prechar.setEnabled(True)
+		self.ui.vsaCalFileField_algo_2.setEnabled(True)
+		self.ui.filePushButton_8.setEnabled(True)
+
+# enable or disable file fields based on vsg cal. dropdown selection		
+def enableVSGCalPrechar(self):
+	idx = self.ui.useVSGCal_prechar.currentIndex()
+	if idx == 0 or idx == 2:
+		self.ui.calFileIField_algo_2.setEnabled(False)
+		self.ui.calFileILabel_prechar.setEnabled(False)
+		self.ui.filePushButton_9.setEnabled(False)
+		self.ui.calFileQLabel_prechar.setEnabled(False)
+		self.ui.calFileQField_algo_2.setEnabled(False)
+		self.ui.filePushButton_10.setEnabled(False)
+	else:
+		self.ui.calFileIField_algo_2.setEnabled(True)
+		self.ui.calFileILabel_prechar.setEnabled(True)
+		self.ui.filePushButton_9.setEnabled(True)
+		self.ui.calFileQLabel_prechar.setEnabled(True)
+		self.ui.calFileQField_algo_2.setEnabled(True)
+		self.ui.filePushButton_10.setEnabled(True)
+	
+def enableExpansionPrechar(self):
+	idx = self.ui.gainExpansionFlag_prechar.currentIndex()
+	if idx == 0 or idx == 2:
+		self.ui.gainExpansionLabel_prechar.setEnabled(False)
+		self.ui.gainExpansion_prechar.setEnabled(False)
+	else:
+		self.ui.gainExpansionLabel_prechar.setEnabled(True)
+		self.ui.gainExpansion_prechar.setEnabled(True)
+	
+def enableFreqMultPrechar(self):
+	idx = self.ui.freqMultiplierFlag_prechar.currentIndex()
+	if idx == 0 or idx == 2:
+		self.ui.freqMultiplierFactorLabel_prechar.setEnabled(False)
+		self.ui.freqMultiplierFactor_prechar.setEnabled(False)
+	else:
+		self.ui.freqMultiplierFactorLabel_prechar.setEnabled(True)
+		self.ui.freqMultiplierFactor_prechar.setEnabled(True)
+	
 # def enableTraceAveragingSA(self):
 	# idx = self.ui.traceAvg_spa.currentIndex()
 	# if idx == 1:

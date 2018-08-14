@@ -91,7 +91,7 @@ def changeStepTab(self,safety):
 			self.resize(1265,maxHeight)
 			self.center()
 			# if no calibration has been done, disable calibration validation tab
-			if vsgCal == 0 and vsaCal == False:
+			if (vsgCal == 0 or vsgCal == 4) and vsaCal == False:
 				self.ui.algoTabs.setTabEnabled(0,False)
 			else:
 				self.ui.algoTabs.setTabEnabled(0,True)

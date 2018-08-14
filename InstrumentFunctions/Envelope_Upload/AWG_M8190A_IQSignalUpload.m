@@ -106,6 +106,7 @@ function AWG_M8190A_IQSignalUpload(SignalsCell, ...
             else
                 iqtotaldata = iqtotaldata+iqdata ;
             end
+
     end
     
     % Normalize the max power of the iq data to 0 dBm
@@ -114,6 +115,7 @@ function AWG_M8190A_IQSignalUpload(SignalsCell, ...
     if (CorrectionEnabled)
         iqtotaldata = iqcorrection(iqtotaldata, fs);
     end
+
     if ExpansionMarginSettings.ExpansionMarginEnable
         norm_fact = 10^(-ExpansionMarginSettings.ExpansionMargin/20)*...
             10^((ExpansionMarginSettings.PAPR_input - ExpansionMarginSettings.PAPR_original)/20) ;   
@@ -127,7 +129,7 @@ function AWG_M8190A_IQSignalUpload(SignalsCell, ...
     else
         iqtotaldata = iqtotaldata;
     end
-    
+
     marker = zeros(1,length(iqtotaldata));
     % Set marker period to 1/2 and set to 1 to enable sample marker ONLY and 
     % 3 to enable sample marker AND sync marker 
@@ -140,7 +142,7 @@ function AWG_M8190A_IQSignalUpload(SignalsCell, ...
     if (~isempty(iqtotaldata) && DisplaySignal)
          iqplot(iqtotaldata, fs, 'marker', marker) ;
     end
-
+    
     % Upload the signal to the AWG
     disp('Uploading Waveform...')
     
@@ -165,9 +167,10 @@ function AWG_M8190A_IQSignalUpload(SignalsCell, ...
             marker = [marker; zeros(Additional_poits, 1)];
         end
         rept = 1; % Saves memory
-               
+        
         % Modified iqdownload code
         iqtotaldata  = iqtotaldata + complex(IQOffsets.I_Offset, IQOffsets.Q_Offset);
+        
         PlotSpectrum(iqtotaldata,iqtotaldata,fs)
         if ~RunSettings.SyncModuleFlag
             iqdownload(repmat(iqtotaldata, rept, 1), fs, 'channelMapping', channelMapping, ...

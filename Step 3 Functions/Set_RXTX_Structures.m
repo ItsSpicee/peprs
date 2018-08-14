@@ -31,6 +31,7 @@ function Set_RXTX_Structures(txd,rxd)
     TX.AWG.Model = txd.Model;     % AWG Model 'M8190A', 'M8195A'
     TX.FGuard = txd.FGuard; % Guard band for ACPR Calculations
     TX.Fcarrier = txd.FCarrier; % AWG Fcarrier of the for the signal
+    display(TX.Fcarrier)
     TX.AWG.FsampleDAC = txd.FSampleDAC;
     
     % Minimum segment length of the AWG frame

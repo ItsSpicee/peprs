@@ -2,6 +2,7 @@ load('IQ_AWG_in.mat')
 
 instrreset % so we do not get timeout errors
 
+% already done in Set_AWG
 AWG_M8190A_Reference_Clk(TX.AWG.ReferenceClockSource,TX.AWG.ReferenceClock)
 
 % AWG run settings

@@ -18,6 +18,7 @@ import workflowNav as flow
 import windowFunctions as menu
 import parameterFunctions as param
 import debugFunctions as debug
+import updateButtons as update
 
 # import relevant matplotlib library components (used to create plots)
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
@@ -158,9 +159,9 @@ class Window(QMainWindow):
 		self.ui.filePushButton_11.clicked.connect(lambda: menu.fileBrowse(self, self.ui.customIField_algo,".\Measurement Data"))
 		self.ui.filePushButton_12.clicked.connect(lambda: menu.fileBrowse(self, self.ui.customQField_algo,".\Measurement Data"))
 		self.ui.filePushButton_7.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_algo_2,".\DPD Data\\Utility Data"))
-		self.ui.filePushButton_8.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_algo_2,".\Measurement Data"))
-		self.ui.filePushButton_9.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileIField_algo_2,".\Measurement Data"))
-		self.ui.filePushButton_10.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileQField_algo_2,".\Measurement Data"))
+		self.ui.filePushButton_8.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_algo_2,".\Measurement Data\RX_CalResults"))
+		self.ui.filePushButton_9.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileIField_algo_2,".\Measurement Data\AWG_CalResults"))
+		self.ui.filePushButton_10.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileQField_algo_2,".\Measurement Data\AWG_CalResults"))
 		self.ui.filePushButton_4.clicked.connect(lambda: menu.fileOpen(self, self.ui.vsaCalFileField_algo,".\Measurement Data"))
 		self.ui.filePushButton_5.clicked.connect(lambda: menu.fileBrowse(self, self.ui.calFileIField_algo,".\Measurement Data"))
 		self.ui.filePushButton_3.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFileField_algo,".\Measurement Data\\Utility Data"))
@@ -179,7 +180,6 @@ class Window(QMainWindow):
 		self.ui.filePushButton_38.clicked.connect(lambda: menu.fileSave(self, self.ui.iqSaveLocField_vsgMeas_3,".\Measurement Data"))
 		self.ui.filePushButton_39.clicked.connect(lambda: menu.fileSave(self, self.ui.vsgCalSaveLocField_vsgMeas_3,".\Measurement Data"))
 		self.ui.filePushButton_40.clicked.connect(lambda: menu.fileSave(self, self.ui.calStructSaveLocField_vsgMeas_3,".\Measurement Data"))
-		self.ui.filePushButton_41.clicked.connect(lambda: menu.fileBrowse(self, self.ui.awgCalFileField_vsgMeas,".\Measurement Data"))
 		self.ui.filePushButton_44.clicked.connect(lambda: menu.fileBrowse(self, self.ui.vsaCalFileField_vsgMeas,".\Measurement Data"))
 		self.ui.filePushButton_47.clicked.connect(lambda: menu.fileBrowse(self, self.ui.downFilterFileField_vsgMeas,".\Measurement Data\\Utility Data"))
 		self.ui.filePushButton_48.clicked.connect(lambda: menu.fileSave(self, self.ui.awgCalSaveLocField_vsgMeas,".\Measurement Data"))
@@ -405,14 +405,19 @@ class Window(QMainWindow):
 		# heterodyne calibration page
 		self.ui.expansionMarginEnable_hetero.currentIndexChanged.connect(lambda: param.enableExpansionMargin(self))
 		self.ui.vsaCalFileEnable_hetero.currentIndexChanged.connect(lambda: param.enableVSACalFileHetero(self))
+		# prechar page
+		self.ui.useVSACal_prechar.currentIndexChanged.connect(lambda: param.enableVSACalPrechar(self))
+		self.ui.useVSGCal_prechar.currentIndexChanged.connect(lambda: param.enableVSGCalPrechar(self))
+		self.ui.gainExpansionFlag_prechar.currentIndexChanged.connect(lambda: param.enableExpansionPrechar(self))
+		self.ui.freqMultiplierFlag_prechar.currentIndexChanged.connect(lambda: param.enableFreqMultPrechar(self))
 		# expand/shrink window depending on which step tab is clicked
 		self.ui.stepTabs.currentChanged.connect(lambda: menu.changeStepTab(self,safety))
 		
 		# define set parameter functions that are called when a set/update button is clicked
 		# vsg page
-		self.ui.awgSetGeneral.clicked.connect(lambda: set.setGeneralAWG(self,setFocusButton,setParams,greyHover,unsetFocusButton,greyButton,self.ui.awgSetGeneral,matlab))
-		self.ui.vsgSetGeneral.clicked.connect(lambda: set.setGeneralVSG(self,setFocusButton,setParams,greyHover,unsetFocusButton,greyButton,self.ui.vsgSetGeneral))
-		self.ui.vsgSetAdv.clicked.connect(lambda: set.setAdvanced(self,self.ui.vsgEquipAdv,setParams,self.ui.vsgSetAdv))
+		self.ui.awgSetGeneral.clicked.connect(lambda: set.setGeneralAWG(self,setFocusButton,setParams,greyHover,self.ui.awgSetGeneral,matlab))
+		self.ui.vsgSetGeneral.clicked.connect(lambda: set.setGeneralVSG(self,setFocusButton,setParams,greyHover,self.ui.vsgSetGeneral))
+		self.ui.vsgSetAdv.clicked.connect(lambda: set.setAdvancedVSG(self,setParams,self.ui.vsgSetAdv))
 		self.ui.awgSetAdv.clicked.connect(lambda: set.setAdvancedAWG(self,setParams,self.ui.awgSetAdv,matlab))
 		# upconverter page
 		self.ui.upSet.clicked.connect(lambda: set.setUp(self,setFocusButton,setButtonHover,setParams,greyHover,greyButton,unsetFocusButton,self.ui.upSet))
@@ -461,6 +466,7 @@ class Window(QMainWindow):
 		# prechar tab
 		self.ui.precharPreview.clicked.connect(lambda: set.preCharPreview(self,matlab))
 		self.ui.precharRun.clicked.connect(lambda: set.runPrecharacterization(self,setParams,self.ui.precharRun,matlab))
+		
 		
 		# define debug functions that are run when a debugging panel button is selected
 		# prechar
@@ -786,6 +792,32 @@ class Window(QMainWindow):
 		self.ui.awgButton_vsgMeas_2.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(0))
 		self.ui.awgButton_vsgMeas_3.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(0))
 		self.ui.vsgButton_vsgMeas.clicked.connect(lambda: self.ui.vsgMeasParamTabs.setCurrentIndex(0))
+		
+		# update buttons
+		# set general AWG
+		self.ui.address_awg.textChanged.connect(lambda: update.updateGenAWG(self))
+		self.ui.refClockSorce_awg.currentIndexChanged.connect(lambda: update.updateGenAWG(self))
+		self.ui.extRefFreq_awg.textChanged.connect(lambda: update.updateGenAWG(self))
+		self.ui.model_awg.currentIndexChanged.connect(lambda: update.updateGenAWG(self))
+		self.ui.iChannel_awg.currentIndexChanged.connect(lambda: update.updateGenAWG(self))
+		self.ui.qChannel_awg.currentIndexChanged.connect(lambda: update.updateGenAWG(self))
+		# set advanced AWG
+		self.ui.trigMode_awg.currentIndexChanged.connect(lambda: update.updateAdvAWG(self))
+		self.ui.dacRange_awg.textChanged.connect(lambda: update.updateAdvAWG(self))
+		self.ui.sampleMarker_awg.textChanged.connect(lambda: update.updateAdvAWG(self))
+		self.ui.syncMarker_awg.textChanged.connect(lambda: update.updateAdvAWG(self))
+		# set general VSG
+		self.ui.refClockSorce_vsg.currentIndexChanged.connect(lambda: update.updateGenVSG(self))
+		self.ui.extRefFreq_vsg.textChanged.connect(lambda: update.updateGenVSG(self))
+		self.ui.iChannel_vsg.currentIndexChanged.connect(lambda: update.updateGenVSG(self))
+		self.ui.qChannel_vsg.currentIndexChanged.connect(lambda: update.updateGenVSG(self))
+		self.ui.model_vsg.currentIndexChanged.connect(lambda: update.updateGenVSG(self))
+		self.ui.address_vsg.textChanged.connect(lambda: update.updateGenVSG(self))
+		# set advanced VSG
+		self.ui.dacRange_vsg.textChanged.connect(lambda: update.updateAdvVSG(self))
+		self.ui.trigMode_vsg.currentIndexChanged.connect(lambda: update.updateAdvVSG(self))
+		self.ui.sampleMarker_vsg.textChanged.connect(lambda: update.updateAdvVSG(self))
+		self.ui.syncMarker_vsg.textChanged.connect(lambda: update.updateAdvVSG(self))
 		
 		# show window
 		self.show()	

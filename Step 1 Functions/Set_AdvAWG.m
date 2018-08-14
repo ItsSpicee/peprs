@@ -13,6 +13,7 @@ function errorString = Set_AdvAWG(dict)
     % connect to instrument
     load('.\Step 1 Functions\arbConfig.mat');
     arbConfig = loadArbConfig(arbConfig);
+    display(dict.genSet)
     % set visa address
     if dict.address == "" || dict.genSet == false
         errorString = 'Please fill out general settings before attempting to set advanced parameters.';

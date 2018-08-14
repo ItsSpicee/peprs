@@ -9,16 +9,17 @@ function AWG_M8190A_Reference_Clk(IntorExt,ClkFreq)
     load('.\Step 1 Functions\arbConfig.mat');
     arbConfig = loadArbConfig(arbConfig);
     f = iqopen(arbConfig);
-    
-    switch (IntorExt)
-        case 'Internal';
+
+    switch IntorExt
+        case 'Internal'
             xfprintf(f, sprintf(':ROSC:SOUR INT'));
-        case 'Backplane';
+        case 'Backplane'
             xfprintf(f, sprintf(':ROSC:SOUR AXI'));
-        case 'External';
+        case 'External'
             xfprintf(f, sprintf(':ROSC:FREQ %d', ClkFreq));
             xfprintf(f, sprintf(':ROSC:SOUR EXT'));
-        otherwise error('unknown source');
+        otherwise
+            error('unknown source');
     end
             
 end            

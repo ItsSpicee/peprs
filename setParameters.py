@@ -7,7 +7,7 @@ from PyQt5.QtCore import (Qt,QSize,QThread,pyqtSignal)
 
 # import python files and variables
 import windowFunctions as win
-from main import matlab as matlab
+from main import matlab
 
 # import matplotlib library and numpy
 import numpy as np
@@ -182,7 +182,7 @@ class runHeterodyneCalibrationThread(QThread):
 		
 	# def run(self):
 			
-def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,awgSetGeneral,matlab):
+def setGeneralAWG(self,buttonFocus,boxDone,greyHover,awgSetGeneral,matlab):
 	# array to check that all parameters are filled out when set button is clicked
 	checkDic = [
 		self.ui.address_awg,
@@ -193,31 +193,25 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 		self.ui.qChannel_awg,
 		self.ui.maxSampleRate_awg
 	]
-	# flag for determining if code was run without errors
-	flag = 0
-	if awgSetGeneral.isChecked() == True:
-		# check if all parameters are filled
-		done = win.checkIfDone(checkDic)
-		if done:
-			# call matlab instrument code
-			# define dictionary for matlab struct
-			d={
-				"address": self.ui.address_awg.text(),
-				"refClkSrc": self.ui.refClockSorce_awg.currentIndex(),
-				"refClkFreq": self.ui.extRefFreq_awg.text(),
-				"model": self.ui.model_awg.currentIndex()
-			}
-			flag = setAWGParams(self,d,matlab)
-		else:
-			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
-			awgSetGeneral.setChecked(False)
-		
+	done = win.checkIfDone(checkDic)
+	if done:
+		# define dictionary for matlab struct
+		d={
+			"address": self.ui.address_awg.text(),
+			"refClkSrc": self.ui.refClockSorce_awg.currentIndex(),
+			"refClkFreq": self.ui.extRefFreq_awg.text(),
+			"model": self.ui.model_awg.currentIndex()
+		}
+		# call matlab instrument code
+		flag = setAWGParams(self,d,matlab)
+		# if code was run without errors
 		if flag:
+			awgSetGeneral.setEnabled(False)
+			awgSetGeneral.setStyleSheet(None)
 			self.ui.awgButton_vsg.setStyleSheet(buttonFocus)
 			self.ui.awgButton_vsg_2.setStyleSheet(buttonFocus)
 			self.ui.awgButton_vsg_3.setStyleSheet(buttonFocus)
 			self.ui.awgEquipGeneral.setStyleSheet(boxDone)
-			awgSetGeneral.setText("Unset")
 			setupIdx = self.ui.vsgWorkflows.currentIndex()
 			if setupIdx == 1:
 				self.ui.vsgNextSteps.setCurrentIndex(5)
@@ -236,54 +230,58 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,a
 				self.ui.upButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
 				self.ui.psgButton_vsg.setStyleSheet(greyHover)
 				self.ui.psgButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
-		
+	else:
+		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+		awgSetGeneral.setChecked(False)
+	
+	if awgSetGeneral.isChecked() == True:
+		if flag == 1:
+			awgSetGeneral.setText("Update")	
 	elif awgSetGeneral.isChecked() == False:
-		self.ui.awgEquipGeneral.setStyleSheet(None)
-		self.ui.awgButton_vsg.setStyleSheet(buttonSelected)
-		self.ui.awgButton_vsg_2.setStyleSheet(buttonSelected)
-		self.ui.awgButton_vsg_3.setStyleSheet(buttonSelected)
-		self.ui.vsaButton_vsg.setStyleSheet(greyButton)
-		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.ArrowCursor))
-		self.ui.upButton_vsg.setStyleSheet(greyButton)
-		self.ui.upButton_vsg.setCursor(QCursor(Qt.ArrowCursor))
-		self.ui.psgButton_vsg.setStyleSheet(greyButton)
-		self.ui.psgButton_vsg.setCursor(QCursor(Qt.ArrowCursor))
-		self.ui.vsgNextSteps.setCurrentIndex(1)
-		awgSetGeneral.setText("Set")
+		# when update is clicked, button checked == False
+		# want to change it back to true so this will be activated on false again
+		awgSetGeneral.setChecked(True)
 		
 def setAdvancedAWG(self,boxDone,setButton,matlab):
+	# array to check that all parameters are filled out when set button is clicked
 	checkDic=[
 		self.ui.trigMode_awg,
 		self.ui.dacRange_awg,
 		self.ui.sampleMarker_awg,
 		self.ui.syncMarker_awg,
 	]
-	
-	d={
-		"address": self.ui.address_awg.text(),
-		"trigMode": self.ui.trigMode_awg.currentIndex(),
-		"dacRange": self.ui.dacRange_awg.text(),
-		"syncMarker": self.ui.syncMarker_awg.text(),
-		"sampleMarker": self.ui.sampleMarker_awg.text(),
-		"genSet": self.ui.awgSetGeneral.isChecked()
-	}
-	flag = setAdvAWGParams(self,d,matlab)
-	
-	if setButton.isChecked() == True:
-		done = win.checkIfDone(checkDic)
-		if done:
-			if flag == 1:
-				setButton.setText("Unset")
-				self.ui.awgEquipAdv.setStyleSheet(boxDone)
-				self.ui.statusBar.showMessage('Successfully Set Advanced Settings',2000)
-		else:
-			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
-			setButton.setChecked(False)			
-	elif setButton.isChecked() == False:
-		self.ui.awgEquipAdv.setStyleSheet(None)
-		setButton.setText("Set")
+	done = win.checkIfDone(checkDic)
+	if done:
+		# define dictionary for matlab structs
+		d={
+			"address": self.ui.address_awg.text(),
+			"trigMode": self.ui.trigMode_awg.currentIndex(),
+			"dacRange": self.ui.dacRange_awg.text(),
+			"syncMarker": self.ui.syncMarker_awg.text(),
+			"sampleMarker": self.ui.sampleMarker_awg.text(),
+			"genSet": self.ui.awgSetGeneral.isChecked()
+		}
+		# set matlab parameters
+		flag = setAdvAWGParams(self,d,matlab)
+		# if no error occurred, flag = 1
+		if flag == 1:
+			self.ui.awgEquipAdv.setStyleSheet(boxDone)
+			setButton.setEnabled(False)
+			setButton.setStyleSheet(None)
+	else:
+		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+		setButton.setChecked(False)
 		
-def setGeneralVSG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,vsgSetGeneral):
+	if setButton.isChecked() == True:
+		if flag == 1:
+			setButton.setText("Update")				
+	elif setButton.isChecked() == False:
+		# when update is clicked, button checked == False
+		# want to change it back to true so this will be activated on false again
+		setButton.setChecked(True)
+		
+def setGeneralVSG(self,buttonFocus,boxDone,greyHover,vsgSetGeneral):
+	# array to check that all parameters are filled out when set button is clicked
 	checkDic=[
 		self.ui.refClockSorce_vsg,
 		self.ui.extRefFreq_vsg,
@@ -291,35 +289,52 @@ def setGeneralVSG(self,buttonFocus,boxDone,greyHover,buttonSelected,greyButton,v
 		self.ui.qChannel_vsg,
 		self.ui.model_vsg,
 		self.ui.address_vsg,
-		self.ui.maxSampleRate_vsg
-		
+		self.ui.maxSampleRate_vsg	
 	]
-
+	done = win.checkIfDone(checkDic)
+	if done:
+		vsgSetGeneral.setEnabled(False)
+		vsgSetGeneral.setStyleSheet(None)
+		self.ui.vsgButton_vsg.setStyleSheet(buttonFocus)
+		self.ui.vsgEquipGeneral.setStyleSheet(boxDone)
+		self.ui.vsgNextSteps.setCurrentIndex(5)
+		self.ui.vsaButton_vsg.setStyleSheet(greyHover)
+		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
+	else:
+		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+		vsgSetGeneral.setChecked(False)
 	if vsgSetGeneral.isChecked() == True:
-		done = win.checkIfDone(checkDic)
-		if done:
-			vsgSetGeneral.setText("Unset")
-			self.ui.vsgButton_vsg.setStyleSheet(buttonFocus)
-			self.ui.vsgEquipGeneral.setStyleSheet(boxDone)
-			self.ui.vsgNextSteps.setCurrentIndex(5)
-			self.ui.vsaButton_vsg.setStyleSheet(greyHover)
-			self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
-		else:
-			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
-			vsgSetGeneral.setChecked(False)
+		vsgSetGeneral.setText("Update")	
 	elif  vsgSetGeneral.isChecked() == False:
-		self.ui.vsgEquipGeneral.setStyleSheet(None)
-		self.ui.vsgButton_vsg.setStyleSheet(buttonSelected)
-		self.ui.vsgNextSteps.setCurrentIndex(4)
-		self.ui.vsaButton_vsg.setStyleSheet(greyButton)
-		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.ArrowCursor))
-		vsgSetGeneral.setText("Set")
-
+		# when update is clicked, button checked == False
+		# want to change it back to true so this will be activated on false again
+		vsgSetGeneral.setChecked(True)
+		
+def setAdvancedVSG(self,boxDone,setButton):
+	checkDic = [
+		self.ui.dacRange_vsg,
+		self.ui.trigMode_vsg,
+		self.ui.sampleMarker_vsg,
+		self.ui.syncMarker_vsg
+	]
+	done = win.checkIfDone(checkDic)
+	if done:
+		self.ui.vsgEquipAdv.setStyleSheet(boxDone)
+		setButton.setEnabled(False)
+		setButton.setStyleSheet(None)
+	else:
+		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+		setButton.setChecked(False)
+		
+	if setButton.isChecked() == True:
+		setButton.setText("Update")
+	elif setButton.isChecked() == False:
+		setButton.setChecked(True)
+		
 def setAdvanced(self,box,boxDone,setButton):
 	if setButton.isChecked() == True:
 		setButton.setText("Unset")
 		box.setStyleSheet(boxDone)
-		self.ui.statusBar.showMessage('Successfully Set Advanced Settings',2000)
 	elif setButton.isChecked() == False:
 		box.setStyleSheet(None)
 		setButton.setText("Set")
@@ -1798,14 +1813,12 @@ def noAWGCalRoutine(self,boxDone,setButton,matlab):
 		self.ui.vfs_awgCal_2,
 		self.ui.trigAmp_awgCal_2,
 		self.ui.sampleClockFreq_awgCal_2,
-		self.ui.awgCalFileField_vsgMeas
 	]
 	if setButton.isChecked() == True:
 		done = win.checkIfDone(checkDic)
 		if done:
 			setButton.setText("Unset")
 			self.ui.awgEquip_vsgMeas_2.setStyleSheet(boxDone)
-			self.ui.awgCalEquip_vsgMeas_2.setStyleSheet(boxDone)
 			self.ui.vsgMeasNextStack.setCurrentIndex(5)
 			self.ui.awgMark_vsgMeas.setVisible(True)
 			self.ui.awgMark_vsgMeas_2.setVisible(True)
@@ -1816,7 +1829,6 @@ def noAWGCalRoutine(self,boxDone,setButton,matlab):
 	elif setButton.isChecked() == False:
 		setButton.setText("Set")
 		self.ui.awgEquip_vsgMeas_2.setStyleSheet(None)
-		self.ui.awgCalEquip_vsgMeas_2.setStyleSheet(None)
 		self.ui.awgMark_vsgMeas.setVisible(False)
 		self.ui.awgMark_vsgMeas_2.setVisible(False)
 		self.ui.awgMark_vsgMeas_3.setVisible(False)
@@ -2239,6 +2251,7 @@ def runCalValidation(self,setBox,setButton,matlab):
 		self.ui.lineEdit_251,
 		self.ui.comboBox_118,
 		self.ui.lineEdit_252,
+		self.ui.noSegments_calval
 	]
 	done = win.checkIfDone(checkDic)
 	if setButton.isChecked() == True:
@@ -2299,12 +2312,10 @@ def preCharPreview(self,matlab):
 		ampCorrField = self.ui.ampCorrection_awgCal.currentIndex()
 		trigAmpField = self.ui.trigAmp_awgCal.text()
 		vsgCenterFreqField = self.ui.centerFreq_awgCal.text()
-		noSegmentsField = self.ui.noTXPeriods_awgCal.text()
 	elif awgPage == 2:
 		ampCorrField = self.ui.ampCorrection_awgCal_2.currentIndex()
 		trigAmpField = self.ui.trigAmp_awgCal_2.text()
 		vsgCenterFreqField = self.ui.centerFreq_awgCal_2.text()
-		noSegmentsField = self.ui.noTXPeriods_awgMeas.text()
 	vsaPage = self.ui.vsaMeasGenStack.currentIndex()
 	if vsaPage == 1:
 		fCarrierField = self.ui.centerFreq_vsaMeas.text()
@@ -2328,7 +2339,7 @@ def preCharPreview(self,matlab):
 		"FGuard" : self.ui.guardBand_prechar.text(),
 		"FCarrier" : vsgCenterFreqField,
 		"FSampleDAC" : self.ui.maxSampleRate_awg.text(),
-		"NumberOfSegments" : noSegmentsField,
+		"NumberOfSegments" : self.ui.noSegments_prechar.text(),
 		"Amp_Corr" : ampCorrField,
 		"GainExpansion_flag" : self.ui.gainExpansionFlag_prechar.currentIndex(),
 		"GainExpansion" : self.ui.gainExpansion_prechar.text(),
@@ -2398,11 +2409,14 @@ def runPrecharacterization(self,setBox,setButton,matlab):
 	noSegmentsField = ""
 	
 	rfOn = self.ui.emergButtonSecond.isChecked()
+	awgSet = self.ui.awgSet_vsgMeas.isChecked()
+	awgCalSet = self.ui.awgSetRun_vsgMeas.isChecked()
+	
 	checkDic = [
 		self.ui.comboBox_81,
-		self.ui.comboBox_121,
+		self.ui.useVSACal_prechar,
 		self.ui.vsaCalFileField_algo_2,
-		self.ui.comboBox_122,
+		self.ui.useVSGCal_prechar,
 		self.ui.calFileIField_algo_2,
 		self.ui.calFileQField_algo_2,
 		self.ui.mirrorSignal_prechar,
@@ -2412,6 +2426,7 @@ def runPrecharacterization(self,setBox,setButton,matlab):
 		self.ui.downFileField_algo_2,
 		self.ui.subRate_prechar,
 		self.ui.sampRateOverwrite_prechar,
+		self.ui.noSegments_prechar,
 		self.ui.gainExpansionFlag_prechar,
 		self.ui.gainExpansion_prechar,
 		self.ui.freqMultiplierFlag_prechar,
@@ -2421,22 +2436,28 @@ def runPrecharacterization(self,setBox,setButton,matlab):
 	
 	if setButton.isChecked() == True:
 		if done:
+			# if rf isn't on, alert
 			if rfOn == False:
 				instrParamErrorMessage(self,"Turn on RF before attempting to run precharacterization setup.")
 				self.ui.emergButtonSecond.setChecked(False)
+				self.ui.precharRun.setChecked(False)
 				return
+			# awg measurement settings aren't set, alert
+			if awgSet == False and awgCalSet == False:
+				instrParamErrorMessage(self,"Set AWG measurement parameters (Step 2) before attempting to run precharacterization setup.")
+				self.ui.precharRun.setChecked(False)
+				return
+			
 			# choose proper fields from stacked widgets to be sent to dictionaries
 			awgPage = self.ui.awgParamsStack_vsgMeas.currentIndex()
 			if awgPage == 1:
 				ampCorrField = self.ui.ampCorrection_awgCal.currentIndex()
 				trigAmpField = self.ui.trigAmp_awgCal.text()
 				vsgCenterFreqField = self.ui.centerFreq_awgCal.text()
-				noSegmentsField = self.ui.noTXPeriods_awgCal.text()
 			elif awgPage == 2:
 				ampCorrField = self.ui.ampCorrection_awgCal_2.currentIndex()
 				trigAmpField = self.ui.trigAmp_awgCal_2.text()
 				vsgCenterFreqField = self.ui.centerFreq_awgCal_2.text()
-				noSegmentsField = self.ui.noTXPeriods_awgMeas.text()
 			vsaPage = self.ui.vsaMeasGenStack.currentIndex()
 			if vsaPage == 1:
 				fCarrierField = self.ui.centerFreq_vsaMeas.text()
@@ -2460,7 +2481,7 @@ def runPrecharacterization(self,setBox,setButton,matlab):
 				"FGuard" : self.ui.guardBand_prechar.text(),
 				"FCarrier" : vsgCenterFreqField,
 				"FSampleDAC" : self.ui.maxSampleRate_awg.text(),
-				"NumberOfSegments" : noSegmentsField,
+				"NumberOfSegments" : self.ui.noSegments_prechar.text(),
 				"Amp_Corr" : ampCorrField,
 				"GainExpansion_flag" : self.ui.gainExpansionFlag_prechar.currentIndex(),
 				"GainExpansion" : self.ui.gainExpansion_prechar.text(),
@@ -2587,7 +2608,8 @@ def runDPD(self,setBox,setButton,matlab):
 		self.ui.comboBox_160,
 		self.ui.lineEdit_273,
 		self.ui.lineEdit_272,
-		self.ui.lineEdit_271
+		self.ui.lineEdit_271,
+		self.ui.noSegments_dpd
 	]
 	done = win.checkIfDone(checkDic)
 	
