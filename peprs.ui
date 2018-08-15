@@ -183,7 +183,7 @@ QPushButton:hover{background-color:rgb(217, 0, 0);}</string>
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="algoTab">
          <property name="layoutDirection">
@@ -869,7 +869,7 @@ Move to 'DPD' tab.</string>
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>738</width>
+                           <width>590</width>
                            <height>550</height>
                           </rect>
                          </property>
@@ -2170,7 +2170,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          <property name="geometry">
                           <rect>
                            <x>0</x>
-                           <y>-262</y>
+                           <y>0</y>
                            <width>738</width>
                            <height>550</height>
                           </rect>
@@ -3462,8 +3462,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                          <property name="geometry">
                           <rect>
                            <x>0</x>
-                           <y>-578</y>
-                           <width>727</width>
+                           <y>0</y>
+                           <width>590</width>
                            <height>1000</height>
                           </rect>
                          </property>
@@ -11412,8 +11412,8 @@ QFrame{background-color:#d1d5de}</string>
                             <widget class="QWidget" name="psgEquipScrollWidgetContents_21">
                              <property name="geometry">
                               <rect>
-                               <x>-205</x>
-                               <y>-121</y>
+                               <x>0</x>
+                               <y>0</y>
                                <width>1250</width>
                                <height>750</height>
                               </rect>
@@ -11465,8 +11465,8 @@ QFrame{background-color:#d1d5de}</string>
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>776</width>
-                               <height>629</height>
+                               <width>600</width>
+                               <height>600</height>
                               </rect>
                              </property>
                              <property name="minimumSize">
@@ -15167,7 +15167,7 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>601</width>
+                                       <width>590</width>
                                        <height>415</height>
                                       </rect>
                                      </property>
@@ -18409,7 +18409,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>603</width>
+                                 <width>590</width>
                                  <height>370</height>
                                 </rect>
                                </property>
@@ -23337,8 +23337,8 @@ Fill out ‘General Settings’ and select file to use in ‘Calibration Setting
                                  <property name="geometry">
                                   <rect>
                                    <x>0</x>
-                                   <y>-242</y>
-                                   <width>600</width>
+                                   <y>0</y>
+                                   <width>590</width>
                                    <height>525</height>
                                   </rect>
                                  </property>
@@ -24861,7 +24861,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>600</width>
+                                   <width>590</width>
                                    <height>300</height>
                                   </rect>
                                  </property>
@@ -25362,7 +25362,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>602</width>
+                                   <width>590</width>
                                    <height>550</height>
                                   </rect>
                                  </property>
@@ -26373,7 +26373,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>602</width>
+                                   <width>590</width>
                                    <height>700</height>
                                   </rect>
                                  </property>
@@ -28341,7 +28341,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>602</width>
+                                   <width>590</width>
                                    <height>1100</height>
                                   </rect>
                                  </property>
@@ -31288,7 +31288,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>602</width>
+                                   <width>590</width>
                                    <height>370</height>
                                   </rect>
                                  </property>
@@ -34403,7 +34403,7 @@ Modelling Parameters</string>
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>662</width>
+                                       <width>220</width>
                                        <height>200</height>
                                       </rect>
                                      </property>
@@ -34834,7 +34834,7 @@ QWidget#power2{background-color:rgb(247,247,247)}
 QWidget#power3{background-color:rgb(247,247,247)}</string>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>5</number>
             </property>
             <widget class="QWidget" name="vsg">
              <property name="styleSheet">
@@ -38779,8 +38779,8 @@ Analyzer</string>
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>605</width>
-                             <height>871</height>
+                             <width>590</width>
+                             <height>500</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -39358,8 +39358,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>605</width>
-                             <height>871</height>
+                             <width>593</width>
+                             <height>382</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -39892,7 +39892,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <x>0</x>
                              <y>0</y>
                              <width>629</width>
-                             <height>871</height>
+                             <height>500</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -40235,7 +40235,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <x>0</x>
                              <y>0</y>
                              <width>629</width>
-                             <height>871</height>
+                             <height>500</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -43753,7 +43753,7 @@ Analyzer</string>
                     <item>
                      <widget class="QStackedWidget" name="up_psg_stack">
                       <property name="currentIndex">
-                       <number>0</number>
+                       <number>1</number>
                       </property>
                       <widget class="QWidget" name="upGeneral">
                        <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -44048,8 +44048,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>590</width>
-                             <height>382</height>
+                             <width>605</width>
+                             <height>1009</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -44144,7 +44144,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                 </font>
                                </property>
                                <property name="text">
-                                <string>LO Visa Address:</string>
+                                <string>Visa Address:</string>
                                </property>
                               </widget>
                              </item>
@@ -44165,7 +44165,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                               </widget>
                              </item>
                              <item row="2" column="1">
-                              <widget class="QLineEdit" name="lineEdit_17">
+                              <widget class="QLineEdit" name="address_psg">
                                <property name="minimumSize">
                                 <size>
                                  <width>30</width>
@@ -44184,7 +44184,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                               </widget>
                              </item>
                              <item row="3" column="1">
-                              <widget class="QLineEdit" name="lineEdit_21">
+                              <widget class="QLineEdit" name="partNum_psg">
                                <property name="enabled">
                                 <bool>false</bool>
                                </property>
@@ -47816,7 +47816,7 @@ Analyzer</string>
                    <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                   </property>
                   <property name="currentIndex">
-                   <number>0</number>
+                   <number>1</number>
                   </property>
                   <widget class="QWidget" name="vsaStandard">
                    <attribute name="title">
@@ -47838,7 +47838,7 @@ Analyzer</string>
                     <item>
                      <widget class="QStackedWidget" name="vsaEquipStack">
                       <property name="currentIndex">
-                       <number>0</number>
+                       <number>2</number>
                       </property>
                       <widget class="QWidget" name="uxaSettingsVSA">
                        <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="9,1">
@@ -50571,7 +50571,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <x>0</x>
                              <y>0</y>
                              <width>629</width>
-                             <height>575</height>
+                             <height>871</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -53322,7 +53322,7 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                    <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                   </property>
                   <property name="currentIndex">
-                   <number>0</number>
+                   <number>1</number>
                   </property>
                   <widget class="QWidget" name="upStandardSettings_2">
                    <attribute name="title">
@@ -53441,7 +53441,7 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                           </widget>
                          </item>
                          <item row="1" column="1" colspan="2">
-                          <widget class="QComboBox" name="comboBox_58">
+                          <widget class="QComboBox" name="source_down">
                            <property name="font">
                             <font>
                              <family>Arial</family>
@@ -53503,7 +53503,7 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                           </widget>
                          </item>
                          <item row="4" column="1">
-                          <widget class="QLineEdit" name="lineEdit_47">
+                          <widget class="QLineEdit" name="power_down">
                            <property name="minimumSize">
                             <size>
                              <width>30</width>
@@ -53522,7 +53522,7 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                           </widget>
                          </item>
                          <item row="5" column="1" colspan="2">
-                          <widget class="QLineEdit" name="lineEdit_48">
+                          <widget class="QLineEdit" name="address_down">
                            <property name="minimumSize">
                             <size>
                              <width>30</width>
@@ -53541,7 +53541,7 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                           </widget>
                          </item>
                          <item row="6" column="1" colspan="2">
-                          <widget class="QLineEdit" name="lineEdit_49">
+                          <widget class="QLineEdit" name="partNum_down">
                            <property name="enabled">
                             <bool>false</bool>
                            </property>
@@ -53775,7 +53775,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           </widget>
                          </item>
                          <item row="1" column="1">
-                          <widget class="QLineEdit" name="lineEdit_50">
+                          <widget class="QLineEdit" name="posFreqStart_down">
                            <property name="minimumSize">
                             <size>
                              <width>30</width>
@@ -53794,7 +53794,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           </widget>
                          </item>
                          <item row="2" column="1">
-                          <widget class="QLineEdit" name="lineEdit_51">
+                          <widget class="QLineEdit" name="posFreqEnd_down">
                            <property name="minimumSize">
                             <size>
                              <width>30</width>
@@ -53813,7 +53813,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           </widget>
                          </item>
                          <item row="3" column="1">
-                          <widget class="QLineEdit" name="lineEdit_52">
+                          <widget class="QLineEdit" name="negFreqStart_down">
                            <property name="minimumSize">
                             <size>
                              <width>30</width>
@@ -53832,7 +53832,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           </widget>
                          </item>
                          <item row="4" column="1">
-                          <widget class="QLineEdit" name="lineEdit_53">
+                          <widget class="QLineEdit" name="negFreqEnd_down">
                            <property name="minimumSize">
                             <size>
                              <width>30</width>
@@ -56796,8 +56796,8 @@ Analyzer</string>
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>590</width>
-                         <height>382</height>
+                         <width>605</width>
+                         <height>1008</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -60142,7 +60142,7 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                    <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                   </property>
                   <property name="currentIndex">
-                   <number>0</number>
+                   <number>1</number>
                   </property>
                   <widget class="QWidget" name="vsaStandard_2">
                    <attribute name="title">
@@ -60184,8 +60184,8 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>590</width>
-                             <height>382</height>
+                             <width>605</width>
+                             <height>871</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -60820,7 +60820,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                     <item>
                      <widget class="QStackedWidget" name="saEquipAdvStack">
                       <property name="currentIndex">
-                       <number>0</number>
+                       <number>1</number>
                       </property>
                       <widget class="QWidget" name="page_10">
                        <layout class="QHBoxLayout" name="horizontalLayout_28">
@@ -60865,7 +60865,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <x>0</x>
                              <y>0</y>
                              <width>629</width>
-                             <height>600</height>
+                             <height>871</height>
                             </rect>
                            </property>
                            <property name="minimumSize">

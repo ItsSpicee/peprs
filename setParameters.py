@@ -331,17 +331,16 @@ def setAdvancedVSG(self,boxDone,setButton):
 	elif setButton.isChecked() == False:
 		setButton.setChecked(True)
 		
-def setAdvanced(self,box,boxDone,setButton):
-	if setButton.isChecked() == True:
-		setButton.setText("Unset")
-		box.setStyleSheet(boxDone)
-	elif setButton.isChecked() == False:
-		box.setStyleSheet(None)
-		setButton.setText("Set")
-		
 def setUp(self,buttonFocus,buttonDone,boxDone,greyHover,greyButton,buttonSelect,setButton):
-	if setButton.isChecked() == True:
-		setButton.setText("Unset")
+	checkDic = [
+		self.ui.source_up,
+		self.ui.power_up,
+		self.ui.address_up,
+	]
+	done = win.checkIfDone(checkDic)
+	if done:
+		setButton.setEnabled(False)
+		setButton.setStyleSheet(None)
 		self.ui.upButton_up.setStyleSheet(buttonFocus)
 		self.ui.upButton_vsg.setStyleSheet(buttonDone)
 		self.ui.upEquip.setStyleSheet(boxDone)
@@ -351,23 +350,23 @@ def setUp(self,buttonFocus,buttonDone,boxDone,greyHover,greyButton,buttonSelect,
 		self.ui.vsaButton_up.setCursor(QCursor(Qt.PointingHandCursor))
 		self.ui.vsaButton_vsg.setStyleSheet(greyHover)
 		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
+	else:
+		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+		setButton.setChecked(False)
+		
+	if setButton.isChecked() == True:
+		setButton.setText("Update")
 	elif setButton.isChecked() == False:
-		self.ui.upEquip.setStyleSheet(None)
-		self.ui.upButton_up.setStyleSheet(buttonSelect)
-		self.ui.upButton_vsg.setStyleSheet(greyHover)
-		self.ui.upButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
-		self.ui.up_psg_next.setCurrentIndex(0)
-		self.ui.vsgNextSteps.setCurrentIndex(2)
-		self.ui.vsaButton_up.setStyleSheet(greyButton)
-		self.ui.vsaButton_up.setCursor(QCursor(Qt.ArrowCursor))
-		self.ui.vsaButton_vsg.setStyleSheet(greyButton)
-		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.ArrowCursor))
-		setButton.setText("Set")
+		setButton.setChecked(True)
 			
 def setPSG(self,buttonFocus,buttonDone,boxDone,greyHover,greyButton,buttonSelect,setButton):
-	if setButton.isChecked() == True:
-		statusList = [1]
-		setButton.setText("Unset")
+	checkDic = [
+		self.ui.address_psg
+	]
+	done = win.checkIfDone(checkDic)
+	if done:
+		setButton.setEnabled(False)
+		setButton.setStyleSheet(None)
 		self.ui.psgButton_up.setStyleSheet(buttonFocus)
 		self.ui.psgButton_vsg.setStyleSheet(buttonDone)
 		self.ui.psgEquip.setStyleSheet(boxDone)
@@ -377,21 +376,16 @@ def setPSG(self,buttonFocus,buttonDone,boxDone,greyHover,greyButton,buttonSelect
 		self.ui.vsaButton_up.setCursor(QCursor(Qt.PointingHandCursor))
 		self.ui.vsaButton_vsg.setStyleSheet(greyHover)
 		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
+	else:
+		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+		setButton.setChecked(False)
+	
+	if setButton.isChecked() == True:
+		setButton.setText("Update")	
 	elif setButton.isChecked() == False:
-		self.ui.psgEquip.setStyleSheet(None)
-		self.ui.psgButton_up.setStyleSheet(buttonSelect)
-		self.ui.psgButton_vsg.setStyleSheet(greyHover)
-		self.ui.psgButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
-		self.ui.up_psg_next.setCurrentIndex(1)
-		self.ui.vsgNextSteps.setCurrentIndex(3)
-		self.ui.vsgNextSteps.setCurrentIndex(3)
-		self.ui.vsaButton_up.setStyleSheet(greyButton)
-		self.ui.vsaButton_up.setCursor(QCursor(Qt.ArrowCursor))
-		self.ui.vsaButton_vsg.setStyleSheet(greyButton)
-		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.ArrowCursor))
-		setButton.setText("Set")
+		setButton.setChecked(True)
 		
-def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSelect,setButton,matlab):
+def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,setButton,matlab):
 	# define variables
 	averaging = self.ui.averagingEnable.currentIndex()
 	avgEnabled = self.ui.averagingEnable.isEnabled()
@@ -404,283 +398,259 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,buttonSe
 	self.ui.demodulationEnable.setStyleSheet(None)
 	
 	# if all top vsa parameters are filled out
-	if setButton.isChecked() == True:
-		if averaging != 0 or avgEnabled == False:
-			self.ui.averagingEnable.setStyleSheet(None)
-			if demod != 0:
-				self.ui.demodulationEnable.setStyleSheet(None)
-				if typeIdx == 3 or typeIdx == 4: # UXA & PXA
-					checkDic=[
+	if averaging != 0 or avgEnabled == False:
+		self.ui.averagingEnable.setStyleSheet(None)
+		if demod != 0:
+			self.ui.demodulationEnable.setStyleSheet(None)
+			if typeIdx == 3 or typeIdx == 4: # UXA & PXA
+				checkDic=[
+					self.ui.averagingEnable,
+					self.ui.demodulationEnable,
+					self.ui.vsaType,
+					self.ui.noAveragesField_sa,
+					self.ui.attenuation_sa,
+					self.ui.freq_sa,
+					self.ui.analysisBandwidth_sa,
+					self.ui.clockRef_sa,
+					self.ui.trigLevel_sa,
+					self.ui.trigSource_sa,
+					self.ui.address_sa,
+					self.ui.dllFile_uxa,
+					self.ui.setupFile_uxa,
+					self.ui.dataFile_uxa
+				]
+				done = win.checkIfDone(checkDic)
+				if done:
+					dAllUXA={
+						"averaging" : self.ui.averagingEnable.currentIndex(),
+						"noAverages": self.ui.noAveragesField_sa.text(),
+						"atten": self.ui.attenuation_sa.text(),
+						"freq": self.ui.freq_sa.text(),
+						"analysisBW": self.ui.analysisBandwidth_sa.text(),
+						"clockRef": self.ui.clockRef_sa.currentIndex(),
+						"trigLevel": self.ui.trigLevel_sa.text(),
+						"trigSource": self.ui.trigSource_sa.currentIndex(),
+						"address": self.ui.address_sa.text()	
+					}
+					if typeIdx == 3:
+						result = matlab.Set_VSA_UXA(dAllUXA,"UXA",nargout=1)
+					elif typeIdx == 4:
+						result = matlab.Set_VSA_UXA(dAllUXA,"PXA",nargout=1)
+					result = result.split("~")
+					partNum = result[0]
+					errorString = result[1]
+					errorArray = errorString.split("|")
+					errors = determineIfErrors(self,errorArray)
+					if errors == 0:
+						self.ui.partNum_sa.setText(partNum);
+						flag = 1;
+					else:
+						addToErrorLayout(self,errorArray)
+						self.ui.awgSetGeneral.setChecked(False)
+						
+					if flag:
+						setButton.setEnabled(False)
+						setButton.setStyleSheet(None)
+						
+						# style mod related widgets
+						self.ui.uxaEquipGeneralVSA.setStyleSheet(boxDone)
+						demod = self.ui.uxaMod.isEnabled()
+						if demod:
+							setAllDemod(self,boxDone)
+							self.ui.modButton_vsa.setStyleSheet(buttonFocus)
+						self.ui.vsaNextStack.setCurrentIndex(3)
+						self.ui.vsgNextSteps.setCurrentIndex(7)
+						self.ui.up_psg_next.setCurrentIndex(5)
+						if typeIdx == 3: #UXA
+							self.ui.uxaButton_vsa.setStyleSheet(buttonFocus)
+							self.ui.uxaButton_vsa_2.setStyleSheet(buttonFocus)
+							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)			
+						elif typeIdx == 4: #PXA
+							self.ui.pxaButton_vsa.setStyleSheet(buttonFocus)
+							self.ui.pxaButton_vsa_2.setStyleSheet(buttonFocus)
+							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)
+				else:
+					instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+					setButton.setChecked(False)
+			elif typeIdx == 1 or typeIdx == 2 or typeIdx == 5 or typeIdx == 6:					
+				if typeIdx == 1 or typeIdx == 5: #Scope
+					checker = [
 						self.ui.averagingEnable,
 						self.ui.demodulationEnable,
 						self.ui.vsaType,
-						self.ui.noAveragesField_sa,
-						self.ui.attenuation_sa,
-						self.ui.freq_sa,
-						self.ui.analysisBandwidth_sa,
-						self.ui.clockRef_sa,
-						self.ui.trigLevel_sa,
-						self.ui.trigSource_sa,
-						self.ui.address_sa,
-						self.ui.dllFile_uxa,
-						self.ui.setupFile_uxa,
-						self.ui.dataFile_uxa
+						self.ui.noAveragesField_scope,
+						self.ui.extClkEnabled_scope,
+						self.ui.trigChannel_scope,
+						self.ui.driverPath_scope,
+						self.ui.acquisition_scope,
+						self.ui.address_scope,
+						self.ui.dllFile_scope,
+						self.ui.setupFile_scope,
+						self.ui.dataFile_scope
 					]
-					done = win.checkIfDone(checkDic)
+					done = win.checkIfDone(checker)
 					if done:
-						dAllUXA={
-							"averaging" : self.ui.averagingEnable.currentIndex(),
-							"noAverages": self.ui.noAveragesField_sa.text(),
-							"atten": self.ui.attenuation_sa.text(),
-							"freq": self.ui.freq_sa.text(),
-							"analysisBW": self.ui.analysisBandwidth_sa.text(),
-							"clockRef": self.ui.clockRef_sa.currentIndex(),
-							"trigLevel": self.ui.trigLevel_sa.text(),
-							"trigSource": self.ui.trigSource_sa.currentIndex(),
-							"address": self.ui.address_sa.text()	
-						}
-						if typeIdx == 3:
-							result = matlab.Set_VSA_UXA(dAllUXA,"UXA",nargout=1)
-						elif typeIdx == 4:
-							result = matlab.Set_VSA_UXA(dAllUXA,"PXA",nargout=1)
-						result = result.split("~")
-						partNum = result[0]
-						errorString = result[1]
-						errorArray = errorString.split("|")
-						errors = determineIfErrors(self,errorArray)
-						if errors == 0:
-							self.ui.partNum_sa.setText(partNum);
-							flag = 1;
-						else:
-							addToErrorLayout(self,errorArray)
-							self.ui.awgSetGeneral.setChecked(False)
-							
-						if flag:
-							setButton.setText("Unset")
-							
-							# style mod related widgets
-							self.ui.uxaEquipGeneralVSA.setStyleSheet(boxDone)
-							demod = self.ui.uxaMod.isEnabled()
-							if demod:
-								setAllDemod(self,boxDone)
-								self.ui.modButton_vsa.setStyleSheet(buttonFocus)
+						setButton.setEnabled(False)
+						setButton.setStyleSheet(None)
+						demodScope = self.ui.scopeMod.isEnabled()
+						demodDig = self.ui.digMod.isEnabled()
+						if demodScope or demodDig:
+							setAllDemod(self,boxDone)
+							self.ui.modButton_vsa_2.setStyleSheet(buttonFocus)
+							self.ui.modButton_vsa.setStyleSheet(buttonFocus)
+						self.ui.scopeEquipGeneral.setStyleSheet(boxDone)
+						self.ui.scopeButton_vsa.setStyleSheet(buttonFocus)
+						self.ui.scopeButton_vsa_2.setStyleSheet(buttonFocus)
+						self.ui.scopeButton_vsa_3.setStyleSheet(buttonFocus)
+						self.ui.scopeButton_vsa_4.setStyleSheet(buttonFocus)
+						if typeIdx == 1:
 							self.ui.vsaNextStack.setCurrentIndex(3)
 							self.ui.vsgNextSteps.setCurrentIndex(7)
 							self.ui.up_psg_next.setCurrentIndex(5)
-							if typeIdx == 3: #UXA
-								self.ui.uxaButton_vsa.setStyleSheet(buttonFocus)
-								self.ui.uxaButton_vsa_2.setStyleSheet(buttonFocus)
-								setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)			
-							elif typeIdx == 4: #PXA
-								self.ui.pxaButton_vsa.setStyleSheet(buttonFocus)
-								self.ui.pxaButton_vsa_2.setStyleSheet(buttonFocus)
-								setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)
+							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)
+						elif typeIdx == 5:
+							self.ui.vsaNextStack.setCurrentIndex(2)
+							self.ui.vsgNextSteps.setCurrentIndex(6)
+							self.ui.up_psg_next.setCurrentIndex(4)
+							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor)
 					else:
 						instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 						setButton.setChecked(False)
-				elif typeIdx == 1 or typeIdx == 2 or typeIdx == 5 or typeIdx == 6:
-					
+				elif typeIdx == 2 or typeIdx ==6: #Digitizer
+					checkah=[
+						self.ui.averagingEnable,
+						self.ui.demodulationEnable,
+						self.ui.vsaType,
+						self.ui.refSource_dig,
+						self.ui.trigSource_dig,
+						self.ui.trigLevel_dig,
+						self.ui.clockEnabled_dig,
+						self.ui.clockFreq_dig,
+						self.ui.coupling_dig,
+						self.ui.vfs_dig,
+						self.ui.interleaving_dig,
+						self.ui.c1Interleave_dig,
+						self.ui.c2Interleave_dig,
+						self.ui.address_dig,
+						self.ui.dllFile_dig,
+						self.ui.setupFile_dig,
+						self.ui.dataFile_dig
+					]
+					done = win.checkIfDone(checkah)
+					if done:
+						setButton.setEnabled(False)
+						setButton.setStyleSheet(None)
+						demodScope = self.ui.scopeMod.isEnabled()
+						demodDig = self.ui.digMod.isEnabled()
+						if demodScope or demodDig:
+							setAllDemod(self,boxDone)
+							self.ui.modButton_vsa_2.setStyleSheet(buttonFocus)
+							self.ui.modButton_vsa.setStyleSheet(buttonFocus)
+						self.ui.digEquipGeneral.setStyleSheet(boxDone)
+						self.ui.digButton_vsa.setStyleSheet(buttonFocus)
+						self.ui.digButton_vsa_2.setStyleSheet(buttonFocus)
+						self.ui.digButton_vsa_3.setStyleSheet(buttonFocus)
+						self.ui.digButton_vsa_4.setStyleSheet(buttonFocus)
+						if typeIdx == 2:
+							self.ui.vsaNextStack.setCurrentIndex(3)
+							self.ui.vsgNextSteps.setCurrentIndex(7)
+							self.ui.up_psg_next.setCurrentIndex(5)
+							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)
+						elif typeIdx == 6:
+							self.ui.vsaNextStack.setCurrentIndex(2)
+							self.ui.vsgNextSteps.setCurrentIndex(6)
+							self.ui.up_psg_next.setCurrentIndex(4)
+							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor)
+					else:
+						instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+						setButton.setChecked(False)
+			# general step 3 vsa parameters
+			fSampleField = ""
+			vsaPage = self.ui.vsaMeasGenStack.currentIndex()
+			if vsaPage == 1:
+				fSampleField = self.ui.sampRate_vsaMeas.text()
+			elif vsaPage == 0:
+				fSampleField = self.ui.sampRate_vsaMeas_2.text()
+			
+			channelVec = [0,0,0,0]
+			c1 = self.ui.measChannel1.isChecked()
+			c2 = self.ui.measChannel2.isChecked()
+			c3 = self.ui.measChannel3.isChecked()
+			c4 = self.ui.measChannel4.isChecked()
+			if c1:
+				channelVec[0] = 1
+			elif c1 == False:
+				channelVec[0] = 0
+			if c2:
+				channelVec[1] = 1
+			elif c2 == False:
+				channelVec[1] = 0
+			if c3:
+				channelVec[2] = 1
+			elif c3 == False:
+				channelVec[2] = 0
+			if c4:
+				channelVec[3] = 1
+			elif c4 == False:
+				channelVec[3] = 0
 				
-					setButton.setText("Unset")
-						
-					if typeIdx == 1 or typeIdx == 5: #Scope
-						
-						checker = [
-							self.ui.averagingEnable,
-							self.ui.demodulationEnable,
-							self.ui.vsaType,
-							
-							self.ui.noAveragesField_scope,
-							self.ui.extClkEnabled_scope,
-							self.ui.trigChannel_scope,
-							self.ui.driverPath_scope,
-							self.ui.acquisition_scope,
-							self.ui.address_scope,
-							self.ui.dllFile_scope,
-							self.ui.setupFile_scope,
-							self.ui.dataFile_scope
-						]
-						done = win.checkIfDone(checker)
-						if done:
-							demodScope = self.ui.scopeMod.isEnabled()
-							demodDig = self.ui.digMod.isEnabled()
-							if demodScope or demodDig:
-								setAllDemod(self,boxDone)
-								self.ui.modButton_vsa_2.setStyleSheet(buttonFocus)
-								self.ui.modButton_vsa.setStyleSheet(buttonFocus)
-							self.ui.scopeEquipGeneral.setStyleSheet(boxDone)
-							self.ui.scopeButton_vsa.setStyleSheet(buttonFocus)
-							self.ui.scopeButton_vsa_2.setStyleSheet(buttonFocus)
-							self.ui.scopeButton_vsa_3.setStyleSheet(buttonFocus)
-							self.ui.scopeButton_vsa_4.setStyleSheet(buttonFocus)
-							if typeIdx == 1:
-								self.ui.vsaNextStack.setCurrentIndex(3)
-								self.ui.vsgNextSteps.setCurrentIndex(7)
-								self.ui.up_psg_next.setCurrentIndex(5)
-								setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)
-							elif typeIdx == 5:
-								self.ui.vsaNextStack.setCurrentIndex(2)
-								self.ui.vsgNextSteps.setCurrentIndex(6)
-								self.ui.up_psg_next.setCurrentIndex(4)
-								setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor)
-						else:
-							instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
-							setButton.setChecked(False)
-					elif typeIdx == 2 or typeIdx ==6: #Digitizer
-						checkah=[
-							self.ui.averagingEnable,
-							self.ui.demodulationEnable,
-							self.ui.vsaType,
-							
-							self.ui.refSource_dig,
-							self.ui.trigSource_dig,
-							self.ui.trigLevel_dig,
-							self.ui.clockEnabled_dig,
-							self.ui.clockFreq_dig,
-							self.ui.coupling_dig,
-							self.ui.vfs_dig,
-							self.ui.interleaving_dig,
-							self.ui.c1Interleave_dig,
-							self.ui.c2Interleave_dig,
-							self.ui.address_dig,
-							self.ui.dllFile_dig,
-							self.ui.setupFile_dig,
-							self.ui.dataFile_dig
-						]
-						done = win.checkIfDone(checkah)
-						if done:
-							demodScope = self.ui.scopeMod.isEnabled()
-							demodDig = self.ui.digMod.isEnabled()
-							if demodScope or demodDig:
-								setAllDemod(self,boxDone)
-								self.ui.modButton_vsa_2.setStyleSheet(buttonFocus)
-								self.ui.modButton_vsa.setStyleSheet(buttonFocus)
-							self.ui.digEquipGeneral.setStyleSheet(boxDone)
-							self.ui.digButton_vsa.setStyleSheet(buttonFocus)
-							self.ui.digButton_vsa_2.setStyleSheet(buttonFocus)
-							self.ui.digButton_vsa_3.setStyleSheet(buttonFocus)
-							self.ui.digButton_vsa_4.setStyleSheet(buttonFocus)
-							if typeIdx == 2:
-								self.ui.vsaNextStack.setCurrentIndex(3)
-								self.ui.vsgNextSteps.setCurrentIndex(7)
-								self.ui.up_psg_next.setCurrentIndex(5)
-								setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)
-							elif typeIdx == 6:
-								self.ui.vsaNextStack.setCurrentIndex(2)
-								self.ui.vsgNextSteps.setCurrentIndex(6)
-								self.ui.up_psg_next.setCurrentIndex(4)
-								setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor)
-						else:
-							instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
-							setButton.setChecked(False)
-				# general step 3 vsa parameters
-				fSampleField = ""
-				vsaPage = self.ui.vsaMeasGenStack.currentIndex()
-				if vsaPage == 1:
-					fSampleField = self.ui.sampRate_vsaMeas.text()
-				elif vsaPage == 0:
-					fSampleField = self.ui.sampRate_vsaMeas_2.text()
-				
-				channelVec = [0,0,0,0]
-				c1 = self.ui.measChannel1.isChecked()
-				c2 = self.ui.measChannel2.isChecked()
-				c3 = self.ui.measChannel3.isChecked()
-				c4 = self.ui.measChannel4.isChecked()
-				if c1:
-					channelVec[0] = 1
-				elif c1 == False:
-					channelVec[0] = 0
-				if c2:
-					channelVec[1] = 1
-				elif c2 == False:
-					channelVec[1] = 0
-				if c3:
-					channelVec[2] = 1
-				elif c3 == False:
-					channelVec[2] = 0
-				if c4:
-					channelVec[3] = 1
-				elif c4 == False:
-					channelVec[3] = 0
-					
-				dGen = {
-					"AnalysisBandwidth":self.ui.analysisBandwidth_sa.text(),
-					"Attenuation":self.ui.attenuation_sa.text(),
-					"ClockReference":self.ui.clockRef_sa.currentIndex(),
-					"TriggerLevel":self.ui.trigLevel_sa.text(),
-					"Interleaving" : self.ui.interleaving_dig.currentIndex(),
-					"EnableExternalClock_Dig" : self.ui.clockEnabled_dig.currentIndex(),
-					"ExternalClockFrequency" : self.ui.clockFreq_dig.currentIndex(),
-					"VFS" : self.ui.vfs_dig.text(),
-					"ACDCCoupling" : self.ui.coupling_dig.currentIndex(),
-					"DriverPath" : self.ui.driverPath_scope.text(),
-					"EnableExternalClock_Scope" : self.ui.extClkEnabled_scope.currentIndex(),
-					"ChannelVec": channelVec,
-					"FSample": fSampleField
-				}
-				matlab.SetRxParameters_GUI(dGen,nargout=0);
-				
-			else:
-				self.fillParametersMsg()
-				# highlight parameters in dark blue section if necessary
-				self.ui.demodulationEnable.setStyleSheet(redBorder)
-				if averaging == 0 and avgEnabled == True:
-					self.ui.averagingEnable.setStyleSheet(redBorder)
-				self.ui.digSet.setChecked(False)
-				self.ui.scopeSet.setChecked(False)
-				self.ui.uxaSet.setChecked(False)
-				self.ui.pxaSet.setChecked(False)
-				
+			dGen = {
+				"AnalysisBandwidth":self.ui.analysisBandwidth_sa.text(),
+				"Attenuation":self.ui.attenuation_sa.text(),
+				"ClockReference":self.ui.clockRef_sa.currentIndex(),
+				"TriggerLevel":self.ui.trigLevel_sa.text(),
+				"Interleaving" : self.ui.interleaving_dig.currentIndex(),
+				"EnableExternalClock_Dig" : self.ui.clockEnabled_dig.currentIndex(),
+				"ExternalClockFrequency" : self.ui.clockFreq_dig.currentIndex(),
+				"VFS" : self.ui.vfs_dig.text(),
+				"ACDCCoupling" : self.ui.coupling_dig.currentIndex(),
+				"DriverPath" : self.ui.driverPath_scope.text(),
+				"EnableExternalClock_Scope" : self.ui.extClkEnabled_scope.currentIndex(),
+				"ChannelVec": channelVec,
+				"FSample": fSampleField
+			}
+			matlab.SetRxParameters_GUI(dGen,nargout=0);
+			
 		else:
 			self.fillParametersMsg()
-			# highlight parameters in red in dark blue section if necessary
-			self.ui.averagingEnable.setStyleSheet(redBorder)
-			if demod == 0:
-				self.ui.demodulationEnable.setStyleSheet(redBorder)
+			# highlight parameters in dark blue section if necessary
+			self.ui.demodulationEnable.setStyleSheet(redBorder)
+			if averaging == 0 and avgEnabled == True:
+				self.ui.averagingEnable.setStyleSheet(redBorder)
 			self.ui.digSet.setChecked(False)
 			self.ui.scopeSet.setChecked(False)
 			self.ui.uxaSet.setChecked(False)
 			self.ui.pxaSet.setChecked(False)
 			
+	else:
+		self.fillParametersMsg()
+		# highlight parameters in red in dark blue section if necessary
+		self.ui.averagingEnable.setStyleSheet(redBorder)
+		if demod == 0:
+			self.ui.demodulationEnable.setStyleSheet(redBorder)
+		self.ui.digSet.setChecked(False)
+		self.ui.scopeSet.setChecked(False)
+		self.ui.uxaSet.setChecked(False)
+		self.ui.pxaSet.setChecked(False)
+	
+	if setButton.isChecked() == True:
+		setButton.setText("Update")	
 	elif setButton.isChecked() == False:
-		setButton.setText("Set")
-		self.ui.vsaNextStack.setCurrentIndex(1)
-		self.ui.vsgNextSteps.setCurrentIndex(5)
-		self.ui.up_psg_next.setCurrentIndex(3)
-		setPrevVSAButtons(self,greyHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyButton,Qt.ArrowCursor)
-		self.ui.modButton_vsa_2.setStyleSheet(buttonSelect)
-		self.ui.modButton_vsa.setStyleSheet(buttonSelect)
-		if typeIdx == 1 or typeIdx == 5:
-			self.ui.scopeButton_vsa.setStyleSheet(buttonSelect)
-			self.ui.scopeButton_vsa_2.setStyleSheet(buttonSelect)
-			self.ui.scopeButton_vsa_3.setStyleSheet(buttonSelect)
-			self.ui.scopeButton_vsa_4.setStyleSheet(buttonSelect)
-			self.ui.scopeEquipGeneral.setStyleSheet(None)	
-			self.ui.scopeMod.setStyleSheet(None)
-		elif typeIdx == 2 or typeIdx == 6:
-			self.ui.digButton_vsa.setStyleSheet(buttonSelect)
-			self.ui.digButton_vsa_2.setStyleSheet(buttonSelect)
-			self.ui.digButton_vsa_3.setStyleSheet(buttonSelect)
-			self.ui.digButton_vsa_4.setStyleSheet(buttonSelect)
-			self.ui.digEquipGeneral.setStyleSheet(None)
-			self.ui.digMod.setStyleSheet(None)
-		elif typeIdx == 3:
-			self.ui.uxaButton_vsa.setStyleSheet(buttonSelect)
-			self.ui.uxaButton_vsa_2.setStyleSheet(buttonSelect)
-			self.ui.uxaEquipGeneralVSA.setStyleSheet(None)
-			self.ui.uxaMod.setStyleSheet(None)
-		elif typeIdx == 4:
-			self.ui.pxaButton_vsa.setStyleSheet(buttonSelect)
-			self.ui.pxaButton_vsa_2.setStyleSheet(buttonSelect)		
-			self.ui.uxaEquipGeneralVSA.setStyleSheet(None)
-			self.ui.uxaMod.setStyleSheet(None)
+		setButton.setChecked(True)
 		
 def setVSAAdv(self,boxDone,setButton,matlab):
-	flag = 0;
-	if setButton.isChecked() == True:
+	checkDic = [
+		self.ui.preampEnable_vsa,
+		self.ui.mwPath_vsa,
+		self.ui.phaseNoiseOptimization_vsa,
+		self.ui.filterTpye_vsa
+	]
+	done = win.checkIfDone(checkDic)
+	if done:
 		averaging = self.ui.averagingEnable.currentIndex()
 		demod = self.ui.demodulationEnable.currentIndex()
 		if averaging != 0 and demod != 0:
+			# define parameter dictionary
 			d = {
 				"address": self.ui.address_sa.text(),
 				"preamp": self.ui.preampEnable_vsa.currentIndex(),
@@ -689,7 +659,9 @@ def setVSAAdv(self,boxDone,setButton,matlab):
 				"phaseNoise": self.ui.phaseNoiseOptimization_vsa.currentIndex(),
 				"filterType": self.ui.filterTpye_vsa.currentIndex()
 			}
+			# set matlab parameters
 			result = matlab.Set_VSA_AdvUXA(d,nargout = 1)
+			# see if there were errors
 			result = result.split("~")
 			partNum = result[0]
 			errorString = result[1]
@@ -704,76 +676,99 @@ def setVSAAdv(self,boxDone,setButton,matlab):
 			
 			if flag:
 				self.ui.uxaVSAAdv.setStyleSheet(boxDone)
-				setButton.setText("Unset")
-				self.ui.statusBar.showMessage('Successfully Set Advanced Settings',2000)
+				setButton.setEnabled(False)
+				setButton.setStyleSheet(None)
 		else:
 			self.fillParametersMsg()
 			self.ui.uxaVSASetAdv.setChecked(False)
-	elif  setButton.isChecked() == False:
-		self.ui.uxaVSAAdv.setStyleSheet(None)
-		setButton.setText("Set")
+	else:
+		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+		setButton.setChecked(False)
+	
+	if setButton.isChecked() == True:
+		setButton.setText("Update")	
+	elif setButton.isChecked() == False:
+		setButton.setChecked(True)
 		
-def setDown(self,buttonFocus,greyHover,buttonHover,boxDone,greyButton,buttonSelect,setButton):
+def setDown(self,buttonFocus,greyHover,buttonHover,boxDone,setButton):
 	checkDic = [
-		self.ui.comboBox_58,
-		self.ui.lineEdit_47,
-		self.ui.lineEdit_48
+		self.ui.source_down,
+		self.ui.power_down,
+		self.ui.address_down
 	]
 	done = win.checkIfDone(checkDic)
-	if setButton.isChecked() == True:
-		if done:
-			setButton.setText("Unset")
-			self.ui.downButton_down.setStyleSheet(buttonFocus)
-			self.ui.downButton_down_2.setStyleSheet(buttonFocus)
-			self.ui.downEquip.setStyleSheet(boxDone)
-			setPrevDownButtons(self,buttonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor)
-			self.ui.downNextStack.setCurrentIndex(1)
-			self.ui.vsaNextStack.setCurrentIndex(3)
-			self.ui.up_psg_next.setCurrentIndex(5)
-			self.ui.vsgNextSteps.setCurrentIndex(7)
-		else:
-			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
-			setButton.setChecked(False)
-	elif setButton.isChecked() == False:
-		self.ui.downEquip.setStyleSheet(None)
-		self.ui.downButton_down.setStyleSheet(buttonSelect)
-		self.ui.downButton_down_2.setStyleSheet(buttonSelect)
-		setPrevDownButtons(self,greyHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor)
-		self.ui.downNextStack.setCurrentIndex(0)
-		self.ui.vsaNextStack.setCurrentIndex(2)
-		self.ui.up_psg_next.setCurrentIndex(4)
-		self.ui.vsgNextSteps.setCurrentIndex(6)
-		setButton.setText("Set")
+	if done:
+		setButton.setEnabled(False)
+		setButton.setStyleSheet(None)
+		self.ui.downButton_down.setStyleSheet(buttonFocus)
+		self.ui.downButton_down_2.setStyleSheet(buttonFocus)
+		self.ui.downEquip.setStyleSheet(boxDone)
+		setPrevDownButtons(self,buttonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor)
+		self.ui.downNextStack.setCurrentIndex(1)
+		self.ui.vsaNextStack.setCurrentIndex(3)
+		self.ui.up_psg_next.setCurrentIndex(5)
+		self.ui.vsgNextSteps.setCurrentIndex(7)
+	else:
+		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+		setButton.setChecked(False)
 		
-def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,greyButton,buttonSelect,setButton,matlab):
-	checkMeter={
-			self.ui.powerMeterAddress,
-			self.ui.powerMeterOffset,
-			self.ui.powerMeterFrequency,
-			self.ui.powerMeterFilter
-		}
-
 	if setButton.isChecked() == True:
-		completed = win.checkIfDone(checkMeter)
-		if completed:
-			flag = 0;
-			setButton.setText("Unset")
-			averaging = ""
-			if self.ui.powerMeterFilter.currentIndex() == 1:
-				averaging = "-1"
-			elif self.ui.powerMeterFilter.currentIndex() == 3:
-				averaging = "-2"
-			elif self.ui.powerMeterFilter.currentIndex() == 2:
-				averaging = self.ui.noAveragesField_meter.text()
-			
-			d={
-				"address": 	self.ui.powerMeterAddress.text(),
-				"offset": self.ui.powerMeterOffset.text(),
-				"frequency": self.ui.powerMeterFrequency.text(),
-				"averaging": averaging
-			}
-			flag = setPowerMeterParams(self,d,self.ui.powerMeterPartNum,self.ui.meterEquip,boxDone,matlab)
-			
+		setButton.setText("Update")	
+	elif setButton.isChecked() == False:
+		setButton.setChecked(True)
+		
+def setAdvancedDown(self,boxDone,setButton):
+	checkDic = [
+		self.ui.posFreqStart_down,
+		self.ui.posFreqEnd_down,
+		self.ui.negFreqStart_down,
+		self.ui.negFreqEnd_down
+	]
+	done = win.checkIfDone(checkDic)
+	if done:
+		self.ui.downEquipAdv.setStyleSheet(boxDone)
+		setButton.setEnabled(False)
+		setButton.setStyleSheet(None)
+	else:
+		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+		setButton.setChecked(False)
+		
+	if setButton.isChecked() == True:
+		setButton.setText("Update")	
+	elif setButton.isChecked() == False:
+		setButton.setChecked(True)
+		
+def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,matlab):
+	checkMeter=[
+		self.ui.powerMeterAddress,
+		self.ui.powerMeterOffset,
+		self.ui.powerMeterFrequency,
+		self.ui.noAveragesField_meter,
+		self.ui.powerMeterFilter
+	]
+	completed = win.checkIfDone(checkMeter)
+	if completed:
+		# determine averaging value before passing into struct
+		averaging = ""
+		if self.ui.powerMeterFilter.currentIndex() == 1:
+			averaging = "-1"
+		elif self.ui.powerMeterFilter.currentIndex() == 3:
+			averaging = "-2"
+		elif self.ui.powerMeterFilter.currentIndex() == 2:
+			averaging = self.ui.noAveragesField_meter.text()
+		# define struct dictionary
+		d={
+			"address": 	self.ui.powerMeterAddress.text(),
+			"offset": self.ui.powerMeterOffset.text(),
+			"frequency": self.ui.powerMeterFrequency.text(),
+			"averaging": averaging
+		}
+		# set matlab parameters
+		flag = setPowerMeterParams(self,d,self.ui.powerMeterPartNum,self.ui.meterEquip,boxDone,matlab)
+		# if no errors occurred
+		if flag:
+			setButton.setEnabled(False)
+			setButton.setStyleSheet(None)
 			self.ui.meterButton_meter.setStyleSheet(buttonFocus)
 			self.ui.meterButton_meter_2.setStyleSheet(buttonFocus)
 			self.ui.meterButton_meter_3.setStyleSheet(buttonFocus)
@@ -785,24 +780,15 @@ def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,greyButton,buttonSel
 			self.ui.vsaNextStack.setCurrentIndex(4)
 			self.ui.up_psg_next.setCurrentIndex(6)
 			self.ui.vsgNextSteps.setCurrentIndex(8)
-		else:
-			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
-			#setButton.setChecked(False)
-	elif setButton.isChecked() == False:
-		self.ui.meterEquip.setStyleSheet(None)
-		self.ui.meterButton_meter.setStyleSheet(buttonSelect)
-		self.ui.meterButton_meter_2.setStyleSheet(buttonSelect)
-		self.ui.meterButton_meter_3.setStyleSheet(buttonSelect)
-		self.ui.meterButton_meter_4.setStyleSheet(buttonSelect)
-		setPrevMeterButtons(self,greyHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor)
-		self.ui.meterNextStack.setCurrentIndex(0)
-		self.ui.downNextStack.setCurrentIndex(1)
-		self.ui.vsaNextStack.setCurrentIndex(3)
-		self.ui.up_psg_next.setCurrentIndex(5)
-		self.ui.vsgNextSteps.setCurrentIndex(7)
-		setButton.setText("Set")
+	else:
+		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+		setButton.setChecked(False)
+	
+	if setButton.isChecked() == True:
+		setButton.setText("Update")
+	elif setButton.isChecked() == False:	
+		setButton.setChecked(True)
 		
-
 def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,buttonSelect,matlab):
 	idx = self.ui.saType.currentIndex()
 	
@@ -815,29 +801,30 @@ def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,bu
 		self.ui.trigLevel_spa,
 		self.ui.trigSource_spa
 		]
-	
-	if setButton.isChecked() == True:
-		done = win.checkIfDone(checkDic)
-		if done:
-			setButton.setText("Unset")
-			statusList = [self.ui.address_spa.text(),self.ui.freq_spa.text(),self.ui.freqSpan_spa.text(),self.ui.resBand_spa.text(),self.ui.clockRef_spa.currentIndex()]
-			#complete = win.checkIfDone(statusList)
-			d={
-				"address": self.ui.address_spa.text(),
-				"atten": self.ui.attenuation_spa.text(),
-				"freq": self.ui.freq_spa.text(),
-				"freqSpan": self.ui.freqSpan_spa.text(),
-				"resBand": self.ui.resBand_spa.text(),
-				"clockRef": self.ui.clockRef_spa.currentIndex(),
-				"trigLevel": self.ui.trigLevel_spa.text(),
-				"trigger": self.ui.trigSource_spa.currentIndex()
-			}	
-			#if complete:
-			if idx == 1:
-				model = "UXA";
-			elif idx == 2:
-				model == "PXA"
-			flag = setSpectrumAnalyzerParams(self,d,self.ui.partNum_spa,matlab,self.ui.saEquip,boxDone,model)
+	done = win.checkIfDone(checkDic)
+	if done:
+		# define dictionary for matlab struct
+		d={
+			"address": self.ui.address_spa.text(),
+			"atten": self.ui.attenuation_spa.text(),
+			"freq": self.ui.freq_spa.text(),
+			"freqSpan": self.ui.freqSpan_spa.text(),
+			"resBand": self.ui.resBand_spa.text(),
+			"clockRef": self.ui.clockRef_spa.currentIndex(),
+			"trigLevel": self.ui.trigLevel_spa.text(),
+			"trigger": self.ui.trigSource_spa.currentIndex()
+		}	
+		# determine model value before passing to function 
+		if idx == 1:
+			model = "UXA";
+		elif idx == 2:
+			model == "PXA"
+		# set matlab parameters
+		flag = setSpectrumAnalyzerParams(self,d,self.ui.partNum_spa,matlab,self.ui.saEquip,boxDone,model)
+		# if no errors
+		if flag:
+			setButton.setEnabled(False)
+			setButton.setStyleSheet(None)
 			self.ui.saButton_sa.setStyleSheet(buttonFocus)
 			self.ui.saButton_sa_2.setStyleSheet(buttonFocus)
 			self.ui.saButton_sa_3.setStyleSheet(buttonFocus)
@@ -850,23 +837,14 @@ def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,bu
 			self.ui.vsaNextStack.setCurrentIndex(5)
 			self.ui.up_psg_next.setCurrentIndex(7)
 			self.ui.vsgNextSteps.setCurrentIndex(9)
-		else:
-			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
-			setButton.setChecked(False)
+	else:
+		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+		setButton.setChecked(False)
+	
+	if setButton.isChecked() == True:
+		setButton.setText("Update")
 	elif setButton.isChecked() == False:
-		self.ui.saEquip.setStyleSheet(None)
-		self.ui.saButton_sa.setStyleSheet(buttonSelect)
-		self.ui.saButton_sa_2.setStyleSheet(buttonSelect)
-		self.ui.saButton_sa_3.setStyleSheet(buttonSelect)
-		self.ui.saButton_sa_4.setStyleSheet(buttonSelect)
-		setPrevSAButtons(self,greyHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor)
-		self.ui.saNextStack.setCurrentIndex(4)
-		self.ui.meterNextStack.setCurrentIndex(1)
-		self.ui.downNextStack.setCurrentIndex(2)
-		self.ui.vsaNextStack.setCurrentIndex(4)
-		self.ui.up_psg_next.setCurrentIndex(6)
-		self.ui.vsgNextSteps.setCurrentIndex(8)
-		setButton.setText("Set")
+		setButton.setChecked(True)
 		
 def setSAAdv(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,greyButton,buttonSelect,matlab):
 	checkDic={

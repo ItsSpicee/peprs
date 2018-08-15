@@ -22,3 +22,60 @@ def updateAdvVSG(self):
 	self.ui.vsgEquipAdv.setStyleSheet(None)
 	self.ui.vsgSetAdv.setEnabled(True)
 	self.ui.vsgSetAdv.setStyleSheet(greenButton)
+	
+def updateUp(self):
+	self.ui.upEquip.setStyleSheet(None)
+	self.ui.upSet.setEnabled(True)
+	self.ui.upSet.setStyleSheet(greenButton)
+	
+def updatePSG(self):
+	self.ui.psgEquip.setStyleSheet(None)
+	self.ui.psgSet.setEnabled(True)
+	self.ui.psgSet.setStyleSheet(greenButton)
+	
+def updateVSA(self):
+	idx = self.ui.vsaType.currentIndex()
+	if idx == 1 or idx == 5:
+		self.ui.scopeEquipGeneral.setStyleSheet(None)
+		self.ui.scopeMod.setStyleSheet(None)
+		self.ui.scopeSet.setEnabled(True)
+		self.ui.scopeSet.setStyleSheet(greenButton)
+	elif idx == 2 or idx == 6:
+		self.ui.digEquipGeneral.setStyleSheet(None)
+		self.ui.digMod.setStyleSheet(None)
+		self.ui.digSet.setEnabled(True)
+		self.ui.digSet.setStyleSheet(greenButton)
+	elif idx == 3 or idx == 4:
+		self.ui.digEquipGeneral.setStyleSheet(None)
+		self.ui.digMod.setStyleSheet(None)
+		self.ui.digSet.setEnabled(True)
+		self.ui.digSet.setStyleSheet(greenButton)
+		
+def updateAdvUXA(self):
+	self.ui.uxaVSAAdv.setStyleSheet(None)
+	self.ui.uxaVSASetAdv.setEnabled(True)
+	self.ui.uxaVSASetAdv.setStyleSheet(greenButton)
+	
+def updateDown(self):
+	self.ui.downEquip.setStyleSheet(None)
+	self.ui.downSet.setEnabled(True)
+	self.ui.downSet.setStyleSheet(greenButton)
+	
+def updateAdvDown(self):
+	self.ui.downEquipAdv.setStyleSheet(None)
+	self.ui.downSetAdv.setEnabled(True)
+	self.ui.downSetAdv.setStyleSheet(greenButton)
+	
+def updateMeter(self):
+	self.ui.meterEquip.setStyleSheet(None)
+	self.ui.meterSet.setEnabled(True)
+	self.ui.meterSet.setStyleSheet(greenButton)
+	
+def updateSA(self):
+	self.ui.saEquip.setStyleSheet(None)
+	self.ui.saSet.setEnabled(True)
+	self.ui.saSet.setStyleSheet(greenButton)
+
+	
+	
+	

@@ -5,7 +5,7 @@ function result = Set_VSA_AdvUXA(dict)
     error = "";
 	phaseType = 0;
 
-	% try
+	try
 		if dict.address == ""
 			errorString = "Fill out general VSA parameters before attempting to set advanced parameters.";
 			resultsString = sprintf("%s~%s","",errorString);
@@ -101,10 +101,10 @@ function result = Set_VSA_AdvUXA(dict)
 		delete(spectrum);
 		clear spectrum;
 		
-	% catch
-	   % errorString = "A problem has occured, resetting instruments. Use Keysight Connection Expert to check your instrument VISA Addresses.";  
-	   % instrreset
-	% end
+	catch
+	   errorString = "A problem has occured, resetting instruments. Use Keysight Connection Expert to check your instrument VISA Addresses.";  
+	   instrreset
+	end
 	
 	for i=1:length(errorList)
         if i == 1
