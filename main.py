@@ -865,11 +865,11 @@ class Window(QMainWindow):
 		self.ui.setupFile_dig.textChanged.connect(lambda: update.updateVSA(self))
 		self.ui.dataFile_dig.textChanged.connect(lambda: update.updateVSA(self))
 		# uxa advanced
-		self.ui.preampEnable_vsa.currentIndexChanged.connect(lambda: update.updateAdvVSA(self))
-		self.ui.ifPath_vsa.currentIndexChanged.connect(lambda: update.updateAdvVSA(self))
-		self.ui.mwPath_vsa.currentIndexChanged.connect(lambda: update.updateAdvVSA(self))
-		self.ui.phaseNoiseOptimization_vsa.currentIndexChanged.connect(lambda: update.updateAdvVSA(self))
-		self.ui.filterTpye_vsa.currentIndexChanged.connect(lambda: update.updateAdvVSA(self))
+		self.ui.preampEnable_vsa.currentIndexChanged.connect(lambda: update.updateAdvUXA(self))
+		self.ui.ifPath_vsa.currentIndexChanged.connect(lambda: update.updateAdvUXA(self))
+		self.ui.mwPath_vsa.currentIndexChanged.connect(lambda: update.updateAdvUXA(self))
+		self.ui.phaseNoiseOptimization_vsa.currentIndexChanged.connect(lambda: update.updateAdvUXA(self))
+		self.ui.filterTpye_vsa.currentIndexChanged.connect(lambda: update.updateAdvUXA(self))
 		# downconverter
 		self.ui.source_down.currentIndexChanged.connect(lambda: update.updateDown(self))
 		self.ui.power_down.textChanged.connect(lambda: update.updateDown(self))

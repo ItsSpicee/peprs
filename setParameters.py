@@ -805,7 +805,8 @@ def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,matlab):
 		self.ui.resBand_spa,
 		self.ui.clockRef_spa,
 		self.ui.trigLevel_spa,
-		self.ui.trigSource_spa
+		self.ui.trigSource_spa,
+		self.ui.attenuation_spa
 		]
 	done = win.checkIfDone(checkDic)
 	if done:
@@ -1011,14 +1012,13 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,matlab,setBu
 				self.ui.up_psg_next.setCurrentIndex(8)
 				self.ui.vsgNextSteps.setCurrentIndex(10)
 				setPrevP1Buttons(self,buttonHover,greyHover,greyButton,Qt.PointingHandCursor,Qt.ArrowCursor)
-				
 			if setButton.isChecked() == True:
 				setButton.setText("Update")	
 			elif setButton.isChecked() == False:
 				setButton.setChecked(True)
-		else:
-			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
-			setButton.setChecked(False)	
+	else:
+		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+		setButton.setChecked(False)	
 
 def setP2(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,matlab,setButton):
 	checkDic = [
