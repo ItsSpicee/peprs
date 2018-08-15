@@ -230,17 +230,17 @@ def setGeneralAWG(self,buttonFocus,boxDone,greyHover,awgSetGeneral,matlab):
 				self.ui.upButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
 				self.ui.psgButton_vsg.setStyleSheet(greyHover)
 				self.ui.psgButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
+		
+			if awgSetGeneral.isChecked() == True:
+				if flag == 1:
+					awgSetGeneral.setText("Update")	
+			elif awgSetGeneral.isChecked() == False:
+				# when update is clicked, button checked == False
+				# want to change it back to true so this will be activated on false again
+				awgSetGeneral.setChecked(True)
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		awgSetGeneral.setChecked(False)
-	
-	if awgSetGeneral.isChecked() == True:
-		if flag == 1:
-			awgSetGeneral.setText("Update")	
-	elif awgSetGeneral.isChecked() == False:
-		# when update is clicked, button checked == False
-		# want to change it back to true so this will be activated on false again
-		awgSetGeneral.setChecked(True)
 		
 def setAdvancedAWG(self,boxDone,setButton,matlab):
 	# array to check that all parameters are filled out when set button is clicked
@@ -268,17 +268,17 @@ def setAdvancedAWG(self,boxDone,setButton,matlab):
 			self.ui.awgEquipAdv.setStyleSheet(boxDone)
 			setButton.setEnabled(False)
 			setButton.setStyleSheet(None)
+	
+		if setButton.isChecked() == True:
+			if flag == 1:
+				setButton.setText("Update")				
+		elif setButton.isChecked() == False:
+			# when update is clicked, button checked == False
+			# want to change it back to true so this will be activated on false again
+			setButton.setChecked(True)
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		setButton.setChecked(False)
-		
-	if setButton.isChecked() == True:
-		if flag == 1:
-			setButton.setText("Update")				
-	elif setButton.isChecked() == False:
-		# when update is clicked, button checked == False
-		# want to change it back to true so this will be activated on false again
-		setButton.setChecked(True)
 		
 def setGeneralVSG(self,buttonFocus,boxDone,greyHover,vsgSetGeneral):
 	# array to check that all parameters are filled out when set button is clicked
@@ -300,15 +300,15 @@ def setGeneralVSG(self,buttonFocus,boxDone,greyHover,vsgSetGeneral):
 		self.ui.vsgNextSteps.setCurrentIndex(5)
 		self.ui.vsaButton_vsg.setStyleSheet(greyHover)
 		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
+		if vsgSetGeneral.isChecked() == True:
+			vsgSetGeneral.setText("Update")	
+		elif  vsgSetGeneral.isChecked() == False:
+			# when update is clicked, button checked == False
+			# want to change it back to true so this will be activated on false again
+			vsgSetGeneral.setChecked(True)
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		vsgSetGeneral.setChecked(False)
-	if vsgSetGeneral.isChecked() == True:
-		vsgSetGeneral.setText("Update")	
-	elif  vsgSetGeneral.isChecked() == False:
-		# when update is clicked, button checked == False
-		# want to change it back to true so this will be activated on false again
-		vsgSetGeneral.setChecked(True)
 		
 def setAdvancedVSG(self,boxDone,setButton):
 	checkDic = [
@@ -322,14 +322,13 @@ def setAdvancedVSG(self,boxDone,setButton):
 		self.ui.vsgEquipAdv.setStyleSheet(boxDone)
 		setButton.setEnabled(False)
 		setButton.setStyleSheet(None)
+		if setButton.isChecked() == True:
+			setButton.setText("Update")
+		elif setButton.isChecked() == False:
+			setButton.setChecked(True)
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		setButton.setChecked(False)
-		
-	if setButton.isChecked() == True:
-		setButton.setText("Update")
-	elif setButton.isChecked() == False:
-		setButton.setChecked(True)
 		
 def setUp(self,buttonFocus,buttonDone,boxDone,greyHover,setButton):
 	checkDic = [
@@ -350,14 +349,13 @@ def setUp(self,buttonFocus,buttonDone,boxDone,greyHover,setButton):
 		self.ui.vsaButton_up.setCursor(QCursor(Qt.PointingHandCursor))
 		self.ui.vsaButton_vsg.setStyleSheet(greyHover)
 		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
+		if setButton.isChecked() == True:
+			setButton.setText("Update")
+		elif setButton.isChecked() == False:
+			setButton.setChecked(True)
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		setButton.setChecked(False)
-		
-	if setButton.isChecked() == True:
-		setButton.setText("Update")
-	elif setButton.isChecked() == False:
-		setButton.setChecked(True)
 			
 def setPSG(self,buttonFocus,buttonDone,boxDone,greyHover,setButton):
 	checkDic = [
@@ -376,14 +374,13 @@ def setPSG(self,buttonFocus,buttonDone,boxDone,greyHover,setButton):
 		self.ui.vsaButton_up.setCursor(QCursor(Qt.PointingHandCursor))
 		self.ui.vsaButton_vsg.setStyleSheet(greyHover)
 		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
+		if setButton.isChecked() == True:
+			setButton.setText("Update")	
+		elif setButton.isChecked() == False:
+			setButton.setChecked(True)
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		setButton.setChecked(False)
-	
-	if setButton.isChecked() == True:
-		setButton.setText("Update")	
-	elif setButton.isChecked() == False:
-		setButton.setChecked(True)
 		
 def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,setButton,matlab):
 	# define variables
@@ -469,6 +466,11 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,setButto
 							self.ui.pxaButton_vsa.setStyleSheet(buttonFocus)
 							self.ui.pxaButton_vsa_2.setStyleSheet(buttonFocus)
 							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor,greyHover,Qt.PointingHandCursor)
+						
+						if setButton.isChecked() == True:
+							setButton.setText("Update")	
+						elif setButton.isChecked() == False:
+							setButton.setChecked(True)	
 				else:
 					instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 					setButton.setChecked(False)
@@ -513,6 +515,11 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,setButto
 							self.ui.vsgNextSteps.setCurrentIndex(6)
 							self.ui.up_psg_next.setCurrentIndex(4)
 							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor)
+						
+						if setButton.isChecked() == True:
+							setButton.setText("Update")	
+						elif setButton.isChecked() == False:
+							setButton.setChecked(True)
 					else:
 						instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 						setButton.setChecked(False)
@@ -561,6 +568,11 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,setButto
 							self.ui.vsgNextSteps.setCurrentIndex(6)
 							self.ui.up_psg_next.setCurrentIndex(4)
 							setPrevVSAButtons(self,setButtonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor,greyButton,Qt.ArrowCursor)
+					
+						if setButton.isChecked() == True:
+							setButton.setText("Update")	
+						elif setButton.isChecked() == False:
+							setButton.setChecked(True)
 					else:
 						instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 						setButton.setChecked(False)
@@ -632,11 +644,6 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,setButto
 		self.ui.scopeSet.setChecked(False)
 		self.ui.uxaSet.setChecked(False)
 		self.ui.pxaSet.setChecked(False)
-	
-	if setButton.isChecked() == True:
-		setButton.setText("Update")	
-	elif setButton.isChecked() == False:
-		setButton.setChecked(True)
 		
 def setVSAAdv(self,boxDone,setButton,matlab):
 	checkDic = [
@@ -678,17 +685,16 @@ def setVSAAdv(self,boxDone,setButton,matlab):
 				self.ui.uxaVSAAdv.setStyleSheet(boxDone)
 				setButton.setEnabled(False)
 				setButton.setStyleSheet(None)
+				if setButton.isChecked() == True:
+					setButton.setText("Update")	
+				elif setButton.isChecked() == False:
+					setButton.setChecked(True)
 		else:
 			self.fillParametersMsg()
 			self.ui.uxaVSASetAdv.setChecked(False)
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		setButton.setChecked(False)
-	
-	if setButton.isChecked() == True:
-		setButton.setText("Update")	
-	elif setButton.isChecked() == False:
-		setButton.setChecked(True)
 		
 def setDown(self,buttonFocus,greyHover,buttonHover,boxDone,setButton):
 	checkDic = [
@@ -708,14 +714,14 @@ def setDown(self,buttonFocus,greyHover,buttonHover,boxDone,setButton):
 		self.ui.vsaNextStack.setCurrentIndex(3)
 		self.ui.up_psg_next.setCurrentIndex(5)
 		self.ui.vsgNextSteps.setCurrentIndex(7)
+		
+		if setButton.isChecked() == True:
+			setButton.setText("Update")	
+		elif setButton.isChecked() == False:
+			setButton.setChecked(True)
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		setButton.setChecked(False)
-		
-	if setButton.isChecked() == True:
-		setButton.setText("Update")	
-	elif setButton.isChecked() == False:
-		setButton.setChecked(True)
 		
 def setAdvancedDown(self,boxDone,setButton):
 	checkDic = [
@@ -729,14 +735,13 @@ def setAdvancedDown(self,boxDone,setButton):
 		self.ui.downEquipAdv.setStyleSheet(boxDone)
 		setButton.setEnabled(False)
 		setButton.setStyleSheet(None)
+		if setButton.isChecked() == True:
+			setButton.setText("Update")	
+		elif setButton.isChecked() == False:
+			setButton.setChecked(True)
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		setButton.setChecked(False)
-		
-	if setButton.isChecked() == True:
-		setButton.setText("Update")	
-	elif setButton.isChecked() == False:
-		setButton.setChecked(True)
 		
 def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,matlab):
 	checkMeter=[
@@ -780,14 +785,15 @@ def setMeter(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,matlab):
 			self.ui.vsaNextStack.setCurrentIndex(4)
 			self.ui.up_psg_next.setCurrentIndex(6)
 			self.ui.vsgNextSteps.setCurrentIndex(8)
+			
+			if setButton.isChecked() == True:
+				setButton.setText("Update")
+			elif setButton.isChecked() == False:	
+				setButton.setChecked(True)
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
-		setButton.setChecked(False)
-	
-	if setButton.isChecked() == True:
-		setButton.setText("Update")
-	elif setButton.isChecked() == False:	
-		setButton.setChecked(True)
+		# commented so that rest of workflow can be reached, REMOVE LATER
+		#setButton.setChecked(False)
 		
 def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,matlab):
 	idx = self.ui.saType.currentIndex()
@@ -837,14 +843,14 @@ def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,matlab):
 			self.ui.vsaNextStack.setCurrentIndex(5)
 			self.ui.up_psg_next.setCurrentIndex(7)
 			self.ui.vsgNextSteps.setCurrentIndex(9)
+			
+			if setButton.isChecked() == True:
+				setButton.setText("Update")
+			elif setButton.isChecked() == False:
+				setButton.setChecked(True)
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		setButton.setChecked(False)
-	
-	if setButton.isChecked() == True:
-		setButton.setText("Update")
-	elif setButton.isChecked() == False:
-		setButton.setChecked(True)
 		
 def setSAAdv(self,boxDone,setButton,matlab):
 	checkDic=[
@@ -897,14 +903,14 @@ def setSAAdv(self,boxDone,setButton,matlab):
 			self.ui.saEquipAdv.setStyleSheet(boxDone)
 			setButton.setText("Unset")
 			self.ui.saEquipAdv.setStyleSheet(boxDone)	
+			
+			if setButton.isChecked() == True:
+				setButton.setText("Update")
+			elif setButton.isChecked() == False:
+				setButton.setChecked(True)
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		setButton.setChecked(False)
-
-	if setButton.isChecked() == True:
-		setButton.setText("Update")
-	elif setButton.isChecked() == False:
-		setButton.setChecked(True)
 		
 def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,matlab,setButton):
 	checkDic = [
@@ -1005,14 +1011,14 @@ def setP1(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,matlab,setBu
 				self.ui.up_psg_next.setCurrentIndex(8)
 				self.ui.vsgNextSteps.setCurrentIndex(10)
 				setPrevP1Buttons(self,buttonHover,greyHover,greyButton,Qt.PointingHandCursor,Qt.ArrowCursor)
+				
+			if setButton.isChecked() == True:
+				setButton.setText("Update")	
+			elif setButton.isChecked() == False:
+				setButton.setChecked(True)
 		else:
 			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 			setButton.setChecked(False)	
-	
-	if setButton.isChecked() == True:
-		setButton.setText("Update")	
-	elif setButton.isChecked() == False:
-		setButton.setChecked(True)
 
 def setP2(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,matlab,setButton):
 	checkDic = [
@@ -1104,14 +1110,14 @@ def setP2(self,boxDone,buttonFocus,buttonHover,greyHover,greyButton,matlab,setBu
 				self.ui.up_psg_next.setCurrentIndex(9)
 				self.ui.vsgNextSteps.setCurrentIndex(11)
 				setPrevP2Buttons(self,buttonHover,greyHover)
+				
+			if setButton.isChecked() == True:
+				setButton.setText("Update")	
+			elif setButton.isChecked() == False:
+				setButton.setChecked(True)
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		setButton.setChecked(False)	
-	
-	if setButton.isChecked() == True:
-		setButton.setText("Update")	
-	elif setButton.isChecked() == False:
-		setButton.setChecked(True)
 	
 def setP3(self,boxDone,buttonFocus,buttonHover,matlab,setButton):
 	checkDic = [
@@ -1193,14 +1199,14 @@ def setP3(self,boxDone,buttonFocus,buttonHover,matlab,setButton):
 			self.ui.up_psg_next.setCurrentIndex(10)
 			self.ui.vsgNextSteps.setCurrentIndex(12)
 			setPrevP3Buttons(self,buttonHover)
+			
+			if setButton.isChecked() == True:
+				setButton.setText("Update")	
+			elif setButton.isChecked() == False:
+				setButton.setChecked(True)	
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
-		setButton.setChecked(False)
-
-	if setButton.isChecked() == True:
-		setButton.setText("Update")	
-	elif setButton.isChecked() == False:
-		setButton.setChecked(True)		
+		setButton.setChecked(False)	
 			
 def setVSAMeasDig(self,boxDone,buttonHover,setButton,matlab):
 	checkDic=[
@@ -1234,14 +1240,14 @@ def setVSAMeasDig(self,boxDone,buttonHover,setButton,matlab):
 				setFocusAndHand(self,self.ui.awgButton_vsaMeas_3,buttonHover)
 		elif vsaType == 1: 
 			self.ui.vsaMeasNextStack.setCurrentIndex(1)
+		
+		if setButton.isChecked() == True:
+			setButton.setText("Update")	
+		elif setButton.isChecked() == False:
+			setButton.setChecked(True)	
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		setButton.setChecked(False)
-	
-	if setButton.isChecked() == True:
-		setButton.setText("Update")	
-	elif setButton.isChecked() == False:
-		setButton.setChecked(True)	
 		
 def setVSAMeasGen(self,boxDone,buttonHover,buttonDone,setButton,matlab):
 	checkDic=[
@@ -1329,14 +1335,14 @@ def setVSAMeasAdv(self,boxDone,setButton):
 		self.ui.saMark_vsgMeas_2.setVisible(True)
 		self.ui.saMark_vsgMeas_3.setVisible(True)
 		self.ui.saMark_vsgMeas_4.setVisible(True)
+		
+		if setButton.isChecked() == True:
+			setButton.setText("Update")		
+		elif setButton.isChecked() == False:
+			setButton.setChecked(True)
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		setButton.setChecked(False)
-
-	if setButton.isChecked() == True:
-		setButton.setText("Update")		
-	elif setButton.isChecked() == False:
-		setButton.setChecked(True)
 	
 def rxCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 	checkDic = [
@@ -1379,7 +1385,7 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 		elif vsaPage == 0:
 			fCarrierField = self.ui.centerFreq_vsaMeas_2.text()
 			fSampleField = self.ui.sampRate_vsaMeas_2.text()
-			noPeriodsField = self.ui.noFrameTimes_vsaMeas_2.tex()
+			noPeriodsField = self.ui.noFrameTimes_vsaMeas_2.text()
 		vsaType = self.ui.vsaType.currentIndex()
 		if vsaType == 1 or vsaType == 5:
 			addressField = self.ui.address_scope.text()
@@ -1504,14 +1510,14 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 		self.ui.statusBar.removeWidget(self.progressBar)
 		# to show progress bar, need both addWidget() and show()
 		self.ui.statusBar.showMessage("RX Calibration Routine Complete",3000)
+		
+		if setButton.isChecked() == True:
+			setButton.setText("Update\n&& Run")		
+		elif setButton.isChecked() == False:
+			setButton.setChecked(True)
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		setButton.setChecked(False)	
-			
-	if setButton.isChecked() == True:
-		setButton.setText("Update\n&&\nRun")		
-	elif setButton.isChecked() == False:
-		setButton.setChecked(True)
 		
 def noRXCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 	checkDic = [
@@ -1533,13 +1539,7 @@ def noRXCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 		setButton.setStyleSheet(None)
 
 		vsgType = self.ui.vsgWorkflow_vsaMeas.currentIndex()
-		self.ui.combEquip_vsaMeas.setStyleSheet(boxDone)
 		self.ui.downEquip_vsaMeas.setStyleSheet(boxDone)
-		self.ui.rxEquip_vsaMeas.setStyleSheet(boxDone)
-		self.ui.trigEquip_vsaMeas.setStyleSheet(boxDone)
-		self.ui.vsaResultsStack_vsaMeas.setCurrentIndex(0)
-		self.ui.vsaResultsStack_vsgMeas.setCurrentIndex(0)
-		self.ui.vsaCalResultsStack_algo.setCurrentIndex(0)
 		self.ui.downMark_vsaMeas.setVisible(True)
 		self.ui.downMark_vsaMeas_2.setVisible(True)
 		self.ui.downMark_vsgMeas.setVisible(True)
@@ -1552,14 +1552,13 @@ def noRXCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 			setFocusAndHand(self,self.ui.awgButton_vsaMeas,buttonHover)
 			setFocusAndHand(self,self.ui.awgButton_vsaMeas_2,buttonHover)
 			setFocusAndHand(self,self.ui.awgButton_vsaMeas_3,buttonHover)
+		if setButton.isChecked() == True:
+			setButton.setText("Update")		
+		elif setButton.isChecked() == False:
+			setButton.setChecked(True)
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		setButton.setChecked(False)
-	
-	if setButton.isChecked() == True:
-		setButton.setText("Update")		
-	elif setButton.isChecked() == False:
-		setButton.setChecked(True)
 		
 def awgCalRoutine(self,boxDone,setButton,matlab):
 	checkDic = [
@@ -1639,8 +1638,8 @@ def awgCalRoutine(self,boxDone,setButton,matlab):
 			"ToneSpacing" : self.ui.toneSpacing_awgCal.text(),
 			"StartingToneFreq" : self.ui.startFreq_awgCal.text(),
 			"EndingToneFreq" : self.ui.endFreq_awgCal.text(),
-			"RealBasisFlag" : self.ui.realBasisFlag_awgCal.text(),
-			"PhaseDistr" : self.ui.phaseDistr_awgCal.text(),
+			"RealBasisFlag" : self.ui.realBasisFlag_awgCal.currentIndex(),
+			"PhaseDistr" : self.ui.phaseDistr_awgCal.currentIndex(),
 			"Fres" : self.ui.freqRes_awgCal.text(),
 			"SaveLocation" : self.ui.awgCalSaveLocField_vsgMeas.text(),
 			"PAPRmin" : self.ui.paprMin_awg.text(),
@@ -1689,7 +1688,7 @@ def awgCalRoutine(self,boxDone,setButton,matlab):
 		
 		self.ui.awgEquip_vsgMeas.setStyleSheet(boxDone)
 		self.ui.rxEquip_vsgMeas.setStyleSheet(boxDone)
-		self.ui.vsgEquip_vsgMeas.setStyleSheet(boxDone)
+		self.ui.awgAlgoSettings_awgCal.setStyleSheet(boxDone)
 		self.ui.calEquip_vsgMeas.setStyleSheet(boxDone)
 		self.ui.awgCalEquip_vsgMeas.setStyleSheet(boxDone)
 		self.ui.vsgMeasNextStack.setCurrentIndex(5)
@@ -1713,14 +1712,14 @@ def awgCalRoutine(self,boxDone,setButton,matlab):
 		self.ui.statusBar.removeWidget(self.progressBar)
 		# to show progress bar, need both addWidget() and show()
 		self.ui.statusBar.showMessage("AWG Calibration Routine Complete",3000)
+		
+		if setButton.isChecked() == True:
+			setButton.setText("Update\n&& Run")		
+		elif setButton.isChecked() == False:
+			setButton.setChecked(True)
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		setButton.setChecked(False)
-	
-	if setButton.isChecked() == True:
-		setButton.setText("Update\n&&\Run")		
-	elif setButton.isChecked() == False:
-		setButton.setChecked(True)
 
 def noAWGCalRoutine(self,boxDone,setButton,matlab):
 	checkDic = [
@@ -1739,14 +1738,14 @@ def noAWGCalRoutine(self,boxDone,setButton,matlab):
 		self.ui.awgMark_vsgMeas.setVisible(True)
 		self.ui.awgMark_vsgMeas_2.setVisible(True)
 		self.ui.awgMark_vsgMeas_3.setVisible(True)
+		
+		if setButton.isChecked() == True:
+			setButton.setText("Update")		
+		elif setButton.isChecked() == False:
+			setButton.setChecked(True)
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		setButton.setChecked(False)
-		
-	if setButton.isChecked() == True:
-		setButton.setText("Update")		
-	elif setButton.isChecked() == False:
-		setButton.setChecked(True)
 	
 def awgPreview(self):
 	self.ui.vsgResultsStack_vsgMeas.setCurrentIndex(0)
@@ -1767,16 +1766,16 @@ def setAdvAWGVSA_vsgMeas(self,boxDone,setButton):
 		self.ui.awgAdvEquip_vsgMeas_2.setStyleSheet(boxDone)
 		self.ui.awgAdvEquip_vsgMeas.setStyleSheet(boxDone)
 		self.ui.vsaAdvEquip_vsgMeas.setStyleSheet(boxDone)
+		
+		if setButton.isChecked() == True:
+			setButton.setText("Update")	
+			self.ui.setAdv_vsgMeas.setText("Update")
+		elif setButton.isChecked() == False:
+			setButton.setChecked(True)
+			self.ui.setAdv_vsgMeas.setChecked(True)
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		setButton.setChecked(False)
-	
-	if setButton.isChecked() == True:
-		setButton.setText("Update")	
-		self.ui.setAdv_vsgMeas.setText("Update")
-	elif setButton.isChecked() == False:
-		setButton.setChecked(True)
-		self.ui.setAdv_vsgMeas.setChecked(True)
 			
 def setAdvAWG_vsgMeas(self,boxDone,setButton):
 	checkDic = [self.ui.trigInAmp_awgMeas_2]
@@ -1786,69 +1785,67 @@ def setAdvAWG_vsgMeas(self,boxDone,setButton):
 		setButton.setStyleSheet(None)
 		self.ui.awgAdvEquip_vsgMeas_2.setStyleSheet(boxDone)
 		self.ui.awgAdvEquip_vsgMeas.setStyleSheet(boxDone)
+		
+		if setButton.isChecked() == True:
+			setButton.setText("Update")	
+		elif setButton.isChecked() == False:
+			setButton.setChecked(True)	
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		setButton.setChecked(False)
 	
-	if setButton.isChecked() == True:
-		setButton.setText("Update")	
-	elif setButton.isChecked() == False:
-		setButton.setChecked(True)	
-	
 def setUpVSGMeas(self,boxDone,setButton):
 	checkDic = [
-		self.ui.comboBox_87,
-		self.ui.lineEdit_144,
-		self.ui.lineEdit_143,
-		self.ui.lineEdit_142,
-		self.ui.lineEdit_141,
-		self.ui.lineEdit_140,
-		self.ui.lineEdit_139,
-		self.ui.lineEdit_138,
-		self.ui.lineEdit_137,
-		self.ui.lineEdit_136,
-		self.ui.lineEdit_135,
-		self.ui.lineEdit_134,
-		self.ui.lineEdit_133,
-		self.ui.lineEdit_132,
-		self.ui.comboBox_96
+		self.ui.varType_upMeas,
+		self.ui.rfCenterFreq_upMeas,
+		self.ui.minRFFreq_upMeas,
+		self.ui.maxRFFreq_upMeas,
+		self.ui.rfUnderstep_upMeas,
+		self.ui.ifCenterFreq_upMeas,
+		self.ui.minIFFreq_upMeas,
+		self.ui.maxIFFreq_upMeas,
+		self.ui.ifUnderstep_upMeas,
+		self.ui.loFreq_upMeas,
+		self.ui.minLOFreq_upMeas,
+		self.ui.maxLOFreq_upMeas,
+		self.ui.loUnderstep_upMeas,
+		self.ui.outPower_upMeas,
+		self.ui.loInjection_upMeas
 	]
-	
-	if setButton.isChecked() == True:
-		done = win.checkIfDone(checkDic)
-		if done:
-			setButton.setText("Unset")
-			self.ui.upEquip_vsgMeas.setStyleSheet(boxDone)
-			self.ui.vsgMeasNextStack.setCurrentIndex(8)
-			self.ui.upMark_vsgMeas.setVisible(True)
-			self.ui.psgMark_vsgMeas.setVisible(True)
-		else:
-			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
-			setButton.setChecked(False)
-	elif setButton.isChecked() == False:
-		setButton.setText("Set")
-		self.ui.upEquip_vsgMeas.setStyleSheet(None)
-		self.ui.upMark_vsgMeas.setVisible(False)
-		self.ui.psgMark_vsgMeas.setVisible(False)
-		self.ui.vsgMeasNextStack.setCurrentIndex(7)
+	done = win.checkIfDone(checkDic)
+	if done:
+		setButton.setEnabled(False)
+		setButton.setStyleSheet(None)
+		self.ui.upEquip_vsgMeas.setStyleSheet(boxDone)
+		self.ui.vsgMeasNextStack.setCurrentIndex(8)
+		self.ui.upMark_vsgMeas.setVisible(True)
+		self.ui.psgMark_vsgMeas.setVisible(True)
 		
+		if setButton.isChecked() == True:
+			setButton.setText("Update")	
+		elif setButton.isChecked() == False:
+			setButton.setChecked(True)
+	else:
+		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+		setButton.setChecked(False)
+	
 def setHetero(self,boxDone,setButton,matlab):
 	checkDic = [
-		self.ui.comboBox_103,
-		self.ui.lineEdit_155,
-		self.ui.lineEdit_156,
-		self.ui.lineEdit_157,
-		self.ui.lineEdit_158,
-		self.ui.lineEdit_159,
-		self.ui.lineEdit_161,
-		self.ui.lineEdit_162,
-		self.ui.lineEdit_163,
-		self.ui.lineEdit_160,
-		self.ui.lineEdit_164,
-		self.ui.lineEdit_165,
-		self.ui.lineEdit_166,
-		self.ui.lineEdit_167,
-		self.ui.comboBox_102,
+		self.ui.varType_hetero,
+		self.ui.rfCenterFreq_hetero,
+		self.ui.minRFFreq_hetero,
+		self.ui.maxRFFreq_hetero,
+		self.ui.rfUnderstep_hetero,
+		self.ui.ifCenterFreq_hetero,
+		self.ui.minIFFreq_hetero,
+		self.ui.maxIFFreq_hetero,
+		self.ui.ifUnderstep_hetero,
+		self.ui.loFreq_hetero,
+		self.ui.minLOFreq_hetero,
+		self.ui.maxLOFreq_hetero,
+		self.ui.loUnderstep_hetero,
+		self.ui.outPower_hetero,
+		self.ui.loInjection_hetero,
 		self.ui.mirrorFlag_hetero,
 		self.ui.freqDomainAlign_hetero,
 		self.ui.downFileField_vsgMeas,
@@ -1867,272 +1864,255 @@ def setHetero(self,boxDone,setButton,matlab):
 		self.ui.noIterations_hetero,			
 		self.ui.upCalSaveLocField_vsgMeas
 	]
+	done = win.checkIfDone(checkDic)
+	if done:
+		addressField = ""
+		vfsField = ""
+		trigAmpField = ""
+		fCarrierField = ""
+		fSampleField = ""
+		noPeriodsField = ""
+		noTXPeriodsField = ""
+		vsgCenterFreqField = ""
+		# determine which field on which page should be used
+		awgCalPage = self.ui.awgParamsStack_vsgMeas.currentIndex()
+		if awgCalPage == 2:
+			vfsField = self.ui.vfs_awgCal_2.text()
+			trigAmpField = self.ui.trigAmp_awgCal_2.text()
+			noTXPeriodsField = self.ui.noTXPeriods_awgMeas.text()
+			vsgCenterFreqField = self.ui.centerFreq_awgCal_2.text()
+		elif awgCalPage == 1:
+			vfsField = self.ui.vfs_awgCal.text()
+			trigAmpField = self.ui.trigAmp_awgCal.text()
+			noTXPeriodsField = self.ui.noTXPeriods_awgCal.text()
+			vsgCenterFreqField = self.ui.centerFreq_awgCal.text()
+		vsaPage = self.ui.vsaMeasGenStack.currentIndex()
+		if vsaPage == 1:
+			fCarrierField = self.ui.centerFreq_vsaMeas.text()
+			fSampleField = self.ui.sampRate_vsaMeas.text()
+			noPeriodsField = self.ui.noFrameTimes_vsaMeas.text()
+		elif vsaPage == 0:
+			fCarrierField = self.ui.centerFreq_vsaMeas_2.text()
+			fSampleField = self.ui.sampRate_vsaMeas_2.text()
+			noPeriodsField = self.ui.noFrameTimes_vsaMeas_2.text()
+		vsaType = self.ui.vsaType.currentIndex()
+		if vsaType == 1 or vsaType == 5:
+			addressField = self.ui.address_scope.text()
+		elif vsaType == 2 or vsaType == 6:
+			addressField = self.ui.address_dig.text()
+		elif vsaType == 3 or vsaType == 4:
+			addressField = self.ui.address_sa.text()
+		channelVec = [0,0,0,0]
+		c1 = self.ui.measChannel1.isChecked()
+		c2 = self.ui.measChannel2.isChecked()
+		c3 = self.ui.measChannel3.isChecked()
+		c4 = self.ui.measChannel4.isChecked()
+		if c1:
+			channelVec[0] = 1
+		elif c1 == False:
+			channelVec[0] = 0
+		if c2:
+			channelVec[1] = 1
+		elif c2 == False:
+			channelVec[1] = 0
+		if c3:
+			channelVec[2] = 1
+		elif c3 == False:
+			channelVec[2] = 0
+		if c4:
+			channelVec[3] = 1
+		elif c4 == False:
+			channelVec[3] = 0
+		
+		#define dictionaries
+		cal = {
+			"ToneSpacing" : self.ui.toneSpacing_hetero.text(),
+			"StartingToneFreq" : self.ui.startTone_hetero.text(),
+			"EndingToneFreq" : self.ui.endTone_hetero.text(),
+			"RealBasisFlag" : self.ui.realBasisFlag_hetero.currentIndex(),
+			"PhaseDistr" : self.ui.phaseDistribution_hetero.currentIndex(),
+			"PAPRmin" : self.ui.paprMin_hetero.text(),
+			"PAPRmax" : self.ui.paprMax_hetero.text(),
+			"FreqRes" : self.ui.freqResolution_hetero.text(),
+			"NumIterations" : self.ui.noIterations_hetero.text(),
+			"SaveLocation" : self.ui.upCalSaveLocField_vsgMeas.text(),
+			"rxCalFlag" : self.ui.vsaCalFileEnable_hetero.currentIndex(),
+			"rxCalFile" : self.ui.vsaCalFileField_vsgMeas_2.text()
+		}
+		tx={
+			"Type": self.ui.vsgSetup.currentIndex(),
+			"Model": self.ui.partNum_awg.text(),
+			"Fsample" : self.ui.maxSampleRate_awg.text(),
+			"ReferenceClockSource": self.ui.refClockSorce_awg.currentIndex(),
+			"ReferenceClock": self.ui.extRefFreq_awg.text(),
+			"VFS": vfsField,	
+			"TriggerAmplitude": trigAmpField,
+			"NumberOfTransmittedPeriods": noTXPeriodsField,
+			"ExpansionMarginEnable": self.ui.expansionMarginEnable_hetero.currentIndex(),
+			"ExpansionMargin" : self.ui.expansionMargin_hetero.text(),
+			"Fcarrier" : vsgCenterFreqField,
+			"AWG_Channel" : self.ui.vsgChannel_hetero.text()
+		}
+		rx={
+			"Type" : self.ui.vsaType.currentIndex(),
+			"FCarrier" : fCarrierField,
+			"MirrorSignalFlag" : self.ui.mirrorFlag_hetero.currentIndex(),
+			"XCorrLength" : self.ui.xCorrLength_vsgMeas.text(),
+			"FSample" : fSampleField,
+			"MeasuredPeriods" : noPeriodsField,
+			"VisaAddress": addressField,
+			"EnableExternalClock_Scope" : self.ui.extClkEnabled_scope.currentIndex(),
+			"TriggerChannel" : self.ui.trigChannel_scope.text(),
+			"ChannelVec": channelVec,
+			"EnableExternalClock_Dig" : self.ui.clockEnabled_dig.currentIndex(),
+			"ExternalClockFrequency" : self.ui.clockFreq_dig.currentIndex(),
+			"ACDCCoupling" : self.ui.coupling_dig.currentIndex(),
+			"VFS" : self.ui.vfs_dig.text(),
+			"Interleaving" : self.ui.interleaving_dig.currentIndex(),
+			"AnalysisBandwidth":self.ui.analysisBandwidth_sa.text(),
+			"Attenuation":self.ui.attenuation_sa.text(),
+			"ClockReference":self.ui.clockRef_sa.currentIndex(),
+			"TriggerLevel":self.ui.trigLevel_sa.text(),
+			"IFPath":self.ui.ifPath_vsa.currentIndex(),
+			"AlignFreqDomainFlag" : self.ui.freqDomainAlign_hetero.currentIndex(),
+			"DownconversionFilterFile" : self.ui.downFileField_vsgMeas.text()
+		}
 
-	if setButton.isChecked() == True:
-		done = win.checkIfDone(checkDic)
-		if done:
-			setButton.setText("Unset")
-			
-			addressField = ""
-			vfsField = ""
-			trigAmpField = ""
-			fCarrierField = ""
-			fSampleField = ""
-			noPeriodsField = ""
-			noTXPeriodsField = ""
-			vsgCenterFreqField = ""
-			# determine which field on which page should be used
-			awgCalPage = self.ui.awgParamsStack_vsgMeas.currentIndex()
-			if awgCalPage == 2:
-				vfsField = self.ui.vfs_awgCal_2.text()
-				trigAmpField = self.ui.trigAmp_awgCal_2.text()
-				noTXPeriodsField = self.ui.noTXPeriods_awgMeas.text()
-				vsgCenterFreqField = self.ui.centerFreq_awgCal_2.text()
-			elif awgCalPage == 1:
-				vfsField = self.ui.vfs_awgCal.text()
-				trigAmpField = self.ui.trigAmp_awgCal.text()
-				noTXPeriodsField = self.ui.noTXPeriods_awgCal.text()
-				vsgCenterFreqField = self.ui.centerFreq_awgCal.text()
-			vsaPage = self.ui.vsaMeasGenStack.currentIndex()
-			if vsaPage == 1:
-				fCarrierField = self.ui.centerFreq_vsaMeas.text()
-				fSampleField = self.ui.sampRate_vsaMeas.text()
-				noPeriodsField = self.ui.noFrameTimes_vsaMeas.text()
-			elif vsaPage == 0:
-				fCarrierField = self.ui.centerFreq_vsaMeas_2.text()
-				fSampleField = self.ui.sampRate_vsaMeas_2.text()
-				noPeriodsField = self.ui.noFrameTimes_vsaMeas_2.text()
-			vsaType = self.ui.vsaType.currentIndex()
-			if vsaType == 1 or vsaType == 5:
-				addressField = self.ui.address_scope.text()
-			elif vsaType == 2 or vsaType == 6:
-				addressField = self.ui.address_dig.text()
-			elif vsaType == 3 or vsaType == 4:
-				addressField = self.ui.address_sa.text()
-			channelVec = [0,0,0,0]
-			c1 = self.ui.measChannel1.isChecked()
-			c2 = self.ui.measChannel2.isChecked()
-			c3 = self.ui.measChannel3.isChecked()
-			c4 = self.ui.measChannel4.isChecked()
-			if c1:
-				channelVec[0] = 1
-			elif c1 == False:
-				channelVec[0] = 0
-			if c2:
-				channelVec[1] = 1
-			elif c2 == False:
-				channelVec[1] = 0
-			if c3:
-				channelVec[2] = 1
-			elif c3 == False:
-				channelVec[2] = 0
-			if c4:
-				channelVec[3] = 1
-			elif c4 == False:
-				channelVec[3] = 0
-			
-			#define dictionaries
-			cal = {
-				"ToneSpacing" : self.ui.toneSpacing_hetero.text(),
-				"StartingToneFreq" : self.ui.startTone_hetero.text(),
-				"EndingToneFreq" : self.ui.endTone_hetero.text(),
-				"RealBasisFlag" : self.ui.realBasisFlag_hetero.currentIndex(),
-				"PhaseDistr" : self.ui.phaseDistribution_hetero.currentIndex(),
-				"PAPRmin" : self.ui.paprMin_hetero.text(),
-				"PAPRmax" : self.ui.paprMax_hetero.text(),
-				"FreqRes" : self.ui.freqResolution_hetero.text(),
-				"NumIterations" : self.ui.noIterations_hetero.text(),
-				"SaveLocation" : self.ui.upCalSaveLocField_vsgMeas.text(),
-				"rxCalFlag" : self.ui.vsaCalFileEnable_hetero.currentIndex(),
-				"rxCalFile" : self.ui.vsaCalFileField_vsgMeas_2.text()
-			}
-			tx={
-				"Type": self.ui.vsgSetup.currentIndex(),
-				"Model": self.ui.partNum_awg.text(),
-				"Fsample" : self.ui.maxSampleRate_awg.text(),
-				"ReferenceClockSource": self.ui.refClockSorce_awg.currentIndex(),
-				"ReferenceClock": self.ui.extRefFreq_awg.text(),
-				"VFS": vfsField,	
-				"TriggerAmplitude": trigAmpField,
-				"NumberOfTransmittedPeriods": noTXPeriodsField,
-				"ExpansionMarginEnable": self.ui.expansionMarginEnable_hetero.currentIndex(),
-				"ExpansionMargin" : self.ui.expansionMargin_hetero.text(),
-				"Fcarrier" : vsgCenterFreqField,
-				"AWG_Channel" : self.ui.vsgChannel_hetero.text()
-			}
-			rx={
-				"Type" : self.ui.vsaType.currentIndex(),
-				"FCarrier" : fCarrierField,
-				"MirrorSignalFlag" : self.ui.mirrorFlag_hetero.currentIndex(),
-				"XCorrLength" : self.ui.xCorrLength_vsgMeas.text(),
-				"FSample" : fSampleField,
-				"MeasuredPeriods" : noPeriodsField,
-				"VisaAddress": addressField,
-				"EnableExternalClock_Scope" : self.ui.extClkEnabled_scope.currentIndex(),
-				"TriggerChannel" : self.ui.trigChannel_scope.text(),
-				"ChannelVec": channelVec,
-				"EnableExternalClock_Dig" : self.ui.clockEnabled_dig.currentIndex(),
-				"ExternalClockFrequency" : self.ui.clockFreq_dig.currentIndex(),
-				"ACDCCoupling" : self.ui.coupling_dig.currentIndex(),
-				"VFS" : self.ui.vfs_dig.text(),
-				"Interleaving" : self.ui.interleaving_dig.currentIndex(),
-				"AnalysisBandwidth":self.ui.analysisBandwidth_sa.text(),
-				"Attenuation":self.ui.attenuation_sa.text(),
-				"ClockReference":self.ui.clockRef_sa.currentIndex(),
-				"TriggerLevel":self.ui.trigLevel_sa.text(),
-				"IFPath":self.ui.ifPath_vsa.currentIndex(),
-				"AlignFreqDomainFlag" : self.ui.freqDomainAlign_hetero.currentIndex(),
-				"DownconversionFilterFile" : self.ui.downFileField_vsgMeas.text()
-			}
-
-			matlab.Set_Heterodyne_Calibration(cal,tx,rx,nargout=0)
-			#matlab.Upconverter_Calibration_Main(nargout=0)
-			
-			# create progress bar
-			progressBar = QProgressBar()
-			progressBar.setRange(0,11);
-			progressBar.setTextVisible(True);
-			self.ui.statusBar.addWidget(progressBar,1)
-			
-			# create thread to run signal generation routine
-			self.heterodyneThread = runHeterodyneCalibrationThread(progressBar,self,boxDone)
-			# connect signals to the thread
-			# as routine is run, update progress bar and step
-			self.heterodyneThread.updateBar.connect(updateHeterodyneBar)
-			# when nmse and papr are available, update gui
-			# self.heterodyneThread.updateData.connect(updateHeterodyneData)
-			# if error occurs, break thread and alery
-			self.heterodyneThread.errorOccurred.connect(errorOccurred)
-			# begin running signal generation
-			self.heterodyneThread.start()	
-			
-			# self.progressBar = QProgressBar()
-			# self.progressBar.setRange(1,10);
-			# self.progressBar.setTextVisible(True);
-			# self.progressBar.setFormat("Currently Running: Heterodyne Calibration Routine")
-			# self.ui.statusBar.addWidget(self.progressBar,1)
-			# completed = 0
-			# while completed < 100:
-				# completed = completed + 0.00001
-				# self.progressBar.setValue(completed)
-			# self.ui.statusBar.removeWidget(self.progressBar)
-			## to show progress bar, need both addWidget() and show()
-			# self.ui.statusBar.showMessage("Heterodyne Calibration Routine Complete",3000)
-		else:
-			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
-			setButton.setChecked(False)
-	elif setButton.isChecked() == False:
-		setButton.setText("Set && Run")
-		self.ui.calEquip_hetero.setStyleSheet(None)
-		self.ui.rxEquip_hetero.setStyleSheet(None)
-		self.ui.vsgEquip_hetero.setStyleSheet(None)
-		self.ui.upCalEquipHetero_hetero.setStyleSheet(None)
-		self.ui.upEquip_hetero.setStyleSheet(None)
-		self.ui.upMark_vsgMeas.setVisible(False)
-		self.ui.psgMark_vsgMeas.setVisible(False)
-		self.ui.debugVSGStack.setCurrentIndex(2)
-		self.ui.vsgMeasNextStack.setCurrentIndex(7)
+		matlab.Set_Heterodyne_Calibration(cal,tx,rx,nargout=0)
+		#matlab.Upconverter_Calibration_Main(nargout=0)
+		
+		# create progress bar
+		progressBar = QProgressBar()
+		progressBar.setRange(0,11);
+		progressBar.setTextVisible(True);
+		self.ui.statusBar.addWidget(progressBar,1)
+		
+		# create thread to run signal generation routine
+		self.heterodyneThread = runHeterodyneCalibrationThread(progressBar,self,boxDone)
+		# connect signals to the thread
+		# as routine is run, update progress bar and step
+		self.heterodyneThread.updateBar.connect(updateHeterodyneBar)
+		# when nmse and papr are available, update gui
+		# self.heterodyneThread.updateData.connect(updateHeterodyneData)
+		# if error occurs, break thread and alery
+		self.heterodyneThread.errorOccurred.connect(errorOccurred)
+		# begin running signal generation
+		self.heterodyneThread.start()	
+		
+		# self.progressBar = QProgressBar()
+		# self.progressBar.setRange(1,10);
+		# self.progressBar.setTextVisible(True);
+		# self.progressBar.setFormat("Currently Running: Heterodyne Calibration Routine")
+		# self.ui.statusBar.addWidget(self.progressBar,1)
+		# completed = 0
+		# while completed < 100:
+			# completed = completed + 0.00001
+			# self.progressBar.setValue(completed)
+		# self.ui.statusBar.removeWidget(self.progressBar)
+		## to show progress bar, need both addWidget() and show()
+		# self.ui.statusBar.showMessage("Heterodyne Calibration Routine Complete",3000)
+		
+		setButton.setEnabled(False)
+		setButton.setStyleSheet(None)
+		
+		if setButton.isChecked() == True:
+			setButton.setText("Update\n&& Run")	
+		elif setButton.isChecked() == False:
+			setButton.setChecked(True)	
+	else:
+		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+		setButton.setChecked(False)
+	
 		
 def setHomo(self,boxDone,setButton):
-	
 	checkDic = [
-		self.ui.comboBox_143,
-		self.ui.lineEdit_186,
-		self.ui.lineEdit_187,
-		self.ui.lineEdit_188,
-		self.ui.lineEdit_189,
-		self.ui.lineEdit_190,
-		self.ui.lineEdit_191,
-		self.ui.lineEdit_192,
-		self.ui.lineEdit_193,
-		self.ui.lineEdit_194,
-		self.ui.lineEdit_195,
-		self.ui.lineEdit_196,
-		self.ui.lineEdit_197,
-		self.ui.lineEdit_198,
-		self.ui.comboBox_142,
-		self.ui.lineEdit_199,
-		self.ui.comboBox_150,
+		self.ui.varType_homo,
+		self.ui.rfCenterFreq_homo,
+		self.ui.minRFFreq_homo,
+		self.ui.maxRFFreq_homo,
+		self.ui.rfUnderstep_homo,
+		self.ui.ifCenterFreq_homo,
+		self.ui.minIFFreq_homo,
+		self.ui.maxIFFreq_homo,
+		self.ui.ifUnderstep_homo,
+		self.ui.loFreq_homo,
+		self.ui.minLoFreq_homo,
+		self.ui.maxLoFreq_homo,
+		self.ui.loUnderstep_homo,
+		self.ui.outPower_homo,
+		self.ui.loInjection_homo,
+		self.ui.trainingLength_homo,
+		self.ui.mirrorFlag_homo,
+		self.ui.guardBand_homo,
 		self.ui.downFileField_vsgMeas_2,
-		self.ui.lineEdit_202,
-		self.ui.lineEdit_204,
-		self.ui.lineEdit_205,
-		self.ui.lineEdit_206,
-		self.ui.lineEdit_207,
-		self.ui.lineEdit_208,
-		self.ui.comboBox_152,
+		self.ui.sampleRate_homo,
+		self.ui.expansionEnable_homo,
+		self.ui.expansionMargin_homo,
+		self.ui.loOffsetFreq_homo,
+		self.ui.iOffset_freq,
+		self.ui.qOffset_homo,
+		self.ui.vsgChannel_homo,
+		self.ui.useAWGCal_homo,
 		self.ui.calFileIField_vsgMeas,
 		self.ui.calFileQField_vsgMeas,
-		self.ui.vsgChannel_homo,
-		self.ui.comboBox_151,
+		self.ui.useVSACal_homo,
 		self.ui.vsaCalFielField_vsgMeas,
-		self.ui.comboBox_148,
-		self.ui.lineEdit_214,
-		self.ui.lineEdit_215,
-		self.ui.comboBox_146,
-		self.ui.lineEdit_216,
-		self.ui.lineEdit_217,
-		self.ui.lineEdit_218,
-		self.ui.lineEdit_219,
-		self.ui.lineEdit_220,
-		self.ui.lineEdit_221,
-		self.ui.comboBox_149,
-		self.ui.comboBox_147,
-		self.ui.lineEdit_222,	
-		self.ui.lineEdit_260,
+		self.ui.type_homo,
+		self.ui.firFilterOrder_homo,
+		self.ui.noIterations_homo,
+		self.ui.uniformSpacing_homo,
+		self.ui.toneSpacing_homo,
+		self.ui.startToneI_homo,
+		self.ui.endToneI_homo,
+		self.ui.startToneQ_homo,
+		self.ui.endToneQ_homo,
+		self.ui.freqRes_homo,
+		self.ui.realBasisFlag_homo,
+		self.ui.phaseDistr_homo,
+		self.ui.paprMin_homo,	
+		self.ui.paprMax_homo,
 		self.ui.iqSaveLocField_vsgMeas_3,
 		self.ui.vsgCalSaveLocField_vsgMeas_3,
 		self.ui.calStructSaveLocField_vsgMeas_3
 	]
+	done = win.checkIfDone(checkDic)
+	if done:
+		self.ui.calEquip_homo.setStyleSheet(boxDone)
+		self.ui.rxEquip_homo.setStyleSheet(boxDone)
+		self.ui.vsgEquip_homo.setStyleSheet(boxDone)
+		self.ui.upCalEquipHomo_homo.setStyleSheet(boxDone)
+		self.ui.upEquip_homo.setStyleSheet(boxDone)
+		self.ui.scopeEquip_homo.setStyleSheet(boxDone)
+		self.ui.vsgMeasNextStack.setCurrentIndex(8)
+		self.ui.debugVSGStack.setCurrentIndex(1)
+		self.ui.vsgResultsFileStack_vsgMeas.setCurrentIndex(0)
+		self.ui.vsgCalPaths_algo.setCurrentIndex(0)
+		self.ui.vsgResultsStack_vsgMeas.setCurrentIndex(0)
+		self.ui.upMark_vsgMeas.setVisible(True)
+		self.ui.psgMark_vsgMeas.setVisible(True)
+		
+		self.progressBar = QProgressBar()
+		self.progressBar.setRange(1,10);
+		self.progressBar.setTextVisible(True);
+		self.progressBar.setFormat("Currently Running: Homodyne Calibration Routine")
+		self.ui.statusBar.addWidget(self.progressBar,1)
+		completed = 0
+		while completed < 100:
+			completed = completed + 0.00001
+			self.progressBar.setValue(completed)
+		self.ui.statusBar.removeWidget(self.progressBar)
+		# to show progress bar, need both addWidget() and show()
+		self.ui.statusBar.showMessage("Homodyne Calibration Routine Complete",3000)
 	
-	if setButton.isChecked() == True:
-		done = win.checkIfDone(checkDic)
-		if done:
-			setButton.setText("Unset")
-			
-
-
-			self.ui.calEquip_homo.setStyleSheet(boxDone)
-			self.ui.rxEquip_homo.setStyleSheet(boxDone)
-			self.ui.vsgEquip_homo.setStyleSheet(boxDone)
-			self.ui.upCalEquipHomo_homo.setStyleSheet(boxDone)
-			self.ui.upEquip_homo.setStyleSheet(boxDone)
-			self.ui.scopeEquip_homo.setStyleSheet(boxDone)
-			self.ui.vsgMeasNextStack.setCurrentIndex(8)
-			self.ui.debugVSGStack.setCurrentIndex(1)
-			self.ui.vsgResultsFileStack_vsgMeas.setCurrentIndex(0)
-			self.ui.vsgCalPaths_algo.setCurrentIndex(0)
-			self.ui.vsgResultsStack_vsgMeas.setCurrentIndex(0)
-			self.ui.upMark_vsgMeas.setVisible(True)
-			self.ui.psgMark_vsgMeas.setVisible(True)
-			
-			self.progressBar = QProgressBar()
-			self.progressBar.setRange(1,10);
-			self.progressBar.setTextVisible(True);
-			self.progressBar.setFormat("Currently Running: Homodyne Calibration Routine")
-			self.ui.statusBar.addWidget(self.progressBar,1)
-			completed = 0
-			while completed < 100:
-				completed = completed + 0.00001
-				self.progressBar.setValue(completed)
-			self.ui.statusBar.removeWidget(self.progressBar)
-			# to show progress bar, need both addWidget() and show()
-			self.ui.statusBar.showMessage("Homodyne Calibration Routine Complete",3000)
-		else:
-			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
-			setButton.setChecked(False)
-	elif setButton.isChecked() == False:
-		setButton.setText("Set && Run")
-		self.ui.calEquip_homo.setStyleSheet(None)
-		self.ui.rxEquip_homo.setStyleSheet(None)
-		self.ui.vsgEquip_homo.setStyleSheet(None)
-		self.ui.upCalEquipHomo_homo.setStyleSheet(None)
-		self.ui.upEquip_homo.setStyleSheet(None)
-		self.ui.scopeEquip_homo.setStyleSheet(None)
-		self.ui.upMark_vsgMeas.setVisible(False)
-		self.ui.psgMark_vsgMeas.setVisible(False)
-		self.ui.debugVSGStack.setCurrentIndex(2)
-		self.ui.vsgMeasNextStack.setCurrentIndex(7)
+		setButton.setEnabled(False)
+		setButton.setStyleSheet(None)
+		if setButton.isChecked() == True:
+			setButton.setText("Update\n&& Run")
+		elif setButton.isChecked() == False:
+			setButton.setChecked(True)
+	else:
+		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+		setButton.setChecked(False)
 		
 def calValPreview(self):
 	self.ui.calValTabs.setCurrentIndex(0)
@@ -2141,67 +2121,63 @@ def calValPreview(self):
 	
 def runCalValidation(self,setBox,setButton,matlab):
 	checkDic = [
-		self.ui.comboBox_68,
-		self.ui.comboBox_112,
+		self.ui.signalName_calval,
+		self.ui.useVSACal_calval,
 		self.ui.vsaCalFileField_algo,
-		self.ui.comboBox_113,
+		self.ui.useVSGCal_calval,
 		self.ui.calFileIField_algo,
 		self.ui.calFileQField_algo,
-		self.ui.comboBox_85,
-		self.ui.comboBox_114,
-		self.ui.lineEdit_249,
-		self.ui.lineEdit_248,
+		self.ui.mirrorFlag_calval,
+		self.ui.timeAlignment_calval,
+		self.ui.guardBand_calval,
+		self.ui.crossCorr_calval,
 		self.ui.downFileField_algo,
-		self.ui.comboBox,
-		self.ui.comboBox_2,
-		self.ui.comboBox_117,
-		self.ui.comboBox_116,
-		self.ui.lineEdit_251,
-		self.ui.comboBox_118,
-		self.ui.lineEdit_252,
-		self.ui.noSegments_calval
+		self.ui.subrateFlag_calval,
+		self.ui.sampRateOverwrite_calval,
+		self.ui.noSegments_calval,
+		self.ui.gainExpansionFlag_calval,
+		self.ui.gainExpansion_calval,
+		self.ui.freqMultFlag_calval,
+		self.ui.freqMultFactor_calval
 	]
 	done = win.checkIfDone(checkDic)
-	if setButton.isChecked() == True:
-		if done:
-			setButton.setText("Unset")
-			self.ui.calValTabs.setCurrentIndex(0)
-			self.ui.resultsAlgoTabs.setCurrentIndex(2)
-			self.ui.algoNextStack.setCurrentIndex(1)
-			self.ui.debugAlgoStack.setCurrentIndex(0)
-			self.ui.calValResultsStack.setCurrentIndex(0)
-			self.ui.calValSignalEquip.setStyleSheet(setBox)
-			self.ui.calValCalFilesEquip.setStyleSheet(setBox)
-			self.ui.calValRefRXEquip.setStyleSheet(setBox)
-			self.ui.calValVSGEquip.setStyleSheet(setBox)
-			
-			self.progressBar = QProgressBar()
-			self.progressBar.setRange(1,10);
-			self.progressBar.setTextVisible(True);
-			self.progressBar.setFormat("Currently Running: Calibration Validation Routine")
-			self.ui.statusBar.addWidget(self.progressBar,1)
-			completed = 0
-			while completed < 100:
-				completed = completed + 0.00001
-				self.progressBar.setValue(completed)
-			self.ui.statusBar.removeWidget(self.progressBar)
-			# to show progress bar, need both addWidget() and show()
-			self.ui.statusBar.showMessage("Calibration Validation Routine Complete",3000)
-		else:
-			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
-			setButton.setChecked(False)	
-	elif setButton.isChecked() == False:
-		setButton.setText("Set && Run")
-		self.ui.calValSignalEquip.setStyleSheet(None)
-		self.ui.calValCalFilesEquip.setStyleSheet(None)
-		self.ui.calValRefRXEquip.setStyleSheet(None)
-		self.ui.calValVSGEquip.setStyleSheet(None)
-		self.ui.algoNextStack.setCurrentIndex(0)
-		self.ui.debugAlgoStack.setCurrentIndex(2)
-
+	if done:
+		self.ui.calValTabs.setCurrentIndex(0)
+		self.ui.resultsAlgoTabs.setCurrentIndex(2)
+		self.ui.algoNextStack.setCurrentIndex(1)
+		self.ui.debugAlgoStack.setCurrentIndex(0)
+		self.ui.calValResultsStack.setCurrentIndex(0)
+		self.ui.calValSignalEquip.setStyleSheet(setBox)
+		self.ui.calValCalFilesEquip.setStyleSheet(setBox)
+		self.ui.calValRefRXEquip.setStyleSheet(setBox)
+		self.ui.calValVSGEquip.setStyleSheet(setBox)
+		
+		self.progressBar = QProgressBar()
+		self.progressBar.setRange(1,10);
+		self.progressBar.setTextVisible(True);
+		self.progressBar.setFormat("Currently Running: Calibration Validation Routine")
+		self.ui.statusBar.addWidget(self.progressBar,1)
+		completed = 0
+		while completed < 100:
+			completed = completed + 0.00001
+			self.progressBar.setValue(completed)
+		self.ui.statusBar.removeWidget(self.progressBar)
+		# to show progress bar, need both addWidget() and show()
+		self.ui.statusBar.showMessage("Calibration Validation Routine Complete",3000)
+	
+		setButton.setEnabled(False)
+		setButton.setStyleSheet(None)
+		if setButton.isChecked() == True:
+			setButton.setText("Update\n&& Run")
+		elif setButton.isChecked() == False:
+			setButton.setChecked(True)
+	else:
+		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+		setButton.setChecked(False)
+	
 def preCharPreview(self,matlab):	
 	# d = {
-		# "signalName": self.ui.comboBox_81.currentIndex(),
+		# "signalName": self.ui.signalName_prechar.currentIndex(),
 	# }
 	# matlab.Set_Prechar_Signal(d,nargout=0)
 	
@@ -2280,7 +2256,7 @@ def preCharPreview(self,matlab):
 		
 	}
 	dSignal = {
-		"signalName": self.ui.comboBox_81.currentIndex(),
+		"signalName": self.ui.signalName_prechar.currentIndex(),
 	}
 	# set signal dictionary
 	matlab.Set_Prechar_Signal(dSignal,nargout=0)
@@ -2321,7 +2297,7 @@ def runPrecharacterization(self,setBox,setButton,matlab):
 	awgCalSet = self.ui.awgSetRun_vsgMeas.isChecked()
 	
 	checkDic = [
-		self.ui.comboBox_81,
+		self.ui.signalName_prechar,
 		self.ui.useVSACal_prechar,
 		self.ui.vsaCalFileField_algo_2,
 		self.ui.useVSGCal_prechar,
@@ -2341,125 +2317,122 @@ def runPrecharacterization(self,setBox,setButton,matlab):
 		self.ui.freqMultiplierFactor_prechar
 	]
 	done = win.checkIfDone(checkDic)
-	
-	if setButton.isChecked() == True:
-		if done:
-			# if rf isn't on, alert
-			if rfOn == False:
-				instrParamErrorMessage(self,"Turn on RF before attempting to run precharacterization setup.")
-				self.ui.emergButtonSecond.setChecked(False)
-				self.ui.precharRun.setChecked(False)
-				return
-			# awg measurement settings aren't set, alert
-			if awgSet == False and awgCalSet == False:
-				instrParamErrorMessage(self,"Set AWG measurement parameters (Step 2) before attempting to run precharacterization setup.")
-				self.ui.precharRun.setChecked(False)
-				return
+	if done:
+		# if rf isn't on, alert
+		if rfOn == False:
+			instrParamErrorMessage(self,"Turn on RF before attempting to run precharacterization setup.")
+			self.ui.emergButtonSecond.setChecked(False)
+			self.ui.precharRun.setChecked(False)
+			return
+		# awg measurement settings aren't set, alert
+		if awgSet == False and awgCalSet == False:
+			instrParamErrorMessage(self,"Set AWG measurement parameters (Step 2) before attempting to run precharacterization setup.")
+			self.ui.precharRun.setChecked(False)
+			return
+		
+		# choose proper fields from stacked widgets to be sent to dictionaries
+		awgPage = self.ui.awgParamsStack_vsgMeas.currentIndex()
+		if awgPage == 1:
+			ampCorrField = self.ui.ampCorrection_awgCal.currentIndex()
+			trigAmpField = self.ui.trigAmp_awgCal.text()
+			vsgCenterFreqField = self.ui.centerFreq_awgCal.text()
+		elif awgPage == 2:
+			ampCorrField = self.ui.ampCorrection_awgCal_2.currentIndex()
+			trigAmpField = self.ui.trigAmp_awgCal_2.text()
+			vsgCenterFreqField = self.ui.centerFreq_awgCal_2.text()
+		vsaPage = self.ui.vsaMeasGenStack.currentIndex()
+		if vsaPage == 1:
+			fCarrierField = self.ui.centerFreq_vsaMeas.text()
+			fSampleField = self.ui.sampRate_vsaMeas.text()
+			noPeriodsField = self.ui.noFrameTimes_vsaMeas.text()
+		elif vsaPage == 0:
+			fCarrierField = self.ui.centerFreq_vsaMeas_2.text()
+			fSampleField = self.ui.sampRate_vsaMeas_2.text()
+			noPeriodsField = self.ui.noFrameTimes_vsaMeas_2.text()
+		vsaType = self.ui.vsaType.currentIndex()
+		if vsaType == 1 or vsaType == 5:
+			addressField = self.ui.address_scope.text()
+		elif vsaType == 2 or vsaType == 6:
+			addressField = self.ui.address_dig.text()
+		elif vsaType == 3 or vsaType == 4:
+			addressField = self.ui.address_sa.text()
+		# define all relevant dictionaries
+		tx={
+			"Type": self.ui.vsgSetup.currentIndex(),
+			"Model": self.ui.partNum_awg.text(),
+			"FGuard" : self.ui.guardBand_prechar.text(),
+			"FCarrier" : vsgCenterFreqField,
+			"FSampleDAC" : self.ui.maxSampleRate_awg.text(),
+			"NumberOfSegments" : self.ui.noSegments_prechar.text(),
+			"Amp_Corr" : ampCorrField,
+			"GainExpansion_flag" : self.ui.gainExpansionFlag_prechar.currentIndex(),
+			"GainExpansion" : self.ui.gainExpansion_prechar.text(),
+			"FreqMutiplierFlag" : self.ui.freqMultiplierFlag_prechar.currentIndex(),
+			"FreqMultiplierFactor": self.ui.freqMultiplierFactor_prechar.text(),	
+			"ReferenceClockSource": self.ui.refClockSorce_awg.currentIndex(),	
+			"iChannel": self.ui.iChannel_awg.currentIndex(),	
+			"qChannel": self.ui.qChannel_awg.currentIndex(),	
+			"ReferenceClock": self.ui.extRefFreq_awg.text(),	
+			"VFS": self.ui.dacRange_awg.text(),	
+			"TriggerAmplitude": trigAmpField
+		}
+		rx={
+			"Type" : self.ui.vsaType.currentIndex(),
+			"FCarrier" : fCarrierField,
+			"MirrorSignalFlag" : self.ui.mirrorSignal_prechar.currentIndex(),
+			"FSample" : fSampleField,
+			"MeasuredPeriods" : noPeriodsField,
+			"xLength" : self.ui.crossCorrLength_prechar.text(),
+			"FsampleOverwrite" : self.ui.sampRateOverwrite_prechar.currentIndex(),
+			"SubRate" : self.ui.subRate_prechar.currentIndex(),
+			"AlignFreqDomainFlag" : self.ui.alignFreqDomain_prechar.currentIndex(),
+			"DownconversionFilterFile" : self.ui.downFileField_algo_2.text(),
+			"TriggerChannel" : self.ui.trigChannel_scope.text(),
+			"ASMPath" : self.ui.dllFile_uxa.text(),
+			"SetupFile" : self.ui.setupFile_uxa.text(),
+			"DataFile" : self.ui.dataFile_uxa.text(),
+			"DemodSignalFlag": self.ui.demodulationEnable.currentIndex(),
+			"VisaAddress": addressField
 			
-			# choose proper fields from stacked widgets to be sent to dictionaries
-			awgPage = self.ui.awgParamsStack_vsgMeas.currentIndex()
-			if awgPage == 1:
-				ampCorrField = self.ui.ampCorrection_awgCal.currentIndex()
-				trigAmpField = self.ui.trigAmp_awgCal.text()
-				vsgCenterFreqField = self.ui.centerFreq_awgCal.text()
-			elif awgPage == 2:
-				ampCorrField = self.ui.ampCorrection_awgCal_2.currentIndex()
-				trigAmpField = self.ui.trigAmp_awgCal_2.text()
-				vsgCenterFreqField = self.ui.centerFreq_awgCal_2.text()
-			vsaPage = self.ui.vsaMeasGenStack.currentIndex()
-			if vsaPage == 1:
-				fCarrierField = self.ui.centerFreq_vsaMeas.text()
-				fSampleField = self.ui.sampRate_vsaMeas.text()
-				noPeriodsField = self.ui.noFrameTimes_vsaMeas.text()
-			elif vsaPage == 0:
-				fCarrierField = self.ui.centerFreq_vsaMeas_2.text()
-				fSampleField = self.ui.sampRate_vsaMeas_2.text()
-				noPeriodsField = self.ui.noFrameTimes_vsaMeas_2.text()
-			vsaType = self.ui.vsaType.currentIndex()
-			if vsaType == 1 or vsaType == 5:
-				addressField = self.ui.address_scope.text()
-			elif vsaType == 2 or vsaType == 6:
-				addressField = self.ui.address_dig.text()
-			elif vsaType == 3 or vsaType == 4:
-				addressField = self.ui.address_sa.text()
-			# define all relevant dictionaries
-			tx={
-				"Type": self.ui.vsgSetup.currentIndex(),
-				"Model": self.ui.partNum_awg.text(),
-				"FGuard" : self.ui.guardBand_prechar.text(),
-				"FCarrier" : vsgCenterFreqField,
-				"FSampleDAC" : self.ui.maxSampleRate_awg.text(),
-				"NumberOfSegments" : self.ui.noSegments_prechar.text(),
-				"Amp_Corr" : ampCorrField,
-				"GainExpansion_flag" : self.ui.gainExpansionFlag_prechar.currentIndex(),
-				"GainExpansion" : self.ui.gainExpansion_prechar.text(),
-				"FreqMutiplierFlag" : self.ui.freqMultiplierFlag_prechar.currentIndex(),
-				"FreqMultiplierFactor": self.ui.freqMultiplierFactor_prechar.text(),	
-				"ReferenceClockSource": self.ui.refClockSorce_awg.currentIndex(),	
-				"iChannel": self.ui.iChannel_awg.currentIndex(),	
-				"qChannel": self.ui.qChannel_awg.currentIndex(),	
-				"ReferenceClock": self.ui.extRefFreq_awg.text(),	
-				"VFS": self.ui.dacRange_awg.text(),	
-				"TriggerAmplitude": trigAmpField
-			}
-			rx={
-				"Type" : self.ui.vsaType.currentIndex(),
-				"FCarrier" : fCarrierField,
-				"MirrorSignalFlag" : self.ui.mirrorSignal_prechar.currentIndex(),
-				"FSample" : fSampleField,
-				"MeasuredPeriods" : noPeriodsField,
-				"xLength" : self.ui.crossCorrLength_prechar.text(),
-				"FsampleOverwrite" : self.ui.sampRateOverwrite_prechar.currentIndex(),
-				"SubRate" : self.ui.subRate_prechar.currentIndex(),
-				"AlignFreqDomainFlag" : self.ui.alignFreqDomain_prechar.currentIndex(),
-				"DownconversionFilterFile" : self.ui.downFileField_algo_2.text(),
-				"TriggerChannel" : self.ui.trigChannel_scope.text(),
-				"ASMPath" : self.ui.dllFile_uxa.text(),
-				"SetupFile" : self.ui.setupFile_uxa.text(),
-				"DataFile" : self.ui.dataFile_uxa.text(),
-				"DemodSignalFlag": self.ui.demodulationEnable.currentIndex(),
-				"VisaAddress": addressField
-				
-			}
-			dSignal = {
-				"signalName": self.ui.comboBox_81.currentIndex(),
-			}
-			# set signal dictionary
-			matlab.Set_Prechar_Signal(dSignal,nargout=0)
-			# set signal generation dictionary
-			matlab.Set_RXTX_Structures(tx,rx,nargout=0)
-			
-			# make debugging panel visible
-			self.ui.debugAlgoStack.setCurrentIndex(0)
-			
-			# create progress bar
-			progressBar = QProgressBar()
-			progressBar.setRange(0,7);
-			progressBar.setTextVisible(True);
-			self.ui.statusBar.addWidget(progressBar,1)
-			
-			# create thread to run signal generation routine
-			self.precharThread = runSignalGenerationThread(progressBar,self,setBox)
-			# connect signals to the thread
-			# as routine is run, update progress bar and step
-			self.precharThread.updateBar.connect(updatePrecharBar)
-			# when nmse and papr are available, update gui
-			self.precharThread.updateData.connect(updatePrecharData)
-			# if error occurs, break thread and alery
-			self.precharThread.errorOccurred.connect(errorOccurred)
-			# begin running signal generation
-			self.precharThread.start()	
-		else:
-			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
-			setButton.setChecked(False)	
-	elif setButton.isChecked() == False:
-		setButton.setText("Set && Run")
-		self.ui.algoNextStack.setCurrentIndex(2)
-		self.ui.debugAlgoStack.setCurrentIndex(2)
-		self.ui.precharSignalEquip.setStyleSheet(None)
-		self.ui.precharCalFilesEquip.setStyleSheet(None)
-		self.ui.precharRefRXEquip.setStyleSheet(None)
-		self.ui.precharVSGEquip.setStyleSheet(None)
+		}
+		dSignal = {
+			"signalName": self.ui.signalName_prechar.currentIndex(),
+		}
+		# set signal dictionary
+		matlab.Set_Prechar_Signal(dSignal,nargout=0)
+		# set signal generation dictionary
+		matlab.Set_RXTX_Structures(tx,rx,nargout=0)
+		
+		# make debugging panel visible
+		self.ui.debugAlgoStack.setCurrentIndex(0)
+		
+		# create progress bar
+		progressBar = QProgressBar()
+		progressBar.setRange(0,7);
+		progressBar.setTextVisible(True);
+		self.ui.statusBar.addWidget(progressBar,1)
+		
+		# create thread to run signal generation routine
+		self.precharThread = runSignalGenerationThread(progressBar,self,setBox)
+		# connect signals to the thread
+		# as routine is run, update progress bar and step
+		self.precharThread.updateBar.connect(updatePrecharBar)
+		# when nmse and papr are available, update gui
+		self.precharThread.updateData.connect(updatePrecharData)
+		# if error occurs, break thread and alery
+		self.precharThread.errorOccurred.connect(errorOccurred)
+		# begin running signal generation
+		self.precharThread.start()	
+		
+		setButton.setEnabled(False)
+		setButton.setStyleSheet(None)
+		if setButton.isChecked() == True:
+			setButton.setText("Update\n&& Run")
+		elif setButton.isChecked() == False:
+			setButton.setChecked(True)
+	else:
+		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+		setButton.setChecked(False)	
 		
 def dpdPreview(self):
 	self.ui.dpdTabs.setCurrentIndex(0)
@@ -2467,103 +2440,96 @@ def dpdPreview(self):
 	self.ui.dpdAlgoStack.setCurrentIndex(0)
 	
 def runDPD(self,setBox,setButton,matlab):
-
 	checkDic = [
-		self.ui.comboBox_130,
-		self.ui.comboBox_131,
+		self.ui.signalName_dpd,
+		self.ui.removeDCFlag_dpd,
 		self.ui.customIField_algo,
 		self.ui.customQField_algo,
-		self.ui.comboBox_132,
+		self.ui.useVSACal_dpd,
 		self.ui.vsaCalFileField_algo_3,
-		self.ui.comboBox_133,
+		self.ui.useVSGCal_dpd,
 		self.ui.calFileIField_algo_3,
 		self.ui.calFileQField_algo_3,
-		self.ui.comboBox_134,
-		self.ui.lineEdit_263,
 		self.ui.downFileField_algo_3,
-		self.ui.comboBox_84,
-		self.ui.comboBox_128,
-		self.ui.lineEdit_267,
-		self.ui.comboBox_135,
-		self.ui.comboBox_136,
-		self.ui.lineEdit_269,
-		self.ui.comboBox_138,
-		self.ui.lineEdit_270,
-		self.ui.lineEdit_284,
-		self.ui.lineEdit_283,
-		self.ui.comboBox_140,
-		self.ui.comboBox_129,
-		self.ui.comboBox_139,
-		self.ui.comboBox_141,
-		self.ui.comboBox_154,
-		self.ui.comboBox_153,
-		self.ui.comboBox_155,
-		self.ui.lineEdit_282,
-		self.ui.lineEdit_281,
-		self.ui.lineEdit_280,
-		self.ui.lineEdit_279,
-		self.ui.lineEdit_278,
-		self.ui.comboBox_156,
-		self.ui.comboBox_157,
-		self.ui.comboBox_158,
-		self.ui.comboBox_159,
-		self.ui.lineEdit_277,
-		self.ui.lineEdit_276,
-		self.ui.lineEdit_275,
-		self.ui.comboBox_161,
-		self.ui.comboBox_162,
-		self.ui.lineEdit_274,
-		self.ui.comboBox_160,
-		self.ui.lineEdit_273,
-		self.ui.lineEdit_272,
-		self.ui.lineEdit_271,
-		self.ui.noSegments_dpd
+		self.ui.guardBand_dpd,
+		self.ui.subtractDCFlag_dpd,
+		self.ui.mirrorFreqFlag_dpd,
+		self.ui.subRate_dpd,
+		self.ui.sampRateOverwrite_dpd,
+		self.ui.noSegments_dpd,
+		self.ui.expansionMarginEnable_dpd,
+		self.ui.expansionMargin_dpd,
+		self.ui.subtractMeanFlag_dpd,
+		self.ui.gainExpansionFlag_dpd,
+		self.ui.gainExpansion_dpd,
+		self.ui.freqMultFlag_dpd,
+		self.ui.freqMultFactor_dpd,
+		self.ui.noIterations_dpd,
+		self.ui.noPoints_dpd,
+		self.ui.memoryTruncation_dpd,
+		self.ui.checkModelFlag_dpd,
+		self.ui.cascadeFlag_dpd,
+		self.ui.despurFlag_dpd,
+		self.ui.modelType_dpd,
+		self.ui.engine_dpd,
+		self.ui.pdModule_dpd,
+		self.ui.memoryStep_dpd,
+		self.ui.nonlinOrder_dpd,
+		self.ui.memoryDepth_dpd,
+		self.ui.modelParam1_dpd,
+		self.ui.modelParam2_dpd,
+		self.ui.coeffArchitecture_dpd,
+		self.ui.polynomOrder_dpd,
+		self.ui.sqrtFlag_dpd,
+		self.ui.filterBasisFlag_dpd,
+		self.ui.rootOrder_dpd,
+		self.ui.noEntries_dpd,
+		self.ui.bitsPerEntry_dpd,
+		self.ui.learningArchitecture_dpd,
+		self.ui.parameterMethod_dpd,
+		self.ui.learningParameter_dpd,
+		self.ui.initialization_dpd,
+		self.ui.twoStepID_dpd,
+		self.ui.activationIteration_dpd,
+		self.ui.retrainIteration_dpd
 	]
 	done = win.checkIfDone(checkDic)
+	if done:
+		self.ui.dpdTabs.setCurrentIndex(0)
+		self.ui.resultsAlgoTabs.setCurrentIndex(4)
+		self.ui.algoNextStack.setCurrentIndex(5)
+		self.ui.debugAlgoStack.setCurrentIndex(1)
+		self.ui.dpdAlgoStack.setCurrentIndex(0)
+		self.ui.dpdSignalEquip.setStyleSheet(setBox)
+		self.ui.dpdCalFilesEquip.setStyleSheet(setBox)
+		self.ui.dpdGeneralEquip.setStyleSheet(setBox)
+		self.ui.dpdModelEquip.setStyleSheet(setBox)
+		self.ui.dpdRefRXEquip.setStyleSheet(setBox)
+		self.ui.dpdVSGEquip.setStyleSheet(setBox)
+		self.ui.dpdTrainingEquip.setStyleSheet(setBox)
+		
+		self.progressBar = QProgressBar()
+		self.progressBar.setRange(1,10);
+		self.progressBar.setTextVisible(True);
+		self.progressBar.setFormat("Currently Running: PreCharacterization Setup Routine")
+		self.ui.statusBar.addWidget(self.progressBar,1)
+		completed = 0
+		while completed < 100:
+			completed = completed + 0.00001
+			self.progressBar.setValue(completed)
+		self.ui.statusBar.removeWidget(self.progressBar)
+		# to show progress bar, need both addWidget() and show()
+		self.ui.statusBar.showMessage("PreCharacterization Setup Routine Complete",3000)	
 	
-	if setButton.isChecked() == True:
-		if done:
-			setButton.setText("Unset")
-			self.ui.dpdTabs.setCurrentIndex(0)
-			self.ui.resultsAlgoTabs.setCurrentIndex(4)
-			self.ui.algoNextStack.setCurrentIndex(5)
-			self.ui.debugAlgoStack.setCurrentIndex(1)
-			self.ui.dpdAlgoStack.setCurrentIndex(0)
-			self.ui.dpdSignalEquip.setStyleSheet(setBox)
-			self.ui.dpdCalFilesEquip.setStyleSheet(setBox)
-			self.ui.dpdGeneralEquip.setStyleSheet(setBox)
-			self.ui.dpdModelEquip.setStyleSheet(setBox)
-			self.ui.dpdRefRXEquip.setStyleSheet(setBox)
-			self.ui.dpdVSGEquip.setStyleSheet(setBox)
-			self.ui.dpdTrainingEquip.setStyleSheet(setBox)
-			
-			self.progressBar = QProgressBar()
-			self.progressBar.setRange(1,10);
-			self.progressBar.setTextVisible(True);
-			self.progressBar.setFormat("Currently Running: PreCharacterization Setup Routine")
-			self.ui.statusBar.addWidget(self.progressBar,1)
-			completed = 0
-			while completed < 100:
-				completed = completed + 0.00001
-				self.progressBar.setValue(completed)
-			self.ui.statusBar.removeWidget(self.progressBar)
-			# to show progress bar, need both addWidget() and show()
-			self.ui.statusBar.showMessage("PreCharacterization Setup Routine Complete",3000)	
-		else:
-			instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
-			setButton.setChecked(False)	
-	elif setButton.isChecked() == False:
-		setButton.setText("Set && Run")
-		self.ui.algoNextStack.setCurrentIndex(4)
-		self.ui.debugAlgoStack.setCurrentIndex(2)
-		self.ui.dpdSignalEquip.setStyleSheet(None)
-		self.ui.dpdCalFilesEquip.setStyleSheet(None)
-		self.ui.dpdGeneralEquip.setStyleSheet(None)
-		self.ui.dpdModelEquip.setStyleSheet(None)
-		self.ui.dpdAWGEquip.setStyleSheet(None)
-		self.ui.dpdRefRXEquip.setStyleSheet(None)
-		self.ui.dpdVSGEquip.setStyleSheet(None)
-		self.ui.dpdTrainingEquip.setStyleSheet(None)
+		setButton.setEnabled(False)
+		setButton.setStyleSheet(None)
+		if setButton.isChecked() == True:
+			setButton.setText("Update\n&& Run")
+		elif setButton.isChecked() == False:
+			setButton.setChecked(True)
+	else:
+		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
+		setButton.setChecked(False)
 		
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # functions for setParameters.py	

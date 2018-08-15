@@ -115,23 +115,24 @@ def updateSAMeas(self):
 	self.ui.vsaMeasAdvSet.setStyleSheet(greenButton)
 	
 def updateRXCal(self):
-	idx = self.ui.vsaMeasRunStack.currentIdx()
+	idx = self.ui.vsaMeasRunStack.currentIndex()
 	
 	self.ui.combEquip_vsaMeas.setStyleSheet(None)
 	self.ui.downEquip_vsaMeas.setStyleSheet(None)
 	self.ui.rxEquip_vsaMeas.setStyleSheet(None)
 	self.ui.trigEquip_vsaMeas.setStyleSheet(None)
-	if idx == 1:
+	if idx == 0:
 		self.ui.set_run_vsa.setEnabled(True)
 		self.ui.set_run_vsa.setStyleSheet(greenButton)
-	elif idx == 0:
+	elif idx == 1:
 		self.ui.downSetVSAMeas.setEnabled(True)
 		self.ui.downSetVSAMeas.setStyleSheet(greenButton)
 
 def updateAWGCal(self):
 	self.ui.awgEquip_vsgMeas.setStyleSheet(None)
+	self.ui.awgAlgoSettings_awgCal.setStyleSheet(None)
+	self.ui.awgCalEquip_vsgMeas.setStyleSheet(None)
 	self.ui.rxEquip_vsgMeas.setStyleSheet(None)
-	self.ui.vsgEquip_vsgMeas.setStyleSheet(None)
 	self.ui.calEquip_vsgMeas.setStyleSheet(None)
 	self.ui.awgSetRun_vsgMeas.setEnabled(True)
 	self.ui.awgSetRun_vsgMeas.setStyleSheet(greenButton)
@@ -156,6 +157,55 @@ def updateAWGMeasAdv(self):
 	self.ui.setAdv_vsgMeas.setEnabled(True)
 	self.ui.setAdv_vsgMeas.setStyleSheet(greenButton)
 	
+def updateUpMeas(self):
+	self.ui.upEquip_vsgMeas.setStyleSheet(None)
+	self.ui.upSet_vsgMeas.setEnabled(True)
+	self.ui.upSet_vsgMeas.setStyleSheet(greenButton)
 	
+def updateHetero(self):
+	self.ui.calEquip_hetero.setStyleSheet(None)
+	self.ui.rxEquip_hetero.setStyleSheet(None)
+	self.ui.vsgEquip_hetero.setStyleSheet(None)
+	self.ui.upCalEquipHetero_hetero.setStyleSheet(None)
+	self.ui.upEquip_hetero.setStyleSheet(None)
+	self.ui.heteroRun.setEnabled(True)
+	self.ui.heteroRun.setStyleSheet(greenButton)
+	
+def updateHomo(self):
+	self.ui.calEquip_homo.setStyleSheet(None)
+	self.ui.rxEquip_homo.setStyleSheet(None)
+	self.ui.vsgEquip_homo.setStyleSheet(None)
+	self.ui.upCalEquipHomo_homo.setStyleSheet(None)
+	self.ui.upEquip_homo.setStyleSheet(None)
+	self.ui.scopeEquip_homo.setStyleSheet(None)
+	self.ui.homoRun.setEnabled(True)
+	self.ui.homoRun.setStyleSheet(greenButton)
+	
+def updateCalVal(self):
+	self.ui.calValSignalEquip.setStyleSheet(None)
+	self.ui.calValCalFilesEquip.setStyleSheet(None)
+	self.ui.calValRefRXEquip.setStyleSheet(None)
+	self.ui.calValVSGEquip.setStyleSheet(None)
+	self.ui.calValRun.setEnabled(True)
+	self.ui.calValRun.setStyleSheet(greenButton)
+	
+def updatePrechar(self):
+	self.ui.precharSignalEquip.setStyleSheet(None)
+	self.ui.precharCalFilesEquip.setStyleSheet(None)
+	self.ui.precharRefRXEquip.setStyleSheet(None)
+	self.ui.precharVSGEquip.setStyleSheet(None)
+	self.ui.precharRun.setEnabled(True)
+	self.ui.precharRun.setStyleSheet(greenButton)
+	
+def updateDPD(self):
+	self.ui.dpdSignalEquip.setStyleSheet(None)
+	self.ui.dpdCalFilesEquip.setStyleSheet(None)
+	self.ui.dpdGeneralEquip.setStyleSheet(None)
+	self.ui.dpdModelEquip.setStyleSheet(None)
+	self.ui.dpdRefRXEquip.setStyleSheet(None)
+	self.ui.dpdVSGEquip.setStyleSheet(None)
+	self.ui.dpdTrainingEquip.setStyleSheet(None)
+	self.ui.dpdRun.setEnabled(True)
+	self.ui.dpdRun.setStyleSheet(greenButton)
 	
 	

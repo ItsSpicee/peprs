@@ -583,43 +583,10 @@ def enableVSACalFile(self,boxDone,boxUnset):
 	setChecked = self.ui.downSetVSAMeas.isChecked()
 	setRunChecked = self.ui.set_run_vsa.isChecked()
 	
-	#enabling subrate flag when generate vsacal file is enabled
-	self.ui.subrateLabel_comb.setEnabled(checked)
-	self.ui.subrateField_comb.setEnabled(checked)
-	self.ui.rfSpacingLabel_comb.setEnabled(checked)
-	self.ui.rfSpacingField_comb.setEnabled(checked)
-	self.ui.ifSpacingLabel_comb.setEnabled(checked)
-	self.ui.ifSpacingField_comb.setEnabled(checked)
-	self.ui.refFileLabel_comb.setEnabled(checked)
-	self.ui.refFileField_comb.setEnabled(checked)
-	self.ui.rfCenterFreqLabel_comb.setEnabled(checked)
-	self.ui.rfCenterFreqField_comb.setEnabled(checked)
-	self.ui.rfCalStartFreqLabel_comb.setEnabled(checked)
-	self.ui.rfCalStartFreqField_comb.setEnabled(checked)
-	self.ui.rfCalStopFreqLabel_comb.setEnabled(checked)
-	self.ui.rfCalStopFreqField_comb.setEnabled(checked)
-	self.ui.loFreqOffsetLabel_comb.setEnabled(checked)
-	self.ui.loFreqOffsetField_comb.setEnabled(checked)
-	self.ui.vsaCalSaveLocLabel_comb.setEnabled(checked)
-	self.ui.vsaCalSaveLocField_comb.setEnabled(checked)
-	self.ui.filePushButton_2.setEnabled(checked)
-	self.ui.filePushButton_19.setEnabled(checked)
-	self.ui.freqResField_comb.setEnabled(checked)
-	self.ui.freqResLabel_comb.setEnabled(checked)
-	self.ui.despurFlagField_comb.setEnabled(checked)
-	self.ui.despurFlagLabel_comb.setEnabled(checked)
-	self.ui.spurStartField_comb.setEnabled(checked)
-	self.ui.spurStartLabel_comb.setEnabled(checked)
-	self.ui.spurSpacingField_comb.setEnabled(checked)
-	self.ui.spurSpacingLabel_comb.setEnabled(checked)
-	self.ui.spurEndField_comb.setEnabled(checked)
-	self.ui.spurEndLabel_comb.setEnabled(checked)
-	self.ui.smoothFlagField_comb.setEnabled(checked)
-	self.ui.smoothFlagLabel_comb.setEnabled(checked)
-	self.ui.smoothOrderField_comb.setEnabled(checked)
-	self.ui.smoothOrderLabel_comb.setEnabled(checked)
+	#enabling boxes when generate vsacal file is enabled
 	self.ui.rxEquip_vsaMeas.setEnabled(checked)
 	self.ui.trigEquip_vsaMeas.setEnabled(checked)
+	self.ui.combEquip_vsaMeas.setEnabled(checked)
 		
 	if checked:
 		self.ui.vsaMeasRunStack.setCurrentIndex(0)
@@ -852,6 +819,22 @@ def enableFreqMultPrechar(self):
 	else:
 		self.ui.freqMultiplierFactorLabel_prechar.setEnabled(True)
 		self.ui.freqMultiplierFactor_prechar.setEnabled(True)
+	
+def copyAWGCenterFreq(self):
+	text = self.ui.centerFreq_awgCal_2.text()
+	self.ui.centerFreq_awgCal.setText(text)
+	
+def copyAWGAmpCorr(self):
+	idx = self.ui.ampCorrection_awgCal_2.currentIndex()
+	self.ui.ampCorrection_awgCal.setCurrentIndex(idx)
+	
+def copyAWGTrigAmp(self):
+	text= self.ui.trigAmp_awgCal_2.text()
+	self.ui.trigAmp_awgCal.setText(text)
+	
+def copyAWGNoPeriods(self):	
+	text = self.ui.noTXPeriods_awgMeas.text()
+	self.ui.noTXPeriods_awgCal.setText(text)
 	
 # def enableTraceAveragingSA(self):
 	# idx = self.ui.traceAvg_spa.currentIndex()
