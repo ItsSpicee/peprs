@@ -183,7 +183,7 @@ QPushButton:hover{background-color:rgb(217, 0, 0);}</string>
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="algoTab">
          <property name="layoutDirection">
@@ -846,7 +846,7 @@ Move to 'DPD' tab.</string>
                      <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                     </property>
                     <property name="currentIndex">
-                     <number>1</number>
+                     <number>0</number>
                     </property>
                     <widget class="QWidget" name="widget">
                      <attribute name="title">
@@ -869,7 +869,7 @@ Move to 'DPD' tab.</string>
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>590</width>
+                           <width>738</width>
                            <height>550</height>
                           </rect>
                          </property>
@@ -3463,7 +3463,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>590</width>
+                           <width>727</width>
                            <height>1000</height>
                           </rect>
                          </property>
@@ -11465,8 +11465,8 @@ QFrame{background-color:#d1d5de}</string>
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>600</width>
-                               <height>600</height>
+                               <width>776</width>
+                               <height>629</height>
                               </rect>
                              </property>
                              <property name="minimumSize">
@@ -15125,7 +15125,7 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                              <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                             </property>
                             <property name="currentIndex">
-                             <number>1</number>
+                             <number>0</number>
                             </property>
                             <widget class="QWidget" name="widget">
                              <attribute name="title">
@@ -15167,7 +15167,7 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>590</width>
+                                       <width>601</width>
                                        <height>415</height>
                                       </rect>
                                      </property>
@@ -15692,7 +15692,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>590</width>
+                                       <width>601</width>
                                        <height>415</height>
                                       </rect>
                                      </property>
@@ -16786,7 +16786,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                         <x>300</x>
                                         <y>10</y>
                                         <width>291</width>
-                                        <height>551</height>
+                                        <height>511</height>
                                        </rect>
                                       </property>
                                       <property name="minimumSize">
@@ -16820,7 +16820,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="16" column="0">
+                                       <item row="15" column="0">
                                         <widget class="QLabel" name="spurSpacingLabel_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -16836,7 +16836,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="17" column="0">
+                                       <item row="16" column="0">
                                         <widget class="QLabel" name="spurStartLabel_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -16852,7 +16852,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="13" column="4">
+                                       <item row="12" column="4">
                                         <widget class="QLabel" name="label_620">
                                          <property name="font">
                                           <font>
@@ -16868,7 +16868,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="13" column="0">
+                                       <item row="12" column="0">
                                         <widget class="QLabel" name="freqResLabel_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -16884,7 +16884,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="18" column="0">
+                                       <item row="17" column="0">
                                         <widget class="QLabel" name="spurEndLabel_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -16900,7 +16900,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="22" column="0">
+                                       <item row="21" column="0">
                                         <widget class="QLabel" name="subrateLabel_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -16916,7 +16916,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="18" column="4">
+                                       <item row="17" column="4">
                                         <widget class="QLabel" name="label_658">
                                          <property name="font">
                                           <font>
@@ -16932,7 +16932,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="17" column="4">
+                                       <item row="16" column="4">
                                         <widget class="QLabel" name="label_657">
                                          <property name="font">
                                           <font>
@@ -16948,7 +16948,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="6" column="4">
+                                       <item row="5" column="4">
                                         <widget class="QPushButton" name="filePushButton_19">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -16965,7 +16965,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="20" column="0">
+                                       <item row="19" column="0">
                                         <widget class="QLabel" name="smoothOrderLabel_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -16981,7 +16981,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="16" column="4">
+                                       <item row="15" column="4">
                                         <widget class="QLabel" name="label_656">
                                          <property name="font">
                                           <font>
@@ -16997,7 +16997,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="19" column="0">
+                                       <item row="18" column="0">
                                         <widget class="QLabel" name="smoothFlagLabel_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17013,7 +17013,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="21" column="4">
+                                       <item row="20" column="4">
                                         <widget class="QPushButton" name="filePushButton_2">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17030,7 +17030,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="15" column="0">
+                                       <item row="14" column="0">
                                         <widget class="QLabel" name="despurFlagLabel_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17046,7 +17046,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="9" column="4">
+                                       <item row="8" column="4">
                                         <widget class="QLabel" name="label_510">
                                          <property name="font">
                                           <font>
@@ -17062,7 +17062,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="21" column="0">
+                                       <item row="20" column="0">
                                         <widget class="QLabel" name="vsaCalSaveLocLabel_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17079,7 +17079,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="10" column="4">
+                                       <item row="9" column="4">
                                         <widget class="QLabel" name="label_511">
                                          <property name="font">
                                           <font>
@@ -17095,7 +17095,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="4" column="4">
+                                       <item row="3" column="4">
                                         <widget class="QLabel" name="label_299">
                                          <property name="font">
                                           <font>
@@ -17111,7 +17111,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="11" column="4">
+                                       <item row="10" column="4">
                                         <widget class="QLabel" name="label_512">
                                          <property name="font">
                                           <font>
@@ -17128,20 +17128,6 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                         </widget>
                                        </item>
                                        <item row="2" column="4">
-                                        <widget class="QPushButton" name="filePushButton">
-                                         <property name="text">
-                                          <string/>
-                                         </property>
-                                         <property name="icon">
-                                          <iconset>
-                                           <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
-                                         </property>
-                                         <property name="flat">
-                                          <bool>true</bool>
-                                         </property>
-                                        </widget>
-                                       </item>
-                                       <item row="3" column="4">
                                         <widget class="QLabel" name="label_509">
                                          <property name="font">
                                           <font>
@@ -17157,7 +17143,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="12" column="4">
+                                       <item row="11" column="4">
                                         <widget class="QLabel" name="label_513">
                                          <property name="font">
                                           <font>
@@ -17173,7 +17159,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="3" column="5">
+                                       <item row="2" column="5">
                                         <widget class="QLabel" name="label_153">
                                          <property name="minimumSize">
                                           <size>
@@ -17212,19 +17198,6 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                         </widget>
                                        </item>
                                        <item row="2" column="0">
-                                        <widget class="QLabel" name="vsaCalFileLabel_comb">
-                                         <property name="font">
-                                          <font>
-                                           <family>Arial</family>
-                                           <pointsize>9</pointsize>
-                                          </font>
-                                         </property>
-                                         <property name="text">
-                                          <string>VSA Cal. File to Use:</string>
-                                         </property>
-                                        </widget>
-                                       </item>
-                                       <item row="3" column="0">
                                         <widget class="QLabel" name="rfSpacingLabel_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17241,25 +17214,6 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                         </widget>
                                        </item>
                                        <item row="2" column="2" colspan="2">
-                                        <widget class="QLineEdit" name="vsaCalFileField_comb">
-                                         <property name="minimumSize">
-                                          <size>
-                                           <width>30</width>
-                                           <height>24</height>
-                                          </size>
-                                         </property>
-                                         <property name="font">
-                                          <font>
-                                           <family>Arial</family>
-                                           <pointsize>9</pointsize>
-                                          </font>
-                                         </property>
-                                         <property name="text">
-                                          <string/>
-                                         </property>
-                                        </widget>
-                                       </item>
-                                       <item row="3" column="2" colspan="2">
                                         <widget class="QLineEdit" name="rfSpacingField_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17284,7 +17238,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="4" column="0">
+                                       <item row="3" column="0">
                                         <widget class="QLabel" name="ifSpacingLabel_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17300,7 +17254,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="4" column="2" colspan="2">
+                                       <item row="3" column="2" colspan="2">
                                         <widget class="QLineEdit" name="ifSpacingField_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17322,7 +17276,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="6" column="0" colspan="2">
+                                       <item row="5" column="0" colspan="2">
                                         <widget class="QLabel" name="refFileLabel_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17338,7 +17292,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="6" column="2" colspan="2">
+                                       <item row="5" column="2" colspan="2">
                                         <widget class="QLineEdit" name="refFileField_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17360,7 +17314,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="9" column="0" colspan="2">
+                                       <item row="8" column="0" colspan="2">
                                         <widget class="QLabel" name="rfCenterFreqLabel_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17376,7 +17330,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="9" column="2" colspan="2">
+                                       <item row="8" column="2" colspan="2">
                                         <widget class="QLineEdit" name="rfCenterFreqField_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17398,7 +17352,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="10" column="0" colspan="2">
+                                       <item row="9" column="0" colspan="2">
                                         <widget class="QLabel" name="rfCalStartFreqLabel_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17414,7 +17368,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="11" column="0" colspan="2">
+                                       <item row="10" column="0" colspan="2">
                                         <widget class="QLabel" name="rfCalStopFreqLabel_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17430,7 +17384,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="10" column="2" colspan="2">
+                                       <item row="9" column="2" colspan="2">
                                         <widget class="QLineEdit" name="rfCalStartFreqField_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17461,7 +17415,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="11" column="2" colspan="2">
+                                       <item row="10" column="2" colspan="2">
                                         <widget class="QLineEdit" name="rfCalStopFreqField_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17483,7 +17437,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="12" column="2" colspan="2">
+                                       <item row="11" column="2" colspan="2">
                                         <widget class="QLineEdit" name="loFreqOffsetField_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17505,7 +17459,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="12" column="0">
+                                       <item row="11" column="0">
                                         <widget class="QLabel" name="loFreqOffsetLabel_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17521,7 +17475,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="13" column="2" colspan="2">
+                                       <item row="12" column="2" colspan="2">
                                         <widget class="QLineEdit" name="freqResField_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17543,7 +17497,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="15" column="2" colspan="3">
+                                       <item row="14" column="2" colspan="3">
                                         <widget class="QComboBox" name="despurFlagField_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17574,7 +17528,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </item>
                                         </widget>
                                        </item>
-                                       <item row="16" column="2" colspan="2">
+                                       <item row="15" column="2" colspan="2">
                                         <widget class="QLineEdit" name="spurSpacingField_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17596,7 +17550,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="17" column="2" colspan="2">
+                                       <item row="16" column="2" colspan="2">
                                         <widget class="QLineEdit" name="spurStartField_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17618,7 +17572,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="18" column="2" colspan="2">
+                                       <item row="17" column="2" colspan="2">
                                         <widget class="QLineEdit" name="spurEndField_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17640,7 +17594,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="19" column="2" colspan="3">
+                                       <item row="18" column="2" colspan="3">
                                         <widget class="QComboBox" name="smoothFlagField_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17677,7 +17631,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </item>
                                         </widget>
                                        </item>
-                                       <item row="20" column="2" colspan="3">
+                                       <item row="19" column="2" colspan="3">
                                         <widget class="QLineEdit" name="smoothOrderField_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17702,7 +17656,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="22" column="2" colspan="3">
+                                       <item row="21" column="2" colspan="3">
                                         <widget class="QComboBox" name="subrateField_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17748,7 +17702,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </item>
                                         </widget>
                                        </item>
-                                       <item row="21" column="3">
+                                       <item row="20" column="3">
                                         <widget class="QLineEdit" name="vsaCalSaveLocField_comb">
                                          <property name="enabled">
                                           <bool>false</bool>
@@ -17770,7 +17724,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="4" column="5">
+                                       <item row="3" column="5">
                                         <widget class="QLabel" name="label_154">
                                          <property name="minimumSize">
                                           <size>
@@ -17808,7 +17762,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="6" column="5">
+                                       <item row="5" column="5">
                                         <widget class="QLabel" name="label_157">
                                          <property name="minimumSize">
                                           <size>
@@ -17846,7 +17800,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="10" column="5">
+                                       <item row="9" column="5">
                                         <widget class="QLabel" name="label_272">
                                          <property name="minimumSize">
                                           <size>
@@ -17884,7 +17838,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="11" column="5">
+                                       <item row="10" column="5">
                                         <widget class="QLabel" name="label_277">
                                          <property name="minimumSize">
                                           <size>
@@ -17922,7 +17876,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="12" column="5">
+                                       <item row="11" column="5">
                                         <widget class="QLabel" name="label_291">
                                          <property name="minimumSize">
                                           <size>
@@ -17960,7 +17914,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="13" column="5">
+                                       <item row="12" column="5">
                                         <widget class="QLabel" name="label_292">
                                          <property name="minimumSize">
                                           <size>
@@ -17998,7 +17952,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="15" column="5">
+                                       <item row="14" column="5">
                                         <widget class="QLabel" name="label_318">
                                          <property name="minimumSize">
                                           <size>
@@ -18036,7 +17990,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="19" column="5">
+                                       <item row="18" column="5">
                                         <widget class="QLabel" name="label_332">
                                          <property name="minimumSize">
                                           <size>
@@ -18074,7 +18028,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                                          </property>
                                         </widget>
                                        </item>
-                                       <item row="20" column="5">
+                                       <item row="19" column="5">
                                         <widget class="QLabel" name="label_335">
                                          <property name="minimumSize">
                                           <size>
@@ -18359,7 +18313,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                            <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                           </property>
                           <property name="currentIndex">
-                           <number>1</number>
+                           <number>0</number>
                           </property>
                           <widget class="QWidget" name="tab_38">
                            <attribute name="title">
@@ -18409,7 +18363,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>590</width>
+                                 <width>603</width>
                                  <height>370</height>
                                 </rect>
                                </property>
@@ -18475,7 +18429,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                   </widget>
                                  </item>
                                  <item row="1" column="1">
-                                  <widget class="QLineEdit" name="lineEdit_285">
+                                  <widget class="QLineEdit" name="traceNum_saMeas">
                                    <property name="minimumSize">
                                     <size>
                                      <width>30</width>
@@ -18625,7 +18579,7 @@ QFrame{background-color:#d1d5de}</string>
                           <item>
                            <widget class="QStackedWidget" name="debugVSAStack">
                             <property name="currentIndex">
-                             <number>0</number>
+                             <number>1</number>
                             </property>
                             <widget class="QWidget" name="page_90">
                              <layout class="QVBoxLayout" name="verticalLayout_200" stretch="0">
@@ -23257,7 +23211,7 @@ Fill out ‘General Settings’ and select file to use in ‘Calibration Setting
                          <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                         </property>
                         <property name="currentIndex">
-                         <number>1</number>
+                         <number>2</number>
                         </property>
                         <widget class="QWidget" name="upStandardSettings_10">
                          <attribute name="title">
@@ -23282,7 +23236,7 @@ Fill out ‘General Settings’ and select file to use in ‘Calibration Setting
                           <item>
                            <widget class="QStackedWidget" name="awgParamsStack_vsgMeas">
                             <property name="currentIndex">
-                             <number>2</number>
+                             <number>1</number>
                             </property>
                             <widget class="QWidget" name="page_56">
                              <layout class="QHBoxLayout" name="horizontalLayout_36">
@@ -23338,7 +23292,7 @@ Fill out ‘General Settings’ and select file to use in ‘Calibration Setting
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>590</width>
+                                   <width>600</width>
                                    <height>525</height>
                                   </rect>
                                  </property>
@@ -24861,7 +24815,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>590</width>
+                                   <width>600</width>
                                    <height>300</height>
                                   </rect>
                                  </property>
@@ -25318,7 +25272,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           <item>
                            <widget class="QStackedWidget" name="upParamsStack_vsgMeas">
                             <property name="currentIndex">
-                             <number>3</number>
+                             <number>1</number>
                             </property>
                             <widget class="QWidget" name="page_39">
                              <layout class="QHBoxLayout" name="horizontalLayout_39">
@@ -25362,7 +25316,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>590</width>
+                                   <width>602</width>
                                    <height>550</height>
                                   </rect>
                                  </property>
@@ -26124,194 +26078,6 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                      </property>
                                      <property name="text">
                                       <string/>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                  </layout>
-                                 </widget>
-                                 <widget class="QGroupBox" name="upCalHeteroEquip_vsgMeas">
-                                  <property name="geometry">
-                                   <rect>
-                                    <x>300</x>
-                                    <y>10</y>
-                                    <width>291</width>
-                                    <height>61</height>
-                                   </rect>
-                                  </property>
-                                  <property name="minimumSize">
-                                   <size>
-                                    <width>291</width>
-                                    <height>0</height>
-                                   </size>
-                                  </property>
-                                  <property name="font">
-                                   <font>
-                                    <kerning>false</kerning>
-                                   </font>
-                                  </property>
-                                  <property name="layoutDirection">
-                                   <enum>Qt::LeftToRight</enum>
-                                  </property>
-                                  <property name="title">
-                                   <string/>
-                                  </property>
-                                  <layout class="QGridLayout" name="gridLayout_22">
-                                   <item row="3" column="0">
-                                    <widget class="QLabel" name="label_824">
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Upconverter Cal. File:</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="3" column="2">
-                                    <widget class="QPushButton" name="filePushButton_29">
-                                     <property name="text">
-                                      <string/>
-                                     </property>
-                                     <property name="icon">
-                                      <iconset>
-                                       <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
-                                     </property>
-                                     <property name="flat">
-                                      <bool>true</bool>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="3" column="1">
-                                    <widget class="QLineEdit" name="upCalFileField_vsgMeas">
-                                     <property name="enabled">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="minimumSize">
-                                      <size>
-                                       <width>30</width>
-                                       <height>24</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string/>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="0" column="0" colspan="3">
-                                    <widget class="QLabel" name="label_636">
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>10</pointsize>
-                                       <weight>50</weight>
-                                       <bold>false</bold>
-                                       <underline>true</underline>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Heterodyne Calibration Settings</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                  </layout>
-                                 </widget>
-                                 <widget class="QGroupBox" name="upCalHomoEquip_vsgMeas">
-                                  <property name="geometry">
-                                   <rect>
-                                    <x>300</x>
-                                    <y>80</y>
-                                    <width>290</width>
-                                    <height>71</height>
-                                   </rect>
-                                  </property>
-                                  <property name="minimumSize">
-                                   <size>
-                                    <width>290</width>
-                                    <height>0</height>
-                                   </size>
-                                  </property>
-                                  <property name="font">
-                                   <font>
-                                    <kerning>false</kerning>
-                                   </font>
-                                  </property>
-                                  <property name="layoutDirection">
-                                   <enum>Qt::LeftToRight</enum>
-                                  </property>
-                                  <property name="title">
-                                   <string/>
-                                  </property>
-                                  <layout class="QGridLayout" name="gridLayout_40">
-                                   <item row="2" column="3">
-                                    <widget class="QPushButton" name="filePushButton_25">
-                                     <property name="text">
-                                      <string/>
-                                     </property>
-                                     <property name="icon">
-                                      <iconset>
-                                       <normaloff>icons/folder 16x16.png</normaloff>icons/folder 16x16.png</iconset>
-                                     </property>
-                                     <property name="flat">
-                                      <bool>true</bool>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="2" column="1" colspan="2">
-                                    <widget class="QLineEdit" name="iqFileField_vsgMeas">
-                                     <property name="enabled">
-                                      <bool>true</bool>
-                                     </property>
-                                     <property name="minimumSize">
-                                      <size>
-                                       <width>30</width>
-                                       <height>24</height>
-                                      </size>
-                                     </property>
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string/>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="0" column="0" colspan="4">
-                                    <widget class="QLabel" name="label_638">
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>10</pointsize>
-                                       <weight>50</weight>
-                                       <bold>false</bold>
-                                       <underline>true</underline>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>Homodyne Calibration Settings</string>
-                                     </property>
-                                    </widget>
-                                   </item>
-                                   <item row="2" column="0">
-                                    <widget class="QLabel" name="label_837">
-                                     <property name="font">
-                                      <font>
-                                       <family>Arial</family>
-                                       <pointsize>9</pointsize>
-                                      </font>
-                                     </property>
-                                     <property name="text">
-                                      <string>IQ Imbalance File:</string>
                                      </property>
                                     </widget>
                                    </item>
@@ -28341,7 +28107,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>590</width>
+                                   <width>602</width>
                                    <height>1100</height>
                                   </rect>
                                  </property>
@@ -31101,7 +30867,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           <item>
                            <widget class="QStackedWidget" name="advParamsStack_vsgMeas">
                             <property name="currentIndex">
-                             <number>2</number>
+                             <number>1</number>
                             </property>
                             <widget class="QWidget" name="page_116">
                              <layout class="QHBoxLayout" name="horizontalLayout_54">
@@ -31145,7 +30911,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>590</width>
+                                   <width>602</width>
                                    <height>370</height>
                                   </rect>
                                  </property>
@@ -31212,7 +30978,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                     </widget>
                                    </item>
                                    <item row="2" column="1">
-                                    <widget class="QLineEdit" name="lineEdit_85">
+                                    <widget class="QLineEdit" name="trigInAmp_awgMeas_2">
                                      <property name="minimumSize">
                                       <size>
                                        <width>30</width>
@@ -31288,7 +31054,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>590</width>
+                                   <width>602</width>
                                    <height>370</height>
                                   </rect>
                                  </property>
@@ -31355,7 +31121,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                     </widget>
                                    </item>
                                    <item row="1" column="1">
-                                    <widget class="QLineEdit" name="lineEdit_86">
+                                    <widget class="QLineEdit" name="trigInAmp_awgMeas">
                                      <property name="minimumSize">
                                       <size>
                                        <width>30</width>
@@ -34834,7 +34600,7 @@ QWidget#power2{background-color:rgb(247,247,247)}
 QWidget#power3{background-color:rgb(247,247,247)}</string>
             </property>
             <property name="currentIndex">
-             <number>5</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="vsg">
              <property name="styleSheet">
@@ -40235,7 +40001,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <x>0</x>
                              <y>0</y>
                              <width>629</width>
-                             <height>500</height>
+                             <height>871</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -43773,8 +43539,8 @@ Analyzer</string>
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>605</width>
-                             <height>1009</height>
+                             <width>590</width>
+                             <height>382</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -47816,7 +47582,7 @@ Analyzer</string>
                    <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                   </property>
                   <property name="currentIndex">
-                   <number>1</number>
+                   <number>0</number>
                   </property>
                   <widget class="QWidget" name="vsaStandard">
                    <attribute name="title">
@@ -47873,8 +47639,8 @@ Analyzer</string>
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>605</width>
-                             <height>871</height>
+                             <width>590</width>
+                             <height>382</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -48883,8 +48649,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>605</width>
-                             <height>871</height>
+                             <width>593</width>
+                             <height>500</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -50502,7 +50268,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                     <item>
                      <widget class="QStackedWidget" name="vsaAdvancedStack">
                       <property name="currentIndex">
-                       <number>2</number>
+                       <number>1</number>
                       </property>
                       <widget class="QWidget" name="selectTypeAdv">
                        <layout class="QHBoxLayout" name="horizontalLayout_18">
@@ -53345,8 +53111,8 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>605</width>
-                         <height>1008</height>
+                         <width>590</width>
+                         <height>382</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -53623,8 +53389,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>605</width>
-                         <height>1008</height>
+                         <width>590</width>
+                         <height>382</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -56796,8 +56562,8 @@ Analyzer</string>
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>605</width>
-                         <height>1008</height>
+                         <width>590</width>
+                         <height>382</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -64538,8 +64304,8 @@ Analyzer</string>
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>590</width>
-                         <height>550</height>
+                         <width>605</width>
+                         <height>1008</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -68025,8 +67791,8 @@ Analyzer</string>
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>590</width>
-                         <height>550</height>
+                         <width>605</width>
+                         <height>1008</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -71087,8 +70853,8 @@ Supply 3</string>
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>590</width>
-                         <height>550</height>
+                         <width>605</width>
+                         <height>1008</height>
                         </rect>
                        </property>
                        <property name="minimumSize">

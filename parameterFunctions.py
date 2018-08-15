@@ -622,18 +622,12 @@ def enableVSACalFile(self,boxDone,boxUnset):
 	self.ui.trigEquip_vsaMeas.setEnabled(checked)
 		
 	if checked:
-		self.ui.vsaCalFileLabel_comb.setEnabled(False)
-		self.ui.vsaCalFileField_comb.setEnabled(False)
-		self.ui.filePushButton.setEnabled(False)
 		self.ui.vsaMeasRunStack.setCurrentIndex(0)
 		if setRunChecked:
 			self.ui.combEquip_vsaMeas.setStyleSheet(boxDone)
 		else:
 			self.ui.combEquip_vsaMeas.setStyleSheet(boxUnset)
 	else:
-		self.ui.vsaCalFileLabel_comb.setEnabled(True)
-		self.ui.vsaCalFileField_comb.setEnabled(True)
-		self.ui.filePushButton.setEnabled(True)
 		self.ui.vsaMeasRunStack.setCurrentIndex(1)
 		if setChecked:
 			self.ui.combEquip_vsaMeas.setStyleSheet(boxDone)

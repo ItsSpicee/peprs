@@ -76,6 +76,86 @@ def updateSA(self):
 	self.ui.saSet.setEnabled(True)
 	self.ui.saSet.setStyleSheet(greenButton)
 
+def updateAdvSA(self):
+	self.ui.saEquipAdv.setStyleSheet(None)
+	self.ui.saSetAdv.setEnabled(True)
+	self.ui.saSetAdv.setStyleSheet(greenButton)
+	
+def updateP1(self):
+	self.ui.p1Equip.setStyleSheet(None)
+	self.ui.p1Set.setEnabled(True)
+	self.ui.p1Set.setStyleSheet(greenButton)
+	
+def updateP2(self):
+	self.ui.p2Equip.setStyleSheet(None)
+	self.ui.p2Set.setEnabled(True)
+	self.ui.p2Set.setStyleSheet(greenButton)
+	
+def updateP3(self):
+	self.ui.p3Equip.setStyleSheet(None)
+	self.ui.p3Set.setEnabled(True)
+	self.ui.p3Set.setStyleSheet(greenButton)
+	
+def updateVSAMeasDig(self):
+	self.ui.vsaMeasGenEquip.setStyleSheet(None)
+	self.ui.vsaMeasGenEquip_2.setStyleSheet(None)
+	self.ui.vsaMeasDigEquip.setStyleSheet(None)
+	self.ui.vsaMeasSet.setEnabled(True)
+	self.ui.vsaMeasSet.setStyleSheet(greenButton)
+	
+def updateVSAMeas(self):
+	self.ui.vsaMeasGenEquip.setStyleSheet(None)
+	self.ui.vsaMeasGenEquip_2.setStyleSheet(None)
+	self.ui.vsaMeasSet_2.setEnabled(True)
+	self.ui.vsaMeasSet_2.setStyleSheet(greenButton)
+	
+def updateSAMeas(self):
+	self.ui.vsaMeasAdvEquip.setStyleSheet(None)
+	self.ui.vsaMeasAdvSet.setEnabled(True)
+	self.ui.vsaMeasAdvSet.setStyleSheet(greenButton)
+	
+def updateRXCal(self):
+	idx = self.ui.vsaMeasRunStack.currentIdx()
+	
+	self.ui.combEquip_vsaMeas.setStyleSheet(None)
+	self.ui.downEquip_vsaMeas.setStyleSheet(None)
+	self.ui.rxEquip_vsaMeas.setStyleSheet(None)
+	self.ui.trigEquip_vsaMeas.setStyleSheet(None)
+	if idx == 1:
+		self.ui.set_run_vsa.setEnabled(True)
+		self.ui.set_run_vsa.setStyleSheet(greenButton)
+	elif idx == 0:
+		self.ui.downSetVSAMeas.setEnabled(True)
+		self.ui.downSetVSAMeas.setStyleSheet(greenButton)
+
+def updateAWGCal(self):
+	self.ui.awgEquip_vsgMeas.setStyleSheet(None)
+	self.ui.rxEquip_vsgMeas.setStyleSheet(None)
+	self.ui.vsgEquip_vsgMeas.setStyleSheet(None)
+	self.ui.calEquip_vsgMeas.setStyleSheet(None)
+	self.ui.awgSetRun_vsgMeas.setEnabled(True)
+	self.ui.awgSetRun_vsgMeas.setStyleSheet(greenButton)
+	
+def updateNoAWGCal(self):
+	self.ui.awgEquip_vsgMeas_2.setStyleSheet(None)
+	self.ui.awgSet_vsgMeas.setEnabled(True)
+	self.ui.awgSet_vsgMeas.setStyleSheet(greenButton)
+	
+def updateVSGMeasAdv(self):
+	self.ui.awgAdvEquip_vsgMeas_2.setStyleSheet(None)
+	self.ui.awgAdvEquip_vsgMeas.setStyleSheet(None)
+	self.ui.vsaAdvEquip_vsgMeas.setStyleSheet(None)
+	self.ui.setAdv_vsgMeas_2.setEnabled(True)
+	self.ui.setAdv_vsgMeas.setEnabled(True)
+	self.ui.setAdv_vsgMeas_2.setStyleSheet(greenButton)
+	self.ui.setAdv_vsgMeas.setStyleSheet(greenButton)
+	
+def updateAWGMeasAdv(self):
+	self.ui.awgAdvEquip_vsgMeas_2.setStyleSheet(None)
+	self.ui.awgAdvEquip_vsgMeas.setStyleSheet(None)
+	self.ui.setAdv_vsgMeas.setEnabled(True)
+	self.ui.setAdv_vsgMeas.setStyleSheet(greenButton)
+	
 	
 	
 	
