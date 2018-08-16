@@ -180,3 +180,9 @@ To deploy a Qt app, follow this documentation: http://doc.qt.io/qt-5/deployment.
 Generating README Table of Contents: https://github.com/thlorenz/doctoc
 
 Markdown Guide: https://about.gitlab.com/handbook/product/technical-writing/markdown-guide/#table-of-contents-toc
+
+## Bassil's Tips (In progress)
+If your PyQt installation isn't working it may be because your Python version is incompatible with PyQt. As far as I know Python 3.4 is incompatible with PyQt.
+<br>If you're experiencing error messages related to the matlab path or installation it may be because your matlab path is incorrectly entered in your system evironment variables.
+<br>Make sure you run the Pyuic5 command after all gui changes to ensure that they take effect and are represented in the Python code.
+<br>If your Qt installation one day stops working/opening your .pro files you might need to completely uninstall Qt and then reinstall it.
