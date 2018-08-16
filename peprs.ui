@@ -183,7 +183,7 @@ QPushButton:hover{background-color:rgb(217, 0, 0);}</string>
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="algoTab">
          <property name="layoutDirection">
@@ -846,7 +846,7 @@ Move to 'DPD' tab.</string>
                      <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                     </property>
                     <property name="currentIndex">
-                     <number>2</number>
+                     <number>0</number>
                     </property>
                     <widget class="QWidget" name="widget">
                      <attribute name="title">
@@ -869,7 +869,7 @@ Move to 'DPD' tab.</string>
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>590</width>
+                           <width>738</width>
                            <height>550</height>
                           </rect>
                          </property>
@@ -2130,7 +2130,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>590</width>
+                           <width>738</width>
                            <height>550</height>
                           </rect>
                          </property>
@@ -7100,7 +7100,7 @@ QFrame{background-color:#d1d5de}</string>
                      <enum>QTabWidget::Rounded</enum>
                     </property>
                     <property name="currentIndex">
-                     <number>0</number>
+                     <number>3</number>
                     </property>
                     <property name="usesScrollButtons">
                      <bool>true</bool>
@@ -9417,7 +9417,7 @@ QFrame{background-color:#d1d5de}</string>
                              <enum>QTabWidget::North</enum>
                             </property>
                             <property name="currentIndex">
-                             <number>3</number>
+                             <number>2</number>
                             </property>
                             <widget class="QWidget" name="tab_29">
                              <attribute name="title">
@@ -23002,7 +23002,7 @@ Fill out ‘General Settings’ and select file to use in ‘Calibration Setting
                          <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                         </property>
                         <property name="currentIndex">
-                         <number>0</number>
+                         <number>1</number>
                         </property>
                         <widget class="QWidget" name="upStandardSettings_10">
                          <attribute name="title">
@@ -31783,7 +31783,7 @@ QFrame{background-color:#d1d5de}</string>
                                    <x>0</x>
                                    <y>0</y>
                                    <width>426</width>
-                                   <height>600</height>
+                                   <height>631</height>
                                   </rect>
                                  </property>
                                  <property name="minimumSize">
@@ -32802,7 +32802,7 @@ Modelling Parameters</string>
                           <item>
                            <widget class="QStackedWidget" name="vsaResultsStack_vsgMeas">
                             <property name="currentIndex">
-                             <number>1</number>
+                             <number>0</number>
                             </property>
                             <widget class="QWidget" name="page_100">
                              <layout class="QVBoxLayout" name="verticalLayout_122" stretch="1,10,1,1">
@@ -32986,7 +32986,7 @@ Modelling Parameters</string>
                              </size>
                             </property>
                             <property name="currentIndex">
-                             <number>1</number>
+                             <number>0</number>
                             </property>
                             <widget class="QWidget" name="page_105">
                              <layout class="QVBoxLayout" name="verticalLayout_209" stretch="4,1">
@@ -33093,23 +33093,7 @@ Modelling Parameters</string>
                                    </layout>
                                   </item>
                                   <item>
-                                   <widget class="QLabel" name="label_739">
-                                    <property name="font">
-                                     <font>
-                                      <family>Arial</family>
-                                      <pointsize>10</pointsize>
-                                     </font>
-                                    </property>
-                                    <property name="frameShape">
-                                     <enum>QFrame::Box</enum>
-                                    </property>
-                                    <property name="text">
-                                     <string>Signal Plot</string>
-                                    </property>
-                                    <property name="alignment">
-                                     <set>Qt::AlignCenter</set>
-                                    </property>
-                                   </widget>
+                                   <layout class="QVBoxLayout" name="signalPlot_vsgCal"/>
                                   </item>
                                  </layout>
                                 </widget>
@@ -33205,23 +33189,7 @@ Modelling Parameters</string>
                                    </layout>
                                   </item>
                                   <item>
-                                   <widget class="QLabel" name="label_738">
-                                    <property name="font">
-                                     <font>
-                                      <family>Arial</family>
-                                      <pointsize>10</pointsize>
-                                     </font>
-                                    </property>
-                                    <property name="frameShape">
-                                     <enum>QFrame::Box</enum>
-                                    </property>
-                                    <property name="text">
-                                     <string>VSG Inverse Response Plot</string>
-                                    </property>
-                                    <property name="alignment">
-                                     <set>Qt::AlignCenter</set>
-                                    </property>
-                                   </widget>
+                                   <layout class="QVBoxLayout" name="responsePlot_vsgCal"/>
                                   </item>
                                  </layout>
                                 </widget>
@@ -33229,7 +33197,7 @@ Modelling Parameters</string>
                                  <attribute name="title">
                                   <string>NMSE, PAPR, Power</string>
                                  </attribute>
-                                 <layout class="QVBoxLayout" name="verticalLayout_222" stretch="1,8">
+                                 <layout class="QVBoxLayout" name="verticalLayout_222" stretch="1,8,0">
                                   <property name="spacing">
                                    <number>0</number>
                                   </property>
@@ -33924,6 +33892,19 @@ Modelling Parameters</string>
                                     </layout>
                                    </widget>
                                   </item>
+                                  <item>
+                                   <spacer name="verticalSpacer_16">
+                                    <property name="orientation">
+                                     <enum>Qt::Vertical</enum>
+                                    </property>
+                                    <property name="sizeHint" stdset="0">
+                                     <size>
+                                      <width>20</width>
+                                      <height>40</height>
+                                     </size>
+                                    </property>
+                                   </spacer>
+                                  </item>
                                  </layout>
                                 </widget>
                                </widget>
@@ -33931,7 +33912,7 @@ Modelling Parameters</string>
                               <item>
                                <widget class="QStackedWidget" name="vsgResultsFileStack_vsgMeas">
                                 <property name="currentIndex">
-                                 <number>0</number>
+                                 <number>1</number>
                                 </property>
                                 <widget class="QWidget" name="page_35">
                                  <layout class="QHBoxLayout" name="horizontalLayout_248">
@@ -33963,7 +33944,7 @@ Modelling Parameters</string>
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>220</width>
+                                       <width>662</width>
                                        <height>200</height>
                                       </rect>
                                      </property>
@@ -49075,8 +49056,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>605</width>
-                             <height>871</height>
+                             <width>593</width>
+                             <height>500</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -53183,8 +53164,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>605</width>
-                         <height>1008</height>
+                         <width>590</width>
+                         <height>382</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -60425,7 +60406,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                              <x>0</x>
                              <y>0</y>
                              <width>629</width>
-                             <height>871</height>
+                             <height>600</height>
                             </rect>
                            </property>
                            <property name="minimumSize">

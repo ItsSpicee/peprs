@@ -141,21 +141,21 @@ class runHeterodyneCalibrationThread(QThread):
 		else:
 			self.errorOccurred.emit(self.main,result,self.bar)
 			return		
-		# result = matlab.Analyze_Signal_PrecharDebug(nargout=1)
-		# if result == "":
-			# completed = "5"
-			# self.updateBar.emit(self.main,completed,self.bar,self.style)
-		# else:
-			# self.errorOccurred.emit(self.main,result,self.bar)
-			# return	
-		# result = matlab.Save_Data_PrecharDebug(nargout=1)
-		# if result == "":
-			# completed = "6"
-			# self.updateBar.emit(self.main,completed,self.bar,self.style)
-		# else:
-			# self.errorOccurred.emit(self.main,result,self.bar)
-			# return
-		# result = matlab.Save_Measurements_PrecharDebug(nargout=1)
+		result = matlab.Save_Model_HeterodyneDebug(nargout=1)
+		if result == "":
+			completed = "8"
+			self.updateBar.emit(self.main,completed,self.bar,self.style)
+		else:
+			self.errorOccurred.emit(self.main,result,self.bar)
+			return	
+		result = matlab.Apply_Model_HeterodyneDebug(nargout=1)
+		if result == "":
+			completed = "9"
+			self.updateBar.emit(self.main,completed,self.bar,self.style)
+		else:
+			self.errorOccurred.emit(self.main,result,self.bar)
+			return
+		# result = matlab.Download_Signal_HeterodyneDebug(nargout=1)
 		# resultSplit = result.split("~")
 		# if resultSplit[0] == "":
 			# self.updateData.emit(self.main,result)

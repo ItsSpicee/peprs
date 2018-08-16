@@ -105,23 +105,34 @@ class Window(QMainWindow):
 		self.ui.saMeasTabs.setTabEnabled(0,False)
 		
 		# create matlab plotting areas where figures will eventually be uploaded
+		# vsg cal
+		self.vsgSignalFigure = plt.figure()
+		self.vsgSignalCanvas = FigureCanvas(self.vsgSignalFigure)
+		self.vsgSignalToolbar = NavigationToolbar(self.vsgSignalCanvas, self)
+		self.ui.signalPlot_vsgCal.addWidget(self.vsgSignalToolbar)
+		self.ui.signalPlot_vsgCal.addWidget(self.vsgSignalCanvas)
+		self.vsgResponseFigure = plt.figure()
+		self.vsgResponseCanvas = FigureCanvas(self.vsgResponseFigure)
+		self.vsgResponseToolbar = NavigationToolbar(self.vsgResponseCanvas, self)
+		self.ui.responsePlot_vsgCal.addWidget(self.vsgResponseToolbar)
+		self.ui.responsePlot_vsgCal.addWidget(self.vsgResponseCanvas)
+		# prechar
 		self.precharSpectrumFigure = plt.figure()
 		self.precharSpectrumCanvas = FigureCanvas(self.precharSpectrumFigure)
 		self.precharSpectrumToolbar = NavigationToolbar(self.precharSpectrumCanvas, self)
 		self.ui.spectrumGraph_prechar.addWidget(self.precharSpectrumToolbar)
 		self.ui.spectrumGraph_prechar.addWidget(self.precharSpectrumCanvas)
-		
 		self.precharGainFigure = plt.figure()
 		self.precharGainCanvas = FigureCanvas(self.precharGainFigure)
 		self.precharGainToolbar = NavigationToolbar(self.precharGainCanvas, self)
 		self.ui.gainGraph_prechar.addWidget(self.precharGainToolbar)
 		self.ui.gainGraph_prechar.addWidget(self.precharGainCanvas)
-		
 		self.precharPhaseFigure = plt.figure()
 		self.precharPhaseCanvas = FigureCanvas(self.precharPhaseFigure)
 		self.precharPhaseToolbar = NavigationToolbar(self.precharPhaseCanvas, self)
 		self.ui.phaseGraph_prechar.addWidget(self.precharPhaseToolbar)
 		self.ui.phaseGraph_prechar.addWidget(self.precharPhaseCanvas)
+		
 		
 		# define functionality for the equipment error messages widget
 		self.ui.errorScrollArea.setMaximumHeight(0)
