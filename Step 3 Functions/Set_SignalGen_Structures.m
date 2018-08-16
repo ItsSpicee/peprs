@@ -1,4 +1,4 @@
-function Set_RXTX_Structures(txd,rxd)
+function Set_SignalGen_Structures(txd,rxd,sd,algo)
     txd.FGuard = str2double(txd.FGuard);
     txd.FCarrier = str2double(txd.FCarrier);
     txd.FSampleDAC = str2double(txd.FSampleDAC);
@@ -15,10 +15,27 @@ function Set_RXTX_Structures(txd,rxd)
     rxd.TriggerChannel = str2double(rxd.TriggerChannel);
     
     %load structures
-    load(".\DPD Data\Signal Generation Parameters\Signal.mat","Signal")
-    load('.\DPD Data\Signal Generation Parameters\RX.mat',"RX")
-    load('.\DPD Data\Signal Generation Parameters\TX.mat',"TX")
-      
+    if algo == "CalVal"
+        load(".\DPD Data\Calibration Validation Parameters\Signal.mat","Signal")
+        load('.\DPD Data\Calibration Validation Parameters\RX.mat',"RX")
+        load('.\DPD Data\Calibration Validation Parameters\TX.mat',"TX")
+    elseif algo == "Prechar"
+        load(".\DPD Data\Precharacterization Setup Parameters\Signal.mat","Signal")
+        load('.\DPD Data\Precharacterization Setup Parameters\RX.mat',"RX")
+        load('.\DPD Data\Precharacterization Setup Parameters\TX.mat',"TX")
+    end
+    
+    %% Set Signal
+    if sd.signalName == 1
+        Signal.Name = "5G_NR_OFDM_50MHz";
+    elseif sd.signalName == 2
+        Signal.Name = "5G_NR_OFDM_100MHz";
+    elseif sd.signalName == 3
+        Signal.Name = "5G_NR_OFDM_200MHz";
+    elseif sd.signalName == 4
+        Signal.Name = "5G_NR_OFDM_400MHz";
+    end
+
     %% SETTING TX 
     
     % Choose between 'AWG' (VSG not ready)
@@ -167,6 +184,13 @@ function Set_RXTX_Structures(txd,rxd)
     RX.VSA.SetupFile = rxd.SetupFile;
     RX.VSA.DataFile = rxd.DataFile;
     
-    save('.\DPD Data\Signal Generation Parameters\RX.mat','RX')
-    save('.\DPD Data\Signal Generation Parameters\TX.mat','TX')
+    if algo == "CalVal"
+        save('.\DPD Data\Calibration Validation Parameters\RX.mat','RX')
+        save('.\DPD Data\Calibration Validation Parameters\TX.mat','TX')
+        save(".\DPD Data\Calibration Validation Parameters\Signal.mat","Signal")
+    elseif algo == "Prechar"
+        save('.\DPD Data\Precharacterization Setup Parameters\RX.mat','RX')
+        save('.\DPD Data\Precharacterization Setup Parameters\TX.mat','TX')
+        save(".\DPD Data\Precharacterization Setup Parameters\Signal.mat","Signal")
+    end
 end

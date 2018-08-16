@@ -1999,11 +1999,6 @@ def setHetero(self,boxDone,setButton,matlab):
 		# begin running signal generation
 		self.heterodyneThread.start()	
 		
-		# self.progressBar = QProgressBar()
-		# self.progressBar.setRange(1,10);
-		# self.progressBar.setTextVisible(True);
-		# self.progressBar.setFormat("Currently Running: Heterodyne Calibration Routine")
-		# self.ui.statusBar.addWidget(self.progressBar,1)
 		# completed = 0
 		# while completed < 100:
 			# completed = completed + 0.00001
@@ -2142,6 +2137,95 @@ def runCalValidation(self,setBox,setButton,matlab):
 	]
 	done = win.checkIfDone(checkDic)
 	if done:
+		ampCorrField = ""
+		trigAmpField = ""
+		fCarrierField = ""
+		fSampleField = ""
+		addressField = ""
+		noPeriodsField = ""
+		vsgCenterFreqField = ""
+		noSegmentsField = ""
+		asmField = ""
+		setupField = ""
+		dataField = ""
+		# choose proper fields from stacked widgets to be sent to dictionaries
+		awgPage = self.ui.awgParamsStack_vsgMeas.currentIndex()
+		if awgPage == 1:
+			ampCorrField = self.ui.ampCorrection_awgCal.currentIndex()
+			trigAmpField = self.ui.trigAmp_awgCal.text()
+			vsgCenterFreqField = self.ui.centerFreq_awgCal.text()
+		elif awgPage == 2:
+			ampCorrField = self.ui.ampCorrection_awgCal_2.currentIndex()
+			trigAmpField = self.ui.trigAmp_awgCal_2.text()
+			vsgCenterFreqField = self.ui.centerFreq_awgCal_2.text()
+		vsaPage = self.ui.vsaMeasGenStack.currentIndex()
+		if vsaPage == 1:
+			fCarrierField = self.ui.centerFreq_vsaMeas.text()
+			fSampleField = self.ui.sampRate_vsaMeas.text()
+			noPeriodsField = self.ui.noFrameTimes_vsaMeas.text()
+		elif vsaPage == 0:
+			fCarrierField = self.ui.centerFreq_vsaMeas_2.text()
+			fSampleField = self.ui.sampRate_vsaMeas_2.text()
+			noPeriodsField = self.ui.noFrameTimes_vsaMeas_2.text()
+		vsaType = self.ui.vsaType.currentIndex()
+		if vsaType == 1 or vsaType == 5:
+			addressField = self.ui.address_scope.text()
+			asmField = self.ui.dllFile_scope.text()
+			setupField = self.ui.setupFile_scope.text()
+			dataField = self.ui.dataFile_scope.text()
+		elif vsaType == 2 or vsaType == 6:
+			addressField = self.ui.address_dig.text()
+			asmField = self.ui.dllFile_dig.text()
+			setupField = self.ui.setupFile_dig.text()
+			dataField = self.ui.dataFile_dig.text()
+		elif vsaType == 3 or vsaType == 4:
+			addressField = self.ui.address_sa.text()
+			asmField = self.ui.dllFile_uxa.text()
+			setupField = self.ui.setupFile_uxa.text()
+			dataField = self.ui.dataFile_uxa.text()
+		# define dictionaries for matlab structs
+		tx={
+			"Type": self.ui.vsgSetup.currentIndex(),
+			"Model": self.ui.partNum_awg.text(),
+			"FGuard" : self.ui.guardBand_calval.text(),
+			"FCarrier" : vsgCenterFreqField,
+			"FSampleDAC" : self.ui.maxSampleRate_awg.text(),
+			"NumberOfSegments" : self.ui.noSegments_calval.text(),
+			"Amp_Corr" : ampCorrField,
+			"GainExpansion_flag" : self.ui.gainExpansionFlag_calval.currentIndex(),
+			"GainExpansion" : self.ui.gainExpansion_calval.text(),
+			"FreqMutiplierFlag" : self.ui.freqMultFlag_calval.currentIndex(),
+			"FreqMultiplierFactor": self.ui.freqMultFactor_calval.text(),	
+			"ReferenceClockSource": self.ui.refClockSorce_awg.currentIndex(),	
+			"iChannel": self.ui.iChannel_awg.currentIndex(),	
+			"qChannel": self.ui.qChannel_awg.currentIndex(),	
+			"ReferenceClock": self.ui.extRefFreq_awg.text(),	
+			"VFS": self.ui.dacRange_awg.text(),	
+			"TriggerAmplitude": trigAmpField
+		}
+		rx={
+			"Type" : self.ui.vsaType.currentIndex(),
+			"FCarrier" : fCarrierField,
+			"MirrorSignalFlag" : self.ui.mirrorFlag_calval.currentIndex(),
+			"FSample" : fSampleField,
+			"MeasuredPeriods" : noPeriodsField,
+			"xLength" : self.ui.crossCorr_calval.text(),
+			"FsampleOverwrite" : self.ui.sampRateOverwrite_calval.currentIndex(),
+			"SubRate" : self.ui.subrateFlag_calval.currentIndex(),
+			"AlignFreqDomainFlag" : self.ui.timeAlignment_calval.currentIndex(),
+			"DownconversionFilterFile" : self.ui.downFileField_algo.text(),
+			"TriggerChannel" : self.ui.trigChannel_scope.text(),
+			"ASMPath" : asmField,
+			"SetupFile" : setupField,
+			"DataFile" : dataField,
+			"DemodSignalFlag": self.ui.demodulationEnable.currentIndex(),
+			"VisaAddress": addressField
+		}
+		dSignal = {
+			"signalName": self.ui.signalName_calval.currentIndex(),
+		}
+		matlab.Set_SignalGen_Structures(tx,rx,dSignal,"CalVal",nargout=0)
+		
 		self.ui.calValTabs.setCurrentIndex(0)
 		self.ui.resultsAlgoTabs.setCurrentIndex(2)
 		self.ui.algoNextStack.setCurrentIndex(1)
@@ -2176,11 +2260,6 @@ def runCalValidation(self,setBox,setButton,matlab):
 		setButton.setChecked(False)
 	
 def preCharPreview(self,matlab):	
-	# d = {
-		# "signalName": self.ui.signalName_prechar.currentIndex(),
-	# }
-	# matlab.Set_Prechar_Signal(d,nargout=0)
-	
 	ampCorrField = ""
 	trigAmpField = ""
 	fCarrierField = ""
@@ -2189,6 +2268,9 @@ def preCharPreview(self,matlab):
 	noPeriodsField = ""
 	vsgCenterFreqField = ""
 	noSegmentsField = ""
+	asmField = ""
+	setupField = ""
+	dataField = ""
 	
 	# choose proper fields from stacked widgets to be sent to dictionaries
 	awgPage = self.ui.awgParamsStack_vsgMeas.currentIndex()
@@ -2212,10 +2294,19 @@ def preCharPreview(self,matlab):
 	vsaType = self.ui.vsaType.currentIndex()
 	if vsaType == 1 or vsaType == 5:
 		addressField = self.ui.address_scope.text()
+		asmField = self.ui.dllFile_scope.text()
+		setupField = self.ui.setupFile_scope.text()
+		dataField = self.ui.dataFile_scope.text()
 	elif vsaType == 2 or vsaType == 6:
 		addressField = self.ui.address_dig.text()
+		asmField = self.ui.dllFile_dig.text()
+		setupField = self.ui.setupFile_dig.text()
+		dataField = self.ui.dataFile_dig.text()
 	elif vsaType == 3 or vsaType == 4:
 		addressField = self.ui.address_sa.text()
+		asmField = self.ui.dllFile_uxa.text()
+		setupField = self.ui.setupFile_uxa.text()
+		dataField = self.ui.dataFile_uxa.text()
 	
 	tx={
 		"Type": self.ui.vsgSetup.currentIndex(),
@@ -2248,22 +2339,18 @@ def preCharPreview(self,matlab):
 		"AlignFreqDomainFlag" : self.ui.alignFreqDomain_prechar.currentIndex(),
 		"DownconversionFilterFile" : self.ui.downFileField_algo_2.text(),
 		"TriggerChannel" : self.ui.trigChannel_scope.text(),
-		"ASMPath" : self.ui.dllFile_uxa.text(),
-		"SetupFile" : self.ui.setupFile_uxa.text(),
-		"DataFile" : self.ui.dataFile_uxa.text(),
+		"ASMPath" : asmField,
+		"SetupFile" : setupField,
+		"DataFile" : dataField,
 		"DemodSignalFlag": self.ui.demodulationEnable.currentIndex(),
 		"VisaAddress": addressField
-		
 	}
 	dSignal = {
 		"signalName": self.ui.signalName_prechar.currentIndex(),
 	}
-	# set signal dictionary
-	matlab.Set_Prechar_Signal(dSignal,nargout=0)
 	# set signal generation dictionary
-	matlab.Set_RXTX_Structures(tx,rx,nargout=0)
+	matlab.Set_SignalGen_Structures(tx,rx,dSignal,"Prechar",nargout=0)
 	result = matlab.Preview_Prechar_Signal(nargout=1)
-	print(result)
 	if result != "":
 		instrParamErrorMessage(self,result)
 	else:
@@ -2291,6 +2378,9 @@ def runPrecharacterization(self,setBox,setButton,matlab):
 	noPeriodsField = ""
 	vsgCenterFreqField = ""
 	noSegmentsField = ""
+	asmField = ""
+	setupField = ""
+	dataField = ""
 	
 	rfOn = self.ui.emergButtonSecond.isChecked()
 	awgSet = self.ui.awgSet_vsgMeas.isChecked()
@@ -2352,10 +2442,19 @@ def runPrecharacterization(self,setBox,setButton,matlab):
 		vsaType = self.ui.vsaType.currentIndex()
 		if vsaType == 1 or vsaType == 5:
 			addressField = self.ui.address_scope.text()
+			asmField = self.ui.dllFile_scope.text()
+			setupField = self.ui.setupFile_scope.text()
+			dataField = self.ui.dataFile_scope.text()
 		elif vsaType == 2 or vsaType == 6:
 			addressField = self.ui.address_dig.text()
+			asmField = self.ui.dllFile_dig.text()
+			setupField = self.ui.setupFile_dig.text()
+			dataField = self.ui.dataFile_dig.text()
 		elif vsaType == 3 or vsaType == 4:
 			addressField = self.ui.address_sa.text()
+			asmField = self.ui.dllFile_uxa.text()
+			setupField = self.ui.setupFile_uxa.text()
+			dataField = self.ui.dataFile_uxa.text()
 		# define all relevant dictionaries
 		tx={
 			"Type": self.ui.vsgSetup.currentIndex(),
@@ -2388,20 +2487,17 @@ def runPrecharacterization(self,setBox,setButton,matlab):
 			"AlignFreqDomainFlag" : self.ui.alignFreqDomain_prechar.currentIndex(),
 			"DownconversionFilterFile" : self.ui.downFileField_algo_2.text(),
 			"TriggerChannel" : self.ui.trigChannel_scope.text(),
-			"ASMPath" : self.ui.dllFile_uxa.text(),
-			"SetupFile" : self.ui.setupFile_uxa.text(),
-			"DataFile" : self.ui.dataFile_uxa.text(),
+			"ASMPath" : asmField,
+			"SetupFile" : setupField,
+			"DataFile" : dataField,
 			"DemodSignalFlag": self.ui.demodulationEnable.currentIndex(),
 			"VisaAddress": addressField
-			
 		}
 		dSignal = {
 			"signalName": self.ui.signalName_prechar.currentIndex(),
 		}
-		# set signal dictionary
-		matlab.Set_Prechar_Signal(dSignal,nargout=0)
 		# set signal generation dictionary
-		matlab.Set_RXTX_Structures(tx,rx,nargout=0)
+		matlab.Set_SignalGen_Structures(tx,rx,dSignal,"Prechar",nargout=0)
 		
 		# make debugging panel visible
 		self.ui.debugAlgoStack.setCurrentIndex(0)

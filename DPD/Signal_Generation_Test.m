@@ -8,9 +8,13 @@ addpath(genpath('C:\Program Files (x86)\IVI Foundation\IVI\Components\MATLAB')) 
 addpath(genpath(pwd))%Automatically Adds all paths in directory and subfolders
 instrreset
 
-load('.\DPD Data\Signal Generation Parameters\Signal.mat')
-load('.\DPD Data\Signal Generation Parameters\RX.mat');
-load('.\DPD Data\Signal Generation Parameters\TX.mat');
+load('.\DPD Data\Precharacterization Setup Parameters\Signal.mat')
+load('.\DPD Data\Precharacterization Setup Parameters\RX.mat');
+load('.\DPD Data\Precharacterization Setup Parameters\TX.mat');
+% or load 
+% load(".\DPD Data\Calibration Validation Parameters\Signal.mat","Signal")
+% load('.\DPD Data\Calibration Validation Parameters\RX.mat',"RX")
+% load('.\DPD Data\Calibration Validation Parameters\TX.mat',"TX")
 
 %#ok<*UNRCH>
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
