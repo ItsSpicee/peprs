@@ -62,18 +62,35 @@ Throughout the GUI, there is a 'Next Step' section that will prompt you on what 
 ### Dashboard Tab
 The dashboard tab is the landing page after the DUT setup is selected. It shows the setup of the equipment workbench.
 ### Step 1 - Set Equipment
-The Set Equipment tab provides the ability to configure equipment to have different parameters. For example, the center frequency of the AWG and UXA can be set. Different instruments can be navigated to via the dashboard in the top left corner.
+The Set Equipment tab is where equipment parameters are configured. For example, the center frequency of the AWG and UXA can be set. Different instruments can be navigated to via the dashboard in the top left corner. You must follow the next steps workflow in order to set/access all of the equipment e.g. the VSG settings must be successfully set before the VSA settings can be reached/navigated to. However, you can visit previously set equipment in any order at any time. Equipment that is accessible will have a hand cursor rather than an arrow and will change colour on hover.
+<br>
+**Note**: If a power meter isn't used in the current bench setup, the section can be bypassed by clicking 'Set' when it has an unfilled parameter. The Spectrum Analyzer then becomes accessible even though an error warning is given.
 ### Step 2 - Set Measurements & Calibrate
-In the Set Measurements tab, parameters related to measurements are set and so are calibration parameters.
+In this tab, measurement related parameters are set and so are calibration parameters. The VSA section should be filled out first so RX Calibration will be completed before TX Calibration (if applicable). Like the Step 1 tab, the dashboard in the top left corner is used to navigate to different instruments, make sure to follow the Next Step prompts! Performing calibration is optional: VSA calibration can be selected with a checkbox and VSG calibration with a dropdown. However, you must set the measurement parameters of the equipment. If calibration is not selected, only the measurement parameters will be shown or enabled, otherwise both calibration and measurement parameters are displayed. If calibration is run, the results of the calibration will be shown in the results panel on the bottom half of the screen. A 'Calibration Workflow' tab is located in the results section for guidance on how calibration files are used in the different scripts.
 ### Step 3 - Set & Run Algorithms
-In the Set & Run Algorithms tab, algorithm related parameters are set and three algorithms can be run: Calibration Validation, Precharacterization Setup, and DPD.
+In the Set & Run Algorithms tab, algorithm related parameters are set. Three algorithms can be run: Calibration Validation, Precharacterization Setup, and DPD. If no calibration files were generated in Step 2, calibration validation will be inaccessible. Similar to Step 2, as the algorithms are run, graphs are shown in the bottom half of the page.
+### Enabling/Disabling Safety and Quality Checks
+In the top menu bar under Preferences, there is the ability to enable or disable the safety and quality checks. These checks appear before you can move to the Step 2 tab or the DPD tab respectively. These checks are to make sure that you have thought through your parameters before performing actual measurements.
 ### Opening and Saving Parameter Settings
 In the top menu bar under File, there is the ability to save and open parameter setups. The appropriate text fields, drop downs, checkboxes, and radio buttons will be set to the appropriate value when saved and loaded. However, you will still have to set all of the appropriate buttons in the GUI i.e. push the "Set" or "Set & Run" buttons.
-### Enabling Safety and Quality Checks
-In the top menu bar under Preferences, there is the ability to enable or disable the safety and quality checks. These checks appear before you can move to the Step 2 tab or the DPD tab respectively.
 
 ## Developer's Guide
+### Task List
+Remaining tasks/tickets to work on can be found here: https://trello.com/invite/b/kT2M75IN/fdbb0fe4c205eb04594f7cc5ce27be5c/peprs
 ### Code Structure/Layout
+There are code comments for more guidance.
+#### Equipment Setup, DPD Data, Measurement Data
+
+#### Step Functions
+The folders titled 'Step 1 Functions', 'Step 2 Functions', and 'Step 3 Functions' contain the functions that are called in each respective step.
+- Step 1 Functions contains the MATLAB functions that are called in setParameters.py
+   - these functions take python dictionaries as input arguments which are converted to MATLAB structs so that the GUI parameters can be used in ATLAB functions
+- Step 2 and 3 Functions contain MATLAB functions for setting parameters as well as for debugging purposes
+
+#### Other Folders/Files
+- C++ Code: contains files automatically created by Qt, they are irrelevant
+- _ _pycache _ _ : is created when python opens main.py, it is irrelevant and regenerated whenever main is run
+- icons: contains images used in the GUI
 
 ### Qt
 Qt applications are intended to be coded in C++. However, for this GUI, everything is written in Python. 
@@ -82,13 +99,13 @@ Qt is used to create the structure/layout of the GUI (i.e. all of the widgets, c
 ```
 pyuic5 -x peprs.ui -o peprs.py
 ```
-The 'peprs.py' file is then called in 'main.py' and initiated as ```self.ui```. Widgets/components can then be referenced in main.py with self.ui.For example, `self.ui.algoTabs` refers to the Step 3 tabs containing calibration validation, precharacterization setup and DPD. The components have a variety of functions that can be used to add functionality to the GUI (see 'Explanations on Signals and Slots' in the Resources section). Some examples are below:
+The 'peprs.py' file is called in 'main.py' and initiated as ```self.ui```. Widgets/components can then be referenced in main.py with self.ui. For example, `self.ui.algoTabs` refers to the Step 3 tabs containing calibration validation, precharacterization setup and DPD. The components have a variety of functions that can be used to add functionality to the GUI (see 'Explanations on Signals and Slots' in the Resources section). Some examples are below:
 
 ```
-self.ui.algoTabs.currentIndexChanged.connect(functionName)
-idx = self.ui.algoTabs.currentIndex()
-self.ui.lineEdit.textChanged.connect()
-text = self.ui.lineEdit.text()
+self.ui.algoTabs.currentIndexChanged.connect(functionName) # when the tab's index changes, call functionName
+idx = self.ui.algoTabs.currentIndex() # what is the current tab object's index? useful for if statements
+self.ui.lineEdit.textChanged.connect() # if a textfield is changed, call a function
+text = self.ui.lineEdit.text() # return self.ui.lineEdit's current text
 ```
 
 #### Common Widgets
@@ -100,7 +117,7 @@ text = self.ui.lineEdit.text()
 - Line edit: text fields
 - Tabs
 - Splitters: provide draggable bar to expand or collapse certain GUI sections
-- Horizaontal/Vertical Spacers: provides dynamic spacing for GUI components
+- Horizontal/Vertical Spacers: provides dynamic spacing for GUI components
 - Horizontal/Vertical/Grid Layout: aligns components in the corresponding setup, works dynamically
 
 #### Resources
@@ -110,7 +127,7 @@ PyQt also has documentation albeit not as nice: http://pyqt.sourceforge.net/Docs
 <br>
 Fortunately, there are plenty of online miscellaneous PyQt tutorials that can be found.
 
-A walkthrough of basic PyQt classes and usage:
+A walkthrough of PyQt: https://www.tutorialspoint.com/pyqt/index.htm
 
 Explanations on Signals and Slots:
 
@@ -120,9 +137,18 @@ Explanations on Signals and Slots:
 
 **Note**: Qt's signals and slots system was changed recently in version 5. There is documentation for Qt4 and Qt5 so keep this in mind.
 
-A nice tutorial on threading in PyQT:
+A nice tutorial on threading in PyQT: https://nikolak.com/pyqt-threading-tutorial/
 <br>
-Note: Uses the old version of signals and slots from Qt4
+**Note**: Uses the old version of signals and slots from Qt4
+### Vector Images
+All graphics in the GUI were made with Vectr.com excluding the folder icon which was taken from flaticon.com
+<br>
+Dashboard Image: https://vectr.com/luser/a10aLQEa2u.svg?width=640&height=640&select=a10aLQEa2upage0
+<br>
+Dashboard Workspace: https://vectr.com/luser/a10aLQEa2u
+<br>
+Calibration Trees: https://vectr.com/luser/bfekQBCnb.svg?width=640&height=640&select=bfekQBCnbpage0
+Calibration Tree Workspace: https://vectr.com/luser/bfekQBCnb
 
 ## Using MATLAB with Python
 ### Method 1: Import MATLAB engine into python
