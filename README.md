@@ -47,8 +47,17 @@ To install the Keysight IO Libraries and add ons, follow this link: https://www.
 
 ## How to Use the GUI
 ### Copying the Repository
-The repository can be located in the working drive in the 'peprs' folder. Clone this repo to your local computer.
-<br>For more information on setting up and using a git repo on a server, visit this link: https://gist.github.com/wlbr/1685405
+The repository can be located in the working drive in the 'peprs' folder. Clone this repo to your local computer using the command `git clone W:\peprs`
+<br>
+The typical git commands can be used:
+```
+git pull
+git push
+git add
+git commit
+```
+For more information on git, visit this link: https://git-scm.com/book/en/v2/Getting-Started-Git-Basics
+
 ### Starting the GUI
 To start the GUI, there are two possible methods. 
 
@@ -57,40 +66,64 @@ To start the GUI, there are two possible methods.
 
 ### Welcoming Dialog
 After running main, the first thing that appears is a dialog window asking you to choose your desired DUT setup. Currently, the only option that is accessible and functional is the SISO DUT.
-### Next Steps
-Throughout the GUI, there is a 'Next Step' section that will prompt you on what action you should take if you ever need guidance.
+
+### Next Steps and Help
+Throughout the GUI, there is a 'Next Step' section that will prompt you on what action you should take if you ever need guidance. There are also help buttons next to some of the parameter fields. They display tooltips when hovered over that provide more details about a field.
+
 ### Dashboard Tab
 The dashboard tab is the landing page after the DUT setup is selected. It shows the setup of the equipment workbench.
+
 ### Step 1 - Set Equipment
 The Set Equipment tab is where equipment parameters are configured. For example, the center frequency of the AWG and UXA can be set. Different instruments can be navigated to via the dashboard in the top left corner. You must follow the next steps workflow in order to set/access all of the equipment e.g. the VSG settings must be successfully set before the VSA settings can be reached/navigated to. However, you can visit previously set equipment in any order at any time. Equipment that is accessible will have a hand cursor rather than an arrow and will change colour on hover.
 <br>
 **Note**: If a power meter isn't used in the current bench setup, the section can be bypassed by clicking 'Set' when it has an unfilled parameter. The Spectrum Analyzer then becomes accessible even though an error warning is given.
+
 ### Step 2 - Set Measurements & Calibrate
 In this tab, measurement related parameters are set and so are calibration parameters. The VSA section should be filled out first so RX Calibration will be completed before TX Calibration (if applicable). Like the Step 1 tab, the dashboard in the top left corner is used to navigate to different instruments, make sure to follow the Next Step prompts! Performing calibration is optional: VSA calibration can be selected with a checkbox and VSG calibration with a dropdown. However, you must set the measurement parameters of the equipment. If calibration is not selected, only the measurement parameters will be shown or enabled, otherwise both calibration and measurement parameters are displayed. If calibration is run, the results of the calibration will be shown in the results panel on the bottom half of the screen. A 'Calibration Workflow' tab is located in the results section for guidance on how calibration files are used in the different scripts.
+
 ### Step 3 - Set & Run Algorithms
 In the Set & Run Algorithms tab, algorithm related parameters are set. Three algorithms can be run: Calibration Validation, Precharacterization Setup, and DPD. If no calibration files were generated in Step 2, calibration validation will be inaccessible. Similar to Step 2, as the algorithms are run, graphs are shown in the bottom half of the page.
+
 ### Enabling/Disabling Safety and Quality Checks
 In the top menu bar under Preferences, there is the ability to enable or disable the safety and quality checks. These checks appear before you can move to the Step 2 tab or the DPD tab respectively. These checks are to make sure that you have thought through your parameters before performing actual measurements.
+
 ### Opening and Saving Parameter Settings
 In the top menu bar under File, there is the ability to save and open parameter setups. The appropriate text fields, drop downs, checkboxes, and radio buttons will be set to the appropriate value when saved and loaded. However, you will still have to set all of the appropriate buttons in the GUI i.e. push the "Set" or "Set & Run" buttons.
 
 ## Developer's Guide
 ### Task List
 Remaining tasks/tickets to work on can be found here: https://trello.com/invite/b/kT2M75IN/fdbb0fe4c205eb04594f7cc5ce27be5c/peprs
+
 ### Code Structure/Layout
-There are code comments for more guidance.
-#### Equipment Setup, DPD Data, Measurement Data
+There are 11 python files:
+- main.py: contains the setup for all the signals and slots of the GUI components
+- peprs.py: generated from peprs.ui, the main window of the application
+- dutsetup.py: generated from dutseup.ui, contains the opening dialog to select the type of DUT
+- qualitycheck.py: generated from qualitycheck.ui, contains the check that is presented before runnning DPD
+- safetycheck.py: generated from safetycheck.ui, contains the check that is presented before going to Step 2
+- setParameters.py: contains functions that are called when a "Set", "Update", "Update & Run," or "Set & Run" button is clicked
+- updateButtons.py: contains functions that are called when a parameter field is changed and an update button needs to be enabled
+- windowFunctions.py: contains functions that are called when tabs are changed, the window is resized, or the menu buttons are used
+- workflowNav.py: contains functions that are called when buttons in the dashboard are clicked
+- debugFunctions.py: contains functions that are called when a debug button is clicked
+- paramaterFunctions.py: contains functions that are called when a parameter is changed
+
+### DPD, RX Calibration, TX Calibration, Utitlty Functions, Instrument Functions
+These are the same repositories from Test and Measurement Code on the working drive.
+
+#### Equipment Setup, Measurement Data, DPD Data
+These folders contain relevant data for their respective steps. For example, they contain calibration results and MATLAB structure files.
 
 #### Step Functions
 The folders titled 'Step 1 Functions', 'Step 2 Functions', and 'Step 3 Functions' contain the functions that are called in each respective step.
-- Step 1 Functions contains the MATLAB functions that are called in setParameters.py
-   - these functions take python dictionaries as input arguments which are converted to MATLAB structs so that the GUI parameters can be used in ATLAB functions
-- Step 2 and 3 Functions contain MATLAB functions for setting parameters as well as for debugging purposes
+- Step 1 Functions contains the MATLAB functions that are called in setParameters.py. These functions send SCPI commands to the equipment
+- Step 2 and 3 Functions contain MATLAB functions for setting parameters as well as for debugging purposes, many of these functions take python dictionaries as input arguments which are converted to MATLAB structs so that the GUI parameters can be used in MATLAB functions
 
 #### Other Folders/Files
 - C++ Code: contains files automatically created by Qt, they are irrelevant
 - _ _pycache _ _ : is created when python opens main.py, it is irrelevant and regenerated whenever main is run
 - icons: contains images used in the GUI
+- Figures: contains saved images of the plots that are embedded into the GUI
 
 ### Qt
 Qt applications are intended to be coded in C++. However, for this GUI, everything is written in Python. 
@@ -140,6 +173,7 @@ Explanations on Signals and Slots:
 A nice tutorial on threading in PyQT: https://nikolak.com/pyqt-threading-tutorial/
 <br>
 **Note**: Uses the old version of signals and slots from Qt4
+
 ### Vector Images
 All graphics in the GUI were made with Vectr.com excluding the folder icon which was taken from flaticon.com
 <br>
@@ -176,7 +210,16 @@ To deploy a Qt app, follow this documentation: http://doc.qt.io/qt-5/deployment.
 <br> To create a python exe file to use during deployment, choose one of these methods: https://wiki.python.org/moin/PyQt/Deploying_PyQt_Applications
 <br> The application will be statically deployed, so it is very important that the correct qt version is installed
 
+## Setup a Git Repo on a Server
+The easiest way to do this is to use the Git GUI. You can clone an already existing repository to any other accessible location.
+<br>
+This link is an alternative command line method: https://gist.github.com/wlbr/1685405
+
 ## Miscellaneous Resources
 Generating README Table of Contents: https://github.com/thlorenz/doctoc
 
 Markdown Guide: https://about.gitlab.com/handbook/product/technical-writing/markdown-guide/#table-of-contents-toc
+
+Convert README.md to html file: https://cloudconvert.com/md-to-html
+<br>
+There are also command line tools that can be installed that allow you to do this.
