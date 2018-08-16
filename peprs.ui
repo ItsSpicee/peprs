@@ -183,7 +183,7 @@ QPushButton:hover{background-color:rgb(217, 0, 0);}</string>
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="algoTab">
          <property name="layoutDirection">
@@ -7100,7 +7100,7 @@ QFrame{background-color:#d1d5de}</string>
                      <enum>QTabWidget::Rounded</enum>
                     </property>
                     <property name="currentIndex">
-                     <number>3</number>
+                     <number>2</number>
                     </property>
                     <property name="usesScrollButtons">
                      <bool>true</bool>
@@ -8651,7 +8651,7 @@ QFrame{background-color:#d1d5de}</string>
                              <enum>QTabWidget::North</enum>
                             </property>
                             <property name="currentIndex">
-                             <number>1</number>
+                             <number>2</number>
                             </property>
                             <widget class="QWidget" name="tab_25">
                              <attribute name="title">
@@ -8699,23 +8699,7 @@ QFrame{background-color:#d1d5de}</string>
                                </layout>
                               </item>
                               <item>
-                               <widget class="QLabel" name="label_1109">
-                                <property name="font">
-                                 <font>
-                                  <family>Arial</family>
-                                  <pointsize>10</pointsize>
-                                 </font>
-                                </property>
-                                <property name="frameShape">
-                                 <enum>QFrame::Box</enum>
-                                </property>
-                                <property name="text">
-                                 <string>Spectrum Plot</string>
-                                </property>
-                                <property name="alignment">
-                                 <set>Qt::AlignCenter</set>
-                                </property>
-                               </widget>
+                               <layout class="QVBoxLayout" name="spectrumPlot_calval"/>
                               </item>
                              </layout>
                             </widget>
@@ -8765,23 +8749,7 @@ QFrame{background-color:#d1d5de}</string>
                                </layout>
                               </item>
                               <item>
-                               <widget class="QLabel" name="label_1115">
-                                <property name="font">
-                                 <font>
-                                  <family>Arial</family>
-                                  <pointsize>10</pointsize>
-                                 </font>
-                                </property>
-                                <property name="frameShape">
-                                 <enum>QFrame::Box</enum>
-                                </property>
-                                <property name="text">
-                                 <string>Gain Distortion Plot</string>
-                                </property>
-                                <property name="alignment">
-                                 <set>Qt::AlignCenter</set>
-                                </property>
-                               </widget>
+                               <layout class="QVBoxLayout" name="gainPlot_calval"/>
                               </item>
                              </layout>
                             </widget>
@@ -8831,29 +8799,13 @@ QFrame{background-color:#d1d5de}</string>
                                </layout>
                               </item>
                               <item>
-                               <widget class="QLabel" name="label_1116">
-                                <property name="font">
-                                 <font>
-                                  <family>Arial</family>
-                                  <pointsize>10</pointsize>
-                                 </font>
-                                </property>
-                                <property name="frameShape">
-                                 <enum>QFrame::Box</enum>
-                                </property>
-                                <property name="text">
-                                 <string>Phase Distortion Plot</string>
-                                </property>
-                                <property name="alignment">
-                                 <set>Qt::AlignCenter</set>
-                                </property>
-                               </widget>
+                               <layout class="QVBoxLayout" name="phasePlot_calval"/>
                               </item>
                              </layout>
                             </widget>
                             <widget class="QWidget" name="tab_27">
                              <attribute name="title">
-                              <string>NMSE, ACPR, PAPR</string>
+                              <string>NMSE, PAPR</string>
                              </attribute>
                              <layout class="QHBoxLayout" name="horizontalLayout_334">
                               <item>
@@ -8869,41 +8821,10 @@ QFrame{background-color:#d1d5de}</string>
                                 <property name="title">
                                  <string/>
                                 </property>
-                                <layout class="QGridLayout" name="gridLayout_102" columnstretch="1,0,1,0,0,0,0,1,0,1,1">
+                                <layout class="QGridLayout" name="gridLayout_102" columnstretch="0,0,0,0,0,0,0,1,0,2,0,0">
                                  <property name="verticalSpacing">
-                                  <number>10</number>
+                                  <number>15</number>
                                  </property>
-                                 <item row="5" column="2" colspan="3">
-                                  <widget class="QLineEdit" name="lineEdit_255">
-                                   <property name="sizePolicy">
-                                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                                     <horstretch>0</horstretch>
-                                     <verstretch>0</verstretch>
-                                    </sizepolicy>
-                                   </property>
-                                   <property name="minimumSize">
-                                    <size>
-                                     <width>0</width>
-                                     <height>0</height>
-                                    </size>
-                                   </property>
-                                   <property name="maximumSize">
-                                    <size>
-                                     <width>16777215</width>
-                                     <height>25</height>
-                                    </size>
-                                   </property>
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>9</pointsize>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string/>
-                                   </property>
-                                  </widget>
-                                 </item>
                                  <item row="1" column="7">
                                   <widget class="QLabel" name="label_1144">
                                    <property name="font">
@@ -8930,19 +8851,6 @@ QFrame{background-color:#d1d5de}</string>
                                    </property>
                                   </widget>
                                  </item>
-                                 <item row="5" column="5">
-                                  <widget class="QLabel" name="label_923">
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>8</pointsize>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string>dBm</string>
-                                   </property>
-                                  </widget>
-                                 </item>
                                  <item row="0" column="0">
                                   <widget class="QLabel" name="label_1151">
                                    <property name="font">
@@ -8954,19 +8862,6 @@ QFrame{background-color:#d1d5de}</string>
                                    </property>
                                    <property name="text">
                                     <string>NMSE</string>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                 <item row="3" column="5">
-                                  <widget class="QLabel" name="label_1153">
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>8</pointsize>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string>dBc/dBc</string>
                                    </property>
                                   </widget>
                                  </item>
@@ -8983,19 +8878,6 @@ QFrame{background-color:#d1d5de}</string>
                                    </property>
                                    <property name="alignment">
                                     <set>Qt::AlignCenter</set>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                 <item row="3" column="0" colspan="2">
-                                  <widget class="QLabel" name="label_1161">
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>10</pointsize>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string>Iteration's Min. ACPR:</string>
                                    </property>
                                   </widget>
                                  </item>
@@ -9030,38 +8912,7 @@ QFrame{background-color:#d1d5de}</string>
                                    </property>
                                   </widget>
                                  </item>
-                                 <item row="3" column="2" colspan="3">
-                                  <widget class="QLineEdit" name="lineEdit_257">
-                                   <property name="sizePolicy">
-                                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                                     <horstretch>0</horstretch>
-                                     <verstretch>0</verstretch>
-                                    </sizepolicy>
-                                   </property>
-                                   <property name="minimumSize">
-                                    <size>
-                                     <width>0</width>
-                                     <height>0</height>
-                                    </size>
-                                   </property>
-                                   <property name="maximumSize">
-                                    <size>
-                                     <width>16777215</width>
-                                     <height>25</height>
-                                    </size>
-                                   </property>
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>9</pointsize>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string/>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                 <item row="4" column="0">
+                                 <item row="2" column="0">
                                   <widget class="QLabel" name="label_1162">
                                    <property name="font">
                                     <font>
@@ -9075,52 +8926,7 @@ QFrame{background-color:#d1d5de}</string>
                                    </property>
                                   </widget>
                                  </item>
-                                 <item row="2" column="0">
-                                  <widget class="QLabel" name="label_1163">
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>10</pointsize>
-                                     <underline>true</underline>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string>ACPR</string>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                 <item row="3" column="9">
-                                  <widget class="QLineEdit" name="lineEdit_258">
-                                   <property name="sizePolicy">
-                                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                                     <horstretch>0</horstretch>
-                                     <verstretch>0</verstretch>
-                                    </sizepolicy>
-                                   </property>
-                                   <property name="minimumSize">
-                                    <size>
-                                     <width>0</width>
-                                     <height>0</height>
-                                    </size>
-                                   </property>
-                                   <property name="maximumSize">
-                                    <size>
-                                     <width>16777215</width>
-                                     <height>25</height>
-                                    </size>
-                                   </property>
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>9</pointsize>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string/>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                 <item row="5" column="10">
+                                 <item row="3" column="11">
                                   <widget class="QLabel" name="label_924">
                                    <property name="font">
                                     <font>
@@ -9133,7 +8939,7 @@ QFrame{background-color:#d1d5de}</string>
                                    </property>
                                   </widget>
                                  </item>
-                                 <item row="5" column="0">
+                                 <item row="3" column="0">
                                   <widget class="QLabel" name="label_1165">
                                    <property name="font">
                                     <font>
@@ -9177,7 +8983,7 @@ QFrame{background-color:#d1d5de}</string>
                                    </property>
                                   </widget>
                                  </item>
-                                 <item row="6" column="7">
+                                 <item row="4" column="7">
                                   <spacer name="verticalSpacer_18">
                                    <property name="orientation">
                                     <enum>Qt::Vertical</enum>
@@ -9190,20 +8996,7 @@ QFrame{background-color:#d1d5de}</string>
                                    </property>
                                   </spacer>
                                  </item>
-                                 <item row="3" column="7" colspan="2">
-                                  <widget class="QLabel" name="label_1166">
-                                   <property name="font">
-                                    <font>
-                                     <family>Arial</family>
-                                     <pointsize>10</pointsize>
-                                    </font>
-                                   </property>
-                                   <property name="text">
-                                    <string>Iteration's Max. ACPR:</string>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                 <item row="5" column="8" colspan="2">
+                                 <item row="3" column="9" colspan="2">
                                   <widget class="QLineEdit" name="lineEdit_261">
                                    <property name="sizePolicy">
                                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -9237,7 +9030,7 @@ QFrame{background-color:#d1d5de}</string>
                                    </property>
                                   </widget>
                                  </item>
-                                 <item row="5" column="7">
+                                 <item row="3" column="8">
                                   <widget class="QLabel" name="label_1171">
                                    <property name="font">
                                     <font>
@@ -9250,8 +9043,8 @@ QFrame{background-color:#d1d5de}</string>
                                    </property>
                                   </widget>
                                  </item>
-                                 <item row="3" column="10">
-                                  <widget class="QLabel" name="label_1172">
+                                 <item row="3" column="7">
+                                  <widget class="QLabel" name="label_923">
                                    <property name="font">
                                     <font>
                                      <family>Arial</family>
@@ -9259,7 +9052,38 @@ QFrame{background-color:#d1d5de}</string>
                                     </font>
                                    </property>
                                    <property name="text">
-                                    <string>dBc/dBc</string>
+                                    <string>dBm</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item row="3" column="1" colspan="6">
+                                  <widget class="QLineEdit" name="lineEdit_255">
+                                   <property name="sizePolicy">
+                                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                                     <horstretch>0</horstretch>
+                                     <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                   </property>
+                                   <property name="minimumSize">
+                                    <size>
+                                     <width>0</width>
+                                     <height>0</height>
+                                    </size>
+                                   </property>
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>16777215</width>
+                                     <height>25</height>
+                                    </size>
+                                   </property>
+                                   <property name="font">
+                                    <font>
+                                     <family>Arial</family>
+                                     <pointsize>9</pointsize>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string/>
                                    </property>
                                   </widget>
                                  </item>
@@ -9417,7 +9241,7 @@ QFrame{background-color:#d1d5de}</string>
                              <enum>QTabWidget::North</enum>
                             </property>
                             <property name="currentIndex">
-                             <number>2</number>
+                             <number>3</number>
                             </property>
                             <widget class="QWidget" name="tab_29">
                              <attribute name="title">
@@ -9604,7 +9428,7 @@ QFrame{background-color:#d1d5de}</string>
                                     </font>
                                    </property>
                                    <property name="text">
-                                    <string>Iteration's NMSE:</string>
+                                    <string>NMSE:</string>
                                    </property>
                                   </widget>
                                  </item>
@@ -11424,8 +11248,8 @@ QFrame{background-color:#d1d5de}</string>
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>600</width>
-                               <height>600</height>
+                               <width>776</width>
+                               <height>629</height>
                               </rect>
                              </property>
                              <property name="minimumSize">
@@ -11500,7 +11324,7 @@ QFrame{background-color:#d1d5de}</string>
 QWidget#vsaMeas{background-color:rgb(247,247,247)}</string>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="vsaMeas">
              <property name="font">
@@ -16273,7 +16097,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>590</width>
+                                       <width>601</width>
                                        <height>575</height>
                                       </rect>
                                      </property>
@@ -18370,7 +18194,7 @@ QFrame{background-color:#d1d5de}</string>
                           <item>
                            <widget class="QStackedWidget" name="debugVSAStack">
                             <property name="currentIndex">
-                             <number>1</number>
+                             <number>0</number>
                             </property>
                             <widget class="QWidget" name="page_90">
                              <layout class="QVBoxLayout" name="verticalLayout_200" stretch="0">
@@ -23002,7 +22826,7 @@ Fill out ‘General Settings’ and select file to use in ‘Calibration Setting
                          <string notr="true">QGroupBox{background-color:rgb(247, 247, 247);}</string>
                         </property>
                         <property name="currentIndex">
-                         <number>1</number>
+                         <number>0</number>
                         </property>
                         <widget class="QWidget" name="upStandardSettings_10">
                          <attribute name="title">
@@ -23027,7 +22851,7 @@ Fill out ‘General Settings’ and select file to use in ‘Calibration Setting
                           <item>
                            <widget class="QStackedWidget" name="awgParamsStack_vsgMeas">
                             <property name="currentIndex">
-                             <number>1</number>
+                             <number>2</number>
                             </property>
                             <widget class="QWidget" name="page_56">
                              <layout class="QHBoxLayout" name="horizontalLayout_36">
@@ -23082,7 +22906,7 @@ Fill out ‘General Settings’ and select file to use in ‘Calibration Setting
                                  <property name="geometry">
                                   <rect>
                                    <x>0</x>
-                                   <y>0</y>
+                                   <y>-231</y>
                                    <width>600</width>
                                    <height>525</height>
                                   </rect>
@@ -24606,7 +24430,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                   <rect>
                                    <x>0</x>
                                    <y>0</y>
-                                   <width>590</width>
+                                   <width>600</width>
                                    <height>300</height>
                                   </rect>
                                  </property>
@@ -24654,7 +24478,7 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                                       </font>
                                      </property>
                                      <property name="text">
-                                      <string>1) AWG - Measurement Settings</string>
+                                      <string>AWG - Measurement Settings</string>
                                      </property>
                                     </widget>
                                    </item>
@@ -31167,7 +30991,7 @@ QFrame{background-color:#d1d5de}</string>
                                    <x>0</x>
                                    <y>0</y>
                                    <width>445</width>
-                                   <height>631</height>
+                                   <height>648</height>
                                   </rect>
                                  </property>
                                  <property name="minimumSize">
@@ -31783,7 +31607,7 @@ QFrame{background-color:#d1d5de}</string>
                                    <x>0</x>
                                    <y>0</y>
                                    <width>426</width>
-                                   <height>631</height>
+                                   <height>600</height>
                                   </rect>
                                  </property>
                                  <property name="minimumSize">
@@ -33944,7 +33768,7 @@ Modelling Parameters</string>
                                       <rect>
                                        <x>0</x>
                                        <y>0</y>
-                                       <width>662</width>
+                                       <width>220</width>
                                        <height>200</height>
                                       </rect>
                                      </property>
@@ -34375,7 +34199,7 @@ QWidget#power2{background-color:rgb(247,247,247)}
 QWidget#power3{background-color:rgb(247,247,247)}</string>
             </property>
             <property name="currentIndex">
-             <number>5</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="vsg">
              <property name="styleSheet">
@@ -47379,7 +47203,7 @@ Analyzer</string>
                     <item>
                      <widget class="QStackedWidget" name="vsaEquipStack">
                       <property name="currentIndex">
-                       <number>2</number>
+                       <number>0</number>
                       </property>
                       <widget class="QWidget" name="uxaSettingsVSA">
                        <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="9,1">
@@ -47414,8 +47238,8 @@ Analyzer</string>
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>590</width>
-                             <height>382</height>
+                             <width>605</width>
+                             <height>871</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -47945,7 +47769,7 @@ Analyzer</string>
                                 </font>
                                </property>
                                <property name="toolTip">
-                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Leave this field blank and attenuation will be set to AUTO. Fill this field and attenuation will be set to MANUAL. Attenuation must be an even number, odd numbers will be rounded up.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Attenuation must be an even number, odd numbers will be rounded up.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                </property>
                                <property name="styleSheet">
                                 <string notr="true">QLabel {border: 1px solid black; border-radius:8px; background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(127, 194, 229, 255), stop:1 rgba(225, 242, 251, 255))}
@@ -48278,7 +48102,7 @@ QLabel:hover {background-color:rgb(221, 240, 250)}</string>
                            </sizepolicy>
                           </property>
                           <property name="currentIndex">
-                           <number>0</number>
+                           <number>1</number>
                           </property>
                           <widget class="QWidget" name="uxaSetPage">
                            <layout class="QHBoxLayout" name="horizontalLayout_132">
@@ -48424,8 +48248,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>593</width>
-                             <height>500</height>
+                             <width>605</width>
+                             <height>871</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -49056,8 +48880,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>593</width>
-                             <height>500</height>
+                             <width>605</width>
+                             <height>871</height>
                             </rect>
                            </property>
                            <property name="minimumSize">
@@ -53164,8 +52988,8 @@ QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1,
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>590</width>
-                         <height>382</height>
+                         <width>605</width>
+                         <height>1008</height>
                         </rect>
                        </property>
                        <property name="minimumSize">
@@ -60195,7 +60019,7 @@ QPushButton:hover{background-color:rgb(28, 126, 159)}</string>
                                 </font>
                                </property>
                                <property name="toolTip">
-                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Leave this field blank and attenuation will be set to AUTO. Fill this field and attenuation will be set to MANUAL. Attenuation must be an even number, odd numbers will be rounded up.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Attenuation must be an even number, odd numbers will be rounded up.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                </property>
                                <property name="styleSheet">
                                 <string notr="true">QLabel {border: 1px solid black; border-radius:8px; background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(127, 194, 229, 255), stop:1 rgba(225, 242, 251, 255))}

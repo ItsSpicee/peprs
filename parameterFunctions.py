@@ -320,6 +320,16 @@ def copyDemod(self,changedModField,replacedFieldOne,replacedFieldTwo):
 	replacedFieldOne.blockSignals(False)
 	replacedFieldTwo.blockSignals(False)
 	
+def powerMeterAveraging(self,averagingTextBox,index,label):
+	if index == 2:
+		label.setDisabled(False)
+		averagingTextBox.setDisabled(False)
+		averagingTextBox.setReadOnly(False)
+	else:
+		label.setDisabled(True)
+		averagingTextBox.setDisabled(True)
+		averagingTextBox.setReadOnly(True)
+	
 def displaySa(self,buttonSelected,buttonFocus,buttonHover,greyHover,greyButton):
 
 	saIdx = self.ui.saType.currentIndex()

@@ -3,7 +3,6 @@ function retVal = xfprintf(f, s, ignoreError)
 % and check the error status
 % if ignoreError is set, the result of :syst:err is ignored
 % returns 0 for success, -1 for errors
-
     retVal = 0;
 % set debugScpi=1 in MATLAB workspace to log SCPI commands
     if (evalin('base', 'exist(''debugScpi'', ''var'')'))

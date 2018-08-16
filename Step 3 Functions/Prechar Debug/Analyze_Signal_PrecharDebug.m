@@ -1,6 +1,6 @@
 function error = Analyze_Signal_PrecharDebug()
 error = '';
-load(".\DPD Data\Signal Generation Parameters\workspace.mat");
+load(".\DPD Data\Precharacterization Setup Parameters\workspace.mat");
 try
     disp(' %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
     disp([' Input Signal']);
@@ -21,5 +21,5 @@ try
 catch
     error = 'An error has occurred while attempting to analyze the signal.';
 end
-save(".\DPD Data\Signal Generation Parameters\workspace.mat");
+save(".\DPD Data\Precharacterization Setup Parameters\workspace.mat");
 end

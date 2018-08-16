@@ -1,13 +1,21 @@
 # windowFunctions.py contains all the functions that are needed to control the window size, display, and menu functionality
 
+# import classes
 from PyQt5.QtWidgets import (QPushButton, QStackedWidget, QMessageBox, QFileDialog, qApp,QDialog, QLineEdit, QComboBox, QRadioButton, QCheckBox)
 from PyQt5.QtCore import (QSettings,QSize,QPoint)
 from PyQt5.QtGui import (QGuiApplication)
 
+# for examining all objects in GUI
 import inspect
 
+# styling variable
 redBorder = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #f24646}"
 
+# declare tab counter variables
+tabCounterIncrement.counterTwo = 0
+tabCounterIncrement.counterThree = 0
+
+# keep track of how many times a tab was successfully navigated to (important for safety and quality checks)
 def tabCounterIncrement(self,dir):
 	i = self.ui.stepTabs.currentIndex()
 	if i == 1:
@@ -20,40 +28,38 @@ def tabCounterIncrement(self,dir):
 			tabCounterIncrement.counterThree = 1;
 		elif dir == "down":
 			tabCounterIncrement.counterThree = 0;
-tabCounterIncrement.counterTwo = 0
-tabCounterIncrement.counterThree = 0
-	 
+
+# Loads saved parameter setup when 'Open' in menu bar is clicked		
 def openDialog(self):
-	# load settings
-	# settings = QSettings("EmRG", "my_app")
-	# guirestore(self.ui,settings)
-	
+	# file dialog to select a file to open
 	file = str(QFileDialog.getOpenFileName(self, "Select a File", "./Saved Parameter Setups"))
 	fileList = file.split(",")
 	file = fileList[0]
 	file = file.replace("'","")
 	file = file.replace("(","")
+	# scan and apply data to objects
 	guirestore(self.ui, QSettings(file, QSettings.IniFormat))
 
+# Saves parameter setup when 'Save' in menu bar is clicked
 def saveDialog(self):
-	# save settings
-	#settings = QSettings("EmRG", "my_app") 
-	# guisave(self.ui,settings)
-	
+	# file dialog to choose a place to save file
 	fileInfo = str(QFileDialog.getSaveFileName(self,'Save File Location',"./Saved Parameter Setups","QSettings Files (*.ini)"))	
 	fileList = fileInfo.split(",")
 	file = fileList[0]
 	file = file.replace("'","")
 	file = file.replace("(","")
+	# scan and save data from objects
 	guisave(self.ui, QSettings(file, QSettings.IniFormat))
-		
+	
+# called when X button is clicked in application to close window	
 def closeButton(self):
 	reply=QMessageBox.question(self,'Exit Confirmation',"Are you sure you want to close the program?",QMessageBox.Yes|QMessageBox.No)
 	if reply == QMessageBox.Yes:
 		qApp.quit()
 
+# if step tab is changed (Step 1: Set Equipment, Step 2: Set Measurements etc.)
 def changeStepTab(self,safety):
-	# determine size window should be set to 
+	# determine max size window should be set to 
 	maxTrue = self.isMaximized()
 	screen = QGuiApplication.primaryScreen()
 	screenSize = screen.availableSize()

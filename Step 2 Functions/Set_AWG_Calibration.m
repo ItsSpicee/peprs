@@ -165,7 +165,15 @@ function Set_AWG_Calibration(cd,txd,rxd)
     end
     RX.UXA.TriggerLevel = TriggerLevel; % mV
     
-    RX.FilterFile = rxd.FilterFile;
+    % make path relative first
+    if contains(rxd.FilterFile,'\peprs\')
+        refinedString = strsplit(rxd.FilterFile,'\peprs\');
+        pathString = refinedString(2);
+        relativeString = char(strrep(pathString,'Measurement Data\','.\Measurement Data\'));
+        RX.FilterFile = relativeString;
+    else
+        RX.FilterFile = rxd.DownconversionFilterFile;
+    end
     
     %% Save Files
     save(".\Measurement Data\AWG Calibration Parameters\Cal.mat","Cal")

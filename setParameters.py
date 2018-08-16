@@ -155,7 +155,20 @@ class runHeterodyneCalibrationThread(QThread):
 		else:
 			self.errorOccurred.emit(self.main,result,self.bar)
 			return
-		# result = matlab.Download_Signal_HeterodyneDebug(nargout=1)
+		result = matlab.Download_Signal_HeterodyneDebug(nargout=1)
+		if result == "":
+			completed = "10"
+			self.updateBar.emit(self.main,completed,self.bar,self.style)
+		else:
+			self.errorOccurred.emit(self.main,result,self.bar)
+			return
+		result = matlab.Analyze_Signal_HeterodyneDebug(nargout=1)
+		if result == "":
+			completed = "11"
+			self.updateBar.emit(self.main,completed,self.bar,self.style)
+		else:
+			self.errorOccurred.emit(self.main,result,self.bar)
+			return
 		# resultSplit = result.split("~")
 		# if resultSplit[0] == "":
 			# self.updateData.emit(self.main,result)
@@ -401,11 +414,11 @@ def setVSA(self,buttonFocus,setButtonHover,boxDone,greyHover,greyButton,setButto
 			self.ui.demodulationEnable.setStyleSheet(None)
 			if typeIdx == 3 or typeIdx == 4: # UXA & PXA
 				checkDic=[
+					self.ui.attenuation_sa,
 					self.ui.averagingEnable,
 					self.ui.demodulationEnable,
 					self.ui.vsaType,
 					self.ui.noAveragesField_sa,
-					self.ui.attenuation_sa,
 					self.ui.freq_sa,
 					self.ui.analysisBandwidth_sa,
 					self.ui.clockRef_sa,
@@ -674,9 +687,10 @@ def setVSAAdv(self,boxDone,setButton,matlab):
 			errorString = result[1]
 			errorArray = errorString.split("|")
 			errors = determineIfErrors(self,errorArray)
+			flag = 0
 			if errors == 0:
 				self.ui.partNum_sa.setText(partNum);
-				flag = 1;
+				flag = 1
 			else:
 				addToErrorLayout(self,errorArray)
 				self.ui.awgSetGeneral.setChecked(False)
@@ -799,6 +813,7 @@ def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,matlab):
 	idx = self.ui.saType.currentIndex()
 	
 	checkDic=[
+		self.ui.attenuation_spa,
 		self.ui.address_spa,
 		self.ui.freq_spa,
 		self.ui.freqSpan_spa,
@@ -806,7 +821,6 @@ def setSA(self,buttonFocus,buttonHover,greyHover,boxDone,setButton,matlab):
 		self.ui.clockRef_spa,
 		self.ui.trigLevel_spa,
 		self.ui.trigSource_spa,
-		self.ui.attenuation_spa
 		]
 	done = win.checkIfDone(checkDic)
 	if done:
@@ -902,7 +916,7 @@ def setSAAdv(self,boxDone,setButton,matlab):
 			setButton.setEnabled(False)
 			setButton.setStyleSheet(None)
 			self.ui.saEquipAdv.setStyleSheet(boxDone)
-			setButton.setText("Unset")
+			setButton.setText("Update")
 			self.ui.saEquipAdv.setStyleSheet(boxDone)	
 			
 			if setButton.isChecked() == True:
@@ -3076,7 +3090,7 @@ def updatePrecharBar(self,stepNumber,bar,setBox):
 		self.ui.precharCalFilesEquip.setStyleSheet(setBox)
 		self.ui.precharRefRXEquip.setStyleSheet(setBox)
 		self.ui.precharVSGEquip.setStyleSheet(setBox)
-		self.ui.precharRun.setText("Unset")
+		self.ui.precharRun.setText("Update\n&& Run")
 		
 		# switch to prechar tab
 		self.ui.precharTabs.setCurrentIndex(0)

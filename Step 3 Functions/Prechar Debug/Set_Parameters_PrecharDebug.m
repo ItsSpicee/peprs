@@ -11,9 +11,9 @@ instrreset
 error = '';
 
 try
-    load(".\DPD Data\Signal Generation Parameters\Signal.mat")
-    load(".\DPD Data\Signal Generation Parameters\RX.mat");
-    load(".\DPD Data\Signal Generation Parameters\TX.mat");
+    load(".\DPD Data\Precharacterization Setup Parameters\Signal.mat")
+    load(".\DPD Data\Precharacterization Setup Parameters\RX.mat");
+    load(".\DPD Data\Precharacterization Setup Parameters\TX.mat");
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %% Instrument control and signal analysis is done with with 32 bit MATLAB
@@ -79,7 +79,7 @@ try
     % Load in the calibration files
     CalibrationParameters
 
-    save(".\DPD Data\Signal Generation Parameters\workspace.mat");
+    save(".\DPD Data\Precharacterization Setup Parameters\workspace.mat");
 catch
     error = 'An error has occurred while attempting to set parameters.';
 end

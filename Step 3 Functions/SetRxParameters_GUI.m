@@ -35,13 +35,13 @@ function SetRxParameters_GUI(dict)
         end
     end 
     
-    
     % UXA Parameters
     RX.UXA.Downconverter_flag = 0; % Leave as 0, Use UXA as a downconverter to feed the signal into the scope
     RX.UXA.Downcversion_RF_Freq = 28e9; % The RF frequency that the UXA is seeing at its RF input port when used in downconversion mode
     
     RX.UXA.AnalysisBandwidth = dict.AnalysisBandwidth;
     RX.UXA.Attenuation = dict.Attenuation;
+    
     if dict.ClockReference == 1
         RX.UXA.ClockReference = 'Internal';
     elseif dict.ClockReference == 2
@@ -63,6 +63,6 @@ function SetRxParameters_GUI(dict)
     end
     
     %RX.channelVec = dict.channelVec;
-    
-    save('.\DPD Data\Signal Generation Parameters\RX.mat','RX')
+    save('.\DPD Data\Algorithm Parameters\RX.mat','RX')
+
 end

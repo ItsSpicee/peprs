@@ -140,7 +140,15 @@ RX.Analyzer.Fsample = FSample; % Sampling rate of the receiver
 RX.NumberOfMeasuredPeriods = MeasuredPeriods; % Number of measured frames;
 RX.VisaAddress = rxd.VisaAddress;
 
-RX.DownFile = rxd.DownconversionFilterFile;
+% make path relative first
+if contains(rxd.DownconversionFilterFile,'\peprs\')
+    refinedString = strsplit(rxd.DownconversionFilterFile,'\peprs\');
+    pathString = refinedString(2);
+    relativeString = char(strrep(pathString,'Measurement Data\','.\Measurement Data\'));
+    RX.DownFile = relativeString;
+else
+    RX.DownFile = rxd.DownconversionFilterFile;
+end
 
 % Scope Parameters
 if rxd.EnableExternalClock_Scope == 1

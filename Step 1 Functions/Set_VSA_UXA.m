@@ -25,7 +25,7 @@ function result = Set_VSA_UXA(dict,model)
 			result = char(resultsString);
 			return
 		end
-        
+        instrreset
 		load(".\InstrumentFunctions\SignalCapture_UXA\UXAConfig.mat")
 		spectrum = visa('agilent',dict.address);
 		spectrum.InputBufferSize = 8388608;

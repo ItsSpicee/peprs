@@ -4,7 +4,9 @@
 greenButton = "QPushButton{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 85, 0, 255), stop:1 rgba(0, 158, 0, 255));color:white;border-radius: 5px; border: 3px solid green;} QPushButton:hover{background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 134, 0, 255), stop:1 rgba(0, 184, 0, 255));}"
 
 def updateGenAWG(self):
+	# remove done border from equipment boxes
 	self.ui.awgEquipGeneral.setStyleSheet(None)
+	# enable update button and change its styling to green
 	self.ui.awgSetGeneral.setEnabled(True)
 	self.ui.awgSetGeneral.setStyleSheet(greenButton)
 		
@@ -35,6 +37,7 @@ def updatePSG(self):
 	
 def updateVSA(self):
 	idx = self.ui.vsaType.currentIndex()
+	# based on which vsa instrument is selected, change styling of different buttons and boxes
 	if idx == 1 or idx == 5:
 		self.ui.scopeEquipGeneral.setStyleSheet(None)
 		self.ui.scopeMod.setStyleSheet(None)
@@ -46,10 +49,14 @@ def updateVSA(self):
 		self.ui.digSet.setEnabled(True)
 		self.ui.digSet.setStyleSheet(greenButton)
 	elif idx == 3 or idx == 4:
-		self.ui.digEquipGeneral.setStyleSheet(None)
-		self.ui.digMod.setStyleSheet(None)
-		self.ui.digSet.setEnabled(True)
-		self.ui.digSet.setStyleSheet(greenButton)
+		self.ui.uxaEquipGeneralVSA.setStyleSheet(None)
+		self.ui.uxaMod.setStyleSheet(None)
+		if idx == 3:
+			self.ui.uxaSet.setEnabled(True)
+			self.ui.uxaSet.setStyleSheet(greenButton)
+		elif idx == 4:
+			self.ui.pxaSet.setEnabled(True)
+			self.ui.pxaSet.setStyleSheet(greenButton)
 		
 def updateAdvUXA(self):
 	self.ui.uxaVSAAdv.setStyleSheet(None)
@@ -116,11 +123,11 @@ def updateSAMeas(self):
 	
 def updateRXCal(self):
 	idx = self.ui.vsaMeasRunStack.currentIndex()
-	
 	self.ui.combEquip_vsaMeas.setStyleSheet(None)
 	self.ui.downEquip_vsaMeas.setStyleSheet(None)
 	self.ui.rxEquip_vsaMeas.setStyleSheet(None)
 	self.ui.trigEquip_vsaMeas.setStyleSheet(None)
+	# change styling based on if rx cal is being run or not
 	if idx == 0:
 		self.ui.set_run_vsa.setEnabled(True)
 		self.ui.set_run_vsa.setStyleSheet(greenButton)

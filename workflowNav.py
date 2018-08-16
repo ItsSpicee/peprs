@@ -1,20 +1,26 @@
 # workflowNav.py contains all the functions that are called when an equipment workflow button is hit, it also contains the dashboard equipment options
 
+# import classes
 from PyQt5.QtGui import (QCursor)
 from PyQt5.QtCore import (Qt)
 from PyQt5.QtWidgets import (QFileDialog)
 
+# function that shortens changing index in stack
 def changeStack(self,stackName,idx):
 	stackName.setCurrentIndex(idx)
 
+# when awg button in dashboard is clicked
 def awgOnClick(self,unactiveButton,activeButton,buttonPHover):
-	self.ui.equipStack.setCurrentIndex(0)
 	upChecked = self.ui.upSet.isChecked()
 	psgChecked = self.ui.psgSet.isChecked()
 	scopeChecked = self.ui.scopeSet.isChecked()
 	digChecked = self.ui.digSet.isChecked()
 	uxaChecked = self.ui.uxaSet.isChecked()
 	pxaChecked = self.ui.pxaSet.isChecked()
+	
+	# change page in equipment stacked widget
+	self.ui.equipStack.setCurrentIndex(0)
+	# change styling of buttons based on what equipment has already been set
 	if upChecked or psgChecked:
 		self.ui.vsaButton_vsg.setStyleSheet(activeButton)
 		self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
@@ -25,25 +31,22 @@ def awgOnClick(self,unactiveButton,activeButton,buttonPHover):
 		self.ui.vsaButton_up.setCursor(QCursor(Qt.PointingHandCursor))
 	else:
 		self.ui.vsaButton_vsg.setStyleSheet(unactiveButton)
-
+		
+# when up button in dashboard is clicked
 def upOnClick(self,buttonGreyPHover,buttonGreyP):
 	awgSet = self.ui.awgSetGeneral.isChecked()
 	upSet = self.ui.upSet.isChecked()
 	
 	self.ui.equipStack.setCurrentIndex(1)
 	self.ui.up_psg_stack.setCurrentIndex(0)
-	
 	if awgSet:
 		self.ui.up_psg_workflow.setCurrentIndex(0)
-		
 	if upSet:
 		self.ui.vsaButton_up.setStyleSheet(buttonGreyPHover)
 		self.ui.vsaButton_up.setCursor(QCursor(Qt.PointingHandCursor))
 	else:
 		self.ui.vsaButton_up.setStyleSheet(buttonGreyP)
 		self.ui.vsaButton_up.setCursor(QCursor(Qt.ArrowCursor))
-	# else:
-		# self.fillParametersMsg()
 	
 def psgOnClick(self,buttonGreyPHover,buttonGreyP):
 	awgSet = self.ui.awgSetGeneral.isChecked()
@@ -144,16 +147,6 @@ def p3OnClick(self):
 	if vsgType == 1 or vsgType == 4:
 		if p1Checked:
 			self.ui.equipStack.setCurrentIndex(8)
-def powerMeterAveraging(self,averagingTextBox,index,label):
-	
-	if index == 2:
-		label.setDisabled(False)
-		averagingTextBox.setDisabled(False)
-		averagingTextBox.setReadOnly(False)
-	else:
-		label.setDisabled(True)
-		averagingTextBox.setDisabled(True)
-		averagingTextBox.setReadOnly(True)
 		
 def awgVSAMeasOnClick(self):
 	vsaSetChecked = self.ui.vsaMeasSet.isChecked()
@@ -185,34 +178,3 @@ def analyzerVSGMeasOnClick(self):
 def switchVSAMeas(self,idx):
 	self.ui.vsaMeasParamTabs.setCurrentIndex(idx)
 	self.ui.rightFlowStack.setCurrentIndex(0)
-		
-# OLD CODE
-
-# for old vsa and vsg only dash buttons
-# def vsgOnlySetup(self,greyButton,blueButton):
-	# self.ui.vsgDash.setStyleSheet(blueButton)
-	# self.ui.meterDash.setStyleSheet(greyButton)
-	# self.ui.vsaDash.setStyleSheet(greyButton)
-	# self.ui.saDash.setStyleSheet(greyButton)
-	
-# def vsaOnlySetup(self,greyButton, blueButton):
-	# self.ui.vsgDash.setStyleSheet(greyButton)
-	# self.ui.meterDash.setStyleSheet(blueButton)
-	# self.ui.vsaDash.setStyleSheet(blueButton)
-	# self.ui.saDash.setStyleSheet(blueButton)
-	
-# def standardSetup(self,blueButton):
-	# self.ui.vsgDash.setStyleSheet(blueButton)
-	# self.ui.meterDash.setStyleSheet(blueButton)
-	# self.ui.vsaDash.setStyleSheet(blueButton)
-	# self.ui.saDash.setStyleSheet(blueButton)
-	
-# for old open folder buttons
-# def fileBrowse(self, lineEdit):
-	# fileInfo = str(QFileDialog.getOpenFileName())
-	# fileList = fileInfo.split(",")
-	# file = fileList[0]
-	# file = file.replace("'","")
-	# file = file.replace("(","")
-	# lineEdit.clear()
-	# lineEdit.insertPlainText(file)

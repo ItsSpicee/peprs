@@ -14,6 +14,12 @@ function Set_SignalGen_Structures(txd,rxd,sd,algo)
     rxd.xLength = str2double(rxd.xLength);
     rxd.TriggerChannel = str2double(rxd.TriggerChannel);
     
+    % load RX parameters from SetRXParameters_GUI and pass them to prechar
+    % setup
+    load('.\DPD Data\Algorithm Parameters\RX.mat')
+    save('.\DPD Data\Precharacterization Setup Parameters\RX.mat','RX')
+    clear('RX')
+    
     %load structures
     if algo == "CalVal"
         load(".\DPD Data\Calibration Validation Parameters\Signal.mat","Signal")
@@ -155,7 +161,15 @@ function Set_SignalGen_Structures(txd,rxd,sd,algo)
     
     % If we are receiving at IF, then we downconvert digitally to process at
     % baseband. After downconversion, we need to filter the signal with a LPF
-    RX.DownconversionFilterFile = rxd.DownconversionFilterFile;  
+   % make path relative first
+    if contains(rxd.DownconversionFilterFile,'\peprs\')
+        refinedString = strsplit(rxd.DownconversionFilterFile,'\peprs\');
+        pathString = refinedString(2);
+        relativeString = char(strrep(pathString,'Measurement Data\','.\Measurement Data\'));
+        RX.DownconversionFilterFile = relativeString;  
+    else
+        RX.DownconversionFilterFile = rxd.DownconversionFilterFile;
+    end
     
     RX.TriggerChannel = rxd.TriggerChannel;
     if TX.AWG.Position == 1

@@ -1,3 +1,5 @@
+# contains all of the functions that are called when a debug button is clicked
+
 from PyQt5.QtWidgets import (QMessageBox)
 
 greyHover = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:10px;color:black} QPushButton:hover{background-color:rgb(243, 243, 243);}"
@@ -67,7 +69,7 @@ def saveMeasurementsPrechar(self,matlab):
 		self.statusBar().showMessage('Successfully saved measurements',2000)	
 	
 ######## FUNCTIONS USED WITHIN THIS FILE ########
-	
+# set all buttons to grey when new debug button is clicked
 def setGreyPrecharButtons(self):
 	self.ui.setParameters_precharDebug.setStyleSheet(greyHover)
 	self.ui.prepareSignal_precharDebug.setStyleSheet(greyHover)

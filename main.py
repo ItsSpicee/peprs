@@ -116,6 +116,22 @@ class Window(QMainWindow):
 		self.vsgResponseToolbar = NavigationToolbar(self.vsgResponseCanvas, self)
 		self.ui.responsePlot_vsgCal.addWidget(self.vsgResponseToolbar)
 		self.ui.responsePlot_vsgCal.addWidget(self.vsgResponseCanvas)
+		# cal validation
+		self.calvalSpectrumFigure = plt.figure()
+		self.calvalSpectrumCanvas = FigureCanvas(self.calvalSpectrumFigure)
+		self.calvalSpectrumToolbar = NavigationToolbar(self.calvalSpectrumCanvas, self)
+		self.ui.spectrumPlot_calval.addWidget(self.calvalSpectrumToolbar)
+		self.ui.spectrumPlot_calval.addWidget(self.calvalSpectrumCanvas)
+		self.calvalGainFigure = plt.figure()
+		self.calvalGainCanvas = FigureCanvas(self.calvalGainFigure)
+		self.calvalGainToolbar = NavigationToolbar(self.calvalGainCanvas, self)
+		self.ui.gainPlot_calval.addWidget(self.calvalGainToolbar)
+		self.ui.gainPlot_calval.addWidget(self.calvalGainCanvas)
+		self.calvalPhaseFigure = plt.figure()
+		self.calvalPhaseCanvas = FigureCanvas(self.precharPhaseFigure)
+		self.calvalPhaseToolbar = NavigationToolbar(self.calvalPhaseCanvas, self)
+		self.ui.phasePlot_calval.addWidget(self.precharPhaseToolbar)
+		self.ui.phasePlot_calval.addWidget(self.precharPhaseCanvas)
 		# prechar
 		self.precharSpectrumFigure = plt.figure()
 		self.precharSpectrumCanvas = FigureCanvas(self.precharSpectrumFigure)
@@ -372,6 +388,8 @@ class Window(QMainWindow):
 		# vsa equipment page - uxa
 		self.ui.trigSource_sa.currentIndexChanged.connect(lambda: param.disableTrigLevelVSA(self))
 		self.ui.freq_sa.textChanged.connect(lambda: param.copyUXACenterFreq(self))
+		# meter page 
+		self.ui.powerMeterFilter.currentIndexChanged.connect(lambda: param.powerMeterAveraging(self,self.ui.noAveragesField_meter,self.ui.powerMeterFilter.currentIndex(),self.ui.noAveragesLabel_meter))
 		# sa page
 		self.ui.saType.currentIndexChanged.connect(lambda: param.displaySa(self,blueSelect,setFocusButton,setButtonHover,greyHover,greyButton))
 		self.ui.trigSource_spa.currentIndexChanged.connect(lambda: param.disableTrigLevelSA(self))
@@ -604,7 +622,6 @@ class Window(QMainWindow):
 		self.ui.power3Button_down.clicked.connect(lambda: flow.p3OnClick(self))
 		self.ui.power3Button_down_2.clicked.connect(lambda: flow.p3OnClick(self))
 		# power meter page
-		self.ui.powerMeterFilter.currentIndexChanged.connect(lambda: flow.powerMeterAveraging(self,self.ui.noAveragesField_meter,self.ui.powerMeterFilter.currentIndex(),self.ui.noAveragesLabel_meter))
 		self.ui.awgButton_meter.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
 		self.ui.awgButton_meter_2.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
 		self.ui.awgButton_meter_3.clicked.connect(lambda: flow.changeStack(self,self.ui.equipStack,0))
@@ -1337,6 +1354,7 @@ class Window(QMainWindow):
 		p3c4A = self.ui.p3c4Address.text()
 		addressList = {p1c1A,p1c2A,p1c3A,p1c4A,p2c1A,p2c2A,p2c3A,p2c4A,p3c1A,p3c2A,p3c3A,p3c4A}
 		awgType = self.ui.vsgWorkflows.currentIndex()
+		awgText = self.ui.awgSetGeneral.text()
 		awgSet = self.ui.awgSetGeneral.isChecked()
 		psgSet = self.ui.psgSet.isChecked()
 		
@@ -1372,7 +1390,7 @@ class Window(QMainWindow):
 					msg = QMessageBox(self)
 					msg.setIcon(QMessageBox.Critical)
 					msg.setWindowTitle('Incorrect Order')
-					msg.setText("Please turn off RF before turning off DC")
+					msg.setText("Turn off RF before turning off DC")
 					msg.setStandardButtons(QMessageBox.Ok)
 					msg.exec_();
 					self.ui.emergButtonFirst.setChecked(True)
@@ -1393,7 +1411,7 @@ class Window(QMainWindow):
 					msg = QMessageBox(self)
 					msg.setIcon(QMessageBox.Critical)
 					msg.setWindowTitle('Incorrect Order')
-					msg.setText("Please turn on DC before turning on RF")
+					msg.setText("Turn on DC before turning on RF")
 					msg.setStandardButtons(QMessageBox.Ok)
 					msg.exec_();
 					self.ui.emergButtonSecond.setChecked(False)
@@ -1406,7 +1424,6 @@ class Window(QMainWindow):
 							self.statusBar().showMessage("AWG RF turned ON",1500)
 						else:
 							matlab.AWG_Output_Toggle(1,nargout=0)
-							self.statusBar().showMessage("RF turned ON ",2000)
 						self.ui.emergButtonSecond.setStyleSheet(redButton)
 						self.ui.emergButtonSecond.setText("Turn Off RF")
 					else:
@@ -1421,7 +1438,6 @@ class Window(QMainWindow):
 					self.statusBar().showMessage("PSG RF turned OFF (test)",1500)
 				else:
 					matlab.AWG_Output_Toggle(0,nargout=0)
-					self.statusBar().showMessage("RF turned OFF",2000)
 				self.ui.emergButtonSecond.setStyleSheet(greenButton)
 				self.ui.emergButtonSecond.setText("Turn On RF")
 		# turn off all
@@ -1442,7 +1458,7 @@ class Window(QMainWindow):
 					else:
 						matlab.Output_Toggle(x,0,nargout=0)
 			
-			self.statusBar().showMessage("RF and DC turned OFF (test)",2000)
+			self.statusBar().showMessage("RF and DC turned OFF",2000)
 			self.ui.emergButtonSecond.setStyleSheet(greenButton)
 			self.ui.emergButtonSecond.setText("Turn On RF")
 			self.ui.emergButtonFirst.setStyleSheet(greenButton)

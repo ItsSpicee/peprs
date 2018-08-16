@@ -4,12 +4,12 @@ function [I, Q] = IQCapture_UXA (Freq, AnalysisBW, Fsample, time, UXAAdd, Atten,
 
     Frequency = num2str(Freq);
     capture_time = num2str(time - 1/Fsample,8);
-    Address = UXAAdd ;
-    Attenuation = num2str(Atten);    
-
+    Address = UXAAdd;
+    Attenuation = num2str(Atten);
+    
     obj.handle = {};
     obj.Address = Address;
-
+    
     saCfg.connected = 1 ;
     saCfg.connectionType = 'visa';
     saCfg.visaAddr = [num2str(Address)] ;
@@ -29,7 +29,7 @@ function [I, Q] = IQCapture_UXA (Freq, AnalysisBW, Fsample, time, UXAAdd, Atten,
     obj.scale_type = '';
     obj.Initialized = true;
     
-    try 
+%     try 
         fopen(obj.handle);
         freq_read = query(obj.handle,':SENSe:FREQuency:RF:CENTer?');
         
@@ -89,8 +89,8 @@ function [I, Q] = IQCapture_UXA (Freq, AnalysisBW, Fsample, time, UXAAdd, Atten,
 %         I = resample(I(1:(end-uncorrelatedSamples)), downsample, upsample, resamplingFilterOrder);
 %         Q = resample(Q(1:(end-uncorrelatedSamples)), downsample, upsample, resamplingFilterOrder);
         fclose(obj.handle);
-    catch
-        warning('Problem during capture IQ, please check memory.')
-        fclose(obj.handle);
-    end
+%     catch
+%         warning('Problem during capture IQ, please check memory.')
+%         fclose(obj.handle);
+%     end
 end                        

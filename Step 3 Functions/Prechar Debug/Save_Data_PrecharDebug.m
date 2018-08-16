@@ -1,6 +1,6 @@
 function error = Save_Data_PrecharDebug()
 error = '';
-load(".\DPD Data\Signal Generation Parameters\workspace.mat");
+load(".\DPD Data\Precharacterization Setup Parameters\workspace.mat");
 try
     % Save EVM Results
     if (RX.VSA.DemodSignalFlag)
@@ -15,5 +15,5 @@ try
 catch
     error = 'An error has occurred while attempting to save data.';
 end
-save(".\DPD Data\Signal Generation Parameters\workspace.mat");
+save(".\DPD Data\Precharacterization Setup Parameters\workspace.mat");
 end
