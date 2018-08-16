@@ -128,10 +128,10 @@ class Window(QMainWindow):
 		self.ui.gainPlot_calval.addWidget(self.calvalGainToolbar)
 		self.ui.gainPlot_calval.addWidget(self.calvalGainCanvas)
 		self.calvalPhaseFigure = plt.figure()
-		self.calvalPhaseCanvas = FigureCanvas(self.precharPhaseFigure)
+		self.calvalPhaseCanvas = FigureCanvas(self.calvalPhaseFigure)
 		self.calvalPhaseToolbar = NavigationToolbar(self.calvalPhaseCanvas, self)
-		self.ui.phasePlot_calval.addWidget(self.precharPhaseToolbar)
-		self.ui.phasePlot_calval.addWidget(self.precharPhaseCanvas)
+		self.ui.phasePlot_calval.addWidget(self.calvalPhaseToolbar)
+		self.ui.phasePlot_calval.addWidget(self.calvalPhaseCanvas)
 		# prechar
 		self.precharSpectrumFigure = plt.figure()
 		self.precharSpectrumCanvas = FigureCanvas(self.precharSpectrumFigure)
@@ -1269,6 +1269,7 @@ class Window(QMainWindow):
 			msg.setText("Please fill out all fields before moving on")
 			msg.setStandardButtons(QMessageBox.Ok)
 			msg.exec_();
+	
 	# check to make sure the quality check is complete
 	def qualityComplete(self,quality):
 		# determine what peprs window size should be set to
@@ -1293,16 +1294,19 @@ class Window(QMainWindow):
 			msg.setText("Please fill out all fields before moving on")
 			msg.setStandardButtons(QMessageBox.Ok)
 			msg.exec_();
+	
 	# safety check cancel button clicked
 	def safetyCancel(self,safety):
 		safety.done(0)
 		menu.tabCounterIncrement(self,"down")
 		self.ui.stepTabs.setCurrentIndex(2)
+	
 	# quality check cancel button clicked	
 	def qualityCancel(self,quality):
 		quality.done(0)
 		menu.tabCounterIncrement(self,"down")
 		self.ui.stepTabs.setCurrentIndex(1)
+	
 	# if peprs window is closed
 	def closeEvent(self,event):
 		reply=QMessageBox.question(self,'Exit Confirmation',"Are you sure you want to close the program?",QMessageBox.Yes|QMessageBox.No,QMessageBox.No)
@@ -1310,6 +1314,7 @@ class Window(QMainWindow):
 			event.accept()
 		else:
 			event.ignore()
+	
 	# if safety/quality check is enabled or disabled		
 	def toggleCheck(self,state):
 		if state:
@@ -1324,6 +1329,7 @@ class Window(QMainWindow):
 		msg.setText("Please fill out the current equipment's parameters before moving on.")
 		msg.setStandardButtons(QMessageBox.Ok)
 		msg.exec_();
+	
 	# center windows	
 	def center(self):
 		# get a rectangle specifying main window geometry
@@ -1334,6 +1340,7 @@ class Window(QMainWindow):
 		qr.moveCenter(cp)
 		# move top-left point of the application window to top-left point of qr rectangle
 		self.move(qr.topLeft())
+	
 	# control rf/dc on or off
 	def toggleOutput(self,button,redButton,greenButton):
 		# turn on dc then rf, turn off rf then dc
@@ -1471,6 +1478,5 @@ if __name__ == '__main__':
 	
 	
 # OLD CODE
-
 # alternative ui file loading method
 #uic.loadUi('peprs.ui',self)

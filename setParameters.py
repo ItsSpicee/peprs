@@ -177,23 +177,6 @@ class runHeterodyneCalibrationThread(QThread):
 		# else:
 			# self.errorOccurred.emit(self.main,result,self.bar)
 			# return
-
-# thread called when RX calibration is run			
-# class runRXCalibrationThread(QThread):
-	# updateBar = pyqtSignal(object,str,QProgressBar,object)
-	# #updateData = pyqtSignal(object,str)
-	# errorOccurred = pyqtSignal(object,str,object) 
-	
-	# def __init__(self,bar,main,style):
-		# QThread.__init__(self)
-		# self.bar = bar
-		# self.main = main
-		# self.style = style
-	
-	# def __del__(self):
-		# self.wait()
-		
-	# def run(self):
 			
 def setGeneralAWG(self,buttonFocus,boxDone,greyHover,awgSetGeneral,matlab):
 	# array to check that all parameters are filled out when set button is clicked
@@ -1517,6 +1500,7 @@ def rxCalRoutine(self,boxDone,buttonHover,setButton,matlab):
 		self.progressBar.setTextVisible(True);
 		self.progressBar.setFormat("Currently Running: RX Calibration Routine")
 		self.ui.statusBar.addWidget(self.progressBar,1)
+		# progress bar that should be replaced by thread functions later
 		completed = 0
 		while completed < 100:
 			completed = completed + 0.00001
@@ -1719,6 +1703,7 @@ def awgCalRoutine(self,boxDone,setButton,matlab):
 		self.progressBar.setTextVisible(True);
 		self.progressBar.setFormat("Currently Running: AWG Calibration Routine")
 		self.ui.statusBar.addWidget(self.progressBar,1)
+		# progress bar that should later be replaced with thread functions
 		completed = 0
 		while completed < 100:
 			completed = completed + 0.00001
@@ -2013,17 +1998,8 @@ def setHetero(self,boxDone,setButton,matlab):
 		# begin running signal generation
 		self.heterodyneThread.start()	
 		
-		# completed = 0
-		# while completed < 100:
-			# completed = completed + 0.00001
-			# self.progressBar.setValue(completed)
-		# self.ui.statusBar.removeWidget(self.progressBar)
-		## to show progress bar, need both addWidget() and show()
-		# self.ui.statusBar.showMessage("Heterodyne Calibration Routine Complete",3000)
-		
 		setButton.setEnabled(False)
 		setButton.setStyleSheet(None)
-		
 		if setButton.isChecked() == True:
 			setButton.setText("Update\n&& Run")	
 		elif setButton.isChecked() == False:
@@ -2031,7 +2007,6 @@ def setHetero(self,boxDone,setButton,matlab):
 	else:
 		instrParamErrorMessage(self,"Please fill out all fields before attempting to set parameters.")
 		setButton.setChecked(False)
-	
 		
 def setHomo(self,boxDone,setButton):
 	checkDic = [
@@ -2105,6 +2080,7 @@ def setHomo(self,boxDone,setButton):
 		self.progressBar.setTextVisible(True);
 		self.progressBar.setFormat("Currently Running: Homodyne Calibration Routine")
 		self.ui.statusBar.addWidget(self.progressBar,1)
+		# progress bar that should later be replaced with thread functions
 		completed = 0
 		while completed < 100:
 			completed = completed + 0.00001
@@ -2255,6 +2231,7 @@ def runCalValidation(self,setBox,setButton,matlab):
 		self.progressBar.setTextVisible(True);
 		self.progressBar.setFormat("Currently Running: Calibration Validation Routine")
 		self.ui.statusBar.addWidget(self.progressBar,1)
+		# progress bar that should later be replaced with thread functions
 		completed = 0
 		while completed < 100:
 			completed = completed + 0.00001
@@ -2623,6 +2600,7 @@ def runDPD(self,setBox,setButton,matlab):
 		self.progressBar.setTextVisible(True);
 		self.progressBar.setFormat("Currently Running: PreCharacterization Setup Routine")
 		self.ui.statusBar.addWidget(self.progressBar,1)
+		# progress bar that should later be replaced by thread functions
 		completed = 0
 		while completed < 100:
 			completed = completed + 0.00001
@@ -3066,6 +3044,7 @@ def determineIfErrors(self,errorArray):
 			errors =1
 	return errors
 	
+# add an item into equipment error widget
 def addToErrorLayout(self,errorArray):
 	for x in errorArray:
 		if x == "" or x == " ":
@@ -3211,57 +3190,38 @@ def updateHeterodyneBar(self,stepNumber,bar,boxDone):
 	elif stepNumber == "7":
 		bar.setFormat("Currently Running: Save Inverse Model Data")
 		bar.setValue(float(stepNumber))
-	# elif stepNumber == "5":
-		# bar.setFormat("Currently Running: Save Spectrum & VSA Data")
-		# bar.setValue(float(stepNumber))
+	elif stepNumber == "8":
+		bar.setFormat("Currently Running: Apply Inverse Model to Verification Signal")
+		bar.setValue(float(stepNumber))
+	elif stepNumber == "9":
+		bar.setFormat("Currently Running: Last Download Signal")
+		bar.setValue(float(stepNumber))
+	elif stepNumber == "10":
+		bar.setFormat("Currently Running: Last Downconvert, Align, && Analyze Signal")
+		bar.setValue(float(stepNumber))
+	elif stepNumber == "11":
+		bar.setValue(float(stepNumber))
+		# remove progress bar
+		self.ui.statusBar.removeWidget(bar)
+		self.ui.statusBar.showMessage("Routine Complete",3000)
+		# change next stack
+		self.ui.vsgMeasNextStack.setCurrentIndex(8)
 		
-		# # embed plots into GUI (created in step 4)
-		# spectrumImage = mpimg.imread('.\Figures\Prechar_Spectrum_Output.png')
-		# self.precharSpectrumFigure.clear()
-		# sax = self.precharSpectrumFigure.add_subplot(111)
-		# sax.imshow(spectrumImage)
-		# sax.set_xlabel('Frequency(GHz)')
-		# sax.set_ylabel('Power(dB)')
-		# sax.set_title('Welch Mean-Square Spectrum Estimate')
-		# sax.set_xticks([], [])
-		# sax.set_yticks([], [])
-		# self.precharSpectrumCanvas.draw()
-		
-		# gainImage = mpimg.imread('.\Figures\Prechar_Gain.png')
-		# self.precharGainFigure.clear()
-		# gax = self.precharGainFigure.add_subplot(111)
-		# gax.imshow(gainImage)
-		# gax.set_xlabel('Input Power (dBm)')
-		# gax.set_ylabel('Gain Distortion (dB)')
-		# gax.set_title('Gain Distortion')
-		# gax.set_xticks([], [])
-		# gax.set_yticks([], [])
-		# self.precharGainCanvas.draw()
-			
-		# phaseImage = mpimg.imread('.\Figures\Prechar_Phase.png')
-		# self.precharPhaseFigure.clear()
-		# pax = self.precharPhaseFigure.add_subplot(111)
-		# pax.imshow(phaseImage)
-		# pax.set_xlabel('Input Power (dBm)')
-		# pax.set_ylabel('Phase Distortion (degree)')
-		# pax.set_title('AM/PM Distortion')
-		# pax.set_xticks([], [])
-		# pax.set_yticks([], [])
-		# self.precharPhaseCanvas.draw()
-		
-		# # switch gui page to show plots
-		# self.ui.precharAlgoStack.setCurrentIndex(0)
-		
-	# elif stepNumber == "6":
-		# bar.setFormat("Currently Running: Save Signal Generation Measurements")
-		# bar.setValue(float(stepNumber))
-	# elif stepNumber == "7":
-		# bar.setValue(float(stepNumber))
-		# # remove progress bar
-		# self.ui.statusBar.removeWidget(bar)
-		# self.ui.statusBar.showMessage("Routine Complete",3000)
-		# # change next stack
-		# self.ui.algoNextStack.setCurrentIndex(3)
+	# NEED TO EMBED PLOTS INTO GUI, EXAMPLE:
+	# # embed plots into GUI (created in step 4)
+	# spectrumImage = mpimg.imread('.\Figures\Prechar_Spectrum_Output.png')
+	# self.precharSpectrumFigure.clear()
+	# sax = self.precharSpectrumFigure.add_subplot(111)
+	# sax.imshow(spectrumImage)
+	# sax.set_xlabel('Frequency(GHz)')
+	# sax.set_ylabel('Power(dB)')
+	# sax.set_title('Welch Mean-Square Spectrum Estimate')
+	# sax.set_xticks([], [])
+	# sax.set_yticks([], [])
+	# self.precharSpectrumCanvas.draw()
+	
+	# # switch gui page to show plots
+	# self.ui.precharAlgoStack.setCurrentIndex(0)
 	
 def errorOccurred(self,error,bar):
 	algoRunErrorMessage(self,error)

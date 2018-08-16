@@ -5,12 +5,14 @@ from PyQt5.QtCore import (Qt)
 from PyQt5.QtWidgets import (QMessageBox)
 import setParameters as set
 
+# change what is shown in GUI based on which VSG instrument is selected from VSG Type dropdown
 def displayVsg(self,greyHover,greyButton):
 	awgChecked = self.ui.awgSetGeneral.isChecked()
 	vsgChecked = self.ui.vsgSetGeneral.isChecked()
 	upChecked = self.ui.upSet.isChecked()
 	psgChecked = self.ui.psgSet.isChecked()
 	i = self.ui.vsgSetup.currentIndex()
+	# change pages in stacks and colour buttons appropriately
 	if i == 0: # select
 		self.ui.vsgEquipStack.setCurrentIndex(2)
 		self.ui.vsgEquipStackAdv.setCurrentIndex(2)
@@ -72,7 +74,8 @@ def displayVsg(self,greyHover,greyButton):
 			self.ui.vsaButton_vsg.setCursor(QCursor(Qt.PointingHandCursor))
 		else:
 			self.ui.vsgNextSteps.setCurrentIndex(4)
-
+			
+# change what is displayed in GUI based on which VSA instrument is selected
 def displayVsa(self,unsetBox,greyHover,greyButton):	
 	vsaIdx = self.ui.vsaType.currentIndex()
 	averaging = self.ui.averagingEnable.currentIndex()
@@ -161,7 +164,6 @@ def displayVsa(self,unsetBox,greyHover,greyButton):
 		self.ui.vsaMeasGenStack.setCurrentIndex(0)
 		self.ui.averagingEnableLabel.setEnabled(True)
 		self.ui.averagingEnable.setEnabled(True)
-		
 	
 	# if scope is selected
 	if vsaIdx == 1 or vsaIdx == 5:
@@ -320,6 +322,7 @@ def copyDemod(self,changedModField,replacedFieldOne,replacedFieldTwo):
 	replacedFieldOne.blockSignals(False)
 	replacedFieldTwo.blockSignals(False)
 	
+# enable or disable power meter averaging field
 def powerMeterAveraging(self,averagingTextBox,index,label):
 	if index == 2:
 		label.setDisabled(False)
@@ -330,8 +333,8 @@ def powerMeterAveraging(self,averagingTextBox,index,label):
 		averagingTextBox.setDisabled(True)
 		averagingTextBox.setReadOnly(True)
 	
+# change what is displayed in GUI based on SA type selected
 def displaySa(self,buttonSelected,buttonFocus,buttonHover,greyHover,greyButton):
-
 	saIdx = self.ui.saType.currentIndex()
 	saChecked = self.ui.saSet.isChecked()
 	self.ui.saEquipTabs.setTabEnabled(0, True)
@@ -384,7 +387,8 @@ def displaySa(self,buttonSelected,buttonFocus,buttonHover,greyHover,greyButton):
 		self.ui.saButton_sa_3.setStyleSheet(buttonFocus)
 		self.ui.saButton_sa_4.setStyleSheet(buttonFocus)
 		set.setPrevSAButtons(self,buttonHover,Qt.PointingHandCursor,greyHover,Qt.PointingHandCursor)
-		
+
+# enable or disable power supply channels if they are in use based on the number of channels field		
 def enableChannel(self):
 	numberChannelsP1 = self.ui.noChannels_p1.currentIndex()
 	numberChannelsP2 = self.ui.noChannels_p2.currentIndex()
@@ -467,7 +471,8 @@ def enableChannel(self):
 		self.ui.p3c2Equip.setEnabled(True)
 		self.ui.p3c3Equip.setEnabled(True)
 		self.ui.p3c4Equip.setEnabled(True)
-		
+	
+# if power supply in use field is changed, enable/disable channels	
 def enableSupplyOne(self):
 	idx = self.ui.p1Enabled.currentIndex()
 	numberChannels = self.ui.noChannels_p1.currentIndex()
@@ -508,6 +513,7 @@ def enableSupplyOne(self):
 		self.ui.p1c3Equip.setEnabled(False)
 		self.ui.p1c4Equip.setEnabled(False)
 		
+# if power supply in use field is changed, enable/disable channels	
 def enableSupplyTwo(self):
 	idx = self.ui.p2Enabled.currentIndex()
 	numberChannels = self.ui.noChannels_p2.currentIndex()
@@ -547,7 +553,8 @@ def enableSupplyTwo(self):
 		self.ui.p2c2Equip.setEnabled(False)
 		self.ui.p2c3Equip.setEnabled(False)
 		self.ui.p2c4Equip.setEnabled(False)
-
+		
+# if power supply in use field is changed, enable/disable channels	
 def enableSupplyThree(self):
 	idx = self.ui.p3Enabled.currentIndex()
 	numberChannels = self.ui.noChannels_p3.currentIndex()
@@ -588,6 +595,7 @@ def enableSupplyThree(self):
 		self.ui.p3c3Equip.setEnabled(False)
 		self.ui.p3c4Equip.setEnabled(False)
 
+# enable or disable fields if rx calibration will be performed or not
 def enableVSACalFile(self,boxDone,boxUnset):
 	checked = self.ui.generateVSACalCheck.isChecked()
 	setChecked = self.ui.downSetVSAMeas.isChecked()
@@ -610,7 +618,8 @@ def enableVSACalFile(self,boxDone,boxUnset):
 			self.ui.combEquip_vsaMeas.setStyleSheet(boxDone)
 		else:
 			self.ui.combEquip_vsaMeas.setStyleSheet(boxUnset)
-			
+		
+# enable or disable frame time in vsaMeas tab		
 def determineFrameTimeEnable(self,dropdown):
 	idx = dropdown.currentIndex()
 	if idx == 1 or idx == 0:
@@ -620,6 +629,7 @@ def determineFrameTimeEnable(self,dropdown):
 		self.ui.frameTime_vsaMeas.setEnabled(True)
 		self.ui.frameTime_vsaMeas_2.setEnabled(True)
 
+# display different parameter boxes based on which type of calibration is selected
 def displayVSGMeas(self):
 	idx = self.ui.vsgCalType.currentIndex()
 	vsgType = self.ui.vsgWorkflow_vsgMeas.currentIndex()
@@ -671,6 +681,7 @@ def displayVSGMeas(self):
 		self.ui.awgParamsStack_vsgMeas.setCurrentIndex(2)
 		self.ui.upParamsStack_vsgMeas.setCurrentIndex(1)
 
+# enable AWG meas external clock freq field based on what was chosen in Step 1
 def enableExtClkFreq(self):
 	idx = self.ui.refClockSorce_awg.currentIndex()
 	if idx == 2 or idx == 4:
@@ -687,7 +698,8 @@ def enableExtClkFreq(self):
 		self.ui.sampleClockFreqLabel_awgCal.setEnabled(False)
 		self.ui.sampleClockFreq_awgCal_2.setEnabled(False)
 		self.ui.sampleClockFreq_awgCal.setEnabled(False)
-		
+
+# for AWG set equipment to create an appropriate channel mapping		
 def enableChannelOptions(self):
 	# 0 = Select, 1 = None, 2 = Channel 1, 3 = Channel 2
 	iIdx = self.ui.iChannel_awg.currentIndex()
@@ -702,7 +714,8 @@ def enableChannelOptions(self):
 		invalidFieldError(self,"Must set both Channel 1 and Channel 2 to None.")
 		self.ui.iChannel_awg.setCurrentIndex(0)
 		self.ui.qChannel_awg.setCurrentIndex(0)
-		
+
+# enable or disable trigger level based on trigger source		
 def disableTrigLevelVSA(self):
 	trigSource = self.ui.trigSource_sa.currentIndex()
 	if trigSource == 1 or trigSource == 2 or trigSource == 3:
@@ -711,7 +724,8 @@ def disableTrigLevelVSA(self):
 	elif trigSource == 0 or trigSource == 4:
 		self.ui.trigLevelLabel_sa.setEnabled(False)
 		self.ui.trigLevel_sa.setEnabled(False)
-		
+	
+# enable or disable trigger level based on trigger source		
 def disableTrigLevelSA(self):
 	trigSource = self.ui.trigSource_spa.currentIndex()
 	if trigSource == 1 or trigSource == 2:
@@ -730,6 +744,7 @@ def enableAveragingSA(self):
 		self.ui.avgCountLabel_spa.setEnabled(False)
 		self.ui.avgCount_spa.setEnabled(False)
 	
+# clear equipment setting errors in dockable widget
 def clearErrors(self):
 	layout = self.ui.errorLayout
 	for i in reversed(range(layout.count())): 
@@ -766,17 +781,20 @@ def invalidFieldError(self,error):
 	msg.setText(error)
 	msg.setStandardButtons(QMessageBox.Ok)
 	msg.exec_();
-	
+
+# copy the UXA center frequency from the equipment tab to the measurement tab	
 def copyUXACenterFreq(self):
 	uxaText = self.ui.freq_sa.text()
 	self.ui.centerFreq_vsaMeas.setText(uxaText)
 	self.ui.centerFreq_vsaMeas_2.setText(uxaText)
 	
+# copy awg ext. freq. from AWG measurement settings to AWG meas. set with calibration
 def copyAWGExternalFreq(self):
 	awgText = self.ui.extRefFreq_awg.text()
 	self.ui.sampleClockFreq_awgCal_2.setText(awgText)
 	self.ui.sampleClockFreq_awgCal.setText(awgText)
 	
+# copy awg dac range from AWG measurement settings to AWG meas. set with calibration
 def copyAWGDacRange(self):
 	awgText = self.ui.dacRange_awg.text()
 	self.ui.vfs_awgCal.setText(awgText)
@@ -846,17 +864,8 @@ def copyAWGNoPeriods(self):
 	text = self.ui.noTXPeriods_awgMeas.text()
 	self.ui.noTXPeriods_awgCal.setText(text)
 	
-# def enableTraceAveragingSA(self):
-	# idx = self.ui.traceAvg_spa.currentIndex()
-	# if idx == 1:
-		# self.ui.traceAvgCount_spa.setEnabled(True)
-		# self.ui.taceAvgCountLabel_spa.setEnabled(True)
-	# elif idx == 2 or idx == 0:
-		# self.ui.traceAvgCount_spa.setEnabled(False)
-		# self.ui.taceAvgCountLabel_spa.setEnabled(False)
-	
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# functions called within parameterFunctions	
+# functions called within displayVSA	
 
 def setVSGWorkflows(self,idx):
 	self.ui.vsgWorkflowForVSA.setCurrentIndex(idx)

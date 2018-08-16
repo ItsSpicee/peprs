@@ -11,10 +11,6 @@ import inspect
 # styling variable
 redBorder = "QGroupBox{background-color:rgb(247, 247, 247); border:2px solid #f24646}"
 
-# declare tab counter variables
-tabCounterIncrement.counterTwo = 0
-tabCounterIncrement.counterThree = 0
-
 # keep track of how many times a tab was successfully navigated to (important for safety and quality checks)
 def tabCounterIncrement(self,dir):
 	i = self.ui.stepTabs.currentIndex()
@@ -28,6 +24,10 @@ def tabCounterIncrement(self,dir):
 			tabCounterIncrement.counterThree = 1;
 		elif dir == "down":
 			tabCounterIncrement.counterThree = 0;
+			
+# declare tab counter variables
+tabCounterIncrement.counterTwo = 0
+tabCounterIncrement.counterThree = 0
 
 # Loads saved parameter setup when 'Open' in menu bar is clicked		
 def openDialog(self):
@@ -67,23 +67,20 @@ def changeStepTab(self,safety):
 	maxHeight = height - 50
 	
 	i = self.ui.stepTabs.currentIndex()
-	measStack = self.ui.measStack.currentIndex()
-	measTabVsa = self.ui.vsaMeasParamTabs.currentIndex()
-	measTabVsg = self.ui.vsgMeasParamTabs.currentIndex()
-	downEnabled = self.ui.vsaWorkflow_vsaMeas.currentIndex()
-	upEnabled = self.ui.vsgWorkflow_vsgMeas.currentIndex()
-	vsgStack = self.ui.awgParamsStack_vsgMeas.currentIndex()
 	safetyState = self.ui.actionEnable_Safety_Check.isChecked()
-	# has calibration been done parameters
+	# has calibration been done? parameters
 	vsgCal = self.ui.vsgCalType.currentIndex()
 	vsaCal = self.ui.generateVSACalCheck.isChecked()
 	
 	if maxTrue == False:
+		# set equipment tab
 		if i == 2:
 			self.setMinimumSize(1265,700)
 			self.resize(1265, 700)
 			self.center()
+		# set measurements tab
 		elif i == 1:
+			# if measurement tab hasn't been clicked on before, execute safety check
 			counterTwo = tabCounterIncrement.counterTwo
 			if counterTwo == 0 and safetyState:
 				safety.exec_()
@@ -92,6 +89,7 @@ def changeStepTab(self,safety):
 				self.setMinimumSize(1265,maxHeight)
 				self.resize(1265,maxHeight)
 				self.center()
+		# set and run algorithms tab
 		elif i == 0:
 			self.setMinimumSize(1265,maxHeight)
 			self.resize(1265,maxHeight)
@@ -101,11 +99,13 @@ def changeStepTab(self,safety):
 				self.ui.algoTabs.setTabEnabled(0,False)
 			else:
 				self.ui.algoTabs.setTabEnabled(0,True)
+		# dashboard tab
 		elif i == 3:
 			self.setMinimumSize(1265,700)
 			self.resize(1265,700)
 			self.center()
-			
+
+# vsa measurement settings and downconverter settings tabs
 def switchMeasTabVSA(self):
 	currentTab = self.ui.vsaMeasParamTabs.currentIndex()
 	vsaChecked = self.ui.vsaMeasSet.isChecked()
@@ -125,6 +125,7 @@ def switchMeasTabVSA(self):
 			else:
 				self.ui.vsaMeasNextStack.setCurrentIndex(5)
 
+# awg settings, upconverter settings, and advanced tabs
 def switchMeasTabVSG(self):
 	currentTab = self.ui.vsgMeasParamTabs.currentIndex()
 	awgChecked = self.ui.awgSet_vsgMeas.isChecked()
@@ -147,37 +148,47 @@ def switchMeasTabVSG(self):
 			self.ui.upParamsStack_vsgMeas.setCurrentIndex(4)
 			if awgChecked or awgRunChecked:
 				self.ui.vsgMeasNextStack.setCurrentIndex(8)
+				
 # called when tab in step 3 is changed (cal val, prechar, dpd)				
 def switchAlgoTab(self,quality):
 	currentTab = self.ui.algoTabs.currentIndex()
 	safetyState = self.ui.actionEnable_Safety_Check.isChecked()
 	if currentTab == 2:
+		# if dpd tab hasn't been clicked on, execute quality check
 		counterThree = tabCounterIncrement.counterThree
 		if counterThree == 0 and safetyState:
 			quality.exec_()
 			tabCounterIncrement(self,"up")
 
+# select a file to use
 def fileBrowse(self, lineEdit,path):
 	fileInfo = str(QFileDialog.getOpenFileName(self,"Choose a File",path))
+	# make file path pretty, remove irrelevant info
 	fileList = fileInfo.split(",")
 	file = fileList[0]
 	file = file.replace("'","")
 	file = file.replace("(","")
+	# set line edit text
 	lineEdit.clear()
 	lineEdit.setText(file)
 	
+# choose a place to save a file
 def fileSave(self,lineEdit,path):
 	fileInfo = str(QFileDialog.getSaveFileName(self,'Save File Location',path,"Text Files (*.txt);;Matlab Files (*.mat)"))	
+	# make file path pretty, remove irrelevant info
 	fileList = fileInfo.split(",")
 	file = fileList[0]
 	file = file.replace("'","")
 	file = file.replace("(","")
 	if file != "":
+		# set line edit text
 		lineEdit.clear()
 		lineEdit.setText(file)
+		# create writeable file
 		writeFile = open(file,'w')
 		writeFile.close()
-	
+
+# open the file from the information provided in the line edit, placeholder/unfinished
 def fileOpen(self,lineEdit,path):
 	file = str(QFileDialog.getExistingDirectory(self, "Select Directory", path))
 	fileList = file.split(",")
@@ -186,6 +197,7 @@ def fileOpen(self,lineEdit,path):
 	file = file.replace("(","")
 	lineEdit.clear()
 	lineEdit.setText(file)
+	
 # check to see that all parameters are filled out when set, if not, outline them in red
 def checkIfDone(array):
 	# check if any parameters are unfilled
@@ -203,10 +215,12 @@ def checkIfDone(array):
 		else:
 			key.setStyleSheet(None)
 	return status
-	
+
+# redock equipment error messages when floating	
 def redock(self):
 	self.ui.errorBar.setFloating(False)
 	
+# hide error messages when docked, show when floating (for space reasons)
 def dockSettings(self):
 	floatState = self.ui.errorBar.isFloating()
 	if floatState:
@@ -214,10 +228,10 @@ def dockSettings(self):
 	else:
 		self.ui.errorScrollArea.setMaximumHeight(0)
 		
-##### TAKEN FROM: https://stackoverflow.com/questions/23279125/python-pyqt4-functions-to-save-and-restore-ui-widget-values	
+# TAKEN FROM: https://stackoverflow.com/questions/23279125/python-pyqt4-functions-to-save-and-restore-ui-widget-values	
+# save parameter values
 def guisave(ui,settings):
 	for name, obj in inspect.getmembers(ui):
-		# if type(obj) is QComboBox:  # this works similar to isinstance, but missed some field... not sure why?
 		if isinstance(obj, QComboBox):
 			name = obj.objectName()  # get combobox name
 			index = obj.currentIndex()  # get current index from combobox
@@ -243,7 +257,8 @@ def guisave(ui,settings):
 			name = obj.objectName()
 			index = obj.currentIndex()
 			settings.setValue(name, index)
-			
+
+# open parameter values			
 def guirestore(ui,settings):
 	for name, obj in inspect.getmembers(ui):
 		if isinstance(obj, QComboBox):

@@ -1,14 +1,20 @@
 # contains all of the functions that are called when a debug button is clicked
 
+# import classes
 from PyQt5.QtWidgets import (QMessageBox)
 
+# styling variables
 greyHover = "QPushButton {border:3px solid rgb(0, 0, 127); background-color:qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(209, 209, 209, 255), stop:1 rgba(254, 254, 254, 255)); border-radius:10px;color:black} QPushButton:hover{background-color:rgb(243, 243, 243);}"
 blueSelect = "QPushButton{ border:3px solid rgb(0, 0, 127);  background-color:qlineargradient(spread:pad, x1:0.994318, y1:0.682, x2:1, y2:0, stop:0 rgba(72, 144, 216, 255), stop:1 rgba(83, 170, 252, 255)); border-radius:10px;color:white; font-weight:bold}"
 
 def setParametersPrechar(self,matlab):
+	# set all debug buttons grey
 	setGreyPrecharButtons(self)
+	# set selected debug button blue
 	self.ui.setParameters_precharDebug.setStyleSheet(blueSelect)
+	# run function
 	matlab.Set_Parameters_PrecharDebug(nargout=0)
+	# update with status bar message
 	self.statusBar().showMessage('Successfully set parameters',2000)
 	
 def prepareSignalPrechar(self,matlab):
@@ -21,6 +27,7 @@ def uploadSignalPrechar(self,matlab):
 	setGreyPrecharButtons(self)
 	self.ui.upload_precharDebug.setStyleSheet(blueSelect)
 	error = matlab.Upload_Signal_PrecharDebug(nargout=1)
+	# if an error occurred, alert
 	if error != "":
 		debugErrorMessage(self,error)
 	else:
@@ -57,6 +64,7 @@ def saveMeasurementsPrechar(self,matlab):
 	setGreyPrecharButtons(self)
 	self.ui.saveMeasurements_precharDebug.setStyleSheet(blueSelect)
 	result = matlab.Save_Measurements_PrecharDebug(nargout=1)
+	# parse result for specific data
 	result = result.split('~')
 	error = result[0]
 	nmsePercent = result[1]
