@@ -1,4 +1,3 @@
-
 # PEPRS - Performance Enhancement for Processing Radio Signals
 PEPRS is a Spring 2018 Co-op project that aims to streamline the process of running signal processing algorithms. It also helps developers use algorithms developed by other people. It can perform RX calibration, TX calibration, and DPD.
 
@@ -196,13 +195,13 @@ To create a python exe file to use during deployment, choose one of these method
 The application will be statically deployed, so it is very important that the correct qt version is installed
 
 ## Setup a Git Repo on a Server
-The easiest way to do this is to use the Git GUI. You can clone an already existing repository to any other accessible location.
-This link is an alternative command line method: https://gist.github.com/wlbr/1685405
+This link shows how to setup a repo on a remote server: https://gist.github.com/joahking/780877
 Some useful commands for this task:
 `git remote -v` lists all of the current remotes setup for the repository
 `git remote rm remote-name` removes the remote "remote-name" from the repo
 `git remote new remote-name` adds a new remote called "remote-name"
-`git config --bool core.bare true` if cloned repo with git GUI, need to make sure it is configured as a bare repository
+`git --bare init` create a bare repository
+`git config --bool core.bare true` configure repo as a bare repository
 
 ## Miscellaneous Resources
 Generating README Table of Contents: https://github.com/thlorenz/doctoc
